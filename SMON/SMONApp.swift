@@ -13,7 +13,9 @@ struct SMONApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            
+            MainView()
+                .environment(\.colorScheme, .dark)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
