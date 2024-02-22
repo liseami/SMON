@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9858172BEF6BFC3474C1854E /* Pods_SMON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27510D520D9F138D6C6B8781 /* Pods_SMON.framework */; };
 		A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A46A2B8706FB008EA955 /* SMONApp.swift */; };
 		A272A46D2B8706FB008EA955 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A46C2B8706FB008EA955 /* ContentView.swift */; };
 		A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A272A46E2B8706FC008EA955 /* Assets.xcassets */; };
 		A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A272A4712B8706FC008EA955 /* Preview Assets.xcassets */; };
 		A272A4742B8706FC008EA955 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A4732B8706FC008EA955 /* Persistence.swift */; };
 		A272A4772B8706FC008EA955 /* SMON.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A272A4752B8706FC008EA955 /* SMON.xcdatamodeld */; };
+		A272A47F2B870C65008EA955 /* Pow in Frameworks */ = {isa = PBXBuildFile; productRef = A272A47E2B870C65008EA955 /* Pow */; };
+		A272A4822B870C73008EA955 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A272A4812B870C73008EA955 /* SwiftUIX */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27510D520D9F138D6C6B8781 /* Pods_SMON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A272A4672B8706FB008EA955 /* SMON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A272A46A2B8706FB008EA955 /* SMONApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMONApp.swift; sourceTree = "<group>"; };
 		A272A46C2B8706FB008EA955 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +27,8 @@
 		A272A4712B8706FC008EA955 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A272A4732B8706FC008EA955 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		A272A4762B8706FC008EA955 /* SMON.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SMON.xcdatamodel; sourceTree = "<group>"; };
+		B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.release.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.release.xcconfig"; sourceTree = "<group>"; };
+		ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.debug.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +36,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A272A4822B870C73008EA955 /* SwiftUIX in Frameworks */,
+				9858172BEF6BFC3474C1854E /* Pods_SMON.framework in Frameworks */,
+				A272A47F2B870C65008EA955 /* Pow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +50,8 @@
 			children = (
 				A272A4692B8706FB008EA955 /* SMON */,
 				A272A4682B8706FB008EA955 /* Products */,
+				B127F7EE8E3E2ABAAF466928 /* Pods */,
+				D3E9067713C5560C79BBF173 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +84,23 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B127F7EE8E3E2ABAAF466928 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */,
+				B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D3E9067713C5560C79BBF173 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27510D520D9F138D6C6B8781 /* Pods_SMON.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -80,15 +108,21 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A272A47A2B8706FC008EA955 /* Build configuration list for PBXNativeTarget "SMON" */;
 			buildPhases = (
+				F8967B72DC0EF44FB6A9E15A /* [CP] Check Pods Manifest.lock */,
 				A272A4632B8706FB008EA955 /* Sources */,
 				A272A4642B8706FB008EA955 /* Frameworks */,
 				A272A4652B8706FB008EA955 /* Resources */,
+				CC27A677E152605CAB9C7098 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = SMON;
+			packageProductDependencies = (
+				A272A47E2B870C65008EA955 /* Pow */,
+				A272A4812B870C73008EA955 /* SwiftUIX */,
+			);
 			productName = SMON;
 			productReference = A272A4672B8706FB008EA955 /* SMON.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +151,10 @@
 				Base,
 			);
 			mainGroup = A272A45E2B8706FB008EA955;
+			packageReferences = (
+				A272A47D2B870C65008EA955 /* XCRemoteSwiftPackageReference "Pow" */,
+				A272A4802B870C73008EA955 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = A272A4682B8706FB008EA955 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,6 +175,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CC27A677E152605CAB9C7098 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F8967B72DC0EF44FB6A9E15A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SMON-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A272A4632B8706FB008EA955 /* Sources */ = {
@@ -190,7 +270,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -253,7 +333,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -274,6 +354,7 @@
 		};
 		A272A47B2B8706FC008EA955 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -282,6 +363,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
 				DEVELOPMENT_TEAM = PX9F7733KU;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -303,6 +385,7 @@
 		};
 		A272A47C2B8706FC008EA955 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +394,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
 				DEVELOPMENT_TEAM = PX9F7733KU;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -352,6 +436,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A272A47D2B870C65008EA955 /* XCRemoteSwiftPackageReference "Pow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/movingparts-io/Pow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.3;
+			};
+		};
+		A272A4802B870C73008EA955 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A272A47E2B870C65008EA955 /* Pow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A272A47D2B870C65008EA955 /* XCRemoteSwiftPackageReference "Pow" */;
+			productName = Pow;
+		};
+		A272A4812B870C73008EA955 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A272A4802B870C73008EA955 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A272A4752B8706FC008EA955 /* SMON.xcdatamodeld */ = {

@@ -1,0 +1,97 @@
+PODS:
+  - Alamofire (5.8.1)
+  - Introspect (0.12.0)
+  - KakaJSON (1.1.2)
+  - Kingfisher (7.11.0)
+  - Lantern (1.1.5)
+  - lottie-ios (4.4.1)
+  - Moya (15.0.0):
+    - Moya/Core (= 15.0.0)
+  - Moya/Combine (15.0.0):
+    - Moya/Core
+  - Moya/Core (15.0.0):
+    - Alamofire (~> 5.0)
+  - PanModal (1.2.7)
+  - SPAlert (5.1.8)
+  - SwifterSwift (6.0.0):
+    - SwifterSwift/AppKit (= 6.0.0)
+    - SwifterSwift/Combine (= 6.0.0)
+    - SwifterSwift/CoreAnimation (= 6.0.0)
+    - SwifterSwift/CoreGraphics (= 6.0.0)
+    - SwifterSwift/CoreLocation (= 6.0.0)
+    - SwifterSwift/CryptoKit (= 6.0.0)
+    - SwifterSwift/Dispatch (= 6.0.0)
+    - SwifterSwift/Foundation (= 6.0.0)
+    - SwifterSwift/HealthKit (= 6.0.0)
+    - SwifterSwift/MapKit (= 6.0.0)
+    - SwifterSwift/SceneKit (= 6.0.0)
+    - SwifterSwift/SpriteKit (= 6.0.0)
+    - SwifterSwift/StoreKit (= 6.0.0)
+    - SwifterSwift/SwiftStdlib (= 6.0.0)
+    - SwifterSwift/UIKit (= 6.0.0)
+    - SwifterSwift/WebKit (= 6.0.0)
+  - SwifterSwift/AppKit (6.0.0)
+  - SwifterSwift/Combine (6.0.0)
+  - SwifterSwift/CoreAnimation (6.0.0)
+  - SwifterSwift/CoreGraphics (6.0.0)
+  - SwifterSwift/CoreLocation (6.0.0)
+  - SwifterSwift/CryptoKit (6.0.0)
+  - SwifterSwift/Dispatch (6.0.0)
+  - SwifterSwift/Foundation (6.0.0)
+  - SwifterSwift/HealthKit (6.0.0)
+  - SwifterSwift/MapKit (6.0.0)
+  - SwifterSwift/SceneKit (6.0.0)
+  - SwifterSwift/SpriteKit (6.0.0)
+  - SwifterSwift/StoreKit (6.0.0)
+  - SwifterSwift/SwiftStdlib (6.0.0)
+  - SwifterSwift/UIKit (6.0.0)
+  - SwifterSwift/WebKit (6.0.0)
+  - SwiftyJSON (5.0.1)
+  - Tagly (0.1.1)
+
+DEPENDENCIES:
+  - Introspect
+  - KakaJSON
+  - Kingfisher
+  - Lantern
+  - lottie-ios
+  - Moya
+  - Moya/Combine (~> 15.0)
+  - PanModal
+  - SPAlert
+  - SwifterSwift
+  - SwiftyJSON
+  - Tagly
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Introspect
+    - KakaJSON
+    - Kingfisher
+    - Lantern
+    - lottie-ios
+    - Moya
+    - PanModal
+    - SPAlert
+    - SwifterSwift
+    - SwiftyJSON
+    - Tagly
+
+SPEC CHECKSUMS:
+  Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
+  Introspect: b66b675de8a85d9ef832f3a710d8e3c7db186884
+  KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
+  Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
+  Lantern: b192e7146c6d04e15e627f37281254a6a8593703
+  lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
+  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
+  SPAlert: 7027ed9df9a2ba8202cab39fd05b53e110f48a99
+  SwifterSwift: 66843dc594f8fb890f5543c22545921d44acc004
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  Tagly: deb459c698853a3fffce027fedb92dcb7cf5c68e
+
+PODFILE CHECKSUM: 46c74065004d8ede1b883f1810b4599b71f7091e
+
+COCOAPODS: 1.12.1

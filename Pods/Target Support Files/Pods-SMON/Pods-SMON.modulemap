@@ -1,0 +1,6 @@
+framework module Pods_SMON {
+  umbrella header "Pods-SMON-umbrella.h"
+
+  export *
+  module * { export * }
+}
