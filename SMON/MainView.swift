@@ -8,20 +8,37 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject var vm: MainViewModel = .init()
     var body: some View {
-//        ZStack{
-//            HomeView()
-////            ThreadView()
-////            MessageView()
-////            ProfileView()
-////            LoginView()
-//        }
-        
-        LoginMainView()
-        
+        ZStack {
+            // 一级页面
+            tabViews
+            // Tabbar
+            tabbar
+        }
+    }
+
+    var tabViews: some View {
+        Group {
+            switch vm.currentTabbar {
+            case .home:
+                HomeView()
+            case .feed:
+                ThreadView()
+            case .message:
+                MessageView()
+            case .profile:
+                ProfileView()
+            }
+        }
+    }
+
+    var tabbar: some View {
+        MainTabbar().environmentObject(vm)
     }
 }
 
 #Preview {
     MainView()
+        .environment(\.colorScheme, .dark)
 }

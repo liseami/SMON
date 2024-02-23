@@ -10,10 +10,8 @@ import SwiftUI
 @main
 struct SMONApp: App {
     let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
-            
             MainView()
                 .environment(\.colorScheme, .dark)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)

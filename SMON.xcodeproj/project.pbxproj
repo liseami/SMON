@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		9858172BEF6BFC3474C1854E /* Pods_SMON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27510D520D9F138D6C6B8781 /* Pods_SMON.framework */; };
+		A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */; };
+		A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03002B88C77000F6AC9B /* MainViewModel.swift */; };
+		A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03032B88C88800F6AC9B /* MainTabbar.swift */; };
+		A26A03072B88C92000F6AC9B /* Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03062B88C92000F6AC9B /* Public.swift */; };
 		A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A46A2B8706FB008EA955 /* SMONApp.swift */; };
 		A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A272A46E2B8706FC008EA955 /* Assets.xcassets */; };
 		A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A272A4712B8706FC008EA955 /* Preview Assets.xcassets */; };
@@ -27,11 +31,14 @@
 		A28F54432B8739F900AF9CD3 /* LoginView_PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54422B8739F900AF9CD3 /* LoginView_PhoneNumber.swift */; };
 		A28F54472B873A1D00AF9CD3 /* DataCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */; };
 		A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */; };
-		A28F544F2B8740EC00AF9CD3 /* hello.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A28F544E2B8740EC00AF9CD3 /* hello.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		27510D520D9F138D6C6B8781 /* Pods_SMON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginBackgroundVideo.mp4; sourceTree = "<group>"; };
+		A26A03002B88C77000F6AC9B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		A26A03032B88C88800F6AC9B /* MainTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbar.swift; sourceTree = "<group>"; };
+		A26A03062B88C92000F6AC9B /* Public.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Public.swift; sourceTree = "<group>"; };
 		A272A4672B8706FB008EA955 /* SMON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A272A46A2B8706FB008EA955 /* SMONApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMONApp.swift; sourceTree = "<group>"; };
 		A272A46E2B8706FC008EA955 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,7 +57,6 @@
 		A28F54422B8739F900AF9CD3 /* LoginView_PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView_PhoneNumber.swift; sourceTree = "<group>"; };
 		A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCollectionView.swift; sourceTree = "<group>"; };
 		A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView_VCode.swift; sourceTree = "<group>"; };
-		A28F544E2B8740EC00AF9CD3 /* hello.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = hello.mp4; path = ../../../Downloads/hello.mp4; sourceTree = "<group>"; };
 		B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.release.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.release.xcconfig"; sourceTree = "<group>"; };
 		ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.debug.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +75,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A26A02FF2B88C75F00F6AC9B /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				A26A03002B88C77000F6AC9B /* MainViewModel.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
+		A26A03052B88C91800F6AC9B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A26A03062B88C92000F6AC9B /* Public.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A272A45E2B8706FB008EA955 = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +115,7 @@
 				A272A46A2B8706FB008EA955 /* SMONApp.swift */,
 				A272A4842B871C77008EA955 /* MainView.swift */,
 				A272A46E2B8706FC008EA955 /* Assets.xcassets */,
-				A28F544E2B8740EC00AF9CD3 /* hello.mp4 */,
+				A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */,
 				A272A4832B871C6F008EA955 /* MVVM */,
 				A272A4982B872062008EA955 /* Data */,
 				A272A4702B8706FC008EA955 /* Preview Content */,
@@ -112,6 +134,7 @@
 		A272A4832B871C6F008EA955 /* MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				A26A03052B88C91800F6AC9B /* Model */,
 				A272A4872B871CCC008EA955 /* TabViews */,
 				A272A4862B871CC7008EA955 /* Login */,
 			);
@@ -135,10 +158,12 @@
 		A272A4872B871CCC008EA955 /* TabViews */ = {
 			isa = PBXGroup;
 			children = (
+				A26A02FF2B88C75F00F6AC9B /* VM */,
 				A272A48C2B871CF9008EA955 /* ProfileView.swift */,
 				A272A48E2B871CFD008EA955 /* HomeView.swift */,
 				A272A4902B871D03008EA955 /* MessageView.swift */,
 				A272A4922B871D1A008EA955 /* ThreadView.swift */,
+				A26A03032B88C88800F6AC9B /* MainTabbar.swift */,
 			);
 			path = TabViews;
 			sourceTree = "<group>";
@@ -245,9 +270,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A28F544F2B8740EC00AF9CD3 /* hello.mp4 in Resources */,
 				A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */,
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
+				A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,11 +327,13 @@
 			files = (
 				A272A4742B8706FC008EA955 /* Persistence.swift in Sources */,
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
+				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
 				A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */,
 				A272A4772B8706FC008EA955 /* SMON.xcdatamodeld in Sources */,
 				A272A4852B871C77008EA955 /* MainView.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
 				A272A4912B871D03008EA955 /* MessageView.swift in Sources */,
+				A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */,
 				A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */,
 				A272A4932B871D1A008EA955 /* ThreadView.swift in Sources */,
 				A28F54472B873A1D00AF9CD3 /* DataCollectionView.swift in Sources */,
@@ -315,6 +342,7 @@
 				A28F54432B8739F900AF9CD3 /* LoginView_PhoneNumber.swift in Sources */,
 				A272A48D2B871CF9008EA955 /* ProfileView.swift in Sources */,
 				A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */,
+				A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
