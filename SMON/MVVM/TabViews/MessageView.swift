@@ -8,8 +8,23 @@
 import SwiftUI
 
 struct MessageView: View {
+    var exampleConversation: BIMConversation {
+        return BIMConversation()
+    }
+
     var body: some View {
-        Text("消息")
+        VStack {
+            NavigationLink("会话页面") {
+                ChatViewContainer(conversation: exampleConversation)
+                    .frame(maxWidth: .infinity)
+                    .clipShape(RoundedRectangle(cornerRadius: 24))
+                    .ignoresSafeArea(.keyboard)
+            }
+            .padding(.all)
+            ConversationListContainer()
+                .frame(maxWidth: .infinity)
+                .ignoresSafeArea(.keyboard)
+        }
     }
 }
 

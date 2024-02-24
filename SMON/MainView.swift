@@ -10,14 +10,15 @@ import SwiftUI
 struct MainView: View {
     @StateObject var vm: MainViewModel = .init()
     var body: some View {
-        ZStack {
-            // 一级页面
-            tabViews
-            // Tabbar
-            tabbar
-        }
+        NavigationView(content: {
+            ZStack {
+                // 一级页面
+                tabViews
+                // Tabbar
+                tabbar
+            }
+        })
     }
-    
 
     var tabViews: some View {
         Group {

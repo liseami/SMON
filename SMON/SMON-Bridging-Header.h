@@ -1,9 +1,6 @@
-//
-//  Use this file to import your target's public headers that you would like to expose to Swift.
-//
 
-
-//#import <BIMSDKConfig.h>
-//#import <BIMClient.h>
-//#import <BIMSDK.h>
-//
+#import <BIMSDKConfig.h>
+#import <BIMClient.h>
+#import <BIMSDK.h>
+#import <BIMConversationListController.h>
+#import <BIMChatViewController.h>
