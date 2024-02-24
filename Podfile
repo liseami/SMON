@@ -19,5 +19,5 @@ pod 'Tagly'# 标签云
 pod 'SPAlert'# 完成弹窗
 pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情
-#pod 'im-uikit-tob', '1.9.0'
+pod 'im-uikit-tob', '1.9.0'
 end

@@ -98,10 +98,24 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher/Kingfisher.bundle"
+  install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
+  install_resource "${PODS_ROOT}/RangersAPM/RangersAPM/Assets/Core/APMInsightCore.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RangersAPM/RangersAPMPrivacyInfo.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RangersAppLog/RangersAppLog.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/im-uikit-tob/TIMOEmojiNew.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/im-uikit-tob/BIMUIKit.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios/LottiePrivacyInfo.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/Kingfisher/Kingfisher.bundle"
+  install_resource "${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle"
+  install_resource "${PODS_ROOT}/RangersAPM/RangersAPM/Assets/Core/APMInsightCore.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RangersAPM/RangersAPMPrivacyInfo.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/RangersAppLog/RangersAppLog.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage/SDWebImage.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/im-uikit-tob/TIMOEmojiNew.bundle"
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/im-uikit-tob/BIMUIKit.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/lottie-ios/LottiePrivacyInfo.bundle"
 fi
 

@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		637FFFD4AA8BCDC602428FBE /* libPods-SMON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */; };
+		A2218D512B89BAF700ECE075 /* libPods-SMON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */; };
+		A2218D672B89BBC400ECE075 /* libPods-SMON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */; };
+		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
+		A25992252B8A08490094DD46 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25992242B8A08490094DD46 /* Test.swift */; };
 		A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */; };
 		A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03002B88C77000F6AC9B /* MainViewModel.swift */; };
 		A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03032B88C88800F6AC9B /* MainTabbar.swift */; };
@@ -38,6 +41,51 @@
 
 /* Begin PBXFileReference section */
 		0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SMON.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D102B89BAF700ECE075 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D112B89BAF700ECE075 /* libBolts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBolts.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D122B89BAF700ECE075 /* libGodzippa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGodzippa.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D132B89BAF700ECE075 /* libIGListDiffKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIGListDiffKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D142B89BAF700ECE075 /* libim-uikit-tob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libim-uikit-tob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D152B89BAF700ECE075 /* BIMUIKit.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = BIMUIKit.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D162B89BAF700ECE075 /* TIMOEmojiNew.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = TIMOEmojiNew.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D172B89BAF700ECE075 /* libimsdk-tob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libimsdk-tob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D182B89BAF700ECE075 /* libIntrospect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIntrospect.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D192B89BAF700ECE075 /* libKakaJSON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libKakaJSON.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D1A2B89BAF700ECE075 /* libKingfisher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libKingfisher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D1B2B89BAF700ECE075 /* Kingfisher.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = Kingfisher.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D1C2B89BAF700ECE075 /* libLantern.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libLantern.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D1D2B89BAF700ECE075 /* liblibextobjc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblibextobjc.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D1E2B89BAF700ECE075 /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D1F2B89BAF700ECE075 /* LottiePrivacyInfo.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = LottiePrivacyInfo.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D202B89BAF700ECE075 /* libMantle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMantle.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D212B89BAF700ECE075 /* libMasonry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMasonry.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D222B89BAF700ECE075 /* libMJRefresh.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMJRefresh.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D232B89BAF700ECE075 /* libMMKV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMMKV.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D242B89BAF700ECE075 /* libMMKVCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMMKVCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D252B89BAF700ECE075 /* libMoya.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMoya.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D262B89BAF700ECE075 /* libOneKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libOneKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D272B89BAF700ECE075 /* libPanModal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPanModal.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D282B89BAF700ECE075 /* libProtobuf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libProtobuf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D292B89BAF700ECE075 /* libRangersAPM.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRangersAPM.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D2A2B89BAF700ECE075 /* RangersAPMPrivacyInfo.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RangersAPMPrivacyInfo.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D2B2B89BAF700ECE075 /* libRangersAppLog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRangersAppLog.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D2C2B89BAF700ECE075 /* RangersAppLog.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = RangersAppLog.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D2D2B89BAF700ECE075 /* libRSSwizzle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRSSwizzle.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D2E2B89BAF700ECE075 /* libSDWebImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDWebImage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D2F2B89BAF700ECE075 /* SDWebImage.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; path = SDWebImage.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D302B89BAF700ECE075 /* libSPAlert.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSPAlert.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D312B89BAF700ECE075 /* libSQLiteRepairKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSQLiteRepairKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D322B89BAF700ECE075 /* libSwifterSwift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSwifterSwift.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D332B89BAF700ECE075 /* libSwiftyJSON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSwiftyJSON.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D342B89BAF700ECE075 /* libTagly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTagly.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D352B89BAF700ECE075 /* libTTSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libTTSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D362B89BAF700ECE075 /* libWCDB.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libWCDB.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D372B89BAF700ECE075 /* libWCDBOptimizedSQLCipher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libWCDBOptimizedSQLCipher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D382B89BAF700ECE075 /* libYYCache.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYYCache.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2218D642B89BB5400ECE075 /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = SDKROOT; };
+		A2218D682B89BC3100ECE075 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		A25992242B8A08490094DD46 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginBackgroundVideo.mp4; sourceTree = "<group>"; };
 		A26A03002B88C77000F6AC9B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A26A03032B88C88800F6AC9B /* MainTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbar.swift; sourceTree = "<group>"; };
@@ -72,9 +120,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2218D672B89BBC400ECE075 /* libPods-SMON.a in Frameworks */,
+				A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */,
+				A2218D512B89BAF700ECE075 /* libPods-SMON.a in Frameworks */,
 				A272A4822B870C73008EA955 /* SwiftUIX in Frameworks */,
 				A272A47F2B870C65008EA955 /* Pow in Frameworks */,
-				637FFFD4AA8BCDC602428FBE /* libPods-SMON.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				A26A03002B88C77000F6AC9B /* MainViewModel.swift */,
+				A25992242B8A08490094DD46 /* Test.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -206,6 +257,50 @@
 		D3E9067713C5560C79BBF173 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2218D6A2B89C3BE00ECE075 /* Photos.framework */,
+				A2218D682B89BC3100ECE075 /* CoreMedia.framework */,
+				A2218D642B89BB5400ECE075 /* CoreAudioTypes.framework */,
+				A2218D102B89BAF700ECE075 /* libAlamofire.a */,
+				A2218D112B89BAF700ECE075 /* libBolts.a */,
+				A2218D122B89BAF700ECE075 /* libGodzippa.a */,
+				A2218D132B89BAF700ECE075 /* libIGListDiffKit.a */,
+				A2218D142B89BAF700ECE075 /* libim-uikit-tob.a */,
+				A2218D152B89BAF700ECE075 /* BIMUIKit.bundle */,
+				A2218D162B89BAF700ECE075 /* TIMOEmojiNew.bundle */,
+				A2218D172B89BAF700ECE075 /* libimsdk-tob.a */,
+				A2218D182B89BAF700ECE075 /* libIntrospect.a */,
+				A2218D192B89BAF700ECE075 /* libKakaJSON.a */,
+				A2218D1A2B89BAF700ECE075 /* libKingfisher.a */,
+				A2218D1B2B89BAF700ECE075 /* Kingfisher.bundle */,
+				A2218D1C2B89BAF700ECE075 /* libLantern.a */,
+				A2218D1D2B89BAF700ECE075 /* liblibextobjc.a */,
+				A2218D1E2B89BAF700ECE075 /* liblottie-ios.a */,
+				A2218D1F2B89BAF700ECE075 /* LottiePrivacyInfo.bundle */,
+				A2218D202B89BAF700ECE075 /* libMantle.a */,
+				A2218D212B89BAF700ECE075 /* libMasonry.a */,
+				A2218D222B89BAF700ECE075 /* libMJRefresh.a */,
+				A2218D232B89BAF700ECE075 /* libMMKV.a */,
+				A2218D242B89BAF700ECE075 /* libMMKVCore.a */,
+				A2218D252B89BAF700ECE075 /* libMoya.a */,
+				A2218D262B89BAF700ECE075 /* libOneKit.a */,
+				A2218D272B89BAF700ECE075 /* libPanModal.a */,
+				A2218D282B89BAF700ECE075 /* libProtobuf.a */,
+				A2218D292B89BAF700ECE075 /* libRangersAPM.a */,
+				A2218D2A2B89BAF700ECE075 /* RangersAPMPrivacyInfo.bundle */,
+				A2218D2B2B89BAF700ECE075 /* libRangersAppLog.a */,
+				A2218D2C2B89BAF700ECE075 /* RangersAppLog.bundle */,
+				A2218D2D2B89BAF700ECE075 /* libRSSwizzle.a */,
+				A2218D2E2B89BAF700ECE075 /* libSDWebImage.a */,
+				A2218D2F2B89BAF700ECE075 /* SDWebImage.bundle */,
+				A2218D302B89BAF700ECE075 /* libSPAlert.a */,
+				A2218D312B89BAF700ECE075 /* libSQLiteRepairKit.a */,
+				A2218D322B89BAF700ECE075 /* libSwifterSwift.a */,
+				A2218D332B89BAF700ECE075 /* libSwiftyJSON.a */,
+				A2218D342B89BAF700ECE075 /* libTagly.a */,
+				A2218D352B89BAF700ECE075 /* libTTSDK.a */,
+				A2218D362B89BAF700ECE075 /* libWCDB.a */,
+				A2218D372B89BAF700ECE075 /* libWCDBOptimizedSQLCipher.a */,
+				A2218D382B89BAF700ECE075 /* libYYCache.a */,
 				0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */,
 			);
 			name = Frameworks;
@@ -223,6 +318,7 @@
 				A272A4642B8706FB008EA955 /* Frameworks */,
 				A272A4652B8706FB008EA955 /* Resources */,
 				E18CEE929EA96173BF6AEFAD /* [CP] Copy Pods Resources */,
+				5E27710FAB9A05E2BBA2556B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -289,6 +385,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5E27710FAB9A05E2BBA2556B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E18CEE929EA96173BF6AEFAD /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +453,7 @@
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
 				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
 				A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */,
+				A25992252B8A08490094DD46 /* Test.swift in Sources */,
 				A272A4772B8706FC008EA955 /* SMON.xcdatamodeld in Sources */,
 				A272A4852B871C77008EA955 /* MainView.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
@@ -400,6 +514,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -463,6 +578,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -494,6 +610,7 @@
 				DEVELOPMENT_TEAM = PX9F7733KU;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -509,7 +626,137 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_LDFLAGS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Alamofire\"",
+					"-l\"BDFileUploader\"",
+					"-l\"BVCParser\"",
+					"-l\"Bolts\"",
+					"-l\"ByteVC1_dec\"",
+					"-l\"Encryptor\"",
+					"-l\"Godzippa\"",
+					"-l\"IGListDiffKit\"",
+					"-l\"Introspect\"",
+					"-l\"KakaJSON\"",
+					"-l\"Kingfisher\"",
+					"-l\"Lantern\"",
+					"-l\"MJRefresh\"",
+					"-l\"MMKV\"",
+					"-l\"MMKVCore\"",
+					"-l\"Mantle\"",
+					"-l\"Masonry\"",
+					"-l\"Moya\"",
+					"-l\"OneKit\"",
+					"-l\"OneKit_BaseKit_awesome_ios\"",
+					"-l\"OneKit_Foundation_awesome_ios\"",
+					"-l\"OneKit_OKModel_awesome_ios\"",
+					"-l\"OneKit_Reachability_awesome_ios\"",
+					"-l\"OneKit_Section_awesome_ios\"",
+					"-l\"OneKit_Service_awesome_ios\"",
+					"-l\"OneKit_StartUp_awesome_ios\"",
+					"-l\"OneKit_UIKit_awesome_ios\"",
+					"-l\"PanModal\"",
+					"-l\"Protobuf\"",
+					"-l\"RAPMEncryptor_RAPMEncryptor_awesome_ios\"",
+					"-l\"RSSwizzle\"",
+					"-l\"RangersAPM\"",
+					"-l\"RangersAPM_APMLog\"",
+					"-l\"RangersAPM_AWECloudCommand\"",
+					"-l\"RangersAPM_Above\"",
+					"-l\"RangersAPM_BDALog\"",
+					"-l\"RangersAPM_BDFishhook\"",
+					"-l\"RangersAPM_CN\"",
+					"-l\"RangersAPM_CloudCommand\"",
+					"-l\"RangersAPM_Core\"",
+					"-l\"RangersAPM_FMDB\"",
+					"-l\"RangersAPM_HMD\"",
+					"-l\"RangersAPM_Public\"",
+					"-l\"RangersAPM_TTReachability\"",
+					"-l\"RangersAPM_Zip\"",
+					"-l\"RangersAPM_Zyone\"",
+					"-l\"RangersAppLog\"",
+					"-l\"RangersAppLog_CN_awesome_ios\"",
+					"-l\"RangersAppLog_Core_awesome_ios\"",
+					"-l\"RangersAppLog_Encryptor_awesome_ios\"",
+					"-l\"SDWebImage\"",
+					"-l\"SPAlert\"",
+					"-l\"SQLiteRepairKit\"",
+					"-l\"SwifterSwift\"",
+					"-l\"SwiftyJSON\"",
+					"-l\"TTSDK\"",
+					"-l\"TTTopSignature_TTTopSignature_ios\"",
+					"-l\"Tagly\"",
+					"-l\"VCloudPandora_CN_ios\"",
+					"-l\"VCloudPandora_Core_ios\"",
+					"-l\"WCDB\"",
+					"-l\"WCDBOptimizedSQLCipher\"",
+					"-l\"YYCache\"",
+					"-l\"boringssl\"",
+					"-l\"boringssl_asm\"",
+					"-l\"c++\"",
+					"-l\"crcrypto\"",
+					"-l\"iconv\"",
+					"-l\"im-uikit-tob\"",
+					"-l\"im-uikit-tob_im-uikit-tob_awesome_ios\"",
+					"-l\"imsdk-tob\"",
+					"-l\"imsdk-tob_Core_awesome_ios\"",
+					"-l\"imsdk-tob_Feature_EssentialPB_awesome_ios\"",
+					"-l\"libextobjc\"",
+					"-l\"lottie-ios\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"stdc++\"",
+					"-l\"vcloudverify\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AVKit\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"Combine\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTNetworkManager\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"WebKit\"",
+					"-framework",
+					"\"boringssl\"",
+					"-framework",
+					"\"crypto\"",
+					"-framework",
+					"\"libvcn\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"-ld_classic",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailycontest.smon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -537,6 +784,7 @@
 				DEVELOPMENT_TEAM = PX9F7733KU;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
@@ -552,7 +800,137 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_LDFLAGS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"Alamofire\"",
+					"-l\"BDFileUploader\"",
+					"-l\"BVCParser\"",
+					"-l\"Bolts\"",
+					"-l\"ByteVC1_dec\"",
+					"-l\"Encryptor\"",
+					"-l\"Godzippa\"",
+					"-l\"IGListDiffKit\"",
+					"-l\"Introspect\"",
+					"-l\"KakaJSON\"",
+					"-l\"Kingfisher\"",
+					"-l\"Lantern\"",
+					"-l\"MJRefresh\"",
+					"-l\"MMKV\"",
+					"-l\"MMKVCore\"",
+					"-l\"Mantle\"",
+					"-l\"Masonry\"",
+					"-l\"Moya\"",
+					"-l\"OneKit\"",
+					"-l\"OneKit_BaseKit_awesome_ios\"",
+					"-l\"OneKit_Foundation_awesome_ios\"",
+					"-l\"OneKit_OKModel_awesome_ios\"",
+					"-l\"OneKit_Reachability_awesome_ios\"",
+					"-l\"OneKit_Section_awesome_ios\"",
+					"-l\"OneKit_Service_awesome_ios\"",
+					"-l\"OneKit_StartUp_awesome_ios\"",
+					"-l\"OneKit_UIKit_awesome_ios\"",
+					"-l\"PanModal\"",
+					"-l\"Protobuf\"",
+					"-l\"RAPMEncryptor_RAPMEncryptor_awesome_ios\"",
+					"-l\"RSSwizzle\"",
+					"-l\"RangersAPM\"",
+					"-l\"RangersAPM_APMLog\"",
+					"-l\"RangersAPM_AWECloudCommand\"",
+					"-l\"RangersAPM_Above\"",
+					"-l\"RangersAPM_BDALog\"",
+					"-l\"RangersAPM_BDFishhook\"",
+					"-l\"RangersAPM_CN\"",
+					"-l\"RangersAPM_CloudCommand\"",
+					"-l\"RangersAPM_Core\"",
+					"-l\"RangersAPM_FMDB\"",
+					"-l\"RangersAPM_HMD\"",
+					"-l\"RangersAPM_Public\"",
+					"-l\"RangersAPM_TTReachability\"",
+					"-l\"RangersAPM_Zip\"",
+					"-l\"RangersAPM_Zyone\"",
+					"-l\"RangersAppLog\"",
+					"-l\"RangersAppLog_CN_awesome_ios\"",
+					"-l\"RangersAppLog_Core_awesome_ios\"",
+					"-l\"RangersAppLog_Encryptor_awesome_ios\"",
+					"-l\"SDWebImage\"",
+					"-l\"SPAlert\"",
+					"-l\"SQLiteRepairKit\"",
+					"-l\"SwifterSwift\"",
+					"-l\"SwiftyJSON\"",
+					"-l\"TTSDK\"",
+					"-l\"TTTopSignature_TTTopSignature_ios\"",
+					"-l\"Tagly\"",
+					"-l\"VCloudPandora_CN_ios\"",
+					"-l\"VCloudPandora_Core_ios\"",
+					"-l\"WCDB\"",
+					"-l\"WCDBOptimizedSQLCipher\"",
+					"-l\"YYCache\"",
+					"-l\"boringssl\"",
+					"-l\"boringssl_asm\"",
+					"-l\"c++\"",
+					"-l\"crcrypto\"",
+					"-l\"iconv\"",
+					"-l\"im-uikit-tob\"",
+					"-l\"im-uikit-tob_im-uikit-tob_awesome_ios\"",
+					"-l\"imsdk-tob\"",
+					"-l\"imsdk-tob_Core_awesome_ios\"",
+					"-l\"imsdk-tob_Feature_EssentialPB_awesome_ios\"",
+					"-l\"libextobjc\"",
+					"-l\"lottie-ios\"",
+					"-l\"resolv\"",
+					"-l\"sqlite3\"",
+					"-l\"stdc++\"",
+					"-l\"vcloudverify\"",
+					"-l\"xml2\"",
+					"-l\"z\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AVKit\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"Combine\"",
+					"-framework",
+					"\"CoreFoundation\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"TTNetworkManager\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"WebKit\"",
+					"-framework",
+					"\"boringssl\"",
+					"-framework",
+					"\"crypto\"",
+					"-framework",
+					"\"libvcn\"",
+					"-weak_framework",
+					"\"Combine\"",
+					"-weak_framework",
+					"\"SwiftUI\"",
+					"-ld_classic",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailycontest.smon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
