@@ -1,4 +1,4 @@
-framework module PanModal {
+module PanModal {
   umbrella header "PanModal-umbrella.h"
 
   export *

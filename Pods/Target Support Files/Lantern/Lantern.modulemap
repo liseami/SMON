@@ -1,4 +1,4 @@
-framework module Lantern {
+module Lantern {
   umbrella header "Lantern-umbrella.h"
 
   export *

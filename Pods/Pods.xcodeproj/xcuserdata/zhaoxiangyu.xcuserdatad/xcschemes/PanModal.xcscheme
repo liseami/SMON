@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AD16B149CC82594F15860A512FDBB6B9"
-               BuildableName = "PanModal.framework"
+               BuildableName = "libPanModal.a"
                BlueprintName = "PanModal"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

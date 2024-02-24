@@ -176,32 +176,14 @@ code_sign_if_enabled() {
 }
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Introspect/Introspect.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/KakaJSON/KakaJSON.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Lantern/Lantern.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Tagly/Tagly.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
+  install_framework "${PODS_ROOT}/TTSDK/TTSDK/boringssl/boringssl.framework"
+  install_framework "${PODS_ROOT}/TTSDK/TTSDK/boringssl/crypto.framework"
+  install_framework "${PODS_ROOT}/TTSDK/TTSDK/VCNVCloudNetwork/products/framework/libvcn.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Introspect/Introspect.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/KakaJSON/KakaJSON.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Lantern/Lantern.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Moya/Moya.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Tagly/Tagly.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
+  install_framework "${PODS_ROOT}/TTSDK/TTSDK/boringssl/boringssl.framework"
+  install_framework "${PODS_ROOT}/TTSDK/TTSDK/boringssl/crypto.framework"
+  install_framework "${PODS_ROOT}/TTSDK/TTSDK/VCNVCloudNetwork/products/framework/libvcn.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

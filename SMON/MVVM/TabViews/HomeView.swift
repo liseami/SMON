@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text("Hello, World!")
+        Text("每日大赛")
             .foregroundStyle(.red)
     }
 }

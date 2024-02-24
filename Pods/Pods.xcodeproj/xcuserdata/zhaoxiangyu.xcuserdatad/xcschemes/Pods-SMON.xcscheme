@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C3687C4250CAB58ADF72923FE32192DF"
-               BuildableName = "Pods_SMON.framework"
+               BuildableName = "libPods-SMON.a"
                BlueprintName = "Pods-SMON"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

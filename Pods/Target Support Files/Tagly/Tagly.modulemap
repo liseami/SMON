@@ -1,4 +1,4 @@
-framework module Tagly {
+module Tagly {
   umbrella header "Tagly-umbrella.h"
 
   export *

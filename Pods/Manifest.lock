@@ -64,7 +64,7 @@ DEPENDENCIES:
   - Tagly
 
 SPEC REPOS:
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Introspect
     - KakaJSON
@@ -92,6 +92,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Tagly: deb459c698853a3fffce027fedb92dcb7cf5c68e
 
-PODFILE CHECKSUM: 46c74065004d8ede1b883f1810b4599b71f7091e
+PODFILE CHECKSUM: 376b3c8418be8afd3fe0a326846a6c1447d21bde
 
 COCOAPODS: 1.12.1

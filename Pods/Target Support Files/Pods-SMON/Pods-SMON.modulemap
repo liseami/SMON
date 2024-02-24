@@ -1,4 +1,4 @@
-framework module Pods_SMON {
+module Pods_SMON {
   umbrella header "Pods-SMON-umbrella.h"
 
   export *

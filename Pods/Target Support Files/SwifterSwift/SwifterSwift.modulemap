@@ -1,4 +1,4 @@
-framework module SwifterSwift {
+module SwifterSwift {
   umbrella header "SwifterSwift-umbrella.h"
 
   export *

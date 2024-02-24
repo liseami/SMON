@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B4652B2924FE3B941944F77DA8477ABD"
-               BuildableName = "SPAlert.framework"
+               BuildableName = "libSPAlert.a"
                BlueprintName = "SPAlert"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

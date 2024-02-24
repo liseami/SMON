@@ -1,4 +1,4 @@
-framework module SPAlert {
+module SPAlert {
   umbrella header "SPAlert-umbrella.h"
 
   export *
