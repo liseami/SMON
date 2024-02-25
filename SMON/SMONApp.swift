@@ -17,19 +17,18 @@ struct SMONApp: App {
                 .tint(.white)
                 .environment(\.colorScheme, .dark)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                
         }
     }
 }
 
-// 修改NavigationBackButton的式样
+// 修改NavigationBackBar的式样
 extension UINavigationController {
     override open func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        navigationBar.topItem?.backButtonDisplayMode = .minimal
         let backBarBtnImage = UIImage(named: "system_backbar")?
             .withRenderingMode(.alwaysTemplate).withTintColor(.white)
         UINavigationBar.appearance().backIndicatorImage = backBarBtnImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = backBarBtnImage
+        navigationBar.topItem?.backButtonDisplayMode = .minimal
     }
 }

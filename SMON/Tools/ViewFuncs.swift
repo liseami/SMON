@@ -9,7 +9,18 @@ import Foundation
 import SwiftUI
 
 extension View {
-    func addBack() ->  some View {
+    func addBack() -> some View {
         return self
     }
+
+    func ifshow(show: Bool) -> some View {
+        Group {
+            if show {
+                self
+            } else {
+                EmptyView()
+            }
+        }
+    }
+
 }

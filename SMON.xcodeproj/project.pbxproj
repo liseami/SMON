@@ -46,6 +46,7 @@
 		A2B45CAE2B8B222400D71EF8 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CAD2B8B222400D71EF8 /* ProfileViewModel.swift */; };
 		A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB02B8B27C900D71EF8 /* SettingView.swift */; };
 		A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */; };
+		A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB62B8B4EA000D71EF8 /* Color+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,7 @@
 		A2B45CAD2B8B222400D71EF8 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		A2B45CB02B8B27C900D71EF8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		A2B45CB62B8B4EA000D71EF8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.release.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.release.xcconfig"; sourceTree = "<group>"; };
 		ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.debug.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				A2B45CA62B8B089900D71EF8 /* String+.swift */,
+				A2B45CB62B8B4EA000D71EF8 /* Color+.swift */,
 			);
 			path = Ex;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				A2B45C992B8A161400D71EF8 /* ConversationList.swift in Sources */,
 				A272A4912B871D03008EA955 /* MessageView.swift in Sources */,
 				A2B45C9B2B8A183200D71EF8 /* ChatView.swift in Sources */,
+				A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */,
 				A26A030C2B89AF2A00F6AC9B /* AppDelegate.swift in Sources */,
 				A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */,
 				A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */,

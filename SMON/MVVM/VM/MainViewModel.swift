@@ -28,6 +28,14 @@ class MainViewModel: ObservableObject {
                 return .init(name: "我的", icon: "tabbar_profile", subline: "")
             }
         }
+        var circleBtnInfo : LabelInfo {
+            switch self {
+            case .home:
+                return .init(name: "冲榜", icon: "tabbar_circle_rank", subline: "")
+            case .feed,.message,.profile:
+                return .init(name: "", icon: "tabbar_circle_post", subline: "")
+            }
+        }
     }
 
     @Published var currentTabbar: TabbarItem = .home
