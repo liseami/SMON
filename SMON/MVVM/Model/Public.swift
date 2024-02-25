@@ -12,3 +12,10 @@ struct LabelInfo {
     var icon: String
     var subline: String
 }
+
+
+struct SettingItem {
+    var name: String
+    var iconName : String?
+    var children: [SettingItem]? = []
+}

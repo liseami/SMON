@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct MainView: View {
     @StateObject var vm: MainViewModel = .init()
@@ -18,6 +19,8 @@ struct MainView: View {
                 tabbar
             }
         })
+        
+        
     }
 
     var tabViews: some View {

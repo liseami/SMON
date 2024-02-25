@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var vm: ProfileViewModel = .init()
+    @State var openSettingView: Bool = true
     var body: some View {
+    
         ScrollView(content: {
             ZStack(alignment: .top) {
                 topImage
@@ -19,6 +21,26 @@ struct ProfileView: View {
             mediaView
         })
         .ignoresSafeArea()
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                XMDesgin.XMIcon(iconName: "profile_share", size: 22)
+                    .padding(.horizontal, 8)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+                    .padding(.horizontal, 8)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    SettingView()
+                } label: {
+                    XMDesgin.XMIcon(iconName: "profile_setting", size: 22)
+                        .padding(.horizontal, 8)
+                }
+                .foregroundColor(.white)
+
+            }
+        }
     }
 
     var topImage: some View {
@@ -101,8 +123,8 @@ struct ProfileView: View {
                         .font(.subheadline)
                         .bold()
                         .lineLimit(2)
-                        .frame(maxWidth:.infinity,alignment:.leading)
-                        .padding(.all,12)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.all, 12)
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
