@@ -8,6 +8,9 @@
 import Foundation
 
 class MainViewModel: ObservableObject {
+    init(currentTabbar: TabbarItem = .home) {
+        self.currentTabbar = currentTabbar
+    }
     enum TabbarItem: CaseIterable {
         case home
         case feed
@@ -16,13 +19,13 @@ class MainViewModel: ObservableObject {
         var labelInfo: LabelInfo {
             switch self {
             case .home:
-                return .init(name: "大赛", icon: "", subline: "")
+                return .init(name: "大赛", icon: "tabbar_home", subline: "")
             case .feed:
-                return .init(name: "推文", icon: "", subline: "")
+                return .init(name: "推文", icon: "tabbar_feed", subline: "")
             case .message:
-                return .init(name: "消息", icon: "", subline: "")
+                return .init(name: "消息", icon: "tabbar_message", subline: "")
             case .profile:
-                return .init(name: "我的", icon: "", subline: "")
+                return .init(name: "我的", icon: "tabbar_profile", subline: "")
             }
         }
     }

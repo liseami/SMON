@@ -38,7 +38,7 @@ struct ChatViewContainer: UIViewControllerRepresentable {
         // Add your viewDidLoad logic here
         func viewDidLoad() {
             // Perform actions when the view is loaded
-            print("View loaded")
+            print("View loaded")	
         }
     }
 }

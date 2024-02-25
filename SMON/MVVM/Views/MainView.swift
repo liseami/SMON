@@ -26,7 +26,7 @@ struct MainView: View {
             case .home:
                 HomeView()
             case .feed:
-                ThreadView()
+                FeedView()
             case .message:
                 MessageView()
             case .profile:
