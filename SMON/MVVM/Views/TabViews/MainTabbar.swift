@@ -10,6 +10,7 @@ import SwiftUI
 
 struct MainTabbar: View {
     @EnvironmentObject var vm: MainViewModel
+    @State var showCircleBtn: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.8), Color.black.opacity(0)]), startPoint: .bottom, endPoint: .top)
@@ -19,6 +20,9 @@ struct MainTabbar: View {
             VStack(spacing: 16) {
                 // 悬浮圆形按钮
                 circleBtn
+                    .transition(.offset(x: -200).combined(with: .movingParts.flip).combined(with: .scale(scale: 0)).combined(with: .opacity))
+                
+                    .ifshow(show: showCircleBtn)
                 // 细线
                 Capsule()
                     .frame(height: 2)
@@ -30,6 +34,13 @@ struct MainTabbar: View {
             .padding(.horizontal)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                withAnimation(.interpolatingSpring(stiffness: 100, damping: 20)) {
+                    showCircleBtn = true
+                }
+            }
+        })
     }
 
     var circleBtn: some View {
@@ -43,7 +54,7 @@ struct MainTabbar: View {
             })
             .clipShape(Circle())
             .changeEffect(.shine, value: vm.currentTabbar, isEnabled: true)
-            .shadow(color: .black, radius: 2, x: 0, y: 1)
+            .shadow(color: .gray, radius: 2, x: 0, y: 1)
             .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 1)
             .overlay {
                 VStack(spacing: 0) {
@@ -66,7 +77,7 @@ struct MainTabbar: View {
                     vm.currentTabbar = tabitem
                     Apphelper.shared.mada(style: .rigid)
                 }, label: {
-                    XMDesgin.XMIcon(iconName: tabitem.labelInfo.icon)
+                    XMDesgin.XMIcon(iconName: tabitem.labelInfo.icon, size: 28)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .background(Color.black.opacity(0.01))
                         .changeEffect(.jump(height: 3), value: vm.currentTabbar, isEnabled: tabitem == vm.currentTabbar)

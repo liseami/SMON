@@ -18,7 +18,7 @@ class ProfileViewModel: ObservableObject {
         var info: LabelInfo {
             switch self {
             case .media:
-                return .init(name: "媒体", icon: "", subline: "")
+                return .init(name: "照片", icon: "", subline: "")
             case .post:
                 return .init(name: "动态", icon: "", subline: "")
             case .rank:

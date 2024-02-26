@@ -11,6 +11,17 @@ struct SettingView: View {
     @StateObject var vm: SettingViewModel = .init()
     var body: some View {
         List {
+            #if DEBUG
+            
+            
+            NavigationLink {
+                XMUIDesginSystemView()
+            } label: {
+                Text("XMUI组件")
+            }
+            
+            #endif
+
             ForEach(vm.settingGroup, id: \.self.name) { group in
                 Section {
                     if let child = group.children {
@@ -18,7 +29,7 @@ struct SettingView: View {
                             Label {
                                 Text(child.name)
                             } icon: {
-                                XMDesgin.XMIcon(iconName: child.iconName ?? "", size: 22, color: .white)
+                                XMDesgin.XMIcon(iconName: child.iconName ?? "", color: .white)
                             }
                             .padding(.vertical, 8)
                             .padding(.horizontal, -2)
@@ -31,8 +42,6 @@ struct SettingView: View {
                         .foregroundStyle(.white)
                         .padding(.vertical)
                 }
-
-                
             }
         }
         .listStyle(.insetGrouped)

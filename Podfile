@@ -21,3 +21,16 @@ pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情
 pod 'im-uikit-tob', '1.9.0'
 end
+
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  end
+    installer.generated_projects.each do |project|
+          project.targets.each do |target|
+              target.build_configurations.each do |config|
+                  config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+               end
+          end
+   end
+end

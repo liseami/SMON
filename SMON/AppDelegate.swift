@@ -19,10 +19,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 func DAppInit() {
 //    // 火山引擎IM注册
     let config = BIMSDKConfig()
-//    config.logListener(BIMLogLevel.LOG_DEBUG, "")
+    config.enableAppLog = true
     BIMClient.sharedInstance().initSDK(Int32(889305), config: config)
     // 火山用户IM登陆
-    BIMClient.sharedInstance().login("15207113458", token: "Bwm7M77IIlNMW9TC8kDwGFxjA52CO7O8CHd0RocCdebpsYbAR5ZpPx") { error in
+    BIMClient.sharedInstance().login("2", token: "GqiiGE7ELTxOUSlJ9XDO1FpENkL7BrcXhTtmW5K597iAN5Taj04yuZ") { error in
         print(error?.description ?? "")
+    }
+    BIMClient.sharedInstance().addConversationListener(BIMConversationListener())
+    BIMClient.sharedInstance().setUserSelfPortrait("https://i.pravatar.cc/300") { _ in
+    }
+    BIMClient.sharedInstance().setUserSelfNickName("赵纯想") { error in
+        print(error?.description ?? "" + "🌞")
     }
 }

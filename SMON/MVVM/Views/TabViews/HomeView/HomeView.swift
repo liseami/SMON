@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var vm: HomeViewModel = .init()
-
+    @State var showFliterView: Bool = false
     var body: some View {
         ZStack(alignment: .top) {
             // 横向翻页
@@ -24,7 +24,7 @@ struct HomeView: View {
             LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.8), Color.black.opacity(0)]), startPoint: .top, endPoint: .bottom)
                 .frame(height: 85)
             HStack {
-                XMDesgin.XMIcon(iconName: "home_bell",size: 22)
+                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
                 Spacer()
                 ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
                     let selected = tabitem == vm.currentTopTab
@@ -34,7 +34,14 @@ struct HomeView: View {
                         .opacity(selected ? 1 : 0.6)
                 }
                 Spacer()
-                XMDesgin.XMIcon(iconName: "home_shop",size: 22)
+                XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
+                    .onTapGesture {
+                        showFliterView.toggle()
+                    }
+                    .fullScreenCover(isPresented: $showFliterView, content: {
+                        HomeFliterView()
+                            .environment(\.colorScheme, .dark)
+                    })
             }
             .padding(.horizontal)
         }

@@ -14,13 +14,13 @@ enum XMDesgin {
         var iconName: String?
         var systemName: String?
 
-        init(iconName: String, size: CGFloat = 28, color: Color = .white) {
+        init(iconName: String, size: CGFloat = 22, color: Color = .white) {
             self.iconName = iconName
             self.size = size
             self.color = color
         }
 
-        init(systemName: String, size: CGFloat = 28, color: Color = .white) {
+        init(systemName: String, size: CGFloat = 22, color: Color = .white) {
             self.systemName = systemName
             self.size = size
             self.color = color
@@ -68,7 +68,7 @@ enum XMDesgin {
                 
             }, label: {
                 HStack(spacing: 2) {
-                    XMDesgin.XMIcon(iconName: iconName, size: 22, color: fColor)
+                    XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     Text(text)
                         .font(.subheadline)
                         .bold()

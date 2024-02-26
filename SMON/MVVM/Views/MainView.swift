@@ -5,8 +5,8 @@
 //  Created by 赵翔宇 on 2024/2/22.
 //
 
-import SwiftUI
 import Introspect
+import SwiftUI
 
 struct MainView: View {
     @StateObject var vm: MainViewModel = .init()
@@ -17,10 +17,9 @@ struct MainView: View {
                 tabViews
                 // Tabbar
                 tabbar
+                LaunchScreenAnimation()
             }
         })
-        
-        
     }
 
     var tabViews: some View {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Apphelper {
     static let shared : Apphelper = .init()
@@ -14,4 +15,33 @@ class Apphelper {
         impactFeedback.prepare()
         impactFeedback.impactOccurred()
     }
+    
+    func findGlobalNavigationController() -> UINavigationController? {
+        // 获取应用的主窗口
+        guard let window = UIApplication.shared.windows.first else {
+            return nil
+        }
+
+        // 递归查找包含 UINavigationController 的视图控制器
+        func findNavigationController(from viewController: UIViewController?) -> UINavigationController? {
+            if let navigationController = viewController as? UINavigationController {
+                return navigationController
+            }
+
+            for child in viewController?.children ?? [] {
+                if let navigationController = findNavigationController(from: child) {
+                    return navigationController
+                }
+            }
+
+            return nil
+        }
+
+        // 从主窗口的根视图控制器开始查找
+        return findNavigationController(from: window.rootViewController)
+    }
 }
+
+
+
+

@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2218D512B89BAF700ECE075 /* libPods-SMON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */; };
-		A2218D672B89BBC400ECE075 /* libPods-SMON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */; };
+		4DEC64B383D5FA4D951CC1DE /* libPods-SMON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A8B1D3C139E8505B7AB286C /* libPods-SMON.a */; };
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
 		A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */; };
 		A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03002B88C77000F6AC9B /* MainViewModel.swift */; };
@@ -36,8 +35,8 @@
 		A28F54432B8739F900AF9CD3 /* LoginView_PhoneNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54422B8739F900AF9CD3 /* LoginView_PhoneNumber.swift */; };
 		A28F54472B873A1D00AF9CD3 /* DataCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */; };
 		A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */; };
-		A2B45C992B8A161400D71EF8 /* ConversationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C982B8A161400D71EF8 /* ConversationList.swift */; };
-		A2B45C9B2B8A183200D71EF8 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C9A2B8A183200D71EF8 /* ChatView.swift */; };
+		A2B45C992B8A161400D71EF8 /* ConversationListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C982B8A161400D71EF8 /* ConversationListContainer.swift */; };
+		A2B45C9B2B8A183200D71EF8 /* ChatViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C9A2B8A183200D71EF8 /* ChatViewContainer.swift */; };
 		A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C9F2B8AFCB300D71EF8 /* Components.swift */; };
 		A2B45CA32B8B008B00D71EF8 /* PublicFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CA22B8B008B00D71EF8 /* PublicFuncs.swift */; };
 		A2B45CA72B8B089900D71EF8 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CA62B8B089900D71EF8 /* String+.swift */; };
@@ -47,6 +46,16 @@
 		A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB02B8B27C900D71EF8 /* SettingView.swift */; };
 		A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */; };
 		A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB62B8B4EA000D71EF8 /* Color+.swift */; };
+		A2BF15EA2B8C38210011A130 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15E92B8C38210011A130 /* TestView.swift */; };
+		A2BF15EC2B8C423D0011A130 /* XMUIDesginSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */; };
+		A2BF15EE2B8C43F20011A130 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A2BF15ED2B8C43F20011A130 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15EF2B8C55480011A130 /* UserManager.swift */; };
+		A2BF15F32B8C64EE0011A130 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15F22B8C64EE0011A130 /* ChatView.swift */; };
+		A2BF15F52B8C67060011A130 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15F42B8C67060011A130 /* PermissionManager.swift */; };
+		A2BF15F92B8C721D0011A130 /* BIMConversationListListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15F82B8C721D0011A130 /* BIMConversationListListener.swift */; };
+		A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2BF163A2B8C811D0011A130 /* Launch Screen.storyboard */; };
+		A2BF163D2B8C83B90011A130 /* LaunchScreenAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF163C2B8C83B90011A130 /* LaunchScreenAnimation.swift */; };
+		A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,8 +129,8 @@
 		A28F54422B8739F900AF9CD3 /* LoginView_PhoneNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView_PhoneNumber.swift; sourceTree = "<group>"; };
 		A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCollectionView.swift; sourceTree = "<group>"; };
 		A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView_VCode.swift; sourceTree = "<group>"; };
-		A2B45C982B8A161400D71EF8 /* ConversationList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationList.swift; sourceTree = "<group>"; };
-		A2B45C9A2B8A183200D71EF8 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A2B45C982B8A161400D71EF8 /* ConversationListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListContainer.swift; sourceTree = "<group>"; };
+		A2B45C9A2B8A183200D71EF8 /* ChatViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewContainer.swift; sourceTree = "<group>"; };
 		A2B45C9F2B8AFCB300D71EF8 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		A2B45CA22B8B008B00D71EF8 /* PublicFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicFuncs.swift; sourceTree = "<group>"; };
 		A2B45CA62B8B089900D71EF8 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
@@ -131,6 +140,16 @@
 		A2B45CB02B8B27C900D71EF8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		A2B45CB62B8B4EA000D71EF8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		A2BF15E92B8C38210011A130 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMUIDesginSystemView.swift; sourceTree = "<group>"; };
+		A2BF15EF2B8C55480011A130 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		A2BF15F22B8C64EE0011A130 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		A2BF15F42B8C67060011A130 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
+		A2BF15F62B8C686A0011A130 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		A2BF15F82B8C721D0011A130 /* BIMConversationListListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BIMConversationListListener.swift; sourceTree = "<group>"; };
+		A2BF163A2B8C811D0011A130 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A2BF163C2B8C83B90011A130 /* LaunchScreenAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenAnimation.swift; sourceTree = "<group>"; };
+		A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFliterView.swift; sourceTree = "<group>"; };
 		B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.release.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.release.xcconfig"; sourceTree = "<group>"; };
 		ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.debug.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,11 +159,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2218D672B89BBC400ECE075 /* libPods-SMON.a in Frameworks */,
 				A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */,
-				A2218D512B89BAF700ECE075 /* libPods-SMON.a in Frameworks */,
 				A272A4822B870C73008EA955 /* SwiftUIX in Frameworks */,
 				A272A47F2B870C65008EA955 /* Pow in Frameworks */,
+				A2BF15EE2B8C43F20011A130 /* SwiftUIX in Frameworks */,
+				4DEC64B383D5FA4D951CC1DE /* libPods-SMON.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +177,8 @@
 				A2B45CA82B8B0C6B00D71EF8 /* HomeViewModel.swift */,
 				A2B45CAD2B8B222400D71EF8 /* ProfileViewModel.swift */,
 				A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */,
+				A2BF15EF2B8C55480011A130 /* UserManager.swift */,
+				A2BF15F42B8C67060011A130 /* PermissionManager.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -191,15 +212,17 @@
 		A272A4692B8706FB008EA955 /* SMON */ = {
 			isa = PBXGroup;
 			children = (
-				A2B45CA12B8B008000D71EF8 /* Tools */,
+				A2BF15F62B8C686A0011A130 /* Info.plist */,
 				A26A030B2B89AF2A00F6AC9B /* AppDelegate.swift */,
 				A272A46A2B8706FB008EA955 /* SMONApp.swift */,
 				A26A03092B89AEAE00F6AC9B /* Bridge.m */,
 				A26A03082B89AEAE00F6AC9B /* SMON-Bridging-Header.h */,
 				A272A46E2B8706FC008EA955 /* Assets.xcassets */,
+				A2BF163A2B8C811D0011A130 /* Launch Screen.storyboard */,
 				A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */,
-				A2B45C9D2B8AFCA000D71EF8 /* DesginSystem */,
 				A272A4832B871C6F008EA955 /* MVVM */,
+				A2B45CA12B8B008000D71EF8 /* Tools */,
+				A2B45C9D2B8AFCA000D71EF8 /* DesginSystem */,
 				A272A4982B872062008EA955 /* Data */,
 				A272A4702B8706FC008EA955 /* Preview Content */,
 			);
@@ -241,8 +264,10 @@
 		A272A4872B871CCC008EA955 /* TabViews */ = {
 			isa = PBXGroup;
 			children = (
+				A2E7F9A62B8CDF1300E86474 /* HomeView */,
+				A2BF15F12B8C64E70011A130 /* Message */,
 				A272A48C2B871CF9008EA955 /* ProfileView.swift */,
-				A272A48E2B871CFD008EA955 /* HomeView.swift */,
+				A2BF15E92B8C38210011A130 /* TestView.swift */,
 				A272A4902B871D03008EA955 /* MessageView.swift */,
 				A272A4922B871D1A008EA955 /* FeedView.swift */,
 				A26A03032B88C88800F6AC9B /* MainTabbar.swift */,
@@ -270,8 +295,9 @@
 		A2B45C972B8A15FD00D71EF8 /* BIM */ = {
 			isa = PBXGroup;
 			children = (
-				A2B45C982B8A161400D71EF8 /* ConversationList.swift */,
-				A2B45C9A2B8A183200D71EF8 /* ChatView.swift */,
+				A2B45C982B8A161400D71EF8 /* ConversationListContainer.swift */,
+				A2B45C9A2B8A183200D71EF8 /* ChatViewContainer.swift */,
+				A2BF15F82B8C721D0011A130 /* BIMConversationListListener.swift */,
 			);
 			path = BIM;
 			sourceTree = "<group>";
@@ -287,6 +313,7 @@
 		A2B45C9E2B8AFCA600D71EF8 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */,
 				A2B45C9F2B8AFCB300D71EF8 /* Components.swift */,
 			);
 			path = Component;
@@ -297,7 +324,6 @@
 			children = (
 				A2B45CA22B8B008B00D71EF8 /* PublicFuncs.swift */,
 				A2B45CA52B8B089100D71EF8 /* Ex */,
-				A2B45CAB2B8B1E3C00D71EF8 /* ViewFuncs.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -305,6 +331,7 @@
 		A2B45CA42B8B062700D71EF8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A2BF163C2B8C83B90011A130 /* LaunchScreenAnimation.swift */,
 				A2B45CAF2B8B27BB00D71EF8 /* SettingView */,
 				A272A4842B871C77008EA955 /* MainView.swift */,
 				A2B45C972B8A15FD00D71EF8 /* BIM */,
@@ -317,6 +344,7 @@
 		A2B45CA52B8B089100D71EF8 /* Ex */ = {
 			isa = PBXGroup;
 			children = (
+				A2B45CAB2B8B1E3C00D71EF8 /* ViewFuncs.swift */,
 				A2B45CA62B8B089900D71EF8 /* String+.swift */,
 				A2B45CB62B8B4EA000D71EF8 /* Color+.swift */,
 			);
@@ -329,6 +357,23 @@
 				A2B45CB02B8B27C900D71EF8 /* SettingView.swift */,
 			);
 			path = SettingView;
+			sourceTree = "<group>";
+		};
+		A2BF15F12B8C64E70011A130 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				A2BF15F22B8C64EE0011A130 /* ChatView.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		A2E7F9A62B8CDF1300E86474 /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				A272A48E2B871CFD008EA955 /* HomeView.swift */,
+				A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */,
+			);
+			path = HomeView;
 			sourceTree = "<group>";
 		};
 		B127F7EE8E3E2ABAAF466928 /* Pods */ = {
@@ -414,6 +459,7 @@
 			packageProductDependencies = (
 				A272A47E2B870C65008EA955 /* Pow */,
 				A272A4812B870C73008EA955 /* SwiftUIX */,
+				A2BF15ED2B8C43F20011A130 /* SwiftUIX */,
 			);
 			productName = SMON;
 			productReference = A272A4672B8706FB008EA955 /* SMON.app */;
@@ -464,6 +510,7 @@
 			files = (
 				A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */,
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
+				A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */,
 				A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,6 +585,7 @@
 				A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */,
 				A272A4742B8706FC008EA955 /* Persistence.swift in Sources */,
 				A2B45CAE2B8B222400D71EF8 /* ProfileViewModel.swift in Sources */,
+				A2BF15F32B8C64EE0011A130 /* ChatView.swift in Sources */,
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
 				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
 				A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */,
@@ -548,21 +596,28 @@
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
 				A2B45CA72B8B089900D71EF8 /* String+.swift in Sources */,
 				A2B45CA92B8B0C6B00D71EF8 /* HomeViewModel.swift in Sources */,
-				A2B45C992B8A161400D71EF8 /* ConversationList.swift in Sources */,
+				A2B45C992B8A161400D71EF8 /* ConversationListContainer.swift in Sources */,
 				A272A4912B871D03008EA955 /* MessageView.swift in Sources */,
-				A2B45C9B2B8A183200D71EF8 /* ChatView.swift in Sources */,
+				A2B45C9B2B8A183200D71EF8 /* ChatViewContainer.swift in Sources */,
 				A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */,
+				A2BF163D2B8C83B90011A130 /* LaunchScreenAnimation.swift in Sources */,
 				A26A030C2B89AF2A00F6AC9B /* AppDelegate.swift in Sources */,
 				A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */,
 				A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */,
 				A272A4932B871D1A008EA955 /* FeedView.swift in Sources */,
 				A28F54472B873A1D00AF9CD3 /* DataCollectionView.swift in Sources */,
+				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
+				A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */,
 				A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */,
+				A2BF15EA2B8C38210011A130 /* TestView.swift in Sources */,
+				A2BF15F92B8C721D0011A130 /* BIMConversationListListener.swift in Sources */,
 				A272A4952B871D80008EA955 /* AppFeaturesView.swift in Sources */,
 				A272A4972B871D8D008EA955 /* LoginMainView.swift in Sources */,
 				A28F54432B8739F900AF9CD3 /* LoginView_PhoneNumber.swift in Sources */,
 				A272A48D2B871CF9008EA955 /* ProfileView.swift in Sources */,
 				A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */,
+				A2BF15F52B8C67060011A130 /* PermissionManager.swift in Sources */,
+				A2BF15EC2B8C423D0011A130 /* XMUIDesginSystemView.swift in Sources */,
 				A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */,
 				A26A030A2B89AEAE00F6AC9B /* Bridge.m in Sources */,
 				A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */,
@@ -610,7 +665,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -674,7 +728,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -699,6 +752,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -708,14 +762,18 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SMON/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos and record videos.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "We need access to your contacts to provide better user experience.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save and retrieve photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -873,6 +931,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -880,16 +939,19 @@
 				DEVELOPMENT_TEAM = PX9F7733KU;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SMON/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need access to your camera to take photos and record videos.";
+				INFOPLIST_KEY_NSContactsUsageDescription = "We need access to your contacts to provide better user experience.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone for recording audio.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access to your photo library to save and retrieve photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1091,6 +1153,10 @@
 		A272A4812B870C73008EA955 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A272A4802B870C73008EA955 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+		A2BF15ED2B8C43F20011A130 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */

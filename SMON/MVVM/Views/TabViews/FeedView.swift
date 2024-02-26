@@ -38,7 +38,7 @@ struct FeedView: View {
                         .opacity(selected ? 1 : 0.6)
                 }
                 Spacer()
-                XMDesgin.XMIcon(iconName: "home_shop",size: 22)
+                XMDesgin.XMIcon(iconName: "home_fliter",size: 22)
             }
             .padding(.horizontal)
         }
@@ -60,7 +60,7 @@ struct FeedView: View {
                     Text("14小时前")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
-                    XMDesgin.XMIcon(systemName: "ellipsis", size: 12,color: .secondary)
+                    XMDesgin.XMIcon(iconName: "system_more", size: 12,color: .secondary)
                 }
                 Text(String.randomChineseString(length: Int.random(in: 12...144)))
                     .font(.subheadline)

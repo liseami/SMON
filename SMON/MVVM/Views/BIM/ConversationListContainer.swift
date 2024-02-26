@@ -6,17 +6,12 @@
 //
 import SwiftUI
 
+
 struct ConversationListContainer: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
-        let viewController = UIViewController()
-        
         let conListController = BIMConversationListController()
         conListController.delegate = context.coordinator
-        
-        viewController.addChild(conListController)
-        viewController.view.addSubview(conListController.view)
-        
-        return viewController
+        return conListController
     }
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
@@ -34,13 +29,14 @@ struct ConversationListContainer: UIViewControllerRepresentable {
             self.parent = parent
         }
         
-        func conversationListController(_ controller: BIMConversationListController?, didSelectConversation conversation: BIMConversation?) {
-            // Handle conversation selection
-            // You can pass the selected conversation to SwiftUI or perform any other actions here
+        // 点击会话
+        func conversationListController(_ controller: BIMBaseConversationListController?, didSelect conversation: BIMConversation?) {
+            guard let conversation else { return }
+            guard let globalNavigationController = Apphelper.shared.findGlobalNavigationController() else { return }
+            globalNavigationController.pushViewController(UIHostingController(rootView: ChatView(conversation: conversation)), animated: true)
         }
-
-        func conversationListController(_ controller: BIMBaseConversationListController?, didSelect conversation: BIMConversation?) {}
         
+        // 全部未读数改变
         func conversationListController(_ controller: BIMBaseConversationListController?, onTotalUnreadMessageCountChanged totalUnreadCount: UInt) {}
     }
 }

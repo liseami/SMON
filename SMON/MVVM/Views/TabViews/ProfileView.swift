@@ -11,7 +11,6 @@ struct ProfileView: View {
     @StateObject var vm: ProfileViewModel = .init()
     @State var openSettingView: Bool = true
     var body: some View {
-    
         ScrollView(content: {
             ZStack(alignment: .top) {
                 topImage
@@ -23,22 +22,20 @@ struct ProfileView: View {
         .ignoresSafeArea()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMIcon(iconName: "profile_share", size: 22)
-                    .padding(.horizontal, 8)
+                XMDesgin.XMIcon(iconName: "profile_share")
+                    .padding(.horizontal,8)
             }
             ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
-                    .padding(.horizontal, 8)
+                XMDesgin.XMIcon(iconName: "home_bell")
+                    .padding(.horizontal,8)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
                     SettingView()
                 } label: {
-                    XMDesgin.XMIcon(iconName: "profile_setting", size: 22)
-                        .padding(.horizontal, 8)
+                    XMDesgin.XMIcon(iconName: "profile_setting")
                 }
                 .foregroundColor(.white)
-
             }
         }
     }

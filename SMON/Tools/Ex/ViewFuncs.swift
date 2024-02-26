@@ -20,7 +20,10 @@ extension View {
             } else {
                 EmptyView()
             }
-        }
+        }.hidden(!show)
     }
 
+    func host() -> UIViewController {
+        return UIHostingController(rootView: self)
+    }
 }
