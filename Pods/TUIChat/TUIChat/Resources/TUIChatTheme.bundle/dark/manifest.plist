@@ -63,7 +63,7 @@
 	<key>chat_text_message_receive_text_color</key>
 	<string>#D9D9D9</string>
 	<key>chat_file_message_bg_color</key>
-	<string>#2D2D2D</string>
+	<string>#000000</string>
 	<key>chat_file_message_title_color</key>
 	<string>#CCCCCC</string>
 	<key>chat_file_message_subtitle_color</key>

@@ -15,13 +15,12 @@ struct AppFeaturesView: View {
             Text("关心另一种社交趣味，查看小众世界的新鲜事")
                 .bold()
                 .font(.title)
-            Text("西檬「每日大赛」是一款暗黑风的「小众文化」社交软件，服务于那些「拥有小小怪癖」的人类。人类的每一种奇思妙想都应该被尊重，始于西檬，止于西檬。")
-            Image(systemName: "arrow.down.circle.fill")
-                .font(.largeTitle)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .onTapGesture {
-                    vm.pageProgress = .Warning
-                }
+            Text("西檬「每日大赛」是一款「小众文化」社交软件，服务于那些「拥有小小怪癖」的人类。人类的每一种奇思妙想都应该被尊重。始于西檬，止于西檬。")
+
+            XMDesgin.CircleBtn(backColor: Color.init(hex: "1F1F1F"), fColor: .white, iconName: "system_down") {
+                vm.pageProgress = .Warning
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding()
     }

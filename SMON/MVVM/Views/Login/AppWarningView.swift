@@ -14,11 +14,13 @@ struct AppWarningView: View {
             Text("我们需要知道这个App是否适合为您服务")
                 .bold()
                 .font(.title)
-
             HStack {
-                Image(systemName: "circle")
                 Text("我不会将App分享给对小众文化不了解的「圈外人」。")
+                Image(systemName: "circle")
             }
+            .padding(.all)
+            .background(Color.secondary)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             HStack {
                 Image(systemName: "circle")
                 Text("我不会将App中的「用户内容」分享到广域社交网络中。")
@@ -31,13 +33,12 @@ struct AppWarningView: View {
                 Image(systemName: "circle")
                 Text("我同意「每日大赛」的《用户协议》与《隐私政策》。")
             }
-            NavigationLink {
-                LoginView_PhoneNumber()
-            } label: {
-                Image(systemName: "arrow.right.circle.fill")
-                    .font(.largeTitle)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+
+            XMDesgin.CircleBtn(backColor: Color.white, fColor: .primary, iconName: "system_down") {
+                Apphelper.shared.findGlobalNavigationController()?.pushViewController(LoginView_PhoneNumber().host(), animated: true)
             }
+            .rotationEffect(.degrees(-90))
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding()
     }

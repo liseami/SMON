@@ -5,6 +5,7 @@
 //  Created by 赵翔宇 on 2024/2/25.
 //
 
+import Pow
 import SwiftUI
 
 enum XMDesgin {
@@ -50,9 +51,9 @@ enum XMDesgin {
         var backColor: Color
         var iconName: String
         var text: String
-        var action : () -> ()
-        @State var onTap : Bool = false
-        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "home_bell", text: String = "text",action : @escaping () -> ()) {
+        var action: () -> ()
+        @State var onTap: Bool = false
+        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "home_bell", text: String = "text", action: @escaping () -> ()) {
             self.fColor = fColor
             self.backColor = backColor
             self.iconName = iconName
@@ -65,7 +66,7 @@ enum XMDesgin {
                 action()
                 onTap.toggle()
                 Apphelper.shared.mada(style: .light)
-                
+
             }, label: {
                 HStack(spacing: 2) {
                     XMDesgin.XMIcon(iconName: iconName, color: fColor)
@@ -82,14 +83,43 @@ enum XMDesgin {
             .conditionalEffect(.pushDown, condition: onTap)
         }
     }
+
+    struct CircleBtn: View {
+        var backColor: Color
+        var fColor: Color
+        var iconName: String
+        var action: () -> ()
+        @State var onTap: Int = 0
+        init(backColor: Color = .black, fColor: Color = .white, iconName: String = "home_bell", action: @escaping () -> () = {}) {
+            self.backColor = backColor
+            self.fColor = fColor
+            self.iconName = iconName
+            self.action = action
+        }
+
+        var body: some View {
+            Button(action: {
+                onTap += 1
+                Apphelper.shared.mada(style: .light)
+                action()
+            }) {
+                Circle()
+                    .fill(backColor)
+                    .frame(width: 58, height: 58)
+                    .overlay {
+                        XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                    }
+            }
+            .changeEffect(.glow(color: .white), value: self.onTap)
+        }
+    }
 }
 
 #Preview {
     VStack {
         XMDesgin.XMIcon(iconName: "tabbar_home")
         XMDesgin.XMIcon(systemName: "flag.badge.ellipsis")
-        XMDesgin.SmallBtn {
-            
-        }
+        XMDesgin.SmallBtn {}
+        XMDesgin.CircleBtn(backColor: .white, fColor: .black, iconName: "home_bell") {}
     }
 }

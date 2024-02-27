@@ -14,6 +14,8 @@ struct LoginMainView: View {
         NavigationView(content: {
             ZStack(content: {
                 videoBackground
+                    .opacity(vm.pageProgress == .AppFeatures ? 1 : 0.3)
+                    .animation(.spring, value: vm.pageProgress)
                 switch vm.pageProgress {
                 case .AppFeatures:
                     AppFeaturesView()

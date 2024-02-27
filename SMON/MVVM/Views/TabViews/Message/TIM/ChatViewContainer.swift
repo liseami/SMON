@@ -9,7 +9,7 @@ struct ChatViewContainer: UIViewControllerRepresentable {
         chatVC.conversationData = conversation
         return chatVC
     }
-
+    
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
     
     func makeCoordinator() -> Coordinator {

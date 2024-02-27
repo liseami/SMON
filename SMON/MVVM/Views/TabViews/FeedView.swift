@@ -51,6 +51,7 @@ struct FeedView: View {
                 .scaledToFit()
                 .frame(width: 38, height: 38) // Adjust the size as needed
                 .clipShape(Circle())
+
             VStack(alignment: .leading) {
                 HStack {
                     Text(String.randomChineseString(length: Int.random(in: 3...12)))

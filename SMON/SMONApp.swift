@@ -10,13 +10,19 @@ import SwiftUI
 @main
 struct SMONApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    let persistenceController = PersistenceController.shared
+    @StateObject var userManager: UserManager = .init()
+
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .tint(.white)
-                .environment(\.colorScheme, .dark)
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            Group {
+                if userManager.user.isLoggedIn {
+                    MainView()
+                } else {
+                    LoginMainView()
+                }
+            }
+            .tint(.white)
+            .environment(\.colorScheme, .dark)
         }
     }
 }
