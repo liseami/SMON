@@ -21,7 +21,7 @@ struct SMONApp: App {
                     LoginMainView()
                 }
             }
-            .tint(.white)
+            .tint(Color.XMDesgin.f1)
             .environment(\.colorScheme, .dark)
         }
     }

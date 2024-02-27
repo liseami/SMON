@@ -26,4 +26,14 @@ extension View {
     func host() -> UIViewController {
         return UIHostingController(rootView: self)
     }
+    
+    
+}
+
+struct ShakeViewModifier: ViewModifier {
+    @State var shake: Bool = false
+    func body(content: Content) -> some View {
+        content
+            .changeEffect(.shake, value: shake)
+    }
 }

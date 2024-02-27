@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import TUIChat
 import TUICore
 import UIKit
 
@@ -24,5 +25,4 @@ func DAppInit() {
         TUIThemeManager.share().registerThemeResourcePath(customThemePath, for: .chat)
     }
     TUIThemeManager.share().applyTheme("dark", for: .all)
-    
 }
