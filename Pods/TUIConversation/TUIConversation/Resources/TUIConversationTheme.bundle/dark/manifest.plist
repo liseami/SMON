@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>id</key>
+	<string>dark</string>
+	<key>name</key>
+	<string>黑夜</string>
+	<key>name_en</key>
+	<string>Dark</string>
+	<key>conversation_cell_bg_color</key>
+	<string>#000000</string>
+	<key>conversation_cell_top_bg_color</key>
+	<string>#191919</string>
+	<key>conversation_bg_color</key>
+	<string>#111111</string>
+	<key>conversation_message_not_disturb_img</key>
+	<string>message_not_disturb</string>
+	<key>pop_icon_new_chat_img</key>
+	<string>new_chat.png</string>
+	<key>pop_icon_new_group_img</key>
+	<string>new_groupchat.png</string>
+	<key>conversation_group_bg_color</key>
+	<string>#000000</string>
+	<key>conversation_group_animate_view_color</key>
+	<string>#2D2D2D</string>
+	<key>conversation_group_btn_select_color</key>
+	<string>#2E8BD8</string>
+	<key>conversation_group_btn_unselect_color</key>
+	<string>#666666</string>
+	<key>no_conversation_img</key>
+	<string>no_conversation</string>
+</dict>
+</plist>

@@ -1,0 +1,6 @@
+framework module TUICallEngine {
+  umbrella header "TUICallEngine.h"
+
+  export *
+  module * { export * }
+}

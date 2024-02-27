@@ -1,0 +1,6 @@
+framework module TUIOfflinePush {
+  umbrella header "TUIOfflinePush-umbrella.h"
+
+  export *
+  module * { export * }
+}

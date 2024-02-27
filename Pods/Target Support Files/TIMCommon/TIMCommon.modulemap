@@ -1,0 +1,6 @@
+framework module TIMCommon {
+  umbrella header "TIMCommon-umbrella.h"
+
+  export *
+  module * { export * }
+}
