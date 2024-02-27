@@ -125,20 +125,24 @@ typedef NS_ENUM(NSInteger, V2TIMGroupTipsType){
     V2TIM_GROUP_TIPS_TYPE_CANCEL_ADMIN        = 0x06,  ///< 取消管理员 (opMember 取消 memberList 管理员身份)
     V2TIM_GROUP_TIPS_TYPE_GROUP_INFO_CHANGE   = 0x07,  ///< 群资料变更 (opMember 修改群资料： groupName & introduction & notification & faceUrl & owner & allMute & custom)
     V2TIM_GROUP_TIPS_TYPE_MEMBER_INFO_CHANGE  = 0x08,  ///< 群成员资料变更 (opMember 修改群成员资料：muteTime)
+    V2TIM_GROUP_TIPS_TYPE_TOPIC_INFO_CHANGE   = 0x09,  ///< 话题资料变更 (opMember 修改话题资料：topicName & introduction & notification & faceUrl & allMute & topicCustomData)
 };
 
 /// 群变更信息 Tips 类型
 typedef NS_ENUM(NSInteger, V2TIMGroupInfoChangeType){
-    V2TIM_GROUP_INFO_CHANGE_TYPE_NAME                = 0x01,  ///< 群名修改
-    V2TIM_GROUP_INFO_CHANGE_TYPE_INTRODUCTION        = 0x02,  ///< 群简介修改
-    V2TIM_GROUP_INFO_CHANGE_TYPE_NOTIFICATION        = 0x03,  ///< 群公告修改
-    V2TIM_GROUP_INFO_CHANGE_TYPE_FACE                = 0x04,  ///< 群头像修改
-    V2TIM_GROUP_INFO_CHANGE_TYPE_OWNER               = 0x05,  ///< 群主变更
-    V2TIM_GROUP_INFO_CHANGE_TYPE_CUSTOM              = 0x06,  ///< 群自定义字段变更
-    V2TIM_GROUP_INFO_CHANGE_TYPE_SHUT_UP_ALL         = 0x08,  ///< 全员禁言字段变更
-    V2TIM_GROUP_INFO_CHANGE_TYPE_RECEIVE_MESSAGE_OPT = 0x0A,  ///< 消息接收选项变更
-    V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_ADD_OPT       = 0x0B,  ///< 申请加群方式下管理员审批选项变更
-    V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_APPROVE_OPT   = 0x0C,  ///< 邀请进群方式下管理员审批选项变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_NAME                       = 0x01,  ///< 群名修改
+    V2TIM_GROUP_INFO_CHANGE_TYPE_INTRODUCTION               = 0x02,  ///< 群简介修改
+    V2TIM_GROUP_INFO_CHANGE_TYPE_NOTIFICATION               = 0x03,  ///< 群公告修改
+    V2TIM_GROUP_INFO_CHANGE_TYPE_FACE                       = 0x04,  ///< 群头像修改
+    V2TIM_GROUP_INFO_CHANGE_TYPE_OWNER                      = 0x05,  ///< 群主变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_CUSTOM                     = 0x06,  ///< 群自定义字段变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_SHUT_UP_ALL                = 0x08,  ///< 全员禁言字段变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_TOPIC_CUSTOM_DATA          = 0x09,  ///< 话题自定义字段变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_RECEIVE_MESSAGE_OPT        = 0x0A,  ///< 消息接收选项变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_ADD_OPT              = 0x0B,  ///< 申请加群方式下管理员审批选项变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_APPROVE_OPT          = 0x0C,  ///< 邀请进群方式下管理员审批选项变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_ENABLE_PERMISSION_GROUP    = 0x0D,  ///< 是否开启权限组功能变更
+    V2TIM_GROUP_INFO_CHANGE_TYPE_DEFAULT_PERMISSIONS        = 0x0E,  ///< 群默认权限变更
 };
 
 /// 消息拉取方式
@@ -480,7 +484,11 @@ typedef NS_ENUM(NSInteger, V2TIMIOSOfflinePushType) {
  *  @param count 拉取消息的个数，不宜太多，会影响消息拉取的速度，这里建议一次拉取 20 个
  *  @param lastMsg 获取消息的起始消息，如果传 nil，起始消息为会话的最新消息
  *
- *  @note 如果 SDK 检测到没有网络，默认会直接返回本地数据
+ *  @note 
+ *  - 如果没有触发登录，调用该接口不会返回历史消息
+ *  - 如果登录失败，调用该接口会返回本地历史消息
+ *  - 如果 SDK 检测到没有网络，调用该接口会返回本地历史消息
+ *  - 如果登录成功且网络正常，调用该接口会先请求云端历史消息，然后再和本地历史消息合并后返回
  */
 - (void)getC2CHistoryMessageList:(NSString *)userID count:(int)count lastMsg:(V2TIMMessage *)lastMsg succ:(V2TIMMessageListSucc)succ fail:(V2TIMFail)fail;
 
@@ -491,9 +499,11 @@ typedef NS_ENUM(NSInteger, V2TIMIOSOfflinePushType) {
  *  @param lastMsg 获取消息的起始消息，如果传 nil，起始消息为会话的最新消息
  *
  *  @note 请注意：
- *  - 如果 SDK 检测到没有网络，默认会直接返回本地数据
+ *  - 如果没有触发登录，调用该接口不会返回历史消息
+ *  - 如果登录失败，调用该接口会返回本地历史消息
+ *  - 如果 SDK 检测到没有网络，调用该接口会返回本地历史消息
+ *  - 如果登录成功且网络正常，调用该接口会先请求云端历史消息，然后再和本地历史消息合并后返回
  *  - 只有会议群（Meeting）才能拉取到进群前的历史消息，直播群（AVChatRoom）消息不存漫游和本地数据库，调用这个接口无效
- *
  */
 - (void)getGroupHistoryMessageList:(NSString *)groupID count:(int)count lastMsg:(V2TIMMessage *)lastMsg succ:(V2TIMMessageListSucc)succ fail:(V2TIMFail)fail;
 
@@ -503,9 +513,11 @@ typedef NS_ENUM(NSInteger, V2TIMIOSOfflinePushType) {
  *  @param option 拉取消息选项设置，可以设置从云端、本地拉取更老或更新的消息
  *
  *  @note 请注意：
- *  - 如果设置为拉取云端消息，当 SDK 检测到没有网络，默认会直接返回本地数据
+ *  - 如果没有触发登录，调用该接口不会返回历史消息
+ *  - 如果登录失败，调用该接口会返回本地历史消息
+ *  - 如果 SDK 检测到没有网络，调用该接口会返回本地历史消息
+ *  - 如果登录成功且网络正常，当 option 设置为拉取云端历史消息，调用该接口会先请求云端历史消息，然后再和本地历史消息合并后返回
  *  - 只有会议群（Meeting）才能拉取到进群前的历史消息，直播群（AVChatRoom）消息不存漫游和本地数据库，调用这个接口无效
- *
  */
 - (void)getHistoryMessageList:(V2TIMMessageListGetOption *)option succ:(V2TIMMessageListSucc)succ
                          fail:(V2TIMFail)fail;
@@ -608,6 +620,9 @@ typedef NS_ENUM(NSInteger, V2TIMIOSOfflinePushType) {
 /**
  * 5.14 搜索云端消息（7.3 及以上版本支持）
  * @param param 消息搜索参数，详见 V2TIMMessageSearchParam 的定义
+ * @note
+ * - 该功能为 IM 增值功能，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17176#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)
+ * - 如果您没有开通该服务，调用接口会返回 60020 错误码
 */
  - (void)searchCloudMessages:(V2TIMMessageSearchParam *)param succ:(V2TIMSearchMessageListSucc)succ fail:(V2TIMFail)fail;
 
@@ -950,6 +965,12 @@ V2TIM_EXPORT @interface V2TIMMessage : NSObject
 ///【本地审核】开通流程请参考 [本地审核功能](https://cloud.tencent.com/document/product/269/83795#.E6.9C.AC.E5.9C.B0.E5.AE.A1.E6.A0.B8.E5.8A.9F.E8.83.BD)
 ///【云端审核】开通流程请参考 [云端审核功能](https://cloud.tencent.com/document/product/269/83795#.E4.BA.91.E7.AB.AF.E5.AE.A1.E6.A0.B8.E5.8A.9F.E8.83.BD)
 @property(nonatomic,assign) BOOL isExcludedFromContentModeration;
+
+/// 消息自定义审核配置 ID（从 7.8 版本开始支持）
+/// 在开通【云端审核】功能后，您可以请前往 [控制台](https://console.cloud.tencent.com/im) (云端审核 -> 审核配置 -> 自定义配置 -> 添加自定义配置) 获取配置 ID。
+///【自定义审核】配置流程请参考 [云端审核功能]（https://cloud.tencent.com/document/product/269/78633#a5efc9e8-a7ec-40e3-9b18-8ed1910f589c）
+/// @note 该字段需要发消息前设置，仅用于控制发消息时的消息审核策略，其值不会存储在漫游和本地。
+@property(nonatomic,strong) NSString *customModerationConfigurationID;
 
 /// 是否被标记为有安全风险的消息（从 7.4 版本开始支持）
 /// 暂时只支持语音和视频消息。
@@ -1312,7 +1333,7 @@ V2TIM_EXPORT @interface V2TIMGroupChangeInfo : NSObject
 /// 因为历史遗留原因，如果只修改了群自定义字段，当前消息不会存漫游和 DB
 @property(nonatomic,strong,readonly) NSString * key;
 
-/// 根据变更类型表示不同的值，当前只有 type = V2TIM_GROUP_INFO_CHANGE_TYPE_SHUT_UP_ALL 时有效
+/// 根据变更类型表示不同的值，当 type = V2TIM_GROUP_INFO_CHANGE_TYPE_SHUT_UP_ALL  或者 V2TIM_GROUP_INFO_CHANGE_TYPE_ENABLE_PERMISSION_GROUP 时有效
 @property(nonatomic,assign,readonly) BOOL boolValue;
 
 /// 根据变更类型表示不同的值
@@ -1321,6 +1342,9 @@ V2TIM_EXPORT @interface V2TIMGroupChangeInfo : NSObject
 /// - 从 6.5 版本开始，当 type 为 V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_ADD_OPT 时，该字段标识了申请加群审批选项发生了变化，其取值详见 @V2TIMGroupAddOpt;
 /// - 从 7.1 版本开始，当 type 为 V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_APPROVE_OPT 时，该字段标识了邀请进群审批选项发生了变化，取值类型详见 @V2TIMGroupAddOpt。
 @property(nonatomic,assign,readonly) uint32_t intValue;
+
+/// 根据变更类型表示不同的值，当前只有 type = V2TIM_GROUP_INFO_CHANGE_TYPE_GROUP_PERMISSION 时有效
+@property(nonatomic,assign,readonly) uint64_t uint64Value;
 
 @end
 

@@ -89,21 +89,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TUICallEngine.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>TUICallKit-TUICallingKitBundle.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>TUICallKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>TUIChat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -119,17 +104,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TUIOfflinePush.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>TXIMSDK_Plus_iOS.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>TXLiteAVSDK_TRTC.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

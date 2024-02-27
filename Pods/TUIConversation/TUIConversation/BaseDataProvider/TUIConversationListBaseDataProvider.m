@@ -363,7 +363,7 @@
         }
         NSNumber *position = [positionMaps objectForKey:item.conversationID];
         NSAssert((position && [position isKindOfClass:NSNumber.class]), @"serius error, the self.conversationList maybe changed on the other thread");
-        if (position) {
+        if (position && position.integerValue < self.conversationList.count) {
             TUIConversationCellData *cellData = self.conversationList[position.integerValue];
             item.onlineStatus = cellData.onlineStatus;
             [self.conversationList replaceObjectAtIndex:[position integerValue] withObject:item];
@@ -876,6 +876,7 @@
         data.faceUrl = conversation.faceUrl;
         data.subTitle = [self getLastDisplayString:conversation];
         data.foldSubTitle = [self getLastDisplayStringForFoldList:conversation];
+        data.atTipsStr = [self getGroupAtTipString:conversation];
         data.atMsgSeqs = [self getGroupatMsgSeqs:conversation];
         data.time = [self getLastDisplayDate:conversation];
         data.isOnTop = conversation.isPinned;
@@ -1078,12 +1079,17 @@
     if (!param || ![param isKindOfClass:[NSDictionary class]]) {
         return NO;
     }
+    // 普通会话对端正在输入
     NSString *businessID = param[BussinessID];
-    if (!businessID || ![businessID isKindOfClass:[NSString class]]) {
-        return NO;
-    }
-    if ([businessID isEqualToString:BussinessID_Typing]) {
+    if (businessID && [businessID isKindOfClass:[NSString class]] && [businessID isEqualToString:BussinessID_Typing]) {
         return YES;
+    }
+    // 客服会话对端正在输入
+    if ([param.allKeys containsObject:BussinessID_CustomerService]) {
+        NSString *src = param[BussinessID_Src_CustomerService];
+        if (src && [src isKindOfClass:[NSString class]] && [src isEqualToString:BussinessID_Src_CustomerService_Typing]) {
+            return YES;
+        }
     }
     return NO;
 }

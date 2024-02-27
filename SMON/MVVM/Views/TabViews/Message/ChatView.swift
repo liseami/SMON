@@ -6,21 +6,21 @@
 //
 
 import SwiftUI
+import TUIChat
 
 struct ChatView: View {
-    
+    let conversation : TUIChatConversationModel
     var body: some View {
-        EmptyView()
-//        ChatViewContainer(conversation: conversation)
-//            .frame(maxWidth: .infinity)
-//            .clipShape(RoundedRectangle(cornerRadius: 24))
-//            .ignoresSafeArea(.keyboard)
-//            .navigationTitle("用户名")
-//            .toolbar {
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    XMDesgin.XMIcon(iconName: "system_more")
-//                }
-//            }
+        ChatViewContainer(conversation: conversation)
+            .edgesIgnoringSafeArea(.bottom)
+            .ignoresSafeArea(.keyboard)
+            .navigationTitle("用户名")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    XMDesgin.XMIcon(iconName: "system_more")
+                }
+            }
     }
 }
 

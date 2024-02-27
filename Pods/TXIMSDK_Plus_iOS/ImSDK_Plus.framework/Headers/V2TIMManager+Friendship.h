@@ -19,6 +19,11 @@ V2TIM_EXPORT @protocol V2TIMFriendshipListener;
 @class V2TIMFriendApplication;
 @class V2TIMFriendGroup;
 @class V2TIMFriendSearchParam;
+@class V2TIMOfficialAccountInfo;
+@class V2TIMOfficialAccountInfoResult;
+@class V2TIMFollowOperationResult;
+@class V2TIMFollowInfo;
+@class V2TIMFollowTypeCheckResult;
 
 V2TIM_EXPORT @interface V2TIMManager (Friendship)
 
@@ -33,9 +38,19 @@ typedef void (^V2TIMFriendOperationResultListSucc)(NSArray<V2TIMFriendOperationR
 /// 好友检查成功回调
 typedef void (^V2TIMFriendCheckResultListSucc)(NSArray<V2TIMFriendCheckResult *> *resultList);
 /// 获取群分组列表成功回调
-typedef void (^V2TIMFriendGroupListSucc)(NSArray<V2TIMFriendGroup *> * groups);
+typedef void (^V2TIMFriendGroupListSucc)(NSArray<V2TIMFriendGroup *> *groups);
 /// 获取好友申请列表成功回调
 typedef void (^V2TIMFriendApplicationResultSucc)(V2TIMFriendApplicationResult *result);
+/// 获取公众号列表成功回调
+typedef void (^V2TIMOfficialAccountInfoResultListSucc)(NSArray<V2TIMOfficialAccountInfoResult *> *resultList);
+/// 关注/取关用户操作成功的回调
+typedef void (^V2TIMFollowOperationResultListSucc)(NSArray<V2TIMFollowOperationResult *> *resultList);
+/// 获取自己 关注/粉丝/互关 列表成功的回调
+typedef void (^V2TIMUserInfoResultSucc)(NSString *nextCursor, NSArray<V2TIMUserFullInfo *> *userInfoList);
+/// 获取用户关注数量信息成功的回调
+typedef void (^V2TIMFollowInfoResultListSucc)(NSArray<V2TIMFollowInfo *> *resultList);
+/// 用户关注类型检查成功回调
+typedef void (^V2TIMFollowTypeCheckResultListSucc)(NSArray<V2TIMFollowTypeCheckResult *> *resultList);
 
 /// 好友申请类型
 typedef NS_ENUM(NSInteger, V2TIMFriendApplicationType) {
@@ -62,6 +77,14 @@ typedef NS_ENUM(NSInteger, V2TIMFriendRelationType) {
 typedef NS_ENUM(NSInteger, V2TIMFriendAcceptType) {
     V2TIM_FRIEND_ACCEPT_AGREE             = 0,  ///< 接受加好友（建立单向好友）
     V2TIM_FRIEND_ACCEPT_AGREE_AND_ADD     = 1,  ///< 接受加好友并加对方为好友（建立双向好友）
+};
+
+/// 关注类型
+typedef NS_ENUM(NSInteger, V2TIMFollowType) {
+    V2TIM_FOLLOW_TYPE_NONE                     = 0x0,  ///< 无任何关注关系
+    V2TIM_FOLLOW_TYPE_IN_MY_FOLLOWING_LIST     = 0x1,  ///< 对方在我的关注列表中
+    V2TIM_FOLLOW_TYPE_IN_MY_FOLLOWERS_LIST     = 0x2,  ///< 对方在我的粉丝列表中
+    V2TIM_FOLLOW_TYPE_IN_BOTH_FOLLOWERS_LIST   = 0x3,  ///< 对方与我互相关注
 };
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -156,7 +179,7 @@ typedef NS_ENUM(NSInteger, V2TIMFriendAcceptType) {
  *  @note
  *   - 好友申请列表包括发起的好友申请和收到的好友申请。
  *   - 最多支持100个。
-*/
+ */
 - (void)getFriendApplicationList:(V2TIMFriendApplicationResultSucc)succ fail:(V2TIMFail)fail;
 
 /**
@@ -249,6 +272,99 @@ typedef NS_ENUM(NSInteger, V2TIMFriendAcceptType) {
  *  5.6 从好友分组中删除好友
  */
 - (void)deleteFriendsFromFriendGroup:(NSString *)groupName userIDList:(NSArray *)userIDList succ:(V2TIMFriendOperationResultListSucc)succ fail:(V2TIMFail)fail;
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                          公众号订阅、取消订阅、获取公众号列表接口
+//
+/////////////////////////////////////////////////////////////////////////////////
+
+/**
+ *  6.1 订阅公众号（7.6 及其以上版本支持）
+ */
+- (void)subscribeOfficialAccount:(NSString *)officialAccountID succ:(V2TIMSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  6.2 取消订阅公众号（7.6 及其以上版本支持）
+ */
+- (void)unsubscribeOfficialAccount:(NSString *)officialAccountID succ:(V2TIMSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  6.3 获取公众号列表（7.6 及其以上版本支持）
+ *  @note officialAccountIDList 传空时，获取订阅的公众号列表
+ */
+- (void)getOfficialAccountsInfo:(NSArray<NSString *> *)officialAccountIDList succ:(V2TIMOfficialAccountInfoResultListSucc)succ fail:(V2TIMFail)fail;
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                          关注/粉丝 相关接口
+//
+/////////////////////////////////////////////////////////////////////////////////
+/**
+ *  7.1 关注用户（从 7.8 版本开始支持）
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)followUser:(NSArray<NSString *> *)userIDList succ:(V2TIMFollowOperationResultListSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  7.2 取消关注用户（从 7.8 版本开始支持）
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)unfollowUser:(NSArray<NSString *> *)userIDList succ:(V2TIMFollowOperationResultListSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  7.3 获取我的关注列表（从 7.8 版本开始支持）
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ * 
+ *  @param nextCursor  分页拉取标志，第一次拉取填 nil 或 @""，回调成功如果 nextCursor 不为 @""，需要分页，可以传入该值再次拉取，直至 nextCursor 返回为 @""
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)getMyFollowingList:(NSString *)nextCursor succ:(V2TIMUserInfoResultSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  7.4 获取我的粉丝列表（从 7.8 版本开始支持）
+ * 
+ *  @param nextCursor  分页拉取标志，第一次拉取填 nil 或 @""，回调成功如果 nextCursor 不为 @""，需要分页，可以传入该值再次拉取，直至 nextCursor 返回为 @""
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)getMyFollowersList:(NSString *)nextCursor succ:(V2TIMUserInfoResultSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  7.5 获取我的互关列表（从 7.8 版本开始支持）
+ * 
+ *  @param nextCursor  分页拉取标志，第一次拉取填 nil 或 @""，回调成功如果 nextCursor 不为 @""，需要分页，可以传入该值再次拉取，直至 nextCursor 返回为 @""
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)getMutualFollowersList:(NSString *)nextCursor succ:(V2TIMUserInfoResultSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  7.6 获取指定用户的 关注/粉丝/互关 数量信息（从 7.8 版本开始支持）
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)getUserFollowInfo:(NSArray *)userIDList succ:(V2TIMFollowInfoResultListSucc)succ fail:(V2TIMFail)fail;
+
+/**
+ *  7.7 检查指定用户的关注类型（从 7.8 版本开始支持）
+ * 
+ *  @note
+ *   - 该功能为 IM 旗舰版功能，[购买旗舰版套餐包](https://buy.cloud.tencent.com/avc?from=17491)后可使用，详见[价格说明](https://cloud.tencent.com/document/product/269/11673?from=17472#.E5.9F.BA.E7.A1.80.E6.9C.8D.E5.8A.A1.E8.AF.A6.E6.83.85)。
+ */
+- (void)checkFollowType:(NSArray<NSString *> *)userIDList succ:(V2TIMFollowTypeCheckResultListSucc)succ fail:(V2TIMFail)fail;
+
 @end
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -306,6 +422,41 @@ V2TIM_EXPORT @protocol V2TIMFriendshipListener <NSObject>
  *  好友资料变更通知
  */
 - (void)onFriendProfileChanged:(NSArray<V2TIMFriendInfo *> *)infoList;
+
+/**
+ *  订阅公众号通知
+ */
+- (void)onOfficialAccountSubscribed:(V2TIMOfficialAccountInfo *)officialAccountInfo;
+
+/**
+ *  取消订阅公众号通知
+ */
+- (void)onOfficialAccountUnsubscribed:(NSString *)officialAccountID;
+
+/**
+ *  订阅的公众号被删除通知
+ */
+- (void)onOfficialAccountDeleted:(NSString *)officialAccountID;
+
+/**
+ *  订阅的公众号资料更新通知
+ */
+- (void)onOfficialAccountInfoChanged:(V2TIMOfficialAccountInfo *)officialAccountInfo;
+
+/**
+ *  关注列表变更通知
+ */
+- (void)onMyFollowingListChanged:(NSArray<V2TIMUserFullInfo *> *)userInfoList isAdd:(BOOL)isAdd NS_SWIFT_NAME(onMyFollowingListChanged(userInfoList:isAdd:));
+
+/**
+ *  粉丝列表变更通知
+ */
+- (void)onMyFollowersListChanged:(NSArray<V2TIMUserFullInfo *> *)userInfoList isAdd:(BOOL)isAdd;
+
+/**
+ *  互关列表变更通知
+ */
+- (void)onMutualFollowersListChanged:(NSArray<V2TIMUserFullInfo *> *)userInfoList isAdd:(BOOL)isAdd;
 
 @end
 
@@ -518,5 +669,132 @@ V2TIM_EXPORT @interface V2TIMFriendSearchParam : NSObject
 
 /// 是否设置搜索备注
 @property(nonatomic, assign) BOOL isSearchRemark;;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                    公众号资料
+//
+/////////////////////////////////////////////////////////////////////////////////
+V2TIM_EXPORT @interface V2TIMOfficialAccountInfo : NSObject
+
+/// 公众号 ID
+@property(nonatomic,strong,readonly) NSString* officialAccountID;
+
+/// 公众号名称
+@property(nonatomic,strong,readonly) NSString* officialAccountName;
+
+/// 公众号头像
+@property(nonatomic,strong,readonly) NSString* faceUrl;
+
+/// 公众号所有者
+@property(nonatomic,strong,readonly) NSString* ownerUserID;
+
+/// 公众号组织
+@property(nonatomic,strong,readonly) NSString* organization;
+
+/// 公众号简介
+@property(nonatomic,strong,readonly) NSString* introduction;
+
+/// 公众号自定义数据
+@property(nonatomic,strong,readonly) NSString* customData;
+
+/// 公众号创建时间，单位：秒
+@property(nonatomic,assign,readonly) uint64_t createTime;
+
+/// 公众号订阅者数量
+@property(nonatomic,assign,readonly) uint64_t subscriberCount;
+
+/// 订阅公众号的时间，单位：秒
+@property(nonatomic,assign,readonly) uint64_t subscribeTime;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                      公众号资料获取结果
+//
+/////////////////////////////////////////////////////////////////////////////////
+/// 公众号资料获取结果
+V2TIM_EXPORT @interface V2TIMOfficialAccountInfoResult : NSObject
+
+/// 返回码
+@property(nonatomic,assign) int resultCode;
+
+/// 返回结果表述
+@property(nonatomic,strong) NSString *resultInfo;
+
+/// 公众号资料
+@property(nonatomic,strong) V2TIMOfficialAccountInfo *officialAccountInfo;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                  关注/取关用户的操作结果
+//
+/////////////////////////////////////////////////////////////////////////////////
+/// 关注/取关用户的操作结果
+V2TIM_EXPORT @interface V2TIMFollowOperationResult : NSObject
+
+/// 用户 ID
+@property(nonatomic,strong) NSString* userID;
+
+/// 返回码
+@property(nonatomic,assign) NSInteger resultCode;
+
+/// 返回信息
+@property(nonatomic,strong) NSString *resultInfo;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                      用户关注数量信息获取结果
+//
+/////////////////////////////////////////////////////////////////////////////////
+/// 用户关注数量信息获取结果
+V2TIM_EXPORT @interface V2TIMFollowInfo : NSObject
+
+/// 返回码
+@property(nonatomic,assign) NSInteger resultCode;
+
+/// 返回结果表述
+@property(nonatomic,strong) NSString *resultInfo;
+
+/// 用户 ID
+@property(nonatomic,strong) NSString *userID;
+
+/// 用户的关注数量
+@property(nonatomic,assign)	uint64_t followingCount;
+
+/// 用户的粉丝数量
+@property(nonatomic,assign)	uint64_t followersCount;
+
+/// 用户的互关数量
+@property(nonatomic,assign)	uint64_t mutualFollowersCount;
+
+@end
+
+/////////////////////////////////////////////////////////////////////////////////
+//
+//                     指定用户的关注类型检查结果
+//
+/////////////////////////////////////////////////////////////////////////////////
+/// 指定用户的关注类型检查结果
+V2TIM_EXPORT @interface V2TIMFollowTypeCheckResult : NSObject
+
+/// 用户 ID
+@property(nonatomic,strong) NSString* userID;
+
+/// 返回码
+@property(nonatomic,assign) NSInteger resultCode;
+
+/// 返回信息
+@property(nonatomic,strong) NSString *resultInfo;
+
+/// 关注类型
+@property(nonatomic,assign) V2TIMFollowType followType;
 
 @end

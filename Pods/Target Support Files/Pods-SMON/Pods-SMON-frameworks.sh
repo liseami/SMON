@@ -193,12 +193,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TUIChat/TUIChat.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TUIConversation/TUIConversation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TUICore/TUICore.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/TUIOfflinePush/TUIOfflinePush.framework"
   install_framework "${PODS_ROOT}/TXIMSDK_Plus_iOS/ImSDK_Plus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Tagly/Tagly.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/TXLiteAVSDK_TRTC/TRTC/TXSoundTouch.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/TXLiteAVSDK_TRTC/TRTC/TXFFmpeg.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
@@ -218,12 +215,9 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/TUIChat/TUIChat.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TUIConversation/TUIConversation.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TUICore/TUICore.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/TUIOfflinePush/TUIOfflinePush.framework"
   install_framework "${PODS_ROOT}/TXIMSDK_Plus_iOS/ImSDK_Plus.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Tagly/Tagly.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/TXLiteAVSDK_TRTC/TRTC/TXSoundTouch.framework"
-  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/TXLiteAVSDK_TRTC/TRTC/TXFFmpeg.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -30,7 +30,7 @@ struct MainView: View {
             case .feed:
                 FeedView()
             case .message:
-                MessageView()
+                ConversationListView()
             case .profile:
                 ProfileView()
             }

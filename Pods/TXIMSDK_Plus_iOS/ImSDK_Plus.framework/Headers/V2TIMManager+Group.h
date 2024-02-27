@@ -17,9 +17,6 @@
 @class V2TIMCreateGroupMemberInfo;
 @class V2TIMGroupInfo;
 @class V2TIMGroupInfoResult;
-@class V2TIMTopicInfo;
-@class V2TIMTopicInfoResult;
-@class V2TIMTopicOperationResult;
 @class V2TIMGroupApplication;
 @class V2TIMGroupSearchParam;
 @class V2TIMGroupMemberSearchParam;
@@ -51,12 +48,6 @@ typedef void (^V2TIMGroupMemberOperationResultListSucc)(NSArray<V2TIMGroupMember
 typedef void (^V2TIMGroupApplicationResultSucc)(V2TIMGroupApplicationResult *result);
 /// 获取群在线人数成功回调
 typedef void (^V2TIMGroupOnlineMemberCountSucc)(NSInteger count);
-/// 操作话题列表结果
-typedef void(^V2TIMTopicOperationResultSucc)(NSMutableArray<V2TIMTopicOperationResult *> *resultList);
-/// 获取话题列表结果
-typedef void(^V2TIMTopicInfoResultListSucc)(NSMutableArray<V2TIMTopicInfoResult *> *resultList);
-/// 创建话题成功回调
-typedef void (^V2TIMCreateTopicSucc)(NSString * topicID);
 /// 群计数器操作成功的回调
 typedef void (^V2TIMGroupCounterResultSucc)(NSDictionary<NSString *, NSNumber *> *groupCounters);
 
@@ -424,37 +415,6 @@ typedef NS_ENUM(NSInteger, V2TIMGroupApplicationHandleResult) {
  */
 - (void)setGroupApplicationRead:(V2TIMSucc)succ fail:(V2TIMFail)fail;
 
-/////////////////////////////////////////////////////////////////////////////////
-//                         社群-话题
-/////////////////////////////////////////////////////////////////////////////////
-/**
- * 5.1 获取当前用户已经加入的支持话题的社群列表
- */
-- (void)getJoinedCommunityList:(V2TIMGroupInfoListSucc)succ fail:(V2TIMFail)fail;
-
-/**
- * 5.2 创建话题
- *
- * @param groupID 社群 ID，必须以 @TGS#_ 开头。
- */
-- (void)createTopicInCommunity:(NSString *)groupID topicInfo:(V2TIMTopicInfo *)topicInfo succ:(V2TIMCreateTopicSucc)succ fail:(V2TIMFail)fail;
-
-/**
- * 5.3 删除话题
- */
-- (void)deleteTopicFromCommunity:(NSString *)groupID topicIDList:(NSArray<NSString *>*)topicIDList succ:(V2TIMTopicOperationResultSucc)succ fail:(V2TIMFail)fail;
-
-/**
- * 5.4 修改话题信息
- */
-- (void)setTopicInfo:(V2TIMTopicInfo *)topicInfo succ:(V2TIMSucc)succ fail:(V2TIMFail)fail;
-
-/**
-  * 5.5 获取话题列表。
-  * @note: topicIDList 传空时，获取此社群下的所有话题列表
-  */
-- (void)getTopicInfoList:(NSString *)groupID topicIDList:(NSArray<NSString *>*)topicIDList succ:(V2TIMTopicInfoResultListSucc)succ fail:(V2TIMFail)fail;
-
 @end
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -468,7 +428,7 @@ V2TIM_EXPORT @interface V2TIMGroupInfo : NSObject
 /**
  * 群组 ID
  *
- * @note 自定义群组 ID 必须为可打印 ASCII 字符（0x20-0x7e），最长48个字节，且前缀不能为 @TGS#（避免与默认分配的群组 ID 混淆）
+ * @note 自定义群组 ID 必须为可打印 ASCII 字符（0x20-0x7e），最长 48 个字节，且前缀不能为 @TGS#（避免与默认分配的群组 ID 混淆）
  */
 @property(nonatomic,strong) NSString* groupID;
 
@@ -484,28 +444,28 @@ V2TIM_EXPORT @interface V2TIMGroupInfo : NSObject
 /**
  * 群名称
  *
- * @note 群名称最长30字节
+ * @note 群名称最长 100 字节，使用 UTF-8 编码
  */
 @property(nonatomic,strong) NSString* groupName;
 
 /**
  * 群公告
  *
- * @note 群公告最长300字节
+ * @note 群公告最长 400 字节，使用 UTF-8 编码
  */
 @property(nonatomic,strong) NSString* notification;
 
 /**
  * 群简介
  *
- * @note 群简介最长240字节
+ * @note 群简介最长 400 字节，使用 UTF-8 编码
  */
 @property(nonatomic,strong) NSString* introduction;
 
 /**
  * 群头像
  *
- * @note 群头像 URL 最长100字节
+ * @note 群头像 URL 最长 500 字节，使用 UTF-8 编码
  */
 @property(nonatomic,strong) NSString* faceURL;
 
@@ -557,6 +517,14 @@ V2TIM_EXPORT @interface V2TIMGroupInfo : NSObject
 /// 当前用户加入此群的 UTC 时间戳，不支持设置，系统自动生成
 @property(nonatomic,assign,readonly) uint32_t joinTime;
 
+/// 是否开启权限组能力，仅支持社群，7.8 版本开始支持
+/// 开启后，管理员角色的权限失效，用群权限、话题权限和权限组能力来对社群、话题进行管理。
+@property(nonatomic,assign) BOOL enablePermissionGroup;
+
+/// 群权限，仅支持社群，7.8 版本开始支持
+/// 群成员在没有加入任何权限组时的默认权限，仅在 enablePermissionGroup = true 打开权限组之后生效
+@property(nonatomic,assign) uint64_t defaultPermissions;
+
 @end
 
 /// 获取群组资料结果
@@ -572,88 +540,6 @@ V2TIM_EXPORT @interface V2TIMGroupInfoResult : NSObject
 @property(nonatomic,strong) V2TIMGroupInfo *info;
 
 @end
-
-/////////////////////////////////////////////////////////////////////////////////
-//
-//             话题基本资料（可以通过 getTopics 获取，不支持由客户自行创建）
-//
-/////////////////////////////////////////////////////////////////////////////////
-V2TIM_EXPORT @interface V2TIMTopicInfo : NSObject
-
-/// 话题 ID，只能在创建话题或者修改话题信息的时候设置。组成方式为：社群 ID + @TOPIC#_xxx，例如社群 ID 为 @TGS#_123，则话题 ID 为 @TGS#_123@TOPIC#_xxx
-@property(nonatomic, strong) NSString *topicID;
-
-/// 话题名称
-@property(nonatomic, strong) NSString *topicName;
-
-/// 话题头像
-@property(nonatomic, strong) NSString *topicFaceURL;
-
-/// 话题介绍
-@property(nonatomic, strong) NSString *introduction;
-
-/// 话题公告
-@property(nonatomic, strong) NSString *notification;
-
-/// 话题全员禁言
-@property(nonatomic, assign) BOOL isAllMuted;
-
-/// 当前用户在话题中的禁言时间
-@property(nonatomic, assign, readonly) uint32_t selfMuteTime;
-
-/// 话题自定义字段
-@property(nonatomic, strong) NSString *customString;
-
-/// 话题消息接收选项，修改话题消息接收选项请调用 setGroupReceiveMessageOpt 接口
-@property(nonatomic, assign, readonly) V2TIMReceiveMessageOpt recvOpt;
-
-/// 话题草稿
-@property(nonatomic, strong) NSString *draftText;
-
-/// 话题消息未读数量
-@property(nonatomic, assign, readonly) uint64_t unreadCount;
-
-/// 话题 lastMessage
-@property(nonatomic,strong,readonly) V2TIMMessage *lastMessage;
-
-/// 话题 at 信息列表
-@property(nonatomic, strong, readonly) NSArray<V2TIMGroupAtInfo *> *groupAtInfolist;
-@end
-
-/////////////////////////////////////////////////////////////////////////////////
-//
-//             V2TIMTopicOperationResult
-//
-/////////////////////////////////////////////////////////////////////////////////
-V2TIM_EXPORT @interface V2TIMTopicOperationResult : NSObject
-
-/// 结果 0：成功；非0：失败
-@property(nonatomic, assign)  int errorCode;
-
-/// 如果删除失败，会返回错误信息
-@property(nonatomic, strong)  NSString *errorMsg;
-
-/// 如果删除成功，会返回对应的 topicID
-@property(nonatomic, strong)  NSString *topicID;
-@end
-
-/////////////////////////////////////////////////////////////////////////////////
-//
-//             V2TIMTopicInfoResult
-//
-/////////////////////////////////////////////////////////////////////////////////
-V2TIM_EXPORT @interface V2TIMTopicInfoResult : NSObject
-
-/// 结果 0：成功；非0：失败
-@property(nonatomic, assign)  int errorCode;
-
-/// 如果获取失败，会返回错误信息
-@property(nonatomic, strong)  NSString *errorMsg;
-
-/// 如果获取成功，会返回对应的 info
-@property(nonatomic, strong)  V2TIMTopicInfo *topicInfo;
-@end
-
 
 /////////////////////////////////////////////////////////////////////////////////
 //

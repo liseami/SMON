@@ -456,16 +456,20 @@ V2TIM_EXPORT @interface V2TIMConversationListFilter : NSObject
 /// C2C 或群会话(填 0 代表不过滤此项)
 @property(nonatomic,assign) V2TIMConversationType type;
 
-/// 会话分组名称(填 nil 代表不过滤此项)
+/// 会话分组名称
+/// 不设置表示不过滤此项，设置为 @"" 代表过滤不属于任何分组的会话
 @property(nonatomic,strong) NSString *conversationGroup;
 
-/// 标记类型，取值详见 @V2TIMConversationMarkType (填 0 代表不过滤此项)
+/// 标记类型，取值详见 @V2TIMConversationMarkType
+/// 不设置表示不过滤此项，设置为 0 代表过滤不含任何标记的会话
 @property(nonatomic,assign) NSUInteger markType;
 
-/// 设置为 YES 时返回包含未读数的会话；设置为 NO 时返回所有会话（默认值是 NO）
+/// 会话未读数
+/// 不设置表示不过滤此项，设置为 YES 代表过滤含未读数的会话；设置为 NO 代表过滤不含未读数的会话
 @property(nonatomic,assign) BOOL hasUnreadCount;
 
-/// 设置为 YES 时返回包含群 @ 消息的会话；设置为 NO 时返回所有会话（默认值是 NO）
+/// 会话 @ 信息
+/// 不设置表示不过滤此项，设置为 YES 代表过滤含群 @ 消息的会话；设置为 NO 代表过滤不含群 @ 消息的会话
 @property(nonatomic,assign) BOOL hasGroupAtInfo;
 @end
 

@@ -10,6 +10,7 @@
 //  - V2TIMManager+Conversation.h 会话相关的高级功能接口，一个会话对应一个聊天窗口。
 //  - V2TIMManager+Group.h 群组相关的高级功能接口，比如邀请人进群，处理加群请求等功能。
 //  - V2TIMManager+Friendship.h 关系链相关的高级功能接口，比如黑名单，好友列表等功能。
+//  - V2TIMManager+Community.h 社群相关的高级功能接口，比如创建话题，话题列表等功能。
 //
 /////////////////////////////////////////////////////////////////////
 
@@ -701,6 +702,9 @@ V2TIM_EXPORT @interface V2TIMUserStatus : NSObject
 /// 用户的自定义状态, 最大 50 字节
 @property (nonatomic, copy) NSString *customStatus;
 
+/// 用户在线设备列表
+@property (nonatomic, strong, readonly) NSMutableArray<NSString *> *onlineDevices;
+
 @end
 
 
@@ -725,6 +729,9 @@ V2TIM_EXPORT @interface V2TIMGroupMemberInfo : NSObject
 
 /// 用户头像
 @property(nonatomic,strong,readonly) NSString* faceURL;
+
+/// 群成员在线终端列表
+@property(nonatomic, strong, readonly) NSMutableArray<NSString*>* onlineDevices;
 
 @end
 

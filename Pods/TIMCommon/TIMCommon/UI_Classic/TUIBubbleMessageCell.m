@@ -9,6 +9,7 @@
 #import "TUIBubbleMessageCell.h"
 #import <TIMCommon/TIMCommonModel.h>
 #import <TIMCommon/TIMDefine.h>
+#import <TUICore/TUICore.h>
 
 @implementation TUIBubbleMessageCell
 
@@ -18,7 +19,9 @@
         _bubbleView = [[UIImageView alloc] initWithFrame:self.container.bounds];
         [self.container addSubview:_bubbleView];
         _bubbleView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self prepareReactTagUI:self.container];
+        self.securityStrikeView = [[TUISecurityStrikeView alloc] init];
+        [self.bubbleView addSubview:self.securityStrikeView];
+
     }
     return self;
 }
@@ -28,6 +31,14 @@
     self.bubbleData = data;
     self.bubbleView.image = self.getBubble;
     self.bubbleView.highlightedImage = self.getHighlightBubble;
+    self.securityStrikeView.hidden = YES;
+    BOOL hasRiskContent = self.messageData.innerMessage.hasRiskContent;
+    if (hasRiskContent) {
+        self.bubbleView.image =  [self getErrorBubble];
+        self.securityStrikeView.hidden = NO;
+    }
+    
+    [self prepareReactTagUI:self.container];
     // tell constraints they need updating
     [self setNeedsUpdateConstraints];
 
@@ -47,7 +58,7 @@
 
     [super updateConstraints];
     [self.bubbleView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.leading.mas_equalTo(self.getBubbleTop);
+        make.leading.mas_equalTo(0);
         make.size.mas_equalTo(self.container);
         make.top.mas_equalTo(self.container);
     }];
@@ -101,6 +112,9 @@
 }
 
 - (UIImage *)getBubble {
+    if (!TIMConfig.defaultConfig.enableMessageBubble) {
+        return nil;
+    }
     if (self.bubbleData.direction == MsgDirectionIncoming) {
         return self.class.incommingBubble;
     } else {
@@ -109,6 +123,9 @@
 }
 
 - (UIImage *)getHighlightBubble {
+    if (!TIMConfig.defaultConfig.enableMessageBubble) {
+        return nil;
+    }
     if (self.bubbleData.direction == MsgDirectionIncoming) {
         return self.class.incommingHighlightedBubble;
     } else {
@@ -116,7 +133,18 @@
     }
 }
 
+- (UIImage *)getErrorBubble {
+    if (self.bubbleData.direction == MsgDirectionIncoming) {
+        return self.class.incommingErrorBubble;
+    } else {
+        return self.class.outgoingErrorBubble;
+    }
+}
+
 - (UIImage *)getAnimateHighlightBubble_alpha50 {
+    if (!TIMConfig.defaultConfig.enableMessageBubble) {
+        return nil;
+    }
     if (self.bubbleData.direction == MsgDirectionIncoming) {
         return self.class.incommingAnimatedHighlightedAlpha50;
     } else {
@@ -125,11 +153,19 @@
 }
 
 - (UIImage *)getAnimateHighlightBubble_alpha20 {
+    if (!TIMConfig.defaultConfig.enableMessageBubble) {
+        return nil;
+    }
     if (self.bubbleData.direction == MsgDirectionIncoming) {
         return self.class.incommingAnimatedHighlightedAlpha20;
     } else {
         return self.class.outgoingAnimatedHighlightedAlpha20;
     }
+}
+
+- (void)prepareReactTagUI:(UIView *)containerView {
+    NSDictionary *param = @{TUICore_TUIChatExtension_ChatMessageReactPreview_Delegate: self};
+    [TUICore raiseExtension:TUICore_TUIChatExtension_ChatMessageReactPreview_ClassicExtensionID parentView:containerView param:param];
 }
 
 + (CGFloat)getBubbleTop:(TUIBubbleMessageCellData *)data {
@@ -184,6 +220,20 @@ static UIImage *gOutgoingHighlightedBubble;
     gOutgoingHighlightedBubble = outgoingHighlightedBubble;
 }
 
+static UIImage *gOutgoingErrorBubble;
++ (UIImage *)outgoingErrorBubble {
+    if (!gOutgoingErrorBubble) {
+        UIImage *defaultImage = [[TUIImageCache sharedInstance] getResourceFromCache:TUIChatImagePath(@"SenderTextNodeBkg")];
+        UIImage *formatImage = TUIChatDynamicImage(@"chat_bubble_send_img", defaultImage);
+        formatImage = [TUISecurityStrikeView changeImageColorWith:[UIColor tui_colorWithHex:@"#FA5151" alpha:0.16] image:formatImage alpha:1];
+        formatImage = [formatImage rtl_imageFlippedForRightToLeftLayoutDirection];
+        UIEdgeInsets ei = UIEdgeInsetsFromString(@"{12,12,12,12}");
+        ei = rtlEdgeInsetsWithInsets(ei);
+        gOutgoingErrorBubble = [formatImage resizableImageWithCapInsets:ei resizingMode:UIImageResizingModeStretch];
+    }
+    return gOutgoingErrorBubble;
+}
+
 static UIImage *gIncommingBubble;
 + (UIImage *)incommingBubble {
     if (!gIncommingBubble) {
@@ -216,6 +266,20 @@ static UIImage *gIncommingHighlightedBubble;
 
 + (void)setIncommingHighlightedBubble:(UIImage *)incommingHighlightedBubble {
     gIncommingHighlightedBubble = incommingHighlightedBubble;
+}
+
+static UIImage *gIncommingErrorBubble;
++ (UIImage *)incommingErrorBubble {
+    if (!gIncommingErrorBubble) {
+        UIImage *defaultImage = [[TUIImageCache sharedInstance] getResourceFromCache:TUIChatImagePath(@"ReceiverTextNodeBkg")];
+        UIImage *formatImage = TUIChatDynamicImage(@"chat_bubble_receive_img", defaultImage);
+        formatImage = [TUISecurityStrikeView changeImageColorWith:[UIColor tui_colorWithHex:@"#FA5151" alpha:0.16] image:formatImage alpha:1];
+        formatImage = [formatImage rtl_imageFlippedForRightToLeftLayoutDirection];
+        UIEdgeInsets ei = UIEdgeInsetsFromString(@"{12,12,12,12}");
+        ei = rtlEdgeInsetsWithInsets(ei);
+        gIncommingErrorBubble = [formatImage resizableImageWithCapInsets:ei resizingMode:UIImageResizingModeStretch];
+    }
+    return gIncommingErrorBubble;
 }
 
 static CGFloat gOutgoingBubbleTop = 0;

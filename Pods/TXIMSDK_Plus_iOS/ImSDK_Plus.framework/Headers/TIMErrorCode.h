@@ -193,6 +193,7 @@ enum ERROR_CODE {
     ERR_SVR_COMM_INVALID_SERVICE                = 60020,  ///< 未购买套餐包或购买的套餐包正在配置中暂未生效，请五分钟后再次尝试。
     ERR_SVR_COMM_SENSITIVE_TEXT                 = 80001,  ///< 文本安全打击，文本中可能包含敏感词汇。
     ERR_SVR_COMM_BODY_SIZE_LIMIT                = 80002,  ///< 发消息包体过长，目前支持最大12k消息包体长度，请减少包体大小重试。
+    ERR_SVR_COMM_SENSITIVE_IMAGE                = 80004,  ///< 图片安全打击，图片中可能包含敏感内容。
 
     // 账号错误码
 
@@ -260,6 +261,10 @@ enum ERROR_CODE {
     ERR_SVR_FRIENDSHIP_DEL_NONFRIEND            = 31704,  ///< 与请求删除的账号之间不存在好友关系。
     ERR_SVR_FRIENDSHIP_DEL_FRIEND_SEC_RSTR      = 31707,  ///< 删除好友请求被安全策略打击，请勿频繁发起删除好友请求。
     ERR_SVR_FRIENDSHIP_ACCOUNT_NOT_FOUND_EX     = 31804,  ///< 请求的用户账号不存在。
+    ERR_SVR_FRIENDSHIP_SELF_FOLLOWING_COUNT_EXCEEDS_LIMIT = 32100,  ///< 自己的关注数量到达上限。
+    ERR_SVR_FRIENDSHIP_PEER_FOLLOWERS_COUNT_EXCEEDS_LIMIT = 32101,  ///< 对方的粉丝数量到达上限。
+    ERR_SVR_FRIENDSHIP_SELF_MUTUAL_FOLLOWERS_COUNT_EXCEEDS_LIMIT = 32102,  ///< 自己的互关数量到达上限。
+    ERR_SVR_FRIENDSHIP_PEER_MUTUAL_FOLLOWERS_COUNT_EXCEEDS_LIMIT = 32103,  ///< 对方的互关数量到达上限。
 
     // 最近联系人错误码
 

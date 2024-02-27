@@ -218,6 +218,7 @@
 "TUIKitGroupKickOffTipsFormat" = "You were removed from the group %@.";
 "TUIKitGroupDropoutTipsFormat" = "You have left the group %@.";
 
+"TUIKitMessageTipsNormalRecallMessage" = "A message is recalled";
 "TUIKitMessageTipsYouRecallMessage" = "You recalled a message.";
 "TUIKitMessageTipsReEditMessage" = "re-edit";
 "TUIKitMessageTipsRecallMessageFormat" = "\"%@\" recalled a message.";
@@ -238,6 +239,8 @@
 "TUIKitMessageTipsUnsupportCustomMessage" = "[Custom Messages]";
 "TUIKitMessageTipsMute" = "is blocked from posting";
 "TUIKitMessageTipsUnmute" = "unblocked";
+"TUIKitMessageTipsRecallRiskContent" = "The violation message was withdrawn";
+"TUIKitMessageDisplayRiskContent" = "[Violation message]";
 
 "TUIKitSignalingFinishGroupChat" = "End Group Chat";
 "TUIKitSignalingFinishConversationAndTimeFormat" = "Duration";
@@ -265,7 +268,18 @@
 "TUIkitMessageTypeFile" = "[File]";
 "TUIKitMessageTypeAnimateEmoji" = "[Animated Sticker]";
 "TUIKitMessageTypeDraftFormat" = "[Drafts]";
+
+"TUIkitMessageTypeRiskImage" = "[Illegal pictures]";
+"TUIkitMessageTypeRiskVoice" = "[Illegal voice]";
+"TUIkitMessageTypeRiskVideo" = "[Illegal video]";
+
 "TUIKitMessageTypeLastMsgCountFormat" = "messages";
+"TUIKitMessageTypeSecurityStrike" = "Sensitive content involved, sending failed";
+"TUIKitMessageTypeSecurityStrikeVoice" = "Sensitive content involved, cannot be listened to";
+"TUIKitMessageTypeSecurityStrikeImage" = "Sensitive content involved and cannot be viewed";
+"TUIKitMessageTypeSecurityStrikeTranslate" = "Sensitive content involved, translation failed";
+
+"TUIKitMessageTypeOtherUseMic" = "Microphone is being used by another function, unable to record.";
 
 "TUIKitMessageReadPartRead" = "read";
 "TUIKitMessageReadPartUnread" = "unread";
@@ -290,6 +304,11 @@
 "TUIKitMoreLinkDetails" = "View Details>>";
 "TUIKitMorePoll" = "Poll";
 "TUIKitMoreGroupNote" = "Group Note";
+"TUIKitMoreEvaluation" = "Service Evaluation";
+"TUIKitMoreCard" = "Card Message";
+
+"TUIKitFileSizeCheckLimited" = "File size exceeds size limit";
+"TUIKitImageSizeCheckLimited" = "Image size exceeds size limit";
 
 "TUIKitCallInviteYouVideoCall" = "invited you to a video call.";
 "TUIKitCallTurningOnMute" = "Mute On";
@@ -423,6 +442,9 @@
 "TUIKitVideoSavedFailed" = "Failed to save video.";
 "TUIKitPictureSavedSuccess" = "Image saved successfully.";
 "TUIKitPictureSavedFailed" = "Failed to save image.";
+"TUIKitPictureCheckRisk" = "It has been detected that the image contains sensitive content and cannot be viewed temporarily.";
+"TUIKitVideoCheckRisk" = "It has been detected that the video contains sensitive content and cannot be viewed temporarily.";
+"TUIKitVideoCheckRiskCancel" = "OK";
 /***************************** 视频、图片加载 & 保存 *************************/
 
 "TUIKitGroupSetAdminsForbidden" = "Unable to set an admin for this type of group chat.";
@@ -648,6 +670,38 @@
 "TUIGroupNoteNotDatePickerSAT" = " Sat";
 "TUIGroupNoteNotDatePickerSUN" = " Sun";
 
+"TUICustomerServiceAccounts" = "Customer Service List";
+"TUICustomerServiceBranchMessage" = "[Branch Message]";
+"TUICustomerServiceCardMessage" = "[Card Message]";
+"TUICustomerServiceCollectInfomation" = "[Collect infomation]";
+"TUICustomerServiceSatisfactionEvaluation" = "[Satisfaction Evaluation]";
+"TUICustomerServiceTimeout" = "[Session Timeout]";
+"TUICustomerServiceEnd" = "[Session End]";
+"TUICustomerServiceFillProductInfo" = "Please fill in product information";
+"TUICustomerServiceSubmitProductInfo" = "Submit";
+"TUICustomerServiceClose" = "Close";
+"TUICustomerServiceName" = "Name";
+"TUICustomerServiceFillProductName" = "Please fill in the product name";
+"TUICustomerServiceDesc" = "Desc";
+"TUICustomerServiceFillProductDesc" = "Please fill in the product description";
+"TUICustomerServicePic" = "Pic";
+"TUICustomerServiceFillPicLink" = "Please fill in the picture link";
+"TUICustomerServiceJumpLink" = "Jump";
+"TUICustomerServiceFillJumpLink" = "Please fill in the card jump link";
+"TUICustomerServiceSubmitEvaluation" = "Submit";
+"TUICustomerService" = "Customer Service plugin";
+"TUICustomerServiceSendProduct" = "Send Product Info";
+"TUICustomerServiceCommonPhrase" = "Common Phrases";
+"TUICustomerServiceCommonPhraseStock" = "Is it in stock?";
+"TUICustomerServiceCommonPhraseCheaper" = "Can it be cheaper?";
+"TUICustomerServiceCommonPhraseGift" = "Is there a giveaway?";
+"TUICustomerServiceCommonPhraseShipping" = "What is the shipping date?";
+"TUICustomerServiceCommonPhraseDelivery" = "Which express company is it?";
+"TUICustomerServiceCommonPhraseArrive" = "When will it arrive?";
+
+"TUIChatBotAccounts" = "Chat Bot";
+"TUIChatBotChangeQuestion" = "Change it";
+
 "TUIConversationGroupAll" = "All";
 "TUIConversationGroupUnread" = "Unread";
 "TUIConversationGroupAtMe" = "@ Me";
@@ -690,7 +744,7 @@
 "TIMAppMainDisconnectTitle" = "TencentCloud·IM (not connected)";
 "TIMAppTabBarItemMessageText" = "Message";
 "TIMAppTabBarItemContactText" = "Contacts";
-"TIMAppTabBarItemMeText"      = "Me";
+"TIMAppTabBarItemMeText"      = "Settings";
 "TIMAppTabBarItemMessageText_mini" = "Chats";
 "TIMAppTabBarItemContactText_mini" = "Contact";
 "TIMAppTabBarItemSettingText_mini" = "Settings";
@@ -715,7 +769,7 @@
 "TIMApp1Billion+" = "1 billion+";
 "TIMApp10000+" = "10,000+";
 "TIMApp1Minute" = "1 minute";
-"TIMAppMeAbout" = "About TencentCloud·IM";
+"TIMAppMeAbout" = "About TencentCloud Chat";
 "TIMAppConfirmLogout" = "Leave now?";
 "TIMAppConfirm" = "OK";
 "TIMAppCancel" = "Cancel";
@@ -733,3 +787,5 @@
 "zh-Hans" = "Simple Chinese";
 "en"      = "English";
 "ar"      = "Arabic";
+"TUIChatFaceGroupAllEmojiName" = "All";
+"TUIChatFaceGroupRecentEmojiName" = "Recently";

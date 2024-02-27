@@ -13,9 +13,14 @@
 - (instancetype)init {
     self = [super init];
     if (self){
-        self.enabelVideo = YES;
-        self.enabelAudio = YES;
+        self.msgNeedReadReceipt = YES;
+        self.enableVideoCall = YES;
+        self.enableAudioCall = YES;
         self.enabelRoom  = YES;
+        self.enableWelcomeCustomMessage  = YES;
+        self.isLimitedPortraitOrientation = NO;
+        self.enablePoll = YES;
+        self.enableGroupNote = YES;
     }
     return self;
 }

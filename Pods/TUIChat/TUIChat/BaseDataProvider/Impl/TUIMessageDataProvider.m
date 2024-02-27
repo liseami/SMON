@@ -3,7 +3,7 @@
 //  Copyright © 2023 Tencent. All rights reserved.
 
 #import <AVFoundation/AVFoundation.h>
-
+#import <TUICore/TUILogin.h>
 #import <TIMCommon/TUISystemMessageCellData.h>
 #import "TUIChatCallingDataProvider.h"
 #import "TUICloudCustomDataTypeCenter.h"
@@ -165,23 +165,6 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
         }
     }
 
-    /**
-     * 判断是否包含「消息响应」
-     * Determine whether to include "react-message"
-     */
-    if ([message isContainsCloudCustomOfDataType:TUICloudCustomDataType_MessageReact]) {
-        [message doThingsInContainsCloudCustomOfDataType:TUICloudCustomDataType_MessageReact
-                                                callback:^(BOOL isContains, id obj) {
-                                                  if (isContains) {
-                                                      if (obj && [obj isKindOfClass:NSDictionary.class]) {
-                                                          NSDictionary *dic = (NSDictionary *)obj;
-                                                          if ([dic isKindOfClass:NSDictionary.class]) {
-                                                              data.messageModifyReacts = dic.copy;
-                                                          }
-                                                      }
-                                                  }
-                                                }];
-    }
 
     /**
      * 判断是否包含「消息回复数」
@@ -269,7 +252,7 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
         // Return nil means not display in the chat page
         return nil;
     }
-    
+
     if (businessID.length > 0) {
         Class cellDataClass = nil;
         if (gDataSourceClass && [gDataSourceClass respondsToSelector:@selector(onGetCustomMessageCellDataClass:)]) {
@@ -277,8 +260,16 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
         }
         if (cellDataClass && [cellDataClass respondsToSelector:@selector(getCellData:)]) {
             TUIMessageCellData *data = [cellDataClass getCellData:message];
-            data.reuseId = businessID;
-            return data;
+            if (data.shouldHide) {
+                return nil;
+            } else {
+                data.reuseId = businessID;
+                return data;
+            }
+        }
+        // CustomerService、ChatBot 场景，不支持的消息直接不展示
+        if ([businessID containsString:BussinessID_CustomerService] || [businessID containsString:BussinessID_ChatBot]) {
+            return nil;
         }
         return [self getUnsupportedCellData:message];
     } else {
@@ -322,17 +313,19 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
 + (nullable TUISystemMessageCellData *)getRevokeCellData:(V2TIMMessage *)message {
     TUISystemMessageCellData *revoke = [[TUISystemMessageCellData alloc] initWithDirection:(message.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming)];
     revoke.reuseId = TSystemMessageCell_ReuseId;
+    revoke.content = [self getRevokeDispayString:message];
+    revoke.innerMessage = message;
+    V2TIMUserFullInfo *revokerInfo = message.revokerInfo;
     if (message.isSelf) {
         if (message.elemType == V2TIM_ELEM_TYPE_TEXT && fabs([[NSDate date] timeIntervalSinceDate:message.timestamp]) < MaxReEditMessageDelay) {
-            revoke.supportReEdit = YES;
+            if(revokerInfo &&![revokerInfo.userID isEqualToString:message.sender]) {
+                //Super User revoke
+                revoke.supportReEdit = NO;
+            }
+            else {
+                revoke.supportReEdit = YES;
+            }
         }
-        revoke.content = TIMCommonLocalizableString(TUIKitMessageTipsYouRecallMessage);
-        revoke.innerMessage = message;
-        return revoke;
-    } else if (message.userID.length > 0) {
-        revoke.content = TIMCommonLocalizableString(TUIKitMessageTipsOthersRecallMessage);
-        revoke.innerMessage = message;
-        return revoke;
     } else if (message.groupID.length > 0) {
         /**
          * 对于群组消息的名称显示，优先显示群名片，昵称优先级其次，用户ID优先级最低。
@@ -341,13 +334,13 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
          */
         NSString *userName = [TUIMessageDataProvider getShowName:message];
         TUIJoinGroupMessageCellData *joinGroupData = [[TUIJoinGroupMessageCellData alloc] initWithDirection:MsgDirectionIncoming];
-        joinGroupData.content = [NSString stringWithFormat:TIMCommonLocalizableString(TUIKitMessageTipsRecallMessageFormat), userName];
+        joinGroupData.content = [self getRevokeDispayString:message];
         joinGroupData.opUserID = message.sender;
         joinGroupData.opUserName = userName;
         joinGroupData.reuseId = TJoinGroupMessageCell_ReuseId;
         return joinGroupData;
     }
-    return nil;
+    return revoke;
 }
 
 + (nullable TUISystemMessageCellData *)getSystemMsgFromDate:(NSDate *)date {
@@ -360,6 +353,11 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
 
 #pragma mark - Last message parser
 + (nullable NSString *)getDisplayString:(V2TIMMessage *)message {
+    BOOL hasRiskContent = message.hasRiskContent;
+    BOOL isRevoked = (message.status == V2TIM_MSG_STATUS_LOCAL_REVOKED);
+    if (hasRiskContent && !isRevoked ) {
+        return  TIMCommonLocalizableString(TUIKitMessageDisplayRiskContent);
+    }
     NSString *str = [self parseDisplayStringFromMessageStatus:message];
     if (str == nil) {
         str = [self parseDisplayStringFromMessageElement:message];
@@ -474,6 +472,10 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
         if (cellDataClass && [cellDataClass respondsToSelector:@selector(getDisplayString:)]) {
             return [cellDataClass getDisplayString:message];
         }
+        // CustomerService、ChatBot 场景，不支持的消息直接不展示
+        if ([businessID containsString:BussinessID_CustomerService] || [businessID containsString:BussinessID_ChatBot]) {
+            return nil;
+        }
         return TIMCommonLocalizableString(TUIKitMessageTipsUnsupportCustomMessage);
     } else {
         return TIMCommonLocalizableString(TUIKitMessageTipsUnsupportCustomMessage);
@@ -499,11 +501,14 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
         TUIReplyMessageCellData *myData = (TUIReplyMessageCellData *)cellData;
         __weak typeof(myData) weakMyData = myData;
         myData.onFinish = ^{
-          @strongify(self);
-          [self.dataSource dataProviderDataSourceWillChange:self];
-          NSUInteger index = [self.uiMsgs indexOfObject:weakMyData];
-          [self.dataSource dataProviderDataSourceChange:self withType:TUIMessageBaseDataProviderDataSourceChangeTypeReload atIndex:index animation:NO];
-          [self.dataSource dataProviderDataSourceDidChange:self];
+            NSUInteger index = [self.uiMsgs indexOfObject:weakMyData];
+            if (index != NSNotFound) {
+                //if messageData exist In datasource, reload this data.
+                @strongify(self);
+                [self.dataSource dataProviderDataSourceWillChange:self];
+                [self.dataSource dataProviderDataSourceChange:self withType:TUIMessageBaseDataProviderDataSourceChangeTypeReload atIndex:index animation:NO];
+                [self.dataSource dataProviderDataSourceDidChange:self];
+            }
         };
         dispatch_group_enter(group);
         [self loadOriginMessageFromReplyData:myData
@@ -589,11 +594,24 @@ static Class<TUIMessageDataProviderDataSource> gDataSourceClass = nil;
     if (!param || ![param isKindOfClass:[NSDictionary class]]) {
         return nil;
     }
+    
     NSString *businessID = param[BussinessID];
-    if (!businessID || ![businessID isKindOfClass:[NSString class]]) {
+    if (businessID.length > 0 && [businessID isKindOfClass:[NSString class]]) {
+        return businessID;
+    } else {
+        if ([param.allKeys containsObject:BussinessID_CustomerService]) {
+            NSString *src = param[BussinessID_Src_CustomerService];
+            if (src.length > 0 && [src isKindOfClass:[NSString class]]) {
+                return [NSString stringWithFormat:@"%@%@", BussinessID_CustomerService, src];
+            }
+        } else if ([param.allKeys containsObject:BussinessID_ChatBot]) {
+            NSNumber *src = param[BussinessID_Src_ChatBot];
+            if (src && [src isKindOfClass:[NSNumber class]]) {
+                return [NSString stringWithFormat:@"%@%@", BussinessID_ChatBot, src];
+            }
+        }
         return nil;
     }
-    return businessID;
 }
 
 + (nullable NSString *)getSignalingBusinessID:(V2TIMSignalingInfo *)signalInfo {

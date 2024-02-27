@@ -9,6 +9,7 @@
 #import "TUIMergeMessageCellData.h"
 #import <TIMCommon/TIMDefine.h>
 #import "TUITextMessageCellData.h"
+#import <TIMCommon/NSString+TUIEmoji.h>
 
 @implementation TUIMergeMessageCellData
 
@@ -68,8 +69,8 @@
 + (NSMutableArray *)formatAbstractSendDetailList:(NSArray *)originAbstractList {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:3];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.lineSpacing = 4;
     style.alignment = isRTL()? NSTextAlignmentRight:NSTextAlignmentLeft;
+    style.lineBreakMode =  NSLineBreakByTruncatingTail;
     NSDictionary *attribute = @{
         NSForegroundColorAttributeName : [UIColor colorWithRed:187 / 255.0 green:187 / 255.0 blue:187 / 255.0 alpha:1 / 1.0],
         NSFontAttributeName : [UIFont systemFontOfSize:12.0],
@@ -89,7 +90,7 @@
         NSString *sender = result[0];
         NSString *detail = result[1];
         sender =  [NSString stringWithFormat:@"%@",sender];
-        detail =  [NSString stringWithFormat:@"%@",detail];
+        detail =  [NSString stringWithFormat:@"%@",detail.getLocalizableStringWithFaceContent];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithCapacity:3];
         if(sender.length>0 ){
             NSMutableAttributedString *abstr = [[NSMutableAttributedString alloc] initWithString:@""];

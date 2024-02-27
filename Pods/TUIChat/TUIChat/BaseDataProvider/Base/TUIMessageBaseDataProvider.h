@@ -116,7 +116,13 @@ typedef NS_ENUM(NSUInteger, TUIMessageBaseDataProviderDataSourceChangeType) {
 @property(nonatomic, assign, readonly) BOOL isLoadingData;
 @property(nonatomic, assign, readonly) BOOL isNoMoreMsg;
 @property(nonatomic, assign, readonly) BOOL isFirstLoad;
-@property(nonatomic, assign) BOOL enableMergeSender;
+
+/**
+ * 如果相邻的消息都为同一个用户发送，则合并消息展示
+ *
+ * If adjacent messages are sent by the same user, the messages will be merged for display.
+ */
+@property(nonatomic, assign) BOOL mergeAdjacentMsgsFromTheSameSender;
 
 /**
  * loadMessage 请求的分页大小, default is 20
@@ -153,8 +159,8 @@ typedef NS_ENUM(NSUInteger, TUIMessageBaseDataProviderDataSourceChangeType) {
 - (void)replaceUIMsg:(TUIMessageCellData *)cellData atIndex:(NSUInteger)index;
 
 /**
- * 预处理互动消息、回复消息(异步加载原始消息以及下载对应的缩略图)
- * Preprocessing interactive messages, reply messages (asynchronously loading original messages and downloading corresponding thumbnails)
+ * 预处理回复消息(异步加载原始消息以及下载对应的缩略图)
+ * Preprocessing reply messages (asynchronously loading original messages and downloading corresponding thumbnails)
  */
 - (void)preProcessMessage:(NSArray<TUIMessageCellData *> *)uiMsgs callback:(void (^)(void))callback;
 
@@ -193,6 +199,8 @@ typedef NS_ENUM(NSUInteger, TUIMessageBaseDataProviderDataSourceChangeType) {
                  Progress:(nullable V2TIMProgress)progress
                 SuccBlock:(nullable V2TIMSucc)succ
                 FailBlock:(nullable V2TIMFail)fail;
+
+- (void)getLastMessage:(BOOL)isFromLocal succ:(void (^)(V2TIMMessage *message))succ fail:(V2TIMFail)fail;
 
 + (void)markC2CMessageAsRead:(NSString *)userID succ:(nullable V2TIMSucc)succ fail:(nullable V2TIMFail)fail;
 
@@ -235,10 +243,12 @@ typedef NS_ENUM(NSUInteger, TUIMessageBaseDataProviderDataSourceChangeType) {
 /// message -> displayString
 + (nullable NSString *)getDisplayString:(V2TIMMessage *)message;
 + (nullable NSString *)getRevokeDispayString:(V2TIMMessage *)message;
++ (nullable NSString *)getRevokeDispayString:(V2TIMMessage *)message operateUser:(V2TIMUserFullInfo *)operateUser reason:(NSString *)reason;
 + (nullable NSString *)getGroupTipsDisplayString:(V2TIMMessage *)message;
 
 /// message <-> info
 + (V2TIMMessage *)getCustomMessageWithJsonData:(NSData *)data;
++ (V2TIMMessage *)getCustomMessageWithJsonData:(NSData *)data desc:(NSString *)desc extension:(NSString *)extension;
 + (NSMutableArray *)getUserIDList:(NSArray<V2TIMGroupMemberInfo *> *)infoList;
 + (NSString *)getShowName:(V2TIMMessage *)message;
 + (NSString *)getOpUserName:(V2TIMGroupMemberInfo *)info;

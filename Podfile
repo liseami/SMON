@@ -21,17 +21,19 @@ pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情
 # 腾讯IM -——————————————————
 # 集成聊天功能
-pod 'TUIChat/UI_Minimalist' 
+pod 'TUIChat/UI_Classic'
 # 集成会话功能
-pod 'TUIConversation/UI_Minimalist'
+pod 'TUIConversation/UI_Classic'
+# 集成关系链功能
+#pod 'TUIContact/UI_Classic'
 # 集成群组功能
-#pod 'TUIGroup/UI_Minimalist'
+#pod 'TUIGroup/UI_Classic'
 # 集成搜索功能（需要购买旗舰版套餐）
-#pod 'TUISearch/UI_Minimalist'
-# 集成离线推送
-pod 'TUIOfflinePush'
+#pod 'TUISearch/UI_Classic'
 # 集成音视频通话功能
-pod 'TUICallKit'
+#pod 'TUICallKit'
+# 集成快速会议
+#pod 'TUIRoomKit'
 # 腾讯IM -——————————————————
 
 end

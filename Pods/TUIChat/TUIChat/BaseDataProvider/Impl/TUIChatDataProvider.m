@@ -20,7 +20,9 @@
 #define Input_SendBtn_ImageName @"Input_SendBtn_ImageName"
 
 @interface TUIChatDataProvider ()
-@property(nonatomic, strong) NSArray<TUIInputMoreCellData *> *customInputMoreMenus;
+@property(nonatomic, strong) TUIInputMoreCellData *welcomeInputMoreMenu;
+
+@property(nonatomic, strong) NSMutableArray<TUIInputMoreCellData *> *customInputMoreMenus;
 @property(nonatomic, strong) NSArray<TUIInputMoreCellData *> *builtInInputMoreMenus;
 
 @property(nonatomic, strong) NSArray<TUICustomActionSheetItem *> *customInputMoreActionItemList;
@@ -41,38 +43,39 @@
     self.builtInInputMoreActionItemList = nil;
 }
 
-- (NSArray<TUIInputMoreCellData *> *)customInputMoreMenus {
-    if (_customInputMoreMenus == nil) {
-        NSMutableArray *arrayM = [NSMutableArray array];
-        if (TUIChatConfig.defaultConfig.enableWelcomeCustomMessage) {
-            // Link
-            __weak typeof(self) weakSelf = self;
-            TUIInputMoreCellData *linkData = [[TUIInputMoreCellData alloc] init];
-            linkData.priority = 0;
-            linkData.title = TIMCommonLocalizableString(TUIKitMoreLink);
-            linkData.image = TUIChatBundleThemeImage(@"chat_more_link_img", @"chat_more_link_img");
-            linkData.onClicked = ^(NSDictionary *actionParam) {
-              NSString *text = TIMCommonLocalizableString(TUIKitWelcome);
-              NSString *link = TUITencentCloudHomePageEN;
-              NSString *language = [TUIGlobalization tk_localizableLanguageKey];
-              if ([language containsString:@"zh-"]) {
-                  link = TUITencentCloudHomePageCN;
-              }
-              NSError *error = nil;
-              NSDictionary *param = @{BussinessID : BussinessID_TextLink, @"text" : text, @"link" : link};
-              NSData *data = [NSJSONSerialization dataWithJSONObject:param options:0 error:&error];
-              if (error) {
-                  NSLog(@"[%@] Post Json Error", [weakSelf class]);
-                  return;
-              }
-              V2TIMMessage *message = [TUIMessageDataProvider getCustomMessageWithJsonData:data];
-              if ([weakSelf.delegate respondsToSelector:@selector(dataProvider:sendMessage:)]) {
-                  [weakSelf.delegate dataProvider:weakSelf sendMessage:message];
-              }
-            };
-            [arrayM addObject:linkData];
-        }
-        _customInputMoreMenus = arrayM;
+- (TUIInputMoreCellData *)welcomeInputMoreMenu {
+    if (!_welcomeInputMoreMenu) {
+        __weak typeof(self) weakSelf = self;
+        _welcomeInputMoreMenu = [[TUIInputMoreCellData alloc] init];
+        _welcomeInputMoreMenu.priority = 0;
+        _welcomeInputMoreMenu.title = TIMCommonLocalizableString(TUIKitMoreLink);
+        _welcomeInputMoreMenu.image = TUIChatBundleThemeImage(@"chat_more_link_img", @"chat_more_link_img");
+        _welcomeInputMoreMenu.onClicked = ^(NSDictionary *actionParam) {
+          NSString *text = TIMCommonLocalizableString(TUIKitWelcome);
+          NSString *link = TUITencentCloudHomePageEN;
+          NSString *language = [TUIGlobalization tk_localizableLanguageKey];
+          if ([language containsString:@"zh-"]) {
+              link = TUITencentCloudHomePageCN;
+          }
+          NSError *error = nil;
+          NSDictionary *param = @{BussinessID : BussinessID_TextLink, @"text" : text, @"link" : link};
+          NSData *data = [NSJSONSerialization dataWithJSONObject:param options:0 error:&error];
+          if (error) {
+              NSLog(@"[%@] Post Json Error", [weakSelf class]);
+              return;
+          }
+          V2TIMMessage *message = [TUIMessageDataProvider getCustomMessageWithJsonData:data desc:text extension:text];
+          if ([weakSelf.delegate respondsToSelector:@selector(dataProvider:sendMessage:)]) {
+              [weakSelf.delegate dataProvider:weakSelf sendMessage:message];
+          }
+        };
+    }
+    return _welcomeInputMoreMenu;
+}
+
+- (NSMutableArray<TUIInputMoreCellData *> *)customInputMoreMenus {
+    if (!_customInputMoreMenus) {
+        _customInputMoreMenus = [NSMutableArray array];
     }
     return _customInputMoreMenus;
 }
@@ -148,7 +151,7 @@
                                                     NSLog(@"[%@] Post Json Error", [self class]);
                                                     return;
                                                 }
-                                                V2TIMMessage *message = [TUIMessageDataProvider getCustomMessageWithJsonData:data];
+                                                   V2TIMMessage *message = [TUIMessageDataProvider getCustomMessageWithJsonData:data desc:text extension:text];
                                                 if ([weakSelf.delegate respondsToSelector:@selector(dataProvider:sendMessage:)]) {
                                                     [weakSelf.delegate dataProvider:weakSelf sendMessage:message];
                                                 }
@@ -218,7 +221,7 @@
     NSString *display = [self.delegate dataProvider:self mergeForwardMsgAbstactForMessage:msg];
 
     if (display.length == 0) {
-        display = [TUIMessageDataProvider getDisplayString:msg];
+        display = [self.class parseAbstractDisplayWStringFromMessageElement:msg];
     }
     NSString * splitStr = @":";
     splitStr = @"\u202C:";
@@ -229,6 +232,17 @@
     return desc;
 }
 
++ (nullable NSString *)parseAbstractDisplayWStringFromMessageElement:(V2TIMMessage *)message {
+    NSString *str = nil;
+    if (message.elemType == V2TIM_ELEM_TYPE_TEXT) {
+        NSString *content = message.textElem.text;
+        str = content;
+    }
+    else {
+        str =  [TUIMessageDataProvider getDisplayString:message];
+    }
+    return str;
+}
 #pragma mark - CellData
 
 - (NSMutableArray<TUIInputMoreCellData *> *)moreMenuCellDataArray:(NSString *)groupID
@@ -236,14 +250,21 @@
                                          conversationModel:(TUIChatConversationModel *)conversationModel
                                                  actionController:(id<TIMInputViewMoreActionProtocol>)actionController {
     
-    BOOL isNeedVideoCall = [TUIChatConfig defaultConfig].enableVideoCall && conversationModel.enabelVideo;
-    BOOL isNeedAudioCall = [TUIChatConfig defaultConfig].enableAudioCall && conversationModel.enabelAudio;
+    BOOL isNeedVideoCall = [TUIChatConfig defaultConfig].enableVideoCall && conversationModel.enableVideoCall;
+    BOOL isNeedAudioCall = [TUIChatConfig defaultConfig].enableAudioCall && conversationModel.enableAudioCall;
+    BOOL isNeedWelcomeCustomMessage = [TUIChatConfig defaultConfig].enableWelcomeCustomMessage && conversationModel.enableWelcomeCustomMessage;
     BOOL isNeedRoom = conversationModel.enabelRoom;
-    BOOL isNeedGroupLive = NO;
-    BOOL isNeedLink = [TUIChatConfig defaultConfig].enableWelcomeCustomMessage;
-    
+    BOOL isNeedPoll = conversationModel.enablePoll;
+    BOOL isNeedGroupNote = conversationModel.enableGroupNote;
+
     NSMutableArray *moreMenus = [NSMutableArray array];
     [moreMenus addObjectsFromArray:self.builtInInputMoreMenus];
+    
+    if (isNeedWelcomeCustomMessage) {
+        if (![self.customInputMoreMenus containsObject:self.welcomeInputMoreMenu]) {
+            [self.customInputMoreMenus addObject:self.welcomeInputMoreMenu];
+        }
+    }
     [moreMenus addObjectsFromArray:self.customInputMoreMenus];
 
     // Extension menus
@@ -256,6 +277,8 @@
     extensionParam[TUICore_TUIChatExtension_InputViewMoreItem_FilterVideoCall] = @(!isNeedVideoCall);
     extensionParam[TUICore_TUIChatExtension_InputViewMoreItem_FilterAudioCall] = @(!isNeedAudioCall);
     extensionParam[TUICore_TUIChatExtension_InputViewMoreItem_FilterRoom]  = @(!isNeedRoom);
+    extensionParam[TUICore_TUIChatExtension_InputViewMoreItem_FilterPoll]  = @(!isNeedPoll);
+    extensionParam[TUICore_TUIChatExtension_InputViewMoreItem_FilterGroupNote]  = @(!isNeedGroupNote);
     extensionParam[TUICore_TUIChatExtension_InputViewMoreItem_ActionVC] = actionController;
     NSArray *extensionList = [TUICore getExtensionList:TUICore_TUIChatExtension_InputViewMoreItem_ClassicExtensionID param:extensionParam];
     for (TUIExtensionInfo *info in extensionList) {

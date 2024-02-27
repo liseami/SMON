@@ -492,16 +492,6 @@ THE SOFTWARE.
 copyright 2017 tencent Ltd. All rights reserved.
 
 
-## TUICallEngine
-
-copyright 2017 tencent Ltd. All rights reserved.
-
-
-## TUICallKit
-
-copyright 2017 tencent Ltd. All rights reserved.
-
-
 ## TUIChat
 
 copyright 2017 tencent Ltd. All rights reserved.
@@ -517,17 +507,7 @@ copyright 2017 tencent Ltd. All rights reserved.
 copyright 2017 tencent Ltd. All rights reserved.
 
 
-## TUIOfflinePush
-
-copyright 2017 tencent Ltd. All rights reserved.
-
-
 ## TXIMSDK_Plus_iOS
-
-copyright 2017 tencent Ltd. All rights reserved.
-
-
-## TXLiteAVSDK_TRTC
 
 copyright 2017 tencent Ltd. All rights reserved.
 

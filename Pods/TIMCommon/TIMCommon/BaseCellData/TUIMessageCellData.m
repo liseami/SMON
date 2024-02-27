@@ -36,6 +36,7 @@
     if (self) {
         _direction = direction;
         _status = Msg_Status_Init;
+        _source = Msg_Source_Unkown;
         _showReadReceipt = YES;
         _sameToNextMsgSender = NO;
         _showAvatar = YES;
@@ -54,6 +55,18 @@
 
 - (BOOL)canForward {
     return YES;
+}
+
+- (BOOL)canLongPress {
+    return YES;
+}
+
+- (BOOL)shouldHide {
+    return NO;
+}
+
+- (BOOL)customReloadCellWithNewMsg:(V2TIMMessage *)newMessage {
+    return NO;
 }
 
 - (CGSize)msgStatusSize {
