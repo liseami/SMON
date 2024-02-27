@@ -26,6 +26,8 @@ struct AppWarningView: View {
                     let selected = agreeList.contains(text)
                     HStack(spacing: 16) {
                         Text(text)
+                            .font(.subheadline)
+                            .foregroundColor(Color.XMDesgin.f1)
                         Spacer()
                         Image(systemName: "circle")
                             .overlay(alignment: .center) {
@@ -58,13 +60,14 @@ struct AppWarningView: View {
                 .onTapGesture(perform: {
                     if agreeList.count != warnings.count {
                         shake.toggle()
+                        Apphelper.shared.mada(style: .heavy)
                     } else {
                         Apphelper.shared.findGlobalNavigationController()?.pushViewController(LoginView_PhoneNumber().host(), animated: true)
                     }
 
                 })
                 .rotationEffect(.degrees(-90))
-                .changeEffect(.shake, value: shake)
+                .changeEffect(.shake(rate: .fast), value: shake)
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .padding()
