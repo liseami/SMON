@@ -1,152 +1,23 @@
 PODS:
   - Alamofire (5.8.1)
-  - Bolts/Tasks (1.9.1)
-  - Godzippa (2.1.1)
-  - IGListDiffKit (4.0.0)
-  - im-uikit-tob (1.9.0):
-    - imsdk-tob (= 1.9.0)
-    - Masonry
-    - MJRefresh
-    - SDWebImage
-  - imsdk-tob (1.9.0):
-    - imsdk-tob/Core (= 1.9.0)
-  - imsdk-tob/Core (1.9.0):
-    - Bolts/Tasks
-    - IGListDiffKit
-    - imsdk-tob/Feature_EssentialPB
-    - libextobjc
-    - Mantle
-    - MMKV
-    - OneKit/ByteDanceKit
-    - OneKit/ByteDanceKit/Foundation
-    - OneKit/OKModel
-    - OneKit/Reachability
-    - Protobuf
-    - RangersAPM/APMLog
-    - RangersAPM/CN
-    - RangersAppLog/Core
-    - RangersAppLog/Host/CN
-    - RSSwizzle
-    - TTNetworkManager
-    - TTSDK/Uploader (> 1.28)
-    - WCDB (~> 1.0.6)
-    - YYCache
-  - imsdk-tob/Feature_EssentialPB (1.9.0):
-    - Protobuf (= 3.21.9)
   - Introspect (0.12.0)
   - KakaJSON (1.1.2)
   - Kingfisher (7.11.0)
   - Lantern (1.1.5)
-  - libextobjc (0.6):
-    - libextobjc/EXTADT (= 0.6)
-    - libextobjc/EXTConcreteProtocol (= 0.6)
-    - libextobjc/EXTKeyPathCoding (= 0.6)
-    - libextobjc/EXTNil (= 0.6)
-    - libextobjc/EXTSafeCategory (= 0.6)
-    - libextobjc/EXTScope (= 0.6)
-    - libextobjc/EXTSelectorChecking (= 0.6)
-    - libextobjc/EXTSynthesize (= 0.6)
-    - "libextobjc/NSInvocation+EXT (= 0.6)"
-    - "libextobjc/NSMethodSignature+EXT (= 0.6)"
-    - libextobjc/RuntimeExtensions (= 0.6)
-    - libextobjc/UmbrellaHeader (= 0.6)
-  - libextobjc/EXTADT (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTConcreteProtocol (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTKeyPathCoding (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTNil (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSafeCategory (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTScope (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSelectorChecking (0.6):
-    - libextobjc/RuntimeExtensions
-  - libextobjc/EXTSynthesize (0.6):
-    - libextobjc/RuntimeExtensions
-  - "libextobjc/NSInvocation+EXT (0.6)":
-    - libextobjc/RuntimeExtensions
-  - "libextobjc/NSMethodSignature+EXT (0.6)":
-    - libextobjc/RuntimeExtensions
-  - libextobjc/RuntimeExtensions (0.6)
-  - libextobjc/UmbrellaHeader (0.6)
   - lottie-ios (4.4.1)
-  - Mantle (2.2.0):
-    - Mantle/extobjc (= 2.2.0)
-  - Mantle/extobjc (2.2.0)
   - Masonry (1.1.0)
-  - MJRefresh (3.7.6)
-  - MMKV (1.3.3):
-    - MMKVCore (~> 1.3.3)
-  - MMKVCore (1.3.3)
   - Moya (15.0.0):
     - Moya/Core (= 15.0.0)
   - Moya/Combine (15.0.0):
     - Moya/Core
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
-  - OneKit/BaseKit (1.4.2):
-    - OneKit/Service
-  - OneKit/boringssl (1.4.2):
-    - OneKit/Service
-  - OneKit/ByteDanceKit (1.4.2):
-    - OneKit/ByteDanceKit/Foundation (= 1.4.2)
-    - OneKit/ByteDanceKit/UIKit (= 1.4.2)
-    - OneKit/Service
-  - OneKit/ByteDanceKit/Foundation (1.4.2):
-    - OneKit/Service
-  - OneKit/ByteDanceKit/UIKit (1.4.2):
-    - OneKit/ByteDanceKit/Foundation
-    - OneKit/Service
-  - OneKit/OKModel (1.4.2):
-    - OneKit/Service
-  - OneKit/Reachability (1.4.2):
-    - OneKit/Service
-  - OneKit/Section (1.4.2)
-  - OneKit/Service (1.4.2)
-  - OneKit/StartUp (1.4.2):
-    - OneKit/Reachability
-    - OneKit/Section
-    - OneKit/Service
   - PanModal (1.2.7)
-  - Protobuf (3.21.9)
-  - RangersAPM/Above (3.9.0)
-  - RangersAPM/APMLog (3.9.0):
-    - RangersAPM/CloudCommand
-    - RangersAPM/Core
-    - RangersAPM/HMD
-    - RangersAPM/Zip
-  - RangersAPM/CloudCommand (3.9.0):
-    - RangersAPM/Core
-    - RangersAPM/HMD
-  - RangersAPM/CN (3.9.0):
-    - RangersAPM/Core
-    - RangersAPM/Public
-  - RangersAPM/Core (3.9.0)
-  - RangersAPM/HMD (3.9.0):
-    - RangersAPM/Core
-    - RangersAPM/Public
-  - RangersAPM/Public (3.9.0):
-    - RangersAPM/Above
-    - RangersAPM/Core
-    - RangersAPM/Zyone
-  - RangersAPM/Zip (3.9.0)
-  - RangersAPM/Zyone (3.9.0)
-  - RangersAppLog/Core (6.13.2):
-    - RangersAppLog/Encryptor
-  - RangersAppLog/Encryptor (6.13.2):
-    - OneKit/BaseKit
-  - RangersAppLog/Host/CN (6.13.2):
-    - RangersAppLog/Core
-  - RSSwizzle (0.1.0)
-  - SDWebImage (5.18.11):
-    - SDWebImage/Core (= 5.18.11)
-  - SDWebImage/Core (5.18.11)
+  - ReactiveObjC (3.1.1)
+  - SDWebImage (5.19.0):
+    - SDWebImage/Core (= 5.19.0)
+  - SDWebImage/Core (5.19.0)
   - SPAlert (5.1.8)
-  - SQLiteRepairKit (1.2.2):
-    - WCDBOptimizedSQLCipher (~> 1.2.0)
   - SwifterSwift (6.0.0):
     - SwifterSwift/AppKit (= 6.0.0)
     - SwifterSwift/Combine (= 6.0.0)
@@ -182,28 +53,174 @@ PODS:
   - SwifterSwift/WebKit (6.0.0)
   - SwiftyJSON (5.0.1)
   - Tagly (0.1.1)
-  - TTNetworkManager (5.0.29.27):
-    - Godzippa
-    - OneKit/BaseKit
-    - OneKit/boringssl
-    - OneKit/StartUp (>= 1.3.11)
-  - TTSDK/Core (1.36.2.5):
-    - RangersAppLog/Core (~> 6.13.0)
-    - RangersAppLog/Host/CN (~> 6.13.0)
-  - TTSDK/Tools (1.36.2.5)
-  - TTSDK/Uploader (1.36.2.5):
-    - TTSDK/Core
-    - TTSDK/Tools
-    - TTSDK/VCN
-  - TTSDK/VCN (1.36.2.5)
-  - WCDB (1.0.7.5):
-    - SQLiteRepairKit (~> 1.2.0)
-    - WCDBOptimizedSQLCipher (~> 1.2.0)
-  - WCDBOptimizedSQLCipher (1.2.1)
-  - YYCache (1.0.4)
+  - TIMCommon (7.5.4864):
+    - TIMCommon/BaseCell (= 7.5.4864)
+    - TIMCommon/BaseCellData (= 7.5.4864)
+    - TIMCommon/CommonModel (= 7.5.4864)
+    - TIMCommon/UI_Classic (= 7.5.4864)
+    - TIMCommon/UI_Minimalist (= 7.5.4864)
+  - TIMCommon/BaseCell (7.5.4864):
+    - TIMCommon/BaseCellData
+  - TIMCommon/BaseCellData (7.5.4864):
+    - TIMCommon/CommonModel
+  - TIMCommon/CommonModel (7.5.4864):
+    - Masonry
+    - ReactiveObjC
+    - SDWebImage
+    - TUICore (= 7.5.4864)
+    - TXIMSDK_Plus_iOS (= 7.5.4864)
+  - TIMCommon/UI_Classic (7.5.4864):
+    - TIMCommon/BaseCell
+  - TIMCommon/UI_Minimalist (7.5.4864):
+    - TIMCommon/BaseCell
+  - TUICallEngine/TRTC (1.9.0.680):
+    - TXIMSDK_Plus_iOS (~> 7.5.4852)
+    - TXLiteAVSDK_TRTC (~> 11.4.14445)
+  - TUICallKit (1.9.0.680):
+    - Masonry
+    - TUICallKit/TRTC (= 1.9.0.680)
+    - TUICore (~> 7.5.4852)
+  - TUICallKit/TRTC (1.9.0.680):
+    - Masonry
+    - TUICallEngine/TRTC (~> 1.9.0.680)
+    - TUICore (~> 7.5.4852)
+    - TXLiteAVSDK_TRTC
+  - TUIChat/BaseCell (7.5.4864):
+    - TUIChat/BaseCellData
+  - TUIChat/BaseCellData (7.5.4864):
+    - TUIChat/BaseCellData/Base (= 7.5.4864)
+    - TUIChat/BaseCellData/Chat (= 7.5.4864)
+    - TUIChat/BaseCellData/Custom (= 7.5.4864)
+    - TUIChat/BaseCellData/Emoji (= 7.5.4864)
+    - TUIChat/BaseCellData/Reply (= 7.5.4864)
+  - TUIChat/BaseCellData/Base (7.5.4864):
+    - TUIChat/CommonModel
+  - TUIChat/BaseCellData/Chat (7.5.4864):
+    - TUIChat/BaseCellData/Base
+  - TUIChat/BaseCellData/Custom (7.5.4864):
+    - TUIChat/BaseCellData/Chat
+  - TUIChat/BaseCellData/Emoji (7.5.4864):
+    - TUIChat/BaseCellData/Custom
+  - TUIChat/BaseCellData/Reply (7.5.4864):
+    - TUIChat/BaseCellData/Custom
+  - TUIChat/BaseDataProvider (7.5.4864):
+    - TUIChat/BaseDataProvider/Base (= 7.5.4864)
+    - TUIChat/BaseDataProvider/Impl (= 7.5.4864)
+  - TUIChat/BaseDataProvider/Base (7.5.4864):
+    - TUIChat/BaseCellData
+  - TUIChat/BaseDataProvider/Impl (7.5.4864):
+    - TUIChat/BaseCellData
+    - TUIChat/BaseDataProvider/Base
+  - TUIChat/CommonModel (7.5.4864):
+    - Masonry
+    - ReactiveObjC
+    - SDWebImage
+    - TIMCommon (= 7.5.4864)
+    - TUIChat/VoiceConvert
+    - TUICore (= 7.5.4864)
+    - TXIMSDK_Plus_iOS (= 7.5.4864)
+  - TUIChat/CommonUI (7.5.4864):
+    - TUIChat/CommonUI/Camera (= 7.5.4864)
+    - TUIChat/CommonUI/Pendency (= 7.5.4864)
+    - TUIChat/CommonUI/Pop (= 7.5.4864)
+  - TUIChat/CommonUI/Camera (7.5.4864):
+    - TUIChat/BaseCell
+    - TUIChat/BaseDataProvider
+  - TUIChat/CommonUI/Pendency (7.5.4864):
+    - TUIChat/BaseCell
+    - TUIChat/BaseDataProvider
+  - TUIChat/CommonUI/Pop (7.5.4864):
+    - TUIChat/BaseCell
+    - TUIChat/BaseDataProvider
+  - TUIChat/UI_Minimalist (7.5.4864):
+    - TUIChat/UI_Minimalist/Cell (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Chat (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Header (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Input (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Service (= 7.5.4864)
+  - TUIChat/UI_Minimalist/Cell (7.5.4864):
+    - TUIChat/UI_Minimalist/Cell/Base (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Cell/Chat (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Cell/Custom (= 7.5.4864)
+    - TUIChat/UI_Minimalist/Cell/Reply (= 7.5.4864)
+  - TUIChat/UI_Minimalist/Cell/Base (7.5.4864):
+    - TUIChat/CommonUI
+  - TUIChat/UI_Minimalist/Cell/Chat (7.5.4864):
+    - TUIChat/UI_Minimalist/Cell/Base
+  - TUIChat/UI_Minimalist/Cell/Custom (7.5.4864):
+    - TUIChat/UI_Minimalist/Cell/Chat
+  - TUIChat/UI_Minimalist/Cell/Reply (7.5.4864):
+    - TUIChat/UI_Minimalist/Cell/Custom
+  - TUIChat/UI_Minimalist/Chat (7.5.4864):
+    - TUIChat/UI_Minimalist/Input
+  - TUIChat/UI_Minimalist/Header (7.5.4864):
+    - TUIChat/UI_Minimalist/Service
+  - TUIChat/UI_Minimalist/Input (7.5.4864):
+    - TUIChat/UI_Minimalist/Cell
+  - TUIChat/UI_Minimalist/Service (7.5.4864):
+    - TUIChat/UI_Minimalist/Chat
+  - TUIChat/VoiceConvert (7.5.4864)
+  - TUIConversation/BaseCell (7.5.4864):
+    - TUIConversation/BaseCell/CellData (= 7.5.4864)
+    - TUIConversation/BaseCell/CellUI (= 7.5.4864)
+  - TUIConversation/BaseCell/CellData (7.5.4864):
+    - TUIConversation/CommonModel
+  - TUIConversation/BaseCell/CellUI (7.5.4864):
+    - TUIConversation/BaseCell/CellData
+  - TUIConversation/BaseDataProvider (7.5.4864):
+    - TUIConversation/BaseCell
+  - TUIConversation/CommonModel (7.5.4864):
+    - Masonry
+    - ReactiveObjC
+    - TIMCommon (= 7.5.4864)
+    - TUICore (= 7.5.4864)
+    - TXIMSDK_Plus_iOS (= 7.5.4864)
+  - TUIConversation/UI_Minimalist (7.5.4864):
+    - TUIConversation/UI_Minimalist/Cell (= 7.5.4864)
+    - TUIConversation/UI_Minimalist/DataProvider (= 7.5.4864)
+    - TUIConversation/UI_Minimalist/Header (= 7.5.4864)
+    - TUIConversation/UI_Minimalist/Service (= 7.5.4864)
+    - TUIConversation/UI_Minimalist/UI (= 7.5.4864)
+  - TUIConversation/UI_Minimalist/Cell (7.5.4864):
+    - TUIConversation/UI_Minimalist/Cell/CellData (= 7.5.4864)
+    - TUIConversation/UI_Minimalist/Cell/CellUI (= 7.5.4864)
+  - TUIConversation/UI_Minimalist/Cell/CellData (7.5.4864):
+    - TUIConversation/BaseDataProvider
+  - TUIConversation/UI_Minimalist/Cell/CellUI (7.5.4864):
+    - TUIConversation/UI_Minimalist/Cell/CellData
+  - TUIConversation/UI_Minimalist/DataProvider (7.5.4864):
+    - TUIConversation/UI_Minimalist/Cell
+  - TUIConversation/UI_Minimalist/Header (7.5.4864):
+    - TUIConversation/UI_Minimalist/Service
+  - TUIConversation/UI_Minimalist/Service (7.5.4864):
+    - TUIConversation/UI_Minimalist/UI
+  - TUIConversation/UI_Minimalist/UI (7.5.4864):
+    - TUIConversation/UI_Minimalist/DataProvider
+  - TUICore (7.5.4864):
+    - ReactiveObjC
+    - SDWebImage
+    - TUICore/ImSDK_Plus (= 7.5.4864)
+  - TUICore/Base (7.5.4864):
+    - ReactiveObjC
+    - SDWebImage
+  - TUICore/ImSDK_Plus (7.5.4864):
+    - ReactiveObjC
+    - SDWebImage
+    - TUICore/Base
+    - TXIMSDK_Plus_iOS (= 7.5.4864)
+  - TUIOfflinePush (7.5.4864):
+    - TUIOfflinePush/APNS (= 7.5.4864)
+  - TUIOfflinePush/APNS (7.5.4864):
+    - TUIOfflinePush/Base
+  - TUIOfflinePush/Base (7.5.4864):
+    - TUICore (= 7.5.4864)
+    - TXIMSDK_Plus_iOS (= 7.5.4864)
+  - TXIMSDK_Plus_iOS (7.5.4864)
+  - TXLiteAVSDK_TRTC (11.4.14571):
+    - TXLiteAVSDK_TRTC/TRTC (= 11.4.14571)
+  - TXLiteAVSDK_TRTC/TRTC (11.4.14571)
 
 DEPENDENCIES:
-  - im-uikit-tob (= 1.9.0)
   - Introspect
   - KakaJSON
   - Kingfisher
@@ -216,83 +233,64 @@ DEPENDENCIES:
   - SwifterSwift
   - SwiftyJSON
   - Tagly
+  - TUICallKit
+  - TUIChat/UI_Minimalist
+  - TUIConversation/UI_Minimalist
+  - TUIOfflinePush
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
-    - Bolts
-    - Godzippa
-    - IGListDiffKit
     - Introspect
     - KakaJSON
     - Kingfisher
     - Lantern
-    - libextobjc
     - lottie-ios
-    - Mantle
     - Masonry
-    - MJRefresh
-    - MMKV
-    - MMKVCore
     - Moya
     - PanModal
-    - Protobuf
-    - RSSwizzle
+    - ReactiveObjC
     - SDWebImage
     - SPAlert
-    - SQLiteRepairKit
     - SwifterSwift
     - SwiftyJSON
     - Tagly
-    - WCDB
-    - WCDBOptimizedSQLCipher
-    - YYCache
-  https://github.com/volcengine/volcengine-specs.git:
-    - im-uikit-tob
-    - imsdk-tob
-    - OneKit
-    - RangersAPM
-    - RangersAppLog
-    - TTNetworkManager
-    - TTSDK
+    - TIMCommon
+    - TUICallEngine
+    - TUICallKit
+    - TUIChat
+    - TUIConversation
+    - TUICore
+    - TUIOfflinePush
+    - TXIMSDK_Plus_iOS
+    - TXLiteAVSDK_TRTC
 
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
-  Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
-  Godzippa: f438af100364a775ef0707d29ab152c356375fbf
-  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
-  im-uikit-tob: db98556eaec490a19584eda58b79a1db60bce827
-  imsdk-tob: ca78fac4d8b417f13cf10e3c8a19076f48c5f3fc
   Introspect: b66b675de8a85d9ef832f3a710d8e3c7db186884
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   Lantern: b192e7146c6d04e15e627f37281254a6a8593703
-  libextobjc: aed8b7d2b07f511c1a7ecaacb33ea03e327c69b7
   lottie-ios: e047b1d2e6239b787cc5e9755b988869cf190494
-  Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MJRefresh: 2fe7fb43a5167ceda20bb7e63f130c04fd1814a5
-  MMKV: f902fb6719da13c2ab0965233d8963a59416f911
-  MMKVCore: d26e4d3edd5cb8588c2569222cbd8be4231374e9
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
-  OneKit: 05d59eb122e247640c35ceb28b300ae27e89cb88
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
-  Protobuf: 02524ec14183fe08fb259741659e79683788158b
-  RangersAPM: d875cf40549867fd7aab3cab2e4006a89c8c96c8
-  RangersAppLog: aca2ba1dd540ae001120f5fe1e391aafc82aa1c7
-  RSSwizzle: d561958f595028bfcef98c7d55c318b3878a61c6
-  SDWebImage: a3ba0b8faac7228c3c8eadd1a55c9c9fe5e16457
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
+  SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
   SPAlert: 7027ed9df9a2ba8202cab39fd05b53e110f48a99
-  SQLiteRepairKit: 35aaae5a8838adb85f5b1eb4d796055be6060a4b
   SwifterSwift: 66843dc594f8fb890f5543c22545921d44acc004
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   Tagly: deb459c698853a3fffce027fedb92dcb7cf5c68e
-  TTNetworkManager: 28f5c1335c76bb43ed585b53087f9cdb338ee1cb
-  TTSDK: 52ee1a9675e1f313fa9102475c7331268dca7524
-  WCDB: 8e90babdeb7784c569353a4bd22a66c0a175a882
-  WCDBOptimizedSQLCipher: baf44493b0c7a3d49e97bc5b64a3856f6428ddd1
-  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  TIMCommon: f397080f2c85adaf661716939d55efbb09b1c306
+  TUICallEngine: cc1d449ebdc08d356539e6986db359569bf4d968
+  TUICallKit: c838e941c29414fb06e99263a9df1f73b177292e
+  TUIChat: 89a6d5f6ea9e02a5c545704e84ee9f5f985a21ea
+  TUIConversation: edcad50c9ed497d8fd77540e788497b6436496f2
+  TUICore: 6a4e13b9607b7618ad252321a49bd64646a92381
+  TUIOfflinePush: 909c5e67cd45d4ba11f3cf8a13e439f80078a94d
+  TXIMSDK_Plus_iOS: 51108658d2e277d85682d9e51d668632a1913591
+  TXLiteAVSDK_TRTC: 5be9b8b610608ad24525e88ac0c7ec5f146523d5
 
-PODFILE CHECKSUM: d55daaa8023c5e9844e4a911f3a14fe5da8c2d24
+PODFILE CHECKSUM: 190dd5911ef1d22fb004ad0edac07f81024a6b2a
 
 COCOAPODS: 1.12.1

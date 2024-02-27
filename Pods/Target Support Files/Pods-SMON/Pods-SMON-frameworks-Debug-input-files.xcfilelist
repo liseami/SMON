@@ -1,4 +1,24 @@
 ${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks.sh
-${PODS_ROOT}/TTSDK/TTSDK/boringssl/boringssl.framework
-${PODS_ROOT}/TTSDK/TTSDK/boringssl/crypto.framework
-${PODS_ROOT}/TTSDK/TTSDK/VCNVCloudNetwork/products/framework/libvcn.framework
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Introspect/Introspect.framework
+${BUILT_PRODUCTS_DIR}/KakaJSON/KakaJSON.framework
+${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
+${BUILT_PRODUCTS_DIR}/Lantern/Lantern.framework
+${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework
+${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
+${BUILT_PRODUCTS_DIR}/PanModal/PanModal.framework
+${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+${BUILT_PRODUCTS_DIR}/SPAlert/SPAlert.framework
+${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/TIMCommon/TIMCommon.framework
+${BUILT_PRODUCTS_DIR}/TUIChat/TUIChat.framework
+${BUILT_PRODUCTS_DIR}/TUIConversation/TUIConversation.framework
+${BUILT_PRODUCTS_DIR}/TUICore/TUICore.framework
+${BUILT_PRODUCTS_DIR}/TUIOfflinePush/TUIOfflinePush.framework
+${PODS_ROOT}/TXIMSDK_Plus_iOS/ImSDK_Plus.framework
+${BUILT_PRODUCTS_DIR}/Tagly/Tagly.framework
+${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework
+${PODS_XCFRAMEWORKS_BUILD_DIR}/TXLiteAVSDK_TRTC/TRTC/TXSoundTouch.framework/TXSoundTouch
+${PODS_XCFRAMEWORKS_BUILD_DIR}/TXLiteAVSDK_TRTC/TRTC/TXFFmpeg.framework/TXFFmpeg

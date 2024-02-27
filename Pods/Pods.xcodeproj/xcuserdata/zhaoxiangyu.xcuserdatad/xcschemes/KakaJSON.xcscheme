@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "25FEE10C6E3A039D9C04BB397323B94A"
-               BuildableName = "libKakaJSON.a"
+               BuildableName = "KakaJSON.framework"
                BlueprintName = "KakaJSON"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

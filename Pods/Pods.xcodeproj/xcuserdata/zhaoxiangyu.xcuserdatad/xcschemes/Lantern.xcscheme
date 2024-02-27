@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "004C0B5925944E135432220F95C6B0E9"
-               BuildableName = "libLantern.a"
+               BuildableName = "Lantern.framework"
                BlueprintName = "Lantern"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

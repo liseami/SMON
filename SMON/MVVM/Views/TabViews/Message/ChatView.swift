@@ -8,23 +8,24 @@
 import SwiftUI
 
 struct ChatView: View {
-    let conversation: BIMConversation
+    
     var body: some View {
-        ChatViewContainer(conversation: conversation)
-            .frame(maxWidth: .infinity)
-            .clipShape(RoundedRectangle(cornerRadius: 24))
-            .ignoresSafeArea(.keyboard)
-            .navigationTitle("用户名")
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    XMDesgin.XMIcon(iconName: "system_more")
-                }
-            }
+        EmptyView()
+//        ChatViewContainer(conversation: conversation)
+//            .frame(maxWidth: .infinity)
+//            .clipShape(RoundedRectangle(cornerRadius: 24))
+//            .ignoresSafeArea(.keyboard)
+//            .navigationTitle("用户名")
+//            .toolbar {
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    XMDesgin.XMIcon(iconName: "system_more")
+//                }
+//            }
     }
 }
 
 #Preview {
     NavigationView(content: {
-        ChatView(conversation: BIMConversation())
+//        ChatView(conversation: BIMConversation())
     })
 }
