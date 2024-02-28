@@ -48,8 +48,7 @@ extension View {
                     .foregroundStyle(Color.XMDesgin.f2)
             }
             .padding(.all)
-            .padding(.leading)
-            .padding(.bottom, 12)
+            .padding(.bottom, 22)
             .moveTo(alignment: .bottomLeading)
         }
     }

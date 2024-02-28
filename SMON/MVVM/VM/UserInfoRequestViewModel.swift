@@ -16,7 +16,7 @@ class UserInfoRequestViewModel: ObservableObject {
     @Published var gender : Int = 0
     @Published var relationHope : Int = 0
     @Published var showCompleteView : Bool = false
-    enum PageStep {
+    enum PageStep :CaseIterable {
         case photo
         case morephoto
         case brithday

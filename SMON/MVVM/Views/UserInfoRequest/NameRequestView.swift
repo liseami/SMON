@@ -47,7 +47,8 @@ struct InfoRequestView<Content>: View where Content: View {
         .statusBarHidden(false)
         .padding(.horizontal)
         .font(.title)
-        .padding(.top, 40)
+        .padding(.top, 60)
+        .padding(.bottom, 16)
         .frame(maxHeight: .infinity, alignment: .top)
     }
 }
