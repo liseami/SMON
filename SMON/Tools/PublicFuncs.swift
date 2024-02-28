@@ -16,6 +16,18 @@ class Apphelper {
         impactFeedback.impactOccurred()
     }
 
+    func getWindow() -> UIWindow? {
+        let connectedScenes = UIApplication.shared.connectedScenes
+        for scene in connectedScenes {
+            if let sceneDelegate = scene.delegate as? UIWindowSceneDelegate {
+                if let window = sceneDelegate.window {
+                    return window
+                }
+            }
+        }
+        return nil
+    }
+    
     func findGlobalNavigationController() -> UINavigationController? {
         // 获取主窗口场景
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

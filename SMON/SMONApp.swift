@@ -15,17 +15,16 @@ struct SMONApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-//                if userManager.user.isLogin {
-//                    // 需要进入资料流程
-//                    if userManager.user.needInfo {
-//                        UserInfoRequestMainView()
-//                    } else {
-//                        MainView()
-//                    }
-//                } else {
-//                    LoginMainView()
-//                }
-                UserInfoRequestMainView()
+                if userManager.user.isLogin {
+                    // 需要进入资料流程
+                    if userManager.user.needInfo {
+                        UserInfoRequestMainView()
+                    } else {
+                        MainView()
+                    }
+                } else {
+                    LoginMainView()
+                }
             }
             .tint(Color.XMDesgin.f1)
             .environment(\.colorScheme, .dark)

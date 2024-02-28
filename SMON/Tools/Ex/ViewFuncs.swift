@@ -34,6 +34,24 @@ extension View {
     func autoOpenKeyboard() -> some View {
         return modifier(KeyBoardFocusModifier())
     }
+
+    func moveTo(alignment: SwiftUI.Alignment) -> some View {
+        return frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
+    }
+    
+    func canSkip(action:@escaping()->()) -> some View {
+        self.overlay {
+            XMDesgin.XMButton {
+                action()
+            } label: {
+                Text("跳过").font(.body)
+                    .foregroundStyle(Color.XMDesgin.f2)
+            }
+            .padding(.all, 36)
+            .moveTo(alignment: .bottomLeading)
+        }
+    }
+
 }
 
 struct ShakeViewModifier: ViewModifier {
@@ -46,15 +64,15 @@ struct ShakeViewModifier: ViewModifier {
     }
 
     func body(content: Content) -> some View {
-        Button(action: {
-            Apphelper.shared.mada(style: .rigid)
+        XMDesgin.XMButton {
             guard enable else { shake += 1; return }
             action()
-        }) {
+        } label: {
             content
         }
         .changeEffect(.shake(rate: .fast), value: shake)
     }
+    
 }
 
 struct KeyBoardFocusModifier: ViewModifier {

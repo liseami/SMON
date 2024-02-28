@@ -15,6 +15,9 @@ class UserManager: ObservableObject {
 
     init() {
         user = loadUserData()
+        #if DEBUG
+        user = .init(userId: "", token: "", needInfo: true)
+        #endif
     }
 
     func login(userId: String, token: String) {

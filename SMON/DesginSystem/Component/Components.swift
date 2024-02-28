@@ -62,12 +62,9 @@ enum XMDesgin {
         }
 
         var body: some View {
-            Button(action: {
+            XMDesgin.XMButton {
                 action()
-                onTap.toggle()
-                Apphelper.shared.mada(style: .light)
-
-            }, label: {
+            } label: {
                 HStack(spacing: 2) {
                     XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     Text(text)
@@ -79,8 +76,7 @@ enum XMDesgin {
                 .padding(.vertical, 8)
                 .background(Rectangle().foregroundColor(backColor))
                 .clipShape(RoundedRectangle(cornerRadius: 99))
-            })
-            .conditionalEffect(.pushDown, condition: onTap)
+            }
         }
     }
 
@@ -88,21 +84,21 @@ enum XMDesgin {
         var backColor: Color
         var fColor: Color
         var iconName: String
+        var enable: Bool
         var action: () -> ()
-        @State var onTap: Int = 0
-        init(backColor: Color = .black, fColor: Color = .white, iconName: String = "home_bell", action: @escaping () -> () = {}) {
+
+        init(backColor: Color = .black, fColor: Color = .white, iconName: String = "home_bell", enable: Bool = true, action: @escaping () -> ()) {
             self.backColor = backColor
             self.fColor = fColor
+            self.enable = enable
             self.iconName = iconName
             self.action = action
         }
 
         var body: some View {
-            Button(action: {
-                onTap += 1
-                Apphelper.shared.mada(style: .light)
+            XMDesgin.XMButton(enable: enable) {
                 action()
-            }) {
+            } label: {
                 Circle()
                     .fill(backColor)
                     .frame(width: 58, height: 58)
@@ -110,7 +106,115 @@ enum XMDesgin {
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     }
             }
+        }
+    }
+
+    struct XMButton<Content>: View where Content: View {
+        var enable: Bool
+        var action: () -> ()
+        var label: () -> Content
+        @State var onTap: Int = 0
+        @State var shake: Int = 0
+        init(enable: Bool = true, action: @escaping () -> (), @ViewBuilder label: @escaping () -> Content) {
+            self.enable = enable
+            self.action = action
+            self.label = label
+        }
+
+        var body: some View {
+            Button {
+                onTap += 1
+                Apphelper.shared.mada(style: .light)
+                guard enable else { shake += 1
+                    Apphelper.shared.mada(style: .heavy)
+                    return
+                }
+                action()
+            } label: {
+                label()
+            }
+            .opacity(enable ? 1 : 0.66)
+            .conditionalEffect(.pushDown, condition: true)
             .changeEffect(.glow(color: .white), value: self.onTap)
+            .changeEffect(.shake(rate: .fast), value: shake)
+        }
+    }
+
+    struct XMMainBtn: View {
+        var fColor: Color
+        var backColor: Color
+        var iconName: String
+        var text: String
+        var action: () -> ()
+        @State var onTap: Bool = false
+        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "home_bell", text: String = "text", action: @escaping () -> ()) {
+            self.fColor = fColor
+            self.backColor = backColor
+            self.iconName = iconName
+            self.text = text
+            self.action = action
+        }
+
+        var body: some View {
+            XMDesgin.XMButton {
+                action()
+            } label: {
+                HStack(spacing: 2) {
+                    XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                    Text(text)
+                        .font(.body)
+                        .bold()
+                        .foregroundStyle(fColor)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 16)
+                .background(Rectangle().foregroundColor(backColor))
+                .clipShape(RoundedRectangle(cornerRadius: 99))
+            }
+        }
+    }
+
+    struct SelectionTable: View {
+        var text: String
+        var selected: Bool
+        var action: () -> ()
+
+        init(text: String, selected: Bool = false, action: @escaping () -> ()) {
+            self.text = text
+            self.selected = selected
+            self.action = action
+        }
+
+        var body: some View {
+            XMDesgin.XMButton {
+                action()
+
+            } label: {
+                HStack(spacing: 24) {
+                    Text(LocalizedStringKey(text))
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color.XMDesgin.f1)
+                        .tint(Color.XMDesgin.main)
+                        .environment(\.openURL, OpenURLAction { _ in
+                            // ... set state that will cause your web view to be loaded...
+                            .handled
+                        })
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    XMDesgin.XMIcon(systemName: "circle")
+                        .overlay(alignment: .center) {
+                            Circle()
+                                .fill(Color.XMDesgin.f1)
+                                .frame(width: 10, height: 10)
+                                .ifshow(show: selected)
+                        }
+                        .foregroundColor(Color.XMDesgin.f1)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 16)
+                .background(Color.XMDesgin.b1)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
         }
     }
 }
@@ -120,6 +224,8 @@ enum XMDesgin {
         XMDesgin.XMIcon(iconName: "tabbar_home")
         XMDesgin.XMIcon(systemName: "flag.badge.ellipsis")
         XMDesgin.SmallBtn {}
-        XMDesgin.CircleBtn(backColor: .white, fColor: .black, iconName: "home_bell") {}
+        XMDesgin.CircleBtn(backColor: .white, fColor: .black, iconName: "home_bell", enable: true) {}
+        XMDesgin.SelectionTable(text: "", selected: false) {}
+        XMDesgin.XMMainBtn {}
     }
 }

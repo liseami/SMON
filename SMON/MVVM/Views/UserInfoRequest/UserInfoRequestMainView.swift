@@ -11,17 +11,30 @@ struct UserInfoRequestMainView: View {
     @StateObject var vm: UserInfoRequestViewModel = .init()
     var body: some View {
         NavigationStack(path: $vm.presentedSteps, root: {
-            Text("1234")
-                .onTapGesture {
-                    vm.presentedSteps.append(.photo)
-                }
+            NameRequestView()
+                .environmentObject(vm)
                 .navigationDestination(for: UserInfoRequestViewModel.PageStep.self) { step in
-                    switch step {
-                    case .photo: NameRequestView()
-                            .environmentObject(vm)
+                    Group {
+                        switch step {
+                        case .photo: AvatarRequestView()
+                        case .morephoto: MorePhotoRequestView()
+                        case .brithday: BrithdayDayRequestView()
+                        case .sex: SexRequestView()
+                        case .relationhope: RelationHopeRequestView()
+                        case .hobby: HobbyRequestView()
+                        case .height: HeightRequestView()
+                        case .drink: DrinkRequestView()
+                        case .smoke: SmokeRequestView()
+                        case .bio: BioRequestView()
+                        }
                     }
+                    .navigationBarBackButtonHidden()
+                    .environmentObject(vm)
                 }
-                
+        })
+        .fullScreenCover(isPresented: $vm.showCompleteView, content: {
+            RequestCompleteView()
+                .environment(\.colorScheme, .dark)
         })
     }
 }

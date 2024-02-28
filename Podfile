@@ -19,6 +19,7 @@ pod 'Tagly'# 标签云
 pod 'SPAlert'# 完成弹窗
 pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情
+pod 'AliyunOSSiOS' #阿里云OSS
 # 腾讯IM -——————————————————
 # 集成聊天功能
 pod 'TUIChat/UI_Classic'

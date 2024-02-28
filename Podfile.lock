@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.8.1)
+  - AliyunOSSiOS (2.10.18)
   - Introspect (0.12.0)
   - KakaJSON (1.1.2)
   - Kingfisher (7.11.0)
@@ -185,6 +186,7 @@ PODS:
   - TXIMSDK_Plus_iOS (7.8.5483)
 
 DEPENDENCIES:
+  - AliyunOSSiOS
   - Introspect
   - KakaJSON
   - Kingfisher
@@ -203,6 +205,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AliyunOSSiOS
     - Introspect
     - KakaJSON
     - Kingfisher
@@ -225,6 +228,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
+  AliyunOSSiOS: e683c1b1faa0657b5cd02de733628cf996f4cd93
   Introspect: b66b675de8a85d9ef832f3a710d8e3c7db186884
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
@@ -245,6 +249,6 @@ SPEC CHECKSUMS:
   TUICore: 8e855f83a1b7a04a57dec07c1b71fae83c871d19
   TXIMSDK_Plus_iOS: 9559f6aebc6d69314521d17235bdb3ab58599be3
 
-PODFILE CHECKSUM: 2d46148016b9f7eddf0433bd5568611d676bec21
+PODFILE CHECKSUM: 21274ed104bf91ec163bf7a525a00cf14ba747be
 
 COCOAPODS: 1.12.1

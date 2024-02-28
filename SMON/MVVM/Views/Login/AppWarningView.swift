@@ -32,24 +32,8 @@ struct AppWarningView: View {
                     ForEach(warnings.indices, id: \.self) { index in
                         let text = warnings[index]
                         let selected = agreeList.contains(text)
-                        HStack(spacing: 16) {
-                            Text(LocalizedStringKey(text))
-                                .font(.subheadline)
-                                .foregroundColor(Color.XMDesgin.f1)
-                                .tint(Color.XMDesgin.main)
-                            Spacer()
-                            Image(systemName: "circle")
-                                .overlay(alignment: .center) {
-                                    Circle()
-                                        .fill(Color.XMDesgin.f1)
-                                        .frame(width: 10, height: 10)
-                                        .ifshow(show: selected)
-                                }
-                        }
-                        .padding(.all)
-                        .background(Color.XMDesgin.b1)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                        .onTapGesture {
+
+                        XMDesgin.SelectionTable(text: text, selected: selected) {
                             Apphelper.shared.mada(style: .soft)
                             if selected {
                                 agreeList.removeAll { target in
