@@ -48,12 +48,11 @@ struct AppWarningView: View {
                     }
                 })
 
-                XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down") {}
-                    .rotationEffect(.degrees(-90))
-                    .isShakeBtn(enable: agreeList.count == warnings.count, action: {
-                        vm.pageProgress = .Login
-                    })
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
+                    vm.pageProgress = .Login
+                }
+                .rotationEffect(.degrees(-90))
+                .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .padding()
         }
