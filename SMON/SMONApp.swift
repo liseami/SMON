@@ -10,16 +10,22 @@ import SwiftUI
 @main
 struct SMONApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    @StateObject var userManager: UserManager = .init()
+    @ObservedObject var userManager: UserManager = .shared
 
     var body: some Scene {
         WindowGroup {
             Group {
-                if userManager.user.isLoggedIn {
-                    MainView()
-                } else {
-                    LoginMainView()
-                }
+//                if userManager.user.isLogin {
+//                    // 需要进入资料流程
+//                    if userManager.user.needInfo {
+//                        UserInfoRequestMainView()
+//                    } else {
+//                        MainView()
+//                    }
+//                } else {
+//                    LoginMainView()
+//                }
+                UserInfoRequestMainView()
             }
             .tint(Color.XMDesgin.f1)
             .environment(\.colorScheme, .dark)

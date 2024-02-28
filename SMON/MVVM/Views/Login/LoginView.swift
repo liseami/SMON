@@ -9,8 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var vm: LoginViewModel
-    @FocusState var input
     @State var showCodeView: Bool = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
             Text("请输入您的手机号码")
@@ -21,10 +21,7 @@ struct LoginView: View {
                 TextField("", text: $vm.phoneInput)
                     .tint(Color.XMDesgin.main)
                     .keyboardType(.numberPad)
-                    .focused($input)
-                    .onAppear(perform: {
-                        input = true
-                    })
+                    .autoOpenKeyboard()
                     .foregroundStyle(Color.XMDesgin.f1)
                 XMDesgin.XMIcon(iconName: "system_xmark", color: Color.XMDesgin.f3)
                     .onTapGesture {

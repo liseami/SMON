@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
+		A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */; };
+		A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */; };
 		A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */; };
 		A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03002B88C77000F6AC9B /* MainViewModel.swift */; };
 		A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03032B88C88800F6AC9B /* MainTabbar.swift */; };
@@ -32,9 +34,9 @@
 		A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F543D2B8738B300AF9CD3 /* LoginViewModel.swift */; };
 		A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54402B8739EF00AF9CD3 /* AppWarningView.swift */; };
 		A28F54432B8739F900AF9CD3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54422B8739F900AF9CD3 /* LoginView.swift */; };
-		A28F54472B873A1D00AF9CD3 /* DataCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */; };
 		A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */; };
 		A28FEF1C2B8DD74D002E8FB2 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28FEF1B2B8DD74D002E8FB2 /* Color.swift */; };
+		A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28FEF1E2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift */; };
 		A2B45C992B8A161400D71EF8 /* ConversationListContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C982B8A161400D71EF8 /* ConversationListContainer.swift */; };
 		A2B45C9B2B8A183200D71EF8 /* ChatViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C9A2B8A183200D71EF8 /* ChatViewContainer.swift */; };
 		A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45C9F2B8AFCB300D71EF8 /* Components.swift */; };
@@ -106,6 +108,8 @@
 		A2218D642B89BB5400ECE075 /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = SDKROOT; };
 		A2218D682B89BC3100ECE075 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestViewModel.swift; sourceTree = "<group>"; };
+		A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRequestView.swift; sourceTree = "<group>"; };
 		A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginBackgroundVideo.mp4; sourceTree = "<group>"; };
 		A26A03002B88C77000F6AC9B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A26A03032B88C88800F6AC9B /* MainTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbar.swift; sourceTree = "<group>"; };
@@ -129,9 +133,9 @@
 		A28F543D2B8738B300AF9CD3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A28F54402B8739EF00AF9CD3 /* AppWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWarningView.swift; sourceTree = "<group>"; };
 		A28F54422B8739F900AF9CD3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCollectionView.swift; sourceTree = "<group>"; };
 		A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView_VCode.swift; sourceTree = "<group>"; };
 		A28FEF1B2B8DD74D002E8FB2 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A28FEF1E2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestMainView.swift; sourceTree = "<group>"; };
 		A2B45C982B8A161400D71EF8 /* ConversationListContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListContainer.swift; sourceTree = "<group>"; };
 		A2B45C9A2B8A183200D71EF8 /* ChatViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewContainer.swift; sourceTree = "<group>"; };
 		A2B45C9F2B8AFCB300D71EF8 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 				A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */,
 				A2BF15EF2B8C55480011A130 /* UserManager.swift */,
 				A2BF15F42B8C67060011A130 /* PermissionManager.swift */,
+				A28F543D2B8738B300AF9CD3 /* LoginViewModel.swift */,
+				A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -261,8 +267,6 @@
 				A28F54402B8739EF00AF9CD3 /* AppWarningView.swift */,
 				A28F54422B8739F900AF9CD3 /* LoginView.swift */,
 				A28F54482B873CD600AF9CD3 /* LoginView_VCode.swift */,
-				A28F54462B873A1D00AF9CD3 /* DataCollectionView.swift */,
-				A28F543C2B87389F00AF9CD3 /* VM */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -289,20 +293,21 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		A28F543C2B87389F00AF9CD3 /* VM */ = {
-			isa = PBXGroup;
-			children = (
-				A28F543D2B8738B300AF9CD3 /* LoginViewModel.swift */,
-			);
-			path = VM;
-			sourceTree = "<group>";
-		};
 		A28FEF1A2B8DD740002E8FB2 /* Color */ = {
 			isa = PBXGroup;
 			children = (
 				A28FEF1B2B8DD74D002E8FB2 /* Color.swift */,
 			);
 			path = Color;
+			sourceTree = "<group>";
+		};
+		A28FEF1D2B8EC7D8002E8FB2 /* UserInfoRequest */ = {
+			isa = PBXGroup;
+			children = (
+				A28FEF1E2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift */,
+				A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */,
+			);
+			path = UserInfoRequest;
 			sourceTree = "<group>";
 		};
 		A2B45C972B8A15FD00D71EF8 /* TIM */ = {
@@ -347,6 +352,7 @@
 			children = (
 				A272A4842B871C77008EA955 /* MainView.swift */,
 				A272A4862B871CC7008EA955 /* Login */,
+				A28FEF1D2B8EC7D8002E8FB2 /* UserInfoRequest */,
 				A2B45CAF2B8B27BB00D71EF8 /* SettingView */,
 				A272A4872B871CCC008EA955 /* TabViews */,
 			);
@@ -585,6 +591,7 @@
 				A2B45CAE2B8B222400D71EF8 /* ProfileViewModel.swift in Sources */,
 				A2BF15F32B8C64EE0011A130 /* ChatView.swift in Sources */,
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
+				A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */,
 				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
 				A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */,
 				A272A4772B8706FC008EA955 /* SMON.xcdatamodeld in Sources */,
@@ -593,6 +600,7 @@
 				A2B45CAC2B8B1E3C00D71EF8 /* ViewFuncs.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
 				A28FEF1C2B8DD74D002E8FB2 /* Color.swift in Sources */,
+				A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */,
 				A2B45CA72B8B089900D71EF8 /* String+.swift in Sources */,
 				A2B45CA92B8B0C6B00D71EF8 /* HomeViewModel.swift in Sources */,
 				A2B45C992B8A161400D71EF8 /* ConversationListContainer.swift in Sources */,
@@ -604,7 +612,7 @@
 				A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */,
 				A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */,
 				A272A4932B871D1A008EA955 /* FeedView.swift in Sources */,
-				A28F54472B873A1D00AF9CD3 /* DataCollectionView.swift in Sources */,
+				A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */,
 				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
 				A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */,
 				A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */,
@@ -756,6 +764,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
 				DEVELOPMENT_TEAM = PX9F7733KU;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -778,6 +787,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailycontest.smon;
@@ -806,6 +817,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
 				DEVELOPMENT_TEAM = PX9F7733KU;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
@@ -828,6 +840,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dailycontest.smon;

@@ -30,6 +30,10 @@ extension View {
     func isShakeBtn(enable: Bool, action: @escaping () -> Void) -> some View {
         disabled(true).modifier(ShakeViewModifier(enable: enable, action: action))
     }
+
+    func autoOpenKeyboard() -> some View {
+        return modifier(KeyBoardFocusModifier())
+    }
 }
 
 struct ShakeViewModifier: ViewModifier {
@@ -50,5 +54,15 @@ struct ShakeViewModifier: ViewModifier {
             content
         }
         .changeEffect(.shake(rate: .fast), value: shake)
+    }
+}
+
+struct KeyBoardFocusModifier: ViewModifier {
+    @FocusState var input
+    func body(content: Content) -> some View {
+        content.focused($input)
+            .onAppear {
+                input = true
+            }
     }
 }

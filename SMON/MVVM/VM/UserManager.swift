@@ -1,15 +1,17 @@
 import Foundation
 
 struct UserModel: Codable {
-    var userId: String?
-    var token: String?
-    var isLoggedIn: Bool = false
+    var userId: String = ""
+    var token: String = ""
+    var needInfo : Bool = true
+    var isLogin: Bool {
+        !token.isEmpty
+    }
 }
 
 class UserManager: ObservableObject {
-    var user: UserModel = .init()
-
     static let shared = UserManager()
+    @Published var user: UserModel = .init()
 
     init() {
         user = loadUserData()
@@ -18,16 +20,12 @@ class UserManager: ObservableObject {
     func login(userId: String, token: String) {
         user.userId = userId
         user.token = token
-        user.isLoggedIn = true
-
         saveUserData(user: user)
     }
 
     func logout() {
-        user.userId = nil
-        user.token = nil
-        user.isLoggedIn = false
-
+        user.userId.removeAll()
+        user.token.removeAll()
         clearUserData()
     }
 

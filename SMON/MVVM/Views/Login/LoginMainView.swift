@@ -26,7 +26,7 @@ struct LoginMainView: View {
                     AppWarningView()
                 case .Login:
                     LoginView()
-                        .transition(.move(edge: .bottom).animation(.easeInOut(duration: 0.1)))
+                        .transition(.move(edge: .bottom).combined(with: .opacity).animation(.easeInOut(duration: 0.5)))
                 }
             })
         }

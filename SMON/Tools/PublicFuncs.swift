@@ -9,16 +9,18 @@ import Foundation
 import UIKit
 
 class Apphelper {
-    static let shared : Apphelper = .init()
+    static let shared: Apphelper = .init()
     func mada(style: UIImpactFeedbackGenerator.FeedbackStyle) {
         let impactFeedback = UIImpactFeedbackGenerator(style: style)
         impactFeedback.prepare()
         impactFeedback.impactOccurred()
     }
-    
+
     func findGlobalNavigationController() -> UINavigationController? {
-        // 获取应用的主窗口
-        guard let window = UIApplication.shared.windows.first else {
+        // 获取主窗口场景
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first
+        else {
             return nil
         }
 
@@ -41,7 +43,3 @@ class Apphelper {
         return findNavigationController(from: window.rootViewController)
     }
 }
-
-
-
-

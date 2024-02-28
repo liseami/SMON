@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView_VCode: View {
     @EnvironmentObject var vm: LoginViewModel
-    @FocusState var input
+    
 
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
@@ -35,7 +35,9 @@ struct LoginView_VCode: View {
             Spacer()
             XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down") {}
                 .rotationEffect(.degrees(-90))
-                .isShakeBtn(enable: vm.isPhoneNumberValid, action: {})
+                .isShakeBtn(enable: true, action: {
+                    UserManager.shared.login(userId: "123", token: "123")
+                })
                 .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .statusBarHidden(false)
@@ -46,10 +48,7 @@ struct LoginView_VCode: View {
         .background {
             TextField("", text: $vm.vcodeInput)
                 .keyboardType(.numberPad)
-                .focused($input)
-                .onAppear(perform: {
-                    input = true
-                })
+                .autoOpenKeyboard()
                 .foregroundStyle(Color.XMDesgin.f1)
                 .opacity(0)
         }
