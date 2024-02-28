@@ -113,7 +113,7 @@ enum XMDesgin {
         var enable: Bool
         var action: () -> ()
         var label: () -> Content
-        @State var onTap: Int = 0
+        @State var onTap: Bool = false
         @State var shake: Int = 0
         init(enable: Bool = true, action: @escaping () -> (), @ViewBuilder label: @escaping () -> Content) {
             self.enable = enable
@@ -122,21 +122,21 @@ enum XMDesgin {
         }
 
         var body: some View {
-            Button {
-                onTap += 1
-                Apphelper.shared.mada(style: .light)
-                guard enable else { shake += 1
-                    Apphelper.shared.mada(style: .heavy)
-                    return
+            label()
+                ._onButtonGesture {
+                    onTap = $0
+                } perform: {
+                    Apphelper.shared.mada(style: .light)
+                    guard enable else { shake += 1
+                        Apphelper.shared.mada(style: .heavy)
+                        return
+                    }
+                    action()
                 }
-                action()
-            } label: {
-                label()
-            }
-            .opacity(enable ? 1 : 0.66)
-            .conditionalEffect(.pushDown, condition: true)
-            .changeEffect(.glow(color: .white), value: self.onTap)
-            .changeEffect(.shake(rate: .fast), value: shake)
+                .opacity(enable ? 1 : 0.66)
+                .conditionalEffect(.pushDown, condition: self.onTap)
+                .changeEffect(.glow(color: .white), value: self.onTap)
+                .changeEffect(.shake(rate: .fast), value: shake)
         }
     }
 
@@ -160,9 +160,11 @@ enum XMDesgin {
                 action()
             } label: {
                 HStack(spacing: 2) {
-                    XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                    if !iconName.isEmpty{
+                        XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                    }
                     Text(text)
-                        .font(.body)
+                        .font(.body.bold())
                         .bold()
                         .foregroundStyle(fColor)
                 }
@@ -188,27 +190,21 @@ enum XMDesgin {
         var body: some View {
             XMDesgin.XMButton {
                 action()
-
             } label: {
                 HStack(spacing: 24) {
                     Text(LocalizedStringKey(text))
-                        .font(.subheadline)
+                        .font(.body)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(Color.XMDesgin.f1)
                         .tint(Color.XMDesgin.main)
-                        .environment(\.openURL, OpenURLAction { _ in
-                            // ... set state that will cause your web view to be loaded...
-                            .handled
-                        })
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    XMDesgin.XMIcon(systemName: "circle")
+                    XMDesgin.XMIcon(systemName: "circle", size: 18, color: Color.XMDesgin.f1)
                         .overlay(alignment: .center) {
                             Circle()
                                 .fill(Color.XMDesgin.f1)
                                 .frame(width: 10, height: 10)
                                 .ifshow(show: selected)
                         }
-                        .foregroundColor(Color.XMDesgin.f1)
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 16)
@@ -225,7 +221,8 @@ enum XMDesgin {
         XMDesgin.XMIcon(systemName: "flag.badge.ellipsis")
         XMDesgin.SmallBtn {}
         XMDesgin.CircleBtn(backColor: .white, fColor: .black, iconName: "home_bell", enable: true) {}
-        XMDesgin.SelectionTable(text: "", selected: false) {}
+        XMDesgin.SelectionTable(text: "男", selected: false) {}
         XMDesgin.XMMainBtn {}
     }
+    .padding(.all)
 }

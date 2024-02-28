@@ -24,6 +24,7 @@ struct UserInfoRequestMainView: View {
                         case .hobby: HobbyRequestView()
                         case .height: HeightRequestView()
                         case .drink: DrinkRequestView()
+                        case .bdsm : BdsmRequestView()
                         case .smoke: SmokeRequestView()
                         case .bio: BioRequestView()
                         }
@@ -34,7 +35,7 @@ struct UserInfoRequestMainView: View {
         })
         .fullScreenCover(isPresented: $vm.showCompleteView, content: {
             RequestCompleteView()
-                .environment(\.colorScheme, .dark)
+                .preferredColorScheme(.dark)
         })
     }
 }

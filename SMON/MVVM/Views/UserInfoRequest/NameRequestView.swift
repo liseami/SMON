@@ -37,17 +37,15 @@ struct InfoRequestView<Content>: View where Content: View {
                     .font(.body).foregroundStyle(Color.XMDesgin.f2)
             })
             content()
-            Spacer()
-            HStack {
-                Spacer()
-                XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: self.btnEnable) {
-                    self.btnAction()
-                }
-                .rotationEffect(.degrees(-90))
+
+            XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: self.btnEnable) {
+                self.btnAction()
             }
+            .rotationEffect(.degrees(-90))
+            .moveTo(alignment: .bottomTrailing)
         }
         .statusBarHidden(false)
-        .padding(.all)
+        .padding(.horizontal)
         .font(.title)
         .padding(.top, 40)
         .frame(maxHeight: .infinity, alignment: .top)

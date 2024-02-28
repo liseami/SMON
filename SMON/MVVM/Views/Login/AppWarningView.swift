@@ -11,8 +11,7 @@ struct AppWarningView: View {
     @EnvironmentObject var vm: LoginViewModel
     let warnings = ["我不会将App分享给对小众文化不了解的「圈外人」",
                     "我对「开放式关系」和「亚文化」没有歧视，始终保持着友好、阳光、乐观的态度来对待陌生人",
-                    "我不会将App中的「用户内容」分享到广域社交网络中",
-                    "我已阅读并同意「每日大赛」的[《用户协议》](www.baidu.com) 与 [《隐私政策》](www.baidu.com)"]
+                    "我不会将App中的「用户内容」分享到广域社交网络中"]
     @State var agreeList: [String] = []
     @State var showBtns: Bool = false
     var body: some View {
@@ -47,12 +46,24 @@ struct AppWarningView: View {
                         .ifshow(show: showBtns)
                     }
                 })
+                .padding(.bottom, 60)
 
-                XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
-                    vm.pageProgress = .Login
+                HStack {
+                    Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意「每日大赛」的[《用户协议》](https://www.baidu.com) 与 [《隐私政策》](https://www.baidu.com)。"))
+                        .font(.subheadline)
+                        .multilineTextAlignment(.leading)
+                        .foregroundStyle(Color.XMDesgin.f2)
+                        .frame(width: 240)
+                        .tint(Color.XMDesgin.main)
+                        .onOpenURL(perform: { url in
+                            print(url)
+                        })
+                    Spacer()
+                    XMDesgin.CircleBtn(backColor: Color.white, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
+                        vm.pageProgress = .Login
+                    }
+                    .rotationEffect(.degrees(-90))
                 }
-                .rotationEffect(.degrees(-90))
-                .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .padding()
         }

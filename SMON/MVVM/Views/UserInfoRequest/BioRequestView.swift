@@ -16,7 +16,7 @@ struct BioRequestView: View {
                 .background(Color.XMDesgin.b1)
                 .font(.body).foregroundColor(Color.XMDesgin.f1)
                 .padding(.all, 12)
-                .frame(height: 200)
+                .frame(height: 160)
                 .background(Color.XMDesgin.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .autoOpenKeyboard()

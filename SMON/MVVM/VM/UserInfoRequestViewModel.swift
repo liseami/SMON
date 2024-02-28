@@ -27,6 +27,7 @@ class UserInfoRequestViewModel: ObservableObject {
         case drink
         case smoke
         case bio
+        case bdsm
         
     }
 }

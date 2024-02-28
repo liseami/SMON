@@ -12,12 +12,14 @@ struct MorePhotoRequestView: View {
     @State var showImagePicker: Bool = false
     var body: some View {
         InfoRequestView(title: "添加更多的照片\r人气大爆发的开始", subline: "据我们的统计显示，个人档案中超过三张照片的用户，其收获喜欢的几率会高出43%。您可以随后对这些照片进行更改。", btnEnable: true) {
-            LazyVGrid(columns: Array(repeating: GridItem(), count: 3), content: {
+            let w = (UIScreen.main.bounds.width - (14 * 2) - 8 - 8) / 3
+
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 3), alignment: .center, spacing: 8) {
                 if let avatar = vm.avatar {
                     Image(uiImage: avatar)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 120, height: 120, alignment: .center)
+                        .frame(width: w, height: w, alignment: .center)
                         .clipShape(RoundedRectangle(cornerRadius: 24))
                 }
                 ForEach(0 ... 4, id: \.self) { index in
@@ -34,12 +36,12 @@ struct MorePhotoRequestView: View {
                                 XMDesgin.XMIcon(iconName: "system_add")
                             }
                         }
-                        .frame(width: 120, height: 120, alignment: .center)
+                        .frame(width: w, height: w, alignment: .center)
                         .background(Color.XMDesgin.b1)
-                        .clipShape(RoundedRectangle(cornerRadius: 24))
+                        .clipShape(RoundedRectangle(cornerRadius: 18))
                     })
                 }
-            })
+            }
 
         } btnAction: {
             vm.presentedSteps.append(.brithday)

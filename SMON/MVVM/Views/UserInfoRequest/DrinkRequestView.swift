@@ -26,10 +26,10 @@ struct DrinkRequestView: View {
                 }
             }
         } btnAction: {
-            vm.presentedSteps.append(.smoke)
+            vm.presentedSteps.append(.bdsm)
         }
         .canSkip {
-            vm.presentedSteps.append(.smoke)
+            vm.presentedSteps.append(.bdsm)
         }
     }
 }

@@ -27,7 +27,7 @@ struct SMONApp: App {
                 }
             }
             .tint(Color.XMDesgin.f1)
-            .environment(\.colorScheme, .dark)
+            .preferredColorScheme(.dark)
         }
     }
 }
