@@ -3,7 +3,7 @@ import Foundation
 struct UserModel: Codable {
     var userId: String = ""
     var token: String = ""
-    var needInfo : Bool = true
+    var needInfo: Bool = true
     var isLogin: Bool {
         !token.isEmpty
     }
@@ -16,7 +16,7 @@ class UserManager: ObservableObject {
     init() {
         user = loadUserData()
         #if DEBUG
-        user = .init(userId: "", token: "", needInfo: true)
+//        user = .init(userId: "", token: "", needInfo: true)
         #endif
     }
 
@@ -27,8 +27,7 @@ class UserManager: ObservableObject {
     }
 
     func logout() {
-        user.userId.removeAll()
-        user.token.removeAll()
+        user = .init()
         clearUserData()
     }
 

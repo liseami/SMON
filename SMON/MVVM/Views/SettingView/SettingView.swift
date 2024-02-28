@@ -12,14 +12,13 @@ struct SettingView: View {
     var body: some View {
         List {
             #if DEBUG
-            
-            
+
             NavigationLink {
                 XMUIDesginSystemView()
             } label: {
                 Text("XMUI组件")
             }
-            
+
             #endif
 
             ForEach(vm.settingGroup, id: \.self.name) { group in
@@ -43,6 +42,11 @@ struct SettingView: View {
                         .padding(.vertical)
                 }
             }
+
+            XMDesgin.XMMainBtn(fColor: Color.red, text: "退出登陆") {
+                UserManager.shared.logout()
+            }
+            .listRowBackground(Color.clear)
         }
         .listStyle(.insetGrouped)
         .navigationTitle("设置")

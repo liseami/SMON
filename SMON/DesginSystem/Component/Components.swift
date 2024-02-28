@@ -126,11 +126,12 @@ enum XMDesgin {
                 ._onButtonGesture {
                     onTap = $0
                 } perform: {
-                    Apphelper.shared.mada(style: .light)
-                    guard enable else { shake += 1
-                        Apphelper.shared.mada(style: .heavy)
+                    guard enable else {
+                        shake += 1
+                        Apphelper.shared.nofimada( .error)
                         return
                     }
+                    Apphelper.shared.mada(style: .light)
                     action()
                 }
                 .opacity(enable ? 1 : 0.66)
@@ -147,7 +148,7 @@ enum XMDesgin {
         var text: String
         var action: () -> ()
         @State var onTap: Bool = false
-        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "home_bell", text: String = "text", action: @escaping () -> ()) {
+        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "", text: String = "text", action: @escaping () -> ()) {
             self.fColor = fColor
             self.backColor = backColor
             self.iconName = iconName
@@ -160,7 +161,7 @@ enum XMDesgin {
                 action()
             } label: {
                 HStack(spacing: 2) {
-                    if !iconName.isEmpty{
+                    if !iconName.isEmpty {
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     }
                     Text(text)

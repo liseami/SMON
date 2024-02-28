@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct BrithdayDayRequestView: View {
-    @EnvironmentObject var vm : UserInfoRequestViewModel
+    @EnvironmentObject var vm: UserInfoRequestViewModel
     var body: some View {
         InfoRequestView(title: "您的生日是？", subline: "", btnEnable: true) {
-            DatePicker("", selection: $vm.brithday,displayedComponents: .date)
+            DatePicker("", selection: $vm.brithday, displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
+                .environment(\.locale, Locale(identifier: "zh-hans"))
         } btnAction: {
             vm.presentedSteps.append(.sex)
         }
-
     }
 }
 

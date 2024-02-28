@@ -16,6 +16,11 @@ class Apphelper {
         impactFeedback.impactOccurred()
     }
 
+    func nofimada(_ type: UINotificationFeedbackGenerator.FeedbackType) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(type)
+    }
+
     func getWindow() -> UIWindow? {
         let connectedScenes = UIApplication.shared.connectedScenes
         for scene in connectedScenes {
@@ -27,7 +32,7 @@ class Apphelper {
         }
         return nil
     }
-    
+
     func findGlobalNavigationController() -> UINavigationController? {
         // 获取主窗口场景
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

@@ -38,20 +38,21 @@ extension View {
     func moveTo(alignment: SwiftUI.Alignment) -> some View {
         return frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }
-    
-    func canSkip(action:@escaping()->()) -> some View {
-        self.overlay {
+
+    func canSkip(action: @escaping () -> Void) -> some View {
+        overlay {
             XMDesgin.XMButton {
                 action()
             } label: {
                 Text("跳过").font(.body)
                     .foregroundStyle(Color.XMDesgin.f2)
             }
-            .padding(.all, 36)
+            .padding(.all)
+            .padding(.leading)
+            .padding(.bottom, 12)
             .moveTo(alignment: .bottomLeading)
         }
     }
-
 }
 
 struct ShakeViewModifier: ViewModifier {
@@ -72,7 +73,6 @@ struct ShakeViewModifier: ViewModifier {
         }
         .changeEffect(.shake(rate: .fast), value: shake)
     }
-    
 }
 
 struct KeyBoardFocusModifier: ViewModifier {
