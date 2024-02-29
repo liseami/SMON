@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
+		A256DB972B900BF6008C7063 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB962B900BF6008C7063 /* WebView.swift */; };
 		A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */; };
 		A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */; };
 		A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD232B8EDE5000B7CE40 /* AvatarRequestView.swift */; };
@@ -24,6 +25,7 @@
 		A25AAD3A2B8F246C00B7CE40 /* BioRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */; };
 		A25AAD3C2B8F26B700B7CE40 /* RequestCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD3B2B8F26B700B7CE40 /* RequestCompleteView.swift */; };
 		A25AAD3E2B8F4E7400B7CE40 /* BdsmRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */; };
+		A25AAD412B90073B00B7CE40 /* WechatRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */; };
 		A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */; };
 		A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03002B88C77000F6AC9B /* MainViewModel.swift */; };
 		A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03032B88C88800F6AC9B /* MainTabbar.swift */; };
@@ -122,6 +124,7 @@
 		A2218D642B89BB5400ECE075 /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = SDKROOT; };
 		A2218D682B89BC3100ECE075 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		A256DB962B900BF6008C7063 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestViewModel.swift; sourceTree = "<group>"; };
 		A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRequestView.swift; sourceTree = "<group>"; };
 		A25AAD232B8EDE5000B7CE40 /* AvatarRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRequestView.swift; sourceTree = "<group>"; };
@@ -138,6 +141,7 @@
 		A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioRequestView.swift; sourceTree = "<group>"; };
 		A25AAD3B2B8F26B700B7CE40 /* RequestCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCompleteView.swift; sourceTree = "<group>"; };
 		A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BdsmRequestView.swift; sourceTree = "<group>"; };
+		A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatRequestView.swift; sourceTree = "<group>"; };
 		A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginBackgroundVideo.mp4; sourceTree = "<group>"; };
 		A26A03002B88C77000F6AC9B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A26A03032B88C88800F6AC9B /* MainTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbar.swift; sourceTree = "<group>"; };
@@ -184,7 +188,7 @@
 		A2BF163A2B8C811D0011A130 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A2BF163C2B8C83B90011A130 /* LaunchScreenAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenAnimation.swift; sourceTree = "<group>"; };
 		A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFliterView.swift; sourceTree = "<group>"; };
-		A2E7F9A92B8D817B00E86474 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		A2E7F9A92B8D817B00E86474 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUIChatXMTheme.bundle; path = SMON/TUIChatXMTheme.bundle; sourceTree = SOURCE_ROOT; };
 		B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.release.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.release.xcconfig"; sourceTree = "<group>"; };
 		ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.debug.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.debug.xcconfig"; sourceTree = "<group>"; };
@@ -350,11 +354,12 @@
 				A25AAD2F2B8F19A900B7CE40 /* RelationHopeRequestView.swift */,
 				A25AAD312B8F1D3700B7CE40 /* HobbyRequestView.swift */,
 				A25AAD332B8F1E9500B7CE40 /* HeightRequestView.swift */,
-				A25AAD352B8F238600B7CE40 /* DrinkRequestView.swift */,
 				A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */,
-				A25AAD372B8F238E00B7CE40 /* SmokeRequestView.swift */,
+				A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */,
 				A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */,
 				A25AAD3B2B8F26B700B7CE40 /* RequestCompleteView.swift */,
+				A25AAD352B8F238600B7CE40 /* DrinkRequestView.swift */,
+				A25AAD372B8F238E00B7CE40 /* SmokeRequestView.swift */,
 			);
 			path = UserInfoRequest;
 			sourceTree = "<group>";
@@ -381,6 +386,7 @@
 		A2B45C9E2B8AFCA600D71EF8 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				A256DB962B900BF6008C7063 /* WebView.swift */,
 				A25AAD252B8EE9BE00B7CE40 /* PhotoSelector.swift */,
 				A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */,
 				A2B45C9F2B8AFCB300D71EF8 /* Components.swift */,
@@ -651,8 +657,10 @@
 				A272A4772B8706FC008EA955 /* SMON.xcdatamodeld in Sources */,
 				A272A4852B871C77008EA955 /* MainView.swift in Sources */,
 				A2B45CA32B8B008B00D71EF8 /* PublicFuncs.swift in Sources */,
+				A25AAD412B90073B00B7CE40 /* WechatRequestView.swift in Sources */,
 				A2B45CAC2B8B1E3C00D71EF8 /* ViewFuncs.swift in Sources */,
 				A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */,
+				A256DB972B900BF6008C7063 /* WebView.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
 				A28FEF1C2B8DD74D002E8FB2 /* Color.swift in Sources */,
 				A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */,

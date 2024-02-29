@@ -15,6 +15,7 @@ struct HobbyRequestView: View {
                 Text("自我疗愈")
                     .font(.title2.bold())
                 Text("🧠 正念")
+                
                     .font(.body)
                     .foregroundStyle(Color.XMDesgin.f1)
                     .padding(.horizontal, 16)

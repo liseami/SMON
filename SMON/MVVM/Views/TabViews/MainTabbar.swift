@@ -5,8 +5,6 @@
 //  Created by 赵翔宇 on 2024/2/23.
 //
 
-import Pow
-import SwiftUI
 
 struct MainTabbar: View {
     @EnvironmentObject var vm: MainViewModel
@@ -91,5 +89,5 @@ struct MainTabbar: View {
 
 #Preview {
 //    MainTabbar().environmentObject(MainViewModel())
-    MainView()
+    HomeView()
 }

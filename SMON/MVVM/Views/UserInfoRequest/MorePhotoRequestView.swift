@@ -10,10 +10,10 @@ import SwiftUI
 struct MorePhotoRequestView: View {
     @EnvironmentObject var vm: UserInfoRequestViewModel
     @State var showImagePicker: Bool = false
+    let w = (UIScreen.main.bounds.width - (14 * 2) - 8 - 8) / 3
+
     var body: some View {
         InfoRequestView(title: "添加更多的照片\r人气大爆发的开始", subline: "据我们的统计显示，个人档案中超过三张照片的用户，其收获喜欢的几率会高出43%。您可以随后对这些照片进行更改。", btnEnable: true) {
-            let w = (UIScreen.main.bounds.width - (14 * 2) - 8 - 8) / 3
-
             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), alignment: .center, spacing: 8) {
                 if let avatar = vm.avatar {
                     Image(uiImage: avatar)

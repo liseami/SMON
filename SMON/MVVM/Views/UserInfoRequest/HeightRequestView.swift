@@ -22,10 +22,10 @@ struct HeightRequestView: View {
             .background(Color.XMDesgin.b1)
             .clipShape(RoundedRectangle(cornerRadius: 22))
         } btnAction: {
-            vm.presentedSteps.append(.drink)
+            vm.presentedSteps.append(.bdsm)
         }
         .canSkip {
-            vm.presentedSteps.append(.drink)
+            vm.presentedSteps.append(.bdsm)
         }
     }
 }

@@ -5,8 +5,7 @@
 //  Created by 赵翔宇 on 2024/2/26.
 //
 
-import Pow
-import SwiftUI
+
 struct LaunchScreenAnimation: View {
     @State var animationStep: Int = 0
 

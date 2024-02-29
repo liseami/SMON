@@ -26,7 +26,7 @@ struct BdsmRequestView: View {
                 }
             }
         } btnAction: {
-            vm.presentedSteps.append(.smoke)
+            vm.presentedSteps.append(.wechat)
         }
     }
 }

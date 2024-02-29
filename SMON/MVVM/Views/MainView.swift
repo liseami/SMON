@@ -17,6 +17,7 @@ struct MainView: View {
                 tabViews
                 // Tabbar
                 tabbar
+                // 启动动画
                 LaunchScreenAnimation()
             }
         })

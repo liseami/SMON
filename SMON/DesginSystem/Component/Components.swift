@@ -5,8 +5,7 @@
 //  Created by 赵翔宇 on 2024/2/25.
 //
 
-import Pow
-import SwiftUI
+
 
 enum XMDesgin {
     struct XMIcon: View {
@@ -134,7 +133,6 @@ enum XMDesgin {
                     Apphelper.shared.mada(style: .light)
                     action()
                 }
-                .opacity(enable ? 1 : 0.66)
                 .conditionalEffect(.pushDown, condition: self.onTap)
                 .changeEffect(.glow(color: .white), value: self.onTap)
                 .changeEffect(.shake(rate: .fast), value: shake)

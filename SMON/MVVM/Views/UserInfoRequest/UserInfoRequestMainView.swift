@@ -5,8 +5,6 @@
 //  Created by 赵翔宇 on 2024/2/28.
 //
 
-import Pow
-import SwiftUI
 struct UserInfoRequestMainView: View {
     @StateObject var vm: UserInfoRequestViewModel = .init()
     var body: some View {
@@ -23,9 +21,10 @@ struct UserInfoRequestMainView: View {
                         case .relationhope: RelationHopeRequestView()
                         case .hobby: HobbyRequestView()
                         case .height: HeightRequestView()
-                        case .drink: DrinkRequestView()
+//                        case .drink: DrinkRequestView()
+//                        case .smoke: SmokeRequestView()
+                        case .wechat: WechatRequestView()
                         case .bdsm: BdsmRequestView()
-                        case .smoke: SmokeRequestView()
                         case .bio: BioRequestView()
                         }
                     }

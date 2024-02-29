@@ -16,7 +16,7 @@ class UserManager: ObservableObject {
     init() {
         user = loadUserData()
         #if DEBUG
-//        user = .init(userId: "", token: "", needInfo: true)
+        user = .init(userId: "", token: "", needInfo: true)
         #endif
     }
 
