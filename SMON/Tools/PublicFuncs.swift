@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import JDStatusBarNotification
 import UIKit
 
 class Apphelper {
@@ -58,5 +59,57 @@ class Apphelper {
 
         // 从主窗口的根视图控制器开始查找
         return findNavigationController(from: window.rootViewController)
+    }
+
+    enum NotificationType {
+        case success(message: String)
+        case info(message: String)
+        case warning(message: String)
+        case error(message: String)
+    }
+
+    func pushNotification(type: NotificationType) {
+        let message: String
+        let backgroundColor: UIColor
+        let textColor: UIColor
+        let font: UIFont
+
+        switch type {
+        case let .success(msg):
+            message = msg
+            backgroundColor = UIColor(Color.XMDesgin.b1)
+            textColor = UIColor(Color.XMDesgin.f1)
+            font = UIFont.preferredFont(forTextStyle: .title3).bold
+        case let .info(msg):
+            message = msg
+            backgroundColor = UIColor(Color.XMDesgin.b1)
+            textColor = UIColor(Color.XMDesgin.f1)
+            font = UIFont.preferredFont(forTextStyle: .title3).bold
+        case let .warning(msg):
+            message = msg
+            backgroundColor = UIColor(Color.XMDesgin.b1)
+            textColor = UIColor(Color.XMDesgin.f1)
+            font = UIFont.preferredFont(forTextStyle: .title3).bold
+        case let .error(msg):
+            message = msg
+            backgroundColor = UIColor(Color.XMDesgin.b1)
+            textColor = UIColor(Color.XMDesgin.f1)
+            font = UIFont.preferredFont(forTextStyle: .title3).bold
+        }
+
+        // update default style
+        NotificationPresenter.shared.updateDefaultStyle { style in
+            let style: StatusBarNotificationStyle = style
+            style.backgroundStyle.backgroundColor = backgroundColor
+            style.textStyle.textColor = textColor
+            style.textStyle.font = font
+            style.canSwipeToDismiss = false
+            style.animationType = .move
+            return style
+        }
+
+        NotificationPresenter.shared.present(message, subtitle: nil, styleName: nil, duration: 2, completion: { _ in
+            // completion block
+        })
     }
 }

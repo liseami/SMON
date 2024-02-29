@@ -13,7 +13,6 @@ struct ConversationListContainer: UIViewControllerRepresentable {
         let conListController = TUIConversationListController()
         conListController.delegate = context.coordinator
         conListController.navigationItem.title = "消息"
-        conListController.navigationController?.navigationBar.prefersLargeTitles = true
         return conListController
     }
 

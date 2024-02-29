@@ -7,7 +7,7 @@
 
 import SwiftUI
 import SwiftUIX
-import TipKit
+import JDStatusBarNotification
 
 struct XMUIDesginSystemView: View {
     var body: some View {
@@ -23,26 +23,14 @@ struct XMUIDesginSystemView: View {
             Section("SwiftUIX用例") {
                 Text("View/statusItem(id:image:) - 添加一个状态栏项目，配置为在单击时显示弹出窗口")
             }
-            Section("TipKit") {
-                if #available(iOS 17.0, *) {
-                    let favoriteLandmarkTip = FavoriteLandmarkTip()
-                    TipView(favoriteLandmarkTip, arrowEdge: .bottom)
-                } else {
-                    EmptyView()
+            
+            Text("小通知")
+                .onTapGesture {
+                    Apphelper.shared.pushNotification(type: .info(message: "成功！"))
                 }
-            }
+            
         }
-        .task {
-            // Configure and load your tips at app launch.
-            if #available(iOS 17.0, *) {
-                try? Tips.configure([
-                    .displayFrequency(.immediate),
-                    .datastoreLocation(.applicationDefault)
-                ])
-            } else {
-                // Fallback on earlier versions
-            }
-        }
+
     }
 }
 
@@ -50,20 +38,4 @@ struct XMUIDesginSystemView: View {
     XMUIDesginSystemView()
 }
 
-struct FavoriteLandmarkTip: Tip {
-    var id: String {
-        return "1"
-    }
 
-    var title: Text {
-        Text("Save as a Favorite")
-    }
-
-    var message: Text? {
-        Text("Your favorite landmarks always appear at the top of the list.")
-    }
-
-    var image: Image? {
-        Image(systemName: "star")
-    }
-}

@@ -1,6 +1,6 @@
 
 # Uncomment the next line to define a global platform for your project
-platform :ios, '14.0'
+platform :ios, '16.0'
 target 'SMON' do
 # 是否强制使用动态库
 use_frameworks!
@@ -19,6 +19,8 @@ pod 'Tagly'# 标签云
 pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情
 pod 'AliyunOSSiOS' #阿里云OSS
+pod 'Popovers'# 全局最上层的各种控件
+pod 'JDStatusBarNotification' # 通知小弹窗
 # 腾讯IM -——————————————————
 # 集成聊天功能
 pod 'TUIChat/UI_Classic'
