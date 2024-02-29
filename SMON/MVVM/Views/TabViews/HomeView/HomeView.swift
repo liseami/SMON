@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct HomeView: View {
     @StateObject var vm: HomeViewModel = .init()
@@ -14,26 +15,30 @@ struct HomeView: View {
         ZStack(alignment: .top) {
             // 横向翻页
             tabView
+                .ignoresSafeArea(.container, edges: .top)
             // 顶部导航
             topBar
         }
-    }
-
-    var topBar: some View {
-        ZStack(alignment: .bottom) {
-            LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.8), Color.black.opacity(0)]), startPoint: .top, endPoint: .bottom)
-                .frame(height: 85)
-            HStack {
-                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
-                Spacer()
-                ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
-                    let selected = tabitem == vm.currentTopTab
-                    Text(tabitem.info.name)
-                        .font(.body)
-                        .bold()
-                        .opacity(selected ? 1 : 0.6)
+        .navigationBarTransparent(true)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack {
+                    Spacer()
+                    ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
+                        let selected = tabitem == vm.currentTopTab
+                        Text(tabitem.info.name)
+                            .font(.body)
+                            .bold()
+                            .opacity(selected ? 1 : 0.6)
+                    }
+                    Spacer()
                 }
-                Spacer()
+            }
+            ToolbarItem(placement: .topBarLeading) {
+                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
                     .onTapGesture {
                         showFliterView.toggle()
@@ -43,9 +48,15 @@ struct HomeView: View {
                             .environment(\.colorScheme, .dark)
                     })
             }
-            .padding(.horizontal)
         }
-        .ignoresSafeArea()
+    }
+
+    var topBar: some View {
+        LinearGradient(gradient: Gradient(colors: [Color.black, Color.black, Color.black.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+            .blur(radius: 12)
+            .padding([.horizontal, .top], -30)
+            .frame(height: 90)
+            .ignoresSafeArea()
     }
 
     var tabView: some View {
@@ -53,21 +64,19 @@ struct HomeView: View {
                 content: {
                     ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
                         // 排行榜页面
-                        rankList
-                            .tag(tab)
+                        rankList.tag(tab)
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))
-                .ignoresSafeArea()
     }
 
     var rankList: some View {
         ScrollView {
-            Spacer().frame(height: 85)
+//            Spacer().frame(height: 44)
             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
                 ForEach(0...99, id: \.self) { _ in
                     VStack {
-                        AsyncImage(url: URL(string: "https://i.pravatar.cc/300")!)
+                        AsyncImage(url: AppConfig.mokImage)
                             .scaledToFit()
                             .frame(width: 100, height: 100) // Adjust the size as needed
                             .clipShape(Circle())
@@ -88,5 +97,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    MainView(vm: .init(currentTabbar: .home))
 }

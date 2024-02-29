@@ -5,11 +5,11 @@
 //  Created by 赵翔宇 on 2024/2/24.
 //
 
+import AliyunOSSiOS
 import Foundation
 import TUIChat
 import TUICore
 import UIKit
-import AliyunOSSiOS
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
@@ -24,14 +24,8 @@ func DAppInit() {
     OSSLog.enable()
 }
 
-
-
 func TUIInit() {
-    // 在模拟器上运行的代码
-    print("This code will only run in the simulator.")
-    // 不在模拟器上运行的代码
-    TUILogin.login(Int32(1600024914), userID: "liseami", userSig: "eJwtjF0LgjAYRv-LbgudcysUvAyJIgrFSLxxbMarLkzX6IP*e0u9fM55OB*U7hPHyB6FiDgYLccNQt40VDDiFgZZKpjVIJqy60Cg0FthjAkNPDoZ*eygl5YzxohVE9Wg-myNA3tmvj9X4GrLm1oPPF*c21PabPPDPU64oHGNX8bwd*FmhVvtjg*jeKbJJULfHyapM7o_") {}
-
+    TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "liseami", userSig: "eJwtjF0LgjAYRv-LbgudcysUvAyJIgrFSLxxbMarLkzX6IP*e0u9fM55OB*U7hPHyB6FiDgYLccNQt40VDDiFgZZKpjVIJqy60Cg0FthjAkNPDoZ*eygl5YzxohVE9Wg-myNA3tmvj9X4GrLm1oPPF*c21PabPPDPU64oHGNX8bwd*FmhVvtjg*jeKbJJULfHyapM7o_") {}
     if let customThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil) {
         TUIThemeManager.share().registerThemeResourcePath(customThemePath, for: .chat)
     }

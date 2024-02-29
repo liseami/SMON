@@ -5,21 +5,23 @@
 //  Created by 赵翔宇 on 2024/2/23.
 //
 
-
 struct MainTabbar: View {
     @EnvironmentObject var vm: MainViewModel
     @State var showCircleBtn: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {
-            LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.8), Color.black.opacity(0)]), startPoint: .bottom, endPoint: .top)
-                .frame(height: 120)
-                .frame(maxHeight: .infinity, alignment: .bottomLeading)
+            Color.black.frame(height: 40)
                 .ignoresSafeArea()
+            LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.6)]), startPoint: .center, endPoint: .top)
+                .blur(radius: 12)
+                .frame(height: 100)
+                .padding(.horizontal, -30)
+                .ignoresSafeArea(edges: .bottom)
             VStack(spacing: 16) {
                 // 悬浮圆形按钮
                 circleBtn
                     .transition(.offset(x: -200).combined(with: .movingParts.flip).combined(with: .scale(scale: 0)).combined(with: .opacity))
-                
+
                     .ifshow(show: showCircleBtn)
                 // 细线
                 Capsule()
@@ -29,9 +31,11 @@ struct MainTabbar: View {
                 // tabbarIcons
                 tabIcons
             }
-            .padding(.horizontal)
+            .padding(.all)
+            .padding(.bottom)
         }
         .frame(maxHeight: .infinity, alignment: .bottom)
+        .ignoresSafeArea()
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
                 withAnimation(.interpolatingSpring(stiffness: 100, damping: 20)) {
@@ -89,5 +93,5 @@ struct MainTabbar: View {
 
 #Preview {
 //    MainTabbar().environmentObject(MainViewModel())
-    HomeView()
+    MainView(vm: MainViewModel(currentTabbar: .feed))
 }

@@ -11,19 +11,19 @@ struct UserModel: Codable {
 
 class UserManager: ObservableObject {
     static let shared = UserManager()
-    @Published var user: UserModel = .init()
+    @Published var user: UserModel  = .init()
 
     init() {
         user = loadUserData()
         #if DEBUG
-        user = .init(userId: "", token: "", needInfo: true)
+//        user = .init(userId: "", token: "", needInfo: true)
         #endif
     }
 
     func login(userId: String, token: String) {
         user.userId = userId
         user.token = token
-        saveUserData(user: user)
+        saveUserData()
     }
 
     func logout() {
@@ -31,7 +31,7 @@ class UserManager: ObservableObject {
         clearUserData()
     }
 
-    private func saveUserData(user: UserModel) {
+     func saveUserData() {
         do {
             let userData = try JSONEncoder().encode(user)
             UserDefaults.standard.set(userData, forKey: "userData")
@@ -46,7 +46,7 @@ class UserManager: ObservableObject {
         {
             return user
         } else {
-            return UserModel()
+            return .init()
         }
     }
 

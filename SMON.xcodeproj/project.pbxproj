@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
 		A256DB972B900BF6008C7063 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB962B900BF6008C7063 /* WebView.swift */; };
+		A256DB992B901C88008C7063 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = A256DB982B901C88008C7063 /* AppConfig.plist */; };
+		A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB9A2B901C9F008C7063 /* AppConfig.swift */; };
 		A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */; };
 		A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */; };
 		A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD232B8EDE5000B7CE40 /* AvatarRequestView.swift */; };
@@ -125,6 +127,8 @@
 		A2218D682B89BC3100ECE075 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		A256DB962B900BF6008C7063 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		A256DB982B901C88008C7063 /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
+		A256DB9A2B901C9F008C7063 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestViewModel.swift; sourceTree = "<group>"; };
 		A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRequestView.swift; sourceTree = "<group>"; };
 		A25AAD232B8EDE5000B7CE40 /* AvatarRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRequestView.swift; sourceTree = "<group>"; };
@@ -263,6 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				A2BF15F62B8C686A0011A130 /* Info.plist */,
+				A256DB982B901C88008C7063 /* AppConfig.plist */,
+				A256DB9A2B901C9F008C7063 /* AppConfig.swift */,
 				A26A030B2B89AF2A00F6AC9B /* AppDelegate.swift */,
 				A272A46A2B8706FB008EA955 /* SMONApp.swift */,
 				A26A03092B89AEAE00F6AC9B /* Bridge.m */,
@@ -586,6 +592,7 @@
 				A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */,
 				A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */,
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
+				A256DB992B901C88008C7063 /* AppConfig.plist in Resources */,
 				A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */,
 				A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */,
 				A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */,
@@ -662,6 +669,7 @@
 				A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */,
 				A256DB972B900BF6008C7063 /* WebView.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
+				A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */,
 				A28FEF1C2B8DD74D002E8FB2 /* Color.swift in Sources */,
 				A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */,
 				A2B45CA72B8B089900D71EF8 /* String+.swift in Sources */,

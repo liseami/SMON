@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TIMAppID</key>
+	<string>1600024914</string>
+	<key>UMAppKey</key>
+	<string>63f73e62d64e68613936ed5a</string>
+	<key>AMapKey</key>
+	<string>712452fbb28fd3d4cc7df84d0346f0e5</string>
+	<key>WeChatAppID</key>
+	<string>wx23ab40265ce0317c</string>
+	<key>WeChatAppSecret</key>
+	<string>24f2c76c97703901355c04e386e30486</string>
+	<key>JGuangAppKey</key>
+	<string>9f98444a6127a4f433267323</string>
+</dict>
+</plist>

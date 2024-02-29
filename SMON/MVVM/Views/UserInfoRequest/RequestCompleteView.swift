@@ -9,12 +9,14 @@ import SwiftUI
 
 struct RequestCompleteView: View {
     @EnvironmentObject var vm: UserInfoRequestViewModel
+    @State var showText: Bool = false
     var body: some View {
         VStack(alignment: .leading, spacing: 36) {
             VStack(alignment: .leading, spacing: 24, content: {
-                Text("🔥")
-                    .padding(.all, 24)
-                    .background(Circle().fill(Color.XMDesgin.b1))
+                Image("inforequest_complete")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 140, height: 140)
                     .conditionalEffect(.smoke, condition: true)
                 Text("每日大赛的游戏规则！")
                     .multilineTextAlignment(.leading)
@@ -23,14 +25,21 @@ struct RequestCompleteView: View {
 
                     .font(.body).foregroundStyle(Color.XMDesgin.f1)
                     .padding(.trailing, 30)
+                    .transition(.movingParts.glare.animation(.easeInOut(duration: 0.66)))
+                    .ifshow(show: showText)
                 Text("祝你玩的愉快！")
+                    .onAppear(perform: {
+                        showText = true
+                    })
                     .font(.body).foregroundStyle(Color.XMDesgin.f1)
 
             })
             Spacer()
             XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "好的") {
                 UserManager.shared.user.needInfo = false
+                UserManager.shared.saveUserData()
             }
+            .padding(.horizontal, 48)
         }
         .frame(maxWidth: .infinity)
         .statusBarHidden(false)

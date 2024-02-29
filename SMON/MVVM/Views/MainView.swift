@@ -21,6 +21,7 @@ struct MainView: View {
                 LaunchScreenAnimation()
             }
         })
+   
     }
 
     var tabViews: some View {
