@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 struct ProfileView: View {
     @StateObject var vm: ProfileViewModel = .init()
@@ -30,12 +31,18 @@ struct ProfileView: View {
                     .padding(.horizontal,8)
             }
             ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    SettingView()
+                XMDesgin.XMButton {
+                    Apphelper.shared.topMostViewController()?.navigationController?.pushViewController(SettingView().host(), animated: true)
                 } label: {
                     XMDesgin.XMIcon(iconName: "profile_setting")
                 }
-                .foregroundColor(.white)
+
+//                NavigationLink {
+//                    SettingView()
+//                } label: {
+//                    XMDesgin.XMIcon(iconName: "profile_setting")
+//                }
+//                .foregroundColor(.white)
             }
         }
     }

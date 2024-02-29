@@ -7,6 +7,7 @@
 
 import Foundation
 import JDStatusBarNotification
+import SwiftUIX
 import UIKit
 
 class Apphelper {
@@ -34,31 +35,25 @@ class Apphelper {
         return nil
     }
 
-    func findGlobalNavigationController() -> UINavigationController? {
-        // 获取主窗口场景
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first
-        else {
-            return nil
-        }
+    func topMostViewController() -> UIViewController? {
+        let vc = UIApplication.shared.connectedScenes.filter {
+            $0.activationState == .foregroundActive
+        }.first(where: { $0 is UIWindowScene })
+            .flatMap { $0 as? UIWindowScene }?.windows
+            .first(where: \.isKeyWindow)?
+            .rootViewController?
+            .topMostViewController()
 
-        // 递归查找包含 UINavigationController 的视图控制器
-        func findNavigationController(from viewController: UIViewController?) -> UINavigationController? {
-            if let navigationController = viewController as? UINavigationController {
-                return navigationController
-            }
+        return vc
+    }
 
-            for child in viewController?.children ?? [] {
-                if let navigationController = findNavigationController(from: child) {
-                    return navigationController
-                }
-            }
-
-            return nil
-        }
-
-        // 从主窗口的根视图控制器开始查找
-        return findNavigationController(from: window.rootViewController)
+    func present<V: View>(_ view: V,
+                          named name: AnyHashable? = nil,
+                          onDismiss: @escaping () -> Void = {},
+                          presentationStyle: ModalPresentationStyle? = nil,
+                          completion: @escaping () -> Void = {})
+    {
+        self.topMostViewController()?.present(view.environment(\.colorScheme, .dark), named: name, onDismiss: onDismiss, presentationStyle: presentationStyle, completion: completion)
     }
 
     enum NotificationType {

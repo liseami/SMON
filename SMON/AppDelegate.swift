@@ -12,6 +12,7 @@ import TUICore
 import UIKit
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         DAppInit()
         // 在应用程序启动时执行一些配置

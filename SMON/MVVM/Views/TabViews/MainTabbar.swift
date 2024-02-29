@@ -21,7 +21,6 @@ struct MainTabbar: View {
                 // 悬浮圆形按钮
                 circleBtn
                     .transition(.offset(x: -200).combined(with: .movingParts.flip).combined(with: .scale(scale: 0)).combined(with: .opacity))
-
                     .ifshow(show: showCircleBtn)
                 // 细线
                 Capsule()
@@ -50,9 +49,10 @@ struct MainTabbar: View {
         let btnName = vm.currentTabbar.circleBtnInfo.name
         return XMDesgin.XMButton {
             if vm.currentTabbar == .home {
-                vm.showHotBuyView = true
+//                vm.showHotBuyView = true
+                Apphelper.shared.present(HotBuyView())
             } else {
-                vm.showPostEditor = true
+                Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
             }
         } label: {
             LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .bottomLeading, endPoint: .topTrailing)

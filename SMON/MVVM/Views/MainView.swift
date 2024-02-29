@@ -41,14 +41,6 @@ struct MainView: View {
                 ProfileView()
             }
         }
-        .sheet(isPresented: $vm.showHotBuyView, content: {
-            // 购买热度
-            HotBuyView()
-        })
-        .fullScreenCover(isPresented: $vm.showPostEditor, content: {
-            // 发布帖子
-            PostEditView()
-        })
     }
 
     var tabbar: some View {
