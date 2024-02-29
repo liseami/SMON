@@ -37,13 +37,6 @@ struct FeedView: View {
             }
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
-//                    .onTapGesture {
-//                        showFliterView.toggle()
-//                    }
-//                    .fullScreenCover(isPresented: $showFliterView, content: {
-//                        HomeFliterView()
-//                            .environment(\.colorScheme, .dark)
-//                    })
             }
         }
     }
@@ -80,23 +73,30 @@ struct FeedView: View {
 
     var postView: some View {
         HStack(alignment: .top, spacing: 12) {
-            AsyncImage(url: AppConfig.mokImage)
-                .scaledToFit()
-                .frame(width: 38, height: 38) // Adjust the size as needed
-                .clipShape(Circle())
+            VStack {
+                AsyncImage(url: AppConfig.mokImage)
+                    .scaledToFit()
+                    .frame(width: 38, height: 38) // Adjust the size as needed
+                    .clipShape(Circle())
+                RoundedRectangle(cornerRadius: 99)
+                    .frame(width: 2)
+                    .frame(maxHeight: .infinity)
+                    .foregroundColor(Color.XMDesgin.f2)
+            }
 
             VStack(alignment: .leading) {
                 HStack {
                     Text(String.randomChineseString(length: Int.random(in: 3...12)))
                         .font(.body.bold())
                         .lineLimit(1)
+                        .foregroundStyle(Color.XMDesgin.f1)
                     Spacer()
                     Text("14小时前")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                    XMDesgin.XMIcon(iconName: "system_more", size: 12, color: .secondary)
+                        .font(.caption)
+                        .foregroundStyle(Color.XMDesgin.f2)
                 }
                 Text(String.randomChineseString(length: Int.random(in: 12...144)))
+                    .foregroundStyle(Color.XMDesgin.f1)
                     .font(.subheadline)
 
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -114,10 +114,44 @@ struct FeedView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 12))
                             }
                         }
+                        Spacer().frame(width: 12)
                     }
                 }
                 .frame(height: 160 / 3 * 4)
                 .padding(.leading, -(16 + 38 + 12))
+                .padding(.trailing, -16)
+                HStack(alignment: .center, spacing: 12, content: {
+                    HStack {
+                        Text("14929")
+                            .font(.caption)
+                            .bold()
+                        XMDesgin.XMIcon(iconName: "feed_heart", size: 16)
+                            .padding(.all, 6)
+                            .background(Color.XMDesgin.b1)
+                            .clipShape(Circle())
+                    }
+                    HStack {
+                        XMDesgin.XMIcon(iconName: "feed_comment", size: 16)
+                            .padding(.all, 6)
+                            .background(Color.XMDesgin.b1)
+                            .clipShape(Circle())
+                    }
+                    Spacer()
+                    XMDesgin.XMIcon(iconName: "system_more", size: 16)
+                        .padding(.all, 6)
+                        .background(Color.XMDesgin.b1)
+                        .clipShape(Circle())
+                })
+                .padding(.top, 6)
+
+                Text("145评论")
+                    .font(.caption)
+                    .bold()
+                    .padding(.top, 6)
+                    .background(content: {
+                        Color.black
+                    })
+                    .padding(.leading, -(38 + 12))
             }
         }
         .padding(.vertical, 12)

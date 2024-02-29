@@ -65,7 +65,10 @@ enum XMDesgin {
                 action()
             } label: {
                 HStack(spacing: 2) {
-                    XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                    if !iconName.isEmpty {
+                        XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                    }
+                   
                     Text(text)
                         .font(.subheadline)
                         .bold()

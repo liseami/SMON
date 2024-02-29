@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>id</key>
+	<string>lively</string>
+	<key>name</key>
+	<string>活泼</string>
+	<key>name_en</key>
+	<string>Lively</string>
+	<key>conversation_cell_bg_color</key>
+	<string>#FFFFFF</string>
+	<key>conversation_cell_top_bg_color</key>
+	<string>#F4F4F4</string>
+	<key>conversation_bg_color</key>
+	<string>#FFFFFF</string>
+	<key>pop_icon_new_chat_img</key>
+	<string>new_chat.png</string>
+	<key>pop_icon_new_group_img</key>
+	<string>new_groupchat.png</string>
+	<key>conversation_group_bg_color</key>
+	<string>#EBECF0</string>
+	<key>conversation_group_animate_view_color</key>
+	<string>#FFFFFF</string>
+	<key>conversation_group_btn_select_color</key>
+	<string>#FF7756</string>
+	<key>conversation_group_btn_unselect_color</key>
+	<string>#666666</string>
+	<key>no_conversation_img</key>
+	<string>no_conversation</string>
+</dict>
+</plist>

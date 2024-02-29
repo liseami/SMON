@@ -39,4 +39,6 @@ class MainViewModel: ObservableObject {
     }
 
     @Published var currentTabbar: TabbarItem = .home
+    @Published var showHotBuyView : Bool = false
+    @Published var showPostEditor : Bool = false
 }

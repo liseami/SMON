@@ -48,27 +48,35 @@ struct MainTabbar: View {
     var circleBtn: some View {
         let iconName = vm.currentTabbar.circleBtnInfo.icon
         let btnName = vm.currentTabbar.circleBtnInfo.name
-        return LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .bottomLeading, endPoint: .topTrailing)
-            .frame(width: 58, height: 58, alignment: .center)
-            .overlay(alignment: .center, content: {
-                Circle().stroke(lineWidth: 2)
-                    .foregroundColor(.init(hex: "D9C15B"))
-            })
-            .clipShape(Circle())
-            .changeEffect(.shine, value: vm.currentTabbar, isEnabled: true)
-            .shadow(color: .gray, radius: 2, x: 0, y: 1)
-            .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 1)
-            .overlay {
-                VStack(spacing: 0) {
-                    XMDesgin.XMIcon(iconName: iconName, color: .white)
-                    Text(btnName)
-                        .font(.caption2)
-                        .foregroundColor(.white)
-                        .ifshow(show: !btnName.isEmpty)
-                }
+        return XMDesgin.XMButton {
+            if vm.currentTabbar == .home {
+                vm.showHotBuyView = true
+            } else {
+                vm.showPostEditor = true
             }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .ifshow(show: !iconName.isEmpty)
+        } label: {
+            LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .bottomLeading, endPoint: .topTrailing)
+                .frame(width: 58, height: 58, alignment: .center)
+                .overlay(alignment: .center, content: {
+                    Circle().stroke(lineWidth: 2)
+                        .foregroundColor(.init(hex: "D9C15B"))
+                })
+                .clipShape(Circle())
+                .changeEffect(.shine, value: vm.currentTabbar, isEnabled: true)
+                .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 1)
+                .overlay {
+                    VStack(spacing: 0) {
+                        XMDesgin.XMIcon(iconName: iconName, color: .white)
+                        Text(btnName)
+                            .font(.caption2)
+                            .foregroundColor(.white)
+                            .ifshow(show: !btnName.isEmpty)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .ifshow(show: !iconName.isEmpty)
+        }
     }
 
     var tabIcons: some View {

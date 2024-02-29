@@ -26,8 +26,14 @@ func DAppInit() {
 
 func TUIInit() {
     TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "liseami", userSig: "eJwtjF0LgjAYRv-LbgudcysUvAyJIgrFSLxxbMarLkzX6IP*e0u9fM55OB*U7hPHyB6FiDgYLccNQt40VDDiFgZZKpjVIJqy60Cg0FthjAkNPDoZ*eygl5YzxohVE9Wg-myNA3tmvj9X4GrLm1oPPF*c21PabPPDPU64oHGNX8bwd*FmhVvtjg*jeKbJJULfHyapM7o_") {}
-    if let customThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil) {
-        TUIThemeManager.share().registerThemeResourcePath(customThemePath, for: .chat)
+    
+    if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),
+       let customConversationThemePath = Bundle.main.path(forResource: "TUIConversationXMTheme.bundle", ofType: nil),
+       let customCoreThemePath = Bundle.main.path(forResource: "TUICoreXMTheme.bundle", ofType: nil)
+    {
+        TUIThemeManager.share().registerThemeResourcePath(customChatThemePath, for: .chat)
+        TUIThemeManager.share().registerThemeResourcePath(customConversationThemePath, for: .conversation)
+        TUIThemeManager.share().registerThemeResourcePath(customCoreThemePath, for: .core)
     }
     TUIThemeManager.share().applyTheme("dark", for: .all)
 }

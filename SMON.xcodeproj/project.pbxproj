@@ -11,6 +11,10 @@
 		A256DB972B900BF6008C7063 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB962B900BF6008C7063 /* WebView.swift */; };
 		A256DB992B901C88008C7063 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = A256DB982B901C88008C7063 /* AppConfig.plist */; };
 		A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB9A2B901C9F008C7063 /* AppConfig.swift */; };
+		A256DBA32B9045DB008C7063 /* TUIConversationXMTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A256DBA22B9045DB008C7063 /* TUIConversationXMTheme.bundle */; };
+		A256DBA52B904622008C7063 /* TUICoreXMTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A256DBA42B904622008C7063 /* TUICoreXMTheme.bundle */; };
+		A256DBA72B906737008C7063 /* HotBuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DBA62B906737008C7063 /* HotBuyView.swift */; };
+		A256DBAA2B907E7A008C7063 /* PostEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DBA92B907E7A008C7063 /* PostEditView.swift */; };
 		A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */; };
 		A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */; };
 		A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD232B8EDE5000B7CE40 /* AvatarRequestView.swift */; };
@@ -129,6 +133,10 @@
 		A256DB962B900BF6008C7063 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		A256DB982B901C88008C7063 /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
 		A256DB9A2B901C9F008C7063 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		A256DBA22B9045DB008C7063 /* TUIConversationXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUIConversationXMTheme.bundle; path = SMON/DesginSystem/TUIConversationXMTheme.bundle; sourceTree = SOURCE_ROOT; };
+		A256DBA42B904622008C7063 /* TUICoreXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUICoreXMTheme.bundle; path = SMON/TUICoreXMTheme.bundle; sourceTree = SOURCE_ROOT; };
+		A256DBA62B906737008C7063 /* HotBuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBuyView.swift; sourceTree = "<group>"; };
+		A256DBA92B907E7A008C7063 /* PostEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostEditView.swift; sourceTree = "<group>"; };
 		A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestViewModel.swift; sourceTree = "<group>"; };
 		A25AAD212B8ED29D00B7CE40 /* NameRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameRequestView.swift; sourceTree = "<group>"; };
 		A25AAD232B8EDE5000B7CE40 /* AvatarRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarRequestView.swift; sourceTree = "<group>"; };
@@ -214,6 +222,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A256DBA82B907E6A008C7063 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				A256DBA92B907E7A008C7063 /* PostEditView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
 		A25AAD3F2B8F774000B7CE40 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +400,8 @@
 			children = (
 				A28FEF1A2B8DD740002E8FB2 /* Color */,
 				A2B45C9E2B8AFCA600D71EF8 /* Component */,
+				A256DBA42B904622008C7063 /* TUICoreXMTheme.bundle */,
+				A256DBA22B9045DB008C7063 /* TUIConversationXMTheme.bundle */,
 				A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */,
 			);
 			path = DesginSystem;
@@ -416,6 +434,7 @@
 				A272A4862B871CC7008EA955 /* Login */,
 				A28FEF1D2B8EC7D8002E8FB2 /* UserInfoRequest */,
 				A2B45CAF2B8B27BB00D71EF8 /* SettingView */,
+				A256DBA82B907E6A008C7063 /* Post */,
 				A272A4872B871CCC008EA955 /* TabViews */,
 			);
 			path = Views;
@@ -454,6 +473,7 @@
 			children = (
 				A272A48E2B871CFD008EA955 /* HomeView.swift */,
 				A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */,
+				A256DBA62B906737008C7063 /* HotBuyView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -591,7 +611,9 @@
 			files = (
 				A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */,
 				A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */,
+				A256DBA52B904622008C7063 /* TUICoreXMTheme.bundle in Resources */,
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
+				A256DBA32B9045DB008C7063 /* TUIConversationXMTheme.bundle in Resources */,
 				A256DB992B901C88008C7063 /* AppConfig.plist in Resources */,
 				A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */,
 				A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */,
@@ -657,6 +679,7 @@
 				A2BF15F32B8C64EE0011A130 /* ChatView.swift in Sources */,
 				A25AAD262B8EE9BE00B7CE40 /* PhotoSelector.swift in Sources */,
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
+				A256DBA72B906737008C7063 /* HotBuyView.swift in Sources */,
 				A25AAD2C2B8EF7FD00B7CE40 /* SexRequestView.swift in Sources */,
 				A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */,
 				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
@@ -682,6 +705,7 @@
 				A25AAD342B8F1E9500B7CE40 /* HeightRequestView.swift in Sources */,
 				A25AAD282B8EF06400B7CE40 /* MorePhotoRequestView.swift in Sources */,
 				A2B45C9B2B8A183200D71EF8 /* ChatViewContainer.swift in Sources */,
+				A256DBAA2B907E7A008C7063 /* PostEditView.swift in Sources */,
 				A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */,
 				A2BF163D2B8C83B90011A130 /* LaunchScreenAnimation.swift in Sources */,
 				A26A030C2B89AF2A00F6AC9B /* AppDelegate.swift in Sources */,

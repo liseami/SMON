@@ -28,15 +28,27 @@ struct MainView: View {
         Group {
             switch vm.currentTabbar {
             case .home:
+                // 首页
                 HomeView()
             case .feed:
+                // 信息流
                 FeedView()
             case .message:
+                // 消息
                 ConversationListView()
             case .profile:
+                // 个人主页
                 ProfileView()
             }
         }
+        .sheet(isPresented: $vm.showHotBuyView, content: {
+            // 购买热度
+            HotBuyView()
+        })
+        .fullScreenCover(isPresented: $vm.showPostEditor, content: {
+            // 发布帖子
+            PostEditView()
+        })
     }
 
     var tabbar: some View {
