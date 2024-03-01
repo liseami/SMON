@@ -35,14 +35,4 @@ struct SMONApp: App {
     }
 }
 
-// 修改NavigationBackBar的式样
-extension UINavigationController {
-    override open func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        let backBarBtnImage = UIImage(named: "system_backbar")?
-            .withRenderingMode(.alwaysTemplate).withTintColor(.white)
-        UINavigationBar.appearance().backIndicatorImage = backBarBtnImage
-        UINavigationBar.appearance().backIndicatorTransitionMaskImage = backBarBtnImage
-        navigationBar.topItem?.backButtonDisplayMode = .minimal
-    }
-}
+

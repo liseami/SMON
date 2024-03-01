@@ -26,6 +26,7 @@ struct SettingView: View {
                     if let children = group.children {
                         ForEach(children, id: \.name) { child in
                             XMDesgin.XMListRow(.init(name: child.name, icon: child.iconName ?? "", subline: "")) {}
+                                .listRowSeparator(.hidden)
                         }
                     }
                 } header: {
@@ -47,6 +48,7 @@ struct SettingView: View {
             }
             .padding(.top, 32)
             .frame(maxWidth: .infinity, alignment: .center)
+            .listRowSeparator(.hidden)
         }
         .navigationBarTransparent(false)
         .listStyle(.plain)

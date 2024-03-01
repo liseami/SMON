@@ -50,7 +50,7 @@ struct MainTabbar: View {
         return XMDesgin.XMButton {
             if vm.currentTabbar == .home {
 //                vm.showHotBuyView = true
-                Apphelper.shared.present(HotBuyView())
+                Apphelper.shared.presentPanSheet(HotBuyView(), style: .cloud)
             } else {
                 Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
             }

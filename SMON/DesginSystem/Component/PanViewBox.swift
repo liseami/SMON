@@ -14,12 +14,13 @@ public enum PanPresentStyle {
     case cloud
     /// 设置
     case setting
+    case shop
 }
 
 class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable where Content: View {
     var style: PanPresentStyle
-    var isShortFormEnabled = true
-    init(content: Content, style: PanPresentStyle = .cloud) {
+    var isShortFormEnabled = false
+    init(content: Content, style: PanPresentStyle) {
         self.style = style
         let contentView = AnyView(content)
         super.init(rootView: contentView)
@@ -49,6 +50,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     // 最大高度
     var longFormHeight: PanModalHeight {
         switch self.style {
+        case .shop: return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.7)
         default: return .maxHeight
         }
     }
@@ -85,8 +87,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     // 允许点击背景后消失
     var allowsTapToDismiss: Bool {
         switch self.style {
-        case .cloud: return true
-        default: return false
+        default: return true
         }
     }
 

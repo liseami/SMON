@@ -52,6 +52,7 @@ struct MainView: View {
                 ProfileHomeView()
             }
         }
+        .navigationBarTransparent(true)
         .environmentObject(vm)
     }
 

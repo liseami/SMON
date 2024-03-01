@@ -19,7 +19,6 @@ struct HomeView: View {
             // 顶部导航
             topBar
         }
-        .navigationBarTransparent(true)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {

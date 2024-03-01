@@ -14,8 +14,7 @@ struct AppWarningView: View {
                     "我不会将App中的「用户内容」分享到广域社交网络中"]
     @State var agreeList: [String] = []
     @State var showBtns: Bool = false
-    @State var openUrl : URL?
-    @State var openUrlSheet : Bool = false
+
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color.black, Color.black.opacity(0)], startPoint: .bottom, endPoint: .top)
@@ -59,9 +58,10 @@ struct AppWarningView: View {
                         .frame(width: 240)
                         .tint(Color.XMDesgin.main)
                         .environment(\.openURL, OpenURLAction { url in
-                            self.openUrl = url
-                            openUrlSheet = true
-                          return .handled
+                            Apphelper.shared.presentPanSheet(InAppBrowser(url: url)
+                                .preferredColorScheme(.dark), style: .cloud)
+
+                            return .handled
                         })
                     Spacer()
                     XMDesgin.CircleBtn(backColor: Color.white, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
@@ -72,14 +72,6 @@ struct AppWarningView: View {
             }
             .padding()
         }
-        .sheet(isPresented: $openUrlSheet, content: {
-            if let openUrl{
-                InAppBrowser(url: openUrl)
-                    .preferredColorScheme(.dark)
-            }else{
-                EmptyView()
-            }
-        })
         .onAppear(perform: {
             withAnimation {
                 showBtns = true

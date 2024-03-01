@@ -64,11 +64,11 @@ class Apphelper {
         case error(message: String)
     }
 
-    func presentPanSheet<T: View>(_ view: T) {
+    func presentPanSheet<T: View>(_ view: T,style : PanPresentStyle) {
         /*
          推送PanSheet页面
          */
-        topMostViewController()?.presentPanModal(PanViewBox(content: view))
+        topMostViewController()?.presentPanModal(PanViewBox(content: view,style: style))
     }
 
     func pushNotification(type: NotificationType) {

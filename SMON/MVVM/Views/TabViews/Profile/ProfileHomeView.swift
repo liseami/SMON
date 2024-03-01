@@ -90,7 +90,7 @@ struct ProfileHomeView: View {
 
     var banner: some View {
         VStack(alignment: .leading, spacing: 16, content: {
-            Text("免费获取赛币").font(.title3.bold())
+//            Text("免费获取赛币").font(.title3.bold())
             HStack(spacing: 32) {
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text("每日签到").font(.body.bold())
@@ -117,18 +117,18 @@ struct ProfileHomeView: View {
     }
 
     var list: some View {
-        VStack(alignment: .leading, spacing: 0, content: {
+        VStack(alignment: .leading, spacing: 12, content: {
             XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "32")) {
                 vm.pathPages.append(.myfriends)
             }
 
-            XMDesgin.XMListRow(.init(name: "当前热度排名情况", icon: "profile_fire", subline: "No.23992")) {
+            XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.23992")) {
                 vm.pathPages.append(.myhotinfo)
             }
 
             XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: "限时特惠")) {
 //                vm.pathPages.append(.coinshop)
-                Apphelper.shared.presentPanSheet(CoinshopView())
+                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
             }
 
         })

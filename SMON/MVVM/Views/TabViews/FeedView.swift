@@ -16,8 +16,6 @@ struct FeedView: View {
             topBar
         })
         .navigationBarTitleDisplayMode(.inline)
-//        .navigationBarColor(.clear)
-        .navigationBarTransparent(true)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 HStack {
