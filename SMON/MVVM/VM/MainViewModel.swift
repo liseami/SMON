@@ -41,12 +41,13 @@ class MainViewModel: ObservableObject {
     @Published var currentTabbar: TabbarItem = .home
     
     @Published var pathPages : [PagePath] = []
-    enum PagePath: CaseIterable {
+    enum PagePath: Hashable {
         case setting
         case notification
         case myprofile
         case coinshop
         case myhotinfo
         case myfriends
+        case postdetail(postId:String)
     }
 }

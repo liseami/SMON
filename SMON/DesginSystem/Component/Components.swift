@@ -9,22 +9,37 @@ enum XMDesgin {
     struct XMIcon: View {
         var size: CGFloat
         var color: Color
+        var withBackCricle: Bool
         var iconName: String?
         var systemName: String?
 
-        init(iconName: String, size: CGFloat = 22, color: Color = .white) {
+        init(iconName: String, size: CGFloat = 22, color: Color = .white, withBackCricle: Bool = false) {
             self.iconName = iconName
             self.size = size
+            self.withBackCricle = withBackCricle
             self.color = color
         }
 
-        init(systemName: String, size: CGFloat = 22, color: Color = .white) {
+        init(systemName: String, size: CGFloat = 22, color: Color = .white, withBackCricle: Bool = false) {
             self.systemName = systemName
             self.size = size
+            self.withBackCricle = withBackCricle
             self.color = color
         }
 
         var body: some View {
+            if withBackCricle {
+                icon
+                    .padding(.all, 8)
+                    .background(Color.XMDesgin.b1)
+                    .clipShape(Circle())
+                    .contentShape(Circle())
+            } else {
+                icon
+            }
+        }
+
+        var icon: some View {
             Group {
                 if let iconName {
                     Image(iconName)
@@ -231,16 +246,21 @@ enum XMDesgin {
                         .frame(height: 1)
                         .foregroundColor(.XMDesgin.f3.opacity(0.8))
                         .opacity(0)
-                    HStack {
+
+                    HStack(spacing: 14) {
                         XMDesgin.XMIcon(iconName: info.icon, size: 28)
                         Text(info.name).bold()
+                            .foregroundStyle(Color.XMDesgin.f1)
                         Spacer()
                         Text(info.subline)
+                            .font(.subheadline)
+                            .foregroundStyle(Color.XMDesgin.f2)
                         XMDesgin.XMIcon(iconName: "system_arrow_right", size: 18, color: Color.XMDesgin.f2)
                     }
                     RoundedRectangle(cornerRadius: 12)
-                        .frame(height: 1)
-                        .foregroundColor(.XMDesgin.f3.opacity(0.5))
+                        .frame(height: 2)
+                        .foregroundColor(.XMDesgin.b1)
+                        .padding(.leading, 28 + 14)
                 }
                 .contentShape(RoundedRectangle(cornerRadius: 12))
             }

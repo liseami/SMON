@@ -8,8 +8,43 @@
 import SwiftUI
 import SwiftUIX
 
+struct XMPost: Hashable {
+    var id: String
+}
+
+class FeedViewModel: ObservableObject {
+    @Published var postDetail: XMPost?
+    @Published var currentTopTab: FeedTopBarItem = .all
+
+    enum FeedTopBarItem: CaseIterable {
+        case near
+        case localCity
+        case all
+        case fans
+        case flow
+        case vistor
+        var info: LabelInfo {
+            switch self {
+            case .all:
+                return .init(name: "全国", icon: "", subline: "")
+            case .localCity:
+                return .init(name: "苏州", icon: "", subline: "")
+            case .near:
+                return .init(name: "附近", icon: "", subline: "")
+            case .fans:
+                return .init(name: "粉丝", icon: "", subline: "")
+            case .flow:
+                return .init(name: "关注", icon: "", subline: "")
+            case .vistor:
+                return .init(name: "访客", icon: "", subline: "")
+            }
+        }
+    }
+}
+
 struct FeedView: View {
-    @StateObject var vm: HomeViewModel = .init()
+    @StateObject var vm: FeedViewModel = .init()
+    @EnvironmentObject var main : MainViewModel
     var body: some View {
         ZStack(alignment: .top, content: {
             tabView
@@ -20,7 +55,7 @@ struct FeedView: View {
             ToolbarItem(placement: .principal) {
                 HStack {
                     Spacer()
-                    ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
+                    ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tabitem in
                         let selected = tabitem == vm.currentTopTab
                         Text(tabitem.info.name)
                             .font(.body)
@@ -52,6 +87,9 @@ struct FeedView: View {
             LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [], content: {
                 ForEach(0...120, id: \.self) { _ in
                     postView
+                        .onTapGesture {
+                            main.pathPages.append(.postdetail(postId: ""))
+                        }
                 }
             })
         }
@@ -60,7 +98,7 @@ struct FeedView: View {
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
-                    ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
+                    ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tab in
                         // 帖子流页面
                         feedList.tag(tab)
                     }

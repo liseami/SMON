@@ -25,7 +25,7 @@ struct ProfileHomeView: View {
             .padding(.all, 16)
         }
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .topBarLeading) {
                 XMDesgin.XMButton {
                     vm.pathPages.append(.notification)
                 } label: {

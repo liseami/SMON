@@ -29,8 +29,11 @@ struct MainView: View {
                     case .coinshop: CoinshopView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: MyFriendsView()
+                    case .postdetail(let postId) :PostDetailView()
                     }
-                }.environmentObject(vm)
+                }
+                .toolbarRole(.editor)
+                .environmentObject(vm)
             }
         }
     }

@@ -40,6 +40,7 @@ struct PostEditView: View {
                             .font(.body)
                             .foregroundColor(Color.XMDesgin.f1)
                             .frame(height: 160)
+                            .tint(.XMDesgin.main)
 
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 4) {
