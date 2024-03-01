@@ -23,7 +23,7 @@ struct HotBuyView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24, content: {
                     HStack(alignment: .center, spacing: 24, content: {
-                        Image("3d-blocks-blocks-composition-48")
+                        Image("saicoin_lvl1")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 140)

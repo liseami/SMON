@@ -5,8 +5,6 @@
 //  Created by 赵翔宇 on 2024/2/25.
 //
 
-
-
 enum XMDesgin {
     struct XMIcon: View {
         var size: CGFloat
@@ -68,7 +66,7 @@ enum XMDesgin {
                     if !iconName.isEmpty {
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     }
-                   
+
                     Text(text)
                         .font(.subheadline)
                         .bold()
@@ -130,7 +128,7 @@ enum XMDesgin {
                 } perform: {
                     guard enable else {
                         shake += 1
-                        Apphelper.shared.nofimada( .error)
+                        Apphelper.shared.nofimada(.error)
                         return
                     }
                     Apphelper.shared.mada(style: .light)
@@ -215,16 +213,50 @@ enum XMDesgin {
             }
         }
     }
+
+    struct XMListRow: View {
+        var info: LabelInfo
+        var action: () -> ()
+        init(_ info: LabelInfo, action: @escaping () -> ()) {
+            self.info = info
+            self.action = action
+        }
+
+        var body: some View {
+            XMButton {
+                action()
+            } label: {
+                VStack(alignment: .leading, spacing: 14) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(height: 1)
+                        .foregroundColor(.XMDesgin.f3.opacity(0.8))
+                        .opacity(0)
+                    HStack {
+                        XMDesgin.XMIcon(iconName: info.icon, size: 28)
+                        Text(info.name).bold()
+                        Spacer()
+                        Text(info.subline)
+                        XMDesgin.XMIcon(iconName: "system_arrow_right", size: 18, color: Color.XMDesgin.f2)
+                    }
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(height: 1)
+                        .foregroundColor(.XMDesgin.f3.opacity(0.5))
+                }
+                .contentShape(RoundedRectangle(cornerRadius: 12))
+            }
+        }
+    }
 }
 
 #Preview {
-    VStack {
+    VStack(spacing: 24) {
         XMDesgin.XMIcon(iconName: "tabbar_home")
         XMDesgin.XMIcon(systemName: "flag.badge.ellipsis")
         XMDesgin.SmallBtn {}
         XMDesgin.CircleBtn(backColor: .white, fColor: .black, iconName: "home_bell", enable: true) {}
         XMDesgin.SelectionTable(text: "男", selected: false) {}
         XMDesgin.XMMainBtn {}
+        XMDesgin.XMListRow(.init(name: "home_bell", icon: "home_bell", subline: "2323")) {}
     }
     .padding(.all)
 }

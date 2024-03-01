@@ -11,11 +11,11 @@ class UserInfoRequestViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var avatar: UIImage?
     @Published var morePhoto: [UIImage] = []
-    @Published var presentedSteps: [PageStep] = []
     @Published var brithday: Date = .now
     @Published var gender: Int = 0
     @Published var relationHope: Int = 0
     @Published var showCompleteView: Bool = false
+    @Published var presentedSteps: [PageStep] = []
     enum PageStep: CaseIterable {
         case photo
         case morephoto

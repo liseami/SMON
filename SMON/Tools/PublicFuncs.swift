@@ -7,6 +7,7 @@
 
 import Foundation
 import JDStatusBarNotification
+import PanModal
 import SwiftUIX
 import UIKit
 
@@ -53,7 +54,7 @@ class Apphelper {
                           presentationStyle: ModalPresentationStyle? = nil,
                           completion: @escaping () -> Void = {})
     {
-        self.topMostViewController()?.present(view.environment(\.colorScheme, .dark), named: name, onDismiss: onDismiss, presentationStyle: presentationStyle, completion: completion)
+        topMostViewController()?.present(view.environment(\.colorScheme, .dark), named: name, onDismiss: onDismiss, presentationStyle: presentationStyle, completion: completion)
     }
 
     enum NotificationType {
@@ -61,6 +62,13 @@ class Apphelper {
         case info(message: String)
         case warning(message: String)
         case error(message: String)
+    }
+
+    func presentPanSheet<T: View>(_ view: T) {
+        /*
+         推送PanSheet页面
+         */
+        topMostViewController()?.presentPanModal(PanViewBox(content: view))
     }
 
     func pushNotification(type: NotificationType) {

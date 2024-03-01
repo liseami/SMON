@@ -21,30 +21,7 @@ struct ProfileView: View {
             mediaView
         })
         .ignoresSafeArea()
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMIcon(iconName: "profile_share")
-                    .padding(.horizontal,8)
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMIcon(iconName: "home_bell")
-                    .padding(.horizontal,8)
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMButton {
-                    Apphelper.shared.topMostViewController()?.navigationController?.pushViewController(SettingView().host(), animated: true)
-                } label: {
-                    XMDesgin.XMIcon(iconName: "profile_setting")
-                }
-
-//                NavigationLink {
-//                    SettingView()
-//                } label: {
-//                    XMDesgin.XMIcon(iconName: "profile_setting")
-//                }
-//                .foregroundColor(.white)
-            }
-        }
+       
     }
 
     var topImage: some View {

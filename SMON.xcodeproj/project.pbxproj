@@ -54,6 +54,12 @@
 		A272A4952B871D80008EA955 /* AppFeaturesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A4942B871D80008EA955 /* AppFeaturesView.swift */; };
 		A272A4972B871D8D008EA955 /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A4962B871D8D008EA955 /* LoginMainView.swift */; };
 		A2784F152B90CA4900A1B06F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F142B90CA4900A1B06F /* UIViewController.swift */; };
+		A2784F172B9166CB00A1B06F /* ProfileHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F162B9166CB00A1B06F /* ProfileHomeView.swift */; };
+		A2784F1B2B91851200A1B06F /* CoinshopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F1A2B91851200A1B06F /* CoinshopView.swift */; };
+		A2784F1D2B91851800A1B06F /* MyHotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F1C2B91851800A1B06F /* MyHotInfoView.swift */; };
+		A2784F1F2B91852100A1B06F /* MyFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F1E2B91852100A1B06F /* MyFriendsView.swift */; };
+		A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F202B9186A500A1B06F /* NotificationView.swift */; };
+		A2784F232B9186FF00A1B06F /* PanViewBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F222B9186FF00A1B06F /* PanViewBox.swift */; };
 		A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F543D2B8738B300AF9CD3 /* LoginViewModel.swift */; };
 		A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54402B8739EF00AF9CD3 /* AppWarningView.swift */; };
 		A28F54432B8739F900AF9CD3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28F54422B8739F900AF9CD3 /* LoginView.swift */; };
@@ -176,6 +182,12 @@
 		A272A4942B871D80008EA955 /* AppFeaturesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeaturesView.swift; sourceTree = "<group>"; };
 		A272A4962B871D8D008EA955 /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
 		A2784F142B90CA4900A1B06F /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		A2784F162B9166CB00A1B06F /* ProfileHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHomeView.swift; sourceTree = "<group>"; };
+		A2784F1A2B91851200A1B06F /* CoinshopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinshopView.swift; sourceTree = "<group>"; };
+		A2784F1C2B91851800A1B06F /* MyHotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHotInfoView.swift; sourceTree = "<group>"; };
+		A2784F1E2B91852100A1B06F /* MyFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsView.swift; sourceTree = "<group>"; };
+		A2784F202B9186A500A1B06F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		A2784F222B9186FF00A1B06F /* PanViewBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanViewBox.swift; sourceTree = "<group>"; };
 		A28F543D2B8738B300AF9CD3 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		A28F54402B8739EF00AF9CD3 /* AppWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppWarningView.swift; sourceTree = "<group>"; };
 		A28F54422B8739F900AF9CD3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -339,9 +351,10 @@
 		A272A4872B871CCC008EA955 /* TabViews */ = {
 			isa = PBXGroup;
 			children = (
+				A2784F192B91850D00A1B06F /* Shop */,
+				A2784F182B9184F400A1B06F /* Profile */,
 				A2E7F9A62B8CDF1300E86474 /* HomeView */,
 				A2BF15F12B8C64E70011A130 /* Message */,
-				A272A48C2B871CF9008EA955 /* ProfileView.swift */,
 				A2BF15E92B8C38210011A130 /* TestView.swift */,
 				A272A4922B871D1A008EA955 /* FeedView.swift */,
 				A26A03032B88C88800F6AC9B /* MainTabbar.swift */,
@@ -356,6 +369,25 @@
 				A272A4752B8706FC008EA955 /* SMON.xcdatamodeld */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		A2784F182B9184F400A1B06F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A272A48C2B871CF9008EA955 /* ProfileView.swift */,
+				A2784F162B9166CB00A1B06F /* ProfileHomeView.swift */,
+				A2784F1C2B91851800A1B06F /* MyHotInfoView.swift */,
+				A2784F1E2B91852100A1B06F /* MyFriendsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A2784F192B91850D00A1B06F /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				A2784F1A2B91851200A1B06F /* CoinshopView.swift */,
+			);
+			path = Shop;
 			sourceTree = "<group>";
 		};
 		A28FEF1A2B8DD740002E8FB2 /* Color */ = {
@@ -412,6 +444,7 @@
 		A2B45C9E2B8AFCA600D71EF8 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				A2784F222B9186FF00A1B06F /* PanViewBox.swift */,
 				A256DB962B900BF6008C7063 /* WebView.swift */,
 				A25AAD252B8EE9BE00B7CE40 /* PhotoSelector.swift */,
 				A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */,
@@ -438,6 +471,7 @@
 				A2B45CAF2B8B27BB00D71EF8 /* SettingView */,
 				A256DBA82B907E6A008C7063 /* Post */,
 				A272A4872B871CCC008EA955 /* TabViews */,
+				A2784F202B9186A500A1B06F /* NotificationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -679,10 +713,12 @@
 				A25AAD302B8F19A900B7CE40 /* RelationHopeRequestView.swift in Sources */,
 				A272A4742B8706FC008EA955 /* Persistence.swift in Sources */,
 				A2B45CAE2B8B222400D71EF8 /* ProfileViewModel.swift in Sources */,
+				A2784F172B9166CB00A1B06F /* ProfileHomeView.swift in Sources */,
 				A2BF15F32B8C64EE0011A130 /* ChatView.swift in Sources */,
 				A25AAD262B8EE9BE00B7CE40 /* PhotoSelector.swift in Sources */,
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
 				A256DBA72B906737008C7063 /* HotBuyView.swift in Sources */,
+				A2784F1B2B91851200A1B06F /* CoinshopView.swift in Sources */,
 				A25AAD2C2B8EF7FD00B7CE40 /* SexRequestView.swift in Sources */,
 				A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */,
 				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
@@ -716,6 +752,7 @@
 				A28F54492B873CD600AF9CD3 /* LoginView_VCode.swift in Sources */,
 				A272A4932B871D1A008EA955 /* FeedView.swift in Sources */,
 				A25AAD2A2B8EF6B600B7CE40 /* BrithdayDayRequestView.swift in Sources */,
+				A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */,
 				A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */,
 				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
 				A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */,
@@ -724,9 +761,11 @@
 				A25AAD2E2B8EFE9900B7CE40 /* AliOSSManager.swift in Sources */,
 				A2BF15EA2B8C38210011A130 /* TestView.swift in Sources */,
 				A272A4952B871D80008EA955 /* AppFeaturesView.swift in Sources */,
+				A2784F1D2B91851800A1B06F /* MyHotInfoView.swift in Sources */,
 				A272A4972B871D8D008EA955 /* LoginMainView.swift in Sources */,
 				A28F54432B8739F900AF9CD3 /* LoginView.swift in Sources */,
 				A272A48D2B871CF9008EA955 /* ProfileView.swift in Sources */,
+				A2784F232B9186FF00A1B06F /* PanViewBox.swift in Sources */,
 				A25AAD362B8F238600B7CE40 /* DrinkRequestView.swift in Sources */,
 				A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */,
 				A2BF15F52B8C67060011A130 /* PermissionManager.swift in Sources */,
@@ -734,6 +773,7 @@
 				A2784F152B90CA4900A1B06F /* UIViewController.swift in Sources */,
 				A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */,
 				A26A030A2B89AEAE00F6AC9B /* Bridge.m in Sources */,
+				A2784F1F2B91852100A1B06F /* MyFriendsView.swift in Sources */,
 				A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

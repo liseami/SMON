@@ -11,7 +11,7 @@ import SwiftUI
 struct MainView: View {
     @StateObject var vm: MainViewModel = .init()
     var body: some View {
-        NavigationView(content: {
+        NavigationStack(path: $vm.pathPages) {
             ZStack {
                 // 一级页面
                 tabViews
@@ -20,8 +20,19 @@ struct MainView: View {
                 // 启动动画
                 LaunchScreenAnimation()
             }
-        })
-   
+            .navigationDestination(for: MainViewModel.PagePath.self) { path in
+                Group {
+                    switch path {
+                    case .notification: NotificationView()
+                    case .setting: SettingView()
+                    case .myprofile: ProfileView()
+                    case .coinshop: CoinshopView()
+                    case .myhotinfo: MyHotInfoView()
+                    case .myfriends: MyFriendsView()
+                    }
+                }.environmentObject(vm)
+            }
+        }
     }
 
     var tabViews: some View {
@@ -38,9 +49,10 @@ struct MainView: View {
                 ConversationListView()
             case .profile:
                 // 个人主页
-                ProfileView()
+                ProfileHomeView()
             }
         }
+        .environmentObject(vm)
     }
 
     var tabbar: some View {
