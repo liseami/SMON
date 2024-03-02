@@ -25,8 +25,14 @@ struct SettingView: View {
                 Section {
                     if let children = group.children {
                         ForEach(children, id: \.name) { child in
-                            XMDesgin.XMListRow(.init(name: child.name, icon: child.iconName ?? "", subline: "")) {}
-                                .listRowSeparator(.hidden)
+                            XMDesgin.XMListRow(.init(name: child.name, icon: child.iconName ?? "", subline: "")) {
+                                switch child.name {
+                                case "退出登录":
+                                    UserManager.shared.logout()
+                                default: break
+                                }
+                            }
+                            .listRowSeparator(.hidden)
                         }
                     }
                 } header: {

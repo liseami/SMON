@@ -5,6 +5,7 @@
 //  Created by 赵翔宇 on 2024/2/28.
 //
 
+import JDStatusBarNotification
 import SwiftUI
 import SwiftUIX
 
@@ -37,7 +38,13 @@ struct AvatarRequestView: View {
         .fullScreenCover(isPresented: $showImagePicker, content: {
             SinglePhotoSelector(completionHandler: { avatar in
                 vm.avatar = avatar
-                AliyunOSSManager.shared.uploadImageToOSS(image: avatar)
+                AliyunOSSManager.shared.uploadImagesToOSS(image: avatar) { _, _ in
+                    
+                } completion: { _, _ in
+                    
+                }
+
+
             })
             .ignoresSafeArea()
             .environment(\.colorScheme, .dark)

@@ -30,7 +30,8 @@ struct InfoRequestView<Content>: View where Content: View {
                 if let icon {
                     XMDesgin.XMIcon(iconName: icon, size: 32)
                 }
-                Text(title)
+                
+                XMTyperText(text:title)
                     .multilineTextAlignment(.leading)
                     .bold()
                 Text(subline)

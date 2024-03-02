@@ -23,10 +23,10 @@ struct AppWarningView: View {
                 .ignoresSafeArea()
             VStack(spacing: 32) {
                 Spacer()
-
-                Text("我们需要知道这个App是否适合为您服务")
+                XMTyperText(text:"我们需要知道这个App是否适合为您服务")
                     .bold()
                     .font(.title)
+                    .frame(maxWidth:.infinity,alignment:.leading)
 
                 VStack(alignment: .leading, spacing: 12, content: {
                     ForEach(warnings.indices, id: \.self) { index in

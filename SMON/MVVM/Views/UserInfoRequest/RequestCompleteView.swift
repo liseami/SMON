@@ -18,21 +18,21 @@ struct RequestCompleteView: View {
                     .scaledToFit()
                     .frame(width: 140, height: 140)
                     .conditionalEffect(.smoke, condition: true)
-                Text("每日大赛的游戏规则！")
+                XMTyperText(text: "每日大赛的游戏规则！")
                     .multilineTextAlignment(.leading)
                     .bold()
-                Text("每天都举行主题「排位赛」，用户按照「🔥热度值」进行排名。\r\r在这里，你可以轻松找到「全国🔥最火热的用户」，「同城🔥最火热的用户」……\r\r最重要的是，目前获取「🔥」非常简单！")
+                XMTyperText(text: "每天都举行主题「排位赛」，用户按照「🔥热度值」进行排名。\r\r在这里，你可以轻松找到「全国🔥最火热的用户」，「同城🔥最火热的用户」……\r\r最重要的是，目前获取「🔥」非常简单！\r\r祝你玩的愉快！")
 
                     .font(.body).foregroundStyle(Color.XMDesgin.f1)
                     .padding(.trailing, 30)
                     .transition(.movingParts.glare.animation(.easeInOut(duration: 0.66)))
                     .ifshow(show: showText)
-                Text("祝你玩的愉快！")
-                    .onAppear(perform: {
-                        showText = true
-                    })
-                    .font(.body).foregroundStyle(Color.XMDesgin.f1)
+                
+                    
 
+            })
+            .onAppear(perform: {
+                showText = true
             })
             Spacer()
             XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "好的") {

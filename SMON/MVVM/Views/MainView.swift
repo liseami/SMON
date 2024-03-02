@@ -20,6 +20,8 @@ struct MainView: View {
                 // 启动动画
                 LaunchScreenAnimation()
             }
+            .environmentObject(vm)
+            .navigationBarTransparent(true)
             .navigationDestination(for: MainViewModel.PagePath.self) { path in
                 Group {
                     switch path {
@@ -32,9 +34,11 @@ struct MainView: View {
                     case .postdetail(let postId) :PostDetailView()
                     }
                 }
+                .navigationBarTransparent(false)
                 .toolbarRole(.editor)
                 .environmentObject(vm)
             }
+         
         }
     }
 
@@ -46,7 +50,7 @@ struct MainView: View {
                 HomeView()
             case .feed:
                 // 信息流
-                FeedView()
+                PostFeedView()
             case .message:
                 // 消息
                 ConversationListView()
@@ -55,8 +59,7 @@ struct MainView: View {
                 ProfileHomeView()
             }
         }
-        .navigationBarTransparent(true)
-        .environmentObject(vm)
+       
     }
 
     var tabbar: some View {

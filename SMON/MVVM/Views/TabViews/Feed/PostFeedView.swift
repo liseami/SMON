@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  ThreadView.swift
 //  SMON
 //
 //  Created by 赵翔宇 on 2024/2/22.
@@ -8,35 +8,32 @@
 import SwiftUI
 import SwiftUIX
 
-struct HomeView: View {
-    @StateObject var vm: HomeViewModel = .init()
-    @State var showFliterView: Bool = false
+struct PostFeedView: View {
+    @StateObject var vm: FeedViewModel = .init()
+    @EnvironmentObject var main: MainViewModel
     var body: some View {
-        ZStack(alignment: .top) {
-            // 横向翻页
+        ZStack(alignment: .top, content: {
+            // 动态流
             tabView
-                .ignoresSafeArea(.container, edges: .top)
             // 顶部模糊
             topBar
-        }
+        })
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 // 顶部导航栏
-                topTabbar
+                toptabbar
             }
             ToolbarItem(placement: .topBarLeading) {
-                // 通知按钮
+                //  通知按钮
                 XMDesgin.XMIcon(iconName: "home_bell", size: 22)
             }
-            // 筛选按钮
             ToolbarItem(placement: .topBarTrailing) {
+                // 筛选按钮
                 fliterBtn
             }
         }
     }
-    
-    
 
     var fliterBtn: some View {
         XMDesgin.XMButton(action: {
@@ -47,10 +44,10 @@ struct HomeView: View {
         })
     }
 
-    var topTabbar: some View {
+    var toptabbar: some View {
         HStack {
             Spacer()
-            ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
+            ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tabitem in
                 let selected = tabitem == vm.currentTopTab
                 XMDesgin.XMButton {
                     vm.currentTopTab = tabitem
@@ -76,15 +73,18 @@ struct HomeView: View {
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
-                    ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
-                        // 排行榜页面
-                        RankListView().tag(tab)
+                    ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tab in
+                        // 帖子流页面
+                        PostListView().tag(tab)
+                            .environmentObject(main)
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                .ignoresSafeArea(.container, edges: .top)
     }
 }
 
 #Preview {
-    MainView(vm: .init(currentTabbar: .home))
+//    FeedView()
+    MainView(vm: MainViewModel(currentTabbar: .feed))
 }
