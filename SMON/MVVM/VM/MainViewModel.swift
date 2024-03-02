@@ -11,6 +11,8 @@ class MainViewModel: ObservableObject {
     init(currentTabbar: TabbarItem = .home) {
         self.currentTabbar = currentTabbar
     }
+    static let shared : MainViewModel = .init()
+    
     enum TabbarItem: CaseIterable {
         case home
         case feed
@@ -48,6 +50,7 @@ class MainViewModel: ObservableObject {
         case coinshop
         case myhotinfo
         case myfriends
+        case profileEditView
         case postdetail(postId:String)
     }
 }

@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProfileHomeView: View {
-    @EnvironmentObject var vm: MainViewModel
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .center, spacing: 24, content: {
@@ -27,7 +26,7 @@ struct ProfileHomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 XMDesgin.XMButton {
-                    vm.pathPages.append(.notification)
+                    MainViewModel.shared.pathPages.append(.notification)
                 } label: {
                     XMDesgin.XMIcon(iconName: "home_bell")
                 }
@@ -35,7 +34,7 @@ struct ProfileHomeView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMButton {
-                    vm.pathPages.append(.setting)
+                    MainViewModel.shared.pathPages.append(.setting)
                 } label: {
                     XMDesgin.XMIcon(iconName: "profile_setting")
                 }
@@ -48,7 +47,7 @@ struct ProfileHomeView: View {
             Text("赵纯想")
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                vm.pathPages.append(.myprofile)
+                MainViewModel.shared.pathPages.append(.myprofile)
             }, label: {
                 AsyncImage(url: URL(string: "https://i.pravatar.cc/1000")!)
                     .scaledToFill()
@@ -84,7 +83,9 @@ struct ProfileHomeView: View {
                         .offset(x: 0, y: 12)
                 }
             }
-            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: "完成你的主页资料") {}
+            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: "完成你的主页资料") {
+                MainViewModel.shared.pathPages.append(.profileEditView)
+            }
         })
     }
 
@@ -117,13 +118,13 @@ struct ProfileHomeView: View {
     }
 
     var list: some View {
-        VStack(alignment: .leading, spacing: 12, content: {
+        VStack(alignment: .leading, spacing: 24, content: {
             XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "32")) {
-                vm.pathPages.append(.myfriends)
+                MainViewModel.shared.pathPages.append(.myfriends)
             }
 
             XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.23992")) {
-                vm.pathPages.append(.myhotinfo)
+                MainViewModel.shared.pathPages.append(.myhotinfo)
             }
 
             XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: "限时特惠")) {
@@ -132,6 +133,7 @@ struct ProfileHomeView: View {
             }
 
         })
+        .padding(.vertical,16)
     }
 
     var userbackpack: some View {

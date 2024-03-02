@@ -33,6 +33,7 @@ struct SettingView: View {
                                 }
                             }
                             .listRowSeparator(.hidden)
+                            .listRowInsets(.init(top: 12, leading: 18, bottom: 12, trailing: 18))
                         }
                     }
                 } header: {
@@ -46,28 +47,25 @@ struct SettingView: View {
 
             VStack(alignment: .center, spacing: 12) {
                 Text("Made with peace & love in Suzhou ♥️")
-                    .font(.system(.subheadline, design: .serif, weight: .bold))
+                    .font(.system(.subheadline, design: .rounded, weight: .bold))
                     .foregroundColor(Color.XMDesgin.f1)
-                Text("SMON" + AppConfig.AppVersion)
-                    .font(.system(.subheadline, design: .serif, weight: .regular))
+                Text("SMON Version" + AppConfig.AppVersion)
+                    .font(.system(.body, design: .rounded, weight: .regular))
                     .foregroundColor(Color.XMDesgin.f1)
             }
             .padding(.top, 32)
             .frame(maxWidth: .infinity, alignment: .center)
             .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
         }
-        .navigationBarTransparent(false)
-        .listStyle(.plain)
+        .scrollIndicators(.hidden)
+        .listStyle(.insetGrouped)
         .navigationTitle("设置")
         .navigationBarTitleDisplayMode(.large)
+        
     }
 }
 
 #Preview {
-    NavigationStack {
-        MainView()
-            .navigationDestination(isPresented: .constant(true)) {
-                SettingView()
-            }
-    }
+    SettingView()
 }

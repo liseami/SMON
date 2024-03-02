@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct MainView: View {
-    @StateObject var vm: MainViewModel = .init()
+    @StateObject var vm: MainViewModel = .shared
     var body: some View {
         NavigationStack(path: $vm.pathPages) {
             ZStack {
@@ -37,11 +37,12 @@ struct MainView: View {
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: MyFriendsView()
                     case .postdetail(let postId) :PostDetailView()
+                    case .profileEditView:
+                        ProfileEditView()
                     }
                 }
                 .navigationBarTransparent(false)
                 .toolbarRole(.editor)
-                .environmentObject(vm)
             }
          
         }
@@ -68,7 +69,7 @@ struct MainView: View {
     }
 
     var tabbar: some View {
-        MainTabbar().environmentObject(vm)
+        MainTabbar()
     }
 }
 

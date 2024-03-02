@@ -6,7 +6,7 @@
 //
 
 struct MainTabbar: View {
-    @EnvironmentObject var vm: MainViewModel
+    @ObservedObject var vm: MainViewModel = .shared
     @State var showCircleBtn: Bool = false
     var body: some View {
         ZStack(alignment: .bottom) {

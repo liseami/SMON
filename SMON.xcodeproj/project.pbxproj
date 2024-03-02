@@ -10,6 +10,7 @@
 		A20AF7562B92BF400098E561 /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7552B92BF400098E561 /* WebImage.swift */; };
 		A20AF7582B92C42F0098E561 /* XMTyperText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7572B92C42F0098E561 /* XMTyperText.swift */; };
 		A20AF75C2B9300260098E561 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75B2B9300260098E561 /* LocationManager.swift */; };
+		A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75D2B931DF60098E561 /* ProfileEditView.swift */; };
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
 		A256DB972B900BF6008C7063 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB962B900BF6008C7063 /* WebView.swift */; };
 		A256DB992B901C88008C7063 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = A256DB982B901C88008C7063 /* AppConfig.plist */; };
@@ -111,6 +112,7 @@
 		A20AF7552B92BF400098E561 /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 		A20AF7572B92C42F0098E561 /* XMTyperText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTyperText.swift; sourceTree = "<group>"; };
 		A20AF75B2B9300260098E561 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A20AF75D2B931DF60098E561 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		A2218D102B89BAF700ECE075 /* libAlamofire.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAlamofire.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2218D112B89BAF700ECE075 /* libBolts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBolts.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2218D122B89BAF700ECE075 /* libGodzippa.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGodzippa.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -551,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				A272A4842B871C77008EA955 /* MainView.swift */,
+				A20AF75D2B931DF60098E561 /* ProfileEditView.swift */,
 				A272A4862B871CC7008EA955 /* Login */,
 				A28FEF1D2B8EC7D8002E8FB2 /* UserInfoRequest */,
 				A2B45CAF2B8B27BB00D71EF8 /* SettingView */,
@@ -850,6 +853,7 @@
 				A272A4932B871D1A008EA955 /* PostFeedView.swift in Sources */,
 				A25AAD2A2B8EF6B600B7CE40 /* BrithdayDayRequestView.swift in Sources */,
 				A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */,
+				A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */,
 				A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */,
 				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
 				A27EFFBA2B92B7B000B47BD6 /* PostView.swift in Sources */,

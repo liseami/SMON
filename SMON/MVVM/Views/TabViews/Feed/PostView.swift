@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PostView: View {
-    @EnvironmentObject var main: MainViewModel
+    
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             avatarAndLine
@@ -16,7 +16,8 @@ struct PostView: View {
         }
         .contentShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture {
-            main.pathPages.append(.postdetail(postId: ""))
+            MainViewModel.shared.pathPages.append(.postdetail(postId: ""))
+            
         }
     }
 

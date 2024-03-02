@@ -21,7 +21,6 @@ struct ProfileView: View {
             mediaView
         })
         .ignoresSafeArea()
-       
     }
 
     var topImage: some View {
@@ -80,33 +79,21 @@ struct ProfileView: View {
 
     var mediaView: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
-            ForEach(0...99, id: \.self) { _ in
+            ForEach(0 ... 99, id: \.self) { _ in
 
-                ZStack(alignment: .bottom) {
-                    AsyncImage(
-                        url: URL(string: "https://i.pravatar.cc/500")!,
-                        content: { image in
-
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: w, height: h)
-                        },
-                        placeholder: {
-                            ProgressView()
-                                .frame(width: w, height: h)
-                        }
-                    )
-
-                    LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black]), startPoint: .top, endPoint: .bottom)
-                        .frame(height: 60)
-                    Text(String.randomChineseString(length: Int.random(in: 2...24)))
-                        .font(.subheadline)
-                        .bold()
-                        .lineLimit(2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.all, 12)
-                }
+                AsyncImage(
+                    url: URL(string: "https://i.pravatar.cc/500")!,
+                    content: { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: w, height: h)
+                    },
+                    placeholder: {
+                        ProgressView()
+                            .frame(width: w, height: h)
+                    }
+                )
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
@@ -115,6 +102,6 @@ struct ProfileView: View {
 }
 
 #Preview {
-//    ProfileView()
-    MainView(vm: .init(currentTabbar: .profile))
+    ProfileView()
+//    MainView(vm: .init(currentTabbar: .profile))
 }

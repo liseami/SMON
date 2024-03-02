@@ -10,7 +10,7 @@ import SwiftUIX
 
 struct PostFeedView: View {
     @StateObject var vm: FeedViewModel = .init()
-    @EnvironmentObject var main: MainViewModel
+    
     var body: some View {
         ZStack(alignment: .top, content: {
             // 动态流
@@ -76,7 +76,7 @@ struct PostFeedView: View {
                     ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tab in
                         // 帖子流页面
                         PostListView().tag(tab)
-                            .environmentObject(main)
+                          
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))

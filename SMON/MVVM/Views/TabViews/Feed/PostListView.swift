@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct PostListView: View {
-    @EnvironmentObject var main: MainViewModel
+    
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [], content: {
                 ForEach(0 ... 120, id: \.self) { _ in
                     PostView()
-                        .environmentObject(main)
                 }
             })
             .padding(.all, 16)
@@ -25,5 +24,5 @@ struct PostListView: View {
 
 #Preview {
     PostListView()
-        .environmentObject(MainViewModel())
+        
 }
