@@ -57,35 +57,44 @@ struct CoinshopView: View {
     var products: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             ForEach(vm.products, id: \.self.count) { product in
-                VStack(alignment: .center, spacing: 0, content: {
-                    VStack(alignment: .center, spacing: 12, content: {
-                        Image(product.image)
-                            .resizable()
-                            .frame(width: 56, height: 56, alignment: .center)
-                        Text("\(product.count)赛币")
-                            .font(.system(.title3, design: .monospaced, weight: .heavy))
-                    })
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 24)
-                    .background(Color.black)
-                    VStack(alignment: .center, spacing: 3, content: {
-                        Text("¥\(product.price).00")
-                            .font(.system(.body, design: .monospaced, weight: .heavy))
-                            .foregroundColor(Color.green)
-                        Text("\(product.discountRate)%")
-                            .font(.system(.caption, design: .monospaced, weight: .heavy))
-                            .foregroundColor(Color.XMDesgin.f2)
-                            .opacity(product.discountRate == 0 ? 0 : 1)
-                    })
-                    .padding(.vertical, 8)
-                })
-                .overlay(alignment: .center) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(lineWidth: 1.5)
-                        .foregroundColor(Color.XMDesgin.f3)
+              let product =   VStack(alignment: .center, spacing: 0, content: {
+                  VStack(alignment: .center, spacing: 12, content: {
+                      Image(product.image)
+                          .resizable()
+                          .frame(width: 56, height: 56, alignment: .center)
+                      Text("\(product.count)赛币")
+                          .font(.system(.title3, design: .monospaced, weight: .heavy))
+                  })
+                  .frame(maxWidth: .infinity)
+                  .padding(.vertical, 24)
+                  .background(Color.black)
+                  VStack(alignment: .center, spacing: 3, content: {
+                      Text("¥\(product.price).00")
+                          .font(.system(.body, design: .monospaced, weight: .heavy))
+                          .foregroundColor(Color.green)
+                      Text("\(product.discountRate)%")
+                          .font(.system(.caption, design: .monospaced, weight: .heavy))
+                          .foregroundColor(Color.XMDesgin.f2)
+                          .opacity(product.discountRate == 0 ? 0 : 1)
+                  })
+                  .padding(.vertical, 8)
+              })
+              .overlay(alignment: .center) {
+                  RoundedRectangle(cornerRadius: 20)
+                      .stroke(lineWidth: 1.5)
+                      .foregroundColor(Color.XMDesgin.f3)
+              }
+              .clipShape(RoundedRectangle(cornerRadius: 20))
+              .padding(.all, 1)
+               
+                XMDesgin.XMButton {
+                    LoadingTask(loadingMessage: "连接苹果商店...") {
+                        
+                    }
+                } label: {
+                    product
                 }
-                .padding(.all, 1)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
+
             }
         }
     }

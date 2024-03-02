@@ -79,8 +79,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     // 上弹后背景颜色
     var panModalBackgroundColor: UIColor {
         switch self.style {
-        case .cloud: return UIColor(Color.XMDesgin.b1.opacity(0.3))
-        default: return UIColor(Color.XMDesgin.f1.opacity(0.3))
+        default: return UIColor(Color.XMDesgin.b1.opacity(0.8))
         }
     }
 

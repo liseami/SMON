@@ -12,10 +12,74 @@ import Lantern
 import PanModal
 import SwiftUIX
 import UIKit
+import StoreKit
+
+/*
+ 模拟延时
+ */
+func waitme() async {
+    await Task.sleep(3 * 1000000000) // 等待1秒钟
+}
+
+/*
+ 强制等待任务
+ */
+public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void) {
+    guard let window = Apphelper.shared.getWindow() else { return }
+
+    // 创建模糊效果的视图
+    if let blurView = VisualEffectBlurView(blurStyle: .dark)
+        .edgesIgnoringSafeArea(.all).host().view
+    {
+        blurView.size = CGSize(width: Screen.main.bounds.width, height: Screen.main.bounds.height)
+        blurView.backgroundColor = UIColor.clear
+        blurView.alpha = 0.0 // 初始时设置为透明
+        blurView.tag = 1
+        blurView.center = CGPoint(x: Screen.main.bounds.width * 0.5, y: Screen.main.bounds.height * 0.5)
+
+        // 将模糊效果的视图添加到窗口上
+        window.addSubview(blurView)
+
+        // 显示loading消息
+        Apphelper.shared.pushNotification(type: .loading(message: loadingMessage))
+
+        // 使用UIView.animate实现渐显动画
+        UIView.animate(withDuration: 1) {
+            blurView.alpha = 1.0 // 设置为完全不透明
+        }
+        // 异步执行任务
+        Task {
+            await waitme()
+            await task()
+
+            DispatchQueue.main.async {
+                // 使用UIView.animate实现淡出动画
+                UIView.animate(withDuration: 0.3) {
+                    blurView.alpha = 0.0 // 设置为透明
+                } completion: { _ in
+                    blurView.removeFromSuperview() // 移除模糊效果的视图
+                    NotificationPresenter.shared.dismiss() // 关闭loading消息
+                }
+            }
+        }
+    }
+}
 
 class Apphelper {
     static let shared: Apphelper = .init()
 
+    /*
+     请求用户评分
+     */
+    
+    func requestReviewApp(){
+        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            DispatchQueue.main.async {
+                SKStoreReviewController.requestReview(in: scene)
+            }
+        }
+    }
+        
     /*
      马达
      */
@@ -76,7 +140,6 @@ class Apphelper {
         topMostViewController()?.presentPanModal(PanViewBox(content: view, style: style))
     }
 
-
     enum NotificationType {
         case success(message: String)
         case info(message: String)
@@ -92,7 +155,7 @@ class Apphelper {
         let message: String
         let backgroundColor: UIColor
         var textColor = UIColor(Color.XMDesgin.f1)
-        var font = UIFont.preferredFont(forTextStyle: .body)
+        let font = UIFont.preferredFont(forTextStyle: .body)
 
         switch type {
         case let .info(msg):
@@ -102,7 +165,6 @@ class Apphelper {
         case let .success(msg):
             message = msg
             backgroundColor = UIColor(Color.green)
-
 
         case let .warning(msg):
             message = msg
@@ -140,8 +202,8 @@ class Apphelper {
             NotificationPresenter.shared.displayActivityIndicator(true)
         }
     }
-    
-    func pushProgressNotification(text:String,progress:@escaping(NotificationPresenter)->()) {
+
+    func pushProgressNotification(text: String, progress: @escaping (NotificationPresenter) -> Void) {
         // update default style
         NotificationPresenter.shared.updateDefaultStyle { style in
             let style: StatusBarNotificationStyle = style
@@ -155,8 +217,6 @@ class Apphelper {
         NotificationPresenter.shared.present(text) { presenter in
             progress(presenter)
         }
-
-    
     }
 
     /*
@@ -204,6 +264,29 @@ class Apphelper {
         lantern.pageIndicator = LanternNumberPageIndicator()
         lantern.show()
     }
+
+    func showActionSheet(title: String?, message: String?, actions: [UIAlertAction], completion: (() -> Void)? = nil) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        alertController.overrideUserInterfaceStyle = .dark
+        for action in actions {
+            alertController.addAction(action)
+        }
+
+        alertController.addAction(.init(title: "取消", style: .cancel, handler: { _ in
+
+        }))
+
+        // 设置模式为黑暗模式
+        alertController.view.tintColor = UIColor(Color.XMDesgin.f1)
+
+        if let viewController = topMostViewController() {
+            alertController.popoverPresentationController?.sourceView = viewController.view
+            alertController.popoverPresentationController?.sourceRect = CGRect(x: viewController.view.bounds.midX, y: viewController.view.bounds.midY, width: 0, height: 0)
+            alertController.popoverPresentationController?.permittedArrowDirections = []
+        }
+
+        topMostViewController()?.present(alertController, animated: true, completion: completion)
+    }
 }
 
 #Preview {
@@ -225,11 +308,18 @@ class Apphelper {
             Apphelper.shared.pushNotification(type: .loading(message: "正在加载..."))
         }
         XMDesgin.XMListRow(.init(name: "Progress", icon: "", subline: "")) {
-            Apphelper.shared.pushProgressNotification(text:"正在加载...") { presenter in
+            Apphelper.shared.pushProgressNotification(text: "正在加载...") { presenter in
                 presenter.displayProgressBar(at: 0.4)
             }
         }
-        
-        
+        XMDesgin.XMListRow(.init(name: "ShowActionSheet", icon: "", subline: "")) {
+            Apphelper.shared.showActionSheet(title: "操作表单", message: "hello,world", actions: [UIAlertAction(title: "保存", style: .default, handler: { _ in
+            }), UIAlertAction(title: "删除", style: .destructive, handler: { _ in
+
+            })])
+        }
+        XMDesgin.XMListRow(.init(name: "强制等待任务", icon: "", subline: "")) {
+            LoadingTask(loadingMessage: "请等待") {}
+        }
     }
 }

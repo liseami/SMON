@@ -11,7 +11,7 @@ struct RankListView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
-                ForEach(0...99, id: \.self) { _ in
+                ForEach(0...99, id: \.self) { index in
                     XMDesgin.XMButton {} label: {
                         VStack {
                             WebImage(str: AppConfig.mokImage!.absoluteString)
@@ -27,6 +27,7 @@ struct RankListView: View {
                                 .foregroundStyle(.secondary)
                         }
                     }
+                    .conditionalEffect(.smoke(layer: .local), condition: index < 3)
                 }
             }
             .padding(.all)

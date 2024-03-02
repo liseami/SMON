@@ -8,6 +8,7 @@
 import Introspect
 import SwiftUI
 
+
 struct MainView: View {
     @StateObject var vm: MainViewModel = .init()
     var body: some View {
@@ -20,6 +21,10 @@ struct MainView: View {
                 // 启动动画
                 LaunchScreenAnimation()
             }
+            .onAppear(perform: {
+//                Apphelper.shared.requestReviewApp()
+                LocationManager().requestLocationPermission()
+            })
             .environmentObject(vm)
             .navigationBarTransparent(true)
             .navigationDestination(for: MainViewModel.PagePath.self) { path in

@@ -27,7 +27,12 @@ struct HomeView: View {
             }
             ToolbarItem(placement: .topBarLeading) {
                 // 通知按钮
-                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+
+                XMDesgin.XMButton {
+                    LoadingTask(loadingMessage: "强制等待...") {}
+                } label: {
+                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+                }
             }
             // 筛选按钮
             ToolbarItem(placement: .topBarTrailing) {
@@ -35,8 +40,6 @@ struct HomeView: View {
             }
         }
     }
-    
-    
 
     var fliterBtn: some View {
         XMDesgin.XMButton(action: {
