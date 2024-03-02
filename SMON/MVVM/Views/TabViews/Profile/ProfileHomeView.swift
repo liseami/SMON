@@ -21,7 +21,7 @@ struct ProfileHomeView: View {
                 userbackpack
                 Spacer().frame(height: 120)
             })
-            .padding(.all, 16)
+            .padding(.horizontal, 16)
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -115,6 +115,7 @@ struct ProfileHomeView: View {
             }
         })
         .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 12)
     }
 
     var list: some View {

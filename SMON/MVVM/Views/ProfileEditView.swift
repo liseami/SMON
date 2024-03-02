@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct ProfileEditView: View {
     var w: CGFloat {
         (UIScreen.main.bounds.size.width - 16 - 16 - 8 - 8 - 8) / 3
@@ -25,6 +27,7 @@ struct ProfileEditView: View {
                         }
                     }
                 }
+                .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
             }
             Section(Text("个人简介")) {
@@ -57,7 +60,7 @@ struct ProfileEditView: View {
         }
         .scrollIndicators(.hidden)
         .font(.body.bold()).foregroundColor(.XMDesgin.f1)
-        .listStyle(.insetGrouped)
+        .listStyle(.grouped)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {
