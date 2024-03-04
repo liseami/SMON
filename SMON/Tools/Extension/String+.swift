@@ -1,6 +1,20 @@
 import Foundation
 
 extension String {
+    
+    static func randomString(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyz0123456789"
+        var randomString = ""
+        
+        for _ in 0..<length {
+            let randomIndex = Int.random(in: 0..<letters.count)
+            let randomChar = letters[letters.index(letters.startIndex, offsetBy: randomIndex)]
+            randomString.append(randomChar)
+        }
+        
+        return randomString
+    }
+    
     static func randomChineseString(length: Int) -> String {
         guard length > 0 else { return "" }
 

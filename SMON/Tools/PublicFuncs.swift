@@ -10,15 +10,15 @@ import JDStatusBarNotification
 import Kingfisher
 import Lantern
 import PanModal
+import StoreKit
 import SwiftUIX
 import UIKit
-import StoreKit
 
 /*
  模拟延时
  */
 func waitme() async {
-    await Task.sleep(3 * 1000000000) // 等待1秒钟
+    await SwiftUI.Task.sleep(3 * 1000000000) // 等待1秒钟
 }
 
 /*
@@ -48,7 +48,7 @@ public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void
             blurView.alpha = 1.0 // 设置为完全不透明
         }
         // 异步执行任务
-        Task {
+        SwiftUI.Task {
             await waitme()
             await task()
 
@@ -69,17 +69,25 @@ class Apphelper {
     static let shared: Apphelper = .init()
 
     /*
+     关闭键盘
+     */
+
+    func closeKeyBoard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+
+    /*
      请求用户评分
      */
-    
-    func requestReviewApp(){
+
+    func requestReviewApp() {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
             DispatchQueue.main.async {
                 SKStoreReviewController.requestReview(in: scene)
             }
         }
     }
-        
+
     /*
      马达
      */
@@ -191,15 +199,17 @@ class Apphelper {
             return style
         }
 
-        switch type {
-        case .info, .error, .success, .warning:
-            NotificationPresenter.shared.present(message, subtitle: nil, styleName: nil, duration: 2, completion: { _ in
-                // completion block
-            })
+        DispatchQueue.main.async {
+            switch type {
+            case .info, .error, .success, .warning:
+                NotificationPresenter.shared.present(message, subtitle: nil, styleName: nil, duration: 2, completion: { _ in
+                    // completion block
+                })
 
-        case let .loading(msg):
-            NotificationPresenter.shared.present(msg)
-            NotificationPresenter.shared.displayActivityIndicator(true)
+            case let .loading(msg):
+                NotificationPresenter.shared.present(msg)
+                NotificationPresenter.shared.displayActivityIndicator(true)
+            }
         }
     }
 
@@ -222,6 +232,7 @@ class Apphelper {
     /*
      点击查看图片详情
      */
+    @MainActor
     func tapToShowImage(tapUrl: String, rect: CGRect? = nil, urls: [String]? = nil) {
         let lantern = Lantern()
 
@@ -286,6 +297,19 @@ class Apphelper {
         }
 
         topMostViewController()?.present(alertController, animated: true, completion: completion)
+    }
+
+    /*
+     根据城市Id，返回城市名称
+     */
+    func cityName(forCityID cityID: String) -> String? {
+        let provinces = MockTool.readArray(Province.self, fileName: "省份&城市") ?? []
+        for province in provinces {
+            if let city = province.children.first(where: { $0.id == cityID }) {
+                return city.name
+            }
+        }
+        return nil
     }
 }
 

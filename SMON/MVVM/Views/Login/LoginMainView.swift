@@ -30,6 +30,7 @@ struct LoginMainView: View {
                 }
             })
         }
+        
         .environmentObject(vm)
     }
 

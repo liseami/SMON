@@ -100,9 +100,9 @@ enum XMDesgin {
         var fColor: Color
         var iconName: String
         var enable: Bool
-        var action: () -> ()
+        var action: () async -> ()
 
-        init(backColor: Color = .black, fColor: Color = .white, iconName: String = "home_bell", enable: Bool = true, action: @escaping () -> ()) {
+        init(backColor: Color = .black, fColor: Color = .white, iconName: String = "home_bell", enable: Bool = true, action: @escaping () async -> ()) {
             self.backColor = backColor
             self.fColor = fColor
             self.enable = enable
@@ -112,7 +112,7 @@ enum XMDesgin {
 
         var body: some View {
             XMDesgin.XMButton(enable: enable) {
-                action()
+                await action()
             } label: {
                 Circle()
                     .fill(backColor)
@@ -126,11 +126,12 @@ enum XMDesgin {
 
     struct XMButton<Content>: View where Content: View {
         var enable: Bool
-        var action: () -> ()
+        var action: () async -> ()
         var label: () -> Content
         @State var onTap: Bool = false
         @State var shake: Int = 0
-        init(enable: Bool = true, action: @escaping () -> (), @ViewBuilder label: @escaping () -> Content) {
+        @State var isLoading: Bool = false
+        init(enable: Bool = true, action: @escaping () async -> (), @ViewBuilder label: @escaping () -> Content) {
             self.enable = enable
             self.action = action
             self.label = label
@@ -138,20 +139,32 @@ enum XMDesgin {
 
         var body: some View {
             label()
+                .opacity(isLoading ? 0 : 1)
                 ._onButtonGesture {
+                    guard isLoading == false else { return }
                     onTap = $0
                 } perform: {
-                    guard enable else {
-                        shake += 1
-                        Apphelper.shared.nofimada(.error)
-                        return
+                    Task {
+                        guard !isLoading else { return }
+                        guard enable else {
+                            shake += 1
+                            Apphelper.shared.nofimada(.error)
+                            return
+                        }
+                        Apphelper.shared.mada(style: .light)
+                        self.isLoading = true
+                        await action()
+                        self.isLoading = false
                     }
-                    Apphelper.shared.mada(style: .light)
-                    action()
                 }
                 .conditionalEffect(.pushDown, condition: self.onTap)
                 .changeEffect(.glow(color: .white), value: self.onTap)
                 .changeEffect(.shake(rate: .fast), value: shake)
+                .overlay {
+                    ProgressView()
+                        .preferredColorScheme(.dark)
+                        .ifshow(show: isLoading)
+                }
         }
     }
 
@@ -249,9 +262,11 @@ enum XMDesgin {
                 } label: {
                     HStack(spacing: 14) {
                         XMDesgin.XMIcon(iconName: info.icon, size: 24)
+                            .ifshow(show: !info.icon.isEmpty)
                         Text(info.name)
                             .font(.system(size: 16, weight: .regular, design: .monospaced))
                             .foregroundStyle(Color.XMDesgin.f1)
+                            .lineLimit(1)
                         Spacer()
                         Text(info.subline)
                             .font(.subheadline)
@@ -268,7 +283,7 @@ enum XMDesgin {
             }
         }
     }
-    
+
     struct XMListRowInlist: View {
         var info: LabelInfo
         var action: () -> ()
@@ -309,8 +324,9 @@ enum XMDesgin {
         XMDesgin.SelectionTable(text: "男", selected: false) {}
         XMDesgin.XMMainBtn {}
         XMDesgin.XMListRow(.init(name: "home_bell", icon: "home_bell", subline: "2323")) {}
-        XMDesgin.XMListRowInlist(.init(name: "home_bell", icon: "home_bell", subline: "")) {
-            
+        XMDesgin.XMListRowInlist(.init(name: "home_bell", icon: "home_bell", subline: "")) {}
+        XMDesgin.CircleBtn {
+            await waitme()
         }
     }
     .padding(.all)

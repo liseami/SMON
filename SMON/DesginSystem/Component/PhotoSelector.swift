@@ -22,6 +22,7 @@ struct PhotoSelector: UIViewControllerRepresentable {
         config.filter = .images // 只允许选择照片
         let imagePicker = PHPickerViewController(configuration: config)
         imagePicker.delegate = context.coordinator
+        
         return imagePicker
     }
 

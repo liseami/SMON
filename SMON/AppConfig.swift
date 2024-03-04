@@ -23,10 +23,12 @@ public enum AppConfig {
     // baseURL
     static var baseUrl: String {
         switch env {
-        case .dev: return "http://test.naduo.love"
+        case .dev: return "https://37z71b5291.imdo.co"
         case .prod: return "https://app.naduo.love"
         }
     }
+    
+    
 
     /// 极光APPKEY
     static var TIMAppID: String {

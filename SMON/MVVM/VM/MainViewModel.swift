@@ -10,9 +10,16 @@ import Foundation
 class MainViewModel: ObservableObject {
     init(currentTabbar: TabbarItem = .home) {
         self.currentTabbar = currentTabbar
+        self.pathPages.removeAll()
     }
-    static let shared : MainViewModel = .init()
-    
+
+    func reset() {
+        self.currentTabbar = .home
+        self.pathPages.removeAll()
+    }
+
+    static let shared: MainViewModel = .init()
+
     enum TabbarItem: CaseIterable {
         case home
         case feed
@@ -30,19 +37,20 @@ class MainViewModel: ObservableObject {
                 return .init(name: "我的", icon: "tabbar_profile", subline: "")
             }
         }
-        var circleBtnInfo : LabelInfo {
+
+        var circleBtnInfo: LabelInfo {
             switch self {
             case .home:
                 return .init(name: "冲榜", icon: "tabbar_circle_rank", subline: "")
-            case .feed,.message,.profile:
+            case .feed, .message, .profile:
                 return .init(name: "", icon: "tabbar_circle_post", subline: "")
             }
         }
     }
 
     @Published var currentTabbar: TabbarItem = .home
-    
-    @Published var pathPages : [PagePath] = []
+
+    @Published var pathPages: [PagePath] = []
     enum PagePath: Hashable {
         case setting
         case notification
@@ -51,6 +59,6 @@ class MainViewModel: ObservableObject {
         case myhotinfo
         case myfriends
         case profileEditView
-        case postdetail(postId:String)
+        case postdetail(postId: String)
     }
 }

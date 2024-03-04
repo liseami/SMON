@@ -18,14 +18,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // 在应用程序启动时执行一些配置
         // 请求用户位置
         
-      
+        print(String(describing: type(of: XMUser.init())))
         return true
     }
 }
 
 func DAppInit() {
     TUIInit()
-    OSSLog.enable()
+//    OSSLog.enable()
     changeNavigaitonBarBackIcon()
 }
 
@@ -37,6 +37,10 @@ func changeNavigaitonBarBackIcon() {
 }
 
 func TUIInit() {
+    let config = V2TIMSDKConfig.init()
+    config.logLevel = .LOG_NONE
+    V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)
+                                          
     TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "liseami", userSig: "eJwtjF0LgjAYRv-LbgudcysUvAyJIgrFSLxxbMarLkzX6IP*e0u9fM55OB*U7hPHyB6FiDgYLccNQt40VDDiFgZZKpjVIJqy60Cg0FthjAkNPDoZ*eygl5YzxohVE9Wg-myNA3tmvj9X4GrLm1oPPF*c21PabPPDPU64oHGNX8bwd*FmhVvtjg*jeKbJJULfHyapM7o_") {}
 
     // 注册主题

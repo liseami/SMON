@@ -38,12 +38,11 @@ struct AvatarRequestView: View {
         .fullScreenCover(isPresented: $showImagePicker, content: {
             SinglePhotoSelector(completionHandler: { avatar in
                 vm.avatar = avatar
-                AliyunOSSManager.shared.uploadImagesToOSS(image: avatar) { _, _ in
-                    
-                } completion: { _, _ in
-                    
-                }
-
+//                AliyunOSSManager.shared.uploadImagesToOSS(image: avatar) { _, _ in
+//
+//                } completion: { _, _ in
+//
+//                }
 
             })
             .ignoresSafeArea()

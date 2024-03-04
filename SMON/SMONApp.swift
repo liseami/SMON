@@ -10,6 +10,8 @@
 @_exported import SwiftUI
 @_exported import SwifterSwift
 
+
+
 @main
 struct SMONApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -20,11 +22,13 @@ struct SMONApp: App {
             Group {
                 if userManager.user.isLogin {
                     // 需要进入资料流程
-                    if userManager.user.needInfo {
-                        UserInfoRequestMainView()
-                    } else {
-                        MainView()
-                    }
+//                    if userManager.user.isNeedInfo {
+//                        UserInfoRequestMainView()
+//                    } else {
+//                        MainView()
+//                    }
+                    
+                    MainView()
                 } else {
                     LoginMainView()
                 }

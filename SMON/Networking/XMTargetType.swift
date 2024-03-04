@@ -7,15 +7,18 @@
 
 import Moya
 import SwifterSwift
+import TIMCommon
 
 public typealias HTTPRequestMethod = Moya.Method
 
 protocol XMTargetType: TargetType {
     var parameters: [String: Any]? { get }
     var parameterEncoding: ParameterEncoding { get }
+    var group: String { get }
 }
 
 // MARK: - 自有扩展
+
 extension XMTargetType {
     var parameters: [String: Any]? { nil }
 
@@ -28,12 +31,18 @@ extension XMTargetType {
 }
 
 // MARK: - Moya 扩展
+
 extension XMTargetType {
     var baseURL: URL {
         URL(string: AppConfig.baseUrl) ?? URL(string: "https://test.com")!
     }
 
-    var path: String { "" }
+    var path: String {
+        let path = String(describing: self)
+        return group + "/" + path.components(separatedBy: "(").first!
+    }
+
+    var group: String { "" }
 
     var sampleData: Data {
         "".data(using: String.Encoding.utf8)!
@@ -56,30 +65,52 @@ extension XMTargetType {
 
     var headers: [String: String]? {
         var headers: [String: String] = [:]
+        let timestamp = String(Int(Date.now.timeIntervalSince1970))
+        let nonce = String.randomString(length: 16)
+        let SIGN_SALT = "K#0*WdiaB_ZGbV2T9l"
+        let sign = (nonce + timestamp + SIGN_SALT).md5()
+
+        // Timestamp
+        headers["Timestamp"] = timestamp
+        // Nonce
+        headers["Nonce"] = nonce
+        // Sign
+        headers["Sign"] = sign
 
         // 常规信息
-//        let standardHeader = [
-//            "version": "1.",
-//            "timestamp": Date().timeIntervalSince1970.string,
-//            "device": UIDevice.current.name,
-//            "os": UIDevice.current.systemVersion,
-//            "model": UIDevice.current.localizedModel,
-//            "DeviceToken": UserDefaults.standard.string(forKey: "DeviceToken")
-//        ]
-//        headers["standard-head"] = standardHeader.jsonString()
-        // 设备信息
-//        headers["device-type"] = UIDevice.current.model
-//        headers["device-uuid"] = UIDevice.current.identifierForVendor?.uuidString ?? ""
-//        headers["device-name"] = UIDevice.current.name
-//        headers["device-system"] = UIDevice.current.systemName
-//        headers["device-system-version"] = UIDevice.current.systemVersion
-//
-//        // App 信息
-//        headers["app-version"] = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-//        headers["app-build"] = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""
-//        headers["app-bundle-identifier"] = Bundle.main.bundleIdentifier ?? ""
+        let standardHeader = [
+            "version": AppConfig.AppVersion,
+            "device": UIDevice.current.name,
+            "os": UIDevice.current.systemVersion,
+            "model": UIDevice.current.modelName,
+            "DeviceToken": UIDevice.current.identifierForVendor?.uuidString ?? ""
+        ]
+        headers["Client-Info"] = standardHeader.jsonString()
+
+#if targetEnvironment(simulator)
+        headers["Token"] = "83f6223abbed5c02574490a5f2f64010"
+#else
+        if !UserManager.shared.user.token.isEmpty {
+            headers["Token"] = UserManager.shared.user.token
+        }
+#endif
 
         return headers
     }
+}
 
+
+extension UIDevice {
+    var modelName: String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+
+        let identifier = machineMirror.children.reduce("") { identifier, element in
+            guard let value = element.value as? Int8, value != 0 else { return identifier }
+            return identifier + String(UnicodeScalar(UInt8(value)))
+        }
+
+        return identifier
+    }
 }

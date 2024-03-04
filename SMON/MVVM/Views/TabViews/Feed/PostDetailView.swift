@@ -147,7 +147,7 @@ struct PostDetailView: View {
                 ForEach(urls, id: \.absoluteString) { url in
 
                     XMDesgin.XMButton {
-                        Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
+                      await  Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
                             url.absoluteString
                         })
                     } label: {

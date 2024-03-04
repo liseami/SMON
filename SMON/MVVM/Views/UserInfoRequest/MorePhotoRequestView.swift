@@ -49,6 +49,8 @@ struct MorePhotoRequestView: View {
         .fullScreenCover(isPresented: $showImagePicker, content: {
             PhotoSelector(maxSelection: 5 - vm.morePhoto.count, completionHandler: { uiimages in
                 vm.morePhoto = uiimages
+                AliyunOSSManager.shared.upLoadImages(images: uiimages) { _ in
+                }
             })
             .ignoresSafeArea()
             .environment(\.colorScheme, .dark)

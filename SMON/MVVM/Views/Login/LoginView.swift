@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var vm: LoginViewModel
-    @State var showCodeView: Bool = false
 
     var body: some View {
         InfoRequestView(title: "请输入您的手机号码", subline: "我们将向您的手机号发送验证码，以帮助你验证并完成登录。", btnEnable: true) {
@@ -31,10 +30,12 @@ struct LoginView: View {
             .font(.title)
             .padding(.trailing, 16)
         } btnAction: {
-            showCodeView.toggle()
+            await vm.getSMSCode()
         }
-        .navigationDestination(isPresented: $showCodeView, destination: {
+        .navigationDestination(isPresented: $vm.showCodeInputView, destination: {
             LoginView_VCode()
+                .toolbarRole(.editor)
+                .environmentObject(vm)
         })
     }
 }

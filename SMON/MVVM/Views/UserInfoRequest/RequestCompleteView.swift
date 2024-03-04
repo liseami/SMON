@@ -36,8 +36,8 @@ struct RequestCompleteView: View {
             })
             Spacer()
             XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "好的") {
-                UserManager.shared.user.needInfo = false
-                UserManager.shared.saveUserData()
+                
+                
             }
             .padding(.horizontal, 48)
         }

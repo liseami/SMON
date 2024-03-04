@@ -28,7 +28,7 @@ struct LoginView_VCode: View {
             .padding(.trailing, 16)
             .frame(height: 44, alignment: .center)
         } btnAction: {
-            UserManager.shared.login(userId: "123", token: "123")
+            await vm.loginBySms()
         }
         .navigationBarTitleDisplayMode(.inline)
         .background {

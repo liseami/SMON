@@ -12,10 +12,10 @@ struct InfoRequestView<Content>: View where Content: View {
     var subline: String = ""
     var icon: String?
     var btnEnable: Bool = true
-    var btnAction: () -> Void
+    var btnAction: () async -> Void
     var content: () -> Content
 
-    init(title: String, subline: String, icon: String? = nil, btnEnable: Bool = true, @ViewBuilder content: @escaping () -> Content, btnAction: @escaping () -> Void) {
+    init(title: String, subline: String, icon: String? = nil, btnEnable: Bool = true, @ViewBuilder content: @escaping () -> Content, btnAction: @escaping () async -> Void) {
         self.title = title
         self.subline = subline
         self.icon = icon
@@ -40,7 +40,7 @@ struct InfoRequestView<Content>: View where Content: View {
             content()
 
             XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: self.btnEnable) {
-                self.btnAction()
+                await self.btnAction()
             }
             .rotationEffect(.degrees(-90))
             .moveTo(alignment: .bottomTrailing)

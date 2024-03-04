@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 struct ProfileEditView: View {
     var w: CGFloat {
         (UIScreen.main.bounds.size.width - 16 - 16 - 8 - 8 - 8) / 3
@@ -19,7 +17,15 @@ struct ProfileEditView: View {
             Section(Text("照片墙")) {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 8) {
                     ForEach(0 ... 8, id: \.self) { _ in
-                        XMDesgin.XMButton {} label: {
+                        XMDesgin.XMButton {
+                            Apphelper.shared.presentPanSheet(PhotoSelector(maxSelection: 6, completionHandler: { uiimages in
+                                AliyunOSSManager.shared.upLoadImages(images: uiimages) { _ in
+                                }
+                            })
+                            .tint(Color.XMDesgin.main)
+                            .ignoresSafeArea()
+                            .environment(\.colorScheme, .dark), style: .cloud)
+                        } label: {
                             WebImage(str: AppConfig.mokImage!.absoluteString)
                                 .scaledToFill()
                                 .frame(width: w, height: w / 3 * 4)
@@ -36,19 +42,19 @@ struct ProfileEditView: View {
                     .scrollContentBackground(.hidden)
                     .listRowBackground(Color.XMDesgin.b1)
             }
+            Section(Text("自我认同")) {
+                XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {}
+            }
+            Section(Text("交往目标")) {
+                XMDesgin.XMListRow(.init(name: "长期关系", icon: "inforequest_drink", subline: "")) {}
+            }
             Section(Text("兴趣标签")) {
                 XMDesgin.XMListRow(.init(name: "🏑曲棍球、🏀篮球、🍺聚会", icon: "", subline: "选择标签")) {}
             }
             Section(Text("身高")) {
                 XMDesgin.XMListRow(.init(name: "180cm", icon: "inforequest_ruler", subline: "")) {}
             }
-            Section(Text("自我认同")) {
-                XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {}
-            }
 
-            Section(Text("交往目标")) {
-                XMDesgin.XMListRow(.init(name: "长期关系", icon: "inforequest_drink", subline: "")) {}
-            }
             Section(Text("微信号")) {
                 XMDesgin.XMListRow(.init(name: "chunxiangjifei123", icon: "inforequest_wechat", subline: "")) {}
             }
@@ -63,9 +69,7 @@ struct ProfileEditView: View {
         .listStyle(.grouped)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {
-                    
-                }
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {}
             }
         }
     }

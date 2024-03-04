@@ -23,7 +23,8 @@ struct MainView: View {
             }
             .onAppear(perform: {
 //                Apphelper.shared.requestReviewApp()
-                LocationManager().requestLocationPermission()
+//                LocationManager().requestLocationPermission()
+               
             })
             .environmentObject(vm)
             .navigationBarTransparent(true)

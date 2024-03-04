@@ -28,12 +28,13 @@ struct SettingView: View {
                             XMDesgin.XMListRow(.init(name: child.name, icon: child.iconName ?? "", subline: "")) {
                                 switch child.name {
                                 case "退出登录":
-                                    UserManager.shared.logout()
+                                    UserManager.shared.user = .init()
                                 default: break
                                 }
                             }
-                            .listRowSeparator(.hidden)
-                            .listRowInsets(.init(top: 12, leading: 18, bottom: 12, trailing: 18))
+                            .listRowInsets(.init(top: 32, leading: 018, bottom: 24, trailing: 24))
+
+                            .listRowSeparator(.hidden, edges: .all)
                         }
                     }
                 } header: {
@@ -50,8 +51,8 @@ struct SettingView: View {
                     .font(.system(.subheadline, design: .rounded, weight: .bold))
                     .foregroundColor(Color.XMDesgin.f1)
                 Text("SMON Version" + AppConfig.AppVersion)
-                    .font(.system(.body, design: .rounded, weight: .regular))
-                    .foregroundColor(Color.XMDesgin.f1)
+                    .font(.system(.body, design: .rounded, weight: .bold))
+                    .foregroundColor(Color.XMDesgin.f2)
             }
             .padding(.top, 32)
             .frame(maxWidth: .infinity, alignment: .center)
@@ -59,10 +60,9 @@ struct SettingView: View {
             .listRowBackground(Color.clear)
         }
         .scrollIndicators(.hidden)
-        .listStyle(.insetGrouped)
+        .listStyle(.plain)
         .navigationTitle("设置")
         .navigationBarTitleDisplayMode(.large)
-        
     }
 }
 
