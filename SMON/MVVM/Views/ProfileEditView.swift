@@ -46,18 +46,12 @@ struct ProfileEditView: View {
                     Button(action: {}) {
                         Label {
                             Text("Dom")
-                        } icon: {
-                            
-                        }
-
+                        } icon: {}
                     }
                 } label: {
-                    XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {
-
-                    }
-                    .contentShape(Rectangle())
+                    XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {}
+                        .contentShape(Rectangle())
                 }
-
             }
             Section(Text("交往目标")) {
                 XMDesgin.XMListRow(.init(name: "长期关系", icon: "inforequest_drink", subline: "")) {}

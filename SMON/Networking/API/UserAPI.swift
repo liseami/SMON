@@ -7,10 +7,16 @@ import SwiftyJSON
 enum UserAPI: XMTargetType {
     ///  短信验证码注册
     case smsCode(p: SmsCodeReqMod)
-    case loginBySms(p:LoginBySmsReqMod)
+    case loginBySms(p: LoginBySmsReqMod)
+    case update(p: XMUserUpdateReqMod)
 
     var group: String {
-        "/v1/user"
+        switch self {
+        case .smsCode, .loginBySms:
+            return "/v1/user"
+        case .update:
+            return "v1/usersInfo"
+        }
     }
 
     var method: HTTPRequestMethod {
@@ -22,7 +28,8 @@ enum UserAPI: XMTargetType {
     var parameters: [String: Any]? {
         switch self {
         case .smsCode(let p): return p.kj.JSONObject()
-        case .loginBySms(let p) : return p.kj.JSONObject()
+        case .loginBySms(let p): return p.kj.JSONObject()
+        case .update(let p):return p.kj.JSONObject()
         }
     }
 }
@@ -38,8 +45,7 @@ extension UserAPI {
         /// 区号
         var zone: String = ""
     }
-    
-    
+
     struct LoginBySmsReqMod: Convertible {
         /// 电话号码
         var cellphone: String = ""
@@ -48,5 +54,4 @@ extension UserAPI {
         /// 区号
         var zone: String = ""
     }
-    
 }

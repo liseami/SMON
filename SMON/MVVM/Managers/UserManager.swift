@@ -1,8 +1,6 @@
 import Foundation
 import KakaJSON
 
-
-
 class UserManager: ObservableObject {
     static let shared = UserManager()
 
@@ -64,5 +62,14 @@ class UserManager: ObservableObject {
                 self.OSSInfo = ossinfo
             }
         }
+    }
+
+    func updateUserInfo(updateReqMod: XMUserUpdateReqMod) async -> MoyaResult {
+        let target = UserAPI.update(p: updateReqMod)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok {
+            Apphelper.shared.pushNotification(type: .success(message: "🎉 资料修改成功"))
+        }
+        return result
     }
 }

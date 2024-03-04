@@ -57,7 +57,7 @@ struct InfoRequestView<Content>: View where Content: View {
 struct NameRequestView: View {
     @EnvironmentObject var vm: UserInfoRequestViewModel
     var body: some View {
-        InfoRequestView(title: "从一个昵称开始\r向会员们介绍你自己", subline: "昵称日后也可以修改。", btnEnable: true) {
+        InfoRequestView(title: "从一个昵称开始\r向会员们介绍你自己", subline: "昵称日后也可以修改。", btnEnable: !vm.name.isEmpty) {
             VStack(alignment: .leading, spacing: 12, content: {
                 Text("昵称")
                     .font(.caption)
@@ -71,7 +71,10 @@ struct NameRequestView: View {
                     .foregroundColor(Color.XMDesgin.f3)
             })
         } btnAction: {
-            vm.presentedSteps.append(.photo)
+            let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(nickname: vm.name))
+            if result.is2000Ok {
+                vm.presentedSteps.append(.morephoto)
+            }
         }
     }
 }

@@ -33,7 +33,17 @@ struct AvatarRequestView: View {
             .moveTo(alignment: .center)
             .frame(height: 140)
         } btnAction: {
-            vm.presentedSteps.append(.morephoto)
+            guard let avatar = vm.avatar else { return }
+            AliyunOSSManager.shared.upLoadImages(images: [avatar]) { urls in
+                if let url = urls?.first {
+                    Task {
+                        let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(avatar: url))
+                        if result.is2000Ok {
+                            vm.presentedSteps.append(.morephoto)
+                        }
+                    }
+                }
+            }
         }
         .fullScreenCover(isPresented: $showImagePicker, content: {
             SinglePhotoSelector(completionHandler: { avatar in

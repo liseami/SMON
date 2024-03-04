@@ -172,7 +172,8 @@ class Apphelper {
             backgroundColor = UIColor(Color.XMDesgin.f1)
         case let .success(msg):
             message = msg
-            backgroundColor = UIColor(Color.green)
+            textColor = UIColor(Color.green)
+            backgroundColor = UIColor(Color.XMDesgin.b1)
 
         case let .warning(msg):
             message = msg

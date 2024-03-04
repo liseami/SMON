@@ -30,7 +30,9 @@ class AliyunOSSManager {
         return AliyunOSSiOS.OSSClient.init(endpoint: ossInfo.endpoint, credentialProvider: OSSCredentialProvider)
     }
 
-    // 上传图片到OSS
+    /*
+     上传图片到OSS
+     */
     func uploadImagesToOSS(images: [UIImage], progressCallback: @escaping (Int, Float) -> Void, completion: @escaping ([String]?) -> Void) {
         let bucketName = "dailycontest"
         var currentIndex = 0
@@ -108,6 +110,8 @@ class AliyunOSSManager {
             }
         }
     }
+    
+    
 }
 
 func compressImage(_ image: UIImage) -> Data? {
