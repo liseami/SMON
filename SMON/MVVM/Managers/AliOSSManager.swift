@@ -51,7 +51,7 @@ class AliyunOSSManager {
             put.bucketName = bucketName
             put.objectKey = objectKey
 
-// guard let data = compressImage(image) else { completion(nil); return }
+            // guard let data = compressImage(image) else { completion(nil); return }
 
             put.uploadingData = image.jpegData(compressionQuality: 0.3)!
             // 当前上传长度、当前已上传总长度、待上传的总长度。
@@ -63,12 +63,12 @@ class AliyunOSSManager {
             let putTask = OSSClient?.putObject(put)
 
             putTask?.continue(with: .default(), with: { task in
-                if let error = task.error {
+                if let _ = task.error {
                     // Error occurred, stop the process and report the error
                     completion(nil)
                 } else {
                     // Current image uploaded successfully, add the URL to the array
-                    let imageURL = "\(self.ossInfo.endpoint)/\(bucketName)/\(objectKey)"
+                    let imageURL = "\(objectKey)"
                     uploadedImageURLs.append(imageURL)
                     currentIndex += 1
                     uploadNextImage()
@@ -111,19 +111,15 @@ class AliyunOSSManager {
 }
 
 func compressImage(_ image: UIImage) -> Data? {
-    
     var imageData = image.jpegData(compressionQuality: 0.9)
 
-    while let data = imageData, data.count > 250000{
+    while let data = imageData, data.count > 250000 {
         imageData = UIImage(data: data)?.jpegData(compressionQuality: 0.9)
     }
 
     if let data = imageData {
         return data
-    }else{
+    } else {
         return nil
     }
-    
-
-    
 }

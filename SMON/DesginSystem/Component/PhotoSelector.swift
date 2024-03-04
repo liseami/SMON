@@ -7,7 +7,23 @@
 
 import PhotosUI
 import SwiftUI
-struct PhotoSelector: UIViewControllerRepresentable {
+struct PhotoSelector : View {
+    var maxSelection: Int
+    var completionHandler: (([UIImage]) -> Void)?
+    init(maxSelection: Int, completionHandler: (([UIImage]) -> Void)?) {
+        self.maxSelection = maxSelection
+        self.completionHandler = completionHandler
+    }
+
+    var body: some View {
+        PhotoSelectorRepresentable(maxSelection: maxSelection, completionHandler: completionHandler)
+            .tint(Color.XMDesgin.main)
+            .ignoresSafeArea()
+            .environment(\.colorScheme, .dark)
+    }
+}
+
+struct PhotoSelectorRepresentable: UIViewControllerRepresentable {
     var maxSelection: Int
     var completionHandler: (([UIImage]) -> Void)?
 
@@ -33,9 +49,9 @@ struct PhotoSelector: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-        var parent: PhotoSelector
+        var parent: PhotoSelectorRepresentable
 
-        init(_ parent: PhotoSelector) {
+        init(_ parent: PhotoSelectorRepresentable) {
             self.parent = parent
         }
 
@@ -95,7 +111,19 @@ struct PhotoSelector: UIViewControllerRepresentable {
     }
 }
 
-struct SinglePhotoSelector: UIViewControllerRepresentable {
+struct SinglePhotoSelector : View {
+    var completionHandler: (UIImage) -> Void
+    init(completionHandler: @escaping ((UIImage) -> Void)) {
+        self.completionHandler = completionHandler
+    }
+    var body: some View {
+        SinglePhotoSelectorRepresentable(completionHandler: completionHandler)
+            .tint(Color.XMDesgin.main)
+            .ignoresSafeArea()
+            .environment(\.colorScheme, .dark)
+    }
+}
+struct SinglePhotoSelectorRepresentable: UIViewControllerRepresentable {
     var completionHandler: (UIImage) -> Void
     init(completionHandler: @escaping ((UIImage) -> Void)) {
         self.completionHandler = completionHandler
@@ -116,9 +144,9 @@ struct SinglePhotoSelector: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        var parent: SinglePhotoSelector
+        var parent: SinglePhotoSelectorRepresentable
 
-        init(_ parent: SinglePhotoSelector) {
+        init(_ parent: SinglePhotoSelectorRepresentable) {
             self.parent = parent
         }
 

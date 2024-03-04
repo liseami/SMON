@@ -18,13 +18,12 @@ struct ProfileEditView: View {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 8) {
                     ForEach(0 ... 8, id: \.self) { _ in
                         XMDesgin.XMButton {
-                            Apphelper.shared.presentPanSheet(PhotoSelector(maxSelection: 6, completionHandler: { uiimages in
-                                AliyunOSSManager.shared.upLoadImages(images: uiimages) { _ in
-                                }
-                            })
-                            .tint(Color.XMDesgin.main)
-                            .ignoresSafeArea()
-                            .environment(\.colorScheme, .dark), style: .cloud)
+                            Apphelper.shared.presentPanSheet(
+                                PhotoSelector(maxSelection: 6, completionHandler: { uiimages in
+                                    AliyunOSSManager.shared.upLoadImages(images: uiimages) { _ in
+                                    }
+                                }), style: .cloud)
+
                         } label: {
                             WebImage(str: AppConfig.mokImage!.absoluteString)
                                 .scaledToFill()
@@ -43,7 +42,22 @@ struct ProfileEditView: View {
                     .listRowBackground(Color.XMDesgin.b1)
             }
             Section(Text("自我认同")) {
-                XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {}
+                Menu {
+                    Button(action: {}) {
+                        Label {
+                            Text("Dom")
+                        } icon: {
+                            
+                        }
+
+                    }
+                } label: {
+                    XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {
+
+                    }
+                    .contentShape(Rectangle())
+                }
+
             }
             Section(Text("交往目标")) {
                 XMDesgin.XMListRow(.init(name: "长期关系", icon: "inforequest_drink", subline: "")) {}

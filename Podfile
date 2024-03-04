@@ -19,7 +19,6 @@ pod 'Tagly'# 标签云
 pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情
 pod 'AliyunOSSiOS' #阿里云OSS
-pod 'Popovers'# 全局最上层的各种控件
 pod 'JDStatusBarNotification' # 通知小弹窗
 # 腾讯IM -——————————————————
 # 集成聊天功能
