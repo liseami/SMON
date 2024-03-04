@@ -15,6 +15,10 @@ extension String {
         return randomString
     }
     
+    func or(_ or: String) -> String {
+        self.isEmpty ? or : self
+    }
+    
     static func randomChineseString(length: Int) -> String {
         guard length > 0 else { return "" }
 

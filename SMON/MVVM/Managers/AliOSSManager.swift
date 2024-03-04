@@ -111,6 +111,18 @@ class AliyunOSSManager {
         }
     }
     
+    func upLoadImages_async(images: [UIImage]) async -> [String]? {
+        return  await withCheckedContinuation { continuation in
+            upLoadImages(images: images) { urls in
+                if let urls{
+                    continuation.resume(returning: urls)
+                }else{
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+    }
+    
     
 }
 
