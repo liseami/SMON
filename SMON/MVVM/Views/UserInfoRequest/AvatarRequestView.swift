@@ -33,13 +33,7 @@ struct AvatarRequestView: View {
             .moveTo(alignment: .center)
             .frame(height: 140)
         } btnAction: {
-            guard let avatar = vm.avatar,
-                  let urls = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar]),
-                  let url = urls.first else { return }
-            let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(avatar: url))
-            if result.is2000Ok {
-                vm.presentedSteps.append(.morephoto)
-            }
+            await updateAvatar()
         }
         .fullScreenCover(isPresented: $showImagePicker, content: {
             SinglePhotoSelector(completionHandler: { avatar in
@@ -54,6 +48,18 @@ struct AvatarRequestView: View {
             .ignoresSafeArea()
             .environment(\.colorScheme, .dark)
         })
+    }
+
+    func updateAvatar() async {
+        guard let avatar = vm.avatar,
+              let urls = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar]),
+              let url = urls.first else { return }
+        let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(avatar: url))
+        if result.is2000Ok {
+            vm.presentedSteps.append(.morephoto)
+        } else {
+            vm.avatar = nil
+        }
     }
 }
 
