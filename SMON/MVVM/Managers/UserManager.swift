@@ -34,8 +34,9 @@ class UserManager: ObservableObject {
 //        user = .init(userId: "", token: "", needInfo: true)
         #endif
         Task {
-            guard user.isLogin else { return }
+            // 仅针对登陆用户
             await getUploadToken()
+            guard user.isLogin else { return }
             await getImUserSign()
         }
     }
@@ -81,6 +82,7 @@ class UserManager: ObservableObject {
         let result = await Networking.request_async(target)
         if result.is2000Ok, let Iminfo = result.mapObject(IMUserSing.self) {
             DispatchQueue.main.async {
+                // 拿到IM登陆密钥
                 self.IMInfo = Iminfo
                 self.TUIInit()
             }
@@ -89,7 +91,7 @@ class UserManager: ObservableObject {
 
     // 更新用户资料
     func updateUserInfo(updateReqMod: XMUserUpdateReqMod) async -> MoyaResult {
-        let target = UserAPI.update(p: updateReqMod)
+        let target = UserAPI.updateUserInfo(p: updateReqMod)
         let result = await Networking.request_async(target)
         if result.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "🎉 资料修改成功"))
@@ -104,7 +106,7 @@ extension UserManager {
         config.logLevel = .LOG_NONE
         V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)
 
-        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "liseami", userSig: self.IMInfo.imUserSign) {}
+        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "liseami", userSig: IMInfo.imUserSign) {}
 
         // 注册主题
         if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),

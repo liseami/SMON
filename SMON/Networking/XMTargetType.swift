@@ -70,7 +70,7 @@ extension XMTargetType {
         var headers: [String: String] = [:]
         let timestamp = String(Int(Date.now.timeIntervalSince1970))
         let nonce = String.randomString(length: 16)
-        let SIGN_SALT = "K#0*WdiaB_ZGbV2T9l"
+        let SIGN_SALT = AppConfig.readPlist(key: "SMONMeiridasai")
         let sign = (nonce + timestamp + SIGN_SALT).md5()
 
         // Timestamp

@@ -65,7 +65,7 @@ public enum AppConfig {
         self.readPlist(key: "MapBoxPublicToken")
     }
 
-    private static func readPlist(key: String) -> String {
+    static func readPlist(key: String) -> String {
         guard let path = Bundle.main.path(forResource: "AppConfig", ofType: "plist"),
               let configDict = NSDictionary(contentsOfFile: path) as? [String: Any],
               let value = configDict[key] as? String

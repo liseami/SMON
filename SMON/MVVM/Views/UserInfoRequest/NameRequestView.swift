@@ -74,6 +74,7 @@ struct NameRequestView: View {
         }
     }
 
+    @MainActor
     func updateName() async {
         let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(nickname: vm.name))
         if result.is2000Ok {

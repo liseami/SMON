@@ -17,6 +17,8 @@ class UserInfoRequestViewModel: ObservableObject {
     @Published var height : Int = 160
     @Published var bdsmAttr : Int = 0
     @Published var wechat : String  = ""
+    @Published var interestsTag : [String] = []
+    
     @Published var bio : String  = ""
     @Published var showCompleteView: Bool = false
     @Published var presentedSteps: [PageStep] = [.name]

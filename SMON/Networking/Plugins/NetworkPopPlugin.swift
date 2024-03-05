@@ -24,11 +24,12 @@ public class NetworkPopPlugin: PluginType {
             if !result.is2000Ok {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
-            if result.messageCode == 4001 {
+            if result.messageCode == 4001 || result.message == "TOKEN 错误" {
                 UserManager.shared.user = .init()
                 Apphelper.shared.closeKeyBoard()
                 Apphelper.shared.pushNotification(type: .info(message: result.message.or("登录过期，请重新登录。")))
             }
+            
         case .failure:
             Apphelper.shared.pushNotification(type: .error(message: result.message.or("网络错误。")))
         }

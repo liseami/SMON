@@ -8,16 +8,11 @@ enum UserAPI: XMTargetType {
     ///  短信验证码注册
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
-    case update(p: XMUserUpdateReqMod)
+    case updateUserInfo(p: XMUserUpdateReqMod)
     
 
     var group: String {
-        switch self {
-        case .smsCode, .loginBySms:
-            return "/v1/user"
-        case .update:
-            return "/v1/user/usersInfo"
-        }
+        return "/v1/user"
     }
 
     var method: HTTPRequestMethod {
@@ -30,7 +25,7 @@ enum UserAPI: XMTargetType {
         switch self {
         case .smsCode(let p): return p.kj.JSONObject()
         case .loginBySms(let p): return p.kj.JSONObject()
-        case .update(let p):return p.kj.JSONObject()
+        case .updateUserInfo(let p):return p.kj.JSONObject()
         }
     }
 }

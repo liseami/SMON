@@ -11,12 +11,7 @@ enum CommonAPI: XMTargetType {
     case getImUserSign
 
     var group: String {
-        switch self {
-        case .interests:
-            "/v1/common/tag"
-        default:
-            "/v1/common"
-        }
+        return "/v1/common"
     }
 
     var method: HTTPRequestMethod {
