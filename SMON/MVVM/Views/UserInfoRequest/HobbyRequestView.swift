@@ -6,27 +6,41 @@
 //
 
 import SwiftUI
+import Tagly
 
 struct HobbyRequestView: View {
     @EnvironmentObject var vm: UserInfoRequestViewModel
+    @State private var taggroups: [XMTagGroup] = []
     var body: some View {
         InfoRequestView(title: "兴趣爱好", subline: "最多选择5样您喜欢的标签。", icon: "inforequest_hobby", btnEnable: true) {
             VStack(alignment: .leading, spacing: 12) {
                 Text("自我疗愈")
-                    .font(.title2.bold())
-                Text("🧠 正念")
-                
-                    .font(.body)
-                    .foregroundStyle(Color.XMDesgin.f1)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(Capsule().fill(Color.XMDesgin.b1))
+                    .font(.title3.bold())
+                ForEach(taggroups,id:\.self){ group in
+                    let children = group.children.map { str in
+                        XMTag(text:str)
+                    }
+                    TagCloudView(data: children, spacing: 12) { tag in
+                        XMDesgin.XMTag(text: tag.text)
+                    }
+                }
+             
             }
         } btnAction: {
-            vm.presentedSteps.append(.height)
+            let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(emotionalNeeds: vm.emotionalNeeds))
+            if result.is2000Ok {
+                vm.presentedSteps.append(.height)
+            }
         }
         .canSkip {
             vm.presentedSteps.append(.height)
+        }
+        .task {
+            let target = CommonAPI.interests
+            let taggroups = await Networking.request_async(target).mapArray(XMTagGroup.self)
+            if let taggroups {
+                self.taggroups = taggroups
+            }
         }
     }
 }

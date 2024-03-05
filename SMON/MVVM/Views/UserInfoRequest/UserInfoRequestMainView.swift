@@ -9,11 +9,11 @@ struct UserInfoRequestMainView: View {
     @StateObject var vm: UserInfoRequestViewModel = .init()
     var body: some View {
         NavigationStack(path: $vm.presentedSteps, root: {
-            NameRequestView()
-                .environmentObject(vm)
+            Color.clear
                 .navigationDestination(for: UserInfoRequestViewModel.PageStep.self) { step in
                     Group {
                         switch step {
+                        case .name : NameRequestView()
                         case .photo: AvatarRequestView()
                         case .morephoto: MorePhotoRequestView()
                         case .brithday: BrithdayDayRequestView()
@@ -23,8 +23,8 @@ struct UserInfoRequestMainView: View {
                         case .height: HeightRequestView()
 //                        case .drink: DrinkRequestView()
 //                        case .smoke: SmokeRequestView()
-                        case .wechat: WechatRequestView()
                         case .bdsm: BdsmRequestView()
+                        case .wechat: WechatRequestView()
                         case .bio: BioRequestView()
                         }
                     }

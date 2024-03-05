@@ -30,8 +30,8 @@ struct InfoRequestView<Content>: View where Content: View {
                 if let icon {
                     XMDesgin.XMIcon(iconName: icon, size: 32)
                 }
-                
-                XMTyperText(text:title)
+
+                XMTyperText(text: title)
                     .multilineTextAlignment(.leading)
                     .bold()
                 Text(subline)
@@ -39,10 +39,9 @@ struct InfoRequestView<Content>: View where Content: View {
             })
             content()
 
-            XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: self.btnEnable) {
+            XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_right", enable: self.btnEnable) {
                 await self.btnAction()
             }
-            .rotationEffect(.degrees(-90))
             .moveTo(alignment: .bottomTrailing)
         }
         .statusBarHidden(false)
@@ -71,10 +70,14 @@ struct NameRequestView: View {
                     .foregroundColor(Color.XMDesgin.f3)
             })
         } btnAction: {
-            let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(nickname: vm.name))
-            if result.is2000Ok {
-                vm.presentedSteps.append(.morephoto)
-            }
+            await updateName()
+        }
+    }
+
+    func updateName() async {
+        let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(nickname: vm.name))
+        if result.is2000Ok {
+            vm.presentedSteps.append(.photo)
         }
     }
 }

@@ -8,7 +8,6 @@
 import Introspect
 import SwiftUI
 
-
 struct MainView: View {
     @StateObject var vm: MainViewModel = .shared
     var body: some View {
@@ -24,7 +23,7 @@ struct MainView: View {
             .onAppear(perform: {
 //                Apphelper.shared.requestReviewApp()
 //                LocationManager().requestLocationPermission()
-               
+
             })
             .environmentObject(vm)
             .navigationBarTransparent(true)
@@ -36,15 +35,14 @@ struct MainView: View {
                     case .coinshop: CoinshopView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: MyFriendsView()
-                    case .postdetail(let postId) :PostDetailView()
-                    case .profileEditView:  ProfileEditView()
-                    case .profile(let userId) : ProfileView(userId: userId)
+                    case .postdetail(let postId): PostDetailView()
+                    case .profileEditView: ProfileEditView()
+                    case .profile(let userId): ProfileView(userId: userId)
                     }
                 }
                 .navigationBarTransparent(false)
                 .toolbarRole(.editor)
             }
-         
         }
     }
 
@@ -65,7 +63,6 @@ struct MainView: View {
                 ProfileHomeView()
             }
         }
-       
     }
 
     var tabbar: some View {

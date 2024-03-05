@@ -8,7 +8,13 @@
 import Foundation
 
 
-struct XMTag : Identifiable {
-    var id : String = UUID.init().uuidString
-    var text : String
+struct XMTag: Identifiable, Convertible {
+    var id: String = UUID().uuidString
+    var text: String = ""
+}
+
+struct XMTagGroup:Hashable, Convertible {
+    var id: String = ""
+    var title: String = ""
+    var children: [String] = []
 }

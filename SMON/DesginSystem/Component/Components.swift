@@ -57,6 +57,22 @@ enum XMDesgin {
             .frame(width: size, height: size, alignment: .center)
         }
     }
+    
+    struct XMTag : View {
+        let text : String
+        init(text: String) {
+            self.text = text
+        }
+        var body: some View{
+            Text(text)
+                .font(.body)
+                .foregroundStyle(Color.XMDesgin.f1)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 8)
+                .background(Color.XMDesgin.b1)
+                .clipShape(Capsule())
+        }
+    }
 
     struct SmallBtn: View {
         var fColor: Color
@@ -329,6 +345,7 @@ enum XMDesgin {
         XMDesgin.CircleBtn {
             await waitme()
         }
+        XMDesgin.XMTag(text: "标签")
     }
     .padding(.all)
 }

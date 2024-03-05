@@ -35,6 +35,10 @@ struct XMUserOSSTokenInfo:Encodable, Decodable, Convertible {
     var expiration: TimeInterval = 0
 }
 
+struct IMUserSing : Encodable, Decodable, Convertible{
+    var imUserSign : String  = ""
+}
+
 
 // 省份
 struct Province: Convertible {

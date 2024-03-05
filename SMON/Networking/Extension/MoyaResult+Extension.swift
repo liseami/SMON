@@ -99,7 +99,7 @@ public extension Result where Success == Moya.Response {
         return json?.dictionaryObject?.kj.model(T.self)
     }
 
-    func mapArray<T: Convertible>(_: T.Type, atKeyPath keyPath: String? = "data") -> [T]? {
+    func mapArray<T: Convertible>(_: T.Type, atKeyPath keyPath: String? = "data.list") -> [T]? {
         if let keyPath = keyPath {
             guard let originDic = (json?.dictionaryObject as NSDictionary?)?.value(forKeyPath: keyPath) else {
                 return nil

@@ -11,12 +11,17 @@ class UserInfoRequestViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var avatar: UIImage?
     @Published var morePhoto: [UIImage] = []
-    @Published var brithday: Date = .now
-    @Published var gender: Int = 0
-    @Published var relationHope: Int = 0
+    @Published var brithday: Date = Calendar.current.date(from: DateComponents.init(year: 2000, month: 1, day: 1)) ?? .now
+    @Published var sex: Int = 0
+    @Published var emotionalNeeds: Int = 0
+    @Published var height : Int = 160
+    @Published var bdsmAttr : Int = 0
+    @Published var wechat : String  = ""
+    @Published var bio : String  = ""
     @Published var showCompleteView: Bool = false
-    @Published var presentedSteps: [PageStep] = []
+    @Published var presentedSteps: [PageStep] = [.name]
     enum PageStep: CaseIterable {
+        case name
         case photo
         case morephoto
         case brithday
@@ -30,5 +35,4 @@ class UserInfoRequestViewModel: ObservableObject {
         case wechat
         case bio
     }
-    
 }

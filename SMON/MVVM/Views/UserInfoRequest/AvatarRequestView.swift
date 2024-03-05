@@ -11,11 +11,13 @@ import SwiftUIX
 
 struct AvatarRequestView: View {
     @EnvironmentObject var vm: UserInfoRequestViewModel
-    @State private var showImagePicker = false
+
     var body: some View {
-        InfoRequestView(title: "至少需要一张照片\r作为头像", subline: "头像日后也可以修改。", btnEnable: true) {
+        InfoRequestView(title: "至少需要一张照片\r作为头像", subline: "头像日后也可以修改。", btnEnable: vm.avatar != nil) {
             XMDesgin.XMButton(action: {
-                showImagePicker = true
+                Apphelper.shared.present(SinglePhotoSelector(completionHandler: { avatar in
+                    vm.avatar = avatar
+                }))
             }, label: {
                 Group {
                     if let avatar = vm.avatar {
@@ -35,25 +37,12 @@ struct AvatarRequestView: View {
         } btnAction: {
             await updateAvatar()
         }
-        .fullScreenCover(isPresented: $showImagePicker, content: {
-            SinglePhotoSelector(completionHandler: { avatar in
-                vm.avatar = avatar
-//                AliyunOSSManager.shared.uploadImagesToOSS(image: avatar) { _, _ in
-//
-//                } completion: { _, _ in
-//
-//                }
-
-            })
-            .ignoresSafeArea()
-            .environment(\.colorScheme, .dark)
-        })
     }
 
     func updateAvatar() async {
         guard let avatar = vm.avatar,
               let urls = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar]),
-              let url = urls.first else { return }
+              let url = urls.first else { vm.avatar = nil; return }
         let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(avatar: url))
         if result.is2000Ok {
             vm.presentedSteps.append(.morephoto)

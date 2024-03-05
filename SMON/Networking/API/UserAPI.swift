@@ -9,13 +9,14 @@ enum UserAPI: XMTargetType {
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
     case update(p: XMUserUpdateReqMod)
+    
 
     var group: String {
         switch self {
         case .smsCode, .loginBySms:
             return "/v1/user"
         case .update:
-            return "v1/usersInfo"
+            return "/v1/user/usersInfo"
         }
     }
 
