@@ -24,7 +24,7 @@ func waitme() async {
 /*
  强制等待任务
  */
-public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void) {
+@MainActor public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void) {
     guard let window = Apphelper.shared.getWindow() else { return }
 
     // 创建模糊效果的视图
@@ -48,18 +48,15 @@ public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void
             blurView.alpha = 1.0 // 设置为完全不透明
         }
         // 异步执行任务
-        SwiftUI.Task {
+        SwiftUI.Task { @MainActor in
             await waitme()
             await task()
-
-            DispatchQueue.main.async {
-                // 使用UIView.animate实现淡出动画
-                UIView.animate(withDuration: 0.3) {
-                    blurView.alpha = 0.0 // 设置为透明
-                } completion: { _ in
-                    blurView.removeFromSuperview() // 移除模糊效果的视图
-                    NotificationPresenter.shared.dismiss() // 关闭loading消息
-                }
+            // 使用UIView.animate实现淡出动画
+            UIView.animate(withDuration: 0.3) {
+                blurView.alpha = 0.0 // 设置为透明
+            } completion: { _ in
+                blurView.removeFromSuperview() // 移除模糊效果的视图
+                NotificationPresenter.shared.dismiss() // 关闭loading消息
             }
         }
     }
@@ -159,6 +156,7 @@ class Apphelper {
     /*
      弹出小提示
      */
+    @MainActor
     func pushNotification(type: NotificationType) {
         let message: String
         let backgroundColor: UIColor
@@ -200,17 +198,15 @@ class Apphelper {
             return style
         }
 
-        DispatchQueue.main.async {
-            switch type {
-            case .info, .error, .success, .warning:
-                NotificationPresenter.shared.present(message, subtitle: nil, styleName: nil, duration: 2, completion: { _ in
-                    // completion block
-                })
+        switch type {
+        case .info, .error, .success, .warning:
+            NotificationPresenter.shared.present(message, subtitle: nil, styleName: nil, duration: 2, completion: { _ in
+                // completion block
+            })
 
-            case let .loading(msg):
-                NotificationPresenter.shared.present(msg)
-                NotificationPresenter.shared.displayActivityIndicator(true)
-            }
+        case let .loading(msg):
+            NotificationPresenter.shared.present(msg)
+            NotificationPresenter.shared.displayActivityIndicator(true)
         }
     }
 

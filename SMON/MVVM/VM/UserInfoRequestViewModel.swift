@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class UserInfoRequestViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var avatar: UIImage?

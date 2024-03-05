@@ -17,10 +17,10 @@ public class NetworkPopPlugin: PluginType {
     public func willSend(_: RequestType, target: TargetType) {}
 
     /// 收到请求时
+    @MainActor 
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
         case .success:
-
             if !result.is2000Ok {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }

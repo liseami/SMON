@@ -2,6 +2,7 @@ import Foundation
 import TUIChat
 import TUICore
 
+
 class UserManager: ObservableObject {
     static let shared = UserManager()
 
@@ -34,8 +35,8 @@ class UserManager: ObservableObject {
 //        user = .init(userId: "", token: "", needInfo: true)
         #endif
         Task {
-            // 仅针对登陆用户
             await getUploadToken()
+            // 仅针对已登陆用户
             guard user.isLogin else { return }
             await getImUserSign()
         }
@@ -66,30 +67,29 @@ class UserManager: ObservableObject {
     }
 
     // 获取最新的阿里云OSS上传Token
+    @MainActor
     func getUploadToken() async {
         let target = CommonAPI.getUploadToken
         let result = await Networking.request_async(target)
         if result.is2000Ok, let ossinfo = result.mapObject(XMUserOSSTokenInfo.self) {
-            DispatchQueue.main.async {
-                self.OSSInfo = ossinfo
-            }
+            OSSInfo = ossinfo
         }
     }
 
     // 获取最新的IMUserSign
+    @MainActor
     func getImUserSign() async {
         let target = CommonAPI.getImUserSign
         let result = await Networking.request_async(target)
         if result.is2000Ok, let Iminfo = result.mapObject(IMUserSing.self) {
-            DispatchQueue.main.async {
-                // 拿到IM登陆密钥
-                self.IMInfo = Iminfo
-                self.TUIInit()
-            }
+            // 拿到IM登陆密钥
+            IMInfo = Iminfo
+            TUIInit()
         }
     }
 
     // 更新用户资料
+    @MainActor
     func updateUserInfo(updateReqMod: XMUserUpdateReqMod) async -> MoyaResult {
         let target = UserAPI.updateUserInfo(p: updateReqMod)
         let result = await Networking.request_async(target)

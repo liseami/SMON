@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class ProfileViewModel: ObservableObject {
     @Published var currentTab: ProfileBarItem = .media
 

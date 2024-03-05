@@ -9,7 +9,6 @@ enum UserAPI: XMTargetType {
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
     case updateUserInfo(p: XMUserUpdateReqMod)
-    
 
     var group: String {
         return "/v1/user"
@@ -25,7 +24,7 @@ enum UserAPI: XMTargetType {
         switch self {
         case .smsCode(let p): return p.kj.JSONObject()
         case .loginBySms(let p): return p.kj.JSONObject()
-        case .updateUserInfo(let p):return p.kj.JSONObject()
+        case .updateUserInfo(let p): return p.kj.JSONObject()
         }
     }
 }
@@ -45,7 +44,7 @@ extension UserAPI {
     struct LoginBySmsReqMod: Convertible {
         /// 电话号码
         var cellphone: String = ""
-        /// 类型，1 注册登录；2 密码重置
+        /// 验证码
         var code: String = ""
         /// 区号
         var zone: String = ""

@@ -9,12 +9,14 @@ import AliyunOSSiOS
 import Foundation
 import JDStatusBarNotification
 
+@MainActor
 class AliyunOSSManager {
     init() {
         self.OSSClient = getOSSClient()
     }
 
     static let shared: AliyunOSSManager = .init()
+
     var ossInfo: XMUserOSSTokenInfo {
         UserManager.shared.OSSInfo
     }
@@ -96,34 +98,29 @@ class AliyunOSSManager {
             if let urls {
                 print("所有图片上传成功，URLs: \(urls)")
                 completion(urls)
-                DispatchQueue.main.async {
-                    NotificationPresenter.shared.dismiss()
-                    Apphelper.shared.pushNotification(type: .success(message: "上传完成。"))
-                }
+                NotificationPresenter.shared.dismiss()
+                Apphelper.shared.pushNotification(type: .success(message: "上传完成。"))
             } else {
                 print("某张图片上传失败，整体失败。")
                 completion(nil)
-                DispatchQueue.main.async {
-                    NotificationPresenter.shared.dismiss()
-                    Apphelper.shared.pushNotification(type: .error(message: "上传失败，请重试。"))
-                }
+
+                NotificationPresenter.shared.dismiss()
+                Apphelper.shared.pushNotification(type: .error(message: "上传失败，请重试。"))
             }
         }
     }
-    
+
     func upLoadImages_async(images: [UIImage]) async -> [String]? {
-        return  await withCheckedContinuation { continuation in
+        return await withCheckedContinuation { continuation in
             upLoadImages(images: images) { urls in
-                if let urls{
+                if let urls {
                     continuation.resume(returning: urls)
-                }else{
+                } else {
                     continuation.resume(returning: nil)
                 }
             }
         }
     }
-    
-    
 }
 
 func compressImage(_ image: UIImage) -> Data? {

@@ -161,7 +161,7 @@ enum XMDesgin {
                     guard isLoading == false else { return }
                     onTap = $0
                 } perform: {
-                    Task {
+                    Task { @MainActor in
                         guard !isLoading else { return }
                         guard enable else {
                             shake += 1

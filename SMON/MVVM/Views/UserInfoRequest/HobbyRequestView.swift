@@ -78,9 +78,7 @@ struct HobbyRequestView: View {
             let target = CommonAPI.interests
             let taggroups = await Networking.request_async(target).mapArray(XMTagGroup.self)
             if let taggroups {
-                DispatchQueue.main.async {
-                    self.taggroups = taggroups
-                }
+                self.taggroups = taggroups
             }
         }
     }
