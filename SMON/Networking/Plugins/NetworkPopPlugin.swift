@@ -11,12 +11,10 @@ import Moya
 
 /// 通用网络插件
 public class NetworkPopPlugin: PluginType {
-    
     public init() {}
 
     /// 即将发送请求
-    public func willSend(_: RequestType, target: TargetType) {
-    }
+    public func willSend(_: RequestType, target: TargetType) {}
 
     /// 收到请求时
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
@@ -25,6 +23,11 @@ public class NetworkPopPlugin: PluginType {
 
             if !result.is2000Ok {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
+            }
+            if result.messageCode == 4001 {
+                UserManager.shared.user = .init()
+                Apphelper.shared.closeKeyBoard()
+                Apphelper.shared.pushNotification(type: .info(message: result.message.or("登录过期，请重新登录。")))
             }
         case .failure:
             Apphelper.shared.pushNotification(type: .error(message: result.message.or("网络错误。")))

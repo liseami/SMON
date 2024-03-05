@@ -33,13 +33,12 @@ struct MainView: View {
                     switch path {
                     case .notification: NotificationView()
                     case .setting: SettingView()
-                    case .myprofile: ProfileView()
                     case .coinshop: CoinshopView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: MyFriendsView()
                     case .postdetail(let postId) :PostDetailView()
-                    case .profileEditView:
-                        ProfileEditView()
+                    case .profileEditView:  ProfileEditView()
+                    case .profile(let userId) : ProfileView(userId: userId)
                     }
                 }
                 .navigationBarTransparent(false)

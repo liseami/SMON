@@ -10,6 +10,13 @@ import Foundation
 class ProfileViewModel: ObservableObject {
     @Published var currentTab: ProfileBarItem = .media
 
+    var userId : String = ""
+    init( userId: String) {
+        self.userId = userId
+    }
+    var isLocalUser : Bool {
+        userId == UserManager.shared.user.userId
+    }
     enum ProfileBarItem: CaseIterable {
         case media
         case post

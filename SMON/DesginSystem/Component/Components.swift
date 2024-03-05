@@ -78,9 +78,10 @@ enum XMDesgin {
                 action()
             } label: {
                 HStack(spacing: 2) {
-                    if !iconName.isEmpty {
+                    
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
-                    }
+                            .opacity(iconName.isEmpty ? 0 : 1)
+                    
 
                     Text(text)
                         .font(.subheadline)
@@ -90,7 +91,7 @@ enum XMDesgin {
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
                 .background(Rectangle().foregroundColor(backColor))
-                .clipShape(RoundedRectangle(cornerRadius: 99))
+                .clipShape(Capsule())
             }
         }
     }

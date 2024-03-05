@@ -22,13 +22,13 @@ struct SMONApp: App {
             Group {
                 if userManager.user.isLogin {
                     // 需要进入资料流程
-                    if userManager.user.isNeedInfo {
-                        UserInfoRequestMainView()
-                    } else {
-                        MainView()
-                    }
+//                    if userManager.user.isNeedInfo {
+//                        UserInfoRequestMainView()
+//                    } else {
+//                        MainView()
+//                    }
                     
-//                    MainView()
+                    MainView()
                 } else {
                     LoginMainView()
                 }

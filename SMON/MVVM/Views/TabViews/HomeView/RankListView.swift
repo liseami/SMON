@@ -12,7 +12,9 @@ struct RankListView: View {
         ScrollView {
             LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
                 ForEach(0...99, id: \.self) { index in
-                    XMDesgin.XMButton {} label: {
+                    XMDesgin.XMButton {
+                        MainViewModel.shared.pathPages.append(.profile(userId: ""))
+                    } label: {
                         VStack {
                             WebImage(str: AppConfig.mokImage!.absoluteString)
                                 .scaledToFit()
@@ -26,6 +28,7 @@ struct RankListView: View {
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
+                        
                     }
                     .conditionalEffect(.smoke(layer: .local), condition: index < 3)
                 }

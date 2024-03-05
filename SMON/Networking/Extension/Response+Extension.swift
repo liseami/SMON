@@ -12,7 +12,9 @@
 // import Moya
 // import SwiftyJSON
 //
+
 // MARK: - 原始
+
 //
 // public extension Response {
 //    var json: JSON? { // 原始Response 转data
@@ -45,7 +47,9 @@
 //    }
 // }
 //
+
 // MARK: - KakaJson
+
 //
 // public extension Response {
 //    /// keyPath默认是data
@@ -75,7 +79,9 @@
 //    }
 // }
 //
+
 // MARK: - Combine
+
 //
 // @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 // public extension AnyPublisher where Output == Response, Failure == MoyaError {
@@ -92,7 +98,9 @@
 //    }
 // }
 //
+
 // MARK: - 辅助方法
+
 //
 // extension AnyPublisher where Failure == MoyaError {
 //    // Workaround for a lot of things, actually. We don't have Publishers.Once, flatMap

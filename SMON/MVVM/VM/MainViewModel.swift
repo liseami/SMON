@@ -54,11 +54,11 @@ class MainViewModel: ObservableObject {
     enum PagePath: Hashable {
         case setting
         case notification
-        case myprofile
         case coinshop
         case myhotinfo
         case myfriends
         case profileEditView
         case postdetail(postId: String)
+        case profile(userId:String)
     }
 }

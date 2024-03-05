@@ -47,7 +47,7 @@ struct ProfileHomeView: View {
             Text("赵纯想")
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(.myprofile)
+                MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId))
             }, label: {
                 AsyncImage(url: URL(string: "https://i.pravatar.cc/1000")!)
                     .scaledToFill()
