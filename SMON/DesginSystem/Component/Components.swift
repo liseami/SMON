@@ -81,7 +81,7 @@ enum XMDesgin {
         var text: String
         var action: () -> ()
         @State var onTap: Bool = false
-        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "home_bell", text: String = "text", action: @escaping () -> ()) {
+        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "", text: String = "text", action: @escaping () -> ()) {
             self.fColor = fColor
             self.backColor = backColor
             self.iconName = iconName
@@ -97,7 +97,7 @@ enum XMDesgin {
                     
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
                             .opacity(iconName.isEmpty ? 0 : 1)
-                    
+                            .ifshow(show: !iconName.isEmpty)
 
                     Text(text)
                         .font(.subheadline)

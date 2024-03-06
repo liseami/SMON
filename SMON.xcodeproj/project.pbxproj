@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A20380E72B95697E00278493 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20380E62B95697E00278493 /* UserAPI.swift */; };
 		A20380E92B95852500278493 /* CommonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20380E82B95852500278493 /* CommonAPI.swift */; };
+		A205EBF92B97EE2800165A43 /* 兴趣标签.json in Resources */ = {isa = PBXBuildFile; fileRef = A205EBF82B97EE2800165A43 /* 兴趣标签.json */; };
 		A20AF7562B92BF400098E561 /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7552B92BF400098E561 /* WebImage.swift */; };
 		A20AF7582B92C42F0098E561 /* XMTyperText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7572B92C42F0098E561 /* XMTyperText.swift */; };
 		A20AF75C2B9300260098E561 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75B2B9300260098E561 /* LocationManager.swift */; };
@@ -119,6 +120,7 @@
 		61E00318C8FBEEF76CFD20CC /* Pods_SMON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A20380E62B95697E00278493 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		A20380E82B95852500278493 /* CommonAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAPI.swift; sourceTree = "<group>"; };
+		A205EBF82B97EE2800165A43 /* 兴趣标签.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "兴趣标签.json"; sourceTree = "<group>"; };
 		A20AF7552B92BF400098E561 /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 		A20AF7572B92C42F0098E561 /* XMTyperText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTyperText.swift; sourceTree = "<group>"; };
 		A20AF75B2B9300260098E561 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 				A2BF163A2B8C811D0011A130 /* Launch Screen.storyboard */,
 				A2BF163C2B8C83B90011A130 /* LaunchScreenAnimation.swift */,
 				A28C55A82B95B99E00707EDA /* 省份&城市.json */,
+				A205EBF82B97EE2800165A43 /* 兴趣标签.json */,
 				A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */,
 				A272A46E2B8706FC008EA955 /* Assets.xcassets */,
 				A272A4832B871C6F008EA955 /* MVVM */,
@@ -768,6 +771,7 @@
 				A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */,
 				A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */,
 				A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */,
+				A205EBF92B97EE2800165A43 /* 兴趣标签.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

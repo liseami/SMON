@@ -13,7 +13,7 @@ struct XMTag: Identifiable, Convertible {
     var text: String = ""
 }
 
-struct XMTagGroup:Hashable, Convertible {
+struct XMTagGroup:Decodable, Hashable, Convertible {
     var id: String = ""
     var title: String = ""
     var children: [String] = []
