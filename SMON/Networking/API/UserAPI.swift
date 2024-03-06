@@ -10,6 +10,7 @@ enum UserAPI: XMTargetType {
     case loginBySms(p: LoginBySmsReqMod)
     case updateUserInfo(p: XMUserUpdateReqMod)
     case getUserInfo(id: String)
+    
 
     var group: String {
         return "/v1/user"

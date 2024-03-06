@@ -7,16 +7,25 @@
 
 import SwiftUI
 
+struct XMPhoto : Hashable{
+    var id : String
+    var url : String
+}
+
+
 struct ProfileEditView: View {
     var w: CGFloat {
         (UIScreen.main.bounds.size.width - 16 - 16 - 8 - 8 - 8) / 3
     }
 
+    @State private var photos : [XMPhoto] = []
+    
     var body: some View {
         List {
+            
             Section(Text("照片墙")) {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 8) {
-                    ForEach(0 ... 8, id: \.self) { _ in
+                    ForEach(photos, id: \.self) { _ in
                         XMDesgin.XMButton {
                             Apphelper.shared.presentPanSheet(
                                 PhotoSelector(maxSelection: 6, completionHandler: { uiimages in
@@ -86,3 +95,26 @@ struct ProfileEditView: View {
 #Preview {
     ProfileEditView()
 }
+
+
+
+
+//
+//struct DropViewDelegate: DropDelegate {
+//    @Binding var photos: [Int]
+//    let current: Int
+//    
+//    func performDrop(info: DropInfo) -> Bool {
+//        guard let itemProvider = info.itemProviders(for: [.string]).first,
+//              let item = itemProvider.item as? String,
+//              let sourceIndex = Int(item) else {
+//            return false
+//        }
+//        
+//        if let destinationIndex = photos.firstIndex(of: current) {
+//            photos.move(fromOffsets: IndexSet(integer: sourceIndex), toOffset: destinationIndex)
+//        }
+//        
+//        return true
+//    }
+//}

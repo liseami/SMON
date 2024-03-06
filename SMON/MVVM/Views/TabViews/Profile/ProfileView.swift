@@ -119,7 +119,7 @@ struct ProfileView: View {
 
     var mediaView: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
-            ForEach(0 ... 99, id: \.self) { _ in
+            ForEach(0...4, id: \.self) { _ in
 
                 WebImage(str: AppConfig.mokImage!.absoluteString)
                     .scaledToFill()
