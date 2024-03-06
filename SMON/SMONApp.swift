@@ -6,11 +6,10 @@
 //
 
 @_exported import Combine
-@_exported import Pow
-@_exported import SwiftUI
-@_exported import SwifterSwift
 @_exported import KakaJSON
-
+@_exported import Pow
+@_exported import SwifterSwift
+@_exported import SwiftUI
 
 @main
 struct SMONApp: App {
@@ -20,15 +19,13 @@ struct SMONApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if userManager.user.isLogin {
+                if userManager.userLoginInfo.isLogin {
                     // 需要进入资料流程
-                    if userManager.user.isNeedInfo {
+                    if userManager.userLoginInfo.isNeedInfo {
                         UserInfoRequestMainView()
                     } else {
                         MainView()
                     }
-                    
-//                    MainView()
                 } else {
                     LoginMainView()
                 }
@@ -38,5 +35,3 @@ struct SMONApp: App {
         }
     }
 }
-
-

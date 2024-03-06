@@ -10,6 +10,7 @@
 		A20380E72B95697E00278493 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20380E62B95697E00278493 /* UserAPI.swift */; };
 		A20380E92B95852500278493 /* CommonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20380E82B95852500278493 /* CommonAPI.swift */; };
 		A205EBF92B97EE2800165A43 /* 兴趣标签.json in Resources */ = {isa = PBXBuildFile; fileRef = A205EBF82B97EE2800165A43 /* 兴趣标签.json */; };
+		A205EBFB2B97FCE100165A43 /* YuanyuanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */; };
 		A20AF7562B92BF400098E561 /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7552B92BF400098E561 /* WebImage.swift */; };
 		A20AF7582B92C42F0098E561 /* XMTyperText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7572B92C42F0098E561 /* XMTyperText.swift */; };
 		A20AF75C2B9300260098E561 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75B2B9300260098E561 /* LocationManager.swift */; };
@@ -121,6 +122,7 @@
 		A20380E62B95697E00278493 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		A20380E82B95852500278493 /* CommonAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAPI.swift; sourceTree = "<group>"; };
 		A205EBF82B97EE2800165A43 /* 兴趣标签.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "兴趣标签.json"; sourceTree = "<group>"; };
+		A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YuanyuanManager.swift; sourceTree = "<group>"; };
 		A20AF7552B92BF400098E561 /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 		A20AF7572B92C42F0098E561 /* XMTyperText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTyperText.swift; sourceTree = "<group>"; };
 		A20AF75B2B9300260098E561 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 				A2BF15F42B8C67060011A130 /* PermissionManager.swift */,
 				A25AAD2D2B8EFE9900B7CE40 /* AliOSSManager.swift */,
 				A20AF75B2B9300260098E561 /* LocationManager.swift */,
+				A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -889,6 +892,7 @@
 				A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */,
 				A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */,
 				A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */,
+				A205EBFB2B97FCE100165A43 /* YuanyuanManager.swift in Sources */,
 				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
 				A27EFFBA2B92B7B000B47BD6 /* PostView.swift in Sources */,
 				A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */,

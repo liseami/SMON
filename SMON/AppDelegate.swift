@@ -14,9 +14,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         DAppInit()
         // 在应用程序启动时执行一些配置
-        // 请求用户位置
-        
-        print(String(describing: type(of: XMUser.init())))
         return true
     }
 }

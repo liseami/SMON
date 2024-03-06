@@ -49,7 +49,33 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
     var wechat: String?
 }
 
-struct XMUser: Decodable, Encodable, Convertible {
+
+
+struct XMUserProfile: Codable, Convertible, XMIntToStringProtocol {
+    var userId: Int = 0
+    var cityId: String = ""
+    var cityName: String = ""
+    var nickname: String = ""
+    var avatar: String = ""
+    var zodiac: String = ""
+    var birthday: String = ""
+    var signature: String = ""
+    var wechat: String = ""
+    var sex: Int = 0
+    var bdsmAttr: Int = 0
+    var emotionalNeeds: Int = 0
+    var education: Int = 0
+    var fansNum: Int = 0
+    var followsNum: Int = 0
+}
+
+
+
+struct XMUserLoginInfo: Decodable, Encodable, Convertible, XMIntToStringProtocol {
+    var isLogin: Bool {
+        !token.isEmpty
+    }
+
     // 用户 ID，默认为空字符串
     var userId: String = ""
 
@@ -99,11 +125,16 @@ struct XMUser: Decodable, Encodable, Convertible {
     var wechat: String = ""
 }
 
-extension XMUser {
-    var isLogin: Bool {
-        !token.isEmpty
-    }
 
+protocol XMIntToStringProtocol {
+    var education: Int { get }
+    var sex: Int { get }
+    var bdsmAttr: Int { get }
+    var emotionalNeeds: Int { get }
+    
+}
+
+extension XMIntToStringProtocol {
     // 获取性别的字符串表示
     var genderString: String {
         switch sex {

@@ -19,6 +19,7 @@ struct ProfileHomeView: View {
                 list
                 // 用户背包
                 userbackpack
+                // 可以滑动更多
                 Spacer().frame(height: 120)
             })
             .padding(.horizontal, 16)
@@ -44,12 +45,12 @@ struct ProfileHomeView: View {
 
     var avatar: some View {
         VStack(alignment: .center, spacing: 32, content: {
-            Text("赵纯想")
+            Text(UserManager.shared.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId))
+                MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId.string))
             }, label: {
-                AsyncImage(url: URL(string: "https://i.pravatar.cc/1000")!)
+                WebImage(str: UserManager.shared.user.avatar)
                     .scaledToFill()
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())

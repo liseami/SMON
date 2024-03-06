@@ -8,17 +8,25 @@
 import Foundation
 
 class MainViewModel: ObservableObject {
+    
+    static let shared: MainViewModel = .init()
+    
     init(currentTabbar: TabbarItem = .home) {
         self.currentTabbar = currentTabbar
         self.pathPages.removeAll()
     }
 
+    
+    @Published var currentTabbar: TabbarItem = .home
+    @Published var pathPages: [PagePath] = []
+    
+    @MainActor
     func reset() {
         self.currentTabbar = .home
         self.pathPages.removeAll()
     }
 
-    static let shared: MainViewModel = .init()
+   
 
     enum TabbarItem: CaseIterable {
         case home
@@ -47,10 +55,6 @@ class MainViewModel: ObservableObject {
             }
         }
     }
-
-    @Published var currentTabbar: TabbarItem = .home
-
-    @Published var pathPages: [PagePath] = []
     enum PagePath: Hashable {
         case setting
         case notification

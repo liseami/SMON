@@ -10,13 +10,16 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     @Published var currentTab: ProfileBarItem = .media
-
+    @Published var user : XMUserProfile = .init()
     var userId : String = ""
     init( userId: String) {
         self.userId = userId
+        Task{
+          await  self.getUserInfo()
+        }
     }
     var isLocalUser : Bool {
-        userId == UserManager.shared.user.userId
+        userId == UserManager.shared.user.userId.string
     }
     enum ProfileBarItem: CaseIterable {
         case media
@@ -36,4 +39,12 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
-}
+    
+    @MainActor
+    func getUserInfo() async {
+        let target = UserAPI.getUserInfo(id: userId)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
+            self.user = userinfo
+        }
+    }}

@@ -72,6 +72,10 @@ public enum AppConfig {
         else { return "" }
         return value
     }
+    
+    public static var yuanyuanurl : String {
+        return "https://www.icloud.com.cn/"
+    }
 
     /// 主页
     static let domain: String = "https://naduo.love/"

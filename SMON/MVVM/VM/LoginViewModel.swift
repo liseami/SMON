@@ -49,9 +49,9 @@ extension LoginViewModel {
         let target = UserAPI.loginBySms(p: .init(cellphone: phoneInput, code: vcodeInput, zone: "86"))
         let result = await Networking.request_async(target)
         if result.is2000Ok {
-            Apphelper.shared.pushNotification(type: .success(message: "登录成功。"))
-            if let user = result.mapObject(XMUser.self) {
-                UserManager.shared.user = user
+            if let userLoginInfo = result.mapObject(XMUserLoginInfo.self) {
+                Apphelper.shared.pushNotification(type: .success(message: "登录成功。"))
+                UserManager.shared.userLoginInfo = userLoginInfo
                 Apphelper.shared.closeKeyBoard()
                 MainViewModel.shared.reset()
             }

@@ -17,7 +17,6 @@ struct PostView: View {
         .contentShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture {
             MainViewModel.shared.pathPages.append(.postdetail(postId: ""))
-            
         }
     }
 

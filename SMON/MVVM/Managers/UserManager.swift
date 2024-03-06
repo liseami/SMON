@@ -2,15 +2,23 @@ import Foundation
 import TUIChat
 import TUICore
 
-
 class UserManager: ObservableObject {
     static let shared = UserManager()
 
-    @Published var user: XMUser {
+    // 本地用户登录信息
+    @Published var userLoginInfo: XMUserLoginInfo {
+        didSet {
+            savaModel(model: userLoginInfo)
+        }
+    }
+    
+    // 本地用户个人信息
+    @Published var user: XMUserProfile {
         didSet {
             savaModel(model: user)
         }
     }
+    
 
     @Published var OSSInfo: XMUserOSSTokenInfo {
         didSet {
@@ -28,7 +36,9 @@ class UserManager: ObservableObject {
         user = .init()
         OSSInfo = .init()
         IMInfo = .init()
-        user = loadModel(type: XMUser.self)
+        userLoginInfo = .init()
+        user = loadModel(type: XMUserProfile.self)
+        userLoginInfo = loadModel(type: XMUserLoginInfo.self)
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
         IMInfo = loadModel(type: IMUserSing.self)
         #if DEBUG
@@ -37,7 +47,8 @@ class UserManager: ObservableObject {
         Task {
             await getUploadToken()
             // 仅针对已登陆用户
-            guard user.isLogin else { return }
+            guard userLoginInfo.isLogin else { return }
+            await getUserInfo()
             await getImUserSign()
         }
     }
@@ -98,6 +109,15 @@ class UserManager: ObservableObject {
         }
         return result
     }
+
+    @MainActor
+    func getUserInfo() async {
+        let target = UserAPI.getUserInfo(id: userLoginInfo.userId)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
+            user = userinfo
+        }
+    }
 }
 
 extension UserManager {
@@ -106,7 +126,7 @@ extension UserManager {
         config.logLevel = .LOG_NONE
         V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)
 
-        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "liseami", userSig: IMInfo.imUserSign) {}
+        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "m" + userLoginInfo.userId, userSig: IMInfo.imUserSign) {}
 
         // 注册主题
         if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),

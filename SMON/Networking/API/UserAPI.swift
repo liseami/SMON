@@ -9,6 +9,7 @@ enum UserAPI: XMTargetType {
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
     case updateUserInfo(p: XMUserUpdateReqMod)
+    case getUserInfo(id: String)
 
     var group: String {
         return "/v1/user"
@@ -22,6 +23,7 @@ enum UserAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .getUserInfo(let id): return ["userId": id]
         case .smsCode(let p): return p.kj.JSONObject()
         case .loginBySms(let p): return p.kj.JSONObject()
         case .updateUserInfo(let p): return p.kj.JSONObject()

@@ -31,7 +31,7 @@ struct ProfileView: View {
     }
 
     var topImage: some View {
-        WebImage(str: AppConfig.mokImage!.absoluteString)
+        WebImage(str: vm.user.avatar)
             .scaledToFill()
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             .clipped()
@@ -43,12 +43,12 @@ struct ProfileView: View {
             Spacer().frame(height: UIScreen.main.bounds.width - 60)
             VStack(alignment: .leading, spacing: 22) {
                 VStack(alignment: .leading, spacing: 8, content: {
-                    Text("赵纯想")
+                    Text(vm.user.nickname)
                         .font(.largeTitle.bold())
-                    Text("天蝎座 · Sub · 长期关系 · 3k粉丝 · 293关注")
+                    Text("\(vm.user.zodiac) · \(vm.user.bdsmAttrString) · \(vm.user.emotionalNeedsString) · \(vm.user.fansNum)粉丝 · \(vm.user.followsNum)关注")
                         .font(.subheadline).foregroundStyle(.secondary)
 
-                    Text(String.randomChineseString(length: 120))
+                    Text(vm.user.signature)
                         .lineLimit(4)
                         .font(.subheadline)
                 })
