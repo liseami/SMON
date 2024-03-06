@@ -11,14 +11,13 @@ class UserManager: ObservableObject {
             savaModel(model: userLoginInfo)
         }
     }
-    
+
     // 本地用户个人信息
     @Published var user: XMUserProfile {
         didSet {
             savaModel(model: user)
         }
     }
-    
 
     @Published var OSSInfo: XMUserOSSTokenInfo {
         didSet {

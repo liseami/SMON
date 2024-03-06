@@ -25,7 +25,7 @@ struct ProfileView: View {
             }
             tabBar
             mediaView
-            tags
+//            tags
         })
         .ignoresSafeArea()
     }

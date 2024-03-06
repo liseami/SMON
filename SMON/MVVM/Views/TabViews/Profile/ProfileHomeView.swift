@@ -48,7 +48,9 @@ struct ProfileHomeView: View {
             Text(UserManager.shared.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId.string))
+                
+                    MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId.string))
+                
             }, label: {
                 WebImage(str: UserManager.shared.user.avatar)
                     .scaledToFill()

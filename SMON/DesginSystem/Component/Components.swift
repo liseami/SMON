@@ -57,13 +57,14 @@ enum XMDesgin {
             .frame(width: size, height: size, alignment: .center)
         }
     }
-    
-    struct XMTag : View {
-        let text : String
+
+    struct XMTag: View {
+        let text: String
         init(text: String) {
             self.text = text
         }
-        var body: some View{
+
+        var body: some View {
             Text(text)
                 .font(.body)
                 .foregroundStyle(Color.XMDesgin.f1)
@@ -94,10 +95,9 @@ enum XMDesgin {
                 action()
             } label: {
                 HStack(spacing: 2) {
-                    
-                        XMDesgin.XMIcon(iconName: iconName, color: fColor)
-                            .opacity(iconName.isEmpty ? 0 : 1)
-                            .ifshow(show: !iconName.isEmpty)
+                    XMDesgin.XMIcon(iconName: iconName, color: fColor)
+                        .opacity(iconName.isEmpty ? 0 : 1)
+                        .ifshow(show: !iconName.isEmpty)
 
                     Text(text)
                         .font(.subheadline)
@@ -148,7 +148,7 @@ enum XMDesgin {
         @State var onTap: Bool = false
         @State var shake: Int = 0
         @State var isLoading: Bool = false
-        init(enable: Bool = true, action: @escaping () async -> (), @ViewBuilder label: @escaping () -> Content) {
+        init(enable: Bool = true, action: @MainActor @escaping () async -> (), @ViewBuilder label: @escaping () -> Content) {
             self.enable = enable
             self.action = action
             self.label = label
@@ -161,7 +161,7 @@ enum XMDesgin {
                     guard isLoading == false else { return }
                     onTap = $0
                 } perform: {
-                    Task { @MainActor in
+                    Task {
                         guard !isLoading else { return }
                         guard enable else {
                             shake += 1

@@ -48,13 +48,12 @@ extension LoginViewModel {
     func loginBySms() async {
         let target = UserAPI.loginBySms(p: .init(cellphone: phoneInput, code: vcodeInput, zone: "86"))
         let result = await Networking.request_async(target)
-        if result.is2000Ok {
-            if let userLoginInfo = result.mapObject(XMUserLoginInfo.self) {
-                Apphelper.shared.pushNotification(type: .success(message: "登录成功。"))
-                UserManager.shared.userLoginInfo = userLoginInfo
-                Apphelper.shared.closeKeyBoard()
-                MainViewModel.shared.reset()
-            }
+        if result.is2000Ok, let userLoginInfo = result.mapObject(XMUserLoginInfo.self) {
+            Apphelper.shared.pushNotification(type: .success(message: "登录成功。"))
+            Apphelper.shared.closeKeyBoard()
+            UserManager.shared.userLoginInfo = userLoginInfo
+            MainViewModel.shared.reset()
+            await UserManager.shared.getUserInfo()
         }
     }
 }

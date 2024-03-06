@@ -10,9 +10,11 @@ import SwiftUI
 
 struct LoginMainView: View {
     @StateObject var vm: LoginViewModel = .init()
-    let player = AVPlayer(url: Bundle.main.url(forResource: "LoginBackgroundVideo", withExtension: "mp4")!)
+    let player: AVPlayer = .init(url: Bundle.main.url(forResource: "LoginBackgroundVideo", withExtension: "mp4")!)
+    init() {}
+
     var body: some View {
-        NavigationStack{
+        NavigationStack {
             ZStack(content: {
                 videoBackground
                     .opacity(vm.pageProgress == .AppFeatures ? 1 : 0.3)
@@ -30,7 +32,7 @@ struct LoginMainView: View {
                 }
             })
         }
-        
+
         .environmentObject(vm)
     }
 
@@ -43,22 +45,15 @@ struct LoginMainView: View {
             .ignoresSafeArea()
             .frame(maxWidth: UIScreen.main.bounds.width)
             .disabled(true)
-            .onAppear {
+            .onReceive(NotificationCenter.default.publisher(for: .AVPlayerItemDidPlayToEndTime)) { _ in
+                self.player.seek(to: .zero)
                 self.player.play()
-                // Set up observer for end of playback
-                NotificationCenter.default.addObserver(
-                    forName: .AVPlayerItemDidPlayToEndTime,
-                    object: self.player.currentItem,
-                    queue: nil)
-                { _ in
-                    // Seek back to the beginning
-                    self.player.seek(to: .zero)
-                    // Start playing again
-                    self.player.play()
-                }
             }
             LinearGradient(colors: [Color.black.opacity(0.8), Color.black.opacity(0)], startPoint: .bottom, endPoint: .top)
                 .ignoresSafeArea()
+        }
+        .onAppear {
+            self.player.play()
         }
     }
 }
