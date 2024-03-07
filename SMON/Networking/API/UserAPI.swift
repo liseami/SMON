@@ -9,8 +9,9 @@ enum UserAPI: XMTargetType {
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
     case updateUserInfo(p: XMUserUpdateReqMod)
-    case getUserInfo(id: String)
-    
+    case getUserInfo(id: String?)
+    case albumList(id: String?)
+    case updateAlbum(p: [String])
 
     var group: String {
         return "/v1/user"
@@ -24,7 +25,9 @@ enum UserAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
-        case .getUserInfo(let id): return ["userId": id]
+        case .updateAlbum(let paths): return ["picPathList": paths]
+        case .albumList(let id): return ["userId": id ?? UserManager.shared.user.userId]
+        case .getUserInfo(let id): return ["userId": id ?? UserManager.shared.user.userId]
         case .smsCode(let p): return p.kj.JSONObject()
         case .loginBySms(let p): return p.kj.JSONObject()
         case .updateUserInfo(let p): return p.kj.JSONObject()

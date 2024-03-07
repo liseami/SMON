@@ -7,114 +7,391 @@
 
 import SwiftUI
 
-struct XMPhoto : Hashable{
-    var id : String
-    var url : String
+class ProfileEditViewModel: ObservableObject {
+    @Published var updateModel: XMUserProfile
+
+    init() {
+        self.updateModel = UserManager.shared.user
+        Task {
+            await self.getPhotos()
+        }
+    }
+
+    @Published var photos: [XMPhoto] = []
+
+    @MainActor
+    func updateUserInfo() async {
+        let p = XMUserUpdateReqMod(from: updateModel)
+        let target = UserAPI.updateUserInfo(p: p)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok {
+            MainViewModel.shared.pathPages.removeLast()
+            Apphelper.shared.pushNotification(type: .success(message: "资料修改成功。"))
+        }
+    }
+
+    @MainActor
+    func getPhotos() async {
+        let target = UserAPI.albumList(id:nil)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok, let photos = result.mapArray(XMPhoto.self) {
+            self.photos = photos
+        }
+    }
+
+    @MainActor
+    func updatePhotos(urls: [String]) async {
+        let urls = photos.map { $0.picPath } + urls
+        let target = UserAPI.updateAlbum(p: urls)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok {
+            await getPhotos()
+        }
+    }
 }
 
-
 struct ProfileEditView: View {
+    @StateObject var vm: ProfileEditViewModel = .init()
     var w: CGFloat {
         (UIScreen.main.bounds.size.width - 16 - 16 - 8 - 8 - 8) / 3
     }
 
-    @State private var photos : [XMPhoto] = []
-    
+    @State private var active: XMPhoto?
+
     var body: some View {
-        List {
-            
-            Section(Text("照片墙")) {
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 8) {
-                    ForEach(photos, id: \.self) { _ in
-                        XMDesgin.XMButton {
-                            Apphelper.shared.presentPanSheet(
-                                PhotoSelector(maxSelection: 6, completionHandler: { uiimages in
-                                    AliyunOSSManager.shared.upLoadImages(images: uiimages) { _ in
-                                    }
-                                }), style: .cloud)
-
-                        } label: {
-                            WebImage(str: AppConfig.mokImage!.absoluteString)
-                                .scaledToFill()
-                                .frame(width: w, height: w / 3 * 4)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 32, pinnedViews: [], content: {
+                photosWall
+                bio
+                bdsmAtt
+                emotionNeed
+                interestsTag
+                height
+                wechat
+                moreInfo
+            })
+            .font(.subheadline).bold()
+            .scrollIndicators(.hidden)
+            .foregroundColor(.XMDesgin.f1)
+            .padding(.all, 16)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {
+                        await vm.updateUserInfo()
                     }
                 }
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
             }
-            Section(Text("个人简介")) {
-                TextEditor(text: .constant("Placeholder"))
-                    .frame(height: 80)
-                    .scrollContentBackground(.hidden)
-                    .listRowBackground(Color.XMDesgin.b1)
+        }
+        .reorderableForEachContainer(active: $active)
+    }
+
+    var moreInfo: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("更多信息")
+            Picker(selection: $vm.updateModel.education) {
+                ForEach(0...5, id: \.self) { index in
+                    Text("\(index.educationString)").tag(index)
+                }
+            } label: {
+                XMDesgin.XMListRow(.init(name: "教育信息", icon: "inforequest_drink", subline: ""), showRightArrow: false) {}
+                    .disabled(true)
             }
-            Section(Text("自我认同")) {
-                Menu {
-                    Button(action: {}) {
-                        Label {
-                            Text("Dom")
-                        } icon: {}
+            .pickerStyle(.navigationLink)
+        })
+    }
+
+    var wechat: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("微信号")
+
+            NavigationLink {
+                WechatSettingView()
+                    .navigationTitle("微信号设置")
+                    .toolbarRole(.editor)
+                    .environmentObject(vm)
+            } label: {
+                XMDesgin.XMListRow(.init(name: vm.updateModel.wechat.maskWeChatId().or("未设置"), icon: "inforequest_wechat", subline: "")) {}
+                    .disabled(true)
+            }
+        })
+    }
+
+    var height: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("身高")
+
+            XMDesgin.XMListRow(.init(name: "\(vm.updateModel.height)cm", icon: "inforequest_ruler", subline: "")) {
+                Apphelper.shared.presentPanSheet(Picker("Height", selection: $vm.updateModel.height) {
+                    ForEach(130 ..< 240) { height in
+                        Text("\(height) cm").tag(height)
                     }
+                }
+                .pickerStyle(WheelPickerStyle())
+                .labelsHidden()
+                .padding(.all)
+                .background(Color.XMDesgin.b1)
+                .clipShape(RoundedRectangle(cornerRadius: 22)), style: .sheet)
+            }
+        })
+    }
+
+    var interestsTag: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("兴趣标签")
+
+            NavigationLink {
+                HobbySelectedView()
+                    .navigationTitle("选择标签")
+                    .toolbarRole(.editor)
+                    .environmentObject(vm)
+            } label: {
+                XMDesgin.XMListRow(.init(name: vm.updateModel.interestsTagList.joined(separator: "、").or("尚无标签"), icon: "", subline: "选择标签")) {}
+                    .disabled(true)
+            }
+        })
+    }
+
+    var bdsmAtt: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("自我认同")
+
+            Picker(selection: $vm.updateModel.bdsmAttr) {
+                ForEach(0...4, id: \.self) { index in
+                    Text(index.bdsmAttrString)
+                        .tag(index)
+                }
+            }
+            .pickerStyle(.segmented)
+        })
+    }
+
+    var photosWall: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("照片墙")
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 8) {
+                ReorderableForEach(vm.photos, active: $active) { photo in
+                    XMDesgin.XMButton.init {
+                        Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: nil)
+                    } label: {
+                        WebImage(str: photo.picUrl)
+                            .scaledToFill()
+                            .frame(width: w, height: w / 3 * 4)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                } preview: { _ in
+                    Color.clear
+                        .scaledToFill()
+                        .frame(width: w, height: w / 3 * 4)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                } moveAction: { from, to in
+                    vm.photos.move(fromOffsets: from, toOffset: to)
+                    Task{
+                        await vm.updatePhotos(urls:[])
+                    }
+                }
+
+                XMDesgin.XMButton {
+                    Apphelper.shared.present(
+                        PhotoSelector(maxSelection: 9 - vm.photos.count, completionHandler: { uiimages in
+                            LoadingTask(loadingMessage: "正在处理..") {
+                                // 阿里云图片上传，之后请求接口，刷新页面
+                                // 期间不允许用户操作
+                                if let urls = await AliyunOSSManager.shared.upLoadImages_async(images: uiimages) {
+                                    await vm.updatePhotos(urls: urls)
+                                }
+                            }
+                        }),
+                        presentationStyle: .fullScreen
+                    )
                 } label: {
-                    XMDesgin.XMListRow(.init(name: "S", icon: "inforequest_bdsm", subline: "")) {}
-                        .contentShape(Rectangle())
+                    Color.XMDesgin.b1
+                        .overlay(content: {
+                            XMDesgin.XMIcon(iconName: "system_add")
+                        })
+                        .frame(width: w, height: w / 3 * 4)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+
+                }.ifshow(show: vm.photos.count < 9)
+            }
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+        })
+    }
+
+    var emotionNeed: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("情感需求")
+            Picker(selection: $vm.updateModel.emotionalNeeds) {
+                ForEach(0...2, id: \.self) { index in
+                    Text(index.emotionalNeedsString)
+                        .tag(index)
                 }
             }
-            Section(Text("交往目标")) {
-                XMDesgin.XMListRow(.init(name: "长期关系", icon: "inforequest_drink", subline: "")) {}
-            }
-            Section(Text("兴趣标签")) {
-                XMDesgin.XMListRow(.init(name: "🏑曲棍球、🏀篮球、🍺聚会", icon: "", subline: "选择标签")) {}
-            }
-            Section(Text("身高")) {
-                XMDesgin.XMListRow(.init(name: "180cm", icon: "inforequest_ruler", subline: "")) {}
-            }
+            .pickerStyle(.segmented)
+        })
+    }
 
-            Section(Text("微信号")) {
-                XMDesgin.XMListRow(.init(name: "chunxiangjifei123", icon: "inforequest_wechat", subline: "")) {}
-            }
-            Section(Text("更多信息")) {
-                XMDesgin.XMListRow(.init(name: "教育信息", icon: "inforequest_drink", subline: "")) {}
-                XMDesgin.XMListRow(.init(name: "公司", icon: "inforequest_drink", subline: "")) {}
-                XMDesgin.XMListRow(.init(name: "职位", icon: "inforequest_drink", subline: "")) {}
-            }
-        }
-        .scrollIndicators(.hidden)
-        .font(.body.bold()).foregroundColor(.XMDesgin.f1)
-        .listStyle(.grouped)
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {}
-            }
-        }
+    var bio: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("个人简介 (\(vm.updateModel.signature.count)/300)")
+
+            TextEditor(text: $vm.updateModel.signature)
+                .tint(Color.XMDesgin.main)
+                .frame(height: 100)
+                .scrollContentBackground(.hidden)
+                .padding(.horizontal, 12)
+                .background {
+                    Color.XMDesgin.b1
+                }
+                .toolbar(content: {
+                    ToolbarItem(placement: .keyboard) {
+                        XMDesgin.SmallBtn(fColor: Color.XMDesgin.f1, backColor: Color.XMDesgin.b1, iconName: "", text: "完成") {
+                            Apphelper.shared.closeKeyBoard()
+                        }
+                        .moveTo(alignment: .trailing)
+                    }
+                })
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        })
     }
 }
 
 #Preview {
-    ProfileEditView()
+    NavigationStack {
+        ProfileEditView()
+    }
 }
 
+public typealias Reorderable = Identifiable & Equatable
+public struct ReorderableForEach<Item: Reorderable, Content: View, Preview: View>: View {
+    public init(
+        _ items: [Item],
+        active: Binding<Item?>,
+        @ViewBuilder content: @escaping (Item) -> Content,
+        @ViewBuilder preview: @escaping (Item) -> Preview,
+        moveAction: @escaping (IndexSet, Int) -> Void
+    ) {
+        self.items = items
+        self._active = active
+        self.content = content
+        self.preview = preview
+        self.moveAction = moveAction
+    }
 
+    public init(
+        _ items: [Item],
+        active: Binding<Item?>,
+        @ViewBuilder content: @escaping (Item) -> Content,
+        moveAction: @escaping (IndexSet, Int) -> Void
+    ) where Preview == EmptyView {
+        self.items = items
+        self._active = active
+        self.content = content
+        self.preview = nil
+        self.moveAction = moveAction
+    }
 
+    @Binding
+    private var active: Item?
 
-//
-//struct DropViewDelegate: DropDelegate {
-//    @Binding var photos: [Int]
-//    let current: Int
-//    
-//    func performDrop(info: DropInfo) -> Bool {
-//        guard let itemProvider = info.itemProviders(for: [.string]).first,
-//              let item = itemProvider.item as? String,
-//              let sourceIndex = Int(item) else {
-//            return false
-//        }
-//        
-//        if let destinationIndex = photos.firstIndex(of: current) {
-//            photos.move(fromOffsets: IndexSet(integer: sourceIndex), toOffset: destinationIndex)
-//        }
-//        
-//        return true
-//    }
-//}
+    @State
+    private var hasChangedLocation = false
+
+    private let items: [Item]
+    private let content: (Item) -> Content
+    private let preview: ((Item) -> Preview)?
+    private let moveAction: (IndexSet, Int) -> Void
+
+    public var body: some View {
+        ForEach(items) { item in
+            if let preview {
+                contentView(for: item)
+                    .onDrag {
+                        dragData(for: item)
+                    } preview: {
+                        preview(item)
+                    }
+            } else {
+                contentView(for: item)
+                    .onDrag {
+                        dragData(for: item)
+                    }
+            }
+        }
+    }
+
+    private func contentView(for item: Item) -> some View {
+        content(item)
+            .opacity(active == item && hasChangedLocation ? 0.5 : 1)
+            .onDrop(
+                of: [.text],
+                delegate: ReorderableDragRelocateDelegate(
+                    item: item,
+                    items: items,
+                    active: $active,
+                    hasChangedLocation: $hasChangedLocation
+                ) { from, to in
+                    withAnimation {
+                        moveAction(from, to)
+                    }
+                }
+            )
+    }
+
+    private func dragData(for item: Item) -> NSItemProvider {
+        active = item
+        return NSItemProvider(object: "\(item.id)" as NSString)
+    }
+}
+
+struct ReorderableDragRelocateDelegate<Item: Reorderable>: DropDelegate {
+    let item: Item
+    var items: [Item]
+
+    @Binding var active: Item?
+    @Binding var hasChangedLocation: Bool
+
+    var moveAction: (IndexSet, Int) -> Void
+
+    func dropEntered(info: DropInfo) {
+        guard item != active, let current = active else { return }
+        guard let from = items.firstIndex(of: current) else { return }
+        guard let to = items.firstIndex(of: item) else { return }
+        hasChangedLocation = true
+        if items[to] != current {
+            moveAction(IndexSet(integer: from), to > from ? to + 1 : to)
+        }
+    }
+
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        DropProposal(operation: .move)
+    }
+
+    func performDrop(info: DropInfo) -> Bool {
+        hasChangedLocation = false
+        active = nil
+        return true
+    }
+}
+
+struct ReorderableDropOutsideDelegate<Item: Reorderable>: DropDelegate {
+    @Binding
+    var active: Item?
+
+    func dropUpdated(info: DropInfo) -> DropProposal? {
+        DropProposal(operation: .move)
+    }
+
+    func performDrop(info: DropInfo) -> Bool {
+        active = nil
+        return true
+    }
+}
+
+public extension View {
+    func reorderableForEachContainer<Item: Reorderable>(
+        active: Binding<Item?>
+    ) -> some View {
+        onDrop(of: [.text], delegate: ReorderableDropOutsideDelegate(active: active))
+    }
+}

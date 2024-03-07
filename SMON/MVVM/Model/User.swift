@@ -36,9 +36,6 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
     // 身高，默认为 0，可选
     var height: Int?
 
-    // 体重，默认为 0，可选
-    var weight: Int?
-
     // 签名，默认为空字符串，可选
     var signature: String?
 
@@ -49,9 +46,24 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
     var wechat: String?
 }
 
+extension XMUserUpdateReqMod {
+    init(from profile: XMUserProfile) {
+        self.nickname = profile.nickname
+        self.avatar = nil // 不可修改
+        self.userAlbum = nil // XMUserProfile 中没有对应的属性
+        self.sex = nil // 不可修改
+        self.birthday = nil // 不可修改
+        self.emotionalNeeds = profile.emotionalNeeds
+        self.bdsmAttr = profile.bdsmAttr
+        self.interestsTag = profile.interestsTag
+        self.height = profile.height
+        self.signature = profile.signature
+        self.education = profile.education
+        self.wechat = profile.wechat
+    }
+}
 
-
-struct XMUserProfile: Codable, Convertible, XMIntToStringProtocol {
+struct XMUserProfile: Convertible {
     var userId: Int = 0
     var cityId: String = ""
     var cityName: String = ""
@@ -61,7 +73,13 @@ struct XMUserProfile: Codable, Convertible, XMIntToStringProtocol {
     var birthday: String = ""
     var signature: String = ""
     var wechat: String = ""
+    var height: Int = 0
     var sex: Int = 0
+    var interestsTagList: [String] = []
+    var interestsTag: String {
+        interestsTagList.joined(separator: "&")
+    }
+
     var bdsmAttr: Int = 0
     var emotionalNeeds: Int = 0
     var education: Int = 0
@@ -69,9 +87,7 @@ struct XMUserProfile: Codable, Convertible, XMIntToStringProtocol {
     var followsNum: Int = 0
 }
 
-
-
-struct XMUserLoginInfo: Decodable, Encodable, Convertible, XMIntToStringProtocol {
+struct XMUserLoginInfo: Decodable, Encodable, Convertible {
     var isLogin: Bool {
         !token.isEmpty
     }
@@ -125,19 +141,10 @@ struct XMUserLoginInfo: Decodable, Encodable, Convertible, XMIntToStringProtocol
     var wechat: String = ""
 }
 
-
-protocol XMIntToStringProtocol {
-    var education: Int { get }
-    var sex: Int { get }
-    var bdsmAttr: Int { get }
-    var emotionalNeeds: Int { get }
-    
-}
-
-extension XMIntToStringProtocol {
+extension Int {
     // 获取性别的字符串表示
     var genderString: String {
-        switch sex {
+        switch self {
         case 1:
             return "男"
         case 2:
@@ -149,7 +156,7 @@ extension XMIntToStringProtocol {
 
     // 获取BDSM属性的字符串表示
     var bdsmAttrString: String {
-        switch bdsmAttr {
+        switch self {
         case 1:
             return "Dom"
         case 2:
@@ -165,7 +172,7 @@ extension XMIntToStringProtocol {
 
     // 获取情感需求的字符串表示
     var emotionalNeedsString: String {
-        switch emotionalNeeds {
+        switch self {
         case 1:
             return "长期关系"
         case 2:
@@ -177,7 +184,7 @@ extension XMIntToStringProtocol {
 
     // 获取教育程度的字符串表示
     var educationString: String {
-        switch education {
+        switch self {
         case 1:
             return "高中"
         case 2:

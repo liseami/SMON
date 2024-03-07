@@ -15,6 +15,7 @@ public enum PanPresentStyle {
     /// 设置
     case setting
     case shop
+    case sheet
 }
 
 class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable where Content: View {
@@ -51,6 +52,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     var longFormHeight: PanModalHeight {
         switch self.style {
         case .shop: return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.7)
+        case .sheet : return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.4)
         default: return .maxHeight
         }
     }

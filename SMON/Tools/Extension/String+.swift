@@ -1,7 +1,6 @@
 import Foundation
 
 extension String {
-    
     static func randomString(length: Int) -> String {
         let letters = "abcdefghijklmnopqrstuvwxyz0123456789"
         var randomString = ""
@@ -17,6 +16,27 @@ extension String {
     
     func or(_ or: String) -> String {
         self.isEmpty ? or : self
+    }
+    
+    func maskWeChatId() -> String {
+        if self.isEmpty {
+            return self
+        }
+            
+        let totalLength = self.count
+        let maskLength = Int(Float(totalLength) * 0.6 + 0.5) // 四舍五入计算掩码长度
+
+        let prefixLength = (totalLength - maskLength) / 2
+        let suffixLength = totalLength - maskLength - prefixLength
+
+        let start = self.index(self.startIndex, offsetBy: prefixLength)
+        let end = self.index(self.endIndex, offsetBy: -suffixLength)
+        let range = start..<end
+            
+        let maskedWeChatId = String(repeating: "*", count: maskLength)
+        let maskedString = self.replacingCharacters(in: range, with: maskedWeChatId)
+            
+        return maskedString
     }
     
     static func randomChineseString(length: Int) -> String {
@@ -57,5 +77,3 @@ extension String {
         return str
     }
 }
-
-

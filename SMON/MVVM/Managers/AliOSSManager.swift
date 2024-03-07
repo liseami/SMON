@@ -98,14 +98,17 @@ class AliyunOSSManager {
             if let urls {
                 print("所有图片上传成功，URLs: \(urls)")
                 completion(urls)
-                NotificationPresenter.shared.dismiss()
-                Apphelper.shared.pushNotification(type: .success(message: "上传完成。"))
+                DispatchQueue.main.async {
+                    NotificationPresenter.shared.dismiss()
+                    Apphelper.shared.pushNotification(type: .success(message: "上传完成。"))
+                }
             } else {
                 print("某张图片上传失败，整体失败。")
                 completion(nil)
-
-                NotificationPresenter.shared.dismiss()
-                Apphelper.shared.pushNotification(type: .error(message: "上传失败，请重试。"))
+                DispatchQueue.main.async {
+                    NotificationPresenter.shared.dismiss()
+                    Apphelper.shared.pushNotification(type: .error(message: "上传失败，请重试。"))
+                }
             }
         }
     }

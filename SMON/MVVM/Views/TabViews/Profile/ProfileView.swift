@@ -45,7 +45,7 @@ struct ProfileView: View {
                 VStack(alignment: .leading, spacing: 8, content: {
                     Text(vm.user.nickname)
                         .font(.largeTitle.bold())
-                    Text("\(vm.user.zodiac) · \(vm.user.bdsmAttrString) · \(vm.user.emotionalNeedsString) · \(vm.user.fansNum)粉丝 · \(vm.user.followsNum)关注")
+                    Text("\(vm.user.zodiac) · \(vm.user.bdsmAttr.bdsmAttrString) · \(vm.user.emotionalNeeds.emotionalNeedsString) · \(vm.user.fansNum)粉丝 · \(vm.user.followsNum)关注")
                         .font(.subheadline).foregroundStyle(.secondary)
 
                     Text(vm.user.signature)
@@ -119,12 +119,16 @@ struct ProfileView: View {
 
     var mediaView: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
-            ForEach(0...4, id: \.self) { _ in
+            ForEach(vm.photos, id: \.self.id) { photo in
 
-                WebImage(str: AppConfig.mokImage!.absoluteString)
-                    .scaledToFill()
-                    .frame(width: w, height: h)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                XMDesgin.XMButton {
+                    Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
+                } label: {
+                    WebImage(str: photo.picUrl)
+                        .scaledToFill()
+                        .frame(width: w, height: h)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
             }
         }
         .padding(.all)

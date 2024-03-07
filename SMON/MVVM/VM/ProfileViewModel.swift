@@ -7,20 +7,24 @@
 
 import Foundation
 
-
 class ProfileViewModel: ObservableObject {
     @Published var currentTab: ProfileBarItem = .media
-    @Published var user : XMUserProfile = .init()
-    var userId : String = ""
-    init( userId: String) {
+    @Published var user: XMUserProfile = .init()
+    @Published var photos: [XMPhoto] = []
+    var userId: String = ""
+
+    init(userId: String) {
         self.userId = userId
-        Task{
-          await  self.getUserInfo()
+        Task {
+            await self.getUserInfo()
+            await self.getPhotos()
         }
     }
-    var isLocalUser : Bool {
+
+    var isLocalUser: Bool {
         userId == UserManager.shared.user.userId.string
     }
+
     enum ProfileBarItem: CaseIterable {
         case media
         case post
@@ -39,12 +43,22 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
-    
+
     @MainActor
     func getUserInfo() async {
         let target = UserAPI.getUserInfo(id: userId)
         let result = await Networking.request_async(target)
         if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
-            self.user = userinfo
+            user = userinfo
         }
-    }}
+    }
+
+    @MainActor
+    func getPhotos() async {
+        let target = UserAPI.albumList(id: userId)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok, let photos = result.mapArray(XMPhoto.self) {
+            self.photos = photos
+        }
+    }
+}

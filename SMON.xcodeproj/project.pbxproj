@@ -81,6 +81,9 @@
 		A27EFFB62B92B6E700B47BD6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB52B92B6E700B47BD6 /* Post.swift */; };
 		A27EFFB82B92B75A00B47BD6 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB72B92B75A00B47BD6 /* PostListView.swift */; };
 		A27EFFBA2B92B7B000B47BD6 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB92B92B7B000B47BD6 /* PostView.swift */; };
+		A281EFE22B99996400E9DE05 /* WechatSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EFE12B99996400E9DE05 /* WechatSettingView.swift */; };
+		A281EFE42B99A09300E9DE05 /* HobbySelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EFE32B99A09300E9DE05 /* HobbySelectedView.swift */; };
+		A281EFE62B99B23700E9DE05 /* XMPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EFE52B99B23700E9DE05 /* XMPhoto.swift */; };
 		A28C55A92B95B99E00707EDA /* 省份&城市.json in Resources */ = {isa = PBXBuildFile; fileRef = A28C55A82B95B99E00707EDA /* 省份&城市.json */; };
 		A28C55AB2B95BE1300707EDA /* MockTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28C55AA2B95BE1300707EDA /* MockTool.swift */; };
 		A28C55AD2B95BFF600707EDA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28C55AC2B95BFF600707EDA /* User.swift */; };
@@ -235,6 +238,9 @@
 		A27EFFB52B92B6E700B47BD6 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A27EFFB72B92B75A00B47BD6 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		A27EFFB92B92B7B000B47BD6 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		A281EFE12B99996400E9DE05 /* WechatSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatSettingView.swift; sourceTree = "<group>"; };
+		A281EFE32B99A09300E9DE05 /* HobbySelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySelectedView.swift; sourceTree = "<group>"; };
+		A281EFE52B99B23700E9DE05 /* XMPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMPhoto.swift; sourceTree = "<group>"; };
 		A28C55A82B95B99E00707EDA /* 省份&城市.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "省份&城市.json"; sourceTree = "<group>"; };
 		A28C55AA2B95BE1300707EDA /* MockTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTool.swift; sourceTree = "<group>"; };
 		A28C55AC2B95BFF600707EDA /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -329,6 +335,7 @@
 				A27EFFB52B92B6E700B47BD6 /* Post.swift */,
 				A28C55AC2B95BFF600707EDA /* User.swift */,
 				A28C55DF2B96B69E00707EDA /* XMTag.swift */,
+				A281EFE52B99B23700E9DE05 /* XMPhoto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -582,7 +589,9 @@
 			isa = PBXGroup;
 			children = (
 				A272A4842B871C77008EA955 /* MainView.swift */,
+				A281EFE12B99996400E9DE05 /* WechatSettingView.swift */,
 				A20AF75D2B931DF60098E561 /* ProfileEditView.swift */,
+				A281EFE32B99A09300E9DE05 /* HobbySelectedView.swift */,
 				A272A4862B871CC7008EA955 /* Login */,
 				A28FEF1D2B8EC7D8002E8FB2 /* UserInfoRequest */,
 				A2B45CAF2B8B27BB00D71EF8 /* SettingView */,
@@ -840,6 +849,7 @@
 				A25AAD262B8EE9BE00B7CE40 /* PhotoSelector.swift in Sources */,
 				A272A48F2B871CFD008EA955 /* HomeView.swift in Sources */,
 				A256DBA72B906737008C7063 /* HotBuyView.swift in Sources */,
+				A281EFE62B99B23700E9DE05 /* XMPhoto.swift in Sources */,
 				A2784F1B2B91851200A1B06F /* CoinshopView.swift in Sources */,
 				A27EFFAB2B92140B00B47BD6 /* NetworkLoggerPlugin.swift in Sources */,
 				A25AAD2C2B8EF7FD00B7CE40 /* SexRequestView.swift in Sources */,
@@ -896,6 +906,7 @@
 				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
 				A27EFFBA2B92B7B000B47BD6 /* PostView.swift in Sources */,
 				A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */,
+				A281EFE22B99996400E9DE05 /* WechatSettingView.swift in Sources */,
 				A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */,
 				A25AAD3E2B8F4E7400B7CE40 /* BdsmRequestView.swift in Sources */,
 				A27EFFA92B92140B00B47BD6 /* MoyaProviderType+Extension.swift in Sources */,
@@ -918,6 +929,7 @@
 				A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */,
 				A26A030A2B89AEAE00F6AC9B /* Bridge.m in Sources */,
 				A2784F1F2B91852100A1B06F /* MyFriendsView.swift in Sources */,
+				A281EFE42B99A09300E9DE05 /* HobbySelectedView.swift in Sources */,
 				A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

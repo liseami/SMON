@@ -132,7 +132,6 @@ struct ProfileHomeView: View {
             }
 
             XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: "限时特惠")) {
-//                vm.pathPages.append(.coinshop)
                 Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
             }
 

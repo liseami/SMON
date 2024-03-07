@@ -17,20 +17,20 @@ public class NetworkPopPlugin: PluginType {
     public func willSend(_: RequestType, target: TargetType) {}
 
     /// 收到请求时
-    @MainActor 
+    @MainActor
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
         case .success:
             if !result.is2000Ok {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
-            
+
             if result.messageCode > 4000 || result.message == "TOKEN 错误" {
                 UserManager.shared.userLoginInfo = .init()
                 Apphelper.shared.closeKeyBoard()
                 Apphelper.shared.pushNotification(type: .info(message: result.message.or("登录过期，请重新登录。")))
             }
-            
+
         case .failure:
             Apphelper.shared.pushNotification(type: .error(message: result.message.or("网络错误。")))
         }

@@ -80,9 +80,9 @@ enum XMDesgin {
         var backColor: Color
         var iconName: String
         var text: String
-        var action: () -> ()
+        var action: () async -> ()
         @State var onTap: Bool = false
-        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "", text: String = "text", action: @escaping () -> ()) {
+        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "", text: String = "text", action: @escaping () async -> ()) {
             self.fColor = fColor
             self.backColor = backColor
             self.iconName = iconName
@@ -92,7 +92,7 @@ enum XMDesgin {
 
         var body: some View {
             XMDesgin.XMButton {
-                action()
+               await action()
             } label: {
                 HStack(spacing: 2) {
                     XMDesgin.XMIcon(iconName: iconName, color: fColor)
@@ -261,43 +261,35 @@ enum XMDesgin {
 
     struct XMListRow: View {
         var info: LabelInfo
+        var showRightArrow : Bool 
         var action: () -> ()
-        init(_ info: LabelInfo, action: @escaping () -> ()) {
+        init(_ info: LabelInfo, showRightArrow: Bool = true, action: @escaping () -> ()) {
             self.info = info
+            self.showRightArrow = showRightArrow
             self.action = action
         }
 
         var body: some View {
-            VStack(alignment: .leading, spacing: 12) {
-//                RoundedRectangle(cornerRadius: 12)
-//                    .frame(height: 1)
-//                    .foregroundColor(.XMDesgin.f3.opacity(0.8))
-//                    .opacity(0)
-
-                XMDesgin.XMButton {
-                    action()
-                } label: {
-                    HStack(spacing: 14) {
-                        XMDesgin.XMIcon(iconName: info.icon, size: 24)
-                            .ifshow(show: !info.icon.isEmpty)
-                        Text(info.name)
-                            .font(.system(size: 16, weight: .regular, design: .monospaced))
-                            .foregroundStyle(Color.XMDesgin.f1)
-                            .lineLimit(1)
-                        Spacer()
-                        Text(info.subline)
-                            .font(.subheadline)
-                            .foregroundStyle(Color.XMDesgin.f2)
-                        XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMDesgin.f2)
-                    }
-                    .contentShape(Rectangle())
+            XMDesgin.XMButton {
+                action()
+            } label: {
+                HStack(spacing: 14) {
+                    XMDesgin.XMIcon(iconName: info.icon, size: 24)
+                        .ifshow(show: !info.icon.isEmpty)
+                    Text(info.name)
+                        .font(.system(size: 16, weight: .regular, design: .monospaced))
+                        .foregroundStyle(Color.XMDesgin.f1)
+                        .lineLimit(1)
+                    Spacer()
+                    Text(info.subline)
+                        .font(.subheadline)
+                        .foregroundStyle(Color.XMDesgin.f2)
+                    XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMDesgin.f2)
+                        .ifshow(show: showRightArrow)
                 }
-
-//                RoundedRectangle(cornerRadius: 12)
-//                    .frame(height: 2)
-//                    .foregroundColor(.XMDesgin.b1)
-//                    .padding(.leading, 28 + 14)
+                .contentShape(Rectangle())
             }
+            
         }
     }
 
