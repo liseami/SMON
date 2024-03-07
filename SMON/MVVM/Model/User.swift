@@ -49,7 +49,7 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
 extension XMUserUpdateReqMod {
     init(from profile: XMUserProfile) {
         self.nickname = profile.nickname
-        self.avatar = nil // 不可修改
+        self.avatar = profile.avatar
         self.userAlbum = nil // XMUserProfile 中没有对应的属性
         self.sex = nil // 不可修改
         self.birthday = nil // 不可修改
@@ -64,28 +64,87 @@ extension XMUserUpdateReqMod {
 }
 
 struct XMUserProfile: Convertible {
-    var userId: Int = 0
-    var cityId: String = ""
-    var cityName: String = ""
-    var nickname: String = ""
-    var avatar: String = ""
-    var zodiac: String = ""
-    var birthday: String = ""
-    var signature: String = ""
-    var wechat: String = ""
-    var height: Int = 0
-    var sex: Int = 0
-    var interestsTagList: [String] = []
+    var userId: Int = 0 // 一定有，不参与资料完成度评分
+    var cityId: String = "" // 一定有，不参与资料完成度评分
+    var cityName: String = "" // 一定有，不参与资料完成度评分
+    var nickname: String = "" // 一定有，不参与资料完成度评分
+    var avatar: String = "" // 一定有，不参与资料完成度评分
+    var zodiac: String = "" // 一定有，不参与资料完成度评分
+    var birthday: String = "" // 一定有，不参与资料完成度评分
+    var signature: String = "" // 不为空，才算完成
+    var wechat: String = ""  // 不为空，才算完成
+    var height: Int = 0  // 不为0，才算完成
+    var sex: Int = 0 // 一定有，不参与资料完成度评分
+    var interestsTagList: [String] = [] // 不为空，才算完成
     var interestsTag: String {
         interestsTagList.joined(separator: "&")
     }
 
-    var bdsmAttr: Int = 0
-    var emotionalNeeds: Int = 0
-    var education: Int = 0
-    var fansNum: Int = 0
-    var followsNum: Int = 0
+    var bdsmAttr: Int = 0 // 不为0，才算完成
+    var emotionalNeeds: Int = 0 // 不为0，才算完成
+    var education: Int = 0 // 不为0，才算完成
+    var fansNum: Int = 0 // 一定有，不参与资料完成度评分
+    var followsNum: Int = 0 // 一定有，不参与资料完成度评分
 }
+
+// 用户资料扩展
+extension XMUserProfile {
+    // 计算资料完整度分数
+    var profileCompletionScore: Int {
+        // 初始化“符合规则”的属性数量和总属性数量
+        var okAttNumber = 0
+        var attNumber = 0
+        
+        // 检查签名是否为空
+        attNumber += 1
+        if !signature.isEmpty {
+            okAttNumber += 1
+        }
+
+        // 检查微信是否为空
+        attNumber += 1
+        if !wechat.isEmpty {
+            okAttNumber += 1
+        }
+
+        // 检查身高是否为零
+        attNumber += 1
+        if height != 0 {
+            okAttNumber += 1
+        }
+
+        // 检查兴趣标签列表是否为空
+        attNumber += 1
+        if !interestsTagList.isEmpty {
+            okAttNumber += 1
+        }
+
+        // 检查BDSM属性是否为零
+        attNumber += 1
+        if bdsmAttr != 0 {
+            okAttNumber += 1
+        }
+
+        // 检查情感需求是否为零
+        attNumber += 1
+        if emotionalNeeds != 0 {
+            okAttNumber += 1
+        }
+
+        // 检查教育经历是否为零
+        attNumber += 1
+        if education != 0 {
+            okAttNumber += 1
+        }
+
+        // 计算最终分数，已完成的 / 总共参与评分的 * 100
+        let finalScore = (okAttNumber / attNumber) * 100
+
+        // 确保最终分数上限为 100
+        return Int(finalScore)
+    }
+}
+
 
 struct XMUserLoginInfo: Decodable, Encodable, Convertible {
     var isLogin: Bool {

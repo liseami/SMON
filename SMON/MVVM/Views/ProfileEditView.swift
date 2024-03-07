@@ -17,10 +17,17 @@ class ProfileEditViewModel: ObservableObject {
         }
     }
 
+    @Published var avatar: UIImage?
     @Published var photos: [XMPhoto] = []
+    
 
     @MainActor
     func updateUserInfo() async {
+        if let avatar, let newAvatarUrl = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar])?.first {
+            updateModel.avatar = newAvatarUrl
+        }
+        // 阿里云图片上传，之后请求接口，刷新页面
+        // 期间不允许用户操作
         let p = XMUserUpdateReqMod(from: updateModel)
         let target = UserAPI.updateUserInfo(p: p)
         let result = await Networking.request_async(target)
@@ -32,7 +39,7 @@ class ProfileEditViewModel: ObservableObject {
 
     @MainActor
     func getPhotos() async {
-        let target = UserAPI.albumList(id:nil)
+        let target = UserAPI.albumList(id: nil)
         let result = await Networking.request_async(target)
         if result.is2000Ok, let photos = result.mapArray(XMPhoto.self) {
             self.photos = photos
@@ -59,18 +66,19 @@ struct ProfileEditView: View {
     @State private var active: XMPhoto?
 
     var body: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 32, pinnedViews: [], content: {
-                photosWall
+        ScrollView(showsIndicators: false) {
+            LazyVStack(alignment: .leading, spacing: 28, pinnedViews: [], content: {
+                avatar
                 bio
+                wechat
                 bdsmAtt
+                photosWall
                 emotionNeed
                 interestsTag
                 height
-                wechat
                 moreInfo
             })
-            .font(.subheadline).bold()
+            .font(.headline).bold()
             .scrollIndicators(.hidden)
             .foregroundColor(.XMDesgin.f1)
             .padding(.all, 16)
@@ -78,11 +86,38 @@ struct ProfileEditView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {
                         await vm.updateUserInfo()
+                        await vm.updatePhotos(urls: [])
                     }
                 }
             }
         }
         .reorderableForEachContainer(active: $active)
+    }
+
+    var avatar: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("头像")
+            XMDesgin.XMButton(action: {
+                Apphelper.shared.present(
+                    SinglePhotoSelector(completionHandler: { UIImage in
+                        vm.avatar = UIImage
+                    }), presentationStyle: .fullScreen
+                )
+            }, label: {
+                Group {
+                    if let avatar = vm.avatar {
+                        Image(uiImage: avatar)
+                            .resizable()
+                            .scaledToFill()
+                    } else {
+                        WebImage(str: vm.updateModel.avatar)
+                            .scaledToFill()
+                    }
+                }
+                .frame(width: 100, height: 100)
+                .clipShape(Circle())
+            })
+        })
     }
 
     var moreInfo: some View {
@@ -103,12 +138,12 @@ struct ProfileEditView: View {
     var wechat: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("微信号")
-
             NavigationLink {
                 WechatSettingView()
                     .navigationTitle("微信号设置")
                     .toolbarRole(.editor)
                     .environmentObject(vm)
+                    .navigationBarTitleDisplayMode(.inline)
             } label: {
                 XMDesgin.XMListRow(.init(name: vm.updateModel.wechat.maskWeChatId().or("未设置"), icon: "inforequest_wechat", subline: "")) {}
                     .disabled(true)
@@ -119,18 +154,21 @@ struct ProfileEditView: View {
     var height: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("身高")
-
             XMDesgin.XMListRow(.init(name: "\(vm.updateModel.height)cm", icon: "inforequest_ruler", subline: "")) {
-                Apphelper.shared.presentPanSheet(Picker("Height", selection: $vm.updateModel.height) {
-                    ForEach(130 ..< 240) { height in
-                        Text("\(height) cm").tag(height)
-                    }
-                }
-                .pickerStyle(WheelPickerStyle())
-                .labelsHidden()
-                .padding(.all)
-                .background(Color.XMDesgin.b1)
-                .clipShape(RoundedRectangle(cornerRadius: 22)), style: .sheet)
+                Apphelper.shared.presentPanSheet(
+                    VStack(alignment: .leading, spacing: 12, content: {
+                        Text("身高设置")
+                            .font(.headline).bold()
+                        Picker("Height", selection: $vm.updateModel.height) {
+                            ForEach(130 ..< 240) { height in
+                                Text("\(height) cm").tag(height)
+                            }
+                        }
+                        .pickerStyle(WheelPickerStyle())
+                        .labelsHidden()
+                    }).padding(.all),
+                    style: .sheet
+                )
             }
         })
     }
@@ -138,12 +176,13 @@ struct ProfileEditView: View {
     var interestsTag: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("兴趣标签")
-
             NavigationLink {
                 HobbySelectedView()
                     .navigationTitle("选择标签")
                     .toolbarRole(.editor)
                     .environmentObject(vm)
+                    .navigationBarTitleDisplayMode(.inline)
+
             } label: {
                 XMDesgin.XMListRow(.init(name: vm.updateModel.interestsTagList.joined(separator: "、").or("尚无标签"), icon: "", subline: "选择标签")) {}
                     .disabled(true)
@@ -178,6 +217,14 @@ struct ProfileEditView: View {
                             .frame(width: w, height: w / 3 * 4)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
+                    .overlay(alignment: .bottomTrailing) {
+                        XMDesgin.XMButton(action: {
+                            vm.photos.removeAll(where: { $0.id == photo.id })
+                        }, label: {
+                            XMDesgin.XMIcon(iconName: "system_xmark", size: 16, color: .XMDesgin.f1, withBackCricle: true)
+                        })
+                        .offset(x: -4, y: -4)
+                    }
                 } preview: { _ in
                     Color.clear
                         .scaledToFill()
@@ -185,9 +232,6 @@ struct ProfileEditView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 } moveAction: { from, to in
                     vm.photos.move(fromOffsets: from, toOffset: to)
-                    Task{
-                        await vm.updatePhotos(urls:[])
-                    }
                 }
 
                 XMDesgin.XMButton {
@@ -236,18 +280,20 @@ struct ProfileEditView: View {
             Text("个人简介 (\(vm.updateModel.signature.count)/300)")
 
             TextEditor(text: $vm.updateModel.signature)
+                .foregroundColor(.XMDesgin.main)
                 .tint(Color.XMDesgin.main)
                 .frame(height: 100)
                 .scrollContentBackground(.hidden)
-                .padding(.horizontal, 12)
+                .padding(.all, 12)
                 .background {
                     Color.XMDesgin.b1
                 }
                 .toolbar(content: {
                     ToolbarItem(placement: .keyboard) {
-                        XMDesgin.SmallBtn(fColor: Color.XMDesgin.f1, backColor: Color.XMDesgin.b1, iconName: "", text: "完成") {
-                            Apphelper.shared.closeKeyBoard()
-                        }
+                        XMDesgin.XMIcon(iconName: "system_arrow_down_circle", withBackCricle: true)
+                            .onTapGesture {
+                                Apphelper.shared.closeKeyBoard()
+                            }
                         .moveTo(alignment: .trailing)
                     }
                 })

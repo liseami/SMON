@@ -13,10 +13,15 @@ struct WechatSettingView: View {
         List {
             Section {
                 TextField("微信号", text: $vm.updateModel.wechat)
+                    .tint(.XMDesgin.main)
+                    .autoOpenKeyboard()
+                    .listRowSeparator(.hidden, edges: .top)
             } header: {
-                Text("微信号").font(.title3.bold())
+                Text("微信号")
+                    .font(.headline.bold())
                     .foregroundStyle(Color.XMDesgin.f1)
             }
+
             Section {
                 Picker(selection: .constant(1)) {
                     ForEach((6 ... 4000).filter { number in
@@ -32,12 +37,18 @@ struct WechatSettingView: View {
                     }
                 }
                 .pickerStyle(.wheel)
+                .listRowSeparator(.hidden, edges: .top)
             } header: {
-                Text("他人如何解锁你的微信？").font(.title3.bold())
+                Text("他人如何解锁你的微信？")
+                    .font(.headline.bold())
+                    .foregroundStyle(Color.XMDesgin.f1)
             } footer: {
-                Text("礼物价值不低于上述设置价格时，对方可以看到你的微信号。")
+                Text("* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。")
+                    .font(.subheadline)
+                    .foregroundStyle(Color.XMDesgin.f2)
+                    .listRowSeparator(.hidden, edges: .bottom)
             }
-        }
+        }.listStyle(.plain)
     }
 }
 

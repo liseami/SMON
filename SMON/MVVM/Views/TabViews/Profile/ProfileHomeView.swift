@@ -7,7 +7,13 @@
 
 import SwiftUI
 
+class ProfileHomeViewModel: ObservableObject {
+    init() {}
+}
+
 struct ProfileHomeView: View {
+    @StateObject var vm: ProfileHomeViewModel = .init()
+    @ObservedObject var userManager: UserManager = .shared
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .center, spacing: 24, content: {
@@ -23,6 +29,9 @@ struct ProfileHomeView: View {
                 Spacer().frame(height: 120)
             })
             .padding(.horizontal, 16)
+        }
+        .task {
+            await UserManager.shared.getUserInfo()
         }
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -45,14 +54,12 @@ struct ProfileHomeView: View {
 
     var avatar: some View {
         VStack(alignment: .center, spacing: 32, content: {
-            Text(UserManager.shared.user.nickname)
+            Text(userManager.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                
-                    MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId.string))
-                
+                MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId.string))
             }, label: {
-                WebImage(str: UserManager.shared.user.avatar)
+                WebImage(str: userManager.user.avatar)
                     .scaledToFill()
                     .frame(width: 120, height: 120)
                     .clipShape(Circle())
@@ -66,14 +73,15 @@ struct ProfileHomeView: View {
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                     Circle()
-                        .trim(from: 0.0, to: CGFloat(0.3))
+                        .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore / 100))
                         .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
                         .foregroundColor(Color.XMDesgin.main)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
+                        .animation(.spring(), value: userManager.user.profileCompletionScore)
                 }
                 .overlay(alignment: .bottom) {
-                    Text("20%")
+                    Text("\(userManager.user.profileCompletionScore)%")
                         .bold()
                         .foregroundStyle(Color.XMDesgin.f1)
                         .padding(.all, 4)
@@ -86,7 +94,9 @@ struct ProfileHomeView: View {
                         .offset(x: 0, y: 12)
                 }
             }
-            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: "完成你的主页资料") {
+
+            let text = userManager.user.profileCompletionScore == 100 ? "修改主页资料" : "完成你的主页资料"
+            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: text) {
                 MainViewModel.shared.pathPages.append(.profileEditView)
             }
         })
@@ -136,7 +146,7 @@ struct ProfileHomeView: View {
             }
 
         })
-        .padding(.vertical,16)
+        .padding(.vertical, 16)
     }
 
     var userbackpack: some View {

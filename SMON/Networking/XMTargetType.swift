@@ -28,8 +28,8 @@ extension XMTargetType {
         default: return JSONEncoding.default
         }
     }
-    
-    var enumName : String {
+
+    var enumName: String {
         String(describing: self).components(separatedBy: "(").first!
     }
 }
@@ -68,9 +68,13 @@ extension XMTargetType {
 
     var headers: [String: String]? {
         var headers: [String: String] = [:]
+        // 时间戳 10 位
         let timestamp = String(Int(Date.now.timeIntervalSince1970))
+        // Noce 16位随机字符串，数字字母
         let nonce = String.randomString(length: 16)
+        // 盐
         let SIGN_SALT = AppConfig.readPlist(key: "SMONMeiridasai")
+        // 前面三个加起来 md5()
         let sign = (nonce + timestamp + SIGN_SALT).md5()
 
         // Timestamp
@@ -91,7 +95,7 @@ extension XMTargetType {
         headers["Client-Info"] = standardHeader.jsonString()
 
 #if targetEnvironment(simulator)
-        headers["Token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJNMGRMT1V1MFRvN3oyWmowVE04NmUwNHJ5TUlhRnFHYlR6d2crbEZaZnhyZXJXT0RmK1hLc25JT2czOUVmTnRnT2sxcFVDcmt0R3E2SWpPVXJYWG5nVk5FUWRmWGJwQUU4cENSSTh0dVlCeDhnN1lsTGM2K2lMRi95TmpuN2xkN05Kei8yTUdyNUdkVE00Rk4ydTRMMlREYnBJN1NTaTV3UjFKNDBiazhXOVN0OFdFQ3gwMEd5cjFtNU13UklwS0luUS9ZL1pJVTVoMzFVWk55WjEzaDQ2WFNxL1ppZHNVdkE4ZU9qeFJ3dVl1TXBPR2tmekV4TU9nMEU3c3lZVlFhK2l2OFFTbG1XRnVRNEhJTXZHYlVXcVd2Tkl3MmJSM2p2ZDAxenRYMTV5b1BwdWt0bzVoUFNST2tFQThjS2tERzRKNkNtamlkNlF4U1c4RDhVRExza2c9PSIsImV4cCI6MTcxMjE5OTU0MX0.uO-L9ftQXfV49-Xz7Fur0gKOJ6vEFSZK5P5gClWCzek"
+        headers["Token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJpb3pDVHF1QTgrNTAvOWgyazhnR1dtU3JTNWY4cHQ0SklVR212ZExLWjB5L25BbUdZY3R0NnNyNDlyV25jU05Mc3hEaDlyWFlQMDdiNUh3NHVxYkZPMnlDSC9MWDVDOEZLdEUyQnRJbDkvazM1dFplS1pDS2FrRWV2V1RFa3BJMlVRU0FTT0lPdXNPbGM0eDZWZzNScHdCc2F0MlVyUW9Bc1NPS0FPTVV5QmV3M0VzQmZxOE04dnJSY3ZObHYwNG5va3c1R0FZLzdlNUtid041ekNFdDNFb0hKZHlwK1FjYys0bmNObFlVZERQYlZ4dDBtRzV3aTZhR3pvRHFvUU5EdWMxdmJrT0pmUCtUSVZGTlhzOHRpcmtBd1l1alhoeUd5MEQ5Yi81d3pnSmFTdWduVkZwUlhLbVBaQjlmdHRseXhPOWluTXdPWUo0aXluRzQyZTlxUkE9PSIsImV4cCI6MTcxMjM5NjU5NH0.P9SlVrPuhnOA3Mc-5WnoORChH-j3pZfiL2cLNPpZ27g"
 #else
         if !UserManager.shared.userLoginInfo.token.isEmpty {
             headers["Token"] = UserManager.shared.userLoginInfo.token
@@ -101,7 +105,6 @@ extension XMTargetType {
         return headers
     }
 }
-
 
 extension UIDevice {
     var modelName: String {
