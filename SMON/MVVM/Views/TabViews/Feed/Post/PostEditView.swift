@@ -29,16 +29,16 @@ struct PostEditView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             Text(String.randomChineseString(length: Int.random(in: 3 ... 12)))
-                                .font(.body.bold())
+                                .font(.XMFont.f1b)
                                 .lineLimit(1)
-                                .foregroundStyle(Color.XMDesgin.f1)
+                                .fcolor(.XMDesgin.f1)
                             Spacer()
                         }
 
                         TextEditor(text: $vm.textInput)
                             .autoOpenKeyboard()
-                            .font(.body)
-                            .foregroundColor(Color.XMDesgin.f1)
+                            .font(.XMFont.f1)
+                            .fcolor(.XMDesgin.f1)
                             .frame(height: 160)
                             .tint(.XMDesgin.main)
 
@@ -100,7 +100,7 @@ struct PostEditView: View {
                     XMDesgin.XMButton.init {
                         presentationMode.dismiss()
                     } label: {
-                        Text("取消").font(.body)
+                        Text("取消").font(.XMFont.f1)
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {

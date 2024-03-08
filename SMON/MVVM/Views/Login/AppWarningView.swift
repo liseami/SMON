@@ -51,9 +51,9 @@ struct AppWarningView: View {
     var markdown: some View {
         HStack {
             Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意「每日大赛」的[《用户协议》](https://www.baidu.com) 与 [《隐私政策》](https://www.baidu.com)。"))
-                .font(.subheadline)
+                .font(.XMFont.f2)
                 .multilineTextAlignment(.leading)
-                .foregroundStyle(Color.XMDesgin.f2)
+                .fcolor(.XMDesgin.f2)
                 .frame(width: 240)
                 .tint(Color.XMDesgin.main)
                 .environment(\.openURL, OpenURLAction { url in

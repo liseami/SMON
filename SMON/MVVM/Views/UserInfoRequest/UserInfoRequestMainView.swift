@@ -56,7 +56,7 @@ struct UserInfoRequestMainView: View {
                 .opacity(0)
                 .changeEffect(.rise(origin: .bottom) {
                     Text("🔥")
-                        .foregroundStyle(Color.XMDesgin.f1)
+                        .fcolor(.XMDesgin.f1)
                 }, value: vm.presentedSteps)
         })
         .changeEffect(.glow(color: .white), value: vm.presentedSteps)

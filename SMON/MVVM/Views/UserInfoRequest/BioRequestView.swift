@@ -15,7 +15,7 @@ struct BioRequestView: View {
                 .tint(Color.XMDesgin.main)
                 .scrollContentBackground(.hidden)
                 .background(Color.XMDesgin.b1)
-                .font(.body).foregroundColor(Color.XMDesgin.f1)
+                .font(.XMFont.f1).fcolor(.XMDesgin.f1)
                 .padding(.all, 12)
                 .frame(height: 160)
                 .background(Color.XMDesgin.b1)

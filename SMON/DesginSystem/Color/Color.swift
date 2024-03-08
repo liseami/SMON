@@ -19,3 +19,8 @@ extension Color {
         static let main : Color = .init(hex: "AA7E1F")
     }
 }
+extension View{
+    func fcolor(_ color : Color) -> some View  {
+        self.foregroundStyle(color)
+    }
+}

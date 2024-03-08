@@ -69,13 +69,13 @@ struct ProfileHomeView: View {
                     Circle()
                         .trim(from: 0.0, to: CGFloat(1))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        .foregroundColor(.XMDesgin.b1)
+                        .fcolor(.XMDesgin.b1)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                     Circle()
                         .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore / 100))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        .foregroundColor(Color.XMDesgin.main)
+                        .fcolor(.XMDesgin.main)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                         .animation(.spring(), value: userManager.user.profileCompletionScore)
@@ -83,10 +83,10 @@ struct ProfileHomeView: View {
                 .overlay(alignment: .bottom) {
                     Text("\(userManager.user.profileCompletionScore)%")
                         .bold()
-                        .foregroundStyle(Color.XMDesgin.f1)
+                        .fcolor(.XMDesgin.f1)
                         .padding(.all, 4)
                         .padding(.horizontal, 4)
-                        .background(Capsule().foregroundColor(Color.XMDesgin.main))
+                        .background(Capsule().fcolor(.XMDesgin.main))
                         .overlay(
                             Capsule()
                                 .stroke(Color.black, lineWidth: 4) // 红色描边
@@ -108,9 +108,9 @@ struct ProfileHomeView: View {
 //            Text("免费获取赛币").font(.title3.bold())
             HStack(spacing: 32) {
                 VStack(alignment: .leading, spacing: 4, content: {
-                    Text("每日签到").font(.body.bold())
-                    Text("1次 / 24小时").font(.subheadline.bold())
-                        .foregroundColor(.XMDesgin.f2)
+                    Text("每日签到").font(.XMFont.f1b)
+                    Text("1次 / 24小时").font(.XMFont.f2b)
+                        .fcolor(.XMDesgin.f2)
                 })
                 .padding(.leading, 120)
                 Spacer()
@@ -154,10 +154,10 @@ struct ProfileHomeView: View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             VStack(alignment: .center, spacing: 12, content: {
                 Text("🔥")
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
+                    .font(.XMFont.big3)
                     .frame(width: 24, height: 24)
                 Text("0 火苗")
-                    .font(.body.bold())
+                    .font(.XMFont.f1b)
             })
             .frame(maxWidth: .infinity)
             .padding(.vertical, 24)
@@ -169,7 +169,7 @@ struct ProfileHomeView: View {
                     .scaledToFit()
                     .frame(width: 24, height: 24)
                 Text("0 赛币")
-                    .font(.body.bold())
+                    .font(.XMFont.f1b)
             })
             .frame(maxWidth: .infinity)
             .padding(.vertical, 24)

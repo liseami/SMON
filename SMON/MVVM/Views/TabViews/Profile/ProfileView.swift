@@ -28,6 +28,14 @@ struct ProfileView: View {
                 profileInfo
             }
             tabBar
+
+            LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
+                ForEach(1 ... 10, id: \.self) { _ in
+                    PostView()
+                }
+            })
+            .padding(.all, 16)
+
             mediaView
 //            tags
         })
@@ -48,8 +56,8 @@ struct ProfileView: View {
             VStack(alignment: .leading, spacing: 22) {
                 VStack(alignment: .leading, spacing: 8, content: {
                     Text(vm.user.nickname)
-                        .font(.largeTitle.bold())
-                    HStack {
+                        .font(.XMFont.big1.bold())
+                    HStack(spacing: 0) {
                         Text("\(userInfo.zodiac) · ")
                         Text(" \(userInfo.bdsmAttr.bdsmAttrString) · ")
                             .ifshow(show: userInfo.bdsmAttr != 0)
@@ -64,11 +72,12 @@ struct ProfileView: View {
                                 MainViewModel.shared.pathPages.append(.myfriends)
                             }
                     }
-                    .font(.subheadline).foregroundStyle(.secondary)
+                    .font(.XMFont.f2)
+                    .foregroundStyle(.secondary)
 
                     Text(vm.user.signature)
                         .lineLimit(4)
-                        .font(.subheadline)
+                        .font(.XMFont.f2)
                 })
 
                 btns
@@ -100,13 +109,13 @@ struct ProfileView: View {
     var tags: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("欢迎与我聊")
-                .font(.body)
+                .font(.XMFont.f1)
                 .bold()
             TagCloudView(data: [XMTag(text: "🍉西瓜"), XMTag(text: "⚽️足球"), XMTag(text: "🏂滑板"), XMTag(text: "🎭戏剧"), XMTag(text: "🎵嘻哈")], spacing: 12, content: { tag in
                 Text(tag.text)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 8)
-                    .background(Rectangle().foregroundColor(.XMDesgin.b1))
+                    .background(Rectangle().fcolor(.XMDesgin.b1))
                     .clipShape(Capsule())
             })
         })
@@ -117,7 +126,7 @@ struct ProfileView: View {
             ForEach(ProfileViewModel.ProfileBarItem.allCases, id: \.self) { tabitem in
                 let selected = tabitem == vm.currentTab
                 Text(tabitem.info.name)
-                    .font(.body)
+                    .font(.XMFont.f1)
                     .bold()
                     .opacity(selected ? 1 : 0.6)
             }
@@ -138,7 +147,6 @@ struct ProfileView: View {
     var mediaView: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
             ForEach(vm.photos, id: \.self.id) { photo in
-
                 XMDesgin.XMButton {
                     Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
                 } label: {

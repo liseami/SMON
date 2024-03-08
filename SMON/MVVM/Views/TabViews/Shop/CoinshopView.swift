@@ -35,14 +35,14 @@ struct CoinshopView: View {
                 Spacer()
                 HStack(alignment: .center, spacing: 12, content: {
                     Text("0 赛币(余额)")
-                        .font(.body.bold())
+                        .font(.XMFont.f1b)
                 })
             })
             products
             Text(LocalizedStringKey("点击支付，即代表您已阅读并同意「每日大赛」的[《赛币充值协议》](https://www.baidu.com)。"))
-                .font(.subheadline)
+                .font(.XMFont.f2)
                 .multilineTextAlignment(.leading)
-                .foregroundStyle(Color.XMDesgin.f2)
+                .fcolor(.XMDesgin.f2)
                 .tint(Color.XMDesgin.main)
                 .environment(\.openURL, OpenURLAction { _ in
                     .handled
@@ -63,18 +63,18 @@ struct CoinshopView: View {
                           .resizable()
                           .frame(width: 56, height: 56, alignment: .center)
                       Text("\(product.count)赛币")
-                          .font(.system(.title3, design: .monospaced, weight: .heavy))
+                          .font(.XMFont.big3)
                   })
                   .frame(maxWidth: .infinity)
                   .padding(.vertical, 24)
                   .background(Color.black)
                   VStack(alignment: .center, spacing: 3, content: {
                       Text("¥\(product.price).00")
-                          .font(.system(.body, design: .monospaced, weight: .heavy))
-                          .foregroundColor(Color.green)
+                          .font(.XMFont.f1b)
+                          .fcolor(Color.green)
                       Text("\(product.discountRate)%")
-                          .font(.system(.caption, design: .monospaced, weight: .heavy))
-                          .foregroundColor(Color.XMDesgin.f2)
+                          .font(.XMFont.f3b)
+                          .fcolor(.XMDesgin.f2)
                           .opacity(product.discountRate == 0 ? 0 : 1)
                   })
                   .padding(.vertical, 8)
@@ -82,7 +82,7 @@ struct CoinshopView: View {
               .overlay(alignment: .center) {
                   RoundedRectangle(cornerRadius: 20)
                       .stroke(lineWidth: 1.5)
-                      .foregroundColor(Color.XMDesgin.f3)
+                      .fcolor(.XMDesgin.f3)
               }
               .clipShape(RoundedRectangle(cornerRadius: 20))
               .padding(.all, 1)

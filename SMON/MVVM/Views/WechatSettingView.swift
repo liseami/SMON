@@ -18,8 +18,9 @@ struct WechatSettingView: View {
                     .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("微信号")
-                    .font(.headline.bold())
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1b)
+                    
+                    .fcolor(.XMDesgin.f1)
             }
 
             Section {
@@ -40,12 +41,12 @@ struct WechatSettingView: View {
                 .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("他人如何解锁你的微信？")
-                    .font(.headline.bold())
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f1)
             } footer: {
                 Text("* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。")
-                    .font(.subheadline)
-                    .foregroundStyle(Color.XMDesgin.f2)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
             }
         }.listStyle(.plain)

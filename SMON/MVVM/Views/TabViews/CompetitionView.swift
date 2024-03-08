@@ -51,7 +51,7 @@ struct CompetitionView: View {
                 } label: {
                     let text = index == 0 ? "前一天" : index == 1 ? "今天" : "后一天"
                     Text(text)
-                        .font(.body)
+                        .font(.XMFont.f1)
                         .bold()
                         .opacity(text == "今天" ? 1 : 0.6)
                 }
@@ -67,23 +67,23 @@ struct CompetitionView: View {
                 VStack(alignment: .center, spacing: 12, content: {
                     VStack(alignment: .center, spacing: 16, content: {
                         Text("包臀裙大赛")
-                            .font(.body.bold())
-                            .foregroundStyle(Color.XMDesgin.f1)
+                            .font(.XMFont.f1b)
+                            .fcolor(.XMDesgin.f1)
                         XMDesgin.SmallBtn(fColor: .XMDesgin.main, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "切换至男生主题") {}
                         Text("快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧。")
-                            .font(.subheadline)
-                            .foregroundStyle(Color.XMDesgin.f1)
+                            .font(.XMFont.f2)
+                            .fcolor(.XMDesgin.f1)
                         XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "立即参与发帖") {}
                             .overlay(alignment: .center) {
                                 Capsule().stroke(lineWidth: 2)
-                                    .foregroundColor(.XMDesgin.f2)
+                                    .fcolor(.XMDesgin.f2)
                             }
                         HStack {
                             Text("23992人参与 · ")
                             Text("3天后截止")
                         }
-                        .font(.subheadline).monospaced()
-                        .foregroundStyle(Color.XMDesgin.f2)
+                        .font(.XMFont.f2).monospaced()
+                        .fcolor(.XMDesgin.f2)
                     })
                     .padding(.top, 32)
                     .padding(.all, 16)
@@ -96,7 +96,7 @@ struct CompetitionView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(alignment: .center) {
                                 RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)
-                                    .foregroundColor(.XMDesgin.f1)
+                                    .fcolor(.XMDesgin.f1)
                             }
                             .offset(x: 0, y: -50)
                     }
@@ -105,14 +105,14 @@ struct CompetitionView: View {
 
                 HStack {
                     Text("热门")
-                        .font(.headline.bold())
+                        .font(.XMFont.f1b)
                         .foregroundStyle(Color.XMDesgin.b1)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
                         .background(Color.XMDesgin.f1)
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                     Text("最新")
-                        .font(.headline.bold())
+                        .font(.XMFont.f1b)
                         .frame(maxWidth: .infinity)
                 }
                 .frame(maxWidth: .infinity)

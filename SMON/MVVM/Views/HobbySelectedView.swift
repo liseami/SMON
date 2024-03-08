@@ -43,8 +43,8 @@ struct HobbySelectedView: View {
                 .bold()
 
             XMTyperText(text: "最多选择5样您喜欢的标签。")
-                .font(.body)
-                .foregroundStyle(Color.XMDesgin.f2)
+                .font(.XMFont.f1)
+                .fcolor(.XMDesgin.f2)
         }
     }
 
@@ -88,7 +88,8 @@ struct HobbySelectedView: View {
             .overlay(alignment: .topTrailing) {
                 Capsule()
                     .stroke(lineWidth: 3)
-                    .foregroundStyle(Color.XMDesgin.main)
+                
+                    .fcolor(.XMDesgin.main)
                     .ifshow(show: isSelected)
             }
     }

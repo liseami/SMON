@@ -44,8 +44,8 @@ extension View {
             XMDesgin.XMButton {
                 action()
             } label: {
-                Text("跳过").font(.body)
-                    .foregroundStyle(Color.XMDesgin.f2)
+                Text("跳过").font(.XMFont.f1)
+                    .fcolor(.XMDesgin.f2)
             }
             .padding(.all)
             .padding(.bottom, 22)

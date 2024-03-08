@@ -33,9 +33,10 @@ struct InfoRequestView<Content>: View where Content: View {
 
                 XMTyperText(text: title)
                     .multilineTextAlignment(.leading)
-                    .bold()
+                    .font(.XMFont.big2.bold())
                 Text(subline)
-                    .font(.body).foregroundStyle(Color.XMDesgin.f2)
+                    .font(.XMFont.f1)
+                    .fcolor(.XMDesgin.f2)
             })
             content()
 
@@ -46,7 +47,6 @@ struct InfoRequestView<Content>: View where Content: View {
         }
         .statusBarHidden(false)
         .padding(.horizontal)
-        .font(.title)
         .padding(.top, 60)
         .padding(.bottom, 16)
         .frame(maxHeight: .infinity, alignment: .top)
@@ -59,15 +59,16 @@ struct NameRequestView: View {
         InfoRequestView(title: "从一个昵称开始\r向会员们介绍你自己", subline: "昵称日后也可以修改。", btnEnable: !vm.name.isEmpty) {
             VStack(alignment: .leading, spacing: 12, content: {
                 Text("昵称")
-                    .font(.caption)
-                    .foregroundStyle(Color.XMDesgin.f3)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f3)
                 TextField("请输入昵称", text: $vm.name)
+                    .font(.XMFont.big2.bold())
                     .autoOpenKeyboard()
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .fcolor(.XMDesgin.f1)
                     .tint(Color.XMDesgin.main)
                 Capsule()
                     .frame(height: 1)
-                    .foregroundColor(Color.XMDesgin.f3)
+                    .fcolor(.XMDesgin.f3)
             })
         } btnAction: {
             await updateName()

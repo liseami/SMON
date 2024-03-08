@@ -17,7 +17,7 @@ struct PostDetailView: View {
                 postView
                 Capsule()
                     .frame(height: 2)
-                    .foregroundColor(Color.XMDesgin.b1)
+                    .fcolor(.XMDesgin.b1)
                     .padding(.horizontal)
                 commentList
             })
@@ -49,7 +49,7 @@ struct PostDetailView: View {
                     .padding(.top, 6)
                 TextField(text: $commentInput, axis: .vertical) {}
                     .tint(.XMDesgin.main)
-                    .font(.subheadline)
+                    .font(.XMFont.f2)
                     .focused($input)
                     .padding(.all, 12)
                     .background(.XMDesgin.b1)
@@ -85,33 +85,33 @@ struct PostDetailView: View {
             VStack(alignment: .leading, spacing: 8, content: {
                 HStack(alignment: .center, spacing: 12, content: {
                     Text(String.randomChineseString(length: Int.random(in: 3...12)))
-                        .font(.subheadline.bold())
+                        .font(.XMFont.f2b)
                         .lineLimit(1)
-                        .foregroundStyle(Color.XMDesgin.f1)
+                        .fcolor(.XMDesgin.f1)
                     Spacer()
                 })
 
                 Text(String.randomChineseString(length: Int.random(in: 15...68)))
-                    .font(.subheadline)
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f1)
 
                 HStack(alignment: .center, spacing: 12, content: {
                     Text("14小时前")
-                        .font(.caption)
-                        .foregroundStyle(Color.XMDesgin.f2)
+                        .font(.XMFont.f3)
+                        .fcolor(.XMDesgin.f2)
                     Spacer()
                     HStack {
                         XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
                         Text("14929")
-                            .font(.caption)
+                            .font(.XMFont.f3)
                             .bold()
                     }
                     XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
                 })
 
                 Text("展开30条回复")
-                    .font(.subheadline).bold()
-                    .foregroundStyle(Color.XMDesgin.f2)
+                    .font(.XMFont.f2).bold()
+                    .fcolor(.XMDesgin.f2)
             })
         }
     }
@@ -135,14 +135,14 @@ struct PostDetailView: View {
         HStack(alignment: .center, spacing: 12, content: {
             HStack {
                 Text("14929")
-                    .font(.caption)
+                    .font(.XMFont.f3)
                     .bold()
                 XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
             }
 
             HStack {
                 Text("2424")
-                    .font(.caption)
+                    .font(.XMFont.f3)
                     .bold()
                 XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
             }
@@ -154,8 +154,8 @@ struct PostDetailView: View {
 
     var text: some View {
         Text(String.randomChineseString(length: Int.random(in: 12...144)))
-            .foregroundStyle(Color.XMDesgin.f1)
-            .font(.body)
+            .fcolor(.XMDesgin.f1)
+            .font(.XMFont.f1)
     }
 
     var userinfo: some View {
@@ -166,13 +166,13 @@ struct PostDetailView: View {
                 .clipShape(Circle())
 
             Text(String.randomChineseString(length: Int.random(in: 3...12)))
-                .font(.body.bold())
+                .font(.XMFont.f1b)
                 .lineLimit(1)
-                .foregroundStyle(Color.XMDesgin.f1)
+                .fcolor(.XMDesgin.f1)
             Spacer()
             Text("14小时前")
-                .font(.caption)
-                .foregroundStyle(Color.XMDesgin.f2)
+                .font(.XMFont.f3)
+                .fcolor(.XMDesgin.f2)
         }
     }
 

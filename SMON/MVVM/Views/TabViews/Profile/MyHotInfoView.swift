@@ -25,12 +25,12 @@ struct MyHotInfoView: View {
                 RankingView(ranking: "No.2392950335")
             } header: {
                 Text("全国排名")
-                    .font(.headline.bold())
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f1)
             } footer: {
                 Text("* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
-                    .font(.subheadline)
-                    .foregroundStyle(Color.XMDesgin.f2)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
             }
 
@@ -40,8 +40,8 @@ struct MyHotInfoView: View {
                     .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("当前规则")
-                    .font(.headline.bold())
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f1)
             }
 
             // 同城排名部分
@@ -49,8 +49,8 @@ struct MyHotInfoView: View {
                 RankingView(ranking: "20320942")
             } header: {
                 Text("同城排名")
-                    .font(.headline.bold())
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f1)
             }
 
             // 当前状态部分
@@ -59,12 +59,12 @@ struct MyHotInfoView: View {
                     .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("当前状态")
-                    .font(.headline.bold())
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f1)
             } footer: {
                 Text("* 进入全国前300后，你会拥有6个小时的热度保护期。之后，你会开始慢慢降温，以给其他人曝光的机会。但可以通过主动购买热度的方式，让自己重新进入6个小时的保护期！")
-                    .font(.subheadline)
-                    .foregroundStyle(Color.XMDesgin.f2)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
             }
         }
@@ -77,7 +77,7 @@ struct MyHotInfoView: View {
                     HStack {
                         XMDesgin.XMIcon(iconName: "profile_hot_history", withBackCricle: false)
                         Text("明细")
-                            .foregroundStyle(Color.XMDesgin.f1)
+                            .fcolor(.XMDesgin.f1)
                     }
                 }
             }
@@ -93,8 +93,8 @@ struct RankingView: View {
 
     var body: some View {
         Text(ranking)
-            .font(.system(size: 32, weight: .bold, design: .rounded))
-            .foregroundColor(.XMDesgin.f1)
+            .font(.XMFont.big1)
+            .fcolor(.XMDesgin.f1)
             .listRowSeparator(.hidden, edges: .top)
     }
 }
@@ -109,7 +109,7 @@ struct RewardsView: View {
                 RewardRow(title: title, points: points)
             }
         }
-        .foregroundColor(.XMDesgin.f2)
+        .fcolor(.XMDesgin.f2)
     }
 }
 
@@ -121,16 +121,16 @@ struct RewardRow: View {
     var body: some View {
         HStack(spacing: 16) {
             Text(title)
-                .font(.subheadline)
+                .font(.XMFont.f2)
                 .fixedSize(horizontal: true, vertical: false)
 
             DashedLine()
                 .stroke(style: StrokeStyle(lineWidth: 3, dash: [3]))
                 .frame(maxWidth: .infinity, maxHeight: 2)
-                .foregroundColor(.XMDesgin.f3)
+                .fcolor(.XMDesgin.f3)
 
             Text(points)
-                .font(.subheadline)
+                .font(.XMFont.f2)
                 .fixedSize(horizontal: true, vertical: false)
         }
     }

@@ -33,13 +33,14 @@ struct WechatGiftView: View {
                     .clipShape(Circle())
                 VStack(alignment: .leading, spacing: 6) {
                     Text("小狐狸")
-                        .font(.headline.bold())
+                        .font(.XMFont.f1b)
                     Text("天蝎座 · S · 长期关系")
-                        .foregroundStyle(Color.XMDesgin.f2)
-                        .font(.subheadline.bold())
+                        .fcolor(.XMDesgin.f2)
+                        .font(.XMFont.f2b)
                 }
                 Spacer()
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: "dl****ie") {}
+                    
             }
             progressLine
             ScrollView(.vertical, showsIndicators: false, content: {
@@ -51,13 +52,13 @@ struct WechatGiftView: View {
                                     .resizable()
                                     .frame(width: 32, height: 32, alignment: .center)
                                 Text("热情玫瑰")
-                                    .font(.system(.caption, design: .monospaced, weight: .heavy))
+                                    .font(.XMFont.f3b)
                             })
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
                             Text("¥\(gift.price) 赛币")
-                                .font(.system(.caption2, design: .monospaced, weight: .heavy))
-                                .foregroundColor(Color.green)
+                                .font(.XMFont.f3b)
+                                .fcolor(Color.green)
                                 .padding(.vertical, 6)
                         })
                         .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -84,8 +85,8 @@ struct WechatGiftView: View {
             }
             .frame(height: 5)
             Text("因对方设置，距离解锁微信还需3020钻")
-                .font(.subheadline)
-                .foregroundColor(.XMDesgin.f2)
+                .font(.XMFont.f2)
+                .fcolor(.XMDesgin.f2)
         })
     }
 }

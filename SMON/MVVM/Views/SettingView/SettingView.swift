@@ -39,20 +39,19 @@ struct SettingView: View {
                     }
                 } header: {
                     Text(group.name)
-                        .font(.body)
-                        .bold()
-                        .foregroundStyle(.white)
+                        .font(.XMFont.f1b)
+                        .fcolor(.XMDesgin.f1)
                         .padding(.vertical, 6)
                 }
             }
 
             VStack(alignment: .center, spacing: 12) {
                 Text("Made with peace & love in Suzhou ♥️")
-                    .font(.system(.subheadline, design: .rounded, weight: .bold))
-                    .foregroundColor(Color.XMDesgin.f1)
+                    .font(.XMFont.f2b)
+                    .fcolor(.XMDesgin.f1)
                 Text("SMON Version" + AppConfig.AppVersion)
-                    .font(.system(.body, design: .rounded, weight: .bold))
-                    .foregroundColor(Color.XMDesgin.f2)
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f2)
             }
             .padding(.top, 32)
             .frame(maxWidth: .infinity, alignment: .center)

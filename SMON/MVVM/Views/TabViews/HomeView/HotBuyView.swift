@@ -48,13 +48,13 @@ struct HotBuyView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(alignment: .center) {
                                 RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 2)
-                                    .foregroundColor(.XMDesgin.f1)
+                                    .fcolor(.XMDesgin.f1)
                             }
                         Text("立刻冲榜")
                             .width(120)
                             .height(56)
-                            .font(.body.bold())
-                            .foregroundColor(Color.XMDesgin.b1)
+                            .font(.XMFont.f1b)
+                            .fcolor(.XMDesgin.b1)
                             .background(Color.XMDesgin.f1)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
@@ -69,8 +69,8 @@ struct HotBuyView: View {
                             HStack(spacing: 12) {
                                 XMDesgin.XMIcon(iconName: tips.icon)
                                 Text(tips.name)
-                                    .font(.subheadline)
-                                    .foregroundStyle(Color.XMDesgin.f1)
+                                    .font(.XMFont.f2)
+                                    .fcolor(.XMDesgin.f1)
                             }
                             .padding(.vertical, 8)
                             .padding(.horizontal, 12)
@@ -100,13 +100,13 @@ struct HotBuyView: View {
                                             .frame(width: 32)
                                             Text(String.randomChineseString(length: 6))
                                                 .lineLimit(1)
-                                                .font(.subheadline)
-                                                .foregroundStyle(Color.XMDesgin.f1)
+                                                .font(.XMFont.f2)
+                                                .fcolor(.XMDesgin.f1)
                                             Spacer()
                                             Text("\(Int.random(in: 0 ... 1200))" + "🔥")
                                                 .lineLimit(1)
-                                                .font(.subheadline)
-                                                .foregroundStyle(Color.XMDesgin.f1)
+                                                .font(.XMFont.f2)
+                                                .fcolor(.XMDesgin.f1)
                                         }
                                         .height(44)
                                         Divider()

@@ -10,7 +10,7 @@ import SwiftUIX
 
 struct PostFeedView: View {
     @StateObject var vm: FeedViewModel = .init()
-    
+
     var body: some View {
         ZStack(alignment: .top, content: {
             // 动态流
@@ -53,7 +53,7 @@ struct PostFeedView: View {
                     vm.currentTopTab = tabitem
                 } label: {
                     Text(tabitem.info.name)
-                        .font(.body)
+                        .font(.XMFont.f1)
                         .bold()
                         .opacity(selected ? 1 : 0.6)
                 }
@@ -62,15 +62,12 @@ struct PostFeedView: View {
         }
     }
 
-    
-
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
                     ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tab in
                         // 帖子流页面
                         PostListView().tag(tab)
-                          
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))

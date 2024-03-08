@@ -22,7 +22,7 @@ struct RelationListView: View {
                     .frame(maxWidth:.infinity)
             })
             .padding(.vertical,12)
-            .font(.headline.bold())
+            .font(.XMFont.f1b)
             .overlay(alignment: .bottom) {
                 Divider()
             }
@@ -55,16 +55,16 @@ struct XMUserLine: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 6, content: {
                         Text("Placeholder")
-                            .font(.headline.bold())
+                            .font(.XMFont.f1b)
                         Text("天蝎 · S")
-                            .font(.subheadline)
-                            .foregroundStyle(Color.XMDesgin.f2)
+                            .font(.XMFont.f2)
+                            .fcolor(.XMDesgin.f2)
                     })
                     Spacer()
                     XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在关注") {}
                 }
                 Text(String.randomChineseString(length: 40))
-                    .font(.subheadline)
+                    .font(.XMFont.f2)
 
             })
         }

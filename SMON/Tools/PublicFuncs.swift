@@ -161,7 +161,7 @@ class Apphelper {
         let message: String
         let backgroundColor: UIColor
         var textColor = UIColor(Color.XMDesgin.f1)
-        let font = UIFont.preferredFont(forTextStyle: .body)
+        
 
         switch type {
         case let .info(msg):
@@ -192,7 +192,7 @@ class Apphelper {
             let style: StatusBarNotificationStyle = style
             style.backgroundStyle.backgroundColor = backgroundColor
             style.textStyle.textColor = textColor
-            style.textStyle.font = font
+            style.textStyle.font = .systemFont(ofSize: 24)
             style.canSwipeToDismiss = false
             style.animationType = .move
             return style

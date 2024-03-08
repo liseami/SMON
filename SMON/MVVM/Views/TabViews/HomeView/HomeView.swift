@@ -61,7 +61,7 @@ struct HomeView: View {
                     vm.currentTopTab = tabitem
                 } label: {
                     Text(tabitem.info.name)
-                        .font(.body)
+                        .font(.XMFont.f1)
                         .bold()
                         .opacity(selected ? 1 : 0.6)
                 }

@@ -111,6 +111,7 @@
 		A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB62B8B4EA000D71EF8 /* Color+.swift */; };
 		A2BA894B2B9AC69A002FEEFA /* CompetitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894A2B9AC69A002FEEFA /* CompetitionView.swift */; };
 		A2BA894D2B9ACBCE002FEEFA /* XMTopBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */; };
+		A2BA89502B9ADFA7002FEEFA /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894F2B9ADFA7002FEEFA /* Font.swift */; };
 		A2BF15EC2B8C423D0011A130 /* XMUIDesginSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */; };
 		A2BF15EE2B8C43F20011A130 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A2BF15ED2B8C43F20011A130 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15EF2B8C55480011A130 /* UserManager.swift */; };
@@ -272,6 +273,7 @@
 		A2B45CB62B8B4EA000D71EF8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		A2BA894A2B9AC69A002FEEFA /* CompetitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionView.swift; sourceTree = "<group>"; };
 		A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTopBlurView.swift; sourceTree = "<group>"; };
+		A2BA894F2B9ADFA7002FEEFA /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMUIDesginSystemView.swift; sourceTree = "<group>"; };
 		A2BF15EF2B8C55480011A130 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A2BF15F22B8C64EE0011A130 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 		A2B45C9D2B8AFCA000D71EF8 /* DesginSystem */ = {
 			isa = PBXGroup;
 			children = (
+				A2BA894E2B9ADFA0002FEEFA /* Font */,
 				A28FEF1A2B8DD740002E8FB2 /* Color */,
 				A2B45C9E2B8AFCA600D71EF8 /* Component */,
 				A256DBA42B904622008C7063 /* TUICoreXMTheme.bundle */,
@@ -631,6 +634,14 @@
 				A2B45CB02B8B27C900D71EF8 /* SettingView.swift */,
 			);
 			path = SettingView;
+			sourceTree = "<group>";
+		};
+		A2BA894E2B9ADFA0002FEEFA /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A2BA894F2B9ADFA7002FEEFA /* Font.swift */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		A2BF15F12B8C64E70011A130 /* Message */ = {
@@ -880,6 +891,7 @@
 				A2B45CAC2B8B1E3C00D71EF8 /* ViewFuncs.swift in Sources */,
 				A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */,
 				A256DB972B900BF6008C7063 /* WebView.swift in Sources */,
+				A2BA89502B9ADFA7002FEEFA /* Font.swift in Sources */,
 				A281EFEA2B9AB99500E9DE05 /* WechatGiftView.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
 				A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */,

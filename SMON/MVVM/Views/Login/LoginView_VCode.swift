@@ -35,7 +35,7 @@ struct LoginView_VCode: View {
             TextField("", text: $vm.vcodeInput)
                 .keyboardType(.numberPad)
                 .autoOpenKeyboard()
-                .foregroundStyle(Color.XMDesgin.f1)
+                .fcolor(.XMDesgin.f1)
                 .opacity(0)
         }
     }

@@ -37,7 +37,7 @@ struct PostView: View {
 //
     var commentNum: some View {
         Text("145评论")
-            .font(.caption)
+            .font(.XMFont.f3)
             .bold()
             .padding(.top, 6)
             .background(content: {
@@ -51,7 +51,7 @@ struct PostView: View {
         HStack(alignment: .center, spacing: 12, content: {
             HStack {
                 Text("14929")
-                    .font(.caption)
+                    .font(.XMFont.f3)
                     .bold()
                 XMDesgin.XMButton {} label: {
                     XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
@@ -109,23 +109,23 @@ struct PostView: View {
         HStack {
             XMDesgin.XMButton {} label: {
                 Text(String.randomChineseString(length: Int.random(in: 3...12)))
-                    .font(.body.bold())
+                    .font(.XMFont.f1b)
                     .lineLimit(1)
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .fcolor(.XMDesgin.f1)
             }
 
             Spacer()
             Text("14小时前")
-                .font(.caption)
-                .foregroundStyle(Color.XMDesgin.f2)
+                .font(.XMFont.f3)
+                .fcolor(.XMDesgin.f2)
         }
     }
 
 //
     var text: some View {
         Text(String.randomChineseString(length: Int.random(in: 12...144)))
-            .foregroundStyle(Color.XMDesgin.f1)
-            .font(.subheadline)
+            .fcolor(.XMDesgin.f1)
+            .font(.XMFont.f2)
     }
 
 //
@@ -141,7 +141,7 @@ struct PostView: View {
             RoundedRectangle(cornerRadius: 99)
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
-                .foregroundColor(Color.XMDesgin.f2)
+                .fcolor(.XMDesgin.f2)
         }
     }
 }

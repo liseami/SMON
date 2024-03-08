@@ -23,7 +23,7 @@ struct RequestCompleteView: View {
                     .bold()
                 XMTyperText(text: "每天都举行主题「排位赛」，用户按照「🔥热度值」进行排名。\r\r在这里，你可以轻松找到「全国🔥最火热的用户」，「同城🔥最火热的用户」……\r\r最重要的是，目前获取「🔥」非常简单！\r\r祝你玩的愉快！")
 
-                    .font(.body).foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f1).fcolor(.XMDesgin.f1)
                     .padding(.trailing, 30)
                     .transition(.movingParts.glare.animation(.easeInOut(duration: 0.66)))
                     .ifshow(show: showText)

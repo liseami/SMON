@@ -79,7 +79,7 @@ struct ProfileEditView: View {
             })
             .font(.headline).bold()
             .scrollIndicators(.hidden)
-            .foregroundColor(.XMDesgin.f1)
+            .fcolor(.XMDesgin.f1)
             .padding(.all, 16)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -279,8 +279,8 @@ struct ProfileEditView: View {
             Text("个人简介 (\(vm.updateModel.signature.count)/300)")
 
             TextEditor(text: $vm.updateModel.signature)
-                .font(.body)
-                .foregroundColor(.XMDesgin.f1)
+                .font(.XMFont.f1)
+                .fcolor(.XMDesgin.f1)
                 .tint(Color.XMDesgin.main)
                 .frame(height: 100)
                 .scrollContentBackground(.hidden)

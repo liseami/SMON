@@ -53,7 +53,7 @@ enum XMDesgin {
                         .scaledToFit()
                 }
             }
-            .foregroundColor(color)
+            .fcolor(color)
             .frame(width: size, height: size, alignment: .center)
         }
     }
@@ -66,8 +66,8 @@ enum XMDesgin {
 
         var body: some View {
             Text(text)
-                .font(.body)
-                .foregroundStyle(Color.XMDesgin.f1)
+                .font(.XMFont.f2b)
+                .fcolor(.XMDesgin.f1)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
                 .background(Color.XMDesgin.b1)
@@ -100,13 +100,13 @@ enum XMDesgin {
                         .ifshow(show: !iconName.isEmpty)
 
                     Text(text)
-                        .font(.subheadline)
+                        .font(.XMFont.f2)
                         .bold()
                         .foregroundStyle(fColor)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
-                .background(Rectangle().foregroundColor(backColor))
+                .background(Rectangle().fcolor(backColor))
                 .clipShape(Capsule())
             }
         }
@@ -209,13 +209,13 @@ enum XMDesgin {
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     }
                     Text(text)
-                        .font(.body.bold())
+                        .font(.XMFont.f1b)
                         .bold()
                         .foregroundStyle(fColor)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
-                .background(Rectangle().foregroundColor(backColor))
+                .background(Rectangle().fcolor(backColor))
                 .clipShape(RoundedRectangle(cornerRadius: 99))
             }
         }
@@ -238,9 +238,9 @@ enum XMDesgin {
             } label: {
                 HStack(spacing: 24) {
                     Text(LocalizedStringKey(text))
-                        .font(.body)
+                        .font(.XMFont.f1)
                         .multilineTextAlignment(.leading)
-                        .foregroundColor(Color.XMDesgin.f1)
+                        .fcolor(.XMDesgin.f1)
                         .tint(Color.XMDesgin.main)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     XMDesgin.XMIcon(systemName: "circle", size: 18, color: Color.XMDesgin.f1)
@@ -277,13 +277,13 @@ enum XMDesgin {
                     XMDesgin.XMIcon(iconName: info.icon, size: 24)
                         .ifshow(show: !info.icon.isEmpty)
                     Text(info.name)
-                        .font(.system(size: 16, weight: .regular, design: .monospaced))
-                        .foregroundStyle(Color.XMDesgin.f1)
+                        .font(.XMFont.f1b)
+                        .fcolor(.XMDesgin.f1)
                         .lineLimit(1)
                     Spacer()
                     Text(info.subline)
-                        .font(.subheadline)
-                        .foregroundStyle(Color.XMDesgin.f2)
+                        .font(.XMFont.f2)
+                        .fcolor(.XMDesgin.f2)
                     XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMDesgin.f2)
                         .ifshow(show: showRightArrow)
                 }
@@ -309,12 +309,12 @@ enum XMDesgin {
                     XMDesgin.XMIcon(iconName: info.icon, size: 24)
                         .ifshow(show: !info.icon.isEmpty)
                     Text(info.name)
-                        .font(.system(size: 16, weight: .regular, design: .monospaced))
-                        .foregroundStyle(Color.XMDesgin.f1)
+                        .font(.XMFont.f1b)
+                        .fcolor(.XMDesgin.f1)
                     Spacer()
                     Text(info.subline)
-                        .font(.subheadline)
-                        .foregroundStyle(Color.XMDesgin.f2)
+                        .font(.XMFont.f2)
+                        .fcolor(.XMDesgin.f2)
                     XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMDesgin.f2)
                 }
                 .contentShape(Rectangle())

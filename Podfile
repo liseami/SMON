@@ -21,6 +21,7 @@ pod 'Lantern'# 照片详情
 pod 'AliyunOSSiOS' #阿里云OSS
 pod 'JDStatusBarNotification' # 通知小弹窗
 # 腾讯IM -——————————————————
+pod 'TXIMSDK_Plus_iOS'
 # 集成聊天功能
 pod 'TUIChat/UI_Classic'
 # 集成会话功能

@@ -26,20 +26,20 @@ struct HotHistoryView: View {
                 .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4, content: {
                 Text("小玩具")
-                    .font(.system(.subheadline, design: .rounded, weight: .regular))
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f1)
                 Text("动态点赞")
-                    .font(.system(.headline, design: .rounded, weight: .bold))
-                    .foregroundStyle(Color.XMDesgin.f1)
+                    .font(.XMFont.f2b)
+                    .fcolor(.XMDesgin.f1)
                 Text(Date.now.string(withFormat: "yyyy年MM月-dd日 HH:mm"))
-                    .font(.caption)
-                    .foregroundStyle(Color.XMDesgin.f2)
+                    .font(.XMFont.f3)
+                    .fcolor(.XMDesgin.f2)
 
             })
             Spacer()
             Text("+392")
-                .font(.system(.title2, design: .monospaced, weight: .bold))
-                .foregroundStyle(Color.XMDesgin.f1)
+                .font(.XMFont.big3.bold())
+                .fcolor(.XMDesgin.f1)
         }
     }
 }

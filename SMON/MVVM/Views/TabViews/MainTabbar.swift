@@ -25,7 +25,7 @@ struct MainTabbar: View {
                 // 细线
                 Capsule()
                     .frame(height: 2)
-                    .foregroundColor(.secondary.opacity(0.4))
+                    .fcolor(.secondary.opacity(0.4))
                     .padding(.horizontal)
                 // tabbarIcons
                 tabIcons
@@ -59,7 +59,7 @@ struct MainTabbar: View {
                 .frame(width: 58, height: 58, alignment: .center)
                 .overlay(alignment: .center, content: {
                     Circle().stroke(lineWidth: 2)
-                        .foregroundColor(.init(hex: "D9C15B"))
+                        .fcolor(.init(hex: "D9C15B"))
                 })
                 .clipShape(Circle())
                 .changeEffect(.shine, value: vm.currentTabbar, isEnabled: true)
@@ -69,8 +69,8 @@ struct MainTabbar: View {
                     VStack(spacing: 0) {
                         XMDesgin.XMIcon(iconName: iconName, color: .white)
                         Text(btnName)
-                            .font(.caption2)
-                            .foregroundColor(.white)
+                            .font(.XMFont.f3b)
+                            .fcolor(.XMDesgin.f1)
                             .ifshow(show: !btnName.isEmpty)
                     }
                 }
