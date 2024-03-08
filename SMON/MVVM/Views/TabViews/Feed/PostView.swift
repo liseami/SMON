@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct PostView: View {
-    
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             avatarAndLine
@@ -28,9 +27,9 @@ struct PostView: View {
             text
             // 图片流
             images
-//            // 底部功能按钮
+            // 底部功能按钮
             toolbtns
-//            // 评论数
+            // 评论数
             commentNum
         }
     }
@@ -59,12 +58,17 @@ struct PostView: View {
                 }
             }
 
-            XMDesgin.XMButton {} label: {
+            XMDesgin.XMButton {
+                MainViewModel.shared.pathPages.append(.postdetail(postId: ""))
+            } label: {
                 XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
             }
 
             Spacer()
-            XMDesgin.XMButton {} label: {
+            Menu {
+                Button("举报内容") {}
+                Button("拉黑用户 / 不再看他", role: .destructive) {}
+            } label: {
                 XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
             }
 
@@ -80,10 +84,9 @@ struct PostView: View {
                     AppConfig.mokImage!
                 }
                 ForEach(urls, id: \.absoluteString) { url in
-                    
-                    
+
                     XMDesgin.XMButton {
-                      await  Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
+                        await Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
                             url.absoluteString
                         })
                     } label: {

@@ -68,13 +68,13 @@ struct ProfileHomeView: View {
                 ZStack {
                     Circle()
                         .trim(from: 0.0, to: CGFloat(1))
-                        .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                        .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .foregroundColor(.XMDesgin.b1)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                     Circle()
                         .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore / 100))
-                        .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                        .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .foregroundColor(Color.XMDesgin.main)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
@@ -92,6 +92,7 @@ struct ProfileHomeView: View {
                                 .stroke(Color.black, lineWidth: 4) // 红色描边
                         )
                         .offset(x: 0, y: 12)
+                        .ifshow(show: userManager.user.profileCompletionScore < 100)
                 }
             }
 

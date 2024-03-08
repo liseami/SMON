@@ -32,10 +32,16 @@ class AliyunOSSManager {
         return AliyunOSSiOS.OSSClient.init(endpoint: ossInfo.endpoint, credentialProvider: OSSCredentialProvider)
     }
 
+    enum XMImageType: String {
+        case avatar
+        case userAlbum
+        case posts
+    }
+
     /*
      上传图片到OSS
      */
-    func uploadImagesToOSS(images: [UIImage], progressCallback: @escaping (Int, Float) -> Void, completion: @escaping ([String]?) -> Void) {
+    func uploadImagesToOSS(images: [UIImage], type: XMImageType = .posts, progressCallback: @escaping (Int, Float) -> Void, completion: @escaping ([String]?) -> Void) {
         let bucketName = "dailycontest"
         var currentIndex = 0
         var uploadedImageURLs: [String] = []
@@ -49,14 +55,17 @@ class AliyunOSSManager {
 
             let image = images[currentIndex]
             let put = OSSPutObjectRequest()
-
+            // 业务类型，头像，相册，帖子等等
+            let type = type.rawValue
+            // 环境，测试环境统一上传至type文件夹
+            let url = AppConfig.env == .dev ? "test/" : "\(type)/"
+            // 图片名称
             let imageName = "XM_iOS_UserPic_\(Date.now.string(withFormat: "yyyyMMddHHmm"))_\(String.random(ofLength: 12))" + ".jpg"
-            let objectKey = AppConfig.env == .dev ? "app/test/\(imageName)" : "app/prod/\(imageName)"
+            // 最终路径：app/业务类型文件夹名（测试环境为：test）/图片名称.jpg
+            let objectKey = "app/\(url)\(imageName)"
             put.bucketName = bucketName
             put.objectKey = objectKey
-
             // guard let data = compressImage(image) else { completion(nil); return }
-
             put.uploadingData = image.jpegData(compressionQuality: 0.3)!
             // 当前上传长度、当前已上传总长度、待上传的总长度。
             put.uploadProgress = { _, totalByteSent, totalBytesExpectedToSend in
@@ -80,13 +89,12 @@ class AliyunOSSManager {
                 return
             })
         }
-
         // Start uploading the first image
         uploadNextImage()
     }
 
-    func upLoadImages(images: [UIImage], completion: @escaping ([String]?) -> Void) {
-        uploadImagesToOSS(images: images) { currentImage, totalProgress in
+    func upLoadImages(images: [UIImage], type: XMImageType = .posts, completion: @escaping ([String]?) -> Void) {
+        uploadImagesToOSS(images: images, type: type) { currentImage, totalProgress in
             // 处理当前图片上传进度和整体进度
             print("上传第 \(currentImage) 张图片，总体进度: \(totalProgress * 100)%")
             DispatchQueue.main.async {
@@ -113,9 +121,9 @@ class AliyunOSSManager {
         }
     }
 
-    func upLoadImages_async(images: [UIImage]) async -> [String]? {
+    func upLoadImages_async(images: [UIImage], type: XMImageType = .posts) async -> [String]? {
         return await withCheckedContinuation { continuation in
-            upLoadImages(images: images) { urls in
+            upLoadImages(images: images, type: type) { urls in
                 if let urls {
                     continuation.resume(returning: urls)
                 } else {

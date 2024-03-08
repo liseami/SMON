@@ -17,6 +17,10 @@ struct ProfileView: View {
         self.userId = userId
     }
 
+    var userInfo: XMUserProfile {
+        vm.user
+    }
+
     var body: some View {
         ScrollView(content: {
             ZStack(alignment: .top) {
@@ -45,8 +49,22 @@ struct ProfileView: View {
                 VStack(alignment: .leading, spacing: 8, content: {
                     Text(vm.user.nickname)
                         .font(.largeTitle.bold())
-                    Text("\(vm.user.zodiac) · \(vm.user.bdsmAttr.bdsmAttrString) · \(vm.user.emotionalNeeds.emotionalNeedsString) · \(vm.user.fansNum)粉丝 · \(vm.user.followsNum)关注")
-                        .font(.subheadline).foregroundStyle(.secondary)
+                    HStack {
+                        Text("\(userInfo.zodiac) · ")
+                        Text(" \(userInfo.bdsmAttr.bdsmAttrString) · ")
+                            .ifshow(show: userInfo.bdsmAttr != 0)
+                        Text("\(userInfo.emotionalNeeds.emotionalNeedsString) · ")
+                            .ifshow(show: userInfo.emotionalNeeds != 0)
+                        Text("\(userInfo.fansNum)粉丝 · ")
+                            .onTapGesture {
+                                MainViewModel.shared.pathPages.append(.myfriends)
+                            }
+                        Text("\(userInfo.followsNum)关注")
+                            .onTapGesture {
+                                MainViewModel.shared.pathPages.append(.myfriends)
+                            }
+                    }
+                    .font(.subheadline).foregroundStyle(.secondary)
 
                     Text(vm.user.signature)
                         .lineLimit(4)
@@ -72,9 +90,12 @@ struct ProfileView: View {
             } else {
                 XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_follow", text: "关注") {}
 
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {}
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {
+                }
 
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: "zhao***lis") {}
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: "zhao***lis") {
+                    Apphelper.shared.presentPanSheet(WechatGiftView(), style: .shop)
+                }
             }
         }
     }

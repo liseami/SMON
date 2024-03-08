@@ -33,8 +33,8 @@ struct MainView: View {
                     case .notification: NotificationView()
                     case .setting: SettingView()
                     case .myhotinfo: MyHotInfoView()
-                    case .myfriends: MyFriendsView()
-                    case .postdetail(let postId): PostDetailView()
+                    case .myfriends: RelationListView()
+                    case .postdetail(let _): PostDetailView()
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
                     

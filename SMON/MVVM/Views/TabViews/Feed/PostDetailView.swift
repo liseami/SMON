@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct PostDetailView: View {
+    @FocusState var input
+    @State private var commentInput = "About me"
+
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, content: {
@@ -26,6 +29,42 @@ struct PostDetailView: View {
             }
         })
         .navigationTitle("详情")
+        .overlay(alignment: .bottom) {
+            inputBar
+        }
+    }
+
+    var inputBar: some View {
+        VStack(alignment: .center, spacing: 0, content: {
+            Color.XMDesgin.b1.opacity(0.6).contentShape(Rectangle())
+                .onTapGesture {
+                    self.input = false
+                }
+                .transition(.opacity.animation(.easeIn(duration: 0.4)))
+                .ifshow(show: input)
+            HStack(alignment: .top) {
+                WebImage(str: AppConfig.mokImage!.absoluteString)
+                    .frame(width: 36, height: 36, alignment: .center)
+                    .clipShape(Circle())
+                    .padding(.top, 6)
+                TextField(text: $commentInput, axis: .vertical) {}
+                    .tint(.XMDesgin.main)
+                    .font(.subheadline)
+                    .focused($input)
+                    .padding(.all, 12)
+                    .background(.XMDesgin.b1)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "发送") {}
+                    .padding(.top, 6)
+                    .transition(.movingParts.pop(Color.XMDesgin.main))
+                    .ifshow(show: input)
+            }
+            .padding(.all, 12)
+            .background(.black)
+            .overlay(alignment: .top) {
+                Divider()
+            }
+        })
     }
 
     var commentList: some View {
@@ -147,7 +186,7 @@ struct PostDetailView: View {
                 ForEach(urls, id: \.absoluteString) { url in
 
                     XMDesgin.XMButton {
-                      await  Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
+                        await Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
                             url.absoluteString
                         })
                     } label: {
