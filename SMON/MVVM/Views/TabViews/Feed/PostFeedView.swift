@@ -16,7 +16,7 @@ struct PostFeedView: View {
             // 动态流
             tabView
             // 顶部模糊
-            topBar
+            XMTopBlurView()
         })
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -62,13 +62,7 @@ struct PostFeedView: View {
         }
     }
 
-    var topBar: some View {
-        LinearGradient(gradient: Gradient(colors: [Color.black, Color.black, Color.black.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-            .blur(radius: 12)
-            .padding([.horizontal, .top], -30)
-            .frame(height: 90)
-            .ignoresSafeArea()
-    }
+    
 
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,

@@ -19,7 +19,6 @@ class ProfileEditViewModel: ObservableObject {
 
     @Published var avatar: UIImage?
     @Published var photos: [XMPhoto] = []
-    
 
     @MainActor
     func updateUserInfo() async {
@@ -280,7 +279,8 @@ struct ProfileEditView: View {
             Text("个人简介 (\(vm.updateModel.signature.count)/300)")
 
             TextEditor(text: $vm.updateModel.signature)
-                .foregroundColor(.XMDesgin.main)
+                .font(.body)
+                .foregroundColor(.XMDesgin.f1)
                 .tint(Color.XMDesgin.main)
                 .frame(height: 100)
                 .scrollContentBackground(.hidden)
@@ -294,7 +294,7 @@ struct ProfileEditView: View {
                             .onTapGesture {
                                 Apphelper.shared.closeKeyBoard()
                             }
-                        .moveTo(alignment: .trailing)
+                            .moveTo(alignment: .trailing)
                     }
                 })
                 .clipShape(RoundedRectangle(cornerRadius: 12))

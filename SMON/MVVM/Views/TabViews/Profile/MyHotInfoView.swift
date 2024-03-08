@@ -76,7 +76,7 @@ struct MyHotInfoView: View {
                 } label: {
                     HStack {
                         XMDesgin.XMIcon(iconName: "profile_hot_history", withBackCricle: false)
-                        Text("历史记录")
+                        Text("明细")
                             .foregroundStyle(Color.XMDesgin.f1)
                     }
                 }

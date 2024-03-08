@@ -34,10 +34,9 @@ struct MainView: View {
                     case .setting: SettingView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: RelationListView()
-                    case .postdetail(let _): PostDetailView()
+                    case .postdetail: PostDetailView()
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
-                    
                     }
                 }
                 .navigationBarTransparent(false)
@@ -52,6 +51,7 @@ struct MainView: View {
             case .home:
                 // 首页
                 HomeView()
+//                CompetitionView()
             case .feed:
                 // 信息流
                 PostFeedView()
