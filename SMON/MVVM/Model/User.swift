@@ -72,8 +72,8 @@ struct XMUserProfile: Convertible {
     var zodiac: String = "" // 一定有，不参与资料完成度评分
     var birthday: String = "" // 一定有，不参与资料完成度评分
     var signature: String = "" // 不为空，才算完成
-    var wechat: String = ""  // 不为空，才算完成
-    var height: Int = 0  // 不为0，才算完成
+    var wechat: String = "" // 不为空，才算完成
+    var height: Int = 0 // 不为0，才算完成
     var sex: Int = 0 // 一定有，不参与资料完成度评分
     var interestsTagList: [String] = [] // 不为空，才算完成
     var interestsTag: String {
@@ -94,7 +94,7 @@ extension XMUserProfile {
         // 初始化“符合规则”的属性数量和总属性数量
         var okAttNumber = 0
         var attNumber = 0
-        
+
         // 检查签名是否为空
         attNumber += 1
         if !signature.isEmpty {
@@ -144,7 +144,6 @@ extension XMUserProfile {
         return Int(finalScore)
     }
 }
-
 
 struct XMUserLoginInfo: Decodable, Encodable, Convertible {
     var isLogin: Bool {
@@ -258,4 +257,11 @@ extension Int {
             return "不愿透露"
         }
     }
+}
+
+struct XMUserInRank: Convertible {
+    var userId: String = "" // : 1764504995815882752,
+    var nickname: String = "" // ": "开手机",
+    var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
+    var cityName: String = "" // ": ""
 }

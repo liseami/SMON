@@ -24,14 +24,17 @@ enum UserAPI: XMTargetType {
     }
 
     var parameters: [String: Any]? {
-        switch self {
-        case .updateAlbum(let paths): return ["picPathList": paths]
-        case .albumList(let id): return id == nil ? nil : ["userId": id!]
-        case .getUserInfo(let id): return id == nil ? nil : ["userId": id!]
-        case .smsCode(let p): return p.kj.JSONObject()
-        case .loginBySms(let p): return p.kj.JSONObject()
-        case .updateUserInfo(let p): return p.kj.JSONObject()
+        get{
+            switch self {
+            case .updateAlbum(let paths): return ["picPathList": paths]
+            case .albumList(let id): return id == nil ? nil : ["userId": id!]
+            case .getUserInfo(let id): return id == nil ? nil : ["userId": id!]
+            case .smsCode(let p): return p.kj.JSONObject()
+            case .loginBySms(let p): return p.kj.JSONObject()
+            case .updateUserInfo(let p): return p.kj.JSONObject()
+            }
         }
+        set{}
     }
 }
 

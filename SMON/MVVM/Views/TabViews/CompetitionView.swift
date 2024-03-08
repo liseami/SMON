@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct CompetitionView: View {
+    @State var currentIndex : Int = 0
+    let comps: [XMCompetition] = [
+        .init(id: "1", movieTitle: "包臀裙大赛", artwork: "", date: .now),
+        .init(id: "2", movieTitle: "小短裙大赛", artwork: "", date: .now),
+        .init(id: "3", movieTitle: "护士服大赛", artwork: "", date: .now),
+        .init(id: "4", movieTitle: "黑丝袜大赛", artwork: "", date: .now),
+        .init(id: "5", movieTitle: "小内裤大赛", artwork: "", date: .now),
+        .init(id: "6", movieTitle: "会好吗大赛", artwork: "", date: .now)
+    ]
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
@@ -49,12 +58,14 @@ struct CompetitionView: View {
         VStack(alignment: .center, spacing: 12, content: {
             VStack(alignment: .center, spacing: 16, content: {
                 Text("包臀裙大赛")
-                    .font(.XMFont.f1b)
+                    .font(.XMFont.big2.bold())
                     .fcolor(.XMDesgin.f1)
                 XMDesgin.SmallBtn(fColor: .XMDesgin.main, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "切换至男生主题") {}
+                    .padding(.vertical, -12)
                 Text("快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧。")
                     .font(.XMFont.f2)
                     .fcolor(.XMDesgin.f1)
+                    
                 XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "立即参与发帖") {}
                     .overlay(alignment: .center) {
                         Capsule().stroke(lineWidth: 2)
@@ -67,21 +78,16 @@ struct CompetitionView: View {
                 .font(.XMFont.f2).monospaced()
                 .fcolor(.XMDesgin.f2)
             })
-            .padding(.top, 48)
+            .padding(.top, 68)
             .padding(.all, 16)
             .background(Color.XMDesgin.b1)
             .clipShape(RoundedRectangle(cornerRadius: 16))
             .overlay(alignment: .top) {
-                HStack {
+                // Carousel List...
+                SnapCarousel(spacing: 12, trailingSpace: 200, index: $currentIndex, items: comps, content: { comp in
                     headerImage
-                        .rotation3DEffect(.degrees(30), axis: .y, anchor: .center, anchorZ: -0.6, perspective: -0.5)
-                        .scaleEffect(CGSize(width: 0.9, height: 0.8), anchor: .trailing)
-                    headerImage
-                    headerImage
-                        .rotation3DEffect(.degrees(30), axis: .y, anchor: .center, anchorZ: 0.6, perspective: 0.5)
-                        .scaleEffect(CGSize(width: 0.9, height: 0.8), anchor: .leading)
-                }
-                .offset(x: 0, y: -50)
+                })
+                .offset(x: 0, y: -30)
             }
         })
         .padding(.top, 40)

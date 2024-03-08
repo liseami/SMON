@@ -72,9 +72,10 @@ struct PostFeedView: View {
                     CompetitionView()
                         .tag(FeedViewModel.FeedTopBarItem.competition)
                     PostListView()
-                        .tag(FeedViewModel.FeedTopBarItem.fans)
+                        .tag(FeedViewModel.FeedTopBarItem.hot)
                     PostListView()
                         .tag(FeedViewModel.FeedTopBarItem.flow)
+
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .ignoresSafeArea(.container, edges: .top)

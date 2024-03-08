@@ -12,7 +12,7 @@ import TIMCommon
 public typealias HTTPRequestMethod = Moya.Method
 
 protocol XMTargetType: TargetType {
-    var parameters: [String: Any]? { get }
+    var parameters: [String: Any]? { get set }
     var parameterEncoding: ParameterEncoding { get }
     var group: String { get }
 }
@@ -21,6 +21,11 @@ protocol XMTargetType: TargetType {
 
 extension XMTargetType {
     var parameters: [String: Any]? { nil }
+
+    // 在外部动态修改
+    mutating func appendParameters(newParameters: [String: Any]) {
+        parameters?.merge(newParameters) { _, new in new }
+    }
 
     var parameterEncoding: ParameterEncoding {
         switch method {

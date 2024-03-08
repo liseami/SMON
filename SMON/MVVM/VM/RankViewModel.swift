@@ -9,7 +9,6 @@ import Foundation
 
 class RankViewModel: ObservableObject {
     @Published var currentTopTab: HomeTopBarItem = .all
-    
     enum HomeTopBarItem: CaseIterable {
         case near
         case localCity
@@ -35,3 +34,5 @@ class RankViewModel: ObservableObject {
         }
     }
 }
+
+

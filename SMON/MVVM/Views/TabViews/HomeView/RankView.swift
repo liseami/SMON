@@ -70,14 +70,12 @@ struct RankView: View {
         }
     }
 
-    
-
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
                     ForEach(RankViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
                         // 排行榜页面
-                        RankListView().tag(tab)
+                        RankListView(target: RankAPI.country).tag(tab)
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))

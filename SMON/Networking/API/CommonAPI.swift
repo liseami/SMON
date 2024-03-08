@@ -22,8 +22,14 @@ enum CommonAPI: XMTargetType {
     }
 
     var parameters: [String: Any]? {
-        switch self {
-        default: return nil
+        
+        get{
+            switch self {
+            default: return nil
+            }
+        }
+        set{
+          
         }
     }
 }
