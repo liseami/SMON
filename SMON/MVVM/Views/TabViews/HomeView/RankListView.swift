@@ -21,12 +21,11 @@ struct RankListView: View {
                                 .frame(width: 100, height: 100) // Adjust the size as needed
                                 .clipShape(Circle())
                             Text(String.randomChineseString(length: Int.random(in: 2...8)))
-                                .font(.XMFont.f2)
-                                .bold()
+                                .font(.XMFont.f1b)
                                 .lineLimit(1)
                             Text("苏州")
                                 .font(.XMFont.f3)
-                                .foregroundStyle(.secondary)
+                                .fcolor(.XMDesgin.f2)
                         }
                         
                     }

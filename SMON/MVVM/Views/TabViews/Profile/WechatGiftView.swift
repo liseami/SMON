@@ -40,7 +40,6 @@ struct WechatGiftView: View {
                 }
                 Spacer()
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: "dl****ie") {}
-                    
             }
             progressLine
             ScrollView(.vertical, showsIndicators: false, content: {
@@ -52,12 +51,12 @@ struct WechatGiftView: View {
                                     .resizable()
                                     .frame(width: 32, height: 32, alignment: .center)
                                 Text("热情玫瑰")
-                                    .font(.XMFont.f3b)
+                                    .font(.XMFont.f2b)
                             })
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
                             Text("¥\(gift.price) 赛币")
-                                .font(.XMFont.f3b)
+                                .font(.XMFont.f3)
                                 .fcolor(Color.green)
                                 .padding(.vertical, 6)
                         })

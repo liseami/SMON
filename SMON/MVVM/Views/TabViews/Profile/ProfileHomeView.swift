@@ -109,6 +109,7 @@ struct ProfileHomeView: View {
             HStack(spacing: 32) {
                 VStack(alignment: .leading, spacing: 4, content: {
                     Text("每日签到").font(.XMFont.f1b)
+
                     Text("1次 / 24小时").font(.XMFont.f2b)
                         .fcolor(.XMDesgin.f2)
                 })

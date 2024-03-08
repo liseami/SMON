@@ -73,7 +73,7 @@ struct ProfileView: View {
                             }
                     }
                     .font(.XMFont.f2)
-                    .foregroundStyle(.secondary)
+                    .fcolor(.XMDesgin.f2)
 
                     Text(vm.user.signature)
                         .lineLimit(4)

@@ -25,7 +25,7 @@ struct MainTabbar: View {
                 // 细线
                 Capsule()
                     .frame(height: 2)
-                    .fcolor(.secondary.opacity(0.4))
+                    .fcolor(.XMDesgin.f2.opacity(0.4))
                     .padding(.horizontal)
                 // tabbarIcons
                 tabIcons

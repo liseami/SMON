@@ -12,38 +12,36 @@ extension SwiftUI.Font {
         static let big1: Font = .largeTitle.monospaced()
         static let big2: Font = .title.monospaced()
         static let big3: Font = .title3.monospaced()
-        static let f1: Font = .headline.monospaced()
+        static let f1: Font = .body.monospaced()
         static let f2: Font = .subheadline.monospaced()
         static let f3: Font = .caption.monospaced()
 
-        static let f1b: Font = .XMFont.f1.bold()
-        static let f2b: Font = .XMFont.f2.bold()
-        static let f3b: Font = .XMFont.f3.bold()
+        static let f1b: Font = .headline.monospaced().bold()
+        static let f2b: Font = .subheadline.monospaced().bold()
+        static let f3b: Font = .caption.monospaced().bold()
     }
 }
 
 #Preview {
-    VStack {
+    VStack(spacing:24) {
         let text = "设计系统3232"
         Text(text)
-            
             .font(.XMFont.big1)
-            
         Text(text)
             .font(.XMFont.big2)
         Text(text)
-
             .font(.XMFont.big3)
+        Divider()
         Text(text)
             .font(.XMFont.f1)
         Text(text)
-            .font(.XMFont.f2)
-        Text(text)
-            .font(.XMFont.f3)
-        Text(text)
             .font(.XMFont.f1b)
         Text(text)
+            .font(.XMFont.f2)
+        Text(text)
             .font(.XMFont.f2b)
+        Text(text)
+            .font(.XMFont.f3)
         Text(text)
             .font(.XMFont.f3b)
     }
