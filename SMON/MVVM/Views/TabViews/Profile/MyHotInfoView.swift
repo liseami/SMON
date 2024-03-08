@@ -28,7 +28,7 @@ struct MyHotInfoView: View {
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
             } footer: {
-                Text("* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
+                XMTyperText(text: "* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
                     .font(.XMFont.f2)
                     .fcolor(.XMDesgin.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
@@ -92,7 +92,7 @@ struct RankingView: View {
     let ranking: String
 
     var body: some View {
-        Text(ranking)
+        XMTyperText(text: ranking)
             .font(.XMFont.big1)
             .fcolor(.XMDesgin.f1)
             .listRowSeparator(.hidden, edges: .top)

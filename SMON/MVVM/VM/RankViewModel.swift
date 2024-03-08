@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HomeViewModel: ObservableObject {
+class RankViewModel: ObservableObject {
     @Published var currentTopTab: HomeTopBarItem = .all
     
     enum HomeTopBarItem: CaseIterable {

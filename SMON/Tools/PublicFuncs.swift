@@ -161,40 +161,39 @@ class Apphelper {
         let message: String
         let backgroundColor: UIColor
         var textColor = UIColor(Color.XMDesgin.f1)
-        
 
         switch type {
         case let .info(msg):
             message = msg
-            textColor = UIColor(Color.XMDesgin.b1)
-            backgroundColor = UIColor(Color.XMDesgin.f1)
+            textColor = UIColor(Color.XMDesgin.f1)
+
         case let .success(msg):
             message = msg
             textColor = UIColor(Color.green)
-            backgroundColor = UIColor(Color.XMDesgin.b1)
 
         case let .warning(msg):
             message = msg
-            backgroundColor = UIColor(Color.orange)
+            textColor = UIColor(Color.orange)
 
         case let .error(msg):
             message = msg
-            backgroundColor = UIColor(Color.red)
+
+            textColor = UIColor(Color.red)
 
         case let .loading(msg):
             message = msg
             textColor = UIColor(Color.green)
-            backgroundColor = UIColor(Color.XMDesgin.b1)
         }
 
         // update default style
         NotificationPresenter.shared.updateDefaultStyle { style in
             let style: StatusBarNotificationStyle = style
-            style.backgroundStyle.backgroundColor = backgroundColor
+            style.backgroundStyle.backgroundColor = UIColor(Color.XMDesgin.b1)
             style.textStyle.textColor = textColor
-            style.textStyle.font = .systemFont(ofSize: 24)
+            style.textStyle.font = .monospacedSystemFont(ofSize: 15, weight: .bold)
             style.canSwipeToDismiss = false
             style.animationType = .move
+
             return style
         }
 
@@ -273,7 +272,7 @@ class Apphelper {
         lantern.show()
     }
 
-    func showActionSheet(title: String?, message: String?, actions: [UIAlertAction], completion: (() -> Void)? = nil) {
+    func pushActionSheet(title: String?, message: String?, actions: [UIAlertAction], completion: (() -> Void)? = nil) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         alertController.overrideUserInterfaceStyle = .dark
         for action in actions {
@@ -334,7 +333,7 @@ class Apphelper {
             }
         }
         XMDesgin.XMListRow(.init(name: "ShowActionSheet", icon: "", subline: "")) {
-            Apphelper.shared.showActionSheet(title: "操作表单", message: "hello,world", actions: [UIAlertAction(title: "保存", style: .default, handler: { _ in
+            Apphelper.shared.pushActionSheet(title: "操作表单", message: "hello,world", actions: [UIAlertAction(title: "保存", style: .default, handler: { _ in
             }), UIAlertAction(title: "删除", style: .destructive, handler: { _ in
 
             })])

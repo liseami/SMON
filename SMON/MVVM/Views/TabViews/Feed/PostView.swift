@@ -65,13 +65,19 @@ struct PostView: View {
             }
 
             Spacer()
-            Menu {
-                Button("举报内容") {}
-                Button("拉黑用户 / 不再看他", role: .destructive) {}
+
+            XMDesgin.XMButton {
+                Apphelper.shared.pushActionSheet(title: "操作", message: nil, actions: [
+                    UIAlertAction(title: "举报内容", style: .default, handler: { _ in
+
+                    }),
+                    UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
+
+                    })
+                ])
             } label: {
                 XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
             }
-
         })
     }
 

@@ -92,7 +92,7 @@ enum XMDesgin {
 
         var body: some View {
             XMDesgin.XMButton {
-               await action()
+                await action()
             } label: {
                 HStack(spacing: 2) {
                     XMDesgin.XMIcon(iconName: iconName, color: fColor)
@@ -100,9 +100,9 @@ enum XMDesgin {
                         .ifshow(show: !iconName.isEmpty)
 
                     Text(text)
-                        .font(.XMFont.f2)
-                        .bold()
-                        .foregroundStyle(fColor)
+                        .font(.XMFont.f2b)
+                        .lineLimit(1)
+                        .fcolor(fColor)
                 }
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
@@ -261,7 +261,7 @@ enum XMDesgin {
 
     struct XMListRow: View {
         var info: LabelInfo
-        var showRightArrow : Bool 
+        var showRightArrow: Bool
         var action: () -> ()
         init(_ info: LabelInfo, showRightArrow: Bool = true, action: @escaping () -> ()) {
             self.info = info
@@ -289,7 +289,6 @@ enum XMDesgin {
                 }
                 .contentShape(Rectangle())
             }
-            
         }
     }
 

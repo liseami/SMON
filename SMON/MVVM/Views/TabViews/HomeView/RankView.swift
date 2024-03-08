@@ -8,8 +8,8 @@
 import SwiftUI
 import SwiftUIX
 
-struct HomeView: View {
-    @StateObject var vm: HomeViewModel = .init()
+struct RankView: View {
+    @StateObject var vm: RankViewModel = .init()
     @State var showFliterView: Bool = false
     var body: some View {
         ZStack(alignment: .top) {
@@ -55,7 +55,7 @@ struct HomeView: View {
     var topTabbar: some View {
         HStack {
             Spacer()
-            ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
+            ForEach(RankViewModel.HomeTopBarItem.allCases, id: \.self) { tabitem in
                 let selected = tabitem == vm.currentTopTab
                 XMDesgin.XMButton {
                     vm.currentTopTab = tabitem
@@ -75,7 +75,7 @@ struct HomeView: View {
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
-                    ForEach(HomeViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
+                    ForEach(RankViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
                         // 排行榜页面
                         RankListView().tag(tab)
                     }

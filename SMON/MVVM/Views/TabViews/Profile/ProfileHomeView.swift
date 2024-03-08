@@ -108,9 +108,10 @@ struct ProfileHomeView: View {
 //            Text("免费获取赛币").font(.title3.bold())
             HStack(spacing: 32) {
                 VStack(alignment: .leading, spacing: 4, content: {
-                    Text("每日签到").font(.XMFont.f1b)
-
-                    Text("1次 / 24小时").font(.XMFont.f2b)
+                    Text("每日签到")
+                        .font(.XMFont.f1b)
+                    Text("1次 / 24小时")
+                        .font(.XMFont.f2)
                         .fcolor(.XMDesgin.f2)
                 })
                 .padding(.leading, 120)
@@ -181,5 +182,5 @@ struct ProfileHomeView: View {
 }
 
 #Preview {
-    MainView(vm: .init(currentTabbar: .profile))
+    MainView(vm: .init(currentTabbar: .home))
 }

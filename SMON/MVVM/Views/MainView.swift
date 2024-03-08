@@ -16,7 +16,7 @@ struct MainView: View {
                 // 一级页面
                 tabViews
                 // Tabbar
-                tabbar
+                MainTabbar()
                 // 启动动画
                 LaunchScreenAnimation()
             }
@@ -34,9 +34,10 @@ struct MainView: View {
                     case .setting: SettingView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: RelationListView()
-                    case .postdetail: PostDetailView()
+                    case .postdetail(let _): PostDetailView()
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
+                    
                     }
                 }
                 .navigationBarTransparent(false)
@@ -50,8 +51,8 @@ struct MainView: View {
             switch vm.currentTabbar {
             case .home:
                 // 首页
-                HomeView()
-//                CompetitionView()
+//                HomeView()
+                RankView()
             case .feed:
                 // 信息流
                 PostFeedView()
@@ -65,9 +66,7 @@ struct MainView: View {
         }
     }
 
-    var tabbar: some View {
-        MainTabbar()
-    }
+    
 }
 
 #Preview {

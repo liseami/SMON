@@ -65,10 +65,16 @@ struct PostFeedView: View {
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
-                    ForEach(FeedViewModel.FeedTopBarItem.allCases, id: \.self) { tab in
-                        // 帖子流页面
-                        PostListView().tag(tab)
-                    }
+                    PostListView()
+                        .tag(FeedViewModel.FeedTopBarItem.near)
+                    PostListView()
+                        .tag(FeedViewModel.FeedTopBarItem.localCity)
+                    CompetitionView()
+                        .tag(FeedViewModel.FeedTopBarItem.competition)
+                    PostListView()
+                        .tag(FeedViewModel.FeedTopBarItem.fans)
+                    PostListView()
+                        .tag(FeedViewModel.FeedTopBarItem.flow)
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .ignoresSafeArea(.container, edges: .top)
