@@ -47,6 +47,7 @@
 		A26A030A2B89AEAE00F6AC9B /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A26A03092B89AEAE00F6AC9B /* Bridge.m */; };
 		A26A030C2B89AF2A00F6AC9B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A030B2B89AF2A00F6AC9B /* AppDelegate.swift */; };
 		A26A030D2B89B43300F6AC9B /* SMON-Bridging-Header.h in Sources */ = {isa = PBXBuildFile; fileRef = A26A03082B89AEAE00F6AC9B /* SMON-Bridging-Header.h */; };
+		A26B53BE2B9BF51E00BD748F /* BannerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26B53BD2B9BF51E00BD748F /* BannerRow.swift */; };
 		A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272A46A2B8706FB008EA955 /* SMONApp.swift */; };
 		A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A272A46E2B8706FC008EA955 /* Assets.xcassets */; };
 		A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A272A4712B8706FC008EA955 /* Preview Assets.xcassets */; };
@@ -117,6 +118,9 @@
 		A2BA895A2B9B3823002FEEFA /* RankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA89592B9B3823002FEEFA /* RankAPI.swift */; };
 		A2BA895C2B9B3994002FEEFA /* Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA895B2B9B3994002FEEFA /* Array+.swift */; };
 		A2BA895E2B9B3C2D002FEEFA /* XMListDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA895D2B9B3C2D002FEEFA /* XMListDataViewModel.swift */; };
+		A2BA89602B9BDF8F002FEEFA /* XMEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA895F2B9BDF8F002FEEFA /* XMEmptyView.swift */; };
+		A2BA89622B9BEFF0002FEEFA /* XMUserLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA89612B9BEFF0002FEEFA /* XMUserLine.swift */; };
+		A2BA89642B9BF005002FEEFA /* XMConversationLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA89632B9BF005002FEEFA /* XMConversationLine.swift */; };
 		A2BF15EC2B8C423D0011A130 /* XMUIDesginSystemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */; };
 		A2BF15EE2B8C43F20011A130 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = A2BF15ED2B8C43F20011A130 /* SwiftUIX */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A2BF15F02B8C55480011A130 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF15EF2B8C55480011A130 /* UserManager.swift */; };
@@ -215,6 +219,7 @@
 		A26A03082B89AEAE00F6AC9B /* SMON-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SMON-Bridging-Header.h"; sourceTree = "<group>"; };
 		A26A03092B89AEAE00F6AC9B /* Bridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		A26A030B2B89AF2A00F6AC9B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A26B53BD2B9BF51E00BD748F /* BannerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerRow.swift; sourceTree = "<group>"; };
 		A272A4672B8706FB008EA955 /* SMON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A272A46A2B8706FB008EA955 /* SMONApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMONApp.swift; sourceTree = "<group>"; };
 		A272A46E2B8706FC008EA955 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -284,6 +289,9 @@
 		A2BA89592B9B3823002FEEFA /* RankAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankAPI.swift; sourceTree = "<group>"; };
 		A2BA895B2B9B3994002FEEFA /* Array+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+.swift"; sourceTree = "<group>"; };
 		A2BA895D2B9B3C2D002FEEFA /* XMListDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMListDataViewModel.swift; sourceTree = "<group>"; };
+		A2BA895F2B9BDF8F002FEEFA /* XMEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMEmptyView.swift; sourceTree = "<group>"; };
+		A2BA89612B9BEFF0002FEEFA /* XMUserLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMUserLine.swift; sourceTree = "<group>"; };
+		A2BA89632B9BF005002FEEFA /* XMConversationLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMConversationLine.swift; sourceTree = "<group>"; };
 		A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMUIDesginSystemView.swift; sourceTree = "<group>"; };
 		A2BF15EF2B8C55480011A130 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A2BF15F22B8C64EE0011A130 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -591,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				A2BA89572B9B12C0002FEEFA /* SnapCarousel.swift */,
+				A26B53BD2B9BF51E00BD748F /* BannerRow.swift */,
 				A2784F222B9186FF00A1B06F /* PanViewBox.swift */,
 				A256DB962B900BF6008C7063 /* WebView.swift */,
 				A25AAD252B8EE9BE00B7CE40 /* PhotoSelector.swift */,
@@ -600,6 +609,9 @@
 				A20AF7572B92C42F0098E561 /* XMTyperText.swift */,
 				A28C55DD2B95E8A400707EDA /* XMStateView.swift */,
 				A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */,
+				A2BA895F2B9BDF8F002FEEFA /* XMEmptyView.swift */,
+				A2BA89612B9BEFF0002FEEFA /* XMUserLine.swift */,
+				A2BA89632B9BF005002FEEFA /* XMConversationLine.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -933,6 +945,7 @@
 				A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */,
 				A27EFFA82B92140B00B47BD6 /* MoyaResult+Extension.swift in Sources */,
 				A20AF7562B92BF400098E561 /* WebImage.swift in Sources */,
+				A2BA89602B9BDF8F002FEEFA /* XMEmptyView.swift in Sources */,
 				A2BF163D2B8C83B90011A130 /* LaunchScreenAnimation.swift in Sources */,
 				A26A030C2B89AF2A00F6AC9B /* AppDelegate.swift in Sources */,
 				A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */,
@@ -956,10 +969,13 @@
 				A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */,
 				A25AAD3E2B8F4E7400B7CE40 /* BdsmRequestView.swift in Sources */,
 				A27EFFA92B92140B00B47BD6 /* MoyaProviderType+Extension.swift in Sources */,
+				A2BA89642B9BF005002FEEFA /* XMConversationLine.swift in Sources */,
 				A25AAD2E2B8EFE9900B7CE40 /* AliOSSManager.swift in Sources */,
 				A272A4952B871D80008EA955 /* AppFeaturesView.swift in Sources */,
 				A28C55AB2B95BE1300707EDA /* MockTool.swift in Sources */,
+				A26B53BE2B9BF51E00BD748F /* BannerRow.swift in Sources */,
 				A2784F1D2B91851800A1B06F /* MyHotInfoView.swift in Sources */,
+				A2BA89622B9BEFF0002FEEFA /* XMUserLine.swift in Sources */,
 				A20AF75C2B9300260098E561 /* LocationManager.swift in Sources */,
 				A272A4972B871D8D008EA955 /* LoginMainView.swift in Sources */,
 				A28F54432B8739F900AF9CD3 /* LoginView.swift in Sources */,

@@ -37,13 +37,22 @@ struct ConversationListView: View {
     var body: some View {
         ZStack(alignment: .top, content: {
             ScrollView {
-                LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
-                    Spacer().frame(height: 12)
-                    ForEach(vm.conversations, id: \.self) { conversation in
-                        userLine(conversation)
-                    }
-                })
-                .padding(.all, 16)
+                XMStateView(reqStatus: .isLoading) {
+                    LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
+                        Spacer().frame(height: 12)
+                        ForEach(vm.conversations, id: \.self) { _ in
+                            XMConversationLine(avatar: "", nickname: "", date: .now, lastmessage: "最后一条消息", userid: "2932939")
+                        }
+                    })
+                    .padding(.all, 16)
+                } loading: {
+                    UserListLoadingView()
+                } empty: {
+                    XMEmptyView(image: "nomessage_pagepic", text: "暂无消息，去找人聊天吧。")
+                }
+            }
+            .refreshable {
+                vm.getConversationList()
             }
             .ignoresSafeArea(.container, edges: .bottom)
 
@@ -55,32 +64,39 @@ struct ConversationListView: View {
 //            .navigationBarTitleDisplayMode(.inline)
 //            .ignoresSafeArea()
     }
-
-    func userLine(_ conversation : V2TIMConversation) -> some View {
-        HStack(alignment: .top, spacing: 12) {
-            WebImage(str: conversation.faceUrl)
-                .scaledToFill()
-                .frame(width: 56, height: 56, alignment: .center)
-                .clipShape(Circle())
-            VStack(alignment: .leading, spacing: 6, content: {
-                Text(conversation.showName)
-                    .font(.XMFont.f1b)
-                Text(conversation.lastMessage.description)
-                    .font(.XMFont.f2)
-                    .lineLimit(2)
-                    .fcolor(.XMDesgin.f2)
-            })
-            Spacer()
-            Text(Date.init(unixTimestamp: Double(conversation.c2cReadTimestamp)).string())
-                .font(.XMFont.f2)
-                .fcolor(.XMDesgin.f2)
-        }
-        .onTapGesture {
-            MainViewModel.shared.pathPages.append(.profile(userId: ""))
-        }
-    }
 }
 
 #Preview {
     MainView(vm: .init(currentTabbar: .message))
+}
+
+struct UserListLoadingView: View {
+    var body: some View {
+        LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
+            Spacer().frame(height: 12)
+            ForEach(0 ... 99, id: \.self) { _ in
+                HStack(alignment: .top, spacing: 12) {
+                    Circle().fill(Color.XMDesgin.b1.gradient)
+                        .frame(width: 56, height: 56, alignment: .center)
+                    HStack {
+                        VStack(alignment: .leading, spacing: 6, content: {
+                            Text(String.random(ofLength: Int.random(in: 4 ... 12)))
+                                .font(.XMFont.f1b)
+                            Text(String.random(ofLength: Int.random(in: 12 ... 40)))
+                                .font(.XMFont.f2)
+                                .lineLimit(2)
+                                .fcolor(.XMDesgin.f2)
+                        })
+                        Spacer()
+                        Text(String.random(ofLength: 4))
+                            .font(.XMFont.f2)
+                            .fcolor(.XMDesgin.f2)
+                    }
+                }
+                .redacted(reason: .placeholder)
+                .conditionalEffect(.repeat(.shine, every: 1), condition: true)
+            }
+        })
+        .padding(.all, 16)
+    }
 }

@@ -12,87 +12,104 @@ import Tagly
 struct ProfileView: View {
     @StateObject var vm: ProfileViewModel
     var userId: String
+    
+    // 初始化
     init(userId: String) {
         self._vm = StateObject(wrappedValue: .init(userId: userId))
         self.userId = userId
     }
-
+    
+    // 用户信息快捷访问
     var userInfo: XMUserProfile {
         vm.user
     }
-
+    
     var body: some View {
-        ScrollView(content: {
+        ScrollView {
             ZStack(alignment: .top) {
-                topImage
-                profileInfo
+                // 顶部图像视图
+                topImageView
+                // 个人信息视图
+                profileInfoView
             }
-            tabBar
-
-            LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
+            // 标签栏视图
+            tabBarView
+            
+            LazyVStack(alignment: .leading, spacing: 24, pinnedViews: []) {
+                // 循环创建 10 个帖子视图
                 ForEach(1 ... 10, id: \.self) { _ in
                     PostView()
                 }
-            })
-            .padding(.all, 16)
-
-            mediaView
-//            tags
-        })
+            }
+            .padding()
+            
+            // 媒体视图
+            mediaGridView
+        }
         .ignoresSafeArea()
     }
-
-    var topImage: some View {
+    
+    // 顶部图像视图
+    var topImageView: some View {
         WebImage(str: vm.user.avatar)
             .scaledToFill()
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
             .clipped()
             .ignoresSafeArea()
     }
-
-    var profileInfo: some View {
+    
+    // 个人信息视图
+    var profileInfoView: some View {
         VStack {
             Spacer().frame(height: UIScreen.main.bounds.width - 60)
             VStack(alignment: .leading, spacing: 22) {
-                VStack(alignment: .leading, spacing: 8, content: {
-                    Text(vm.user.nickname)
-                        .font(.XMFont.big1.bold())
-                    HStack(spacing: 0) {
-                        Text("\(userInfo.zodiac) · ")
-                        Text(" \(userInfo.bdsmAttr.bdsmAttrString) · ")
-                            .ifshow(show: userInfo.bdsmAttr != 0)
-                        Text("\(userInfo.emotionalNeeds.emotionalNeedsString) · ")
-                            .ifshow(show: userInfo.emotionalNeeds != 0)
-                        Text("\(userInfo.fansNum)粉丝 · ")
-                            .onTapGesture {
-                                MainViewModel.shared.pathPages.append(.myfriends)
-                            }
-                        Text("\(userInfo.followsNum)关注")
-                            .onTapGesture {
-                                MainViewModel.shared.pathPages.append(.myfriends)
-                            }
-                    }
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
-
-                    Text(vm.user.signature)
-                        .lineLimit(4)
-                        .font(.XMFont.f2)
-                })
-
-                btns
+                // 昵称、标签等信息视图
+                userInfoView
+                // 按钮视图
+                buttonView
             }
             .padding(.horizontal)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(alignment: .top) {
+                // 渐变背景
                 LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black]), startPoint: .top, endPoint: .center)
                     .frame(height: 80)
-//                            .offset(y:-12)
             }
         }
     }
-
-    var btns: some View {
+    
+    // 昵称、标签等信息视图
+    var userInfoView: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(vm.user.nickname)
+                .font(.XMFont.big1.bold())
+            
+            HStack(spacing: 0) {
+                Text("\(userInfo.zodiac) · ")
+                Text(" \(userInfo.bdsmAttr.bdsmAttrString) · ")
+                    .ifshow(show: userInfo.bdsmAttr != 0)
+                Text("\(userInfo.emotionalNeeds.emotionalNeedsString) · ")
+                    .ifshow(show: userInfo.emotionalNeeds != 0)
+                Text("\(userInfo.fansNum)粉丝 · ")
+                    .onTapGesture {
+                        MainViewModel.shared.pathPages.append(.myfriends)
+                    }
+                Text("\(userInfo.followsNum)关注")
+                    .onTapGesture {
+                        MainViewModel.shared.pathPages.append(.myfriends)
+                    }
+            }
+            .font(.XMFont.f2)
+            .fcolor(.XMDesgin.f2)
+            
+            Text(vm.user.signature)
+                .lineLimit(4)
+                .font(.XMFont.f2)
+        }
+    }
+    
+    // 按钮视图
+    var buttonView: some View {
         HStack {
             if vm.isLocalUser {
                 XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_edit", text: "编辑社交资料") {}
@@ -100,28 +117,31 @@ struct ProfileView: View {
                 XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_follow", text: "关注") {}
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {}
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: "zhao***lis") {
-                    Apphelper.shared.presentPanSheet(WechatGiftView(), style: .shop)
+                    Apphelper.shared.presentPanSheet(WechatGiftView()
+                        .environmentObject(vm), style: .shop)
                 }
             }
         }
     }
-
-    var tags: some View {
-        VStack(alignment: .leading, spacing: 12, content: {
+    
+    // 标签视图
+    var tagView: some View {
+        VStack(alignment: .leading, spacing: 12) {
             Text("欢迎与我聊")
                 .font(.XMFont.f1)
                 .bold()
-            TagCloudView(data: [XMTag(text: "🍉西瓜"), XMTag(text: "⚽️足球"), XMTag(text: "🏂滑板"), XMTag(text: "🎭戏剧"), XMTag(text: "🎵嘻哈")], spacing: 12, content: { tag in
+            TagCloudView(data: [XMTag(text: "🍉西瓜"), XMTag(text: "⚽️足球"), XMTag(text: "🏂滑板"), XMTag(text: "🎭戏剧"), XMTag(text: "🎵嘻哈")], spacing: 12) { tag in
                 Text(tag.text)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 8)
                     .background(Rectangle().fcolor(.XMDesgin.b1))
                     .clipShape(Capsule())
-            })
-        })
+            }
+        }
     }
-
-    var tabBar: some View {
+    
+    // 标签栏视图
+    var tabBarView: some View {
         HStack {
             ForEach(ProfileViewModel.ProfileBarItem.allCases, id: \.self) { tabitem in
                 let selected = tabitem == vm.currentTab
@@ -135,17 +155,13 @@ struct ProfileView: View {
         .padding(.horizontal)
         .padding(.top, 24)
     }
-
-    var w: CGFloat {
-        (UIScreen.main.bounds.width - (16 * 2 + 8)) / 2
-    }
-
-    var h: CGFloat {
-        w / 3 * 4
-    }
-
-    var mediaView: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
+    
+    // 媒体网格视图
+    var mediaGridView: some View {
+        let w = (UIScreen.main.bounds.width - (16 * 2 + 8)) / 2
+        let h = w / 3 * 4
+        
+        return LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
             ForEach(vm.photos, id: \.self.id) { photo in
                 XMDesgin.XMButton {
                     Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
@@ -157,11 +173,10 @@ struct ProfileView: View {
                 }
             }
         }
-        .padding(.all)
+        .padding()
     }
 }
 
 #Preview {
-    ProfileView(userId: "32")
-//    MainView(vm: .init(currentTabbar: .profile))
+    ProfileView(userId: "1765668637701701633")
 }

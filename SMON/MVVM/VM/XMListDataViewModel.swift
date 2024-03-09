@@ -39,6 +39,7 @@ class XMListDataViewModel<ListRowMod: Convertible>: ObservableObject, XMListData
 extension XMListDataViewModel {
     @MainActor
     func getListData() async {
+        await waitme(sec: 1)
         if reqStatus != .isOK || reqStatus != .isOKButEmpty {
             reqStatus = .isLoading
         }

@@ -15,6 +15,7 @@ struct XMGift {
 }
 
 struct WechatGiftView: View {
+    @EnvironmentObject var vm: ProfileViewModel
     let gifts: [XMGift] = [
         .init(image: "saicoin_lvl1", price: 1, count: 5, discountRate: 0),
         .init(image: "saicoin_lvl2", price: 12, count: 60, discountRate: 25),
@@ -27,23 +28,21 @@ struct WechatGiftView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24, content: {
             HStack(spacing: 16) {
-                WebImage(str: AppConfig.mokImage!.absoluteString)
-                    .scaledToFill()
-                    .frame(width: 56, height: 56)
-                    .clipShape(Circle())
+                XMUserAvatar(str: vm.user.avatar, userId: vm.userId, size: 80)
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("小狐狸")
+                    Text(vm.user.nickname)
                         .font(.XMFont.f1b)
-                    Text("天蝎座 · S · 长期关系")
+                    Text("\(vm.user.zodiac) · \(vm.user.bdsmAttr.bdsmAttrString) · \(vm.user.emotionalNeeds.emotionalNeedsString)")
+                        .fixedSize(horizontal: true, vertical: false)
                         .fcolor(.XMDesgin.f2)
                         .font(.XMFont.f2b)
                 }
                 Spacer()
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: "dl****ie") {}
             }
+            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: "dl****ie") {}
             progressLine
             ScrollView(.vertical, showsIndicators: false, content: {
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 4), spacing: 16) {
+                LazyVGrid(columns: Array(repeating: GridItem(), count: 4), spacing: 8) {
                     ForEach(self.gifts, id: \.self.count) { gift in
                         let gift = VStack(alignment: .center, spacing: 0, content: {
                             VStack(alignment: .center, spacing: 12, content: {
@@ -60,8 +59,8 @@ struct WechatGiftView: View {
                                 .fcolor(Color.green)
                                 .padding(.vertical, 6)
                         })
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .padding(.all, 3)
+                        .background(RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.XMDesgin.b1.gradient.shadow(.drop(color: Color.green, radius: 0))))
                         XMDesgin.XMButton {
                             LoadingTask(loadingMessage: "连接苹果商店...") {}
                         } label: {
@@ -69,21 +68,25 @@ struct WechatGiftView: View {
                         }
                     }
                 }
+                .padding(.all,2)
             })
         })
+        .padding(.top, 16)
         .padding(.all, 16)
     }
 
     var progressLine: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             ZStack(alignment: .leading) {
-                Capsule().fill(Color.XMDesgin.b3.opacity(0.3))
-                LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .leading, endPoint: .trailing)
-                    .clipShape(Capsule())
+                Capsule().fill(Color.XMDesgin.b3.opacity(0.3).gradient)
+                Capsule().fill(Color.green.gradient)
                     .frame(width: 40 + CGFloat(240 * 4 / 23))
             }
             .frame(height: 5)
-            Text("因对方设置，距离解锁微信还需3020钻")
+            Text("* 因对方设置，距离解锁微信还需3020赛币。")
+                .font(.XMFont.f2)
+                .fcolor(.XMDesgin.f2)
+            Text("* 系统已助力320赛币。")
                 .font(.XMFont.f2)
                 .fcolor(.XMDesgin.f2)
         })
@@ -91,5 +94,11 @@ struct WechatGiftView: View {
 }
 
 #Preview {
-    WechatGiftView()
+    NavigationView(content: {
+        Text("")
+            .onAppear(perform: {
+                Apphelper.shared.presentPanSheet(WechatGiftView()
+                    .environmentObject(ProfileViewModel(userId: "1765668637701701633")), style: .shop)
+            })
+    })
 }

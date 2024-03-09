@@ -46,7 +46,7 @@ struct MyHotInfoView: View {
 
             // 同城排名部分
             Section {
-                RankingView(ranking: "20320942")
+                RankingView(ranking: "No.20320942")
             } header: {
                 Text("同城排名")
                     .font(.XMFont.f1b)
@@ -96,6 +96,10 @@ struct RankingView: View {
             .font(.XMFont.big1)
             .fcolor(.XMDesgin.f1)
             .listRowSeparator(.hidden, edges: .top)
+            .padding(.all, 12)
+            .background(RoundedRectangle(cornerRadius: 12)
+                .fill(Color.XMDesgin.main.gradient.shadow(.drop(color: .XMDesgin.main, radius: 10)))
+            )
     }
 }
 

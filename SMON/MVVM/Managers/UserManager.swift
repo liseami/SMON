@@ -104,7 +104,7 @@ class UserManager: ObservableObject {
         let target = UserAPI.updateUserInfo(p: updateReqMod)
         let result = await Networking.request_async(target)
         if result.is2000Ok {
-            Apphelper.shared.pushNotification(type: .success(message: "🎉 资料修改成功"))
+            
         }
         return result
     }

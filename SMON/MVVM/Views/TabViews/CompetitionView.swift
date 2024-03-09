@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CompetitionView: View {
-    @State var currentIndex : Int = 0
+    @State var currentIndex: Int = 0
     let comps: [XMCompetition] = [
         .init(id: "1", movieTitle: "包臀裙大赛", artwork: "", date: .now),
         .init(id: "2", movieTitle: "小短裙大赛", artwork: "", date: .now),
@@ -39,39 +39,38 @@ struct CompetitionView: View {
         HStack {
             Text("热门")
                 .font(.XMFont.f1b)
-                .foregroundStyle(Color.XMDesgin.b1)
+                .foregroundStyle(Color.XMDesgin.f1)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
-                .background(Color.XMDesgin.f1)
-                .clipShape(RoundedRectangle(cornerRadius: 4))
+                .background(Color.XMDesgin.b1)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             Text("最新")
                 .font(.XMFont.f1b)
                 .frame(maxWidth: .infinity)
         }
         .frame(maxWidth: .infinity)
         .padding(.all, 4)
-        .background(Color.XMDesgin.b1)
-        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .background(Color.XMDesgin.b1.opacity(0))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
     var header: some View {
         VStack(alignment: .center, spacing: 12, content: {
             VStack(alignment: .center, spacing: 16, content: {
                 Text("包臀裙大赛")
-                    .font(.XMFont.big2.bold())
+                    .font(.XMFont.big3.bold())
                     .fcolor(.XMDesgin.f1)
-                XMDesgin.SmallBtn(fColor: .XMDesgin.main, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "切换至男生主题") {}
-                    .padding(.vertical, -12)
                 Text("快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧。")
                     .font(.XMFont.f2)
                     .fcolor(.XMDesgin.f1)
-                    
-                XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "立即参与发帖") {}
+
+                XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "去男生主题发帖") {}
                     .overlay(alignment: .center) {
-                        Capsule().stroke(lineWidth: 2)
+                        Capsule()
+                            .stroke(lineWidth: 1)
                             .fcolor(.XMDesgin.f2)
                     }
-                HStack {
+                HStack(spacing: 0) {
                     Text("23992人参与 · ")
                     Text("3天后截止")
                 }
@@ -80,14 +79,14 @@ struct CompetitionView: View {
             })
             .padding(.top, 68)
             .padding(.all, 16)
-            .background(Color.XMDesgin.b1)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .background(Color.XMDesgin.b1.gradient)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .top) {
                 // Carousel List...
-                SnapCarousel(spacing: 12, trailingSpace: 200, index: $currentIndex, items: comps, content: { comp in
+                BannerRow(imageW: 156, spacing: 12, index: .constant(2), list: comps) { _ in
                     headerImage
-                })
-                .offset(x: 0, y: -30)
+                }
+                .offset(x: 0, y: -44)
             }
         })
         .padding(.top, 40)

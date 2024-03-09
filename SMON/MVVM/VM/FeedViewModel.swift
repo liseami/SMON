@@ -12,17 +12,14 @@ class FeedViewModel: ObservableObject {
     @Published var currentTopTab: FeedTopBarItem = .competition
 
     enum FeedTopBarItem: CaseIterable {
-        
         case near
         case localCity
-//        case all
         case competition
-        case flow
         case hot
-//        case vistor
+        case flow
         var info: LabelInfo {
             switch self {
-            case .competition :
+            case .competition:
                 return .init(name: "每日大赛", icon: "", subline: "")
             case .localCity:
                 return .init(name: "苏州", icon: "", subline: "")

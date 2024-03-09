@@ -23,6 +23,7 @@ struct PostDetailView: View {
             })
             .padding(.horizontal, 16)
         }
+        .scrollDismissesKeyboard(.immediately)
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
@@ -36,18 +37,11 @@ struct PostDetailView: View {
 
     var inputBar: some View {
         VStack(alignment: .center, spacing: 0, content: {
-            Color.XMDesgin.b1.opacity(0.6).contentShape(Rectangle())
-                .onTapGesture {
-                    self.input = false
-                }
-                .transition(.opacity.animation(.easeIn(duration: 0.4)))
-                .ifshow(show: input)
             HStack(alignment: .top) {
-                WebImage(str: AppConfig.mokImage!.absoluteString)
-                    .frame(width: 36, height: 36, alignment: .center)
-                    .clipShape(Circle())
+                XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: "32",size: 32)
                     .padding(.top, 6)
                 TextField(text: $commentInput, axis: .vertical) {}
+                    .lineLimit(...(input ? 4 : 1))
                     .tint(.XMDesgin.main)
                     .font(.XMFont.f2)
                     .focused($input)

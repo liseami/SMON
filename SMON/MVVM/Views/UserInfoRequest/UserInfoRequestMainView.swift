@@ -5,7 +5,6 @@
 //  Created by 赵翔宇 on 2024/2/28.
 //
 
-
 struct UserInfoRequestMainView: View {
     @StateObject var vm: UserInfoRequestViewModel = .init()
     var body: some View {
@@ -14,7 +13,7 @@ struct UserInfoRequestMainView: View {
                 .navigationDestination(for: UserInfoRequestViewModel.PageStep.self) { step in
                     Group {
                         switch step {
-                        case .name : NameRequestView()
+                        case .name: NameRequestView()
                         case .photo: AvatarRequestView()
                         case .morephoto: MorePhotoRequestView()
                         case .brithday: BrithdayDayRequestView()
@@ -22,8 +21,6 @@ struct UserInfoRequestMainView: View {
                         case .relationhope: RelationHopeRequestView()
                         case .hobby: HobbyRequestView()
                         case .height: HeightRequestView()
-//                        case .drink: DrinkRequestView()
-//                        case .smoke: SmokeRequestView()
                         case .bdsm: BdsmRequestView()
                         case .wechat: WechatRequestView()
                         case .bio: BioRequestView()
@@ -44,9 +41,10 @@ struct UserInfoRequestMainView: View {
 
     var progressLine: some View {
         ZStack(alignment: .leading) {
-            Capsule().fill(Color.XMDesgin.b3.opacity(0.3))
-            LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .leading, endPoint: .trailing)
-                .clipShape(Capsule())
+            Capsule()
+                .fill(Color.XMDesgin.b3.opacity(0.3).gradient)
+            Capsule()
+                .fill(Color.XMDesgin.main.gradient)
                 .frame(width: 40 + CGFloat(240 * vm.presentedSteps.count / UserInfoRequestViewModel.PageStep.allCases.count))
         }
         .frame(width: 280, height: 5)

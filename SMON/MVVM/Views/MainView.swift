@@ -20,11 +20,6 @@ struct MainView: View {
                 // 启动动画
                 LaunchScreenAnimation()
             }
-            .onAppear(perform: {
-//                Apphelper.shared.requestReviewApp()
-//                LocationManager().requestLocationPermission()
-
-            })
             .environmentObject(vm)
             .navigationBarTransparent(true)
             .navigationDestination(for: MainViewModel.PagePath.self) { path in

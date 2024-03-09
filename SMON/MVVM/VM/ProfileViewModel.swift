@@ -61,4 +61,8 @@ class ProfileViewModel: ObservableObject {
             self.photos = photos
         }
     }
+    
+    func tapChat() async {
+        
+    }
 }

@@ -14,9 +14,9 @@ struct WebImage: View {
     var body: some View {
         KFImage(URL(string: str))
             .resizable()
-            .placeholder { _ in
+            .placeholder { p in
                 Color.XMDesgin.b1
-                    .conditionalEffect(.repeat(.shine, every: 1), condition: true)
+//                    .conditionalEffect(.repeat(.shine, every: 1), condition: true)
             }
             .fade(duration: 0.3)
             .loadDiskFileSynchronously()
@@ -24,8 +24,27 @@ struct WebImage: View {
     }
 }
 
+struct XMUserAvatar: View {
+    let str: String
+    let userId: String
+    let size: CGFloat
+    init(str: String, userId: String, size: CGFloat = 56.0) {
+        self.str = str
+        self.userId = userId
+        self.size = size
+    }
+
+    var body: some View {
+        WebImage(str: str)
+            .scaledToFill()
+            .frame(width: size, height: size)
+            .clipShape(Circle())
+    }
+}
+
 #Preview {
     VStack {
+        XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: "32", size: 56)
         WebImage(str: AppConfig.mokImage!.absoluteString)
         WebImage(str: "AppConfig.mokImage!.absoluteString")
     }
