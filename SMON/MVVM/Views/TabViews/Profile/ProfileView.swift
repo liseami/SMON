@@ -32,9 +32,12 @@ struct ProfileView: View {
                 // 个人信息视图
                 profileInfoView
             }
+//            tagView
+//                .padding(.horizontal, 16)
             // 标签栏视图
             tabBarView
-            
+            // 媒体视图
+            mediaGridView
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: []) {
                 // 循环创建 10 个帖子视图
                 ForEach(1 ... 10, id: \.self) { _ in
@@ -42,10 +45,12 @@ struct ProfileView: View {
                 }
             }
             .padding()
-            
-            // 媒体视图
-            mediaGridView
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+            }
+        })
         .ignoresSafeArea()
     }
     
@@ -92,11 +97,11 @@ struct ProfileView: View {
                     .ifshow(show: userInfo.emotionalNeeds != 0)
                 Text("\(userInfo.fansNum)粉丝 · ")
                     .onTapGesture {
-                        MainViewModel.shared.pathPages.append(.myfriends)
+                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
                     }
                 Text("\(userInfo.followsNum)关注")
                     .onTapGesture {
-                        MainViewModel.shared.pathPages.append(.myfriends)
+                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
                     }
             }
             .font(.XMFont.f2)
@@ -115,7 +120,9 @@ struct ProfileView: View {
                 XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_edit", text: "编辑社交资料") {}
             } else {
                 XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_follow", text: "关注") {}
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {}
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {
+                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: "m" + userInfo.userId.string))
+                }
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: "zhao***lis") {
                     Apphelper.shared.presentPanSheet(WechatGiftView()
                         .environmentObject(vm), style: .shop)
@@ -127,9 +134,9 @@ struct ProfileView: View {
     // 标签视图
     var tagView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("欢迎与我聊")
-                .font(.XMFont.f1)
-                .bold()
+//            Text("欢迎与我聊")
+//                .font(.XMFont.f1)
+//                .bold()
             TagCloudView(data: [XMTag(text: "🍉西瓜"), XMTag(text: "⚽️足球"), XMTag(text: "🏂滑板"), XMTag(text: "🎭戏剧"), XMTag(text: "🎵嘻哈")], spacing: 12) { tag in
                 Text(tag.text)
                     .padding(.horizontal, 20)
@@ -158,25 +165,34 @@ struct ProfileView: View {
     
     // 媒体网格视图
     var mediaGridView: some View {
-        let w = (UIScreen.main.bounds.width - (16 * 2 + 8)) / 2
+        let w = (UIScreen.main.bounds.width - (16 * 2 + 8 * 2)) / 3
         let h = w / 3 * 4
         
-        return LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 16) {
-            ForEach(vm.photos, id: \.self.id) { photo in
-                XMDesgin.XMButton {
-                    Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
-                } label: {
-                    WebImage(str: photo.picUrl)
-                        .scaledToFill()
-                        .frame(width: w, height: h)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+        return  ScrollView(.horizontal,showsIndicators:  false) {
+            HStack(alignment: .center, spacing: 8) {
+                Spacer().frame(width:8)
+                ForEach(vm.photos, id: \.self.id) { photo in
+                    XMDesgin.XMButton {
+                        Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
+                    } label: {
+                        WebImage(str: photo.picUrl)
+                            .scaledToFill()
+                            .frame(width: w, height: h)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
                 }
             }
+            .padding(.vertical, 12)
         }
-        .padding()
     }
 }
 
 #Preview {
-    ProfileView(userId: "1765668637701701633")
+    NavigationView(content: {
+        NavigationLink(_isActive: .constant(true), destination: {
+            ProfileView(userId: "")
+        }, label: {
+            Text("hello")
+        })
+    })
 }

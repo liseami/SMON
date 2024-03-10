@@ -27,15 +27,15 @@ class ProfileViewModel: ObservableObject {
 
     enum ProfileBarItem: CaseIterable {
         case media
-        case post
+//        case post
         case rank
         case gift
         var info: LabelInfo {
             switch self {
             case .media:
-                return .init(name: "照片", icon: "", subline: "")
-            case .post:
-                return .init(name: "动态", icon: "", subline: "")
+                return .init(name: "照片与动态", icon: "", subline: "")
+//            case .post:
+//                return .init(name: "动态", icon: "", subline: "")
             case .rank:
                 return .init(name: "历史排名", icon: "", subline: "")
             case .gift:
@@ -61,8 +61,6 @@ class ProfileViewModel: ObservableObject {
             self.photos = photos
         }
     }
-    
-    func tapChat() async {
-        
-    }
+
+    func tapChat() async {}
 }

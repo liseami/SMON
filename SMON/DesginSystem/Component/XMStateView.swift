@@ -33,6 +33,7 @@ struct XMStateView<Content: View, Loading: View, Empty: View>: View {
         case .isLoading:
             loading()
                 .transition(.opacity.animation(.easeOut(duration: 0.2)))
+                .frame(maxWidth:.infinity)
         case .isNeedReTry:
             VStack {
                 Image("networkerror_pagepic")
@@ -43,11 +44,13 @@ struct XMStateView<Content: View, Loading: View, Empty: View>: View {
                 .bounds.height * 0.3)
             .frame(height: UIScreen.main
                 .bounds.height, alignment: .top)
+            .frame(maxWidth:.infinity)
         case .isOK:
             content()
                 .transition(.opacity.animation(.easeOut(duration: 0.2)))
         case .isOKButEmpty:
             empty()
+                .frame(maxWidth:.infinity)
         }
     }
 }

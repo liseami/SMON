@@ -9,36 +9,26 @@ import SwiftUI
 
 struct AppWarningView: View {
     @EnvironmentObject var vm: LoginViewModel
-    let warnings = ["我对「开放式关系」和「亚文化」没有歧视，始终保持着友好、阳光、乐观的态度来对待陌生人", "我不会将App分享给对小众文化不了解的「圈外人」",
-                    "我不会将App中的「用户内容」分享到广域社交网络中"]
+    let warnings = ["我对「开放式关系」和「亚文化社交」没有歧视，始终保持着友好、阳光、乐观的态度来对待陌生人。", "我不会将App分享给对小众文化不了解的「圈外人」。",
+                    "我不会将App中的「用户内容」分享到广域社交网络中（本App已启用截图防护功能）。"]
     @State var agreeList: [String] = []
     @State var showBtns: Bool = false
 
     var body: some View {
-        ZStack {
-            background
-            VStack(spacing: 32) {
-                Spacer()
-                title
+        VStack(spacing: 32) {
+            Spacer()
+            title
 
-                rules
+            rules
 
-                markdown
-            }
-            .padding()
+            markdown
         }
+        .padding()
         .onAppear(perform: {
             withAnimation {
                 showBtns = true
             }
         })
-    }
-
-    var background: some View {
-        LinearGradient(colors: [Color.black, Color.black.opacity(0)], startPoint: .bottom, endPoint: .top)
-            .frame(height: UIScreen.main.bounds.height * 0.4)
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .ignoresSafeArea()
     }
 
     var title: some View {
@@ -50,7 +40,7 @@ struct AppWarningView: View {
 
     var markdown: some View {
         HStack {
-            Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意「每日大赛」的[《用户协议》](https://www.baidu.com) 与 [《隐私政策》](https://www.baidu.com)。"))
+            Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意[《每日大赛APP用户协议》](https://ismonlove.com) 与 [《每日大赛APP用户隐私政策》](https://ismonlove.com)。"))
                 .font(.XMFont.f2)
                 .multilineTextAlignment(.leading)
                 .fcolor(.XMDesgin.f2)
@@ -59,12 +49,11 @@ struct AppWarningView: View {
                 .environment(\.openURL, OpenURLAction { url in
                     Apphelper.shared.presentPanSheet(InAppBrowser(url: url)
                         .preferredColorScheme(.dark), style: .cloud)
-
                     return .handled
                 })
             Spacer()
             XMDesgin.CircleBtn(backColor: Color.white, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
-                vm.pageProgress = .Login
+                vm.pageProgress = .Login_PhoneNumberInput
             }
             .rotationEffect(.degrees(-90))
         }
@@ -90,7 +79,7 @@ struct AppWarningView: View {
                 .ifshow(show: showBtns)
             }
         })
-        .shadow(.drop(color: .black, radius: 24, x: 0, y: 0))
+        .shadow(.drop(color: Color.XMDesgin.b1.opacity(0.6), radius: 12, x: 0, y: 0))
         .padding(.bottom, 60)
     }
 }

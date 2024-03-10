@@ -17,7 +17,7 @@ import UIKit
 /*
  模拟延时
  */
-func waitme(sec:Int = 3) async {
+func waitme(sec: Int = 3) async {
     await SwiftUI.Task.sleep(UInt64(sec * 1000000000)) // 等待1秒钟
 }
 
@@ -71,6 +71,20 @@ class Apphelper {
 
     func closeKeyBoard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+
+    /*
+     弹出Alert弹窗
+     */
+
+    @MainActor
+    func pushAlert(title: String, message: String, actions: [UIAlertAction]) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        actions.forEach { UIAlertAction in
+            alertController.addAction(UIAlertAction)
+        }
+        topMostViewController()?.present(alertController, animated: true, completion: nil)
     }
 
     /*

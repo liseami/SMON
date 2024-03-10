@@ -7,6 +7,7 @@
 
 import Introspect
 import SwiftUI
+import TUIChat
 
 struct MainView: View {
     @StateObject var vm: MainViewModel = .shared
@@ -29,10 +30,10 @@ struct MainView: View {
                     case .setting: SettingView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: RelationListView()
-                    case .postdetail(let _): PostDetailView()
+                    case .postdetail: PostDetailView()
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
-                    
+                    case .chat(let userId): ChatView(userId: userId)
                     }
                 }
                 .navigationBarTransparent(false)
@@ -53,15 +54,13 @@ struct MainView: View {
                 PostFeedView()
             case .message:
                 // 消息
-                ConversationListView()
+                MessageView()
             case .profile:
                 // 个人主页
                 ProfileHomeView()
             }
         }
     }
-
-    
 }
 
 #Preview {

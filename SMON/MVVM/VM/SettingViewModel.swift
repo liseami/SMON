@@ -7,7 +7,20 @@
 
 import Foundation
 
+
 class SettingViewModel: ObservableObject {
+    
+
+
+    enum PagePath: Hashable {
+        case blackList
+        case notificationSetting
+        case inviteFriends
+        case appInfo
+        case thirdPartySDKInfo
+        case accountCancellation
+    }
+    
     var settingGroup: [SettingItem] =
         [
             .init(name: "获得赛币", children: [
@@ -22,8 +35,8 @@ class SettingViewModel: ObservableObject {
             ]),
             .init(name: "关于App", children: [
                 .init(name: "App信息", iconName: "setting_about"),
-                .init(name: "用户协议", iconName: "setting_userbook"),
-                .init(name: "隐私政策", iconName: "setting_userbook"),
+                .init(name: "分享App", iconName: "setting_about"),
+                .init(name: "去AppStore评分", iconName: "setting_about"),
                 .init(name: "第三方SDK信息共享清单", iconName: "setting_sdk"),
             ]),
             .init(name: "退出", children: [

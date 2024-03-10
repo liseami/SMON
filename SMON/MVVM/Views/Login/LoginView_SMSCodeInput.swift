@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LoginView_VCode: View {
+struct LoginView_SMSCodeInput: View {
     @EnvironmentObject var vm: LoginViewModel
 
     var body: some View {
@@ -16,7 +16,7 @@ struct LoginView_VCode: View {
                 ForEach(0 ..< 6, id: \.self) { index in
                     if vm.vcodeInput.count >= index + 1 {
                         Text(String(vm.vcodeInput[index]))
-                            .font(.title3.bold())
+                            .transition(.asymmetric(insertion: .movingParts.boing.animation(.spring).combined(with: .opacity), removal: .movingParts.boing).combined(with: .opacity).animation(.linear))
                     } else {
                         Circle().fill(Color.XMDesgin.f2)
                             .frame(width: 10, height: 10)
@@ -24,12 +24,23 @@ struct LoginView_VCode: View {
                 }
                 Spacer()
             }
-            .font(.title)
+            .font(.XMFont.big2.bold())
             .padding(.trailing, 16)
             .frame(height: 44, alignment: .center)
         } btnAction: {
             await vm.loginBySms()
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarLeading) {
+                XMDesgin.XMButton.init {
+                    vm.pageProgress = .Login_PhoneNumberInput
+                    vm.phoneInput.removeAll()
+                } label: {
+                    Text("取消")
+                        .font(.XMFont.f1)
+                }
+            }
+        })
         .navigationBarTitleDisplayMode(.inline)
         .background {
             TextField("", text: $vm.vcodeInput)
@@ -38,10 +49,18 @@ struct LoginView_VCode: View {
                 .fcolor(.XMDesgin.f1)
                 .opacity(0)
         }
+        .onChange(of: vm.vcodeInput) { input in
+            if input.count > 6 {
+                Apphelper.shared.nofimada(.error)
+                vm.vcodeInput = String(input.prefix(6))
+            }
+        }
     }
 }
 
 #Preview {
-    LoginView_VCode()
-        .environmentObject(LoginViewModel())
+    
+        LoginView_SMSCodeInput()
+            .environmentObject(LoginViewModel())
+    
 }

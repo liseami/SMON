@@ -1,12 +1,9 @@
-
-# Uncomment the next line to define a global platform for your project
 platform :ios, '16.0'
 target 'SMON' do
-# 是否强制使用动态库
+# 强制使用动态库
 use_frameworks!
-# 开启 modular headers。请按需开启，开启后 Pod 模块才能使用 @import 导入。
+# 开启 modular headers。开启后 Pod 模块才能使用 @import 导入。
 use_modular_headers!
-
 pod 'Moya'# 网络底层
 pod 'Moya/Combine', '~> 15.0'# 网络底层结合SwiftUICombine
 pod 'KakaJSON'# JSON处理
@@ -26,6 +23,7 @@ pod 'TXIMSDK_Plus_iOS'
 pod 'TUIChat/UI_Classic'
 # 集成会话功能
 pod 'TUIConversation/UI_Classic'
+# 以下部分没有导入，仅作候选
 # 集成关系链功能
 #pod 'TUIContact/UI_Classic'
 # 集成群组功能

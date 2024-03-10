@@ -32,7 +32,7 @@ struct RankListView: View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             ForEach(Array(vm.list.enumerated()), id: \.offset) { index, user in
                 XMDesgin.XMButton {
-                    MainViewModel.shared.pathPages.append(.profile(userId: user.userId))
+                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: user.userId))
                 } label: {
                     VStack {
                         WebImage(str: user.avatar)

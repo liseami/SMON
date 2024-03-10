@@ -11,19 +11,12 @@ struct WechatSettingView: View {
     @EnvironmentObject var vm: ProfileEditViewModel
     var body: some View {
         List {
-            Section {
+            XMSection(title: "微信号") {
                 TextField("微信号", text: $vm.updateModel.wechat)
-                    .tint(.XMDesgin.main)
                     .autoOpenKeyboard()
-                    .listRowSeparator(.hidden, edges: .top)
-            } header: {
-                Text("微信号")
-                    .font(.XMFont.f1b)
-                    
-                    .fcolor(.XMDesgin.f1)
             }
-
-            Section {
+            
+            XMSection(title: "他人如何解锁你的微信？",footer: "* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。") {
                 Picker(selection: .constant(1)) {
                     ForEach((6 ... 4000).filter { number in
                         if number < 300 {
@@ -38,17 +31,8 @@ struct WechatSettingView: View {
                     }
                 }
                 .pickerStyle(.wheel)
-                .listRowSeparator(.hidden, edges: .top)
-            } header: {
-                Text("他人如何解锁你的微信？")
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
-            } footer: {
-                Text("* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。")
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
-                    .listRowSeparator(.hidden, edges: .bottom)
             }
+
         }.listStyle(.plain)
     }
 }

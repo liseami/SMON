@@ -32,9 +32,7 @@ struct ConversationListContainer: UIViewControllerRepresentable {
         }
 
         func conversationListController(_ conversationController: UIViewController, didSelectConversation conversation: TUIConversationCellData) {
-            let data = TUIChatConversationModel()
-            data.userID = conversation.userID
-            conversationController.navigationController?.pushViewController(ChatView(conversation: data).host(), animated: true)
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: conversation.userID))
         }
     }
 }

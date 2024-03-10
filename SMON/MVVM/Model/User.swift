@@ -90,7 +90,7 @@ struct XMUserProfile: Convertible {
 // 用户资料扩展
 extension XMUserProfile {
     // 计算资料完整度分数
-    var profileCompletionScore: Int {
+    var profileCompletionScore: Double {
         // 初始化“符合规则”的属性数量和总属性数量
         var okAttNumber = 0
         var attNumber = 0
@@ -138,10 +138,10 @@ extension XMUserProfile {
         }
 
         // 计算最终分数，已完成的 / 总共参与评分的 * 100
-        let finalScore = (okAttNumber / attNumber) * 100
+        let finalScore = (Double(okAttNumber) / Double(attNumber))
 
         // 确保最终分数上限为 100
-        return Int(finalScore)
+        return finalScore
     }
 }
 

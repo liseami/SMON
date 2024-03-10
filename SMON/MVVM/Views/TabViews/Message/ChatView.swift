@@ -9,7 +9,15 @@ import SwiftUI
 import TUIChat
 
 struct ChatView: View {
+    let userId : String
     let conversation : TUIChatConversationModel
+    
+    init(userId: String) {
+        self.userId = userId
+        self.conversation = TUIChatConversationModel.init()
+        self.conversation.userID = userId
+    }
+    
     var body: some View {
         ChatViewContainer(conversation: conversation)
             .edgesIgnoringSafeArea(.bottom)

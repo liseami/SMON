@@ -52,6 +52,17 @@ class UserManager: ObservableObject {
         }
     }
 
+    @MainActor
+    func logOut() {
+        Apphelper.shared.pushAlert(title: "退出登录？", message: "确认退出登录？系统会清空当前用户的全部缓存和信息。", actions: [UIAlertAction(title: "确定", style: .destructive, handler: { _ in
+            self.user = .init()
+            self.userLoginInfo = .init()
+            self.OSSInfo = .init()
+            self.IMInfo = .init()
+            MainViewModel.shared.currentTabbar = .home
+        }), .init(title: "取消", style: .default)])
+    }
+
     // 持久化数据
     func savaModel<M: Convertible>(model: M) {
         let jsonString = model.kj.JSONString()
@@ -103,9 +114,7 @@ class UserManager: ObservableObject {
     func updateUserInfo(updateReqMod: XMUserUpdateReqMod) async -> MoyaResult {
         let target = UserAPI.updateUserInfo(p: updateReqMod)
         let result = await Networking.request_async(target)
-        if result.is2000Ok {
-            
-        }
+        if result.is2000Ok {}
         return result
     }
 

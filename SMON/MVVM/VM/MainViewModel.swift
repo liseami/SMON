@@ -12,16 +12,16 @@ class MainViewModel: ObservableObject {
 
     init(currentTabbar: TabbarItem = .home) {
         self.currentTabbar = currentTabbar
-        self.pathPages.removeAll()
+        self.pathPages = .init()
     }
 
     @Published var currentTabbar: TabbarItem = .home
-    @Published var pathPages: [PagePath] = []
+    @Published var pathPages: NavigationPath = .init()
 
     @MainActor
     func reset() {
         self.currentTabbar = .home
-        self.pathPages.removeAll()
+        self.pathPages = .init()
     }
 
     enum TabbarItem: CaseIterable {
@@ -53,7 +53,7 @@ class MainViewModel: ObservableObject {
         }
     }
 
-    enum PagePath: Hashable {
+    enum PagePath: Hashable,Decodable {
         case setting
         case notification
         case myhotinfo
@@ -61,5 +61,6 @@ class MainViewModel: ObservableObject {
         case profileEditView
         case postdetail(postId: String)
         case profile(userId: String)
+        case chat(userId:String)
     }
 }

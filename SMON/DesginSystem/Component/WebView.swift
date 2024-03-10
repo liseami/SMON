@@ -57,6 +57,7 @@ class WebviewController: UIViewController, WKNavigationDelegate {
             self.webview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
         ])
 
+        progressbar.tintColor = UIColor(Color.XMDesgin.main)
         self.webview.addSubview(self.progressbar)
         self.setProgressBarPosition()
 
@@ -104,6 +105,12 @@ class WebviewController: UIViewController, WKNavigationDelegate {
 
 struct InAppBrowser: View {
     let url: URL
+    init(url: URL) {
+        self.url = url
+    }
+    init(url:String){
+        self.url = URL.init(string: url)!
+    }
     var body: some View {
         VStack {
             Webview(url: url)

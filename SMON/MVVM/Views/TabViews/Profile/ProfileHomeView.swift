@@ -36,7 +36,7 @@ struct ProfileHomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 XMDesgin.XMButton {
-                    MainViewModel.shared.pathPages.append(.notification)
+                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
                 } label: {
                     XMDesgin.XMIcon(iconName: "home_bell")
                 }
@@ -44,7 +44,7 @@ struct ProfileHomeView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMButton {
-                    MainViewModel.shared.pathPages.append(.setting)
+                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.setting)
                 } label: {
                     XMDesgin.XMIcon(iconName: "profile_setting")
                 }
@@ -57,15 +57,13 @@ struct ProfileHomeView: View {
             Text(userManager.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(.profile(userId: UserManager.shared.user.userId.string))
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: UserManager.shared.user.userId.string))
             }, label: {
-                WebImage(str: userManager.user.avatar)
-                    .scaledToFill()
-                    .frame(width: 120, height: 120)
-                    .clipShape(Circle())
+                XMUserAvatar(str: userManager.user.avatar, userId: userManager.user.userId.string, size: 120)
             })
             .overlay {
                 ZStack {
+                    
                     Circle()
                         .trim(from: 0.0, to: CGFloat(1))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
@@ -73,15 +71,16 @@ struct ProfileHomeView: View {
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                     Circle()
-                        .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore / 100))
+                        .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore ))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .fcolor(.XMDesgin.main)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                         .animation(.spring(), value: userManager.user.profileCompletionScore)
+                    
                 }
                 .overlay(alignment: .bottom) {
-                    Text("\(userManager.user.profileCompletionScore)%")
+                    Text("\(Int(userManager.user.profileCompletionScore * 100))%")
                         .bold()
                         .fcolor(.XMDesgin.f1)
                         .padding(.all, 4)
@@ -92,13 +91,13 @@ struct ProfileHomeView: View {
                                 .stroke(Color.black, lineWidth: 4) // 红色描边
                         )
                         .offset(x: 0, y: 12)
-                        .ifshow(show: userManager.user.profileCompletionScore < 100)
+                        .ifshow(show: userManager.user.profileCompletionScore < 1)
                 }
             }
 
-            let text = userManager.user.profileCompletionScore == 100 ? "修改主页资料" : "完成你的主页资料"
+            let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
             XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: text) {
-                MainViewModel.shared.pathPages.append(.profileEditView)
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profileEditView)
             }
         })
     }
@@ -137,11 +136,11 @@ struct ProfileHomeView: View {
     var list: some View {
         VStack(alignment: .leading, spacing: 24, content: {
             XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "32")) {
-                MainViewModel.shared.pathPages.append(.myfriends)
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
             }
 
             XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.23992")) {
-                MainViewModel.shared.pathPages.append(.myhotinfo)
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
             }
 
             XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: "限时特惠")) {
@@ -182,5 +181,5 @@ struct ProfileHomeView: View {
 }
 
 #Preview {
-    MainView(vm: .init(currentTabbar: .home))
+    MainView(vm: .init(currentTabbar: .profile))
 }

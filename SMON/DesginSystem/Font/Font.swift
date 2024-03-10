@@ -12,7 +12,7 @@ extension SwiftUI.Font {
         static let big1: Font = .largeTitle.monospaced()
         static let big2: Font = .title.monospaced()
         static let big3: Font = .title3.monospaced()
-        static let f1: Font = .body.monospaced()
+        static let f1: Font = .body.weight(.regular)
         static let f2: Font = .subheadline.monospaced()
         static let f3: Font = .caption.monospaced()
 

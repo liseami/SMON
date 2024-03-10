@@ -94,8 +94,8 @@ struct CompetitionView: View {
 
     var headerImage: some View {
         WebImage(str: AppConfig.mokImage!.absoluteString)
-            .frame(width: 156, height: 156 / 16 * 9)
             .scaledToFill()
+            .frame(width: 156, height: 156 / 16 * 9)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .center) {
                 RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)

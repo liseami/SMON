@@ -22,22 +22,25 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
     }
 
     @Published var conversations: [V2TIMConversation] = []
+    @Published var status: XMRequestStatus = .isLoading
 
     func getConversationList() {
         V2TIMManager.sharedInstance().getConversationList(UInt64(0), count: 300) { conversations, _, _ in
             self.conversations = conversations ?? []
+            self.status = conversations?.isEmpty == true ? .isOKButEmpty : .isOK
         } fail: { _, _ in
+            self.status = .isNeedReTry
         }
     }
 }
 
-struct ConversationListView: View {
+struct MessageView: View {
     @StateObject var vm: MessageViewModel = .shared
 
     var body: some View {
         ZStack(alignment: .top, content: {
-            ScrollView {
-                XMStateView(reqStatus: .isLoading) {
+            ScrollView(showsIndicators: false) {
+                XMStateView(reqStatus: vm.status) {
                     LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                         Spacer().frame(height: 12)
                         ForEach(vm.conversations, id: \.self) { _ in
@@ -58,6 +61,19 @@ struct ConversationListView: View {
 
             XMTopBlurView()
         })
+
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                // 通知按钮
+                XMDesgin.XMButton {} label: {
+                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+                }
+            }
+            // 筛选按钮
+            ToolbarItem(placement: .topBarTrailing) {
+                XMDesgin.XMIcon(iconName: "setting_about", size: 22)
+            }
+        }
 
 //        ConversationListContainer()
 //            .navigationTitle("消息")

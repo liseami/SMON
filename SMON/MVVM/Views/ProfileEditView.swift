@@ -216,14 +216,17 @@ struct ProfileEditView: View {
                             .frame(width: w, height: w / 3 * 4)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    .overlay(alignment: .bottomTrailing) {
+                    .overlay(alignment: .topTrailing) {
                         XMDesgin.XMButton(action: {
-                            vm.photos.removeAll(where: { $0.id == photo.id })
+                            withAnimation {
+                                vm.photos.removeAll(where: { $0.id == photo.id })
+                            }
                         }, label: {
                             XMDesgin.XMIcon(iconName: "system_xmark", size: 16, color: .XMDesgin.f1, withBackCricle: true)
                         })
-                        .offset(x: -4, y: -4)
+                        .padding(.all, 6)
                     }
+                    .transition(.asymmetric(insertion: .movingParts.blur, removal: .movingParts.poof.animation(.easeInOut(duration: 0.5))))
                 } preview: { _ in
                     Color.clear
                         .scaledToFill()
@@ -303,9 +306,7 @@ struct ProfileEditView: View {
 }
 
 #Preview {
-    NavigationStack {
-        ProfileEditView()
-    }
+    ProfileEditView()
 }
 
 public typealias Reorderable = Identifiable & Equatable

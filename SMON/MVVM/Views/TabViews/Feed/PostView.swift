@@ -15,7 +15,7 @@ struct PostView: View {
         }
         .contentShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture {
-            MainViewModel.shared.pathPages.append(.postdetail(postId: ""))
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: ""))
         }
     }
 
@@ -59,7 +59,7 @@ struct PostView: View {
             }
 
             XMDesgin.XMButton {
-                MainViewModel.shared.pathPages.append(.postdetail(postId: ""))
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: ""))
             } label: {
                 XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
             }
