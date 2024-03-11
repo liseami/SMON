@@ -9,7 +9,7 @@ import Foundation
 
 extension SwiftUI.Font {
     enum XMFont {
-        static let big1: Font = .largeTitle.monospaced()
+        static let big1: Font = .custom("GenSekiGothic-L", relativeTo: .largeTitle)
         static let big2: Font = .title.monospaced()
         static let big3: Font = .title3.monospaced()
         static let f1: Font = .body.weight(.regular)
