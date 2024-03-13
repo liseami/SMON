@@ -1,5 +1,0 @@
-
-
-
-#import <AliyunOSSiOS/OSSService.h>  
-
