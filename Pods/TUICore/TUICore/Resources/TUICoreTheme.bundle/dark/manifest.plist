@@ -9,15 +9,15 @@
 	<key>name_en</key>
 	<string>Dark</string>
 	<key>primary_color</key>
-	<string>#FEFEFE</string>
+	<string>#FFFFFF</string>
 	<key>primary_bg_color</key>
-	<string>#000000</string>
+	<string>#F2F3F5</string>
 	<key>primary_theme_color</key>
-	<string>#AA7E1F</string>
+	<string>#2170B1</string>
 	<key>common_switch_on_color</key>
-	<string>#AA7E1F</string>
+	<string>#2170B1</string>
 	<key>head_bg_gradient_start_color</key>
-	<string>#000000</string>
+	<string>#111111</string>
 	<key>default_group_head_public_img</key>
 	<string>default_group_head_public.png</string>
 	<key>default_group_head_meeting_img</key>
@@ -31,7 +31,7 @@
 	<key>default_c2c_head_img</key>
 	<string>default_c2c_head.png</string>
 	<key>search_textfield_bg_color</key>
-	<string>#191919</string>
+	<string>#292929</string>
 	<key>service_more_video_call_img</key>
 	<string>service_more_video_call.png</string>
 	<key>service_more_voice_call_img</key>

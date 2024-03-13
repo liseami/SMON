@@ -9,11 +9,11 @@
 	<key>name_en</key>
 	<string>Dark</string>
 	<key>conversation_cell_bg_color</key>
-	<string>#191919</string>
-	<key>conversation_cell_top_bg_color</key>
-	<string>#666666</string>
-	<key>conversation_bg_color</key>
 	<string>#000000</string>
+	<key>conversation_cell_top_bg_color</key>
+	<string>#191919</string>
+	<key>conversation_bg_color</key>
+	<string>#111111</string>
 	<key>conversation_message_not_disturb_img</key>
 	<string>message_not_disturb</string>
 	<key>pop_icon_new_chat_img</key>
