@@ -98,7 +98,7 @@ struct WechatGiftView: View {
         Text("")
             .onAppear(perform: {
                 Apphelper.shared.presentPanSheet(WechatGiftView()
-                    .environmentObject(ProfileViewModel(userId: "1765668637701701633")), style: .shop)
+                    .environmentObject(ProfileViewModel(userId: 1765668637701701633)), style: .shop)
             })
     })
 }

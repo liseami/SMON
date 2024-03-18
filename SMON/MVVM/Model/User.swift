@@ -151,7 +151,7 @@ struct XMUserLoginInfo: Decodable, Encodable, Convertible {
     }
 
     // 用户 ID，默认为空字符串
-    var userId: String = ""
+    var userId: Int = 0
 
     // 令牌，默认为空字符串
     var token: String = ""
@@ -260,7 +260,7 @@ extension Int {
 }
 
 struct XMUserInRank: Convertible {
-    var userId: String = "" // : 1764504995815882752,
+    var userId: Int = 0 // : 1764504995815882752,
     var nickname: String = "" // ": "开手机",
     var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
     var cityName: String = "" // ": ""

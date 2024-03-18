@@ -21,7 +21,7 @@ enum PostsOperationAPI: XMTargetType {
             default: return nil
             }
         }
-        set {}
+       
     }
 
     var method: HTTPRequestMethod {

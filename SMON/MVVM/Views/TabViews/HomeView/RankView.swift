@@ -75,7 +75,7 @@ struct RankView: View {
                 content: {
                     ForEach(RankViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
                         // 排行榜页面
-                        RankListView(target: RankAPI.country).tag(tab)
+                        RankListView().tag(tab)
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))

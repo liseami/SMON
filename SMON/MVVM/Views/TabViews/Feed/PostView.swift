@@ -12,6 +12,27 @@ class PostViewModel: ObservableObject {
     init(post: XMPost) {
         self.post = post
     }
+
+    @Published var hidden: Bool = false
+    
+
+    @MainActor
+    func delete() async {
+        let t = PostAPI.delete(postId: self.post.id, userId: self.post.userId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            self.hidden = true
+        }
+    }
+    
+    @MainActor
+    func tapLike() async {
+        let t = PostAPI.tapLike(postId: self.post.id)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            self.post.isLiked.toggle()
+        }
+    }
 }
 
 struct PostView: View {
@@ -21,13 +42,18 @@ struct PostView: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
-            avatarAndLine
-            right
-        }
-        .contentShape(RoundedRectangle(cornerRadius: 12))
-        .onTapGesture {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: ""))
+        if vm.hidden {
+            EmptyView()
+                .frame(width: 0, height: 0, alignment: .center)
+        } else {
+            HStack(alignment: .top, spacing: 12) {
+                avatarAndLine
+                right
+            }
+            .contentShape(RoundedRectangle(cornerRadius: 12))
+            .onTapGesture {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))
+            }
         }
     }
 
@@ -64,7 +90,7 @@ struct PostView: View {
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
             HStack {
-                Text("\(vm.post.likeNums ?? 0)")
+                Text("\(vm.post.likeNums)")
                     .font(.XMFont.f3)
                     .bold()
                 XMDesgin.XMButton {} label: {
@@ -73,7 +99,7 @@ struct PostView: View {
             }
 
             XMDesgin.XMButton {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: ""))
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))
             } label: {
                 XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
             }
@@ -81,18 +107,32 @@ struct PostView: View {
             Spacer()
 
             XMDesgin.XMButton {
-                Apphelper.shared.pushActionSheet(title: "操作", message: nil, actions: [
-                    UIAlertAction(title: "举报内容", style: .default, handler: { _ in
-
-                    }),
-                    UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
-
-                    })
-                ])
+                Apphelper.shared.pushActionSheet(title: "操作", message: nil, actions: actions)
             } label: {
                 XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
             }
         })
+    }
+
+    var actions: [UIAlertAction] {
+        var result: [UIAlertAction] = [
+        ]
+        if self.vm.post.userId == UserManager.shared.user.userId {
+            result.insert(UIAlertAction(title: "删除", style: .destructive, handler: { _ in
+                Task {
+                    await vm.delete()
+                }
+            }), at: 0)
+            return result
+        } else {
+            result = [UIAlertAction(title: "举报内容", style: .default, handler: { _ in
+
+            }),
+            UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
+
+            })]
+            return result
+        }
     }
 
 //
@@ -107,7 +147,7 @@ struct PostView: View {
                     } label: {
                         WebImage(str: url)
                             .scaledToFill()
-                            .frame(width: 160, height: 160 / 3 * 4)
+                            .frame(width: 148, height: 148 / 3 * 4)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                 }

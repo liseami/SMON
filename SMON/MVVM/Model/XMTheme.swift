@@ -8,15 +8,15 @@
 import Foundation
 
 struct XMTheme: Identifiable, Convertible {
-    var id: String = "" // 1,
-    var sex: String = "" // 2,
+    var id: Int = 0 // 1,
+    var sex: Int = 0 // 2,
     var title: String = "" // "包臀裙大赛",
     var coverUrl: String = "" // "https://dailycontest.oss-cn-shanghai.aliyuncs.com/posts/theme/test.jpg",
     var description: String = "" // "这是一个包臀裙大赛",
     var startAt: Int = 0 // 1710259200,
     var endAt: Int = 0 // 1710345600,
-    var postsNums: String = "" // 1,
-    var postsNumsStr: String = "" // "1"
+    var postsNums: Int = 0 // 1,
+    var postsNumsStr: Int = 0 // "1"
 }
 
 extension XMTheme {

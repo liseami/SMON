@@ -9,8 +9,8 @@ enum UserAPI: XMTargetType {
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
     case updateUserInfo(p: XMUserUpdateReqMod)
-    case getUserInfo(id: String?)
-    case albumList(id: String?)
+    case getUserInfo(id: Int?)
+    case albumList(id: Int?)
     case updateAlbum(p: [String])
 
     var group: String {

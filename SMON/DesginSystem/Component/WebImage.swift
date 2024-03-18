@@ -26,9 +26,9 @@ struct WebImage: View {
 
 struct XMUserAvatar: View {
     let str: String
-    let userId: String
+    let userId: Int
     let size: CGFloat
-    init(str: String, userId: String, size: CGFloat = 56.0) {
+    init(str: String, userId: Int, size: CGFloat = 56.0) {
         self.str = str
         self.userId = userId
         self.size = size
@@ -44,7 +44,7 @@ struct XMUserAvatar: View {
 
 #Preview {
     VStack {
-        XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: "32", size: 56)
+        XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: 32, size: 56)
         WebImage(str: AppConfig.mokImage!.absoluteString)
         WebImage(str: "AppConfig.mokImage!.absoluteString")
     }

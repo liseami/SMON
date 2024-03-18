@@ -44,7 +44,7 @@ struct MessageView: View {
                     LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                         Spacer().frame(height: 12)
                         ForEach(vm.conversations, id: \.self) { _ in
-                            XMConversationLine(avatar: "", nickname: "", date: .now, lastmessage: "最后一条消息", userid: "2932939")
+                            XMConversationLine(avatar: "", nickname: "", date: .now, lastmessage: "最后一条消息", userid: 2932939)
                         }
                     })
                     .padding(.all, 16)

@@ -41,7 +41,7 @@ class UserManager: ObservableObject {
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
         IMInfo = loadModel(type: IMUserSing.self)
         #if DEBUG
-//        user = .init(userId: "", token: "", needInfo: true)
+//        user = .init(userId: 0, token: "", needInfo: true)
         #endif
         Task {
             await getUploadToken()
@@ -137,7 +137,7 @@ extension UserManager {
         config.logLevel = .LOG_NONE
         V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)
 
-        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "m" + userLoginInfo.userId, userSig: IMInfo.imUserSign) {}
+        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "m" + userLoginInfo.userId.string, userSig: IMInfo.imUserSign) {}
 
         // 注册主题
         if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),

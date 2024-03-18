@@ -16,7 +16,10 @@
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
 		A2498ACB2BA7DD630045B7AD /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACA2BA7DD630045B7AD /* PostAPI.swift */; };
 		A2498ACD2BA7E23D0045B7AD /* PostsOperationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACC2BA7E23D0045B7AD /* PostsOperationAPI.swift */; };
-		A2498ACF2BA7E7D10045B7AD /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACE2BA7E7D10045B7AD /* Int.swift */; };
+		A2498ACF2BA7E7D10045B7AD /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACE2BA7E7D10045B7AD /* Int++.swift */; };
+		A2498AD42BA812C40045B7AD /* XMModRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD32BA812C40045B7AD /* XMModRequestViewModel.swift */; };
+		A2498AD62BA827FA0045B7AD /* PostCommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */; };
+		A2498AD82BA828960045B7AD /* CompetitionPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD72BA828960045B7AD /* CompetitionPostListView.swift */; };
 		A256DB972B900BF6008C7063 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB962B900BF6008C7063 /* WebView.swift */; };
 		A256DB992B901C88008C7063 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = A256DB982B901C88008C7063 /* AppConfig.plist */; };
 		A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB9A2B901C9F008C7063 /* AppConfig.swift */; };
@@ -199,7 +202,10 @@
 		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		A2498ACA2BA7DD630045B7AD /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		A2498ACC2BA7E23D0045B7AD /* PostsOperationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsOperationAPI.swift; sourceTree = "<group>"; };
-		A2498ACE2BA7E7D10045B7AD /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		A2498ACE2BA7E7D10045B7AD /* Int++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int++.swift"; sourceTree = "<group>"; };
+		A2498AD32BA812C40045B7AD /* XMModRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMModRequestViewModel.swift; sourceTree = "<group>"; };
+		A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentListView.swift; sourceTree = "<group>"; };
+		A2498AD72BA828960045B7AD /* CompetitionPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionPostListView.swift; sourceTree = "<group>"; };
 		A256DB962B900BF6008C7063 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		A256DB982B901C88008C7063 /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
 		A256DB9A2B901C9F008C7063 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -376,6 +382,7 @@
 				A25AAD1F2B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift */,
 				A27EFFB32B92B6DB00B47BD6 /* FeedViewModel.swift */,
 				A2BA895D2B9B3C2D002FEEFA /* XMListDataViewModel.swift */,
+				A2498AD32BA812C40045B7AD /* XMModRequestViewModel.swift */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -480,6 +487,7 @@
 				A2E7F9A62B8CDF1300E86474 /* HomeView */,
 				A2BF15F12B8C64E70011A130 /* Message */,
 				A2BA894A2B9AC69A002FEEFA /* CompetitionView.swift */,
+				A2498AD72BA828960045B7AD /* CompetitionPostListView.swift */,
 			);
 			path = TabViews;
 			sourceTree = "<group>";
@@ -521,6 +529,7 @@
 				A27EFFB92B92B7B000B47BD6 /* PostView.swift */,
 				A27EFFB72B92B75A00B47BD6 /* PostListView.swift */,
 				A27EFF9C2B92035700B47BD6 /* PostDetailView.swift */,
+				A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */,
 				A256DBA82B907E6A008C7063 /* Post */,
 			);
 			path = Feed;
@@ -627,7 +636,7 @@
 				A2784F142B90CA4900A1B06F /* UIViewController+.swift */,
 				A28C55E12B96D85500707EDA /* Date+.swift */,
 				A2BA895B2B9B3994002FEEFA /* Array+.swift */,
-				A2498ACE2BA7E7D10045B7AD /* Int.swift */,
+				A2498ACE2BA7E7D10045B7AD /* Int++.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -971,6 +980,7 @@
 				A2BF26D52BA1D91700B5A616 /* Bridge.m in Sources */,
 				A2BF26CA2BA1D8DA00B5A616 /* Response+Extension.swift in Sources */,
 				A25AAD3A2B8F246C00B7CE40 /* BioRequestView.swift in Sources */,
+				A2498AD62BA827FA0045B7AD /* PostCommentListView.swift in Sources */,
 				A2EF07662B9D4DA1004CF692 /* ThirdPartySDKInfoView.swift in Sources */,
 				A27EFF9D2B92035700B47BD6 /* PostDetailView.swift in Sources */,
 				A2BA89542B9B03E6002FEEFA /* XMTheme.swift in Sources */,
@@ -991,6 +1001,7 @@
 				A28F54492B873CD600AF9CD3 /* LoginView_SMSCodeInput.swift in Sources */,
 				A2BA895C2B9B3994002FEEFA /* Array+.swift in Sources */,
 				A2BA894D2B9ACBCE002FEEFA /* XMTopBlurView.swift in Sources */,
+				A2498AD42BA812C40045B7AD /* XMModRequestViewModel.swift in Sources */,
 				A272A4932B871D1A008EA955 /* PostFeedView.swift in Sources */,
 				A28C55DE2B95E8A400707EDA /* XMStateView.swift in Sources */,
 				A25AAD2A2B8EF6B600B7CE40 /* BrithdayDayRequestView.swift in Sources */,
@@ -1005,10 +1016,11 @@
 				A281EFE22B99996400E9DE05 /* WechatSettingView.swift in Sources */,
 				A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */,
 				A2BF26CE2BA1D8DA00B5A616 /* XMTargetType.swift in Sources */,
+				A2498AD82BA828960045B7AD /* CompetitionPostListView.swift in Sources */,
 				A25AAD3E2B8F4E7400B7CE40 /* BdsmRequestView.swift in Sources */,
 				A2BA89642B9BF005002FEEFA /* XMConversationLine.swift in Sources */,
 				A2BF269F2BA1D83B00B5A616 /* MessageView.swift in Sources */,
-				A2498ACF2BA7E7D10045B7AD /* Int.swift in Sources */,
+				A2498ACF2BA7E7D10045B7AD /* Int++.swift in Sources */,
 				A25AAD2E2B8EFE9900B7CE40 /* AliOSSManager.swift in Sources */,
 				A272A4952B871D80008EA955 /* AppFeaturesView.swift in Sources */,
 				A28C55AB2B95BE1300707EDA /* MockTool.swift in Sources */,

@@ -11,10 +11,10 @@ import Tagly
 
 struct ProfileView: View {
     @StateObject var vm: ProfileViewModel
-    var userId: String
+    var userId: Int
     
     // 初始化
-    init(userId: String) {
+    init(userId: Int) {
         self._vm = StateObject(wrappedValue: .init(userId: userId))
         self.userId = userId
     }
@@ -190,7 +190,7 @@ struct ProfileView: View {
 #Preview {
     NavigationView(content: {
         NavigationLink(_isActive: .constant(true), destination: {
-            ProfileView(userId: "")
+            ProfileView(userId: 0)
         }, label: {
             Text("hello")
         })

@@ -10,19 +10,22 @@ import Foundation
 enum PostAPI: XMTargetType {
     case publish(p: PostPublishReqMod)
     case themeList(p: ThemePostListReqMod)
+    case delete(postId: Int, userId: Int)
+    case detail(postId: Int, userId: Int)
+    case tapLike(postId: Int)
     var group: String {
         return "/v1/posts"
     }
 
     var parameters: [String: Any]? {
-        get {
-            switch self {
-            case .publish(let p): return p.kj.JSONObject()
-            case .themeList(let p): return p.kj.JSONObject()
-            default: return nil
-            }
+        switch self {
+        case .publish(let p): return p.kj.JSONObject()
+        case .themeList(let p): return p.kj.JSONObject()
+        case .delete(let postId, let userId): return ["userId": userId, "postId": postId]
+        case .detail(let postId, let userId): return ["userId": userId, "postId": postId]
+        case .tapLike(let postId): return ["postId": postId]
+        default: return nil
         }
-        set {}
     }
 
     var method: HTTPRequestMethod {

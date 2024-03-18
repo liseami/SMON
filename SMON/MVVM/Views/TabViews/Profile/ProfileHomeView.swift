@@ -57,9 +57,9 @@ struct ProfileHomeView: View {
             Text(userManager.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: UserManager.shared.user.userId.string))
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: UserManager.shared.user.userId))
             }, label: {
-                XMUserAvatar(str: userManager.user.avatar, userId: userManager.user.userId.string, size: 120)
+                XMUserAvatar(str: userManager.user.avatar, userId: userManager.user.userId, size: 120)
             })
             .overlay {
                 ZStack {

@@ -11,9 +11,9 @@ class ProfileViewModel: ObservableObject {
     @Published var currentTab: ProfileBarItem = .media
     @Published var user: XMUserProfile = .init()
     @Published var photos: [XMPhoto] = []
-    var userId: String = ""
+    var userId: Int = 0
 
-    init(userId: String) {
+    init(userId: Int) {
         self.userId = userId
         Task {
             await self.getUserInfo()
@@ -22,7 +22,7 @@ class ProfileViewModel: ObservableObject {
     }
 
     var isLocalUser: Bool {
-        userId == UserManager.shared.user.userId.string
+        userId == UserManager.shared.user.userId
     }
 
     enum ProfileBarItem: CaseIterable {

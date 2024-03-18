@@ -15,51 +15,67 @@ public enum XMRequestStatus {
     case isOKButEmpty
 }
 
-protocol XMListDataViewModelProtocol: AnyObject, ObservableObject {
-    associatedtype ListRowMod: Convertible
-    var list: [ListRowMod] { get }
-    var target: XMTargetType { get }
-    var reqStatus: XMRequestStatus { get }
-    func getListData() async
-    func loadMore() async
-}
 
-class XMListDataViewModel<ListRowMod: Convertible>: ObservableObject, XMListDataViewModelProtocol {
+
+// 定义泛型 ViewModel 类
+class XMListViewModel<ListRowMod: Convertible>: ObservableObject {
     @Published var list: [ListRowMod] = []
     @Published var reqStatus: XMRequestStatus = .isLoading
-    var target: XMTargetType
-    var currentPageIndex: Int = 0
+    @Published var isLoadingMore: Bool = false
+    var pageindex: Int = 0
 
-    init(target: XMTargetType) {
-        self.target = target
-        Task { await getListData() }
+    private let targetBuilder: (Int) -> XMTargetType
+    var target: XMTargetType {
+        self.targetBuilder(self.pageindex)
     }
-}
+    var pageName: String
+    init(autoGetData: Bool = true, pageName: String, targetBuilder: @escaping (Int) -> XMTargetType) {
+        self.targetBuilder = targetBuilder
+        self.pageName = pageName
+        guard autoGetData else { return }
+        Task { await self.getListData() }
+    }
 
-extension XMListDataViewModel {
+    deinit {}
+
     @MainActor
-    func getListData() async {
-        await waitme(sec: 1)
-        if reqStatus != .isOK || reqStatus != .isOKButEmpty {
-            reqStatus = .isLoading
+    func getListData(_ atKeyPath: String = .datalist) async {
+        if self.reqStatus != .isOK || self.reqStatus != .isOKButEmpty {
+            self.reqStatus = .isLoading
         }
-        currentPageIndex = 1
-        if target.parameters != nil {
-            target.appendParameters(newParameters: ["page": currentPageIndex + 1])
-        }
-        let result = await Networking.request_async(target)
-        if result.is2000Ok, let items = result.mapArray(ListRowMod.self) {
-            if items.isEmpty {
-                reqStatus = .isOKButEmpty
+        self.pageindex = 1
+        let r = await Networking.request_async(self.target)
+        if r.is2000Ok {
+            if let list = r.mapArray(ListRowMod.self, atKeyPath: atKeyPath), list.isEmpty == false {
+                self.list.removeAll()
+                self.pageindex += 1
+                self.list = list
+                self.reqStatus = .isOK
             } else {
-                list = items
-                reqStatus = .isOK
+                self.reqStatus = .isOKButEmpty
             }
         } else {
-            reqStatus = .isNeedReTry
+            self.reqStatus = .isNeedReTry
         }
     }
 
     @MainActor
-    func loadMore() async {}
+    func loadMore(_ atKeyPath: String = .datalist) async {
+        guard self.reqStatus == .isOK else { return }
+        await waitme()
+        guard self.reqStatus == .isOK else { return }
+        self.isLoadingMore = true
+        let r = await Networking.request_async(self.target)
+        if r.is2000Ok {
+            if let list = r.mapArray(ListRowMod.self), list.isEmpty == false {
+                self.list.append(contentsOf: list)
+                self.pageindex += 1
+            } else {}
+            if self.list.isEmpty {
+                self.pageindex = 1
+                self.reqStatus = .isOKButEmpty
+            }
+        } else {}
+        self.isLoadingMore = false
+    }
 }

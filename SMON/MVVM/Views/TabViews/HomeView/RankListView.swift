@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
-class RanklistViewModel: XMListDataViewModel<XMUserInRank> {}
+class RanklistViewModel: XMListViewModel<XMUserInRank> {
+    init() {
+        super.init(pageName: "") { _ in
+            RankAPI.country
+        }
+    }
+}
 
 struct RankListView: View {
-    @StateObject var vm: RanklistViewModel
-    init(target: XMTargetType) {
-        self._vm = StateObject(wrappedValue: .init(target: target))
-    }
+    @StateObject var vm: RanklistViewModel = .init()
 
     var body: some View {
         ScrollView {

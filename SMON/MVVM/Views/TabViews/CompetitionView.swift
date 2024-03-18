@@ -18,9 +18,7 @@ class CompetitionViewModel: ObservableObject {
     @Published var themeList: [XMTheme] = []
 
     @Published var themeType: Int = 1 {
-        didSet {
-            Task { await self.getThemePostList() }
-        }
+        didSet {}
     }
 
     init() {
@@ -42,19 +40,6 @@ class CompetitionViewModel: ObservableObject {
         let r = await Networking.request_async(t)
         if r.is2000Ok, let list = r.mapArray(XMTheme.self) {
             themeList = list
-            await getThemePostList()
-        }
-    }
-
-    /*
-     获取帖子列表
-     */
-    @MainActor
-    func getThemePostList() async {
-        let t = PostAPI.themeList(p: .init(type: themeType, themeId: currentTheme?.id.int ?? 0))
-        let r = await Networking.request_async(t)
-        if r.is2000Ok, let list = r.mapArray(XMPost.self) {
-            postList = list
         }
     }
 }
@@ -69,16 +54,12 @@ struct CompetitionView: View {
                 // 最新最热选择
                 tab
                 // 帖子列表
-                postList
+                if let currentTheme = vm.currentTheme {
+                    CompetitionPostListView(type: vm.themeType, themeId: currentTheme.id)
+                }
+
             })
             .padding(.all, 16)
-        }
-    }
-
-    @ViewBuilder
-    var postList: some View {
-        ForEach(vm.postList, id: \.self.id) { post in
-            PostView(post)
         }
     }
 

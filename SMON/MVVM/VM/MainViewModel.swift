@@ -59,8 +59,8 @@ class MainViewModel: ObservableObject {
         case myhotinfo
         case myfriends
         case profileEditView
-        case postdetail(postId: String)
-        case profile(userId: String)
+        case postdetail(postId: Int)
+        case profile(userId: Int)
         case chat(userId:String)
     }
 }
