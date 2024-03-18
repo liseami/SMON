@@ -118,6 +118,9 @@ class UserManager: ObservableObject {
         return result
     }
 
+    /*
+     获取用户资料
+     */
     @MainActor
     func getUserInfo() async {
         let target = UserAPI.getUserInfo(id: userLoginInfo.userId)

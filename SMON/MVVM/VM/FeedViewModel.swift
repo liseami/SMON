@@ -8,8 +8,9 @@
 import Foundation
 
 class FeedViewModel: ObservableObject {
-    @Published var postDetail: XMPost?
+    // 顶部tabbar
     @Published var currentTopTab: FeedTopBarItem = .competition
+
 
     enum FeedTopBarItem: CaseIterable {
         case near
@@ -33,3 +34,5 @@ class FeedViewModel: ObservableObject {
         }
     }
 }
+
+

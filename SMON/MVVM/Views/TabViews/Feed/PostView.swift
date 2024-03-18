@@ -7,7 +7,19 @@
 
 import SwiftUI
 
+class PostViewModel: ObservableObject {
+    @Published var post: XMPost
+    init(post: XMPost) {
+        self.post = post
+    }
+}
+
 struct PostView: View {
+    @StateObject var vm: PostViewModel
+    init(_ post: XMPost) {
+        self._vm = StateObject(wrappedValue: .init(post: post))
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             avatarAndLine
@@ -25,8 +37,10 @@ struct PostView: View {
             username
             // 文字内容
             text
+                .ifshow(show: vm.post.postContent.isEmpty == false)
             // 图片流
             images
+                .ifshow(show: vm.post.postAttachs.isEmpty == false)
             // 底部功能按钮
             toolbtns
             // 评论数
@@ -36,7 +50,7 @@ struct PostView: View {
 
 //
     var commentNum: some View {
-        Text("145评论")
+        Text("\(vm.post.commentNums == 0 ? "" : vm.post.commentNums.string)评论")
             .font(.XMFont.f3)
             .bold()
             .padding(.top, 6)
@@ -50,7 +64,7 @@ struct PostView: View {
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
             HStack {
-                Text("14929")
+                Text("\(vm.post.likeNums ?? 0)")
                     .font(.XMFont.f3)
                     .bold()
                 XMDesgin.XMButton {} label: {
@@ -86,17 +100,12 @@ struct PostView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 4) {
                 Spacer().frame(width: 16 + 38 + 12 - 4)
-                let urls = [0, 0, 0, 0].map { _ in
-                    AppConfig.mokImage!
-                }
-                ForEach(urls, id: \.absoluteString) { url in
-
+                let urls = vm.post.postAttachs.map { $0.picUrl }
+                ForEach(urls, id: \.self) { url in
                     XMDesgin.XMButton {
-                        await Apphelper.shared.tapToShowImage(tapUrl: url.absoluteString, rect: nil, urls: urls.map { url in
-                            url.absoluteString
-                        })
+                        Apphelper.shared.tapToShowImage(tapUrl: url, rect: nil, urls: urls)
                     } label: {
-                        WebImage(str: url.absoluteString)
+                        WebImage(str: url)
                             .scaledToFill()
                             .frame(width: 160, height: 160 / 3 * 4)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -114,14 +123,14 @@ struct PostView: View {
     var username: some View {
         HStack {
             XMDesgin.XMButton {} label: {
-                Text(String.randomChineseString(length: Int.random(in: 3...12)))
+                Text(vm.post.nickname)
                     .font(.XMFont.f1b)
                     .lineLimit(1)
                     .fcolor(.XMDesgin.f1)
             }
 
             Spacer()
-            Text("14小时前")
+            Text(vm.post.createdAtStr)
                 .font(.XMFont.f3)
                 .fcolor(.XMDesgin.f2)
         }
@@ -129,7 +138,7 @@ struct PostView: View {
 
 //
     var text: some View {
-        Text(String.randomChineseString(length: Int.random(in: 12...144)))
+        Text(vm.post.postContent)
             .fcolor(.XMDesgin.f1)
             .font(.XMFont.f2)
     }
@@ -138,7 +147,7 @@ struct PostView: View {
     var avatarAndLine: some View {
         VStack {
             XMDesgin.XMButton {} label: {
-                WebImage(str: AppConfig.mokImage!.absoluteString)
+                WebImage(str: vm.post.avatar)
                     .scaledToFit()
                     .frame(width: 38, height: 38) // Adjust the size as needed
                     .clipShape(Circle())

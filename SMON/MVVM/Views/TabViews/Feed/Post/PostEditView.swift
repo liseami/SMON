@@ -14,9 +14,26 @@ class PostEditViewModel: ObservableObject {
     
     /// 文本输入框内容
     @Published var textInput: String = ""
+    @Published var postAttachs: [String] = []
+    @Published var themeId: String?
     
     /// 发布帖子
-    func publishPost() async {}
+    @MainActor
+    func publishPost() async {
+        if imageSelected.isEmpty == false,
+           let urls = await
+           AliyunOSSManager.shared.upLoadImages_async(images: imageSelected)
+        {
+            postAttachs = urls
+        }
+        let t = PostAPI.publish(p: .init(postContent: textInput, postAttachs: postAttachs, themeId: "2"))
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            Apphelper.shared.pushNotification(type: .success(message: "发布成功。"))
+            // 关闭页面
+            Apphelper.shared.topMostViewController()?.dismiss(animated: true)
+        }
+    }
 }
 
 struct PostEditView: View {
@@ -59,7 +76,9 @@ struct PostEditView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    XMDesgin.SmallBtn(fColor: Color.XMDesgin.b1, backColor: Color.XMDesgin.f1, iconName: "", text: "发布") {}
+                    XMDesgin.SmallBtn(fColor: Color.XMDesgin.b1, backColor: Color.XMDesgin.f1, iconName: "", text: "发布") {
+                        await vm.publishPost()
+                    }
                 }
             }
         })
@@ -72,7 +91,7 @@ struct PostEditView: View {
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text(String.randomChineseString(length: Int.random(in: 3 ... 12)))
+                    Text(UserManager.shared.user.nickname)
                         .font(.XMFont.f1b)
                         .lineLimit(1)
                         .fcolor(.XMDesgin.f1)

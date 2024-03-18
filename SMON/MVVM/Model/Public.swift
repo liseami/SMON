@@ -22,6 +22,11 @@ struct SettingItem {
 }
 
 
+struct PageInfo : Convertible{
+    var page : Int = 1
+    var pageSize : Int = 10
+}
+
 struct XMUserOSSTokenInfo:Encodable, Decodable, Convertible {
     /// OSS服务的访问端点
     var endpoint: String = ""

@@ -69,6 +69,7 @@ struct PostFeedView: View {
                         .tag(FeedViewModel.FeedTopBarItem.near)
                     PostListView()
                         .tag(FeedViewModel.FeedTopBarItem.localCity)
+                    // 每日大赛
                     CompetitionView()
                         .tag(FeedViewModel.FeedTopBarItem.competition)
                     PostListView()

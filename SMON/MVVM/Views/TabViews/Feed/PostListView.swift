@@ -13,7 +13,7 @@ struct PostListView: View {
         ScrollView(.vertical) {
             LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [], content: {
                 ForEach(0 ... 120, id: \.self) { _ in
-                    PostView()
+                    PostView(.init())
                 }
             })
             .padding(.all, 16)

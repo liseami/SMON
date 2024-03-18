@@ -7,21 +7,68 @@
 
 import SwiftUI
 
+class CompetitionViewModel: ObservableObject {
+    @Published var postList: [XMPost] = []
+    // 当前主题IndexId
+    @Published var currentThemeIndex: Int = 0 {
+        didSet {}
+    }
+
+    // 主题列表
+    @Published var themeList: [XMTheme] = []
+
+    @Published var themeType: Int = 1 {
+        didSet {
+            Task { await self.getThemePostList() }
+        }
+    }
+
+    init() {
+        Task { await self.getthemeList() }
+    }
+
+    // 当前选择的主题
+    var currentTheme: XMTheme? {
+        guard !themeList.isEmpty else { return nil }
+        return themeList[currentThemeIndex]
+    }
+
+    /*
+     获取主题列表
+     */
+    @MainActor
+    func getthemeList() async {
+        let t = PostsOperationAPI.themeList(p: .init())
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let list = r.mapArray(XMTheme.self) {
+            themeList = list
+            await getThemePostList()
+        }
+    }
+
+    /*
+     获取帖子列表
+     */
+    @MainActor
+    func getThemePostList() async {
+        let t = PostAPI.themeList(p: .init(type: themeType, themeId: currentTheme?.id.int ?? 0))
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let list = r.mapArray(XMPost.self) {
+            postList = list
+        }
+    }
+}
+
 struct CompetitionView: View {
     @State var currentIndex: Int = 0
-    let comps: [XMCompetition] = [
-        .init(id: "1", movieTitle: "包臀裙大赛", artwork: "", date: .now),
-        .init(id: "2", movieTitle: "小短裙大赛", artwork: "", date: .now),
-        .init(id: "3", movieTitle: "护士服大赛", artwork: "", date: .now),
-        .init(id: "4", movieTitle: "黑丝袜大赛", artwork: "", date: .now),
-        .init(id: "5", movieTitle: "小内裤大赛", artwork: "", date: .now),
-        .init(id: "6", movieTitle: "会好吗大赛", artwork: "", date: .now)
-    ]
+    @StateObject var vm: CompetitionViewModel = .init()
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                 header
+                // 最新最热选择
                 tab
+                // 帖子列表
                 postList
             })
             .padding(.all, 16)
@@ -30,23 +77,29 @@ struct CompetitionView: View {
 
     @ViewBuilder
     var postList: some View {
-        ForEach(0 ... 23, id: \.self) { _ in
-            PostView()
+        ForEach(vm.postList, id: \.self.id) { post in
+            PostView(post)
         }
     }
 
     var tab: some View {
         HStack {
-            Text("热门")
-                .font(.XMFont.f1b)
-                .foregroundStyle(Color.XMDesgin.f1)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 6)
-                .background(Color.XMDesgin.b1)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-            Text("最新")
-                .font(.XMFont.f1b)
-                .frame(maxWidth: .infinity)
+            ForEach(1 ... 2, id: \.self) { themetype in
+                let selected = vm.themeType == themetype
+                let text = themetype == 1 ? "最热" : "最新"
+                Text(text)
+                    .font(selected ? .XMFont.f1b : .XMFont.f1)
+                    .fcolor(Color.XMDesgin.f1)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 6)
+                    .background(selected ? Color.XMDesgin.b1 : .clear)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .onTapGesture {
+                        withAnimation(.bouncy) {
+                            vm.themeType = themetype
+                        }
+                    }
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(.all, 4)
@@ -54,46 +107,50 @@ struct CompetitionView: View {
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
+    @ViewBuilder
     var header: some View {
-        VStack(alignment: .center, spacing: 12, content: {
-            VStack(alignment: .center, spacing: 16, content: {
-                Text("包臀裙大赛")
-                    .font(.XMFont.big3.bold())
-                    .fcolor(.XMDesgin.f1)
-                Text("快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧，快来秀出你的包臀裙照片吧。")
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
+        if let theme = vm.currentTheme {
+            VStack(alignment: .center, spacing: 12, content: {
+                VStack(alignment: .center, spacing: 16, content: {
+                    Text(theme.title)
+                        .font(.XMFont.big3.bold())
+                        .fcolor(.XMDesgin.f1)
+                    Text(theme.description)
+                        .font(.XMFont.f2)
+                        .fcolor(.XMDesgin.f1)
 
-                XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "去男生主题发帖") {}
-                    .overlay(alignment: .center) {
-                        Capsule()
-                            .stroke(lineWidth: 1)
-                            .fcolor(.XMDesgin.f2)
+                    XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "去男生主题发帖") {}
+                        .overlay(alignment: .center) {
+                            Capsule()
+                                .stroke(lineWidth: 1)
+                                .fcolor(.XMDesgin.f2)
+                        }
+                    HStack(spacing: 0) {
+                        Text("\(theme.postsNums)个帖子 · ")
+                        // xx天后截止
+                        Text(theme.deadlineInfoStr)
                     }
-                HStack(spacing: 0) {
-                    Text("23992人参与 · ")
-                    Text("3天后截止")
+                    .font(.XMFont.f2).monospaced()
+                    .fcolor(.XMDesgin.f2)
+                })
+                .padding(.top, 68)
+                .padding(.all, 16)
+                .background(Color.XMDesgin.b1.gradient)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(alignment: .top) {
+                    // 主题大赛列表
+                    BannerRow(imageW: 156, spacing: 12, index: $vm.currentThemeIndex, list: vm.themeList) { theme in
+                        headerImage(theme.coverUrl)
+                    }
+                    .offset(x: 0, y: -44)
                 }
-                .font(.XMFont.f2).monospaced()
-                .fcolor(.XMDesgin.f2)
             })
-            .padding(.top, 68)
-            .padding(.all, 16)
-            .background(Color.XMDesgin.b1.gradient)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .overlay(alignment: .top) {
-                // Carousel List...
-                BannerRow(imageW: 156, spacing: 12, index: .constant(2), list: comps) { _ in
-                    headerImage
-                }
-                .offset(x: 0, y: -44)
-            }
-        })
-        .padding(.top, 40)
+            .padding(.top, 40)
+        }
     }
 
-    var headerImage: some View {
-        WebImage(str: AppConfig.mokImage!.absoluteString)
+    func headerImage(_ imageUrl: String) -> some View {
+        WebImage(str: imageUrl)
             .scaledToFill()
             .frame(width: 156, height: 156 / 16 * 9)
             .clipShape(RoundedRectangle(cornerRadius: 12))

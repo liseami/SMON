@@ -41,7 +41,7 @@ struct ProfileView: View {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: []) {
                 // 循环创建 10 个帖子视图
                 ForEach(1 ... 10, id: \.self) { _ in
-                    PostView()
+                    PostView(.init())
                 }
             }
             .padding()
