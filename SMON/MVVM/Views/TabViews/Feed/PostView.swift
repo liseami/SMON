@@ -14,7 +14,6 @@ class PostViewModel: ObservableObject {
     }
 
     @Published var hidden: Bool = false
-    
 
     @MainActor
     func delete() async {
@@ -22,15 +21,6 @@ class PostViewModel: ObservableObject {
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             self.hidden = true
-        }
-    }
-    
-    @MainActor
-    func tapLike() async {
-        let t = PostAPI.tapLike(postId: self.post.id)
-        let r = await Networking.request_async(t)
-        if r.is2000Ok {
-            self.post.isLiked.toggle()
         }
     }
 }
@@ -89,13 +79,9 @@ struct PostView: View {
 //
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            HStack {
-                Text("\(vm.post.likeNums)")
-                    .font(.XMFont.f3)
-                    .bold()
-                XMDesgin.XMButton {} label: {
-                    XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
-                }
+            XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums) { islike in
+                vm.post.isLiked = islike.int
+                vm.post.likeNums += islike ? 1 : -1
             }
 
             XMDesgin.XMButton {
@@ -162,7 +148,9 @@ struct PostView: View {
 //
     var username: some View {
         HStack {
-            XMDesgin.XMButton {} label: {
+            XMDesgin.XMButton {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: vm.post.userId))
+            } label: {
                 Text(vm.post.nickname)
                     .font(.XMFont.f1b)
                     .lineLimit(1)
@@ -179,6 +167,7 @@ struct PostView: View {
 //
     var text: some View {
         Text(vm.post.postContent)
+            .lineSpacing(3)
             .fcolor(.XMDesgin.f1)
             .font(.XMFont.f2)
     }
@@ -186,7 +175,9 @@ struct PostView: View {
 //
     var avatarAndLine: some View {
         VStack {
-            XMDesgin.XMButton {} label: {
+            XMDesgin.XMButton {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: vm.post.userId))
+            } label: {
                 WebImage(str: vm.post.avatar)
                     .scaledToFit()
                     .frame(width: 38, height: 38) // Adjust the size as needed

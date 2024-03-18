@@ -20,6 +20,9 @@
 		A2498AD42BA812C40045B7AD /* XMModRequestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD32BA812C40045B7AD /* XMModRequestViewModel.swift */; };
 		A2498AD62BA827FA0045B7AD /* PostCommentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */; };
 		A2498AD82BA828960045B7AD /* CompetitionPostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD72BA828960045B7AD /* CompetitionPostListView.swift */; };
+		A2498ADA2BA831320045B7AD /* XMLikeBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498AD92BA831320045B7AD /* XMLikeBtn.swift */; };
+		A2498ADD2BA833610045B7AD /* GenSekiGothic-B.ttc in Resources */ = {isa = PBXBuildFile; fileRef = A2498ADB2BA833600045B7AD /* GenSekiGothic-B.ttc */; };
+		A2498AE02BA834D40045B7AD /* GenSekiGothic-M.ttc in Resources */ = {isa = PBXBuildFile; fileRef = A2498ADF2BA834D40045B7AD /* GenSekiGothic-M.ttc */; };
 		A256DB972B900BF6008C7063 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB962B900BF6008C7063 /* WebView.swift */; };
 		A256DB992B901C88008C7063 /* AppConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = A256DB982B901C88008C7063 /* AppConfig.plist */; };
 		A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A256DB9A2B901C9F008C7063 /* AppConfig.swift */; };
@@ -76,6 +79,7 @@
 		A27EFFB62B92B6E700B47BD6 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB52B92B6E700B47BD6 /* Post.swift */; };
 		A27EFFB82B92B75A00B47BD6 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB72B92B75A00B47BD6 /* PostListView.swift */; };
 		A27EFFBA2B92B7B000B47BD6 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB92B92B7B000B47BD6 /* PostView.swift */; };
+		A27F716E2BA83F0F0028885D /* Bool++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27F716D2BA83F0F0028885D /* Bool++.swift */; };
 		A281EFE22B99996400E9DE05 /* WechatSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EFE12B99996400E9DE05 /* WechatSettingView.swift */; };
 		A281EFE42B99A09300E9DE05 /* HobbySelectedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EFE32B99A09300E9DE05 /* HobbySelectedView.swift */; };
 		A281EFE62B99B23700E9DE05 /* XMPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A281EFE52B99B23700E9DE05 /* XMPhoto.swift */; };
@@ -102,7 +106,7 @@
 		A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB02B8B27C900D71EF8 /* SettingView.swift */; };
 		A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */; };
 		A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB62B8B4EA000D71EF8 /* Color+.swift */; };
-		A2BA894B2B9AC69A002FEEFA /* CompetitionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894A2B9AC69A002FEEFA /* CompetitionView.swift */; };
+		A2BA894B2B9AC69A002FEEFA /* MeiRiDaSaiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */; };
 		A2BA894D2B9ACBCE002FEEFA /* XMTopBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */; };
 		A2BA89502B9ADFA7002FEEFA /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894F2B9ADFA7002FEEFA /* Font.swift */; };
 		A2BA89542B9B03E6002FEEFA /* XMTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA89532B9B03E6002FEEFA /* XMTheme.swift */; };
@@ -206,6 +210,9 @@
 		A2498AD32BA812C40045B7AD /* XMModRequestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMModRequestViewModel.swift; sourceTree = "<group>"; };
 		A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentListView.swift; sourceTree = "<group>"; };
 		A2498AD72BA828960045B7AD /* CompetitionPostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionPostListView.swift; sourceTree = "<group>"; };
+		A2498AD92BA831320045B7AD /* XMLikeBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLikeBtn.swift; sourceTree = "<group>"; };
+		A2498ADB2BA833600045B7AD /* GenSekiGothic-B.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenSekiGothic-B.ttc"; sourceTree = "<group>"; };
+		A2498ADF2BA834D40045B7AD /* GenSekiGothic-M.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GenSekiGothic-M.ttc"; sourceTree = "<group>"; };
 		A256DB962B900BF6008C7063 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		A256DB982B901C88008C7063 /* AppConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfig.plist; sourceTree = "<group>"; };
 		A256DB9A2B901C9F008C7063 /* AppConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
@@ -261,6 +268,7 @@
 		A27EFFB52B92B6E700B47BD6 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A27EFFB72B92B75A00B47BD6 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 		A27EFFB92B92B7B000B47BD6 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		A27F716D2BA83F0F0028885D /* Bool++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool++.swift"; sourceTree = "<group>"; };
 		A281EFE12B99996400E9DE05 /* WechatSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatSettingView.swift; sourceTree = "<group>"; };
 		A281EFE32B99A09300E9DE05 /* HobbySelectedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HobbySelectedView.swift; sourceTree = "<group>"; };
 		A281EFE52B99B23700E9DE05 /* XMPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMPhoto.swift; sourceTree = "<group>"; };
@@ -287,7 +295,7 @@
 		A2B45CB02B8B27C900D71EF8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		A2B45CB62B8B4EA000D71EF8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
-		A2BA894A2B9AC69A002FEEFA /* CompetitionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionView.swift; sourceTree = "<group>"; };
+		A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeiRiDaSaiView.swift; sourceTree = "<group>"; };
 		A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTopBlurView.swift; sourceTree = "<group>"; };
 		A2BA894F2B9ADFA7002FEEFA /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		A2BA89532B9B03E6002FEEFA /* XMTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTheme.swift; sourceTree = "<group>"; };
@@ -486,7 +494,7 @@
 				A2784F182B9184F400A1B06F /* Profile */,
 				A2E7F9A62B8CDF1300E86474 /* HomeView */,
 				A2BF15F12B8C64E70011A130 /* Message */,
-				A2BA894A2B9AC69A002FEEFA /* CompetitionView.swift */,
+				A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */,
 				A2498AD72BA828960045B7AD /* CompetitionPostListView.swift */,
 			);
 			path = TabViews;
@@ -527,6 +535,7 @@
 			children = (
 				A272A4922B871D1A008EA955 /* PostFeedView.swift */,
 				A27EFFB92B92B7B000B47BD6 /* PostView.swift */,
+				A2498AD92BA831320045B7AD /* XMLikeBtn.swift */,
 				A27EFFB72B92B75A00B47BD6 /* PostListView.swift */,
 				A27EFF9C2B92035700B47BD6 /* PostDetailView.swift */,
 				A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */,
@@ -637,6 +646,7 @@
 				A28C55E12B96D85500707EDA /* Date+.swift */,
 				A2BA895B2B9B3994002FEEFA /* Array+.swift */,
 				A2498ACE2BA7E7D10045B7AD /* Int++.swift */,
+				A27F716D2BA83F0F0028885D /* Bool++.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -658,6 +668,8 @@
 		A2BA894E2B9ADFA0002FEEFA /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				A2498ADB2BA833600045B7AD /* GenSekiGothic-B.ttc */,
+				A2498ADF2BA834D40045B7AD /* GenSekiGothic-M.ttc */,
 				A2BA894F2B9ADFA7002FEEFA /* Font.swift */,
 			);
 			path = Font;
@@ -868,12 +880,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				A28C55A92B95B99E00707EDA /* 省份&城市.json in Resources */,
+				A2498AE02BA834D40045B7AD /* GenSekiGothic-M.ttc in Resources */,
 				A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */,
 				A272A4722B8706FC008EA955 /* Preview Assets.xcassets in Resources */,
 				A256DBA52B904622008C7063 /* TUICoreXMTheme.bundle in Resources */,
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
 				A256DBA32B9045DB008C7063 /* TUIConversationXMTheme.bundle in Resources */,
 				A256DB992B901C88008C7063 /* AppConfig.plist in Resources */,
+				A2498ADD2BA833610045B7AD /* GenSekiGothic-B.ttc in Resources */,
 				A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */,
 				A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */,
 				A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */,
@@ -974,6 +988,7 @@
 				A25AAD222B8ED29D00B7CE40 /* NameRequestView.swift in Sources */,
 				A2B45CA72B8B089900D71EF8 /* String+.swift in Sources */,
 				A2B45CA92B8B0C6B00D71EF8 /* RankViewModel.swift in Sources */,
+				A2498ADA2BA831320045B7AD /* XMLikeBtn.swift in Sources */,
 				A25AAD3C2B8F26B700B7CE40 /* RequestCompleteView.swift in Sources */,
 				A25AAD322B8F1D3700B7CE40 /* HobbyRequestView.swift in Sources */,
 				A2BF26C82BA1D8DA00B5A616 /* MoyaResult+Extension.swift in Sources */,
@@ -1044,6 +1059,7 @@
 				A27EFFB62B92B6E700B47BD6 /* Post.swift in Sources */,
 				A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */,
 				A2BF15F52B8C67060011A130 /* PermissionManager.swift in Sources */,
+				A27F716E2BA83F0F0028885D /* Bool++.swift in Sources */,
 				A2BF15EC2B8C423D0011A130 /* XMUIDesginSystemView.swift in Sources */,
 				A2784F152B90CA4900A1B06F /* UIViewController+.swift in Sources */,
 				A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */,
@@ -1051,7 +1067,7 @@
 				A2BF26CD2BA1D8DA00B5A616 /* Networking.swift in Sources */,
 				A2784F1F2B91852100A1B06F /* RelationListView.swift in Sources */,
 				A281EFE42B99A09300E9DE05 /* HobbySelectedView.swift in Sources */,
-				A2BA894B2B9AC69A002FEEFA /* CompetitionView.swift in Sources */,
+				A2BA894B2B9AC69A002FEEFA /* MeiRiDaSaiView.swift in Sources */,
 				A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

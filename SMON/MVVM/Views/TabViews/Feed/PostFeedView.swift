@@ -28,20 +28,7 @@ struct PostFeedView: View {
                 //  通知按钮
                 XMDesgin.XMIcon(iconName: "home_bell", size: 22)
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                // 筛选按钮
-                fliterBtn
-            }
         }
-    }
-
-    var fliterBtn: some View {
-        XMDesgin.XMButton(action: {
-            Apphelper.shared.presentPanSheet(HomeFliterView()
-                .environment(\.colorScheme, .dark), style: .cloud)
-        }, label: {
-            XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
-        })
     }
 
     var toptabbar: some View {
@@ -70,8 +57,9 @@ struct PostFeedView: View {
                     PostListView()
                         .tag(FeedViewModel.FeedTopBarItem.localCity)
                     // 每日大赛
-                    CompetitionView()
+                    MeiRiDaSaiView()
                         .tag(FeedViewModel.FeedTopBarItem.competition)
+
                     PostListView()
                         .tag(FeedViewModel.FeedTopBarItem.hot)
                     PostListView()

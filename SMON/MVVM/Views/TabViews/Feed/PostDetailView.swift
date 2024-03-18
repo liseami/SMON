@@ -75,9 +75,6 @@ struct PostDetailView: View {
         })
     }
 
-    
-
-
     var postView: some View {
         VStack(alignment: .leading, spacing: 24) {
             // 用户信息
@@ -95,18 +92,18 @@ struct PostDetailView: View {
 
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            HStack {
-                Text("\(vm.mod?.likeNums ?? 0)")
-                    .font(.XMFont.f3)
-                    .bold()
-                XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
-            }
+            if let mod = vm.mod {
+                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod?.isLiked.bool ?? false, likeNumbers: vm.mod?.likeNums ?? 0) { islike in
+                    vm.mod?.isLiked = islike.int
+                    vm.mod?.likeNums += islike ? 1 : -1
+                }
 
-            HStack {
-                Text("\(vm.mod?.commentNums ?? 0)")
-                    .font(.XMFont.f3)
-                    .bold()
-                XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
+                HStack {
+                    Text("\(vm.mod?.commentNums ?? 0)")
+                        .font(.XMFont.f3)
+                        .bold()
+                    XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
+                }
             }
 
             Spacer()
@@ -117,6 +114,7 @@ struct PostDetailView: View {
     @ViewBuilder
     var text: some View {
         Text(vm.mod?.postContent ?? "")
+            .lineSpacing(3)
             .fcolor(.XMDesgin.f1)
             .font(.XMFont.f1)
             .ifshow(show: vm.mod?.postContent.isEmpty == false)
@@ -124,11 +122,7 @@ struct PostDetailView: View {
 
     var userinfo: some View {
         HStack {
-            WebImage(str: vm.mod?.avatar ?? "")
-                .scaledToFit()
-                .frame(width: 56, height: 56) // Adjust the size as needed
-                .clipShape(Circle())
-
+            XMUserAvatar(str: vm.mod?.avatar ?? "", userId: vm.mod?.userId ?? 0, size: 56)
             Text(vm.mod?.nickname ?? "")
                 .font(.XMFont.f1b)
                 .lineLimit(1)
@@ -142,7 +136,7 @@ struct PostDetailView: View {
 
     @ViewBuilder
     var images: some View {
-        if let atts = vm.mod?.postAttachs {
+        if let atts = vm.mod?.postAttachs, atts.isEmpty == false {
             let urls = atts.map { $0.picUrl }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
@@ -164,6 +158,8 @@ struct PostDetailView: View {
             .frame(height: CGFloat(200 / 3 * 4))
             .padding(.leading, -CGFloat(16 + 38 + 12))
             .padding(.trailing, -CGFloat(16))
+        } else {
+            EmptyView().frame(width: 0, height: 0, alignment: .center)
         }
     }
 }

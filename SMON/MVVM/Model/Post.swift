@@ -24,7 +24,7 @@ struct XMPost: Convertible {
 
 struct XMPostDetail: Convertible {
     var id: Int = 0 // "" // 2,
-    var userId: String = "" // 1764610746026688512,
+    var userId: Int = 0 // 1764610746026688512,
     var nickname: String = "" // "zhanglu1385",
     var avatar: String = "" // "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/avatar/default.jpg",
     var postContent: String = "" // "2012年，波多野结衣出席第九届上海国际成人展开幕和第二届台湾成人博览会",

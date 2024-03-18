@@ -9,5 +9,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>GenSekiGothic-M.ttc</string>
+		<string>GenSekiGothic-B.ttc</string>
+	</array>
 </dict>
 </plist>

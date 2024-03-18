@@ -100,6 +100,6 @@ struct SnapCarousel<Content: View, T: Identifiable>: View {
 
 struct SnapCarousel_Previews: PreviewProvider {
     static var previews: some View {
-        CompetitionView()
+        MeiRiDaSaiView()
     }
 }

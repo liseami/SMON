@@ -16,8 +16,8 @@ extension Int {
         return days
     }
 
-  mutating  func toggle() {
-        self == 1 ? { self = 2 }() : { self = 1 }()
+    mutating func toggle() {
+        self == 1 ? { self = 0 }() : { self = 1 }()
     }
 
     var bool: Bool {

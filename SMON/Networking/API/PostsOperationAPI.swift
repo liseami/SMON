@@ -9,7 +9,8 @@ import Foundation
 
 enum PostsOperationAPI: XMTargetType {
     case themeList(p: PageInfo)
-
+    case tapLike(postId: Int)
+    
     var group: String {
         return "/v1/postsOperation"
     }
@@ -18,6 +19,7 @@ enum PostsOperationAPI: XMTargetType {
         get {
             switch self {
             case .themeList(let p): return p.kj.JSONObject()
+            case .tapLike(let postId): return ["postId": postId]
             default: return nil
             }
         }

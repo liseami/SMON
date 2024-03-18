@@ -9,21 +9,20 @@ import Foundation
 
 extension SwiftUI.Font {
     enum XMFont {
-        static let big1: Font = .largeTitle.monospaced()
-        static let big2: Font = .title.monospaced()
-        static let big3: Font = .title3.monospaced()
-        static let f1: Font = .body.weight(.regular)
-        static let f2: Font = .subheadline.monospaced()
-        static let f3: Font = .caption.monospaced()
-
-        static let f1b: Font = .headline.monospaced().bold()
-        static let f2b: Font = .subheadline.monospaced().bold()
-        static let f3b: Font = .caption.monospaced().bold()
+        static let big1: Font = .custom("GenSekiGothicTW-M", relativeTo: .largeTitle)
+        static let big2: Font = .custom("GenSekiGothicTW-M", relativeTo: .title)
+        static let big3: Font = .custom("GenSekiGothicTW-M", relativeTo: .title3)
+        static let f1: Font = .custom("GenSekiGothicTW-M", relativeTo: .body)
+        static let f2: Font = .custom("GenSekiGothicTW-M", relativeTo: .subheadline)
+        static let f3: Font = .custom("GenSekiGothicTW-M", relativeTo: .caption)
+        static let f1b: Font = .custom("GenSekiGothicTW-B", relativeTo: .body)
+        static let f2b: Font = .custom("GenSekiGothicTW-B", relativeTo: .subheadline)
+        static let f3b: Font = .custom("GenSekiGothicTW-B", relativeTo: .caption)
     }
 }
 
 #Preview {
-    VStack(spacing:24) {
+    VStack(spacing: 24) {
         let text = "设计系统3232"
         Text(text)
             .font(.XMFont.big1)
