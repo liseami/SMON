@@ -87,7 +87,7 @@ struct PostEditView: View {
     var textInput: some View {
         // 头像和文本输入框
         HStack(alignment: .top, spacing: 12) {
-            XMUserAvatar(str: UserManager.shared.user.avatar, userId: 0, size: 44)
+            XMUserAvatar(str: UserManager.shared.user.avatar, userId: "0", size: 44)
 
             VStack(alignment: .leading) {
                 HStack {

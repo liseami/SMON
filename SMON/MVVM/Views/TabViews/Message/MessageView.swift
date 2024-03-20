@@ -13,7 +13,7 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
     override init() {
         super.init()
         V2TIMManager.sharedInstance().add(self)
-        V2TIMManager.sharedInstance().login("m" + UserManager.shared.user.userId.string, userSig: UserManager.shared.IMInfo.imUserSign) {
+        V2TIMManager.sharedInstance().login("m" + UserManager.shared.user.userId, userSig: UserManager.shared.IMInfo.imUserSign) {
             // 登录成功
             print("IM登录成功")
             self.getConversationList()
@@ -44,7 +44,7 @@ struct MessageView: View {
                     LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                         Spacer().frame(height: 12)
                         ForEach(vm.conversations, id: \.self) { _ in
-                            XMConversationLine(avatar: "", nickname: "", date: .now, lastmessage: "最后一条消息", userid: 2932939)
+                            XMConversationLine(avatar: "", nickname: "", date: .now, lastmessage: "最后一条消息", userid: "2932939")
                         }
                     })
                     .padding(.all, 16)

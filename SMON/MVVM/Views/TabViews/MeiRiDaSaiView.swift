@@ -39,6 +39,7 @@ class MeiRiDaSaiViewModel: ObservableObject {
      */
     @MainActor
     func getthemeList() async {
+        themeList = []
         let t = PostsOperationAPI.themeList(p: .init())
         let r = await Networking.request_async(t)
         if r.is2000Ok, let list = r.mapArray(XMTheme.self) {

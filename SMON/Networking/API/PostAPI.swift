@@ -10,8 +10,8 @@ import Foundation
 enum PostAPI: XMTargetType {
     case publish(p: PostPublishReqMod)
     case themeList(p: ThemePostListReqMod)
-    case delete(postId: Int, userId: Int)
-    case detail(postId: Int, userId: Int)
+    case delete(postId: Int, userId: String)
+    case detail(postId: Int, userId: String)
    
     var group: String {
         return "/v1/posts"

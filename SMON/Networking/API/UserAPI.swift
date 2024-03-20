@@ -5,13 +5,13 @@ import Moya
 import SwiftyJSON
 
 enum UserAPI: XMTargetType {
-    ///  短信验证码注册
     case smsCode(p: SmsCodeReqMod)
     case loginBySms(p: LoginBySmsReqMod)
     case updateUserInfo(p: XMUserUpdateReqMod)
-    case getUserInfo(id: Int?)
-    case albumList(id: Int?)
+    case getUserInfo(id: String?)
+    case albumList(id: String?)
     case updateAlbum(p: [String])
+
 
     var group: String {
         return "/v1/user"
@@ -24,7 +24,7 @@ enum UserAPI: XMTargetType {
     }
 
     var parameters: [String: Any]? {
-        get{
+        get {
             switch self {
             case .updateAlbum(let paths): return ["picPathList": paths]
             case .albumList(let id): return id == nil ? nil : ["userId": id!]
@@ -34,7 +34,7 @@ enum UserAPI: XMTargetType {
             case .updateUserInfo(let p): return p.kj.JSONObject()
             }
         }
-        set{}
+        set {}
     }
 }
 

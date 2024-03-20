@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A20189DA2BAA717700AFFF06 /* UserRelationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */; };
 		A205EBF92B97EE2800165A43 /* 兴趣标签.json in Resources */ = {isa = PBXBuildFile; fileRef = A205EBF82B97EE2800165A43 /* 兴趣标签.json */; };
 		A205EBFB2B97FCE100165A43 /* YuanyuanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */; };
 		A20AF7562B92BF400098E561 /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7552B92BF400098E561 /* WebImage.swift */; };
@@ -154,6 +155,7 @@
 
 /* Begin PBXFileReference section */
 		61E00318C8FBEEF76CFD20CC /* Pods_SMON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRelationAPI.swift; sourceTree = "<group>"; };
 		A205EBF82B97EE2800165A43 /* 兴趣标签.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "兴趣标签.json"; sourceTree = "<group>"; };
 		A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YuanyuanManager.swift; sourceTree = "<group>"; };
 		A20AF7552B92BF400098E561 /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				A2BF26C52BA1D8DA00B5A616 /* UserAPI.swift */,
+				A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */,
 				A2BF26C62BA1D8DA00B5A616 /* RankAPI.swift */,
 				A2BF26C72BA1D8DA00B5A616 /* CommonAPI.swift */,
 				A2498ACA2BA7DD630045B7AD /* PostAPI.swift */,
@@ -971,6 +974,7 @@
 				A2EF076C2B9D5824004CF692 /* XMAppLogo.swift in Sources */,
 				A272A4852B871C77008EA955 /* MainView.swift in Sources */,
 				A27EFFB82B92B75A00B47BD6 /* PostListView.swift in Sources */,
+				A20189DA2BAA717700AFFF06 /* UserRelationAPI.swift in Sources */,
 				A2B45CA32B8B008B00D71EF8 /* PublicFuncs.swift in Sources */,
 				A25AAD412B90073B00B7CE40 /* WechatRequestView.swift in Sources */,
 				A2B45CAC2B8B1E3C00D71EF8 /* ViewFuncs.swift in Sources */,
@@ -1205,7 +1209,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
-				DEVELOPMENT_TEAM = PX9F7733KU;
+				DEVELOPMENT_TEAM = DRBYZJAA5D;
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1235,7 +1239,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dailycontest.smon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wuhanjiyunshang.meiridasai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1260,7 +1264,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
-				DEVELOPMENT_TEAM = PX9F7733KU;
+				DEVELOPMENT_TEAM = DRBYZJAA5D;
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1290,7 +1294,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dailycontest.smon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wuhanjiyunshang.meiridasai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

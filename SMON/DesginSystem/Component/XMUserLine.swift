@@ -32,7 +32,7 @@ struct XMUserLine: View {
             })
         }
         .onTapGesture {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: 0))
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: "0"))
         }
     }
 }

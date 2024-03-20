@@ -52,7 +52,7 @@ struct PostDetailView: View {
     var inputBar: some View {
         VStack(alignment: .center, spacing: 0, content: {
             HStack(alignment: .top) {
-                XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: 32, size: 32)
+                XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: "32", size: 32)
                     .padding(.top, 6)
                 TextField(text: $commentInput, axis: .vertical) {}
                     .lineLimit(...(input ? 4 : 1))
@@ -122,7 +122,7 @@ struct PostDetailView: View {
 
     var userinfo: some View {
         HStack {
-            XMUserAvatar(str: vm.mod?.avatar ?? "", userId: vm.mod?.userId ?? 0, size: 56)
+            XMUserAvatar(str: vm.mod?.avatar ?? "", userId: vm.mod?.userId ?? "", size: 56)
             Text(vm.mod?.nickname ?? "")
                 .font(.XMFont.f1b)
                 .lineLimit(1)

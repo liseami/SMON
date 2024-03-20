@@ -7,14 +7,19 @@
 
 import Foundation
 
-class ProfileViewModel: ObservableObject {
+class ProfileViewModel: XMListViewModel<XMPost> {
     @Published var currentTab: ProfileBarItem = .media
     @Published var user: XMUserProfile = .init()
     @Published var photos: [XMPhoto] = []
-    var userId: Int = 0
+    var userId: String = ""
 
-    init(userId: Int) {
+    init(userId: String) {
+        super.init(pageName: "") { _ in
+            PostAPI.themeList(p: .init(page: 1, pageSize: 10, type: 1, themeId: 2))
+        }
         self.userId = userId
+        print(userId)
+        print(userId)
         Task {
             await self.getUserInfo()
             await self.getPhotos()
@@ -62,5 +67,23 @@ class ProfileViewModel: ObservableObject {
         }
     }
 
-    func tapChat() async {}
+    /*
+     私信
+     */
+
+    func tapChat() {
+        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: "m" + userId))
+    }
+
+    /*
+     关注点击
+     */
+    @MainActor
+    func tapFollow() async {
+        let t = UserRelationAPI.tapFollow(followUserId: userId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            await getUserInfo()
+        }
+    }
 }

@@ -15,16 +15,14 @@ public enum XMRequestStatus {
     case isOKButEmpty
 }
 
-
-
-// 定义泛型 ViewModel 类
+// 定义泛型 ViewModel 类,用于list请求
 class XMListViewModel<ListRowMod: Convertible>: ObservableObject {
     @Published var list: [ListRowMod] = []
     @Published var reqStatus: XMRequestStatus = .isLoading
     @Published var isLoadingMore: Bool = false
     var pageindex: Int = 0
 
-    private let targetBuilder: (Int) -> XMTargetType
+    private var targetBuilder: (Int) -> XMTargetType
     var target: XMTargetType {
         self.targetBuilder(self.pageindex)
     }

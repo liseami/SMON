@@ -27,21 +27,6 @@ struct MyHotInfoView: View {
                 Text("全国排名")
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
-            } footer: {
-                XMTyperText(text: "* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
-                    .listRowSeparator(.hidden, edges: .bottom)
-            }
-
-            // 奖励规则部分
-            Section {
-                RewardsView(rewards: rewards)
-                    .listRowSeparator(.hidden, edges: .top)
-            } header: {
-                Text("当前规则")
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
             }
 
             // 同城排名部分
@@ -51,6 +36,11 @@ struct MyHotInfoView: View {
                 Text("同城排名")
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
+            } footer: {
+                XMTyperText(text: "* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f2)
+                    .listRowSeparator(.hidden, edges: .bottom)
             }
 
             // 当前状态部分
@@ -66,6 +56,16 @@ struct MyHotInfoView: View {
                     .font(.XMFont.f2)
                     .fcolor(.XMDesgin.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
+            }
+
+            // 奖励规则部分
+            Section {
+                RewardsView(rewards: rewards)
+                    .listRowSeparator(.hidden, edges: .top)
+            } header: {
+                Text("当前规则")
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMDesgin.f1)
             }
         }
         .listStyle(.plain)
@@ -92,14 +92,14 @@ struct RankingView: View {
     let ranking: String
 
     var body: some View {
-        XMTyperText(text: ranking)
-            .font(.XMFont.big1)
-            .fcolor(.XMDesgin.f1)
-            .listRowSeparator(.hidden, edges: .top)
-            .padding(.all, 12)
-            .background(RoundedRectangle(cornerRadius: 12)
-                .fill(Color.XMDesgin.main.gradient.shadow(.drop(color: .XMDesgin.main, radius: 10)))
-            )
+        RoundedRectangle(cornerRadius: 12)
+            .fill(Color.XMDesgin.main.gradient.shadow(.drop(color: .XMDesgin.main, radius: 10)))
+            .mask(alignment: .leading) {
+                XMTyperText(text: ranking)
+                    .font(.XMFont.big1.bold())
+                    .fcolor(.XMDesgin.f1)
+                    .listRowSeparator(.hidden, edges: .top)
+            }
     }
 }
 

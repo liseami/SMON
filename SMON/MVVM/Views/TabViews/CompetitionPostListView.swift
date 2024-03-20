@@ -33,6 +33,9 @@ struct CompetitionPostListView: View {
         .onChange(of: superVM.themeType) { _ in
             Task { await vm.getListData(.datalist) }
         }
+        .onChange(of: superVM.themeList.count) { _ in
+            Task { await vm.getListData(.datalist) }
+        }
     }
 }
 

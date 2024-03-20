@@ -12,7 +12,7 @@ struct XMConversationLine: View {
     let nickname : String
     let date : Date
     let lastmessage : String
-    let userid : Int
+    let userid : String
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             XMUserAvatar(str: avatar, userId: userid)
@@ -32,13 +32,13 @@ struct XMConversationLine: View {
             })
         }
         .onTapGesture {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: 0))
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: "0"))
         }
     }
 }
 
 #Preview {
-    XMConversationLine(avatar: "dsajsjdf", nickname: "用户名", date: .now, lastmessage: "最后一条消息", userid: 33)
+    XMConversationLine(avatar: "dsajsjdf", nickname: "用户名", date: .now, lastmessage: "最后一条消息", userid: "33")
 }
 
 

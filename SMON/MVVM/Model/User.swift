@@ -64,7 +64,7 @@ extension XMUserUpdateReqMod {
 }
 
 struct XMUserProfile: Convertible {
-    var userId: Int = 0 // 一定有，不参与资料完成度评分
+    var userId: String = "" // 一定有，不参与资料完成度评分
     var cityId: String = "" // 一定有，不参与资料完成度评分
     var cityName: String = "" // 一定有，不参与资料完成度评分
     var nickname: String = "" // 一定有，不参与资料完成度评分
@@ -79,12 +79,13 @@ struct XMUserProfile: Convertible {
     var interestsTag: String {
         interestsTagList.joined(separator: "&")
     }
-
     var bdsmAttr: Int = 0 // 不为0，才算完成
     var emotionalNeeds: Int = 0 // 不为0，才算完成
     var education: Int = 0 // 不为0，才算完成
     var fansNum: Int = 0 // 一定有，不参与资料完成度评分
     var followsNum: Int = 0 // 一定有，不参与资料完成度评分
+    // 1关注对方，0没有关注
+    var isFollow : Int = 0
 }
 
 // 用户资料扩展
@@ -151,7 +152,7 @@ struct XMUserLoginInfo: Decodable, Encodable, Convertible {
     }
 
     // 用户 ID，默认为空字符串
-    var userId: Int = 0
+    var userId: String = ""
 
     // 令牌，默认为空字符串
     var token: String = ""
@@ -260,7 +261,7 @@ extension Int {
 }
 
 struct XMUserInRank: Convertible {
-    var userId: Int = 0 // : 1764504995815882752,
+    var userId: String = ""// : 1764504995815882752,
     var nickname: String = "" // ": "开手机",
     var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
     var cityName: String = "" // ": ""

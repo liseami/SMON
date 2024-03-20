@@ -30,8 +30,10 @@ struct WechatGiftView: View {
             HStack(spacing: 16) {
                 XMUserAvatar(str: vm.user.avatar, userId: vm.userId, size: 80)
                 VStack(alignment: .leading, spacing: 6) {
+                    // 昵称
                     Text(vm.user.nickname)
                         .font(.XMFont.f1b)
+                    // 星座等信息
                     Text("\(vm.user.zodiac) · \(vm.user.bdsmAttr.bdsmAttrString) · \(vm.user.emotionalNeeds.emotionalNeedsString)")
                         .fixedSize(horizontal: true, vertical: false)
                         .fcolor(.XMDesgin.f2)
@@ -39,7 +41,8 @@ struct WechatGiftView: View {
                 }
                 Spacer()
             }
-            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: "dl****ie") {}
+            // 微信号掩码
+            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: vm.user.wechat) {}
             progressLine
             ScrollView(.vertical, showsIndicators: false, content: {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 4), spacing: 8) {
@@ -68,7 +71,7 @@ struct WechatGiftView: View {
                         }
                     }
                 }
-                .padding(.all,2)
+                .padding(.all, 2)
             })
         })
         .padding(.top, 16)
@@ -98,7 +101,7 @@ struct WechatGiftView: View {
         Text("")
             .onAppear(perform: {
                 Apphelper.shared.presentPanSheet(WechatGiftView()
-                    .environmentObject(ProfileViewModel(userId: 1765668637701701633)), style: .shop)
+                    .environmentObject(ProfileViewModel(userId: "1765668637701701633")), style: .shop)
             })
     })
 }
