@@ -83,7 +83,7 @@ public enum AppConfig {
     static let UserAgreement: String = domain + "articles/UserAgreement"
     /// 隐私政策
     static let UserPrivacyPolicy: String = domain + "articles/PrivacyPolicy"
-    /// 隐私政策
+    /// 隐私政策ß
     static let RechargeProtocol: String = domain + "articles/RechargeProtocol"
     /// 当前版本
     static var AppVersion: String { (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0" }

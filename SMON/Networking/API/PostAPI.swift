@@ -12,7 +12,7 @@ enum PostAPI: XMTargetType {
     case themeList(p: ThemePostListReqMod)
     case delete(postId: Int, userId: String)
     case detail(postId: Int, userId: String)
-   
+
     var group: String {
         return "/v1/posts"
     }
@@ -23,14 +23,20 @@ enum PostAPI: XMTargetType {
         case .themeList(let p): return p.kj.JSONObject()
         case .delete(let postId, let userId): return ["userId": userId, "postId": postId]
         case .detail(let postId, let userId): return ["userId": userId, "postId": postId]
-    
-        default: return nil
         }
     }
 
     var method: HTTPRequestMethod {
         switch self {
         default: return .post
+        }
+    }
+
+    func updatingParameters(_ newPage: Int) -> XMTargetType {
+        switch self {
+        case .themeList(let p):
+            return PostAPI.themeList(p: .init(page: newPage, pageSize: p.pageSize, type: p.type, themeId: p.themeId))
+        default: return self
         }
     }
 }
@@ -44,7 +50,7 @@ extension PostAPI {
 
     struct ThemePostListReqMod: Convertible {
         var page: Int = 1
-        var pageSize: Int = 10
+        var pageSize: Int = 20
         // 1 最热，2最新
         var type: Int = 1
         var themeId: Int = 0

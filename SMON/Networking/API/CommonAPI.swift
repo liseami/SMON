@@ -9,6 +9,7 @@ enum CommonAPI: XMTargetType {
     case getUploadToken
     case interests
     case getImUserSign
+    case versionInfo(lat: String, lon: String)
 
     var group: String {
         return "/v1/common"
@@ -22,14 +23,9 @@ enum CommonAPI: XMTargetType {
     }
 
     var parameters: [String: Any]? {
-        
-        get{
-            switch self {
-            default: return nil
-            }
-        }
-        set{
-          
+        switch self {
+        case .versionInfo(let lat ,let lon) : return nil
+        default: return nil
         }
     }
 }

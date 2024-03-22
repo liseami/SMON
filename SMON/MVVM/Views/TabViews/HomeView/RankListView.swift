@@ -8,9 +8,7 @@
 import SwiftUI
 class RanklistViewModel: XMListViewModel<XMUserInRank> {
     init() {
-        super.init(pageName: "") { _ in
-            RankAPI.country
-        }
+        super.init(target: RankAPI.country(page: 1))
     }
 }
 
@@ -19,13 +17,22 @@ struct RankListView: View {
 
     var body: some View {
         ScrollView {
-            XMStateView(reqStatus: vm.reqStatus) {
-                rankList
-            } loading: {
-                RankListLoadingView()
-            } empty: {
-                XMEmptyView()
-            }
+            LazyVStack(alignment: .center, spacing: 0, pinnedViews: [], content: {
+                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, customContent: {
+                    rankList
+                }) {
+                    RankListLoadingView()
+                } emptyView: {
+                    XMEmptyView()
+                } loadMore: {
+                    await vm.loadMore()
+                } getListData: {
+                    await vm.getListData()
+                }
+            })
+        }
+        .task {
+            await vm.getListData()
         }
         .scrollIndicators(.hidden)
         .refreshable { await vm.getListData() }
@@ -35,7 +42,7 @@ struct RankListView: View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             ForEach(Array(vm.list.enumerated()), id: \.offset) { index, user in
                 XMDesgin.XMButton {
-                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: user.userId ?? ""))
+                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: user.userId))
                 } label: {
                     VStack {
                         WebImage(str: user.avatar)

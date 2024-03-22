@@ -12,9 +12,10 @@ import TIMCommon
 public typealias HTTPRequestMethod = Moya.Method
 
 public protocol XMTargetType: TargetType {
-    var parameters: [String: Any]? { get  }
+    var parameters: [String: Any]? { get }
     var parameterEncoding: ParameterEncoding { get }
     var group: String { get }
+    func updatingParameters(_ newPage: Int) -> XMTargetType
 }
 
 // MARK: - 自有扩展
@@ -22,10 +23,10 @@ public protocol XMTargetType: TargetType {
 extension XMTargetType {
     var parameters: [String: Any]? { nil }
 
-//    // 在外部动态修改
-//    mutating func appendParameters(newParameters: [String: Any]) {
-//        parameters?.merge(newParameters) { _, new in new }
-//    }
+    func updatingParameters(_ newPage: Int) -> XMTargetType {
+        return self
+    }
+
 
     var parameterEncoding: ParameterEncoding {
         switch method {
@@ -91,9 +92,9 @@ extension XMTargetType {
 
         // 常规信息
         let standardHeader = [
-            "version": AppConfig.AppVersion,
-            "device": UIDevice.current.name,
-            "os": UIDevice.current.systemVersion,
+            "version": AppConfig.AppVersion.replacingOccurrences(of: ".", with: ""),
+            "device": "ios",
+            "os": "iOS" + UIDevice.current.systemVersion,
             "model": UIDevice.current.modelName,
             "DeviceToken": UIDevice.current.identifierForVendor?.uuidString ?? ""
         ]

@@ -12,9 +12,7 @@ class CompletionPostListViewModel: XMListViewModel<XMPost> {
     init(type: Int, themeId: Int) {
         self.type = type
         self.themeId = themeId
-        super.init(pageName: "") { pageindex in
-            PostAPI.themeList(p: .init(page: pageindex, type: type, themeId: themeId))
-        }
+        super.init(target: PostAPI.themeList(p: .init(page: 1, type: type, themeId: themeId)))
     }
 }
 
@@ -27,19 +25,24 @@ struct CompetitionPostListView: View {
     }
 
     var body: some View {
-        ForEach(vm.list, id: \.self.id) { post in
+        XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus) { post in
             PostView(post)
+        } loadingView: {
+            ProgressView()
+        } emptyView: {
+            Text("暂无内容")
+        } loadMore: {
+            await vm.loadMore()
         }
-        .onChange(of: superVM.themeType) { _ in
-            Task { await vm.getListData(.datalist) }
-        }
-        .onChange(of: superVM.themeList.count) { _ in
-            Task { await vm.getListData(.datalist) }
+        .task {
+            await vm.getListData()
         }
     }
 }
 
 #Preview {
-    CompetitionPostListView(type: 1, themeId: 2)
-        .environmentObject(MeiRiDaSaiViewModel())
+    ScrollView {
+        CompetitionPostListView(type: 1, themeId: 2)
+            .environmentObject(MeiRiDaSaiViewModel())
+    }
 }

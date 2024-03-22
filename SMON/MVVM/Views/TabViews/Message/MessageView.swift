@@ -16,7 +16,10 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
         V2TIMManager.sharedInstance().login("m" + UserManager.shared.user.userId, userSig: UserManager.shared.IMInfo.imUserSign) {
             // 登录成功
             print("IM登录成功")
-            self.getConversationList()
+            DispatchQueue.main.async {
+                self.uploadUserInfo()
+                self.getConversationList()
+            }
         } fail: { _, _ in
         }
     }
@@ -24,6 +27,10 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
     @Published var conversations: [V2TIMConversation] = []
     @Published var status: XMRequestStatus = .isLoading
 
+    /*
+     获取聊天列表
+     */
+    @MainActor
     func getConversationList() {
         V2TIMManager.sharedInstance().getConversationList(UInt64(0), count: 300) { conversations, _, _ in
             self.conversations = conversations ?? []
@@ -32,36 +39,28 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
             self.status = .isNeedReTry
         }
     }
+
+    @MainActor
+    func uploadUserInfo() {
+        // 设置个人资料
+        let info = V2TIMUserFullInfo()
+        info.nickName = UserManager.shared.user.nickname
+        info.faceURL = UserManager.shared.user.avatar
+        V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
+        }
+    }
 }
+
+extension V2TIMConversation: Identifiable {}
 
 struct MessageView: View {
     @StateObject var vm: MessageViewModel = .shared
 
     var body: some View {
         ZStack(alignment: .top, content: {
-            ScrollView(showsIndicators: false) {
-                XMStateView(reqStatus: vm.status) {
-                    LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
-                        Spacer().frame(height: 12)
-                        ForEach(vm.conversations, id: \.self) { _ in
-                            XMConversationLine(avatar: "", nickname: "", date: .now, lastmessage: "最后一条消息", userid: "2932939")
-                        }
-                    })
-                    .padding(.all, 16)
-                } loading: {
-                    UserListLoadingView()
-                } empty: {
-                    XMEmptyView(image: "nomessage_pagepic", text: "暂无消息，去找人聊天吧。")
-                }
-            }
-            .refreshable {
-                vm.getConversationList()
-            }
-            .ignoresSafeArea(.container, edges: .bottom)
-
+            converstaionList
             XMTopBlurView()
         })
-
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 // 通知按钮
@@ -74,11 +73,31 @@ struct MessageView: View {
                 XMDesgin.XMIcon(iconName: "setting_about", size: 22)
             }
         }
+    }
 
-//        ConversationListContainer()
-//            .navigationTitle("消息")
-//            .navigationBarTitleDisplayMode(.inline)
-//            .ignoresSafeArea()
+    var converstaionList: some View {
+        ScrollView(showsIndicators: false) {
+            LazyVStack(alignment: .leading, spacing: 12, pinnedViews: [], content: {
+                XMStateView(vm.conversations, reqStatus: vm.status, loadmoreStatus: .isOK) { conversation in
+                    let xmuserId = String(conversation.userID.suffix(from: conversation.userID.firstIndex(of: "m")!))
+
+                    XMDesgin.XMButton(action: {
+                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: xmuserId))
+                    }, label: {
+                        XMConversationLine(avatar: "", nickname: conversation.showName ?? "", date: conversation.lastMessage.timestamp ?? .now, lastmessage: "conversation.lastMessage.textElem ?? ", userid: conversation.userID)
+                    })
+                } loadingView: {
+                    UserListLoadingView()
+                } emptyView: {
+                    XMEmptyView(image: "nomessage_pagepic", text: "暂无消息，去找人聊天吧。")
+                } loadMore: {}
+            })
+            .padding(.horizontal, 16)
+        }
+        .refreshable {
+            vm.getConversationList()
+        }
+        .ignoresSafeArea(.container, edges: .bottom)
     }
 }
 

@@ -46,11 +46,13 @@ public class NetworkingLogger: PluginType {
                 switch target.task {
                 case .requestPlain, .uploadMultipart: break
                 case let .requestParameters(parameters, _), let .uploadCompositeMultipart(_, parameters):
-                    print("请求参数 : ", parameters)
+                    print("请求参数 : \(Date.now.timeIntervalSince1970.string)", parameters )
+                    print(Date.now.timeIntervalSince1970.string)
                 default:
                     if let requestBody = request.httpBody {
                         let decrypt = String(data: requestBody, encoding: .utf8)
-                        print("请求参数 : \(decrypt)")
+                        print("请求参数 : \(decrypt) \(Date.now.timeIntervalSince1970.string)" )
+                        print(Date.now.timeIntervalSince1970.string)
                     }
                 }
             }

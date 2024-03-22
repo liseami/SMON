@@ -23,19 +23,23 @@ struct MyHotInfoView: View {
             // 全国排名部分
             Section {
                 RankingView(ranking: "No.2392950335")
+                    .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("全国排名")
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
+                    .listRowSeparator(.hidden, edges: .all)
             }
 
             // 同城排名部分
             Section {
                 RankingView(ranking: "No.20320942")
+                    .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("同城排名")
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
+                    .listRowSeparator(.hidden, edges: .all)
             } footer: {
                 XMTyperText(text: "* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
                     .font(.XMFont.f2)

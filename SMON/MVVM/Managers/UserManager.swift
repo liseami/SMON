@@ -19,15 +19,24 @@ class UserManager: ObservableObject {
         }
     }
 
+    // 阿里云个人信息
     @Published var OSSInfo: XMUserOSSTokenInfo {
         didSet {
             savaModel(model: OSSInfo)
         }
     }
 
+    // IMInfo
     @Published var IMInfo: IMUserSing {
         didSet {
             savaModel(model: IMInfo)
+        }
+    }
+
+    // APP版本信息
+    @Published var APPVersionInfo: XMVersionInfo {
+        didSet {
+            savaModel(model: APPVersionInfo)
         }
     }
 
@@ -35,20 +44,24 @@ class UserManager: ObservableObject {
         user = .init()
         OSSInfo = .init()
         IMInfo = .init()
+        APPVersionInfo = .init()
         userLoginInfo = .init()
         user = loadModel(type: XMUserProfile.self)
         userLoginInfo = loadModel(type: XMUserLoginInfo.self)
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
         IMInfo = loadModel(type: IMUserSing.self)
+        APPVersionInfo = loadModel(type: XMVersionInfo.self)
         #if DEBUG
 //        user = .init(userId: 0, token: "", needInfo: true)
         #endif
         Task {
             await getUploadToken()
+            await getVersionInfo()
             // 仅针对已登陆用户
             guard userLoginInfo.isLogin else { return }
             await getUserInfo()
             await getImUserSign()
+
         }
     }
 
@@ -129,6 +142,21 @@ class UserManager: ObservableObject {
             user = userinfo
         }
     }
+
+    /*
+     获取版本信息
+     */
+    @MainActor
+    func getVersionInfo() async {
+        let t = CommonAPI.versionInfo(lat: "", lon: "")
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let versionInfo = r.mapObject(XMVersionInfo.self) {
+            self.APPVersionInfo = versionInfo
+            if versionInfo.status == 1 {
+                Apphelper.shared.presentPanSheet(Color.red.ignoresSafeArea(), style: .setting)
+            }
+        }
+    }
 }
 
 extension UserManager {
@@ -136,7 +164,6 @@ extension UserManager {
         let config = V2TIMSDKConfig()
         config.logLevel = .LOG_NONE
         V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)
-
         TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "m" + userLoginInfo.userId, userSig: IMInfo.imUserSign) {}
 
         // 注册主题

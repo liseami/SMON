@@ -10,9 +10,7 @@ import SwiftUI
 
 class RelationListViewModel: XMListViewModel<XMUserProfile> {
     init() {
-        super.init(pageName: "") { _ in
-            UserRelationAPI.followersList(lastUserId: "")
-        }
+        super.init(target: UserRelationAPI.followersList(lastUserId: ""))
     }
 
     @Published var currentTab: TabbarItem = .firend

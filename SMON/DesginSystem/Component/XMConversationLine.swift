@@ -31,9 +31,6 @@ struct XMConversationLine: View {
                     .fcolor(.XMDesgin.f2)
             })
         }
-        .onTapGesture {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: "0"))
-        }
     }
 }
 

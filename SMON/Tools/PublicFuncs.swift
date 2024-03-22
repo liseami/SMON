@@ -17,7 +17,7 @@ import UIKit
 /*
  模拟延时
  */
-func waitme(sec: Int = 3) async {
+func waitme(sec: Double = 3) async {
     await SwiftUI.Task.sleep(UInt64(sec * 1000000000)) // 等待1秒钟
 }
 

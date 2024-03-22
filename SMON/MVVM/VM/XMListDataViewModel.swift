@@ -8,72 +8,96 @@
 import Foundation
 
 // 页面请求指标
-public enum XMRequestStatus {
+public enum XMRequestStatus: String {
     case isLoading
     case isNeedReTry
     case isOK
     case isOKButEmpty
 }
 
-// 定义泛型 ViewModel 类,用于list请求
-class XMListViewModel<ListRowMod: Convertible>: ObservableObject {
-    @Published var list: [ListRowMod] = []
-    @Published var reqStatus: XMRequestStatus = .isLoading
-    @Published var isLoadingMore: Bool = false
-    var pageindex: Int = 0
+protocol XMListDataViewModelProtocol: ObservableObject {
+    associatedtype ListRowMod: Convertible
+    associatedtype ListData: RandomAccessCollection where ListData.Element == ListRowMod
 
-    private var targetBuilder: (Int) -> XMTargetType
-    var target: XMTargetType {
-        self.targetBuilder(self.pageindex)
-    }
-    var pageName: String
-    init(autoGetData: Bool = true, pageName: String, targetBuilder: @escaping (Int) -> XMTargetType) {
-        self.targetBuilder = targetBuilder
-        self.pageName = pageName
-        guard autoGetData else { return }
-        Task { await self.getListData() }
+    var list: ListData { get set }
+    var reqStatus: XMRequestStatus { get set }
+    var loadingMoreStatus: XMRequestStatus { get set }
+    var currentPage: Int { get set }
+
+    func getListData() async
+    func loadMore() async
+}
+
+// 定义泛型 ViewModel 类,用于list请求
+class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
+    @Published var list: [ListRowMod]
+    @Published var reqStatus: XMRequestStatus = .isOK
+    @Published var loadingMoreStatus: XMRequestStatus = .isOK
+    var currentPage: Int = 1
+    private var target: XMTargetType
+
+    init(target: XMTargetType) {
+        self.target = target
+        self.list = []
     }
 
     deinit {}
 
     @MainActor
-    func getListData(_ atKeyPath: String = .datalist) async {
-        if self.reqStatus != .isOK || self.reqStatus != .isOKButEmpty {
-            self.reqStatus = .isLoading
+    func getListData() async {
+        await waitme(sec: 0.2)
+        reqStatus = .isLoading
+        // 手动更新 parameters 字典
+        currentPage = 1
+        if target.parameters?.contains(where: { $0.key == "page" }) == true {
+            target = target.updatingParameters(currentPage)
         }
-        self.pageindex = 1
-        let r = await Networking.request_async(self.target)
-        if r.is2000Ok {
-            if let list = r.mapArray(ListRowMod.self, atKeyPath: atKeyPath), list.isEmpty == false {
-                self.list.removeAll()
-                self.pageindex += 1
-                self.list = list
-                self.reqStatus = .isOK
+        list = []
+        let result = await Networking.request_async(target)
+        if result.is2000Ok, let items = result.mapArray(ListRowMod.self) {
+            if items.isEmpty {
+                reqStatus = .isOKButEmpty
             } else {
-                self.reqStatus = .isOKButEmpty
+                reqStatus = .isOK
+                list = items
+                print(list.count)
+                print(list.count)
             }
         } else {
-            self.reqStatus = .isNeedReTry
+            reqStatus = .isNeedReTry
         }
+        loadingMoreStatus = .isOK
     }
 
     @MainActor
-    func loadMore(_ atKeyPath: String = .datalist) async {
-        guard self.reqStatus == .isOK else { return }
-        await waitme()
-        guard self.reqStatus == .isOK else { return }
-        self.isLoadingMore = true
-        let r = await Networking.request_async(self.target)
-        if r.is2000Ok {
-            if let list = r.mapArray(ListRowMod.self), list.isEmpty == false {
-                self.list.append(contentsOf: list)
-                self.pageindex += 1
-            } else {}
-            if self.list.isEmpty {
-                self.pageindex = 1
-                self.reqStatus = .isOKButEmpty
+    func loadMore() async {
+        loadingMoreStatus = .isLoading
+        await waitme(sec: 0.2)
+        // 手动更新 parameters 字典
+        if target.parameters?.contains(where: { $0.key == "page" }) == true {
+            target = target.updatingParameters(currentPage + 1)
+        }
+        let r = await Networking.request_async(target)
+        if r.is2000Ok, let items = r.mapArray(ListRowMod.self) {
+            // 没有更多数据
+            if items.isEmpty {
+                await waitme(sec: 0.2)
+                loadingMoreStatus = .isOKButEmpty
+                // 数据小于10个
+            } else if items.count < 20 {
+                await waitme(sec: 0.2)
+                loadingMoreStatus = .isOKButEmpty
+                list += items
+            } else {
+                // 下一页数据数据多于等于10
+                list += items
+                currentPage += 1
+                await waitme(sec: 0.2)
+                loadingMoreStatus = .isOK
             }
-        } else {}
-        self.isLoadingMore = false
+        } else {
+            await waitme(sec: 0.2)
+            loadingMoreStatus = .isNeedReTry
+        }
     }
 }

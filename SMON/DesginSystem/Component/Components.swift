@@ -190,33 +190,34 @@ enum XMDesgin {
         var backColor: Color
         var iconName: String
         var text: String
-        var action: () -> ()
+        var enable: Bool
+        var action: () async -> ()
         @State var onTap: Bool = false
-        init(fColor: Color = .black, backColor: Color = .white, iconName: String = "", text: String = "text", action: @escaping () -> ()) {
+        init(fColor: Color = .XMDesgin.b1, backColor: Color = .XMDesgin.f1, iconName: String = "", text: String = "text", enable: Bool = true, action: @escaping () async -> ()) {
             self.fColor = fColor
             self.backColor = backColor
             self.iconName = iconName
             self.text = text
             self.action = action
+            self.enable = enable
         }
 
         var body: some View {
-            XMDesgin.XMButton {
-                action()
+            XMDesgin.XMButton(enable: enable) {
+               await action()
             } label: {
                 HStack(spacing: 2) {
                     if !iconName.isEmpty {
                         XMDesgin.XMIcon(iconName: iconName, color: fColor)
                     }
                     Text(text)
-                        .font(.XMFont.f1b)
-                        .bold()
+                        .font(.XMFont.f2)
                         .foregroundStyle(fColor)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .background(Rectangle().fcolor(backColor))
-                .clipShape(RoundedRectangle(cornerRadius: 99))
+                .clipShape(RoundedRectangle(cornerRadius: 4))
             }
         }
     }

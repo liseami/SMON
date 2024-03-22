@@ -60,6 +60,7 @@ struct MeiRiDaSaiView: View {
                 tab
                 // 帖子列表
                 if let currentTheme = vm.currentTheme {
+                    // 帖子列表
                     CompetitionPostListView(type: vm.themeType, themeId: currentTheme.id)
                         .environmentObject(vm)
                 }

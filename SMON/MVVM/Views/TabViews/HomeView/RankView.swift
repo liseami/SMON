@@ -30,7 +30,7 @@ struct RankView: View {
 
                 XMDesgin.XMButton {
                     LoadingTask(loadingMessage: "强制等待...") {
-                        print(Apphelper.shared.cityName(forCityID: "340100"))
+                  
                     }
                 } label: {
                     XMDesgin.XMIcon(iconName: "home_bell", size: 22)

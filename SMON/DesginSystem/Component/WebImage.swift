@@ -14,7 +14,7 @@ struct WebImage: View {
     var body: some View {
         KFImage(URL(string: str))
             .resizable()
-            .placeholder { p in
+            .placeholder { _ in
                 Color.XMDesgin.b1
 //                    .conditionalEffect(.repeat(.shine, every: 1), condition: true)
             }

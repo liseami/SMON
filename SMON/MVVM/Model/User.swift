@@ -79,13 +79,14 @@ struct XMUserProfile: Convertible {
     var interestsTag: String {
         interestsTagList.joined(separator: "&")
     }
+
     var bdsmAttr: Int = 0 // 不为0，才算完成
     var emotionalNeeds: Int = 0 // 不为0，才算完成
     var education: Int = 0 // 不为0，才算完成
     var fansNum: Int = 0 // 一定有，不参与资料完成度评分
     var followsNum: Int = 0 // 一定有，不参与资料完成度评分
     // 1关注对方，0没有关注
-    var isFollow : Int = 0
+    var isFollow: Int = 0
 }
 
 // 用户资料扩展
@@ -260,8 +261,9 @@ extension Int {
     }
 }
 
-struct XMUserInRank: Convertible {
-    var userId: String = ""// : 1764504995815882752,
+struct XMUserInRank: Identifiable, Convertible {
+    var id: String = UUID().uuidString
+    var userId: String = "" // : 1764504995815882752,
     var nickname: String = "" // ": "开手机",
     var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
     var cityName: String = "" // ": ""

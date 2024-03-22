@@ -18,53 +18,6 @@
             endingLineNumber = "65"
             landmarkName = "loadWebAndLogin(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "40016337-0D9E-425F-99F9-D96EB06631F3 - a3c87210ff163782"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #1 (Swift.Double) -&gt; () in SMON.YuanyuanManager.loadWebAndLogin(completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "SMON"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhaoxiangyu/%E8%A5%BF%E6%AA%AC2.0/SMON/SMON/MVVM/Managers/YuanyuanManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "408">
-               </Location>
-               <Location
-                  uuid = "40016337-0D9E-425F-99F9-D96EB06631F3 - a3c87210ff16371f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #1 (Swift.Double) -&gt; () in SMON.YuanyuanManager.loadWebAndLogin(completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "SMON"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhaoxiangyu/%E8%A5%BF%E6%AA%AC2.0/SMON/SMON/MVVM/Managers/YuanyuanManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "408">
-               </Location>
-               <Location
-                  uuid = "40016337-0D9E-425F-99F9-D96EB06631F3 - a3c87210ff16371f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #1 (Swift.Double) -&gt; () in SMON.YuanyuanManager.loadWebAndLogin(completion: (Swift.Optional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "SMON"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/zhaoxiangyu/%E8%A5%BF%E6%AA%AC2.0/SMON/SMON/MVVM/Managers/YuanyuanManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "450">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
