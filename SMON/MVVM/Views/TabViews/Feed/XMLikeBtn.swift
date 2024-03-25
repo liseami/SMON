@@ -66,5 +66,5 @@ struct XMLikeBtn: View {
 }
 
 #Preview {
-    XMLikeBtn(target: PostsOperationAPI.tapLike(postId: 32), isLiked: false, likeNumbers: 12, onComplete: { _ in })
+    XMLikeBtn(target: PostsOperationAPI.tapLike(postId: "32"), isLiked: false, likeNumbers: 12, onComplete: { _ in })
 }

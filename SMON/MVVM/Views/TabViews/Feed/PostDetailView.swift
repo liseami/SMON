@@ -8,34 +8,76 @@
 import SwiftUI
 
 class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
-    let postId: Int
-    init(postId: Int) {
+    let postId: String
+    init(postId: String) {
         self.postId = postId
         super.init(pageName: "") {
             PostAPI.detail(postId: postId, userId: UserManager.shared.user.userId)
         }
     }
+
+    @Published var inputStr: String = ""
+    @Published var targetComment: XMPostComment?
+
+    /*
+     发表评论和回复
+     */
+    @MainActor
+    func addCommentToPost() async {
+        guard self.inputStr.isEmpty == false else { return }
+
+        var mod = PostsOperationAPI.CommentReqMod()
+        if let targetComment {
+            // 给评论回复
+            mod.commentId = targetComment.id
+            mod.toUserId = targetComment.id
+        } else {
+            // 给帖子回复
+            mod.toUserId = self.mod?.userId ?? ""
+        }
+        mod.postId = self.postId
+        mod.content = self.inputStr
+
+        let t = PostsOperationAPI.comment(p: mod)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            self.inputStr.removeAll()
+            Apphelper.shared.closeKeyBoard()
+            // 请求详情
+            self.mod = nil
+            await self.getSingleData()
+        }
+    }
 }
 
 struct PostDetailView: View {
-    @FocusState var input
-    @State private var commentInput = "About me"
     @StateObject var vm: PostDetailViewModel
-    init(_ postId: Int) {
+    init(_ postId: String) {
         self._vm = StateObject(wrappedValue: .init(postId: postId))
     }
+
+    @State var passwordText: String = ""
+    @FocusState var focused
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, content: {
+                // 详情
                 postView
+                // 细线
                 Capsule()
                     .frame(height: 2)
                     .fcolor(.XMDesgin.b1)
                     .padding(.horizontal)
-                PostCommentListView()
+                // 评论列表
+                PostCommentListView(postId: vm.postId, focused: $focused)
+                    .environmentObject(vm)
+                Spacer().frame(height: 120)
             })
             .padding(.horizontal, 16)
+        }
+        .refreshable {
+            await vm.getSingleData()
         }
         .scrollDismissesKeyboard(.immediately)
         .toolbar(content: {
@@ -45,27 +87,29 @@ struct PostDetailView: View {
         })
         .navigationTitle("详情")
         .overlay(alignment: .bottom) {
-            inputBar
+            commentInpuBar
         }
     }
 
-    var inputBar: some View {
+    var commentInpuBar: some View {
         VStack(alignment: .center, spacing: 0, content: {
             HStack(alignment: .top) {
-                XMUserAvatar(str: AppConfig.mokImage!.absoluteString, userId: "32", size: 32)
+                XMUserAvatar(str: UserManager.shared.user.avatar, userId: UserManager.shared.user.userId, size: 32)
                     .padding(.top, 6)
-                TextField(text: $commentInput, axis: .vertical) {}
-                    .lineLimit(...(input ? 4 : 1))
+                TextField(text: $vm.inputStr, prompt: Text(vm.targetComment == nil ? "说点什么？" : "回复：@" + vm.targetComment!.nickname), label: {})
+                    .lineLimit(...(focused ? 4 : 1))
                     .tint(.XMDesgin.main)
                     .font(.XMFont.f2)
-                    .focused($input)
+                    .focused($focused)
                     .padding(.all, 12)
                     .background(.XMDesgin.b1)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "发送") {}
-                    .padding(.top, 6)
-                    .transition(.movingParts.pop(Color.XMDesgin.main))
-                    .ifshow(show: input)
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "发送") {
+                    await vm.addCommentToPost()
+                }
+                .padding(.top, 6)
+                .transition(.movingParts.pop(Color.XMDesgin.main))
+                .ifshow(show: focused)
             }
             .padding(.all, 12)
             .background(.black)
@@ -92,10 +136,11 @@ struct PostDetailView: View {
 
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            if let mod = vm.mod {
+            if vm.mod != nil {
                 XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod?.isLiked.bool ?? false, likeNumbers: vm.mod?.likeNums ?? 0) { islike in
                     vm.mod?.isLiked = islike.int
                     vm.mod?.likeNums += islike ? 1 : -1
+                    NotificationCenter.default.post(name: Notification.Name("HomeViewRefresh"), object: nil, userInfo: ["postId": vm.postId])
                 }
 
                 HStack {
@@ -165,5 +210,5 @@ struct PostDetailView: View {
 }
 
 #Preview {
-    PostDetailView(1)
+    PostDetailView("1")
 }

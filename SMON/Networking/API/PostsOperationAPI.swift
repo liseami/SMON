@@ -9,7 +9,7 @@ import Foundation
 
 enum PostsOperationAPI: XMTargetType {
     case themeList(p: PageInfo)
-    case tapLike(postId: Int)
+    case tapLike(postId: String)
     case comment(p: CommentReqMod)
     case commentDelete(commentId: String)
     case tapCommentLike(commentId: String)
@@ -28,7 +28,7 @@ enum PostsOperationAPI: XMTargetType {
         case .commentDelete(let commentId): return ["commentId": commentId]
         case .tapCommentLike(let commentId): return ["commentId": commentId]
         case .commentList(let page, let postId): return ["page": page, "postId": postId]
-        case .commentReplyList(let page, let postId): return ["page": page, "postId": postId]
+        case .commentReplyList(let page, let postId): return ["page": page, "commentId": postId]
         }
     }
 
@@ -42,7 +42,7 @@ enum PostsOperationAPI: XMTargetType {
 extension PostsOperationAPI {
     struct CommentReqMod: Convertible {
         /// 回复评论ID
-        var commentId: Int?
+        var commentId: String?
         /// 评论内容
         var content: String?
         /// 图片评论
@@ -50,9 +50,9 @@ extension PostsOperationAPI {
         /// 服务端使用
         var ipAddress: String?
         /// 帖子ID
-        var postId: Int?
+        var postId: String?
         /// 回复评论用户ID
-        var toUserId: Int?
+        var toUserId: String?
         /// 评论用户ID，服务端使用
         var userId: Int?
     }

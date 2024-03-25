@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct XMPost: Convertible, Equatable ,Identifiable{
+struct XMPost: Convertible, Equatable, Identifiable {
     static func == (lhs: XMPost, rhs: XMPost) -> Bool {
         lhs.isLiked == rhs.isLiked && lhs.id == rhs.id &&
             lhs.commentNums == rhs.commentNums
     }
 
-    var id: Int = 0
+    var id: String = ""
     var userId: String = ""
     var nickname: String = ""
     var avatar: String = ""
@@ -27,8 +27,40 @@ struct XMPost: Convertible, Equatable ,Identifiable{
     var createdAtStr: String = ""
 }
 
+struct XMPostComment: Convertible, Equatable, Identifiable {
+    var id: String = "" ////
+    var userId: String = "" // 1764610746026688512,
+    var nickname: String = "" // "zhanglu1385",
+    var avatar: String = "" // "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/avatar/default.jpg",
+    var isLiked: Int = 0 //
+    var isPostsAuthor: Int = 0 //
+    var likeNum: Int = 0 //
+    var commentNum: Int = 0 //
+    var content: String = "" // "这是一级评论",
+    var imagePath: String = "" // "",
+    var createdAt: Int = 0 // 1710813905,
+    var createdAtStr: String = "" // "周二 10:05"
+}
+
+struct XMPostReply: Convertible, Equatable, Identifiable {
+    var id: String = "" // : 2,
+    var userId: String = "" // ": 1764610746026688512,
+    var nickname: String = "" // ": "zhanglu1385",
+    var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/avatar/default.jpg",
+    var toUserId: String = "" // ": 1764610746026688512,
+    var toUserNickname: String = "" // ": "zhanglu1385",
+    var toUserAvatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/avatar/default.jpg",
+    var isLiked: Int = 0 // ": 0,
+    var isPostsAuthor: Int = 0 // ": 1,
+    var likeNum: Int = 0 // ": 0,
+    var content: String = "" // ": "回复评论",
+    var imagePath: String = "" // ": "",
+    var createdAt: String = "" // ": 1710819287,
+    var createdAtStr: String = "" // ": "周二 11:34"
+}
+
 struct XMPostDetail: Convertible {
-    var id: Int = 0 // "" // 2,
+    var id: String = "" //// "" // 2,
     var userId: String = "" // 1764610746026688512,
     var nickname: String = "" // "zhanglu1385",
     var avatar: String = "" // "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/avatar/default.jpg",
@@ -45,5 +77,5 @@ struct XMPostDetail: Convertible {
 struct PostAttachment: Convertible {
     var picUrl: String = ""
     var picPath: String = ""
-    var id: Int = 0
+    var id: String = ""
 }

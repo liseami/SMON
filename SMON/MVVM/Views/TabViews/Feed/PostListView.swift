@@ -19,7 +19,7 @@ struct PostListView: View {
             .padding(.all, 16)
         }
         .refreshable {}
-    }
+    }	
 }
 
 #Preview {

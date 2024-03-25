@@ -3,64 +3,52 @@
 //  SMON
 //
 //  Created by 赵翔宇 on 2024/3/18.
-//
 
 import SwiftUI
-// class PostCommentListViewModel : XMListViewModel<> {
-//
-// }
-struct PostCommentListView: View {
-    var body: some View {
-        LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
-            ForEach(1 ... 120, id: \.self) { _ in
-                comment
-            }
-        })
+class PostCommentListViewModel: XMListViewModel<XMPostComment> {
+    init(postId: String) {
+        super.init(target: PostsOperationAPI.commentList(page: 1, postId: postId))
+        Task { await self.getListData() }
     }
+}
+
+struct PostCommentListView: View {
+    @StateObject var vm: PostCommentListViewModel
+    @EnvironmentObject var detailVM: PostDetailViewModel
+
+    @FocusState.Binding var focused: Bool
     
-    
-    var comment: some View {
-        HStack(alignment: .top, spacing: 12) {
-            AsyncImage(url: AppConfig.mokImage)
-                .scaledToFit()
-                .frame(width: 38, height: 38) // Adjust the size as needed
-                .clipShape(Circle())
+    init(postId: String, focused: FocusState<Bool>.Binding) {
+        self._focused = focused
+        self._vm = StateObject(wrappedValue: .init(postId: postId))
+    }
 
-            VStack(alignment: .leading, spacing: 8, content: {
-                HStack(alignment: .center, spacing: 12, content: {
-                    Text(String.randomChineseString(length: Int.random(in: 3...12)))
-                        .font(.XMFont.f2b)
-                        .lineLimit(1)
-                        .fcolor(.XMDesgin.f1)
-                    Spacer()
-                })
+    var body: some View {
+        XMStateView(vm.list,
+                    reqStatus: vm.reqStatus,
+                    loadmoreStatus: vm.loadingMoreStatus) { comment in
+            PostCommentView(comment: comment)
+                .onTapGesture {
+                    focused = true
+                    detailVM.targetComment = comment
+                }
 
-                Text(String.randomChineseString(length: Int.random(in: 15...68)))
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
-
-                HStack(alignment: .center, spacing: 12, content: {
-                    Text("14小时前")
-                        .font(.XMFont.f3)
-                        .fcolor(.XMDesgin.f2)
-                    Spacer()
-                    HStack {
-                        XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
-                        Text("14929")
-                            .font(.XMFont.f3)
-                            .bold()
-                    }
-                    XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
-                })
-
-                Text("展开30条回复")
-                    .font(.XMFont.f2).bold()
-                    .fcolor(.XMDesgin.f2)
-            })
+        } loadingView: {
+            ProgressView()
+        } emptyView: {
+            Text("--- 暂无评论 ---")
+                .font(.XMFont.f2)
+                .fcolor(.XMDesgin.f2)
+                .padding(.vertical, 32)
+        }
+        .onChange(of: detailVM.mod == nil) { _ in
+            Task { await vm.getListData() }
         }
     }
 }
 
 #Preview {
-    PostCommentListView()
+//    PostCommentListView(postId: "", input: <#FocusState<Bool>.Binding#>, input: )
+//        .environmentObject(PostDetailViewModel(postId: ""))
+    EmptyView()
 }

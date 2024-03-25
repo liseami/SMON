@@ -71,9 +71,6 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
 
         case .isOK:
             content
-                .transition(.opacity.animation(.easeOut(duration: 0.2)))
-                .animation(.bouncy, value: self.list.count)
-
             Group {
                 switch loadmoreStatus {
                 case .isLoading:

@@ -10,9 +10,7 @@ import SwiftUI
 class MeiRiDaSaiViewModel: ObservableObject {
     @Published var postList: [XMPost] = []
     // 当前主题IndexId
-    @Published var currentThemeIndex: Int = 0 {
-        didSet {}
-    }
+    @Published var currentThemeIndex: Int = 0
 
     // 主题列表
     @Published var themeList: [XMTheme] = []
@@ -56,15 +54,16 @@ struct MeiRiDaSaiView: View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                 header
-                // 最新最热选择
+//                // 最新最热选择
                 tab
                 // 帖子列表
-                if let currentTheme = vm.currentTheme {
-                    // 帖子列表
-                    CompetitionPostListView(type: vm.themeType, themeId: currentTheme.id)
+                if let themeid = vm.currentTheme?.id {
+                    CompetitionPostListView(type: vm.themeType, themeId: themeid)
                         .environmentObject(vm)
+                }else{
+                    ProgressView()
+                        .padding(.top,32)
                 }
-
             })
             .padding(.all, 16)
         }

@@ -24,7 +24,7 @@ enum CommonAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
-        case .versionInfo(let lat ,let lon) : return nil
+        case .versionInfo(let lat, let lon): return lat.isEmpty ? nil : ["lat": lat, "lon": lon]
         default: return nil
         }
     }

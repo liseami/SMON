@@ -19,6 +19,13 @@ class UserManager: ObservableObject {
         }
     }
 
+    // 本地用户经纬度缓存
+    @Published var userlocation: XMUserLocationInfo {
+        didSet {
+            savaModel(model: userlocation)
+        }
+    }
+
     // 阿里云个人信息
     @Published var OSSInfo: XMUserOSSTokenInfo {
         didSet {
@@ -44,8 +51,10 @@ class UserManager: ObservableObject {
         user = .init()
         OSSInfo = .init()
         IMInfo = .init()
+        userlocation = .init()
         APPVersionInfo = .init()
         userLoginInfo = .init()
+        userlocation = loadModel(type: XMUserLocationInfo.self)
         user = loadModel(type: XMUserProfile.self)
         userLoginInfo = loadModel(type: XMUserLoginInfo.self)
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
@@ -59,9 +68,9 @@ class UserManager: ObservableObject {
             await getVersionInfo()
             // 仅针对已登陆用户
             guard userLoginInfo.isLogin else { return }
+            LocationManager.shared.startUpdatingLocation()
             await getUserInfo()
             await getImUserSign()
-
         }
     }
 
@@ -148,11 +157,12 @@ class UserManager: ObservableObject {
      */
     @MainActor
     func getVersionInfo() async {
-        let t = CommonAPI.versionInfo(lat: "", lon: "")
+        let t = CommonAPI.versionInfo(lat: userlocation.lat, lon: userlocation.long)
         let r = await Networking.request_async(t)
         if r.is2000Ok, let versionInfo = r.mapObject(XMVersionInfo.self) {
-            self.APPVersionInfo = versionInfo
-            if versionInfo.status == 1 {
+            APPVersionInfo = versionInfo
+            // 强制更新
+            if versionInfo.status == 3 {
                 Apphelper.shared.presentPanSheet(Color.red.ignoresSafeArea(), style: .setting)
             }
         }

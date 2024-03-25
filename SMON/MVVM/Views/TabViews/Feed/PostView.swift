@@ -83,6 +83,17 @@ struct PostView: View {
                 vm.post.isLiked = islike.int
                 vm.post.likeNums += islike ? 1 : -1
             }
+            // 在详情内被点赞，列表中响应。
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("HomeViewRefresh"), object: nil)) { notification in
+                if let postId = notification.userInfo?["postId"] as? String, postId == vm.post.id {
+                    DispatchQueue.main.async {
+                        vm.post.isLiked.toggle()
+                        print(vm.post.isLiked.bool)
+                        vm.post.likeNums += vm.post.isLiked.bool ? 1 : -1
+                        vm.objectWillChange.send()
+                    }
+                }
+            }
 
             XMDesgin.XMButton {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))

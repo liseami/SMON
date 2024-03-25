@@ -30,7 +30,7 @@ struct MainView: View {
                     case .setting: SettingView()
                     case .myhotinfo: MyHotInfoView()
                     case .myfriends: RelationListView()
-                    case .postdetail(let postId): PostDetailView.init(postId)
+                    case .postdetail(let postId): PostDetailView(postId)
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
                     case .chat(let userId): ChatView(userId: userId)

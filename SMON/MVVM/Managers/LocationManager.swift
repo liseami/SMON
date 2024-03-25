@@ -8,6 +8,7 @@
 import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
+    static let shared = LocationManager()
     private var locationManager = CLLocationManager()
     
     @Published var userLocation: CLLocationCoordinate2D?
@@ -41,6 +42,9 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last?.coordinate {
             userLocation = location
+            UserManager.shared.userlocation = .init(lat: location.latitude.string, long: location.longitude.string)
+            Task { await UserManager.shared.getVersionInfo() }
+            stopUpdatingLocation()
         }
     }
     

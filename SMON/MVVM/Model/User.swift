@@ -63,6 +63,10 @@ extension XMUserUpdateReqMod {
     }
 }
 
+struct XMUserLocationInfo: Convertible {
+    var lat : String = ""
+    var long : String =  ""
+}
 struct XMUserProfile: Convertible {
     var userId: String = "" // 一定有，不参与资料完成度评分
     var cityId: String = "" // 一定有，不参与资料完成度评分
