@@ -58,6 +58,16 @@ enum XMDesgin {
         }
     }
 
+    struct XMAuthorTag : View {
+        var body: some View{
+            Text("作者")
+                .font(.XMFont.f3b)
+                .fcolor(.XMDesgin.f1)
+                .padding(.all, 4)
+                .padding(.horizontal, 2)
+                .background(Capsule().fill(Color.XMDesgin.main.gradient))
+        }
+    }
     struct XMTag: View {
         let text: String
         init(text: String) {

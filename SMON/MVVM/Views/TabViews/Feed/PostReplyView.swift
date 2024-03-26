@@ -23,37 +23,40 @@ struct PostReplayView: View {
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {
-            XMUserAvatar(str: reply.avatar, userId: reply.userId, size: 38)
-            VStack(alignment: .leading, spacing: 8, content: {
-                HStack(alignment: .center, spacing: 12, content: {
-                    Text(reply.nickname)
-                        .font(.XMFont.f2b)
-                        .lineLimit(1)
-                        .fcolor(.XMDesgin.f1)
-                    Spacer()
-                })
-
-                Text(reply.content)
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
-
-                HStack(alignment: .center, spacing: 12, content: {
-                    Text(reply.createdAtStr)
-                        .font(.XMFont.f3)
+        VStack(alignment: .leading, spacing: 8, content: {
+            HStack(alignment: .center, spacing: 12, content: {
+                XMUserAvatar(str: reply.avatar, userId: reply.userId, size: 20)
+                Text(reply.nickname)
+                XMDesgin.XMAuthorTag()
+                    .ifshow(show: reply.isPostsAuthor.bool)
+                Group {
+                    Text("回复")
                         .fcolor(.XMDesgin.f2)
-                    Spacer()
-                    HStack {
-                        XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
-                        Text(reply.likeNum.string)
-                            .font(.XMFont.f3)
-                            .bold()
-                    }
-                    XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
-                })
-
+                    XMUserAvatar(str: reply.toUserAvatar, userId: reply.toUserId, size: 20)
+                    Text(reply.toUserNickname)
+                    XMDesgin.XMAuthorTag()
+                        .ifshow(show: reply.isPostsAuthor.bool)
+                }
+                .ifshow(show: reply.toUserId != reply.userId)
+                Spacer()
             })
-        }
+            .font(.XMFont.f2)
+            .lineLimit(1)
+            .fcolor(.XMDesgin.f1)
+
+            Text(reply.content)
+                .font(.XMFont.f2)
+                .fcolor(.XMDesgin.f1)
+
+            HStack(alignment: .center, spacing: 12, content: {
+                Text(reply.createdAtStr)
+                    .font(.XMFont.f3)
+                    .fcolor(.XMDesgin.f2)
+                Spacer()
+                XMLikeBtn(target: PostsOperationAPI.tapCommentLike(commentId: self.vm.reply.id), isLiked: self.vm.reply.isLiked.bool, likeNumbers: self.vm.reply.likeNum,contentId: vm.reply.id) 
+            })
+
+        })
     }
 }
 

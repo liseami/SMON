@@ -34,7 +34,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
     @Published var reqStatus: XMRequestStatus = .isOK
     @Published var loadingMoreStatus: XMRequestStatus = .isOK
     var currentPage: Int = 1
-    private var target: XMTargetType
+    var target: XMTargetType
 
     init(target: XMTargetType) {
         self.target = target

@@ -11,6 +11,7 @@ import SwiftUIX
 struct RankView: View {
     @StateObject var vm: RankViewModel = .init()
     @State var showFliterView: Bool = false
+
     var body: some View {
         ZStack(alignment: .top) {
             // 横向翻页
@@ -29,9 +30,7 @@ struct RankView: View {
                 // 通知按钮
 
                 XMDesgin.XMButton {
-                    LoadingTask(loadingMessage: "强制等待...") {
-                  
-                    }
+                    LoadingTask(loadingMessage: "强制等待...") {}
                 } label: {
                     XMDesgin.XMIcon(iconName: "home_bell", size: 22)
                 }
@@ -45,8 +44,10 @@ struct RankView: View {
 
     var fliterBtn: some View {
         XMDesgin.XMButton(action: {
-            Apphelper.shared.presentPanSheet(HomeFliterView()
-                .environment(\.colorScheme, .dark), style: .cloud)
+            Apphelper.shared.presentPanSheet(
+                HomeFliterView()
+                    .environmentObject(vm)
+                    .environment(\.colorScheme, .dark), style: .cloud)
         }, label: {
             XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
         })
@@ -75,7 +76,8 @@ struct RankView: View {
                 content: {
                     ForEach(RankViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
                         // 排行榜页面
-                        RankListView().tag(tab)
+                        RankListView(target: vm.target(for: tab))
+                            .tag(tab)
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))

@@ -79,21 +79,7 @@ struct PostView: View {
 //
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums) { islike in
-                vm.post.isLiked = islike.int
-                vm.post.likeNums += islike ? 1 : -1
-            }
-            // 在详情内被点赞，列表中响应。
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name("HomeViewRefresh"), object: nil)) { notification in
-                if let postId = notification.userInfo?["postId"] as? String, postId == vm.post.id {
-                    DispatchQueue.main.async {
-                        vm.post.isLiked.toggle()
-                        print(vm.post.isLiked.bool)
-                        vm.post.likeNums += vm.post.isLiked.bool ? 1 : -1
-                        vm.objectWillChange.send()
-                    }
-                }
-            }
+            XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums,contentId: vm.post.id) 
 
             XMDesgin.XMButton {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))

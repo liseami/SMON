@@ -30,7 +30,8 @@ struct CompetitionPostListView: View {
                     reqStatus: vm.reqStatus,
                     loadmoreStatus: vm.loadingMoreStatus) { post in
             PostView(post)
-                
+            
+
         } loadingView: {
             ProgressView()
         } emptyView: {
@@ -45,6 +46,7 @@ struct CompetitionPostListView: View {
                 await vm.getListData()
             }
         }
+     
     }
 }
 

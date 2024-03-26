@@ -35,10 +35,14 @@ struct XMUserAvatar: View {
     }
 
     var body: some View {
-        WebImage(str: str)
-            .scaledToFill()
-            .frame(width: size, height: size)
-            .clipShape(Circle())
+        XMDesgin.XMButton {
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: self.userId))
+        } label: {
+            WebImage(str: str)
+                .scaledToFill()
+                .frame(width: size, height: size)
+                .clipShape(Circle())
+        }
     }
 }
 

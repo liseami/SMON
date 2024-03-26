@@ -7,12 +7,8 @@
 
 import Foundation
 
-struct XMPost: Convertible, Equatable, Identifiable {
-    static func == (lhs: XMPost, rhs: XMPost) -> Bool {
-        lhs.isLiked == rhs.isLiked && lhs.id == rhs.id &&
-            lhs.commentNums == rhs.commentNums
-    }
-
+struct XMPost: Convertible, Identifiable {
+    
     var id: String = ""
     var userId: String = ""
     var nickname: String = ""

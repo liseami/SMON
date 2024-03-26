@@ -10,6 +10,15 @@ class PostCommentListViewModel: XMListViewModel<XMPostComment> {
         super.init(target: PostsOperationAPI.commentList(page: 1, postId: postId))
         Task { await self.getListData() }
     }
+
+    @MainActor
+    func delete(commentId: String) async {
+        let t = PostsOperationAPI.commentDelete(commentId: commentId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            self.list.removeAll(where: { $0.id == commentId })
+        }
+    }
 }
 
 struct PostCommentListView: View {
@@ -17,7 +26,7 @@ struct PostCommentListView: View {
     @EnvironmentObject var detailVM: PostDetailViewModel
 
     @FocusState.Binding var focused: Bool
-    
+
     init(postId: String, focused: FocusState<Bool>.Binding) {
         self._focused = focused
         self._vm = StateObject(wrappedValue: .init(postId: postId))
@@ -27,11 +36,23 @@ struct PostCommentListView: View {
         XMStateView(vm.list,
                     reqStatus: vm.reqStatus,
                     loadmoreStatus: vm.loadingMoreStatus) { comment in
-            PostCommentView(comment: comment)
+            let commentView = PostCommentView(comment: comment)
+                .contentShape(Rectangle())
                 .onTapGesture {
                     focused = true
                     detailVM.targetComment = comment
                 }
+
+            // 自己的评论可以删除
+            if comment.userId == UserManager.shared.user.userId {
+                commentView.onLongPressGesture(minimumDuration: 0.5, maximumDistance: 1) {
+                    Apphelper.shared.pushActionSheet(title: "操作", message: "", actions: [UIAlertAction(title: "删除", style: .destructive, handler: { _ in
+                        Task { await vm.delete(commentId: comment.id) }
+                    })])
+                }
+            } else {
+                commentView
+            }
 
         } loadingView: {
             ProgressView()

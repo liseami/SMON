@@ -48,6 +48,15 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
             await self.getSingleData()
         }
     }
+
+    @MainActor
+    func deletePost() async {
+        let t = PostAPI.delete(postId: self.postId, userId: self.mod?.userId ?? "")
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            MainViewModel.shared.pathPages.removeLast()
+        }
+    }
 }
 
 struct PostDetailView: View {
@@ -82,7 +91,19 @@ struct PostDetailView: View {
         .scrollDismissesKeyboard(.immediately)
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+                XMDesgin.XMButton {
+                    let actions = vm.mod?.userId == UserManager.shared.user.userId ?
+                        [
+                            UIAlertAction(title: "删除", style: .destructive, handler: { _ in
+                                Task {
+                                    await vm.deletePost()
+                                }
+                            }),
+                        ] : []
+                    Apphelper.shared.pushActionSheet(title: "操作", message: "", actions: actions)
+                } label: {
+                    XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+                }
             }
         })
         .navigationTitle("详情")
@@ -137,11 +158,7 @@ struct PostDetailView: View {
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
             if vm.mod != nil {
-                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod?.isLiked.bool ?? false, likeNumbers: vm.mod?.likeNums ?? 0) { islike in
-                    vm.mod?.isLiked = islike.int
-                    vm.mod?.likeNums += islike ? 1 : -1
-                    NotificationCenter.default.post(name: Notification.Name("HomeViewRefresh"), object: nil, userInfo: ["postId": vm.postId])
-                }
+                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod?.isLiked.bool ?? false, likeNumbers: vm.mod?.likeNums ?? 0,contentId: vm.mod?.id ?? "") 
 
                 HStack {
                     Text("\(vm.mod?.commentNums ?? 0)")

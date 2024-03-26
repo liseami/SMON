@@ -32,6 +32,8 @@ struct PostCommentView: View {
                         .font(.XMFont.f2b)
                         .lineLimit(1)
                         .fcolor(.XMDesgin.f1)
+                    XMDesgin.XMAuthorTag()
+                        .ifshow(show: comment.isPostsAuthor.bool)
                     Spacer()
                 })
 
@@ -44,21 +46,18 @@ struct PostCommentView: View {
                         .font(.XMFont.f3)
                         .fcolor(.XMDesgin.f2)
                     Spacer()
-                    HStack {
-                        XMDesgin.XMIcon(iconName: "feed_heart", size: 16, withBackCricle: true)
-                        Text(comment.likeNum.string)
-                            .font(.XMFont.f3)
-                            .bold()
-                    }
-                    XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
+                    XMLikeBtn(target: PostsOperationAPI.tapCommentLike(commentId: self.vm.comment.id), isLiked: self.vm.comment.isLiked.bool, likeNumbers: self.vm.comment.likeNum,contentId: self.vm.comment.id)
                 })
 
-                ForEach(vm.list, id: \.id) { replay in
+                let replayDict = Dictionary(grouping: vm.list, by: \.id)
+                let uniqueReplays = replayDict.values.flatMap { $0 }
+                let list = ForEach(uniqueReplays, id: \.id) { replay in
                     PostReplayView(reply: replay)
                 }
+                list
+                    .contentShape(Rectangle())
 
                 XMDesgin.XMButton {
-                    vm.currentPage = 0
                     await vm.loadMore()
                 } label: {
                     Text("展开\(comment.commentNum - vm.list.count)条回复")
@@ -69,6 +68,7 @@ struct PostCommentView: View {
 
             })
         }
+        
     }
 }
 
