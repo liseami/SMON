@@ -35,9 +35,11 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
     @Published var loadingMoreStatus: XMRequestStatus = .isOK
     var currentPage: Int = 1
     var target: XMTargetType
+    var pagesize : Int = 20
 
-    init(target: XMTargetType) {
+    init(target: XMTargetType,pagesize : Int = 20) {
         self.target = target
+        self.pagesize = pagesize
         self.list = []
     }
 
@@ -84,7 +86,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
                 await waitme(sec: 0.2)
                 loadingMoreStatus = .isOKButEmpty
                 // 数据小于10个
-            } else if items.count < 20 {
+            } else if items.count < pagesize {
                 await waitme(sec: 0.2)
                 loadingMoreStatus = .isOKButEmpty
                 list += items

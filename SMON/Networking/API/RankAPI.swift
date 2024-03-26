@@ -14,11 +14,11 @@ enum RankAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
-        case .sameCity(let cityId, let page): return ["page": page, "pageSize": 20, "cityId": cityId]
-        case .country(let page): return ["page": page, "pageSize": 20]
-        case .fans(let page): return ["page": page, "pageSize": 20]
-        case .follow(let page): return ["page": page, "pageSize": 20]
-        case .vistor(let page): return ["page": page, "pageSize": 20]
+        case .sameCity(let cityId, let page): return ["page": page, "pageSize": 50, "cityId": cityId]
+        case .country(let page): return ["page": page, "pageSize": 50]
+        case .fans(let page): return ["page": page, "pageSize": 50]
+        case .follow(let page): return ["page": page, "pageSize": 50]
+        case .vistor(let page): return ["page": page, "pageSize": 50]
         case .nearby(let page, let fliter):
             return ["page": page] +
                 ["latitude": UserManager.shared.userlocation.lat, "longitude": UserManager.shared.userlocation.long]

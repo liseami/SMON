@@ -36,6 +36,7 @@ class RankViewModel: ObservableObject {
             filterModToTarget = .init(maxAge: fliterMod.maxAge, minAge: fliterMod.minAge, range: fliterMod.range.int, sex: fliterMod.sex)
         }
     }
+    @Published var showContent : Bool = false
 
     @Published var filterModToTarget: FliterMod = .init()
 

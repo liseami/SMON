@@ -72,11 +72,16 @@ struct ProfileView: View {
     
     // 顶部图像视图
     var topImageView: some View {
-        WebImage(str: vm.user.avatar)
-            .scaledToFill()
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-            .clipped()
-            .ignoresSafeArea()
+        ZStack(alignment: .center, content: {
+            WebImage(str: vm.user.avatar)
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                .clipped()
+                .ignoresSafeArea()
+            Image("profileblur")
+                .resizable()
+                .scaledToFit()
+        })
     }
     
     // 个人信息视图
@@ -91,11 +96,6 @@ struct ProfileView: View {
             }
             .padding(.horizontal)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(alignment: .top) {
-                // 渐变背景
-                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(0), Color.black]), startPoint: .top, endPoint: .center)
-                    .frame(height: 80)
-            }
         }
     }
     

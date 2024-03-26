@@ -14,6 +14,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
     var getListData: () async -> ()
     var loadMore: () async -> ()
     let loading: Loading
+    let pagesize : Int
     let empty: Empty
     let content: Content
     let list: ListData
@@ -22,6 +23,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
         _ ListData: ListData,
         reqStatus: XMRequestStatus = .isLoading,
         loadmoreStatus: XMRequestStatus = .isLoading,
+        pagesize : Int = 20  ,
         @ViewBuilder rowContent: @escaping (ListData.Element) -> RowContent,
         @ViewBuilder loadingView: @escaping () -> Loading,
         @ViewBuilder emptyView: @escaping () -> Empty,
@@ -36,12 +38,14 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
         self.loadMore = loadMore
         self.loadmoreStatus = loadmoreStatus
         self.getListData = getListData
+        self.pagesize = pagesize
     }
 
     @MainActor public init(
         _ ListData: ListData,
         reqStatus: XMRequestStatus = .isLoading,
         loadmoreStatus: XMRequestStatus = .isLoading,
+        pagesize : Int = 20 ,
         @ViewBuilder customContent: @escaping () -> Content,
         @ViewBuilder loadingView: @escaping () -> Loading,
         @ViewBuilder emptyView: @escaping () -> Empty,
@@ -56,6 +60,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
         self.loadMore = loadMore
         self.loadmoreStatus = loadmoreStatus
         self.getListData = getListData
+        self.pagesize = pagesize
     }
 
     var body: some View {
@@ -100,7 +105,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
             }
             .frame(maxWidth: .infinity, alignment: .center)
             .transition(.opacity.animation(.bouncy))
-            .ifshow(show: self.list.count >= 20)
+            .ifshow(show: self.list.count >= pagesize)
 
         case .isOKButEmpty:
             empty
