@@ -7,8 +7,21 @@
 
 import SwiftUI
 
-class ProfileHomeViewModel: ObservableObject {
-    init() {}
+struct HomePageInfo : Convertible{
+    var userId : String = "" // : 1764610746026688512,
+    var isDailySignin : String = "" //": 0,
+    var eachFollowNums : String = "" //": 1,
+    var currentRank : String = "" //": 4,
+    var flamesNums : String = "" //": 0,
+    var coinNums : String = "" //": 0
+}
+
+class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
+    init() {
+        super.init(autoGetData: true, pageName: "") {
+            UserAPI.getHomePage
+        }
+    }
 }
 
 struct ProfileHomeView: View {
@@ -135,11 +148,11 @@ struct ProfileHomeView: View {
 
     var list: some View {
         VStack(alignment: .leading, spacing: 24, content: {
-            XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "32")) {
+            XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)")) {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
             }
 
-            XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.23992")) {
+            XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)")) {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
             }
 
@@ -157,7 +170,7 @@ struct ProfileHomeView: View {
                 Text("🔥")
                     .font(.XMFont.big3)
                     .frame(width: 24, height: 24)
-                Text("0 火苗")
+                Text("\(vm.mod.flamesNums) 火苗")
                     .font(.XMFont.f1b)
             })
             .frame(maxWidth: .infinity)
@@ -169,7 +182,7 @@ struct ProfileHomeView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 24, height: 24)
-                Text("0 赛币")
+                Text("\(vm.mod.flamesNums) 赛币")
                     .font(.XMFont.f1b)
             })
             .frame(maxWidth: .infinity)

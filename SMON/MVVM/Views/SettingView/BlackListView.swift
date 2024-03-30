@@ -12,7 +12,7 @@ struct BlackListView: View {
         ScrollView(.vertical, showsIndicators: false, content: {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                 ForEach(0 ... 120, id: \.self) { _ in
-                    XMUserLine()
+                    XMUserLine(user: .init())
                 }
             })
             .padding(.all, 16)

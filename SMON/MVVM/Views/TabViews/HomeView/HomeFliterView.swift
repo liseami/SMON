@@ -9,38 +9,44 @@ import SwiftUI
 
 struct HomeFliterView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var vm: RankViewModel
+    @EnvironmentObject var vm: NearRankViewModel
     @State private var onEditing = false
+    // 模型
+    @State var mod: FliterModInput
+    init(mod: FliterMod) {
+        _mod = State(initialValue: FliterModInput(mod: mod))
+    }
+
     var body: some View {
         NavigationView(content: {
             List {
                 XMSection(title: "距离偏好") {
-                    Slider(value: $vm.fliterMod.range, in: 2...200, step: 1, onEditingChanged: { _ in
+                    Slider(value: $mod.range, in: 2...200, step: 1, onEditingChanged: { _ in
 
                     }).tint(Color.XMDesgin.main)
-                    Text("\(vm.fliterMod.range.int)公里")
+                    Text("\(mod.range.int)公里")
                 }
 
                 XMSection(title: "年龄偏好") {
                     RangeSlider(
-                        lowValue: $vm.fliterMod.minAgeProgress,
-                        highValue: $vm.fliterMod.maxAgeProgress,
+                        lowValue: $mod.minAgeProgress,
+                        highValue: $mod.maxAgeProgress,
                         in: 0...100,
                         showDifferenceOnEditing: true, color: Color.XMDesgin.main)
                     {
                         self.onEditing = $0
                     }
-                    Text("\(vm.fliterMod.minAge) - \(vm.fliterMod.maxAge)")
+                    Text("\(mod.minAge) - \(mod.maxAge)")
                 }
                 XMSection(title: "性别偏好") {
-                    XMDesgin.XMListRow(.init(name: vm.fliterMod.sex == nil ? "所有人" : vm.fliterMod.sex == 1 ? "男性" : "女性", icon: "", subline: "")) {
+                    XMDesgin.XMListRow(.init(name: mod.sex == nil ? "所有人" : mod.sex == 1 ? "男性" : "女性", icon: "", subline: "")) {
                         Apphelper.shared.pushActionSheet(title: "性别选择", message: "", actions: [UIAlertAction(title: "女性", style: .default, handler: { _ in
-                                vm.fliterMod.sex = 2
+                                mod.sex = 2
                             }),
                             UIAlertAction(title: "男性", style: .default, handler: { _ in
-                                vm.fliterMod.sex = 1
+                                mod.sex = 1
                             }), UIAlertAction(title: "所有人", style: .default, handler: { _ in
-                                vm.fliterMod.sex = nil
+                                mod.sex = nil
                             })])
                     }
                 }
@@ -48,15 +54,20 @@ struct HomeFliterView: View {
             .listStyle(.plain)
             .toolbar(content: {
                 ToolbarItem(placement: .topBarLeading) {
+                    // 取消，不保存
                     XMDesgin.XMIcon(iconName: "system_xmark")
                         .onTapGesture {
-                            vm.fliterMod = .init()
                             presentationMode.dismiss()
                         }
                 }
+                // 确认，保存
                 ToolbarItem(placement: .topBarTrailing) {
                     XMDesgin.XMIcon(iconName: "system_checkmark")
                         .onTapGesture {
+                            let mod_api_use = FliterMod(maxAge: self.mod.maxAge, minAge: self.mod.minAge, range: self.mod.range.int, sex: self.mod.sex)
+                            // 筛选项存入缓存中
+                            UserManager.shared.NearbyFliterMod = mod_api_use
+                            vm.filterMod_APIUse = mod_api_use
                             presentationMode.dismiss()
                         }
                 }
@@ -64,11 +75,16 @@ struct HomeFliterView: View {
             .navigationTitle("用户筛选")
             .navigationBarTitleDisplayMode(.inline)
         })
+        .onAppear(perform: {
+            print(self.mod.maxAgeProgress)
+            print(self.mod.minAgeProgress)
+
+        })
     }
 }
 
 #Preview {
-    HomeFliterView()
+    HomeFliterView(mod: .init())
         .environmentObject(RankViewModel())
 }
 

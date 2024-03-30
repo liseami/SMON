@@ -19,22 +19,29 @@ class UserManager: ObservableObject {
         }
     }
 
+    // 附近的人筛选项
+    var NearbyFliterMod: FliterMod {
+        didSet {
+            savaModel(model: NearbyFliterMod)
+        }
+    }
+
     // 本地用户经纬度缓存
-    @Published var userlocation: XMUserLocationInfo {
+    var userlocation: XMUserLocationInfo {
         didSet {
             savaModel(model: userlocation)
         }
     }
 
     // 阿里云个人信息
-    @Published var OSSInfo: XMUserOSSTokenInfo {
+    var OSSInfo: XMUserOSSTokenInfo {
         didSet {
             savaModel(model: OSSInfo)
         }
     }
 
     // IMInfo
-    @Published var IMInfo: IMUserSing {
+    var IMInfo: IMUserSing {
         didSet {
             savaModel(model: IMInfo)
         }
@@ -53,7 +60,9 @@ class UserManager: ObservableObject {
         IMInfo = .init()
         userlocation = .init()
         APPVersionInfo = .init()
+        NearbyFliterMod = .init()
         userLoginInfo = .init()
+        NearbyFliterMod = loadModel(type: FliterMod.self)
         userlocation = loadModel(type: XMUserLocationInfo.self)
         user = loadModel(type: XMUserProfile.self)
         userLoginInfo = loadModel(type: XMUserLoginInfo.self)

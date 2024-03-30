@@ -10,10 +10,27 @@ import SwiftUI
 
 class RelationListViewModel: XMListViewModel<XMUserProfile> {
     init() {
-        super.init(target: UserRelationAPI.followersList(lastUserId: ""))
+        super.init(target: UserRelationAPI.followersList(page: 1))
+        Task { await getListData() }
     }
 
-    @Published var currentTab: TabbarItem = .firend
+    @Published var currentTab: TabbarItem = .firend {
+        didSet {
+            switch currentTab {
+            case .fans:
+                target = UserRelationAPI.fansList(page: 1)
+            case .firend:
+                target =
+                    UserRelationAPI.fansList(page: 1)
+            case .fllow:
+                target =
+                    UserRelationAPI.followersList(page: 1)
+            }
+            currentPage = 1
+            Task { await getListData() }
+        }
+    }
+
     enum TabbarItem: CaseIterable {
         case firend
         case fllow
@@ -37,29 +54,28 @@ struct RelationListView: View {
         VStack(alignment: .center, spacing: 0, content: {
             // tabbar
             tabbar
-                .onChange(of: vm.currentTab) { _ in
-//                    switch currentTab {
-//                    case .fans:
-//                        vm.target = UserRelationAPI.fansList(lastUserId: "")
-//                    case .firend:
-//                        vm.target =
-//                            UserRelationAPI.fansList(lastUserId: "")
-//                    case .fllow:
-//                        vm.target =
-//                            UserRelationAPI.followersList(lastUserId: "")
-//                    }
-                }
             // list
             ScrollView(.vertical, showsIndicators: false, content: {
                 LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
-                    ForEach(vm.list, id: \.userId) { _ in
-                        XMUserLine()
+                    XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus) { user in
+                        XMUserLine(user: user)
+                    } loadingView: {
+                        UserListLoadingView()
+                    } emptyView: {
+                        EmptyView()
+                    } loadMore: {
+                        await vm.loadMore()
+                    } getListData: {
+                        await vm.getListData()
                     }
                 })
                 .padding(.all, 16)
             })
+            .refreshable {
+                await vm.getListData()
+            }
         })
-        .navigationTitle("朋友")
+        .navigationTitle(vm.currentTab.titile)
         .navigationBarTitleDisplayMode(.inline)
     }
 
@@ -71,6 +87,10 @@ struct RelationListView: View {
                     .font(selected ? .XMFont.f1b : .XMFont.f1)
                     .frame(maxWidth: .infinity)
                     .opacity(selected ? 1 : 0.66)
+                    .onTapGesture {
+                        Apphelper.shared.mada(style: .medium)
+                        vm.currentTab = tabbaritem
+                    }
             }
 
         })

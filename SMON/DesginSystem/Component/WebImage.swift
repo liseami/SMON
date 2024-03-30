@@ -16,7 +16,6 @@ struct WebImage: View {
             .resizable()
             .placeholder { _ in
                 Color.XMDesgin.b1
-//                    .conditionalEffect(.repeat(.shine, every: 1), condition: true)
             }
             .fade(duration: 0.3)
             .loadDiskFileSynchronously()

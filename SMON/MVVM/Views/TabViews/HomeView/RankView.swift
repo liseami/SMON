@@ -35,35 +35,40 @@ struct RankView: View {
                     XMDesgin.XMIcon(iconName: "home_bell", size: 22)
                 }
             }
-            // 筛选按钮
-            ToolbarItem(placement: .topBarTrailing) {
-                fliterBtn
-            }
         }
     }
 
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
-                    ForEach(RankViewModel.HomeTopBarItem.allCases, id: \.self) { tab in
+                    // 附近的人
+                    ZStack(alignment: .top) {
+                        if vm.currentTopTab == .near {
+                            NearRankView()
+                        } else {
+                            Color.clear.frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                    }
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .environmentObject(vm)
+                    .tag(RankViewModel.HomeTopBarItem.near)
+
+                    // 其他四个页面，接口请求固定，无筛选
+                    ForEach([RankViewModel.HomeTopBarItem.localCity, RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.fans, RankViewModel.HomeTopBarItem.flow, RankViewModel.HomeTopBarItem.vistor], id: \.self) { tab in
                         // 排行榜页面
-                        RankListView(target: vm.target(for: tab))
-                            .environmentObject(vm)
-                            .tag(tab)
+                        ZStack(alignment: .top) {
+                            if vm.currentTopTab == tab {
+                                RankListView(target: vm.target(for: tab))
+                            } else {
+                                Color.clear.frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }
+                        }
+                        .transition(.move(edge: .bottom).combined(with: .opacity))
+                        .environmentObject(vm)
+                        .tag(tab)
                     }
                 })
                 .tabViewStyle(.page(indexDisplayMode: .never))
-    }
-
-    var fliterBtn: some View {
-        XMDesgin.XMButton(action: {
-            Apphelper.shared.presentPanSheet(
-                HomeFliterView()
-                    .environmentObject(vm)
-                    .environment(\.colorScheme, .dark), style: .cloud)
-        }, label: {
-            XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
-        })
     }
 
     var topTabbar: some View {

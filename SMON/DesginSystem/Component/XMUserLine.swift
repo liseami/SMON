@@ -8,36 +8,35 @@
 import SwiftUI
 
 struct XMUserLine: View {
+    var user: XMUserProfile
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            WebImage(str: AppConfig.mokImage!.absoluteString)
-                .scaledToFill()
-                .frame(width: 44, height: 44, alignment: .center)
-                .clipShape(Circle())
+            XMUserAvatar(str: user.avatar, userId: user.userId, size: 44)
+
             VStack(alignment: .leading, spacing: 12, content: {
                 HStack {
                     VStack(alignment: .leading, spacing: 6, content: {
-                        Text("Placeholder")
+                        Text(user.nickname)
                             .font(.XMFont.f1b)
-                        Text("天蝎 · S")
+                        Text("\(user.zodiac) · \(user.emotionalNeeds)")
                             .font(.XMFont.f2)
                             .fcolor(.XMDesgin.f2)
                     })
                     Spacer()
                     XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在关注") {}
+                        .ifshow(show: user.isFollow.bool)
                 }
-                Text(String.randomChineseString(length: 40))
+                Text(user.signature)
                     .font(.XMFont.f2)
 
             })
         }
         .onTapGesture {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: "0"))
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: user.userId))
         }
     }
 }
 
-
 #Preview {
-    XMUserLine()
+    XMUserLine.init(user: .init())
 }

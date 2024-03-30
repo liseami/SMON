@@ -67,7 +67,8 @@ struct XMUserLocationInfo: Convertible {
     var lat : String = ""
     var long : String =  ""
 }
-struct XMUserProfile: Convertible {
+struct XMUserProfile: Convertible ,Identifiable{
+    var id : String = UUID().uuidString
     var userId: String = "" // 一定有，不参与资料完成度评分
     var cityId: String = "" // 一定有，不参与资料完成度评分
     var cityName: String = "" // 一定有，不参与资料完成度评分

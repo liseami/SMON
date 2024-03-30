@@ -10,11 +10,14 @@
 		A20189DA2BAA717700AFFF06 /* UserRelationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */; };
 		A205EBF92B97EE2800165A43 /* 兴趣标签.json in Resources */ = {isa = PBXBuildFile; fileRef = A205EBF82B97EE2800165A43 /* 兴趣标签.json */; };
 		A205EBFB2B97FCE100165A43 /* YuanyuanManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */; };
+		A209C8232BB6A32400531EF1 /* GoodAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A209C8222BB6A32400531EF1 /* GoodAPI.swift */; };
+		A209C8252BB6AA9900531EF1 /* AppOperationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A209C8242BB6AA9900531EF1 /* AppOperationAPI.swift */; };
 		A20AF7562B92BF400098E561 /* WebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7552B92BF400098E561 /* WebImage.swift */; };
 		A20AF7582B92C42F0098E561 /* XMTyperText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF7572B92C42F0098E561 /* XMTyperText.swift */; };
 		A20AF75C2B9300260098E561 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75B2B9300260098E561 /* LocationManager.swift */; };
 		A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75D2B931DF60098E561 /* ProfileEditView.swift */; };
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
+		A2380F502BB412D8005B5975 /* NearRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2380F4F2BB412D8005B5975 /* NearRankView.swift */; };
 		A2498ACB2BA7DD630045B7AD /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACA2BA7DD630045B7AD /* PostAPI.swift */; };
 		A2498ACD2BA7E23D0045B7AD /* PostsOperationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACC2BA7E23D0045B7AD /* PostsOperationAPI.swift */; };
 		A2498ACF2BA7E7D10045B7AD /* Int++.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2498ACE2BA7E7D10045B7AD /* Int++.swift */; };
@@ -163,6 +166,8 @@
 		A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRelationAPI.swift; sourceTree = "<group>"; };
 		A205EBF82B97EE2800165A43 /* 兴趣标签.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "兴趣标签.json"; sourceTree = "<group>"; };
 		A205EBFA2B97FCE100165A43 /* YuanyuanManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YuanyuanManager.swift; sourceTree = "<group>"; };
+		A209C8222BB6A32400531EF1 /* GoodAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodAPI.swift; sourceTree = "<group>"; };
+		A209C8242BB6AA9900531EF1 /* AppOperationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOperationAPI.swift; sourceTree = "<group>"; };
 		A20AF7552B92BF400098E561 /* WebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImage.swift; sourceTree = "<group>"; };
 		A20AF7572B92C42F0098E561 /* XMTyperText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTyperText.swift; sourceTree = "<group>"; };
 		A20AF75B2B9300260098E561 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -211,6 +216,7 @@
 		A2218D642B89BB5400ECE075 /* CoreAudioTypes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioTypes.framework; path = System/Library/Frameworks/CoreAudioTypes.framework; sourceTree = SDKROOT; };
 		A2218D682B89BC3100ECE075 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		A2380F4F2BB412D8005B5975 /* NearRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearRankView.swift; sourceTree = "<group>"; };
 		A2498ACA2BA7DD630045B7AD /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
 		A2498ACC2BA7E23D0045B7AD /* PostsOperationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsOperationAPI.swift; sourceTree = "<group>"; };
 		A2498ACE2BA7E7D10045B7AD /* Int++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int++.swift"; sourceTree = "<group>"; };
@@ -746,6 +752,8 @@
 			isa = PBXGroup;
 			children = (
 				A2BF26C52BA1D8DA00B5A616 /* UserAPI.swift */,
+				A209C8242BB6AA9900531EF1 /* AppOperationAPI.swift */,
+				A209C8222BB6A32400531EF1 /* GoodAPI.swift */,
 				A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */,
 				A2BF26C62BA1D8DA00B5A616 /* RankAPI.swift */,
 				A2BF26C72BA1D8DA00B5A616 /* CommonAPI.swift */,
@@ -760,6 +768,7 @@
 			children = (
 				A272A48E2B871CFD008EA955 /* RankView.swift */,
 				A27EFFB12B92B67700B47BD6 /* RankListView.swift */,
+				A2380F4F2BB412D8005B5975 /* NearRankView.swift */,
 				A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */,
 				A256DBA62B906737008C7063 /* HotBuyView.swift */,
 			);
@@ -971,6 +980,7 @@
 				A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */,
 				A25AAD302B8F19A900B7CE40 /* RelationHopeRequestView.swift in Sources */,
 				A272A4742B8706FC008EA955 /* Persistence.swift in Sources */,
+				A209C8252BB6AA9900531EF1 /* AppOperationAPI.swift in Sources */,
 				A281EFE82B9AB6E700E9DE05 /* HotHistoryView.swift in Sources */,
 				A2B45CAE2B8B222400D71EF8 /* ProfileViewModel.swift in Sources */,
 				A2784F172B9166CB00A1B06F /* ProfileHomeView.swift in Sources */,
@@ -1022,6 +1032,7 @@
 				A27EFF9D2B92035700B47BD6 /* PostDetailView.swift in Sources */,
 				A2BA89542B9B03E6002FEEFA /* XMTheme.swift in Sources */,
 				A25AAD342B8F1E9500B7CE40 /* HeightRequestView.swift in Sources */,
+				A209C8232BB6A32400531EF1 /* GoodAPI.swift in Sources */,
 				A25AAD282B8EF06400B7CE40 /* MorePhotoRequestView.swift in Sources */,
 				A256DBAA2B907E7A008C7063 /* PostEditView.swift in Sources */,
 				A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */,
@@ -1060,6 +1071,7 @@
 				A2BF269F2BA1D83B00B5A616 /* MessageView.swift in Sources */,
 				A2498ACF2BA7E7D10045B7AD /* Int++.swift in Sources */,
 				A25AAD2E2B8EFE9900B7CE40 /* AliOSSManager.swift in Sources */,
+				A2380F502BB412D8005B5975 /* NearRankView.swift in Sources */,
 				A272A4952B871D80008EA955 /* AppFeaturesView.swift in Sources */,
 				A28C55AB2B95BE1300707EDA /* MockTool.swift in Sources */,
 				A2EF075C2B9D4CDD004CF692 /* NotificationSettingView.swift in Sources */,

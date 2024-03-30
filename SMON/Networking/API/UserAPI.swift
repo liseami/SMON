@@ -11,7 +11,8 @@ enum UserAPI: XMTargetType {
     case getUserInfo(id: String?)
     case albumList(id: String?)
     case updateAlbum(p: [String])
-
+    case getHomePage
+    case wallet
 
     var group: String {
         return "/v1/user"
@@ -24,17 +25,16 @@ enum UserAPI: XMTargetType {
     }
 
     var parameters: [String: Any]? {
-        get {
-            switch self {
-            case .updateAlbum(let paths): return ["picPathList": paths]
-            case .albumList(let id): return id == nil ? nil : ["userId": id!]
-            case .getUserInfo(let id): return id == nil ? nil : ["userId": id!]
-            case .smsCode(let p): return p.kj.JSONObject()
-            case .loginBySms(let p): return p.kj.JSONObject()
-            case .updateUserInfo(let p): return p.kj.JSONObject()
-            }
+        switch self {
+        case .wallet : return nil
+        case .getHomePage : return nil
+        case .updateAlbum(let paths): return ["picPathList": paths]
+        case .albumList(let id): return id == nil ? nil : ["userId": id!]
+        case .getUserInfo(let id): return id == nil ? nil : ["userId": id!]
+        case .smsCode(let p): return p.kj.JSONObject()
+        case .loginBySms(let p): return p.kj.JSONObject()
+        case .updateUserInfo(let p): return p.kj.JSONObject()
         }
-        set {}
     }
 }
 

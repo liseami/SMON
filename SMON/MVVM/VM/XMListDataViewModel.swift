@@ -47,8 +47,8 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
 
     @MainActor
     func getListData() async {
-        await waitme(sec: 0.2)
         reqStatus = .isLoading
+        await waitme(sec: 0.4)
         // 手动更新 parameters 字典
         currentPage = 1
         if target.parameters?.contains(where: { $0.key == "page" }) == true {

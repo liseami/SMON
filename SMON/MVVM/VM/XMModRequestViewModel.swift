@@ -12,7 +12,7 @@ import Foundation
  */
 
 class XMModRequestViewModel<ListRowMod: Convertible>: ObservableObject {
-    @Published var mod: ListRowMod?
+    @Published var mod: ListRowMod
     @Published var reqStatus: XMRequestStatus = .isLoading
     var target: XMTargetType
 
@@ -20,7 +20,7 @@ class XMModRequestViewModel<ListRowMod: Convertible>: ObservableObject {
     init(autoGetData: Bool = true, pageName: String, target: () -> XMTargetType) {
         self.target = target()
         self.pageName = pageName
-
+        mod = .init()
         guard autoGetData else { return }
         Task { await self.getSingleData() }
     }

@@ -27,8 +27,6 @@ struct RequestCompleteView: View {
                     .padding(.trailing, 30)
                     .transition(.movingParts.glare.animation(.easeInOut(duration: 0.66)))
                     .ifshow(show: showText)
-                
-                    
 
             })
             .onAppear(perform: {
@@ -36,8 +34,7 @@ struct RequestCompleteView: View {
             })
             Spacer()
             XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "好的") {
-                
-                
+                UserManager.shared.userLoginInfo.isNeedInfo = false
             }
             .padding(.horizontal, 48)
         }

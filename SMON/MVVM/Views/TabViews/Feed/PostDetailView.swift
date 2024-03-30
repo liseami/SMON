@@ -33,7 +33,7 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
             mod.toUserId = targetComment.id
         } else {
             // 给帖子回复
-            mod.toUserId = self.mod?.userId ?? ""
+            mod.toUserId = self.mod.userId ?? ""
         }
         mod.postId = self.postId
         mod.content = self.inputStr
@@ -44,14 +44,14 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
             self.inputStr.removeAll()
             Apphelper.shared.closeKeyBoard()
             // 请求详情
-            self.mod = nil
+            self.mod = .init()
             await self.getSingleData()
         }
     }
 
     @MainActor
     func deletePost() async {
-        let t = PostAPI.delete(postId: self.postId, userId: self.mod?.userId ?? "")
+        let t = PostAPI.delete(postId: self.postId, userId: self.mod.userId ?? "")
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             MainViewModel.shared.pathPages.removeLast()
@@ -92,7 +92,7 @@ struct PostDetailView: View {
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMButton {
-                    let actions = vm.mod?.userId == UserManager.shared.user.userId ?
+                    let actions = vm.mod.userId == UserManager.shared.user.userId ?
                         [
                             UIAlertAction(title: "删除", style: .destructive, handler: { _ in
                                 Task {
@@ -158,10 +158,10 @@ struct PostDetailView: View {
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
             if vm.mod != nil {
-                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod?.isLiked.bool ?? false, likeNumbers: vm.mod?.likeNums ?? 0,contentId: vm.mod?.id ?? "") 
+                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod.isLiked.bool ?? false, likeNumbers: vm.mod.likeNums ?? 0,contentId: vm.mod.id ?? "") 
 
                 HStack {
-                    Text("\(vm.mod?.commentNums ?? 0)")
+                    Text("\(vm.mod.commentNums ?? 0)")
                         .font(.XMFont.f3)
                         .bold()
                     XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
@@ -175,22 +175,22 @@ struct PostDetailView: View {
 
     @ViewBuilder
     var text: some View {
-        Text(vm.mod?.postContent ?? "")
+        Text(vm.mod.postContent ?? "")
             .lineSpacing(3)
             .fcolor(.XMDesgin.f1)
             .font(.XMFont.f1)
-            .ifshow(show: vm.mod?.postContent.isEmpty == false)
+            .ifshow(show: vm.mod.postContent.isEmpty == false)
     }
 
     var userinfo: some View {
         HStack {
-            XMUserAvatar(str: vm.mod?.avatar ?? "", userId: vm.mod?.userId ?? "", size: 56)
-            Text(vm.mod?.nickname ?? "")
+            XMUserAvatar(str: vm.mod.avatar ?? "", userId: vm.mod.userId ?? "", size: 56)
+            Text(vm.mod.nickname ?? "")
                 .font(.XMFont.f1b)
                 .lineLimit(1)
                 .fcolor(.XMDesgin.f1)
             Spacer()
-            Text(vm.mod?.createdAtStr ?? "")
+            Text(vm.mod.createdAtStr ?? "")
                 .font(.XMFont.f3)
                 .fcolor(.XMDesgin.f2)
         }
@@ -198,8 +198,8 @@ struct PostDetailView: View {
 
     @ViewBuilder
     var images: some View {
-        if let atts = vm.mod?.postAttachs, atts.isEmpty == false {
-            let urls = atts.map { $0.picUrl }
+        if vm.mod.postAttachs.isEmpty == false {
+            let urls = vm.mod.postAttachs.map { $0.picUrl }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 4) {
                     Spacer().frame(width: 16 + 38 + 12 - 4)

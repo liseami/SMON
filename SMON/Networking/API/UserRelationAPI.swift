@@ -11,10 +11,9 @@ import Moya
 import SwiftyJSON
 
 enum UserRelationAPI: XMTargetType {
-
     case tapFollow(followUserId: String)
-    case followersList(lastUserId: String)
-    case fansList(lastUserId: String)
+    case followersList(page: Int)
+    case fansList(page: Int)
 
     var group: String {
         return "/v1/userRelation"
@@ -27,15 +26,10 @@ enum UserRelationAPI: XMTargetType {
     }
 
     var parameters: [String: Any]? {
-        get {
-            switch self {
-            case .followersList(let lastUserId): return ["userId": lastUserId]
-            case .fansList(let lastUserId): return ["userId": lastUserId]
-            case .tapFollow(let id): return ["followUserId": id]
-            }
+        switch self {
+        case .followersList(let page): return ["page": page, "pageSize": 20]
+        case .fansList(let page): return ["page": page, "pageSize": 20]
+        case .tapFollow(let id): return ["followUserId": id]
         }
-        set {}
     }
 }
-
-

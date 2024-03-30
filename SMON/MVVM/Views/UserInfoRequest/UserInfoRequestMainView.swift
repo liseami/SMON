@@ -32,6 +32,7 @@ struct UserInfoRequestMainView: View {
         })
         .fullScreenCover(isPresented: $vm.showCompleteView, content: {
             RequestCompleteView()
+                .environmentObject(vm)
                 .preferredColorScheme(.dark)
         })
         .overlay {
