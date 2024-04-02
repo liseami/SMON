@@ -53,6 +53,7 @@ PODS:
   - SwifterSwift/UIKit (6.0.0)
   - SwifterSwift/WebKit (6.0.0)
   - SwiftyJSON (5.0.1)
+  - SwiftyStoreKit (0.16.1)
   - Tagly (0.1.1)
   - TIMCommon (7.8.5483):
     - TIMCommon/BaseCell (= 7.8.5483)
@@ -198,6 +199,7 @@ DEPENDENCIES:
   - PanModal
   - SwifterSwift
   - SwiftyJSON
+  - SwiftyStoreKit
   - Tagly
   - TUIChat/UI_Classic
   - TUIConversation/UI_Classic
@@ -220,6 +222,7 @@ SPEC REPOS:
     - SDWebImage
     - SwifterSwift
     - SwiftyJSON
+    - SwiftyStoreKit
     - Tagly
     - TIMCommon
     - TUIChat
@@ -243,6 +246,7 @@ SPEC CHECKSUMS:
   SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
   SwifterSwift: 66843dc594f8fb890f5543c22545921d44acc004
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   Tagly: deb459c698853a3fffce027fedb92dcb7cf5c68e
   TIMCommon: f87e96822cc1df0ec9fea9049301922ae3f742a5
   TUIChat: 45f37caa632381bd1a05deb20f66a58ef25dc4d5
@@ -250,6 +254,6 @@ SPEC CHECKSUMS:
   TUICore: 8e855f83a1b7a04a57dec07c1b71fae83c871d19
   TXIMSDK_Plus_iOS: 9559f6aebc6d69314521d17235bdb3ab58599be3
 
-PODFILE CHECKSUM: 6ad643b56c1d80752472420b9958c0bff6848715
+PODFILE CHECKSUM: 65ad36cf8ae2d40027c75e9358804b0affa94541
 
 COCOAPODS: 1.12.1

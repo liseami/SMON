@@ -10,6 +10,12 @@ import Foundation
 enum PostAPI: XMTargetType {
     case publish(p: PostPublishReqMod)
     case themeList(p: ThemePostListReqMod)
+
+    case sameCityList(page: Int)
+    case recommendList(page: Int)
+    case followList(page: Int)
+    case nearbyList(page: Int)
+
     case delete(postId: String, userId: String)
     case detail(postId: String, userId: String)
 
@@ -19,6 +25,11 @@ enum PostAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .sameCityList(let page): return ["page": page, "pageSize": "20"]
+        case .recommendList(let page): return ["page": page, "pageSize": "20"]
+        case .followList(let page): return ["page": page, "pageSize": "20"]
+        case .nearbyList(let page): return ["page": page, "pageSize": "20"]
+
         case .publish(let p): return p.kj.JSONObject()
         case .themeList(let p): return p.kj.JSONObject()
         case .delete(let postId, let userId): return ["userId": userId, "postId": postId]
@@ -36,6 +47,10 @@ enum PostAPI: XMTargetType {
         switch self {
         case .themeList(let p):
             return PostAPI.themeList(p: .init(page: newPage, pageSize: p.pageSize, type: p.type, themeId: p.themeId))
+        case .sameCityList(let p): return PostAPI.sameCityList(page: newPage)
+        case .recommendList(let p): return PostAPI.recommendList(page: newPage)
+        case .followList(let p): return PostAPI.followList(page: newPage)
+        case .nearbyList(let p): return PostAPI.nearbyList(page: newPage)
         default: return self
         }
     }

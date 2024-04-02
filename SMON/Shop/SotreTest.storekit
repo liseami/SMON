@@ -1,0 +1,178 @@
+{
+  "identifier" : "2460BAD3",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.0",
+      "familyShareable" : false,
+      "internalID" : "6480427674",
+      "localizations" : [
+        {
+          "description" : "1元",
+          "displayName" : "赛币充值1元",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "meiridasai_001",
+      "referenceName" : "赛币充值1元",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "1.0",
+      "familyShareable" : false,
+      "internalID" : "6480104403",
+      "localizations" : [
+        {
+          "description" : "7赛币",
+          "displayName" : "7赛币",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "001",
+      "referenceName" : "赛币充值1元7赛币",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "298.0",
+      "familyShareable" : false,
+      "internalID" : "6480104826",
+      "localizations" : [
+        {
+          "description" : "298元2086赛币",
+          "displayName" : "298元2086赛币",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "005",
+      "referenceName" : "赛币充值298元2086赛币",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "30.0",
+      "familyShareable" : false,
+      "internalID" : "6480104808",
+      "localizations" : [
+        {
+          "description" : "30元210赛币",
+          "displayName" : "30元210赛币",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "003",
+      "referenceName" : "赛币充值30元210赛币",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "555.0",
+      "familyShareable" : false,
+      "internalID" : "6480104964",
+      "localizations" : [
+        {
+          "description" : "555元3885赛币",
+          "displayName" : "555元3885赛币",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "006",
+      "referenceName" : "赛币充值555元3885赛币",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "6.0",
+      "familyShareable" : false,
+      "internalID" : "6480104648",
+      "localizations" : [
+        {
+          "description" : "42赛币",
+          "displayName" : "42赛币",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "002",
+      "referenceName" : "赛币充值6元42赛币",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "98.0",
+      "familyShareable" : false,
+      "internalID" : "6480104871",
+      "localizations" : [
+        {
+          "description" : "98元686赛币",
+          "displayName" : "98元686赛币",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "004",
+      "referenceName" : "赛币充值98元686赛币",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6479641187",
+    "_developerTeamID" : "DRBYZJAA5D",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 733716634.09191704,
+    "_locale" : "zh_CN",
+    "_storefront" : "CHN",
+    "_storeKitErrors" : [
+      {
+        "current" : {
+          "index" : 2,
+          "type" : "generic"
+        },
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

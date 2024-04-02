@@ -151,7 +151,7 @@ struct ProfileView: View {
                 }
                 // 私信
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {
-                    vm.tapChat()
+                    await vm.tapChat()
                 }
                 // 微信
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {

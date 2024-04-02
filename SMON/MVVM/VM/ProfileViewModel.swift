@@ -14,7 +14,7 @@ class ProfileViewModel: XMListViewModel<XMPost> {
     var userId: String = ""
 
     init(userId: String) {
-        super.init( target:  PostAPI.themeList(p: .init(page: 1, pageSize: 10, type: 1, themeId: 2)))
+        super.init(target: PostAPI.themeList(p: .init(page: 1, pageSize: 10, type: 1, themeId: 2)))
         self.userId = userId
         print(userId)
         print(userId)
@@ -68,9 +68,13 @@ class ProfileViewModel: XMListViewModel<XMPost> {
     /*
      私信
      */
-
-    func tapChat() {
-        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: "m" + userId))
+    @MainActor
+    func tapChat() async {
+        let t = UserOperationAPI.sayHello(toUserId: userId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: "m" + userId))
+        }
     }
 
     /*

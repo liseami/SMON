@@ -16,10 +16,14 @@ struct XMEmptyView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 12) {
             Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 280, height: 280)
             Text(text)
                 .font(.XMFont.f1)
+                .fcolor(.XMDesgin.f2)
         }
         .padding(.top, UIScreen.main
             .bounds.height * 0.3)

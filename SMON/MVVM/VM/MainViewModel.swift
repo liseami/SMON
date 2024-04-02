@@ -62,5 +62,6 @@ class MainViewModel: ObservableObject {
         case postdetail(postId: String)
         case profile(userId: String)
         case chat(userId:String)
+        case flamedetail
     }
 }

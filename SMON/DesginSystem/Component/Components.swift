@@ -70,8 +70,10 @@ enum XMDesgin {
     }
     struct XMTag: View {
         let text: String
-        init(text: String) {
+        let bgcolor : Color
+        init(text: String,bgcolor : Color = Color.XMDesgin.b1) {
             self.text = text
+            self.bgcolor = bgcolor
         }
 
         var body: some View {
@@ -80,7 +82,7 @@ enum XMDesgin {
                 .fcolor(.XMDesgin.f1)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
-                .background(Color.XMDesgin.b1)
+                .background(bgcolor)
                 .clipShape(Capsule())
         }
     }

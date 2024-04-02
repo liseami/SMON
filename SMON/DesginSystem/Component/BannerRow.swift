@@ -27,7 +27,7 @@ struct BannerRow<Content: View, T: Identifiable>: View {
         self.list = list
         self._index = index
         self.content = content
-        self._currentIndex = State.init(initialValue: index.wrappedValue)
+        self._currentIndex = State(initialValue: index.wrappedValue)
     }
 
     var body: some View {

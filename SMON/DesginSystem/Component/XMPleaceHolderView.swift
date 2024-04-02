@@ -18,8 +18,7 @@ struct XMPleaceHolderView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 120, height: 120)
-                    .scaleEffect(2)
+                    .frame(width: 240, height: 240)
             }
             Text(text)
                 .font(.XMFont.f1)

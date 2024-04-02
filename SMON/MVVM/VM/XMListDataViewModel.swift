@@ -35,12 +35,14 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
     @Published var loadingMoreStatus: XMRequestStatus = .isOK
     var currentPage: Int = 1
     var target: XMTargetType
-    var pagesize : Int = 20
-
-    init(target: XMTargetType,pagesize : Int = 20) {
+    var pagesize: Int = 20
+    var atKetPath: String = ""
+    
+    init(target: XMTargetType, pagesize: Int = 20, atKeyPath: String = .datalist) {
         self.target = target
         self.pagesize = pagesize
         self.list = []
+        self.atKetPath = atKeyPath
     }
 
     deinit {}
@@ -56,14 +58,14 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
         }
         list = []
         let result = await Networking.request_async(target)
-        if result.is2000Ok, let items = result.mapArray(ListRowMod.self) {
+        if result.is2000Ok, let items = result.mapArray(ListRowMod.self, atKeyPath: atKetPath) {
             if items.isEmpty {
                 reqStatus = .isOKButEmpty
             } else {
                 list = items
                 print(list)
                 reqStatus = .isOK
-                print(self.reqStatus)
+                print(reqStatus)
             }
         } else {
             reqStatus = .isNeedReTry
@@ -80,7 +82,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
             target = target.updatingParameters(currentPage + 1)
         }
         let r = await Networking.request_async(target)
-        if r.is2000Ok, let items = r.mapArray(ListRowMod.self) {
+        if r.is2000Ok, let items = r.mapArray(ListRowMod.self, atKeyPath: atKetPath) {
             // 没有更多数据
             if items.isEmpty {
                 await waitme(sec: 0.2)

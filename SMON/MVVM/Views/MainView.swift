@@ -34,6 +34,7 @@ struct MainView: View {
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
                     case .chat(let userId): ChatView(userId: userId)
+                    case .flamedetail : FlameDetailView()
                     }
                 }
                 .navigationBarTransparent(false)

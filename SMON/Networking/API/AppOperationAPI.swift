@@ -5,10 +5,11 @@ import Moya
 import SwiftyJSON
 
 enum AppOperationAPI: XMTargetType {
-    case getCoinList
+    
+    case dailySignIn
 
     var group: String {
-        return "/v1/goods"
+        return "/v1/appOperation"
     }
 
     var method: HTTPRequestMethod {

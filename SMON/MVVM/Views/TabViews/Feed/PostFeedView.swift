@@ -52,17 +52,18 @@ struct PostFeedView: View {
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,
                 content: {
-                    PostListView()
+                    PostListView(target: PostAPI.nearbyList(page: 1))
                         .tag(FeedViewModel.FeedTopBarItem.near)
-                    PostListView()
+
+                    PostListView(target: PostAPI.sameCityList(page: 1))
                         .tag(FeedViewModel.FeedTopBarItem.localCity)
                     // 每日大赛
                     MeiRiDaSaiView()
                         .tag(FeedViewModel.FeedTopBarItem.competition)
 
-                    PostListView()
+                    PostListView(target: PostAPI.recommendList(page: 1))
                         .tag(FeedViewModel.FeedTopBarItem.hot)
-                    PostListView()
+                    PostListView(target: PostAPI.followList(page: 1))
                         .tag(FeedViewModel.FeedTopBarItem.flow)
 
                 })

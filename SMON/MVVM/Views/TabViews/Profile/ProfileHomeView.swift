@@ -5,21 +5,45 @@
 //  Created by 赵翔宇 on 2024/3/1.
 //
 
+import StoreKit
 import SwiftUI
 
-struct HomePageInfo : Convertible{
-    var userId : String = "" // : 1764610746026688512,
-    var isDailySignin : String = "" //": 0,
-    var eachFollowNums : String = "" //": 1,
-    var currentRank : String = "" //": 4,
-    var flamesNums : String = "" //": 0,
-    var coinNums : String = "" //": 0
+struct HomePageInfo: Convertible {
+    var userId: String = "" // : 1764610746026688512,
+    var isDailySignin: Bool = false // ": 0,
+    var eachFollowNums: String = "" // ": 1,
+    var currentRank: String = "" // ": 4,
+    var flamesNums: String = "" // ": 0,
+    var coinNums: String = "" // ": 0
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
     init() {
         super.init(autoGetData: true, pageName: "") {
             UserAPI.getHomePage
+        }
+        Task {
+            do {
+                let products = try await Product.products(
+                    for: ["meiridasai_001", "001", "002", "003", "004", "005", "006"]
+                )
+                print(products.isEmpty ? "没有查找到产品。" : products)
+                return products.first
+            } catch {
+                print("没有产品。")
+                return nil
+            }
+        }
+    }
+
+    /*
+     每日签到
+     */
+    @MainActor func dailySignIn() async {
+        let t = AppOperationAPI.dailySignIn
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            await self.getSingleData()
         }
     }
 }
@@ -43,9 +67,10 @@ struct ProfileHomeView: View {
             })
             .padding(.horizontal, 16)
         }
-        .task {
+        .refreshable(action: {
+            await vm.getSingleData()
             await UserManager.shared.getUserInfo()
-        }
+        })
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 XMDesgin.XMButton {
@@ -70,13 +95,12 @@ struct ProfileHomeView: View {
             Text(userManager.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: UserManager.shared.user.userId))
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: userManager.user.userId))
             }, label: {
                 XMUserAvatar(str: userManager.user.avatar, userId: userManager.user.userId, size: 120)
             })
             .overlay {
                 ZStack {
-                    
                     Circle()
                         .trim(from: 0.0, to: CGFloat(1))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
@@ -84,13 +108,12 @@ struct ProfileHomeView: View {
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                     Circle()
-                        .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore ))
+                        .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
                         .fcolor(.XMDesgin.main)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                         .animation(.spring(), value: userManager.user.profileCompletionScore)
-                    
                 }
                 .overlay(alignment: .bottom) {
                     Text("\(Int(userManager.user.profileCompletionScore * 100))%")
@@ -118,28 +141,32 @@ struct ProfileHomeView: View {
     var banner: some View {
         VStack(alignment: .leading, spacing: 16, content: {
 //            Text("免费获取赛币").font(.title3.bold())
-            HStack(spacing: 32) {
-                VStack(alignment: .leading, spacing: 4, content: {
-                    Text("每日签到")
-                        .font(.XMFont.f1b)
-                    Text("1次 / 24小时")
-                        .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
-                })
-                .padding(.leading, 120)
-                Spacer()
-            }
-            .frame(maxWidth: .infinity)
-            .frame(height: 80)
-            .background(.XMDesgin.b1)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-            .overlay(alignment: .leading) {
-                Image("profile_calendar")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 56, height: 56)
-                    .scaleEffect(2.2)
-                    .padding(.leading, 24)
+            XMDesgin.XMButton {
+                await vm.dailySignIn()
+            } label: {
+                HStack(spacing: 32) {
+                    VStack(alignment: .leading, spacing: 4, content: {
+                        Text("每日签到")
+                            .font(.XMFont.f1b)
+                        Text(vm.mod.isDailySignin ? "今日已签，100火苗已到账" : "1次 / 24小时")
+                            .font(.XMFont.f2)
+                            .fcolor(.XMDesgin.f2)
+                    })
+                    .padding(.leading, 120)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 80)
+                .background(.XMDesgin.b1)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .overlay(alignment: .leading) {
+                    Image("profile_calendar")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 56, height: 56)
+                        .scaleEffect(2.2)
+                        .padding(.leading, 24)
+                }
             }
         })
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -156,7 +183,7 @@ struct ProfileHomeView: View {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
             }
 
-            XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: "限时特惠")) {
+            XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums)) {
                 Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
             }
 
@@ -165,30 +192,44 @@ struct ProfileHomeView: View {
     }
 
     var userbackpack: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
-            VStack(alignment: .center, spacing: 12, content: {
-                Text("🔥")
-                    .font(.XMFont.big3)
-                    .frame(width: 24, height: 24)
-                Text("\(vm.mod.flamesNums) 火苗")
-                    .font(.XMFont.f1b)
+        VStack(alignment: .center, spacing: 12) {
+            HStack(alignment: .center, spacing: 12, content: {
+                ForEach([
+                    (icon: "❤️‍🔥", label: "热度", value: vm.mod.flamesNums),
+                    (icon: "🔥", label: "火苗", value: vm.mod.flamesNums)
+                ], id: \.icon) { item in
+                    XMDesgin.XMButton.init {
+                        if item.label == "火苗" {
+                            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.flamedetail)
+                        } else {
+                            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
+                        }
+                    } label: {
+                        VStack(alignment: .center, spacing: 12) {
+                            Text(item.icon)
+                                .font(.XMFont.big3)
+                                .frame(width: 24, height: 24)
+                            Text("\(item.value) \(item.label)")
+                                .font(.XMFont.f1b)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 24)
+                        .background(Color.XMDesgin.b1)
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
+                    }
+                }
             })
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 24)
-            .background(Color.XMDesgin.b1)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            VStack(alignment: .center, spacing: 12, content: {
-                Image("saicoin_lvl1")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-                Text("\(vm.mod.flamesNums) 赛币")
-                    .font(.XMFont.f1b)
-            })
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 24)
-            .background(Color.XMDesgin.b1)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(alignment: .center) {
+                AutoLottieView(lottieFliesName: "buyhot_arrow", loopMode: .loop, speed: 1.618)
+                    .frame(width: 100, height: 100)
+                    .scaleEffect(2)
+                    .rotationEffect(.init(degrees: 90))
+                    .allowsTightening(false)
+            }
+
+            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "立即兑换为热度") {
+                Apphelper.shared.presentPanSheet(HotExchangeView(), style: .sheet)
+            }
         }
     }
 }

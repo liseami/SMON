@@ -12,7 +12,15 @@ class NearRankViewModel: XMListViewModel<XMUserInRank> {
         let mod = UserManager.shared.NearbyFliterMod
         self.filterMod_APIUse = mod
         super.init(target: RankAPI.nearby(page: 1, fliter: mod), pagesize: 50)
-        Task { await self.getListData() }
+       
+        if LocationManager.shared.locationManager.authorizationStatus != .authorizedWhenInUse {
+            Apphelper.shared.presentPanSheet(
+                RequestUserLocationAuthorizationView()
+                    .environmentObject(self),
+                style: .setting)
+        }else{
+            Task { await self.getListData() }
+        }
     }
 
     // 接口入参模型，发生变动，自动请求接口

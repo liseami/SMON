@@ -52,7 +52,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     var longFormHeight: PanModalHeight {
         switch self.style {
         case .shop: return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.7)
-        case .sheet : return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.4)
+        case .sheet : return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.5)
         default: return .maxHeight
         }
     }

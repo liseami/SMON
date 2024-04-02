@@ -13,6 +13,7 @@ ${BUILT_PRODUCTS_DIR}/ReactiveObjC/ReactiveObjC.framework
 ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/SwiftyStoreKit/SwiftyStoreKit.framework
 ${BUILT_PRODUCTS_DIR}/TIMCommon/TIMCommon.framework
 ${BUILT_PRODUCTS_DIR}/TUIChat/TUIChat.framework
 ${BUILT_PRODUCTS_DIR}/TUIConversation/TUIConversation.framework
