@@ -15,24 +15,13 @@ struct HomePageInfo: Convertible {
     var currentRank: String = "" // ": 4,
     var flamesNums: String = "" // ": 0,
     var coinNums: String = "" // ": 0
+    var currentHot : String = ""
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
     init() {
         super.init(autoGetData: true, pageName: "") {
             UserAPI.getHomePage
-        }
-        Task {
-            do {
-                let products = try await Product.products(
-                    for: ["meiridasai_001", "001", "002", "003", "004", "005", "006"]
-                )
-                print(products.isEmpty ? "没有查找到产品。" : products)
-                return products.first
-            } catch {
-                print("没有产品。")
-                return nil
-            }
         }
     }
 
@@ -195,7 +184,7 @@ struct ProfileHomeView: View {
         VStack(alignment: .center, spacing: 12) {
             HStack(alignment: .center, spacing: 12, content: {
                 ForEach([
-                    (icon: "❤️‍🔥", label: "热度", value: vm.mod.flamesNums),
+                    (icon: "❤️‍🔥", label: "热度", value: vm.mod.currentHot),
                     (icon: "🔥", label: "火苗", value: vm.mod.flamesNums)
                 ], id: \.icon) { item in
                     XMDesgin.XMButton.init {

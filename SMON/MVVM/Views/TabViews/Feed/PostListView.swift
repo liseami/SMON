@@ -28,9 +28,13 @@ struct PostListView: View {
                 XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus) { post in
                     PostView(post)
                 } loadingView: {
-                    ProgressView()
+                    PostListLoadingView()
                 } emptyView: {
                     XMEmptyView()
+                } loadMore: {
+                    await vm.loadMore()
+                } getListData: {
+                    await vm.getListData()
                 }
 
             })

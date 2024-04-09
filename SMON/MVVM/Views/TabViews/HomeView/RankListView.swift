@@ -60,8 +60,9 @@ struct RankListView: View {
 }
 
 #Preview {
-    MainView(vm: .init(currentTabbar: .home))
-        .environmentObject(RankViewModel())
+    PostListLoadingView()
+//    MainView(vm: .init(currentTabbar: .home))
+//        .environmentObject(RankViewModel())
 }
 
 struct RankListLoadingView: View {
@@ -87,3 +88,16 @@ struct RankListLoadingView: View {
         .padding(.all)
     }
 }
+
+
+struct PostListLoadingView: View {
+    var body: some View {
+        LazyVStack(alignment: .leading, spacing: 12) {
+            ForEach(0 ... 33, id: \.self) { _ in
+              LoadingPostView()
+                .conditionalEffect(.repeat(.shine, every: 1), condition: true)
+            }
+        }
+    }
+}
+

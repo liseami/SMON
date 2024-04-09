@@ -9,15 +9,21 @@ import SwiftUI
 import TUIChat
 
 struct ChatView: View {
-    let userId : String
-    let conversation : TUIChatConversationModel
-    
+    let userId: String
+    let conversation: TUIChatConversationModel
+
     init(userId: String) {
         self.userId = userId
-        self.conversation = TUIChatConversationModel.init()
+        self.conversation = TUIChatConversationModel()
         self.conversation.userID = userId
     }
-    
+
+    var XMUserId: String {
+        var realId = self.userId
+        realId.removeFirst()
+        return realId
+    }
+
     var body: some View {
         ChatViewContainer(conversation: conversation)
             .edgesIgnoringSafeArea(.bottom)
@@ -27,6 +33,9 @@ struct ChatView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     XMDesgin.XMIcon(iconName: "system_more")
+                        .onTapGesture {
+                          
+                        }
                 }
             }
     }

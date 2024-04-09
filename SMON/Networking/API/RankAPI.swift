@@ -28,11 +28,11 @@ enum RankAPI: XMTargetType {
 
     func updatingParameters(_ newPage: Int) -> any XMTargetType {
         switch self {
-        case .nearby(let page, let fliter): return RankAPI.nearby(page: newPage, fliter: fliter)
+        case .nearby(_, let fliter): return RankAPI.nearby(page: newPage, fliter: fliter)
         case .fans: return RankAPI.fans(page: newPage)
         case .follow: return RankAPI.follow(page: newPage)
         case .visitor: return RankAPI.visitor(page: newPage)
-        case .sameCity(let cityId, let page): return RankAPI.sameCity(cityId: cityId, page: newPage)
+        case .sameCity(let cityId, _): return RankAPI.sameCity(cityId: cityId, page: newPage)
         case .country: return RankAPI.country(page: newPage)
         }
     }

@@ -18,7 +18,7 @@ struct XMPleaceHolderView: View {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 240, height: 240)
+                    .frame(width: 160, height: 160)
             }
             Text(text)
                 .font(.XMFont.f1)
@@ -28,7 +28,7 @@ struct XMPleaceHolderView: View {
             .padding(.horizontal, 120)
         }
         .frame(height: UIScreen.main.bounds.width, alignment: .top)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity,alignment: .center)
         .padding(.top, UIScreen.main.bounds.width * 0.3)
         .listRowInsets(.init(top: 0, leading: 24, bottom: 0, trailing: 24))
         .listRowSeparator(.hidden, edges: .all)
@@ -37,7 +37,7 @@ struct XMPleaceHolderView: View {
 }
 
 #Preview {
-    XMPleaceHolderView.init(imageName: "pear", text: "请重试。",btnText: "重试") {
+    XMPleaceHolderView.init(imageName: "networkerror_pagepic", text: "请重试。",btnText: "重试") {
         
     }
 }

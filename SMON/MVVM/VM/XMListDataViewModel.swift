@@ -63,9 +63,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
                 reqStatus = .isOKButEmpty
             } else {
                 list = items
-                print(list)
                 reqStatus = .isOK
-                print(reqStatus)
             }
         } else {
             reqStatus = .isNeedReTry

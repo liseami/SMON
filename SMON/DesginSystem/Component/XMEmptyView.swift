@@ -20,7 +20,7 @@ struct XMEmptyView: View {
             Image(image)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 280, height: 280)
+                .frame(width: 220, height: 220)
             Text(text)
                 .font(.XMFont.f1)
                 .fcolor(.XMDesgin.f2)

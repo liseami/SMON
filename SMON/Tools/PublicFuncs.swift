@@ -100,6 +100,18 @@ class Apphelper {
     }
 
     /*
+     关闭sheet
+     */
+
+    func closeSheet() {
+        if let presentedVC = topMostViewController()?.presentedViewController {
+            presentedVC.dismiss(animated: true)
+        } else {
+            topMostViewController()?.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    /*
      马达
      */
     func mada(style: UIImpactFeedbackGenerator.FeedbackStyle) {

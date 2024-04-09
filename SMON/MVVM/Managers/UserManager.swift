@@ -77,9 +77,7 @@ class UserManager: ObservableObject {
             await getVersionInfo()
             // 仅针对已登陆用户
             guard userLoginInfo.isLogin else { return }
-            LocationManager.shared.startUpdatingLocation {
-                
-            }
+            LocationManager.shared.uploadUserLocation()
             await getUserInfo()
             await getImUserSign()
         }

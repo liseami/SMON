@@ -14,13 +14,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var blurredWindow: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         DAppInit()
-
         return true
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // 当App从后台返回前台时会调用
-        print("// 当App从后台返回前台时会调用")
     }
 }
 

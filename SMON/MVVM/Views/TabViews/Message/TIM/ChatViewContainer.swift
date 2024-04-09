@@ -18,6 +18,7 @@ struct ChatViewContainer: UIViewControllerRepresentable {
     }
     
     class Coordinator: NSObject {
+        
         var parent: ChatViewContainer
         
         init(_ parent: ChatViewContainer) {

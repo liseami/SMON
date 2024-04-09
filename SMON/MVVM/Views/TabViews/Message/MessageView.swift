@@ -58,9 +58,12 @@ struct MessageView: View {
 
     var body: some View {
         ZStack(alignment: .top, content: {
-            converstaionList
+//            converstaionList
+            ConversationListContainer()
+                .ignoresSafeArea()
             XMTopBlurView()
         })
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 // 通知按钮
@@ -132,6 +135,6 @@ struct UserListLoadingView: View {
                 .conditionalEffect(.repeat(.shine, every: 1), condition: true)
             }
         })
-        .padding(.all, 16)
+        
     }
 }

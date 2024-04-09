@@ -21,15 +21,15 @@ struct HotHistoryView: View {
 
     var row: some View {
         HStack(spacing: 16) {
-            WebImage(str: AppConfig.mokImage!.absoluteString)
-                .frame(width: 56, height: 56)
+            XMDesgin.XMIcon(iconName: "system_toggle")
+                .frame(width: 56, height: 56, alignment: .center)
                 .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4, content: {
-                Text("小玩具")
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
-                Text("动态点赞")
-                    .font(.XMFont.f2b)
+//                Text("我")
+//                    .font(.XMFont.f2)
+//                    .fcolor(.XMDesgin.f1)
+                Text(Bool.random() ? "购买热度" : Bool.random() ? "火苗兑换" : "冷却buff降温")
+                    .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
                 Text(Date.now.string(withFormat: "yyyy年MM月-dd日 HH:mm"))
                     .font(.XMFont.f3)
@@ -37,10 +37,11 @@ struct HotHistoryView: View {
 
             })
             Spacer()
-            Text("+392")
+            Text(Bool.random() ? "+392" : "-131")
                 .font(.XMFont.big3.bold())
                 .fcolor(.XMDesgin.f1)
         }
+        
     }
 }
 

@@ -64,8 +64,6 @@ struct XMLikeBtn: View {
                         return }
                     DispatchQueue.main.async {
                         self.isLiked.toggle()
-                        print(self.isLiked)
-                        print(self.isLiked)
                         self.likeNumbers += self.isLiked ? 1 : -1
                     }
                 }

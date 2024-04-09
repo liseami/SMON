@@ -87,7 +87,6 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
                     Color.clear
                         .frame(width: 1, height: 1, alignment: .center)
                         .task {
-                            print("滑到底了，自动加载更多。")
                             await self.loadMore()
                         }
                         .offset(y: 40)

@@ -20,25 +20,11 @@ struct XMProduct: Convertible, Identifiable {
 }
 
 class StoreManager: XMListViewModel<XMProduct> {
-    @Published private(set) var activeTransactions: Set<StoreKit.Transaction> = []
-
-    private var updates: Task<Void, Never>?
-
     init() {
         super.init(target: GoodAPI.getCoinList, atKeyPath: .data)
         Task {
             await self.getListData()
             await self.getUserWallet()
-        }
-        updates = Task {
-            // 监听购买活动
-            for await update in StoreKit.Transaction.updates {
-                if let transaction = try? update.payloadValue {
-                    await fetchActiveTransactions()
-                    await transaction.finish()
-                    print("交易ID:" + "\(transaction.id)")
-                }
-            }
         }
     }
 
@@ -54,66 +40,11 @@ class StoreManager: XMListViewModel<XMProduct> {
             self.wallet = wallet
         }
     }
-
-    deinit {
-        updates?.cancel()
-    }
-
-    @MainActor
-    func fetchProducts(id: String) async -> Product? {
-        do {
-            let products = try await Product.products(
-                for: ["001", "002", "003", "004", "005", "006"]
-            )
-            print(products.isEmpty ? "没有查找到产品。" : products)
-            return products.first
-        } catch {
-            print("没有产品。")
-            return nil
-        }
-    }
-
-    /// 买产品
-    func buyProduct(id: String) {
-//
-//        SwiftyStoreKit.
-    }
-
-    // 发起购买
-    @MainActor
-    func purchase(_ product: Product) async throws {
-        let result = try await product.purchase()
-        switch result {
-        case .success(let verificationResult):
-            if let transaction = try? verificationResult.payloadValue {
-                activeTransactions.insert(transaction)
-                await transaction.finish()
-            }
-        case .userCancelled:
-            Apphelper.shared.pushNotification(type: .info(message: "购买已取消。"))
-        case .pending:
-            Apphelper.shared.pushNotification(type: .info(message: "支付成功。请刷新赛币额。"))
-            break
-        @unknown default:
-            break
-        }
-    }
-
-    // 寻找活动的交易
-    func fetchActiveTransactions() async {
-        var activeTransactions: Set<StoreKit.Transaction> = []
-        for await entitlement in StoreKit.Transaction.currentEntitlements {
-            if let transaction = try? entitlement.payloadValue {
-                activeTransactions.insert(transaction)
-            }
-        }
-        self.activeTransactions = activeTransactions
-    }
 }
 
 struct CoinshopView: View {
     @StateObject var vm: StoreManager = .init()
-
+    @StateObject var iapmanager: IAPManager = .init()
     var body: some View {
         VStack(alignment: .center, spacing: 24, content: {
             Spacer().frame(height: 1)
@@ -135,70 +66,26 @@ struct CoinshopView: View {
                     .handled
                 })
         })
-        .task {
-            if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL,
-               FileManager.default.fileExists(atPath: appStoreReceiptURL.path)
-            {
-                do {
-                    let receiptData = try Data(contentsOf: appStoreReceiptURL, options: .alwaysMapped)
-                    print(receiptData)
-
-                    let receiptString = receiptData.base64EncodedString(options: [])
-                    print(receiptString)
-                    // Read ReceiptData
-                } catch { print("Couldn't read receipt data with error: " + error.localizedDescription) }
-            } else {
-                print("没有票据")
-            }
-        }
         .padding(.all)
         .frame(maxWidth: .infinity, alignment: .top)
         .frame(height: UIScreen.main.bounds.height * 0.7, alignment: .top)
-//        .background(Color.red)
     }
 
     var products: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             XMStateView(vm.list, reqStatus: vm.reqStatus) { product in
-                let productUI = VStack(alignment: .center, spacing: 0, content: {
-                    VStack(alignment: .center, spacing: 12, content: {
-                        WebImage(str: product.coverUrl)
-                            .frame(width: 56, height: 56, alignment: .center)
-                        Text(product.title)
-                            .font(.XMFont.big3.bold())
-                    })
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 24)
-                    .background(Color.black)
-                    VStack(alignment: .center, spacing: 3, content: {
-                        Text("¥\(product.price)")
-                            .font(.XMFont.f1b)
-                            .fcolor(Color.green)
-                    })
-                    .padding(.vertical, 8)
-                })
-                .overlay(alignment: .center) {
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(lineWidth: 1.5)
-                        .fcolor(.XMDesgin.f3)
-                }
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding(.all, 1)
+                
 
                 XMDesgin.XMButton {
                     LoadingTask(loadingMessage: "连接苹果商店...") {
-                        if let p = await vm.fetchProducts(id: product.goodsCode) {
-                            do {
-                                try await vm.purchase(p)
-                            } catch {
-                                Apphelper.shared.pushNotification(type: .error(message: "购买失败请重试。"))
-                            }
+                        if let p = iapmanager.products.first(where: { $0.productIdentifier == product.id }) {
+                            iapmanager.purchase(product: p)
                         } else {
-                            Apphelper.shared.pushNotification(type: .error(message: "产品不存在。"))
+                            Apphelper.shared.pushNotification(type: .error(message: "没有相关产品。"))
                         }
                     }
                 } label: {
-                    productUI
+                    self.productCell(product)
                 }
             } loadingView: {
                 ProgressView()
@@ -206,6 +93,34 @@ struct CoinshopView: View {
                 EmptyView()
             }
         }
+    }
+    
+    func productCell(_ product : XMProduct) -> some View {
+        
+        VStack(alignment: .center, spacing: 0, content: {
+            VStack(alignment: .center, spacing: 12, content: {
+                WebImage(str: product.coverUrl)
+                    .frame(width: 56, height: 56, alignment: .center)
+                Text(product.title)
+                    .font(.XMFont.big3.bold())
+            })
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 24)
+            .background(Color.black)
+            VStack(alignment: .center, spacing: 3, content: {
+                Text("¥\(product.price)")
+                    .font(.XMFont.f1b)
+                    .fcolor(Color.green)
+            })
+            .padding(.vertical, 8)
+        })
+        .overlay(alignment: .center) {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 1.5)
+                .fcolor(.XMDesgin.f3)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 20))
+        .padding(.all, 1)
     }
 }
 

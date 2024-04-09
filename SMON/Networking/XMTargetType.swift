@@ -100,17 +100,13 @@ extension XMTargetType {
         ]
         headers["Client-Info"] = standardHeader.jsonString()
 
-//#if targetEnvironment(simulator)
-//        headers["Token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJDS1orQjZvVkJqdmRDUitncHVGejRwY2pPS1U5N255dThBaE4vdi9wYStoU2VpcFMybFh4d1RFMERidExlVlJKTEtRWVA1NnBrR2lOaWx1T0RNMlVSUTk1TktLUVdJYmxDODRYNUJyTzQ3QmVMK29zekMydWI1RDJrVXEvZlEwMWtWYk9GRjhGYTlvM00xR3NrUmNYeUV5c3d1RHA3OWpUbGlMZmluanNmWjhoT20wWGY2a2VlaGhacXVGYXEwbllNZjIxME1md2c4VTZZMHhrVlV0NW5kT2FtektLUWJoTC9UbjhSMDZKYktnNTlWdXE4czlCNGU3Z0xmMDNLQ0pWN1lWbXVTUnEvdG9wdzlQcWNGR1I1TnBGUnlLQ3U2QVFBdkJ1SHVEcVlGVEtmUitYd215T0dyek8zbHhRVUpsckhZZmdJdGFmMjlJeFdLS2NiWnVwdmc9PSIsImV4cCI6MTcxMzkzOTY2NH0.K3QnOWBTjxPxuxglA_JHgcmcRoynzKfyge1YFNoo2LE"
-//#else
+#if targetEnvironment(simulator)
+        headers["Token"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJyV0pWQzh2SzFaNXlxaFd0ZWI5RVVTNURVNkQ1Uno3UTlWc3VKNEtINmxBcVZsZ2VHUE5CbE9zQUxVaThuYXN3N3gwZ0ZhRE15bzU3UmxESkU4TU5XaEl5MmdiVXgrOGZiTmVXQk9VWmpVU1pWZkJjRlk3YjlBQW5EZWhjUWlRWFNZU3hZY2NNZHBqNURyMlBTcDduSk41V2xHdmRVbHNMaVJoZ0pka3pEVmthbHNVd1RFajdaY2lienkrVUptdk1hYnMwVzVFb2IrMnJwSk9vcEFwSzNGblVqeTlmMWhwbXRXSERVQzk3endtL3VKd2lzdCtGOXBQQ1p6alk1dnFFbWNsQUVBU3k3QUNLU25tem55bThYcExQTE04L3RySENrSDhzWk10NnZlMFZpSGtEVHpBcUsrUmFMOU1yYkZvVXlYc0JxZFJydjdHdUpzb1FTZUZacUE9PSIsImV4cCI6MTcxNDY0MDAzNn0.TXFglyfjJyq6bzroLO5R3u7EtgFPN9wumsyQF3MeqFA"
+#else
         if !UserManager.shared.userLoginInfo.token.isEmpty {
             headers["Token"] = UserManager.shared.userLoginInfo.token
         }
-//#endif
-//        
-//        if !UserManager.shared.userLoginInfo.token.isEmpty {
-//            headers["Token"] = UserManager.shared.userLoginInfo.token
-//        }
+#endif
 
         return headers
     }

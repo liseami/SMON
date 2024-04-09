@@ -11,14 +11,15 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     static let shared = LocationManager()
     var locationManager = CLLocationManager()
     
-    @Published var userLocation: CLLocationCoordinate2D?
     @Published var locationError: Error?
-    @Published var authorizationStatus: CLAuthorizationStatus = .notDetermined
     
     override init() {
         super.init()
         setupLocationManager()
-        self.authorizationStatus = locationManager.authorizationStatus
+    }
+    
+    func uploadUserLocation() {
+        locationManager.requestLocation()
     }
     
     func setupLocationManager() {
@@ -26,52 +27,33 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    func requestLocationPermission() {
-        locationManager.requestWhenInUseAuthorization()
-//        locationManager.requestAlwaysAuthorization()
-    }
-    
-    var gotLocation: () -> () = {}
-    func startUpdatingLocation(whenGot: @escaping () -> ()) {
-        locationManager.startUpdatingLocation()
+    var gotLocation: () async -> () = {}
+    func startUpdatingLocation(whenGot: @escaping () async -> ()) {
         gotLocation = whenGot
-    }
-    
-    func stopUpdatingLocation() {
+        print("开始获取用户定位")
         locationManager.stopUpdatingLocation()
+        locationManager.requestLocation()
     }
     
     // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last?.coordinate {
-            userLocation = location
-            UserManager.shared.userlocation = .init(lat: location.latitude.string, long: location.longitude.string)
-            Task { await UserManager.shared.getVersionInfo()
-                gotLocation()
+            print("获取到最新的定位")
+            Task {
+                UserManager.shared.userlocation = .init(lat: location.latitude.string, long: location.longitude.string)
+                await UserManager.shared.getVersionInfo()
+                await gotLocation()
+                self.locationManager.stopUpdatingLocation() // 停止位置更新
             }
         }
     }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        authorizationStatus = manager.authorizationStatus
-        switch manager.authorizationStatus {
-        // 用户已拒绝该应用访问位置数据。
-        case .denied:
-            DispatchQueue.main.async {
-                Apphelper.shared.pushNotification(type: .error(message: "已拒绝位置访问。"))
-            }
-            print("已拒绝访问位置权限。")
-        // 用户已授权该应用在使用期间可以访问位置数据。这种权限只允许在应用处于前台时获取位置更新。
-        case .authorizedWhenInUse:
-            print("已授权用户访问。")
-            
-        @unknown default:
-            print(manager.authorizationStatus.rawValue)
-        }
-    }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("获取定位错误")
+        DispatchQueue.main.async {
+            Apphelper.shared.pushNotification(type: .error(message: "获取定位错误。"))
+        }
         locationError = error
     }
 }

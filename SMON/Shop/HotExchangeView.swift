@@ -9,12 +9,18 @@ import StoreKit
 import SwiftUI
 import SwiftUIX
 
-class ButHotViewModel: ObservableObject {
-    @Published var input: String = ""
-}
-
 struct HotExchangeView: View {
-    @StateObject var vm: ButHotViewModel = .init()
+//    @StateObject var vm: ButHotViewModel = .init()
+    @Environment(\.presentationMode) var presentationMode
+    @MainActor
+    func flameToHot() async {
+        let t = UserAssetAPI.flamesToHot
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            Apphelper.shared.pushNotification(type: .success(message: "兑换成功！"))
+            Apphelper.shared.closeSheet()
+        }
+    }
 
     var body: some View {
         VStack(alignment: .center, spacing: 24, content: {
@@ -61,7 +67,9 @@ struct HotExchangeView: View {
                     .rotationEffect(.init(degrees: 90))
             }
             Spacer()
-            XMDesgin.XMMainBtn(text: "立即兑换！") {}
+            XMDesgin.XMMainBtn(text: "立即兑换！") {
+                await self.flameToHot()
+            }
         })
         .padding(.all)
         .frame(maxWidth: .infinity, alignment: .top)

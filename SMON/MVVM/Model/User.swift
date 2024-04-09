@@ -272,4 +272,5 @@ struct XMUserInRank: Identifiable, Convertible {
     var nickname: String = "" // ": "开手机",
     var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
     var cityName: String = "" // ": ""
+    var distanceStr : String = ""
 }

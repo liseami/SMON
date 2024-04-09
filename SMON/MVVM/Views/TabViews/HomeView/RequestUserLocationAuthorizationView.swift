@@ -12,6 +12,7 @@ struct RequestUserLocationAuthorizationView: View {
     @ObservedObject var location: LocationManager = .shared
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var vm: NearRankViewModel
+    @EnvironmentObject var superVM: RankViewModel
     var body: some View {
         VStack(alignment: .center, spacing: 24) {
             Text("查看您附近的人？")
@@ -26,34 +27,32 @@ struct RequestUserLocationAuthorizationView: View {
                 .scaledToFit()
                 .frame(width: 280, height: 280)
             Spacer()
-            if location.authorizationStatus == .denied {
-                XMDesgin.XMMainBtn(text: "去系统设置打开位置权限") {
-                    if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
-                        UIApplication.shared.open(settingsURL)
-                    }
-                }
 
-                XMDesgin.XMMainBtn(text: "我已打开，刷新权限") {
-                    if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-                        presentationMode.dismiss()
-                        await vm.getListData()
-                    } else {
-                        Apphelper.shared.pushNotification(type: .error(message: "重试或重新打开APP"))
+            Group{
+                switch CLLocationManager().authorizationStatus {
+                case .notDetermined:
+                    XMDesgin.XMMainBtn(text: "打开位置权限") {
+                        CLLocationManager().requestWhenInUseAuthorization()
                     }
-                }
-            } else {
-                XMDesgin.XMMainBtn(text: "打开位置权限") {
-                    location.requestLocationPermission()
+                case .restricted, .denied:
+                    XMDesgin.XMMainBtn(text: "去系统设置打开位置权限") {
+                        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                            UIApplication.shared.open(settingsURL)
+                        }
+                    }
+                case .authorizedAlways:
+                    EmptyView()
+                case .authorizedWhenInUse:
+                    EmptyView()
+                @unknown default:
+                    EmptyView()
                 }
             }
+            
         }
-        .onChange(of: location.authorizationStatus, perform: { value in
-            if value == .authorizedWhenInUse {
-                presentationMode.dismiss()
-                location.startUpdatingLocation {
-                    Task { await vm.getListData() }
-                }
-            }
+        
+        .onAppear(perform: {
+            print( CLLocationManager().authorizationStatus.rawValue)
         })
         .background(content: {
             AutoLottieView(lottieFliesName: "location_background", loopMode: .loop, speed: 1)
@@ -61,10 +60,19 @@ struct RequestUserLocationAuthorizationView: View {
         })
         .padding(.vertical, 24)
         .padding(.all, 32)
+        .overlay(alignment: .topLeading) {
+            XMDesgin.XMIcon(iconName: "system_xmark", size: 22, color: .XMDesgin.f1, withBackCricle: true)
+                .onTapGesture {
+                    Apphelper.shared.closeSheet()
+                    superVM.currentTopTab = .localCity
+                }
+                .padding(.leading, 12)
+        }
     }
 }
 
 #Preview {
     RequestUserLocationAuthorizationView()
         .environmentObject(NearRankViewModel())
+        .environmentObject(RankViewModel())
 }

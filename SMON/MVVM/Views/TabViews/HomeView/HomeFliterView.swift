@@ -75,11 +75,6 @@ struct HomeFliterView: View {
             .navigationTitle("用户筛选")
             .navigationBarTitleDisplayMode(.inline)
         })
-        .onAppear(perform: {
-            print(self.mod.maxAgeProgress)
-            print(self.mod.minAgeProgress)
-
-        })
     }
 }
 

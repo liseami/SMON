@@ -15,7 +15,7 @@
 struct SMONApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject var userManager: UserManager = .shared
-
+    @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
             Group {
@@ -32,6 +32,20 @@ struct SMONApp: App {
             }
             .tint(Color.XMDesgin.f1)
             .preferredColorScheme(.dark)
+        }
+        // 场景状态改变
+        .onChange(of: scenePhase) { newValue in
+            switch newValue {
+            case .background:
+                print("进入background")
+            case .inactive:
+                print("进入inactive")
+            case .active:
+                NotificationCenter.default.post(name: Notification.Name.APP_GO_TO_ACTIVE, object: nil, userInfo: nil)
+                print("进入active")
+            @unknown default:
+                break
+            }
         }
     }
 }

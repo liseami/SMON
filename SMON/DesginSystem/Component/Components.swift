@@ -58,8 +58,8 @@ enum XMDesgin {
         }
     }
 
-    struct XMAuthorTag : View {
-        var body: some View{
+    struct XMAuthorTag: View {
+        var body: some View {
             Text("作者")
                 .font(.XMFont.f3b)
                 .fcolor(.XMDesgin.f1)
@@ -68,10 +68,11 @@ enum XMDesgin {
                 .background(Capsule().fill(Color.XMDesgin.main.gradient))
         }
     }
+
     struct XMTag: View {
         let text: String
-        let bgcolor : Color
-        init(text: String,bgcolor : Color = Color.XMDesgin.b1) {
+        let bgcolor: Color
+        init(text: String, bgcolor: Color = Color.XMDesgin.b1) {
             self.text = text
             self.bgcolor = bgcolor
         }
@@ -112,6 +113,7 @@ enum XMDesgin {
                         .ifshow(show: !iconName.isEmpty)
 
                     Text(text)
+                        .height(22)
                         .font(.XMFont.f2b)
                         .lineLimit(1)
                         .fcolor(fColor)
@@ -216,7 +218,7 @@ enum XMDesgin {
 
         var body: some View {
             XMDesgin.XMButton(enable: enable) {
-               await action()
+                await action()
             } label: {
                 HStack(spacing: 2) {
                     if !iconName.isEmpty {

@@ -50,25 +50,36 @@ struct PostFeedView: View {
     }
 
     var tabView: some View {
-        TabView(selection: $vm.currentTopTab,
-                content: {
-                    PostListView(target: PostAPI.nearbyList(page: 1))
-                        .tag(FeedViewModel.FeedTopBarItem.near)
+        TabView(selection: $vm.currentTopTab) {
+            tabContent(for: .near, target: PostAPI.nearbyList(page: 1))
+                .tag(FeedViewModel.FeedTopBarItem.near)
+            tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
+                .tag(FeedViewModel.FeedTopBarItem.localCity)
+            // 每日大赛，单独处理
+            tabContent(for: .competition, target: nil)
+                .tag(FeedViewModel.FeedTopBarItem.competition)
+            tabContent(for: .hot, target: PostAPI.recommendList(page: 1))
+                .tag(FeedViewModel.FeedTopBarItem.hot)
+            tabContent(for: .flow, target: PostAPI.followList(page: 1))
+                .tag(FeedViewModel.FeedTopBarItem.flow)
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .ignoresSafeArea(.container, edges: .top)
+    }
 
-                    PostListView(target: PostAPI.sameCityList(page: 1))
-                        .tag(FeedViewModel.FeedTopBarItem.localCity)
-                    // 每日大赛
+    func tabContent(for tab: FeedViewModel.FeedTopBarItem, target: PostAPI?) -> some View {
+        ZStack(alignment: .top) {
+            if vm.currentTopTab == tab {
+                if let target = target {
+                    PostListView(target: target)
+                } else {
                     MeiRiDaSaiView()
-                        .tag(FeedViewModel.FeedTopBarItem.competition)
-
-                    PostListView(target: PostAPI.recommendList(page: 1))
-                        .tag(FeedViewModel.FeedTopBarItem.hot)
-                    PostListView(target: PostAPI.followList(page: 1))
-                        .tag(FeedViewModel.FeedTopBarItem.flow)
-
-                })
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .ignoresSafeArea(.container, edges: .top)
+                }
+            } else {
+                Color.clear.frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .environmentObject(vm)
     }
 }
 

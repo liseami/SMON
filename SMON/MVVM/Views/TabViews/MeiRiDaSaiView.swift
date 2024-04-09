@@ -60,9 +60,6 @@ struct MeiRiDaSaiView: View {
                 if let themeid = vm.currentTheme?.id {
                     CompetitionPostListView(type: vm.themeType, themeId: themeid)
                         .environmentObject(vm)
-                }else{
-                    ProgressView()
-                        .padding(.top,32)
                 }
             })
             .padding(.all, 16)
@@ -104,6 +101,7 @@ struct MeiRiDaSaiView: View {
                     Text(theme.title)
                         .font(.XMFont.big3.bold())
                         .fcolor(.XMDesgin.f1)
+
                     Text(theme.description)
                         .font(.XMFont.f2)
                         .fcolor(.XMDesgin.f1)
@@ -135,7 +133,61 @@ struct MeiRiDaSaiView: View {
                 }
             })
             .padding(.top, 40)
+        } else {
+            fakeheader
         }
+    }
+
+    var fakeheader: some View {
+        VStack(alignment: .center, spacing: 12, content: {
+            VStack(alignment: .center, spacing: 16, content: {
+                Text("theme.title")
+                    .redacted(reason: .placeholder)
+                    .font(.XMFont.big3.bold())
+                    .fcolor(.XMDesgin.f1)
+                Text("theme.description")
+                    .redacted(reason: .placeholder)
+                    .font(.XMFont.f2)
+                    .fcolor(.XMDesgin.f1)
+
+                XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在寻找大赛主题") {}
+                    .overlay(alignment: .center) {
+                        Capsule()
+                            .stroke(lineWidth: 1)
+                            .fcolor(.XMDesgin.f2)
+                    }
+                HStack(spacing: 0) {
+                    Text("232345个帖子 · ")
+                        .redacted(reason: .placeholder)
+                    // xx天后截止
+                    Text("theme.deadlineInfoStr")
+                        .redacted(reason: .placeholder)
+                }
+                .font(.XMFont.f2).monospaced()
+                .fcolor(.XMDesgin.f2)
+            })
+            .padding(.top, 68)
+            .padding(.all, 16)
+            .background(Color.XMDesgin.b1.gradient)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .overlay(alignment: .top) {
+                // 主题大赛列表
+                BannerRow(imageW: 156, spacing: 12, index: .constant(2), list: [XMTheme(id: 1), XMTheme(id: 2), XMTheme(id: 3), XMTheme(id: 4), XMTheme(id: 5), XMTheme(id: 6)]) { _ in
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.XMDesgin.b1)
+                        .scaledToFill()
+                        .frame(width: 156, height: 156 / 16 * 9)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .overlay(alignment: .center) {
+                            RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)
+                                .fcolor(.XMDesgin.f1)
+                        }
+                        .conditionalEffect(.repeat(.shine, every: 1), condition: true)
+                }
+                .offset(x: 0, y: -44)
+            }
+        })
+        .padding(.top, 40)
     }
 
     func headerImage(_ imageUrl: String) -> some View {

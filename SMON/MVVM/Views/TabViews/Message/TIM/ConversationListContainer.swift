@@ -9,15 +9,16 @@ import TUIChat
 import TUIConversation
 
 struct ConversationListContainer: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
+    func makeUIViewController(context: Context) -> TUIConversationListController {
         let conListController = TUIConversationListController()
         conListController.delegate = context.coordinator
         conListController.navigationItem.title = "消息"
         return conListController
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: TUIConversationListController, context: Context) {
         // Update the view controller if needed
+        
     }
 
     func makeCoordinator() -> Coordinator {

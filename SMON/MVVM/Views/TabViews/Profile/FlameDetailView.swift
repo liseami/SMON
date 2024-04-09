@@ -45,6 +45,7 @@ struct FlameDetailView: View {
                     await vm.getListData()
                 }
             })
+            .padding(.all)
         }
         .refreshable {
             await vm.getListData()
@@ -70,7 +71,7 @@ struct FlameDetailView: View {
             Spacer()
             Text(data.addFlames)
                 .font(.XMFont.big3.bold())
-                .fcolor(.XMDesgin.f1)
+                .fcolor(Int(data.addFlames) ?? 0 > 0 ? .green : .red)
         }
     }
 }

@@ -67,7 +67,7 @@ struct PostView: View {
 //
     var commentNum: some View {
         Text("\(vm.post.commentNums == 0 ? "" : vm.post.commentNums.string)评论")
-            .font(.XMFont.f3)
+            .font(.XMFont.f2)
             .bold()
             .padding(.top, 6)
             .background(content: {
@@ -79,7 +79,7 @@ struct PostView: View {
 //
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums,contentId: vm.post.id) 
+            XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums, contentId: vm.post.id)
 
             XMDesgin.XMButton {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))
@@ -132,6 +132,7 @@ struct PostView: View {
                             .scaledToFill()
                             .frame(width: 148, height: 148 / 3 * 4)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .padding(.vertical, 4)
                     }
                 }
                 Spacer().frame(width: 12)
@@ -189,8 +190,129 @@ struct PostView: View {
     }
 }
 
+struct LoadingPostView: View {
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            avatarAndLine
+            right
+        }
+    }
+
+    var right: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            // 用户名
+            username
+            // 文字内容
+            text
+
+            // 图片流
+            images
+
+            // 底部功能按钮
+            toolbtns
+            // 评论数
+            commentNum
+        }
+    }
+
+//
+    var commentNum: some View {
+        Text("评论")
+            .font(.XMFont.f3)
+            .bold()
+            .padding(.top, 6)
+            .background(content: {
+                Color.black
+            })
+            .padding(.leading, -CGFloat(38 + 12))
+    }
+
+//
+    var toolbtns: some View {
+        HStack(alignment: .center, spacing: 12, content: {
+            XMLikeBtn(target: PostsOperationAPI.tapLike(postId: "vm.post.id"), isLiked: false, likeNumbers: 0, contentId: "vm.post.id")
+              
+
+            XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
+              
+
+            Spacer()
+
+            XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+              
+        })
+    }
+
+//
+    var images: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 4) {
+                Spacer().frame(width: 16 + 38 + 12 - 4)
+
+                ForEach(["1", "2", "3"], id: \.self) { url in
+                    WebImage(str: url)
+                        .scaledToFill()
+                        .frame(width: 148, height: 148 / 3 * 4)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                      
+                }
+                Spacer().frame(width: 12)
+            }
+        }
+        .frame(height: CGFloat(160 / 3 * 4))
+        .padding(.leading, -CGFloat(16 + 38 + 12))
+        .padding(.trailing, -CGFloat(16))
+    }
+
+//
+    var username: some View {
+        HStack {
+            Text(String.random(ofLength: Int.random(in: 4...12)))
+                .redacted(reason: .placeholder)
+                .font(.XMFont.f1b)
+                .lineLimit(1)
+                .fcolor(.XMDesgin.f1)
+              
+
+            Spacer()
+            Text(String.random(ofLength: Int.random(in: 4...12)))
+                .redacted(reason: .placeholder)
+                .font(.XMFont.f3)
+                .fcolor(.XMDesgin.f2)
+            
+        }
+    }
+
+//
+    var text: some View {
+        Text(String.random(ofLength: Int.random(in: 32...120)))
+            .redacted(reason: .placeholder)
+            .lineSpacing(3)
+            .fcolor(.XMDesgin.f1)
+            .font(.XMFont.f2)
+    }
+
+//
+    var avatarAndLine: some View {
+        VStack {
+            WebImage(str: " vm.post.avatar")
+                .scaledToFit()
+                .frame(width: 38, height: 38) // Adjust the size as needed
+                .clipShape(Circle())
+              
+
+            RoundedRectangle(cornerRadius: 99)
+                .frame(width: 2)
+                .frame(maxHeight: .infinity)
+                .fcolor(.XMDesgin.f2)
+            
+        }
+    }
+}
+
 #Preview {
 //    PostView()
 //        .environmentObject(MainViewModel())
-    MainView(vm: .init(currentTabbar: .feed))
+    LoadingPostView()
+//    MainView(vm: .init(currentTabbar: .feed))
 }

@@ -5,22 +5,13 @@
 //  Created by 赵翔宇 on 2024/3/27.
 //
 
+import CoreLocation
 import SwiftUI
-
 class NearRankViewModel: XMListViewModel<XMUserInRank> {
     init() {
         let mod = UserManager.shared.NearbyFliterMod
         self.filterMod_APIUse = mod
         super.init(target: RankAPI.nearby(page: 1, fliter: mod), pagesize: 50)
-       
-        if LocationManager.shared.locationManager.authorizationStatus != .authorizedWhenInUse {
-            Apphelper.shared.presentPanSheet(
-                RequestUserLocationAuthorizationView()
-                    .environmentObject(self),
-                style: .setting)
-        }else{
-            Task { await self.getListData() }
-        }
     }
 
     // 接口入参模型，发生变动，自动请求接口
@@ -35,6 +26,22 @@ class NearRankViewModel: XMListViewModel<XMUserInRank> {
 struct NearRankView: View {
     @StateObject var vm: NearRankViewModel = .init()
     @EnvironmentObject var superVm: RankViewModel
+    @State private var isLoadingUserLocation: Bool = false
+
+    // 请求数据
+    func reqData() async {
+        // 权限OK，请求接口
+        isLoadingUserLocation = true
+        if UserManager.shared.userlocation.lat != "" {
+            await vm.getListData()
+            isLoadingUserLocation = false
+        } else {
+            LocationManager.shared.startUpdatingLocation {
+                await self.vm.getListData()
+                isLoadingUserLocation = false
+            }
+        }
+    }
 
     var body: some View {
         ScrollView {
@@ -51,6 +58,35 @@ struct NearRankView: View {
                     await vm.getListData()
                 }
             })
+        }
+        .overlay {
+            AutoLottieView(lottieFliesName: "location_background", loopMode: .loop, speed: 2.4)
+                .scaleEffect(2)
+                .ifshow(show: isLoadingUserLocation)
+        }
+        .task {
+            // 初始化时，检查用户权限，没有打开权限，则弹窗提示
+            if CLLocationManager().authorizationStatus.rawValue < 3 {
+                Apphelper.shared.presentPanSheet(
+                    RequestUserLocationAuthorizationView()
+                        .environmentObject(superVm)
+                        .environmentObject(self.vm),
+                    style: .setting)
+            } else {
+                Task { await reqData() }
+            }
+        }
+        // 用户从设置回到了APP时
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.APP_GO_TO_ACTIVE, object: nil)) { _ in
+            // 检查最新状态
+            if CLLocationManager().authorizationStatus.rawValue >= 3 {
+                // 回到APP，用户已授权
+                Apphelper.shared.closeSheet()
+                Task { await reqData() }
+            } else {
+                Apphelper.shared.pushNotification(type: .error(message: "授权仍未打开。"))
+                superVm.currentTopTab = .localCity
+            }
         }
         .scrollIndicators(.hidden)
         .refreshable { await vm.getListData() }
@@ -83,7 +119,7 @@ struct NearRankView: View {
                     Text(user.nickname)
                         .font(.XMFont.f1b)
                         .lineLimit(1)
-                    Text(user.cityName.or("未知"))
+                    Text(user.distanceStr)
                         .font(.XMFont.f3)
                         .fcolor(.XMDesgin.f2)
                 }
