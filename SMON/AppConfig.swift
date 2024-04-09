@@ -35,34 +35,9 @@ public enum AppConfig {
         self.readPlist(key: "TIMAppID")
     }
 
-    /// 极光APPKEY
-    static var JGuangAppKey: String {
-        self.readPlist(key: "JGuangAppKey")
-    }
-
-    /// 微信APPID
-    static var WeChatAppID: String {
-        self.readPlist(key: "WeChatAppID")
-    }
-
-    /// 微信WeChatAppSecret
-    static var WeChatAppSecret: String {
-        self.readPlist(key: "WeChatAppSecret")
-    }
-
-    /// 高德地图Key
-    static var AMapKey: String {
-        self.readPlist(key: "AMapKey")
-    }
-
     // 友盟AppKey
     static var UMAppKey: String {
         self.readPlist(key: "UMAppKey")
-    }
-
-    /// MapBoxPublicToken
-    static var MapBoxPublicToken: String {
-        self.readPlist(key: "MapBoxPublicToken")
     }
 
     static func readPlist(key: String) -> String {
@@ -73,12 +48,9 @@ public enum AppConfig {
         return value
     }
     
-    public static var yuanyuanurl : String {
-        return "https://www.icloud.com.cn/"
-    }
 
     /// 主页
-    static let domain: String = "https://naduo.love/"
+    static let domain: String = "https://ismonlove.com/"
     /// 用户协议
     static let UserAgreement: String = domain + "articles/UserAgreement"
     /// 隐私政策
@@ -88,7 +60,7 @@ public enum AppConfig {
     /// 当前版本
     static var AppVersion: String { (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0" }
     /// AppID
-    static var AppleStoreAppID: String { "6446198565" }
+    static var AppleStoreAppID: String { "6479641187" }
     /// 商店链接
     static var AppStoreURL: URL { URL(string: "https://apps.apple.com/cn/app/id" + AppleStoreAppID)! }
     /// 测试图片

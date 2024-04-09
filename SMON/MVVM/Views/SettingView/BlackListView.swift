@@ -7,13 +7,30 @@
 
 import SwiftUI
 
+class BlackListViewModel: XMListViewModel<XMUserProfile> {
+    init() {
+        super.init(target: UserRelationAPI.blackList(page: 1), pagesize: 20)
+        Task { await self.getListData() }
+    }
+}
+
 struct BlackListView: View {
+    @StateObject var vm: BlackListViewModel = .init()
     var body: some View {
         ScrollView(.vertical, showsIndicators: false, content: {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
-                ForEach(0 ... 120, id: \.self) { _ in
-                    XMUserLine(user: .init())
+                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { user in
+                    XMUserLine(user: user)
+                } loadingView: {
+                    UserListLoadingView()
+                } emptyView: {
+                    XMEmptyView()
+                } loadMore: {
+                    await vm.loadMore()
+                } getListData: {
+                    await vm.getListData()
                 }
+
             })
             .padding(.all, 16)
         })

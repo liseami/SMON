@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1520"
+   LastUpgradeVersion = "1530"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -23,14 +24,14 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -49,20 +50,9 @@
             ReferencedContainer = "container:SMON.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-         <AdditionalOption
-            key = "APP_DISTRIBUTOR_ID_OVERRIDE"
-            value = "com.apple.AppStore"
-            isEnabled = "YES">
-         </AdditionalOption>
-      </AdditionalOptions>
-      <LocationScenarioReference
-         identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
-         referenceType = "1">
-      </LocationScenarioReference>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -79,7 +69,7 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Release">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"

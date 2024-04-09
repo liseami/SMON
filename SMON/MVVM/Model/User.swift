@@ -92,6 +92,7 @@ struct XMUserProfile: Convertible ,Identifiable{
     var followsNum: Int = 0 // 一定有，不参与资料完成度评分
     // 1关注对方，0没有关注
     var isFollow: Int = 0
+    var isEachOther : Int = 0
 }
 
 // 用户资料扩展

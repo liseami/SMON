@@ -8,7 +8,23 @@
 import SwiftUI
 
 struct XMUserLine: View {
-    var user: XMUserProfile
+    @MainActor
+    func tapFollow() async {
+        let t = UserRelationAPI.tapFollow(followUserId: user.userId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            user.isFollow.toggle()
+            if user.isEachOther.bool {
+                user.isEachOther.toggle()
+            }
+        }
+    }
+
+    @State var user: XMUserProfile
+    init(user: XMUserProfile) {
+        self._user = State(initialValue: user)
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
             XMUserAvatar(str: user.avatar, userId: user.userId, size: 44)
@@ -23,8 +39,22 @@ struct XMUserLine: View {
                             .fcolor(.XMDesgin.f2)
                     })
                     Spacer()
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在关注") {}
-                        .ifshow(show: user.isFollow.bool)
+
+                    if user.isEachOther.bool {
+                        XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "互相关注") {
+                            await tapFollow()
+                        }
+                    } else {
+                        if !user.isFollow.bool {
+                            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在关注") {
+                                await tapFollow()
+                            }
+                        } else {
+                            XMDesgin.SmallBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "关注") {
+                                await tapFollow()
+                            }
+                        }
+                    }
                 }
                 Text(user.signature)
                     .font(.XMFont.f2)
@@ -38,5 +68,5 @@ struct XMUserLine: View {
 }
 
 #Preview {
-    XMUserLine.init(user: .init())
+    XMUserLine(user: .init())
 }
