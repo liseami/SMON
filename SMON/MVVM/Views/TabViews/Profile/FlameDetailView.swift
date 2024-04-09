@@ -69,7 +69,7 @@ struct FlameDetailView: View {
 
             })
             Spacer()
-            Text(data.addFlames)
+            Text(Int(data.addFlames) ?? 0 > 0 ? "+" + data.addFlames : data.addFlames)
                 .font(.XMFont.big3.bold())
                 .fcolor(Int(data.addFlames) ?? 0 > 0 ? .green : .red)
         }

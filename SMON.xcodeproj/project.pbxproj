@@ -124,6 +124,7 @@
 		A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB02B8B27C900D71EF8 /* SettingView.swift */; };
 		A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */; };
 		A2B45CB72B8B4EA000D71EF8 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B45CB62B8B4EA000D71EF8 /* Color+.swift */; };
+		A2B579F22BC51B9F008B5E15 /* radar.json in Resources */ = {isa = PBXBuildFile; fileRef = A2B579F12BC51B9F008B5E15 /* radar.json */; };
 		A2BA894B2B9AC69A002FEEFA /* MeiRiDaSaiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */; };
 		A2BA894D2B9ACBCE002FEEFA /* XMTopBlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */; };
 		A2BA89502B9ADFA7002FEEFA /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BA894F2B9ADFA7002FEEFA /* Font.swift */; };
@@ -332,6 +333,7 @@
 		A2B45CB02B8B27C900D71EF8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A2B45CB22B8B28A800D71EF8 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		A2B45CB62B8B4EA000D71EF8 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		A2B579F12BC51B9F008B5E15 /* radar.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = radar.json; sourceTree = "<group>"; };
 		A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeiRiDaSaiView.swift; sourceTree = "<group>"; };
 		A2BA894C2B9ACBCE002FEEFA /* XMTopBlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMTopBlurView.swift; sourceTree = "<group>"; };
 		A2BA894F2B9ADFA7002FEEFA /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
@@ -400,6 +402,7 @@
 		A209C8362BBA880B00531EF1 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				A2B579F12BC51B9F008B5E15 /* radar.json */,
 				A209C83B2BBA892700531EF1 /* buyhot_arrow.json */,
 				A23DD49B2BBBEAB200249972 /* location_background.json */,
 				A209C8392BBA883300531EF1 /* LottieView.swift */,
@@ -956,6 +959,7 @@
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
 				A256DBA32B9045DB008C7063 /* TUIConversationXMTheme.bundle in Resources */,
 				A256DB992B901C88008C7063 /* AppConfig.plist in Resources */,
+				A2B579F22BC51B9F008B5E15 /* radar.json in Resources */,
 				A2498ADD2BA833610045B7AD /* GenSekiGothic-B.ttc in Resources */,
 				A2BF163B2B8C811D0011A130 /* Launch Screen.storyboard in Resources */,
 				A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */,

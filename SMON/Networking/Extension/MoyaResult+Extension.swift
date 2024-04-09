@@ -69,7 +69,7 @@ public extension Result where Success == Moya.Response {
 
     // 那朵后端状态码
     var is2000Ok: Bool {
-        (json?["code"].int ?? json?["code"].string?.int ?? 0) == 2000
+        self.messageCode == 2000
     }
 }
 

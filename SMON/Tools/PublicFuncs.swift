@@ -185,7 +185,6 @@ class Apphelper {
     @MainActor
     func pushNotification(type: NotificationType) {
         let message: String
-        let backgroundColor: UIColor
         var textColor = UIColor(Color.XMDesgin.f1)
 
         switch type {

@@ -60,7 +60,7 @@ struct NearRankView: View {
             })
         }
         .overlay {
-            AutoLottieView(lottieFliesName: "location_background", loopMode: .loop, speed: 2.4)
+            AutoLottieView(lottieFliesName: "radar", loopMode: .loop, speed: 1)
                 .scaleEffect(2)
                 .ifshow(show: isLoadingUserLocation)
         }

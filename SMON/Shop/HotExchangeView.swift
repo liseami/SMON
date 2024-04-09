@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftUIX
 
 struct HotExchangeView: View {
-//    @StateObject var vm: ButHotViewModel = .init()
+    @EnvironmentObject var vm: ProfileHomeViewModel
     @Environment(\.presentationMode) var presentationMode
     @MainActor
     func flameToHot() async {
@@ -19,7 +19,10 @@ struct HotExchangeView: View {
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "兑换成功！"))
             Apphelper.shared.closeSheet()
+        }else{
+            Apphelper.shared.closeSheet()
         }
+       
     }
 
     var body: some View {
@@ -41,7 +44,7 @@ struct HotExchangeView: View {
                     Text("❤️‍🔥")
                         .font(.XMFont.big3)
                         .frame(width: 24, height: 24)
-                    Text("\(212391) 热度")
+                    Text("\(vm.mod.flamesNums) 热度")
                         .font(.XMFont.f1b)
                 })
                 .frame(maxWidth: .infinity)
@@ -52,7 +55,7 @@ struct HotExchangeView: View {
                     Text("🔥")
                         .font(.XMFont.big3)
                         .frame(width: 24, height: 24)
-                    Text("\(212391) 火苗")
+                    Text("\(vm.mod.flamesNums) 火苗")
                         .font(.XMFont.f1b)
                 })
                 .frame(maxWidth: .infinity)
@@ -80,4 +83,5 @@ struct HotExchangeView: View {
 
 #Preview {
     HotExchangeView()
+        .environmentObject(ProfileHomeViewModel())
 }

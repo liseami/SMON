@@ -18,10 +18,10 @@ class RelationListViewModel: XMListViewModel<XMUserProfile> {
         didSet {
             switch currentTab {
             case .fans:
-                target = UserRelationAPI.friendList(page: 1)
+                target = UserRelationAPI.fansList(page: 1)
             case .firend:
                 target =
-                    UserRelationAPI.fansList(page: 1)
+                    UserRelationAPI.friendList(page: 1)
             case .fllow:
                 target =
                     UserRelationAPI.followersList(page: 1)
@@ -46,8 +46,6 @@ class RelationListViewModel: XMListViewModel<XMUserProfile> {
             }
         }
     }
-
- 
 }
 
 struct RelationListView: View {
@@ -61,11 +59,10 @@ struct RelationListView: View {
                 LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                     XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus) { user in
                         XMUserLine(user: user)
-                            
                     } loadingView: {
                         UserListLoadingView()
                     } emptyView: {
-                        EmptyView()
+                        XMEmptyView()
                     } loadMore: {
                         await vm.loadMore()
                     } getListData: {

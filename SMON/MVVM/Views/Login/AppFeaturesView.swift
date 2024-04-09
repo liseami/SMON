@@ -12,19 +12,19 @@ struct AppFeaturesView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Spacer()
-            XMTyperText(text: "关心另一种社交趣味，查看小众世界的新鲜事")
-            
-                .bold()
-                .font(.title)
-            
-            Text("西檬「每日大赛」是一款「小众文化」社交软件，服务于那些「拥有小小怪癖」的人类。人类的每一种奇思妙想都应该被尊重。始于西檬，止于西檬。")
+            XMTyperText(text: "始于大赛，止于大赛，真诚、友好、不下头")
+                .lineSpacing(6)
+                .font(.XMFont.big1.bold())
 
-            XMDesgin.CircleBtn(backColor: Color.init(hex: "1F1F1F"), fColor: .white, iconName: "system_down") {
+            Text("「每日大赛官方版」是一款「以图会友」的社交软件，服务于充满展示欲的新新人类。人类的每一种奇思妙想都应该被尊重。始于大赛，止于大赛。")
+                .font(.XMFont.f1)
+
+            XMDesgin.CircleBtn(backColor: Color(hex: "1F1F1F"), fColor: .white, iconName: "system_down") {
                 vm.pageProgress = .Warning
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
-        .padding()
+        .padding(.all, 16)
     }
 }
 

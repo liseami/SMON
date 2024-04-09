@@ -184,7 +184,7 @@ struct ProfileHomeView: View {
         VStack(alignment: .center, spacing: 12) {
             HStack(alignment: .center, spacing: 12, content: {
                 ForEach([
-                    (icon: "❤️‍🔥", label: "热度", value: vm.mod.currentHot),
+                    (icon: "❤️‍🔥", label: "热度", value: String(format: "%.2f", vm.mod.currentHot.double() ?? 0)),
                     (icon: "🔥", label: "火苗", value: vm.mod.flamesNums)
                 ], id: \.icon) { item in
                     XMDesgin.XMButton.init {
@@ -214,10 +214,13 @@ struct ProfileHomeView: View {
                     .scaleEffect(2)
                     .rotationEffect(.init(degrees: 90))
                     .allowsTightening(false)
+                    .disabled(true)
             }
 
             XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "立即兑换为热度") {
-                Apphelper.shared.presentPanSheet(HotExchangeView(), style: .sheet)
+                Apphelper.shared.presentPanSheet(HotExchangeView()
+                    .environmentObject(vm)
+                                                 , style: .sheet)
             }
         }
     }

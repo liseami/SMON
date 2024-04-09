@@ -28,7 +28,7 @@ public class NetworkPopPlugin: PluginType {
             if result.messageCode > 4000 || result.message == "TOKEN 错误" {
                 UserManager.shared.userLoginInfo = .init()
                 Apphelper.shared.closeKeyBoard()
-                Apphelper.shared.pushNotification(type: .info(message: result.message.or("登录过期，请重新登录。")))
+                Apphelper.shared.pushNotification(type: .info(message: "登录过期，请重新登录。"))
             }
 
         case .failure:

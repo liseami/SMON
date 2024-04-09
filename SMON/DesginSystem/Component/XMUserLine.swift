@@ -13,9 +13,20 @@ struct XMUserLine: View {
         let t = UserRelationAPI.tapFollow(followUserId: user.userId)
         let r = await Networking.request_async(t)
         if r.is2000Ok {
-            user.isFollow.toggle()
-            if user.isEachOther.bool {
-                user.isEachOther.toggle()
+            switch user.followStatus {
+            case 0:
+                user.followStatus = 1
+            // 我关注他
+            case 1:
+                user.followStatus = 0
+            // 他关注我,没有关系
+            case 2:
+                user.followStatus = 10
+            // 互相关注
+            case 10:
+                user.followStatus = 2
+            default:
+                break
             }
         }
     }
@@ -34,27 +45,42 @@ struct XMUserLine: View {
                     VStack(alignment: .leading, spacing: 6, content: {
                         Text(user.nickname)
                             .font(.XMFont.f1b)
-                        Text("\(user.zodiac) · \(user.emotionalNeeds)")
+                        Text("\(user.zodiac) · \(user.emotionalNeeds.emotionalNeedsString)")
                             .font(.XMFont.f2)
                             .fcolor(.XMDesgin.f2)
                     })
                     Spacer()
 
-                    if user.isEachOther.bool {
-                        XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "互相关注") {
-                            await tapFollow()
-                        }
-                    } else {
-                        if !user.isFollow.bool {
+                    Group {
+                        switch user.followStatus {
+                        // 我关注他
+                        case 1:
                             XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在关注") {
                                 await tapFollow()
                             }
-                        } else {
+                        // 他关注我,没有关系
+                        case 2, 0:
                             XMDesgin.SmallBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "关注") {
                                 await tapFollow()
                             }
+                       
+                        // 互相关注
+                        case 10:
+                            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "互相关注") {
+                                await tapFollow()
+                            }
+                        default:
+                            EmptyView()
                         }
-                    }
+                    }     .changeEffect(.spray(origin: .top) {
+                        Group {
+                            Image(systemName: "heart.fill")
+                            Image(systemName: "sparkles")
+                        }
+                        .font(.title)
+                        .foregroundStyle(Color.XMDesgin.main.gradient)
+                    }, value: user.followStatus)
+                    
                 }
                 Text(user.signature)
                     .font(.XMFont.f2)

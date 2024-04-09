@@ -100,7 +100,7 @@ struct RankingView: View {
             .fill(Color.XMDesgin.main.gradient.shadow(.drop(color: .XMDesgin.main, radius: 10)))
             .mask(alignment: .leading) {
                 XMTyperText(text: ranking)
-                    .font(.XMFont.big1.bold())
+                    .font(.custom("GenSekiGothicTW-B", fixedSize: 44))
                     .fcolor(.XMDesgin.f1)
                     .listRowSeparator(.hidden, edges: .top)
             }

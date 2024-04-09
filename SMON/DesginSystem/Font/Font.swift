@@ -9,15 +9,15 @@ import Foundation
 
 extension SwiftUI.Font {
     enum XMFont {
-        static let big1: Font = .custom("GenSekiGothicTW-M", relativeTo: .largeTitle)
-        static let big2: Font = .custom("GenSekiGothicTW-M", relativeTo: .title)
-        static let big3: Font = .custom("GenSekiGothicTW-M", relativeTo: .title3)
-        static let f1: Font = .custom("GenSekiGothicTW-M", relativeTo: .body)
-        static let f2: Font = .custom("GenSekiGothicTW-M", relativeTo: .subheadline)
-        static let f3: Font = .custom("GenSekiGothicTW-M", relativeTo: .caption)
-        static let f1b: Font = .custom("GenSekiGothicTW-B", relativeTo: .body)
-        static let f2b: Font = .custom("GenSekiGothicTW-B", relativeTo: .subheadline)
-        static let f3b: Font = .custom("GenSekiGothicTW-B", relativeTo: .caption)
+        static let big1: Font = .custom("GenSekiGothicTW-M", fixedSize: 32)
+        static let big2: Font = .custom("GenSekiGothicTW-M", fixedSize: 24)
+        static let big3: Font = .custom("GenSekiGothicTW-M", fixedSize: 20)
+        static let f1: Font = .custom("GenSekiGothicTW-M",fixedSize: 17)
+        static let f2: Font = .custom("GenSekiGothicTW-M", fixedSize: 15)
+        static let f3: Font = .custom("GenSekiGothicTW-M", fixedSize: 13)
+        static let f1b: Font = .custom("GenSekiGothicTW-B", fixedSize: 17)
+        static let f2b: Font = .custom("GenSekiGothicTW-B", fixedSize: 15)
+        static let f3b: Font = .custom("GenSekiGothicTW-B", fixedSize: 13)
     }
 }
 

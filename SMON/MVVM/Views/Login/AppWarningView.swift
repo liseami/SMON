@@ -33,8 +33,8 @@ struct AppWarningView: View {
 
     var title: some View {
         XMTyperText(text: "我们需要知道这个App是否适合为您服务")
-            .bold()
-            .font(.title)
+            .lineSpacing(6)
+            .font(.XMFont.big1.bold())
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
