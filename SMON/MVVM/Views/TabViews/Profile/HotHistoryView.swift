@@ -7,41 +7,60 @@
 
 import SwiftUI
 
+struct HotHistroy: Convertible, Identifiable {
+    var id: String = "" // ": 1775081130106683392,
+    var userId: String = "" // ": 1764610746026688512,
+    var eventTitle: String = "" // ": "火苗兑换",
+    var addPopularity: String = "" // ": 100.00,
+    var createdAtStr: String = "" // ": "04-02 16:41"
+}
+
+class HotHistoryViewModel: XMListViewModel<HotHistroy> {
+    init() {
+        super.init(target: UserAssetAPI.getHotRecord(page: 1),pagesize: 20)
+        Task { await self.getListData() }
+    }
+}
+
 struct HotHistoryView: View {
+    @StateObject var vm: HotHistoryViewModel = .init()
     var body: some View {
         List {
-            ForEach(0 ... 100, id: \.self) { _ in
-                row
+            XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { item in
+                row(item)
+            } loadingView: {
+                ProgressView()
+            } emptyView: {
+                XMEmptyView()
+            } loadMore: {
+                await vm.loadMore()
+            } getListData: {
+                await vm.getListData()
             }
         }
         .listStyle(.plain)
         .toolbarRole(.editor)
-        .navigationTitle("🔥热度历史")
+        .navigationTitle("热度明细")
     }
 
-    var row: some View {
+    func row(_ item: HotHistroy) -> some View {
         HStack(spacing: 16) {
-            XMDesgin.XMIcon(iconName: "system_toggle")
+            XMDesgin.XMIcon(iconName: "profile_hot_history")
                 .frame(width: 56, height: 56, alignment: .center)
                 .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4, content: {
-//                Text("我")
-//                    .font(.XMFont.f2)
-//                    .fcolor(.XMDesgin.f1)
-                Text(Bool.random() ? "购买热度" : Bool.random() ? "火苗兑换" : "冷却buff降温")
+                Text(item.eventTitle)
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
-                Text(Date.now.string(withFormat: "yyyy年MM月-dd日 HH:mm"))
+                Text(item.createdAtStr)
                     .font(.XMFont.f3)
                     .fcolor(.XMDesgin.f2)
-
             })
             Spacer()
-            Text(Bool.random() ? "+392" : "-131")
+            Text(Int(item.addPopularity) ?? 0 > 0 ? "+\(item.addPopularity)" : item.addPopularity)
                 .font(.XMFont.big3.bold())
-                .fcolor(.XMDesgin.f1)
+                .fcolor(Int(item.addPopularity) ?? 0 > 0 ? .green : .red)
         }
-        
     }
 }
 

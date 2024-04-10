@@ -7,56 +7,75 @@
 
 import SwiftUI
 
+class MyHotInfoViewModel : XMModRequestViewModel<UserRankInfo> {
+    init() {
+        super.init(pageName: "") {
+            UserAssetAPI.hotInfo
+        }
+    }
+}
+
+struct UserRankInfo : Convertible {
+    let userId: String = ""
+    let countryRank: String = ""
+    let cityRank: String = ""
+    let cityRankDesc: String = ""
+    let hotStatus: Int = 0
+    let hotTitle: String = ""
+    let hotStatusDesc: String = ""
+    let hotEventRuleList: [HotEventRule] = []
+}
+
+struct HotEventRule :Convertible{
+    let title: String = ""
+    let hotDesc: String = ""
+}
+
 struct MyHotInfoView: View {
-    // 定义奖励规则数组
-    let rewards = [
-        ("发布的动态被点赞、评论", "+ 10 🔥"),
-        ("收到礼物", "+ 礼物赛币价值 * 10 🔥"),
-        ("每日登录", "+ 50 🔥"),
-        ("参加大赛", "+ 200 🔥"),
-        ("大赛帖子被点赞、评论", "+ 30 🔥"),
-        ("朋友填写了你的邀请码", "+ 1000 🔥")
-    ]
+    @StateObject var vm : MyHotInfoViewModel = .init()
+
 
     var body: some View {
         List {
-            // 全国排名部分
-            Section {
-                RankingView(ranking: "No.2392950335")
-                    .listRowSeparator(.hidden, edges: .top)
-            } header: {
-                Text("全国排名")
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
-                    .listRowSeparator(.hidden, edges: .all)
-            }
+            if vm.mod.cityRank.isEmpty == false {
+                // 全国排名部分
+                Section {
+                    RankingView(ranking: "No.\(vm.mod.countryRank)")
+                        .listRowSeparator(.hidden, edges: .top)
+                } header: {
+                    Text("全国排名")
+                        .font(.XMFont.f1b)
+                        .fcolor(.XMDesgin.f1)
+                        .listRowSeparator(.hidden, edges: .all)
+                }
 
-            // 同城排名部分
-            Section {
-                RankingView(ranking: "No.20320942")
-                    .listRowSeparator(.hidden, edges: .top)
-            } header: {
-                Text("同城排名")
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
-                    .listRowSeparator(.hidden, edges: .all)
-            } footer: {
-                XMTyperText(text: "* 通过发布动态、参加主题赛、收获会员们的点赞，来提升热度。或通过直接购买的方式快速为自己升温！")
-                    .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
-                    .listRowSeparator(.hidden, edges: .bottom)
+                // 同城排名部分
+                Section {
+                    RankingView(ranking: "No.\(vm.mod.cityRank)")
+                        .listRowSeparator(.hidden, edges: .top)
+                } header: {
+                    Text("同城排名")
+                        .font(.XMFont.f1b)
+                        .fcolor(.XMDesgin.f1)
+                        .listRowSeparator(.hidden, edges: .all)
+                } footer: {
+                    XMTyperText(text: "*\(vm.mod.cityRankDesc)")
+                        .font(.XMFont.f2)
+                        .fcolor(.XMDesgin.f2)
+                        .listRowSeparator(.hidden, edges: .bottom)
+                }
             }
 
             // 当前状态部分
             Section {
-                XMDesgin.XMTag(text: "❄️一级冷却")
+                XMDesgin.XMTag(text: vm.mod.hotTitle)
                     .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("当前状态")
                     .font(.XMFont.f1b)
                     .fcolor(.XMDesgin.f1)
             } footer: {
-                Text("* 进入全国前300后，你会拥有6个小时的热度保护期。之后，你会开始慢慢降温，以给其他人曝光的机会。但可以通过主动购买热度的方式，让自己重新进入6个小时的保护期！")
+                Text("* \(vm.mod.hotStatusDesc)")
                     .font(.XMFont.f2)
                     .fcolor(.XMDesgin.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
@@ -64,7 +83,7 @@ struct MyHotInfoView: View {
 
             // 奖励规则部分
             Section {
-                RewardsView(rewards: rewards)
+                RewardsView(rules: vm.mod.hotEventRuleList)
                     .listRowSeparator(.hidden, edges: .top)
             } header: {
                 Text("当前规则")
@@ -109,12 +128,12 @@ struct RankingView: View {
 
 // 奖励规则视图
 struct RewardsView: View {
-    let rewards: [(String, String)]
+    let rules : [HotEventRule]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            ForEach(rewards, id: \.0) { title, points in
-                RewardRow(title: title, points: points)
+            ForEach(rules, id: \.title) { rule in
+                RewardRow(title: rule.title, points: rule.hotDesc)
             }
         }
         .fcolor(.XMDesgin.f2)

@@ -7,10 +7,25 @@
 
 import SwiftUI
 
-class MeiRiDaSaiViewModel: ObservableObject {
-    @Published var postList: [XMPost] = []
+class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
+    init() {
+        super.init(target: PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: 0, themeId: 0)), pagesize: 20)
+        // 获取主题列表
+        Task {
+            await self.getthemeList()
+            await refreshPostList()
+        }
+    }
+
     // 当前主题IndexId
-    @Published var currentThemeIndex: Int = 0
+    @Published var currentThemeIndex: Int = 0 {
+        // 每次主题变化，请求帖子
+        didSet {
+            Task {
+                await refreshPostList()
+            }
+        }
+    }
 
     // 主题列表
     @Published var themeList: [XMTheme] = []
@@ -18,12 +33,19 @@ class MeiRiDaSaiViewModel: ObservableObject {
     // 最热最新
     @Published var themeType: Int = 1 {
         didSet {
-            Task { await self.getthemeList() }
+            Task {
+                await refreshPostList()
+            }
         }
     }
 
-    init() {
-        Task { await self.getthemeList() }
+    /*
+     刷新帖子
+     */
+    @MainActor
+    func refreshPostList() async {
+        target = PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: themeType, themeId: currentTheme?.id ?? 0))
+        await getListData()
     }
 
     // 当前选择的主题
@@ -54,12 +76,21 @@ struct MeiRiDaSaiView: View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
                 header
-//                // 最新最热选择
+                // 最新最热选择
                 tab
                 // 帖子列表
-                if let themeid = vm.currentTheme?.id {
-                    CompetitionPostListView(type: vm.themeType, themeId: themeid)
-                        .environmentObject(vm)
+                XMStateView(vm.list,
+                            reqStatus: vm.reqStatus,
+                            loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
+                    PostView(post)
+                } loadingView: {
+                    PostListLoadingView()
+                } emptyView: {
+                    Text("暂无内容")
+                } loadMore: {
+                    await vm.loadMore()
+                } getListData: {
+                    await vm.getListData()
                 }
             })
             .padding(.all, 16)

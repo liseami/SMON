@@ -78,9 +78,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
                 let receiptString = receiptData.base64EncodedString(options: [])
                 
             } catch { print("Couldn't read receipt data with error: " + error.localizedDescription) }
-        } else {
-            
-        }
+        } else {}
     }
 }
 
@@ -91,7 +89,6 @@ extension IAPManager: SKProductsRequestDelegate {
         DispatchQueue.main.async {
             self.products = response.products
         }
-
     }
     
     func request(_ request: SKRequest, didFailWithError error: Error) {

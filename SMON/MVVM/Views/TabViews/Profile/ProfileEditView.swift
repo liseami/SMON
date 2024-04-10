@@ -31,6 +31,7 @@ class ProfileEditViewModel: ObservableObject {
         let target = UserAPI.updateUserInfo(p: p)
         let result = await Networking.request_async(target)
         if result.is2000Ok {
+            await UserManager.shared.getUserInfo()
             MainViewModel.shared.pathPages.removeLast()
             Apphelper.shared.pushNotification(type: .success(message: "资料修改成功。"))
         }
@@ -68,6 +69,7 @@ struct ProfileEditView: View {
         ScrollView(showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 28, pinnedViews: [], content: {
                 avatar
+                nickname
                 bio
                 wechat
                 bdsmAtt
@@ -77,7 +79,8 @@ struct ProfileEditView: View {
                 height
                 moreInfo
             })
-            .font(.headline).bold()
+            .tint(Color.XMDesgin.main)
+            .font(.XMFont.f1b)
             .scrollIndicators(.hidden)
             .fcolor(.XMDesgin.f1)
             .padding(.all, 16)
@@ -87,6 +90,14 @@ struct ProfileEditView: View {
                         await vm.updateUserInfo()
                         await vm.updatePhotos(urls: [])
                     }
+                }
+                
+                ToolbarItem(placement: .keyboard) {
+                    XMDesgin.XMIcon(iconName: "system_arrow_down_circle", withBackCricle: true)
+                        .onTapGesture {
+                            Apphelper.shared.closeKeyBoard()
+                        }
+                        .moveTo(alignment: .trailing)
                 }
             }
         }
@@ -291,15 +302,21 @@ struct ProfileEditView: View {
                 .background {
                     Color.XMDesgin.b1
                 }
-                .toolbar(content: {
-                    ToolbarItem(placement: .keyboard) {
-                        XMDesgin.XMIcon(iconName: "system_arrow_down_circle", withBackCricle: true)
-                            .onTapGesture {
-                                Apphelper.shared.closeKeyBoard()
-                            }
-                            .moveTo(alignment: .trailing)
-                    }
-                })
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        })
+    }
+
+    var nickname: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("昵称")
+            TextField(text: $vm.updateModel.nickname)
+                .font(.XMFont.f1)
+                .fcolor(.XMDesgin.f1)
+                .scrollContentBackground(.hidden)
+                .padding(.all, 12)
+                .background {
+                    Color.XMDesgin.b1
+                }
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         })
     }

@@ -32,7 +32,7 @@ struct HotBuyView: View {
                         .font(.XMFont.big2.bold())
                         .animation(.spring)
                         .onAppear(perform: {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
                                 self.showImage = true
                                 Apphelper.shared.mada(style: .heavy)
                             }

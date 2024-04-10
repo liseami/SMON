@@ -21,7 +21,7 @@ struct FlameDetail: Convertible, Identifiable {
 
 class FlameDetailViewModel: XMListViewModel<FlameDetail> {
     init() {
-        super.init(target: UserAssetAPI.getUserFlamesRecord(page: 1), pagesize: 10, atKeyPath: .datalist)
+        super.init(target: UserAssetAPI.getUserFlamesRecord(page: 1), pagesize: 20, atKeyPath: .datalist)
         Task {
             await self.getListData()
         }
@@ -33,7 +33,7 @@ struct FlameDetailView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .center, spacing: 12, pinnedViews: [], content: {
-                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 10) { data in
+                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { data in
                     makeRow(data)
                 } loadingView: {
                     ProgressView()
