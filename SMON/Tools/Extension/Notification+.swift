@@ -13,4 +13,6 @@ extension Notification.Name {
         Notification.Name("com.wuhanjiyunshang.meiridasai.POST_TAP_LIKE")
     public static let APP_GO_TO_ACTIVE =
         Notification.Name("com.wuhanjiyunshang.meiridasai.APP_GO_TO_ACTIVE")
+    public static let POST_PUBLISHED_SUCCESS =
+        Notification.Name("com.wuhanjiyunshang.meiridasai.POST_PUBLISHED_SUCCESS")
 }

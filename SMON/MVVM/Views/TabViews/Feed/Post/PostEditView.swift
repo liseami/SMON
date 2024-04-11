@@ -17,6 +17,12 @@ class PostEditViewModel: ObservableObject {
     @Published var postAttachs: [String] = []
     @Published var themeId: String?
     
+    @Published var targetTheme: XMTheme?
+    
+    init() {
+        self.targetTheme = MeiRiDaSaiViewModel.shared.currentTheme
+    }
+
     /// 发布帖子
     @MainActor
     func publishPost() async {
@@ -26,12 +32,13 @@ class PostEditViewModel: ObservableObject {
         {
             postAttachs = urls
         }
-        let t = PostAPI.publish(p: .init(postContent: textInput, postAttachs: postAttachs, themeId: "2"))
+        let t = PostAPI.publish(p: .init(postContent: textInput, postAttachs: postAttachs, themeId: targetTheme?.id.string ?? ""))
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "发布成功。"))
             // 关闭页面
             Apphelper.shared.topMostViewController()?.dismiss(animated: true)
+            NotificationCenter.default.post(name: Notification.Name.POST_PUBLISHED_SUCCESS, object: nil)
         }
     }
 }
@@ -40,9 +47,6 @@ struct PostEditView: View {
     /// 视图模型
     @StateObject var vm: PostEditViewModel = .init()
     
-    /// 环境变量,用于控制视图的展示与隐藏
-    @Environment(\.presentationMode) var presentationMode
-
     var body: some View {
         NavigationView(content: {
             ScrollView(showsIndicators: false) {
@@ -63,6 +67,35 @@ struct PostEditView: View {
                         XMDesgin.XMIcon(iconName: "post_image", size: 16, withBackCricle: true)
                     }
                     Spacer()
+                    
+                    if let title = vm.targetTheme?.title {
+                        Menu.init {
+                            Button(action: {
+                                DispatchQueue.main.async {
+                                    vm.targetTheme = nil
+                                }
+                            }, label: {
+                                Text("不参与")
+                            })
+                            ForEach(MeiRiDaSaiViewModel.shared.themeList, id: \.id) { theme in
+                                Button(action: {
+                                    DispatchQueue.main.async {
+                                        vm.targetTheme = theme
+                                    }
+                                }, label: {
+                                    Text("参与 : #" + theme.title)
+                                })
+                            }
+                        } label: {
+                            HStack {
+                                Text("参与")
+                                    .font(.XMFont.f2b)
+                                    .fcolor(.XMDesgin.f1)
+                                XMDesgin.XMTag(text: title, bgcolor: .XMDesgin.main)
+                            }
+                        }
+                    }
+                    
                 })
                 .padding()
             }
@@ -70,7 +103,7 @@ struct PostEditView: View {
                 // 导航栏按钮
                 ToolbarItem(placement: .topBarLeading) {
                     XMDesgin.XMButton.init {
-                        presentationMode.dismiss()
+                        Apphelper.shared.closeSheet()
                     } label: {
                         Text("取消").font(.XMFont.f1)
                     }

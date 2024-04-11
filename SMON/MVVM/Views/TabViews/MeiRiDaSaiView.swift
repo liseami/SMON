@@ -8,6 +8,7 @@
 import SwiftUI
 
 class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
+    static let shared = MeiRiDaSaiViewModel()
     init() {
         super.init(target: PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: 0, themeId: 0)), pagesize: 20)
         // 获取主题列表
@@ -18,7 +19,7 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
     }
 
     // 当前主题IndexId
-    @Published var currentThemeIndex: Int = 0 {
+    @Published var currentThemeIndex: Int = 1 {
         // 每次主题变化，请求帖子
         didSet {
             Task {
@@ -28,7 +29,11 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
     }
 
     // 主题列表
-    @Published var themeList: [XMTheme] = []
+    @Published var themeList: [XMTheme] = [] {
+        didSet {
+            currentThemeIndex = max(0, themeList.count - 2)
+        }
+    }
 
     // 最热最新
     @Published var themeType: Int = 1 {
@@ -70,7 +75,7 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
 
 struct MeiRiDaSaiView: View {
     @State var currentIndex: Int = 0
-    @StateObject var vm: MeiRiDaSaiViewModel = .init()
+    @StateObject var vm: MeiRiDaSaiViewModel = .shared
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -103,6 +108,14 @@ struct MeiRiDaSaiView: View {
         }
         .refreshable {
             await vm.getthemeList()
+        }
+        // 在详情内被点赞，列表中响应。
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.POST_PUBLISHED_SUCCESS, object: nil)) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                Task {
+                    await self.vm.getListData()
+                }
+            }
         }
     }
 
@@ -170,7 +183,10 @@ struct MeiRiDaSaiView: View {
                 }
             })
             .padding(.top, 40)
-        } else {
+            .transition(.movingParts.anvil.animation(.bouncy))
+        }
+
+        else {
             fakeheader
         }
     }
