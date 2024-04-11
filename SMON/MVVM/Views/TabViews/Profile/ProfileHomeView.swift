@@ -61,13 +61,13 @@ struct ProfileHomeView: View {
             await UserManager.shared.getUserInfo()
         })
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                XMDesgin.XMButton {
-                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
-                } label: {
-                    XMDesgin.XMIcon(iconName: "home_bell")
-                }
-            }
+//            ToolbarItem(placement: .topBarLeading) {
+//                XMDesgin.XMButton {
+//                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+//                } label: {
+//                    XMDesgin.XMIcon(iconName: "home_bell")
+//                }
+//            }
 
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMButton {
@@ -172,9 +172,9 @@ struct ProfileHomeView: View {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
             }
 
-            XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums)) {
-                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
-            }
+//            XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums)) {
+//                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
+//            }
 
         })
         .padding(.vertical, 16)

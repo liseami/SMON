@@ -65,16 +65,16 @@ struct MessageView: View {
         })
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                // 通知按钮
-                XMDesgin.XMButton {} label: {
-                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
-                }
-            }
+//            ToolbarItem(placement: .topBarLeading) {
+//                // 通知按钮
+//                XMDesgin.XMButton {} label: {
+//                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+//                }
+//            }
             // 筛选按钮
-            ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMIcon(iconName: "setting_about", size: 22)
-            }
+//            ToolbarItem(placement: .topBarTrailing) {
+//                XMDesgin.XMIcon(iconName: "setting_about", size: 22)
+//            }
         }
     }
 

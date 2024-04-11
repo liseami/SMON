@@ -26,15 +26,15 @@ struct RankView: View {
                 // 顶部导航栏
                 topTabbar
             }
-            ToolbarItem(placement: .topBarLeading) {
-                // 通知按钮
-
-                XMDesgin.XMButton {
-                    LoadingTask(loadingMessage: "强制等待...") {}
-                } label: {
-                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
-                }
-            }
+//            ToolbarItem(placement: .topBarLeading) {
+//                // 通知按钮
+//
+//                XMDesgin.XMButton {
+//                    LoadingTask(loadingMessage: "强制等待...") {}
+//                } label: {
+//                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+//                }
+//            }
         }
     }
 

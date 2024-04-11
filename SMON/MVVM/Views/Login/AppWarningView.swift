@@ -18,9 +18,7 @@ struct AppWarningView: View {
         VStack(spacing: 32) {
             Spacer()
             title
-
             rules
-
             markdown
         }
         .padding()
@@ -40,13 +38,16 @@ struct AppWarningView: View {
 
     var markdown: some View {
         HStack {
-            Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意[《每日大赛APP用户协议》](https://ismonlove.com) 与 [《每日大赛APP用户隐私政策》](https://ismonlove.com)。"))
+            Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意[《每日大赛APP用户协议》](https://ismonlove.com/work/YHXY.html) 与 [《每日大赛APP用户隐私政策》](https://ismonlove.com/work/YSZC.html)。"))
                 .font(.XMFont.f2)
+                .lineSpacing(6)
                 .multilineTextAlignment(.leading)
                 .fcolor(.XMDesgin.f2)
                 .frame(width: 240)
                 .tint(Color.XMDesgin.main)
                 .environment(\.openURL, OpenURLAction { url in
+                    print(url)
+                    Apphelper.shared.mada(style: .rigid)
                     Apphelper.shared.presentPanSheet(InAppBrowser(url: url)
                         .preferredColorScheme(.dark), style: .cloud)
                     return .handled
@@ -75,7 +76,7 @@ struct AppWarningView: View {
                         agreeList.append(text)
                     }
                 }
-                .transition(.movingParts.skid.animation(.spring.delay(Double(index) * 0.2)))
+                .transition(.movingParts.skid(direction: .leading).animation(.spring.delay(Double(index) * 0.4)))
                 .ifshow(show: showBtns)
             }
         })

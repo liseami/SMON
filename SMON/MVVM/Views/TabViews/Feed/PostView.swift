@@ -112,7 +112,16 @@ struct PostView: View {
 
             }),
             UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
-
+                /*
+                 拉黑用户
+                 */
+                Task {
+                    let t = UserRelationAPI.tapBlack(blackUserId: vm.post.userId)
+                    let r = await Networking.request_async(t)
+                    if r.is2000Ok {
+                        self.vm.hidden = true
+                    }
+                }
             })]
             return result
         }
@@ -231,15 +240,13 @@ struct LoadingPostView: View {
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
             XMLikeBtn(target: PostsOperationAPI.tapLike(postId: "vm.post.id"), isLiked: false, likeNumbers: 0, contentId: "vm.post.id")
-              
 
             XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
-              
 
             Spacer()
 
             XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
-              
+
         })
     }
 
@@ -254,7 +261,6 @@ struct LoadingPostView: View {
                         .scaledToFill()
                         .frame(width: 148, height: 148 / 3 * 4)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
-                      
                 }
                 Spacer().frame(width: 12)
             }
@@ -272,14 +278,12 @@ struct LoadingPostView: View {
                 .font(.XMFont.f1b)
                 .lineLimit(1)
                 .fcolor(.XMDesgin.f1)
-              
 
             Spacer()
             Text(String.random(ofLength: Int.random(in: 4...12)))
                 .redacted(reason: .placeholder)
                 .font(.XMFont.f3)
                 .fcolor(.XMDesgin.f2)
-            
         }
     }
 
@@ -299,13 +303,11 @@ struct LoadingPostView: View {
                 .scaledToFit()
                 .frame(width: 38, height: 38) // Adjust the size as needed
                 .clipShape(Circle())
-              
 
             RoundedRectangle(cornerRadius: 99)
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
                 .fcolor(.XMDesgin.f2)
-            
         }
     }
 }

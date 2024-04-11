@@ -41,7 +41,7 @@ struct SettingView: View {
                                 case "第三方SDK信息共享清单":
                                     MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.thirdPartySDKInfo)
                                 case "账户注销":
-                                    UserManager.shared.logOut()
+                                    UserManager.shared.goodBye()
                                 case "退出登录":
                                     UserManager.shared.logOut()
                                 default:

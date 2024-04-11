@@ -76,7 +76,7 @@ class UserManager: ObservableObject {
             await getUploadToken()
             await getVersionInfo()
             // 仅针对已登陆用户
-            guard userLoginInfo.isLogin else { return }
+            guard userLoginInfo.isLogin && !userLoginInfo.isNeedInfo else { return }
             LocationManager.shared.uploadUserLocation()
             await getUserInfo()
             await getImUserSign()
@@ -93,6 +93,18 @@ class UserManager: ObservableObject {
             MainViewModel.shared.currentTabbar = .home
         }), .init(title: "取消", style: .default)])
     }
+    
+    @MainActor
+    func goodBye() {
+        Apphelper.shared.pushAlert(title: "注销账户？", message: "确认注销账户？系统会清空当前用户在服务器上留存的全部数据。", actions: [UIAlertAction(title: "确定", style: .destructive, handler: { _ in
+            self.user = .init()
+            self.userLoginInfo = .init()
+            self.OSSInfo = .init()
+            self.IMInfo = .init()
+            MainViewModel.shared.currentTabbar = .home
+        }), .init(title: "取消", style: .default)])
+    }
+
 
     // 持久化数据
     func savaModel<M: Convertible>(model: M) {

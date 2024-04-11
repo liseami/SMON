@@ -30,7 +30,13 @@ struct PostListView: View {
                 } loadingView: {
                     PostListLoadingView()
                 } emptyView: {
-                    XMEmptyView()
+                    VStack(spacing: 24) {
+                        Text("暂无帖子，快快发布吧！")
+                            .font(.XMFont.f1)
+                            .fcolor(.XMDesgin.f2)
+                        LoadingPostView()
+                    }
+                    .padding(.top, 12)
                 } loadMore: {
                     await vm.loadMore()
                 } getListData: {

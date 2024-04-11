@@ -86,7 +86,13 @@ struct MeiRiDaSaiView: View {
                 } loadingView: {
                     PostListLoadingView()
                 } emptyView: {
-                    Text("暂无内容")
+                    VStack(spacing: 24) {
+                        Text("暂无帖子，快快发布吧！")
+                            .font(.XMFont.f1)
+                            .fcolor(.XMDesgin.f2)
+                        LoadingPostView()
+                    }
+                    .padding(.top, 12)
                 } loadMore: {
                     await vm.loadMore()
                 } getListData: {
@@ -137,12 +143,12 @@ struct MeiRiDaSaiView: View {
                         .font(.XMFont.f2)
                         .fcolor(.XMDesgin.f1)
 
-                    XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "去男生主题发帖") {}
-                        .overlay(alignment: .center) {
-                            Capsule()
-                                .stroke(lineWidth: 1)
-                                .fcolor(.XMDesgin.f2)
-                        }
+//                    XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "去男生主题发帖") {}
+//                        .overlay(alignment: .center) {
+//                            Capsule()
+//                                .stroke(lineWidth: 1)
+//                                .fcolor(.XMDesgin.f2)
+//                        }
                     HStack(spacing: 0) {
                         Text("\(theme.postsNums)个帖子 · ")
                         // xx天后截止

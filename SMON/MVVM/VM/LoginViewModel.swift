@@ -17,26 +17,23 @@ class LoginViewModel: ObservableObject {
         case Login_SMSCodeInput
     }
 
-    @Published var pageProgress: PageProgress = .AppFeatures 
-    
-    
+    @Published var pageProgress: PageProgress = .AppFeatures
+
     @Published var phoneInput: String = "" {
         didSet {
             Apphelper.shared.mada(style: .soft)
         }
     }
 
-    
     @Published var vcodeInput: String = "" {
         didSet {
             Apphelper.shared.mada(style: .soft)
         }
     }
 
-    
     var isPhoneNumberValid: Bool {
         // 移除非数字字符
-        let cleanedPhoneInput = self.phoneInput
+        let cleanedPhoneInput = phoneInput
 
         // 检查长度是否为11位
         guard cleanedPhoneInput.count == 11 else {
@@ -79,7 +76,10 @@ extension LoginViewModel {
             Apphelper.shared.closeKeyBoard()
             UserManager.shared.userLoginInfo = userLoginInfo
             MainViewModel.shared.reset()
-            await UserManager.shared.getUserInfo()
+            // 不需要基础信息，才请求用户信息
+            if userLoginInfo.isNeedInfo == false {
+                await UserManager.shared.getUserInfo()
+            }
         }
     }
 }

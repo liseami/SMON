@@ -48,12 +48,14 @@ struct MainTabbar: View {
         let iconName = vm.currentTabbar.circleBtnInfo.icon
         let btnName = vm.currentTabbar.circleBtnInfo.name
         return XMDesgin.XMButton {
-            if vm.currentTabbar == .home {
-//                vm.showHotBuyView = true
-                Apphelper.shared.presentPanSheet(HotBuyView(), style: .cloud)
-            } else {
-                Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
-            }
+//            if vm.currentTabbar == .home {
+////                vm.showHotBuyView = true
+//                Apphelper.shared.presentPanSheet(HotBuyView(), style: .cloud)
+//            } else {
+//                Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
+//            }
+            
+            Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
         } label: {
             LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .bottomLeading, endPoint: .topTrailing)
                 .frame(width: 58, height: 58, alignment: .center)

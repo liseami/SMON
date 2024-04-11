@@ -24,21 +24,15 @@ public enum AppConfig {
     static var baseUrl: String {
         switch env {
         case .dev: return "https://mrdstest.ismonlove.com"
-        case .prod: return "https://app.naduo.love"
+        case .prod: return "https://mrds.ismonlove.com"
         }
     }
-    
-    
 
     /// 极光APPKEY
     static var TIMAppID: String {
         self.readPlist(key: "TIMAppID")
     }
 
-    // 友盟AppKey
-    static var UMAppKey: String {
-        self.readPlist(key: "UMAppKey")
-    }
 
     static func readPlist(key: String) -> String {
         guard let path = Bundle.main.path(forResource: "AppConfig", ofType: "plist"),
@@ -52,11 +46,9 @@ public enum AppConfig {
     /// 主页
     static let domain: String = "https://ismonlove.com/"
     /// 用户协议
-    static let UserAgreement: String = domain + "articles/UserAgreement"
+    static let UserAgreement: String = domain + "work/YHXY.html"
     /// 隐私政策
-    static let UserPrivacyPolicy: String = domain + "articles/PrivacyPolicy"
-    /// 隐私政策ß
-    static let RechargeProtocol: String = domain + "articles/RechargeProtocol"
+    static let UserPrivacyPolicy: String = domain + "work/YSZC.html"
     /// 当前版本
     static var AppVersion: String { (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0" }
     /// AppID

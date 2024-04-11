@@ -24,10 +24,10 @@ struct PostFeedView: View {
                 // 顶部导航栏
                 toptabbar
             }
-            ToolbarItem(placement: .topBarLeading) {
-                //  通知按钮
-                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
-            }
+//            ToolbarItem(placement: .topBarLeading) {
+//                //  通知按钮
+//                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+//            }
         }
     }
 

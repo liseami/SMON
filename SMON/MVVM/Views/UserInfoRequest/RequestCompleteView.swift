@@ -21,7 +21,7 @@ struct RequestCompleteView: View {
                 XMTyperText(text: "每日大赛的游戏规则！")
                     .multilineTextAlignment(.leading)
                     .bold()
-                XMTyperText(text: "每天都举行主题「排位赛」，用户按照「🔥热度值」进行排名。\r\r在这里，你可以轻松找到「全国🔥最火热的用户」，「同城🔥最火热的用户」……\r\r最重要的是，目前获取「🔥」非常简单！\r\r祝你玩的愉快！")
+                XMTyperText(text: "每天都举行主题「排位赛」，用户按照「❤️‍🔥热度值」进行排名。\r\r在这里，你可以轻松找到「全国❤️‍🔥最火热的用户」，「同城❤️‍🔥最火热的用户」……\r\r最重要的是，目前获取「❤️‍🔥」非常简单！\r\r祝你玩的愉快！")
 
                     .font(.XMFont.f1).fcolor(.XMDesgin.f1)
                     .padding(.trailing, 30)
@@ -34,7 +34,10 @@ struct RequestCompleteView: View {
             })
             Spacer()
             XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "好的") {
-                UserManager.shared.userLoginInfo.isNeedInfo = false
+                Task {
+                    UserManager.shared.userLoginInfo.isNeedInfo = false
+                    await UserManager.shared.getUserInfo()
+                }
             }
             .padding(.horizontal, 48)
         }

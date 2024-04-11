@@ -34,7 +34,7 @@ struct AppInfoView: View {
             })
             .padding(.bottom, 120)
             XMDesgin.XMListRow(.init(name: "用户协议", icon: "setting_userbook", subline: ""), showRightArrow: true) {
-                Apphelper.shared.presentPanSheet(InAppBrowser(url: AppConfig.UserPrivacyPolicy)
+                Apphelper.shared.presentPanSheet(InAppBrowser(url: AppConfig.UserAgreement)
                     .preferredColorScheme(.dark), style: .cloud)
             }
             XMDesgin.XMListRow(.init(name: "隐私政策", icon: "setting_userbook", subline: ""), showRightArrow: true) {

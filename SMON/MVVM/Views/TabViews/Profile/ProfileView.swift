@@ -56,18 +56,52 @@ struct ProfileView: View {
                 case .isOKButEmpty:
                     Text("暂无帖子")
                 }
-            case .rank:
-                EmptyView()
-            case .gift:
-                EmptyView()
+//            case .rank:
+//                EmptyView()
+//            case .gift:
+//                EmptyView()
             }
+        }
+        .refreshable {
+            await vm.getData()
         }
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+                    .onTapGesture {
+                        Apphelper.shared.pushActionSheet(title: "操作", message: "", actions: actions)
+                    }
             }
         })
         .ignoresSafeArea()
+    }
+    
+    var actions: [UIAlertAction] {
+        var result: [UIAlertAction] = [
+        ]
+        if userId == UserManager.shared.user.userId {
+            result.insert(UIAlertAction(title: "编辑个人资料", style: .destructive, handler: { _ in
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profileEditView)
+            }), at: 0)
+            return result
+        } else {
+            result = [UIAlertAction(title: "举报用户", style: .default, handler: { _ in
+
+            }),
+            UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
+                /*
+                 拉黑用户
+                 */
+                Task {
+                    let t = UserRelationAPI.tapBlack(blackUserId: self.userId)
+                    let r = await Networking.request_async(t)
+                    if r.is2000Ok {
+                        MainViewModel.shared.pathPages.removeLast()
+                    }
+                }
+            })]
+            return result
+        }
     }
     
     // 顶部图像视图
@@ -153,11 +187,11 @@ struct ProfileView: View {
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {
                     await vm.tapChat()
                 }
-                // 微信
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
-                    Apphelper.shared.presentPanSheet(WechatGiftView()
-                        .environmentObject(vm), style: .shop)
-                }
+//                // 微信
+//                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
+//                    Apphelper.shared.presentPanSheet(WechatGiftView()
+//                        .environmentObject(vm), style: .shop)
+//                }
             }
         }
     }

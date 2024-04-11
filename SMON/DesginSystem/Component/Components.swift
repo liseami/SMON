@@ -270,7 +270,16 @@ enum XMDesgin {
                 .padding(.vertical, 16)
                 .background(Color.XMDesgin.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
+                .changeEffect(.spray(origin: .top) {
+                    Group {
+                        Image(systemName: "heart.fill")
+                        Image(systemName: "sparkles")
+                    }
+                    .font(.title)
+                    .foregroundStyle(Color.XMDesgin.main.gradient)
+                }, value: self.selected,isEnabled: self.selected != true)
             }
+
         }
     }
 

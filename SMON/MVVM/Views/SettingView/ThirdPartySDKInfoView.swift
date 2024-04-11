@@ -4,20 +4,8 @@ struct ThirdPartySDKInfoView: View {
     @State private var podfileContent = ""
 
     var body: some View {
-        List {
-            XMSection(title: "第三方SDK接入") {
-                if podfileContent.isEmpty {
-                    Text("加载中...")
-                } else {
-                    ForEach(podfileContent.split(separator: "\n"), id: \.self) { line in
-                        Text(line)
-                            .font(.system(.body, design: .monospaced))
-                            .multilineTextAlignment(.leading)
-                    }
-                }
-            }
-        }
-        .listStyle(.plain)
+        InAppBrowser(url: AppConfig.UserPrivacyPolicy)
+            .preferredColorScheme(.dark)
         .navigationTitle("第三方SDK接入信息")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

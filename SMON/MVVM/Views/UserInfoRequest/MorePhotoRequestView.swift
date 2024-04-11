@@ -39,10 +39,22 @@ struct MorePhotoRequestView: View {
                 }
             }
 
-        } btnAction: {}
-            .canSkip {
-                vm.presentedSteps.append(.brithday)
+        } btnAction: {
+            LoadingTask(loadingMessage: "上传照片") {
+                if let urls = await AliyunOSSManager.shared.upLoadImages_async(images: vm.morePhoto, type: .userAlbum) {
+                    let target = UserAPI.updateAlbum(p: urls)
+                    let result = await Networking.request_async(target)
+                    if result.is2000Ok {
+                        vm.presentedSteps.append(.brithday)
+                    } else {
+                        Apphelper.shared.pushNotification(type: .error(message: "上传失败，请稍后再试。"))
+                    }
+                }
             }
+        }
+        .canSkip {
+            vm.presentedSteps.append(.brithday)
+        }
     }
 
     @ViewBuilder
