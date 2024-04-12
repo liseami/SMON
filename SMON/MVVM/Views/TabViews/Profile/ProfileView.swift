@@ -40,26 +40,26 @@ struct ProfileView: View {
             switch vm.currentTab {
             case .media:
                 mediaGridView
-                switch vm.reqStatus {
-                case .isLoading:
-                    ProgressView()
-                case .isNeedReTry:
-                    EmptyView()
-                case .isOK:
-                    LazyVStack(alignment: .leading, spacing: 24, pinnedViews: []) {
-                        // 循环创建 10 个帖子视图
-                        ForEach(vm.list, id: \.id) { post in
-                            PostView(post)
-                        }
+                
+                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
+                    PostView(post)
+                } loadingView: {
+                    PostListLoadingView()
+                } emptyView: {
+                    VStack(spacing: 24) {
+                        Text("他很忙，什么也没留下～")
+                            .font(.XMFont.f1)
+                            .fcolor(.XMDesgin.f2)
+                        LoadingPostView()
                     }
-                    .padding()
-                case .isOKButEmpty:
-                    Text("暂无帖子")
+                    .padding(.top, 12)
+                } loadMore: {
+                    await vm.loadMore()
+                } getListData: {
+                    await vm.getData()
                 }
-//            case .rank:
-//                EmptyView()
-//            case .gift:
-//                EmptyView()
+                .padding(.horizontal, 16)
+
             }
         }
         .refreshable {
@@ -80,25 +80,21 @@ struct ProfileView: View {
         var result: [UIAlertAction] = [
         ]
         if userId == UserManager.shared.user.userId {
-            result.insert(UIAlertAction(title: "编辑个人资料", style: .destructive, handler: { _ in
+            result.insert(UIAlertAction(title: "编辑个人资料", style: .default, handler: { _ in
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profileEditView)
             }), at: 0)
             return result
         } else {
             result = [UIAlertAction(title: "举报用户", style: .default, handler: { _ in
-
+                Task {
+                    await Apphelper.shared.report(type: .user, reportValue: vm.user.userId)
+                }
             }),
             UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
                 /*
                  拉黑用户
                  */
-                Task {
-                    let t = UserRelationAPI.tapBlack(blackUserId: self.userId)
-                    let r = await Networking.request_async(t)
-                    if r.is2000Ok {
-                        MainViewModel.shared.pathPages.removeLast()
-                    }
-                }
+                Apphelper.shared.blackUser(userid: self.vm.user.userId)
             })]
             return result
         }

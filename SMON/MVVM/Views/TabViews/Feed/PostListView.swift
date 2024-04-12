@@ -25,7 +25,10 @@ struct PostListView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(alignment: .leading, spacing: 16, pinnedViews: [], content: {
-                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus) { post in
+                XMStateView(vm.list,
+                            reqStatus: vm.reqStatus,
+                            loadmoreStatus: vm.loadingMoreStatus,
+                            pagesize: 20) { post in
                     PostView(post)
                 } loadingView: {
                     PostListLoadingView()
@@ -46,7 +49,9 @@ struct PostListView: View {
             })
             .padding(.all, 16)
         }
-        .refreshable {}
+        .refreshable {
+            await vm.getListData()
+        }
     }
 }
 

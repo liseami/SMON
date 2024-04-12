@@ -14,6 +14,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     var blurredWindow: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         DAppInit()
+        let _ = ConfigStore.shared
         return true
     }
 }

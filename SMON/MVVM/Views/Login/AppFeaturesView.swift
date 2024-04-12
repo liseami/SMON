@@ -14,7 +14,7 @@ struct AppFeaturesView: View {
             Spacer()
             XMTyperText(text: "关心另一种趣味\n始于大赛，止于大赛")
                 .lineSpacing(6)
-                .font(.XMFont.big1.bold())
+                .font(.XMFont.big2.bold())
             Text("「每日大赛官方版」是一款「以图会友」的社交软件，服务于充满展示欲的新新人类。人类的每一种奇思妙想都应该被尊重。始于大赛，止于大赛。")
                 .font(.XMFont.f1)
             XMDesgin.CircleBtn(backColor: Color(hex: "1F1F1F"), fColor: .white, iconName: "system_down") {

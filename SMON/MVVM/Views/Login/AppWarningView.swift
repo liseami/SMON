@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AppWarningView: View {
     @EnvironmentObject var vm: LoginViewModel
-    let warnings = ["我对「开放式关系」和「亚文化社交」没有歧视，始终保持着友好、阳光、乐观的态度来对待陌生人。", "我不会将App分享给对小众文化不了解的「圈外人」。",
-                    "我不会将App中的「用户内容」分享到广域社交网络中（本App已启用截图防护功能）。"]
+    let warnings = ["我对「小众文化」没有歧视，始终保持着友好、阳光、乐观的态度来对待陌生人。", "我不会将App分享给对小众文化不了解的「圈外人」。",
+                    "我不会将App中的「用户内容」分享到广域社交网络中。"]
     @State var agreeList: [String] = []
     @State var showBtns: Bool = false
 
@@ -32,13 +32,13 @@ struct AppWarningView: View {
     var title: some View {
         XMTyperText(text: "我们需要知道这个App是否适合为您服务")
             .lineSpacing(6)
-            .font(.XMFont.big1.bold())
+            .font(.XMFont.big2.bold())
             .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var markdown: some View {
         HStack {
-            Text(LocalizedStringKey("点击下一步，即代表您已阅读并同意[《每日大赛APP用户协议》](https://ismonlove.com/work/YHXY.html) 与 [《每日大赛APP用户隐私政策》](https://ismonlove.com/work/YSZC.html)。"))
+            Text(LocalizedStringKey("点击🫱右侧的圆形「下一步」按钮，即代表您已阅读并同意[《每日大赛APP用户协议》](https://ismonlove.com/work/YHXY.html) 与 [《每日大赛APP用户隐私政策》](https://ismonlove.com/work/YSZC.html)。"))
                 .font(.XMFont.f2)
                 .lineSpacing(6)
                 .multilineTextAlignment(.leading)

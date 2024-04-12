@@ -12,7 +12,7 @@ struct RequestUserLocationAuthorizationView: View {
     @ObservedObject var location: LocationManager = .shared
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var vm: NearRankViewModel
-    @EnvironmentObject var superVM: RankViewModel
+    
     var body: some View {
         VStack(alignment: .center, spacing: 24) {
             Text("查看您附近的人？")
@@ -64,7 +64,6 @@ struct RequestUserLocationAuthorizationView: View {
             XMDesgin.XMIcon(iconName: "system_xmark", size: 22, color: .XMDesgin.f1, withBackCricle: true)
                 .onTapGesture {
                     Apphelper.shared.closeSheet()
-                    superVM.currentTopTab = .localCity
                 }
                 .padding(.leading, 12)
         }

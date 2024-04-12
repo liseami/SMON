@@ -14,10 +14,8 @@ class ProfileViewModel: XMListViewModel<XMPost> {
     var userId: String = ""
 
     init(userId: String) {
-        super.init(target: PostAPI.themeList(p: .init(page: 1, pageSize: 10, type: 1, themeId: 2)))
+        super.init(target: PostAPI.user(page: 1, userId: userId))
         self.userId = userId
-        print(userId)
-        print(userId)
         Task {
             await getData()
         }

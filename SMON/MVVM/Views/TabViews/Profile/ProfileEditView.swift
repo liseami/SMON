@@ -32,7 +32,7 @@ class ProfileEditViewModel: ObservableObject {
         let result = await Networking.request_async(target)
         if result.is2000Ok {
             await UserManager.shared.getUserInfo()
-            MainViewModel.shared.pathPages.removeLast()
+            MainViewModel.shared.pageBack()
             Apphelper.shared.pushNotification(type: .success(message: "资料修改成功。"))
         }
     }

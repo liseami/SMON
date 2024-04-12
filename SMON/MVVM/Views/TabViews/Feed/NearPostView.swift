@@ -7,25 +7,14 @@
 
 import CoreLocation
 import SwiftUI
-class NearRankViewModel: XMListViewModel<XMUserInRank> {
+class NearPostViewModel: XMListViewModel<XMPost> {
     init() {
-        let mod = UserManager.shared.NearbyFliterMod
-        self.filterMod_APIUse = mod
-        super.init(target: RankAPI.nearby(page: 1, fliter: mod), pagesize: 50)
-    }
-
-    // 接口入参模型，发生变动，自动请求接口
-    @Published var filterMod_APIUse: FliterMod {
-        didSet {
-            target = RankAPI.nearby(page: 1, fliter: filterMod_APIUse)
-            Task { await getListData() }
-        }
+        super.init(target: PostAPI.nearbyList(page: 1), pagesize: 20)
     }
 }
 
-struct NearRankView: View {
-    @StateObject var vm: NearRankViewModel = .init()
-    @EnvironmentObject var superVm: RankViewModel
+struct NearPostView: View {
+    @StateObject var vm: NearPostViewModel = .init()
     @State private var isLoadingUserLocation: Bool = false
 
     // 请求数据
@@ -46,10 +35,10 @@ struct NearRankView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .center, spacing: 0, pinnedViews: [], content: {
-                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 50, customContent: {
-                    rankList
-                }) {
-                    RankListLoadingView()
+                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
+                    PostView(post)
+                } loadingView: {
+                    PostListLoadingView()
                 } emptyView: {
                     XMEmptyView()
                 } loadMore: {
@@ -57,7 +46,9 @@ struct NearRankView: View {
                 } getListData: {
                     await vm.getListData()
                 }
+
             })
+            .padding(.all,16)
         }
         .overlay {
             AutoLottieView(lottieFliesName: "radar", loopMode: .loop, speed: 1)
@@ -84,47 +75,10 @@ struct NearRankView: View {
                 Task { await reqData() }
             } else {
                 Apphelper.shared.pushNotification(type: .error(message: "授权仍未打开。"))
-                superVm.currentTopTab = .localCity
             }
         }
         .scrollIndicators(.hidden)
         .refreshable { await vm.getListData() }
-        .toolbar(content: {
-            // 筛选按钮
-            ToolbarItem(placement: .topBarTrailing) {
-                fliterBtn
-            }
-        })
-    }
-
-    var fliterBtn: some View {
-        XMDesgin.XMButton(action: {
-            Apphelper.shared.presentPanSheet(
-                // 筛选项调节
-                HomeFliterView(mod: self.vm.filterMod_APIUse)
-                    .environmentObject(vm)
-                    .environment(\.colorScheme, .dark), style: .cloud)
-        }, label: {
-            XMDesgin.XMIcon(iconName: "home_fliter", size: 22)
-        })
-    }
-
-    var rankList: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
-            ForEach(Array(vm.list.enumerated()), id: \.offset) { index, user in
-                VStack {
-                    XMUserAvatar(str: user.avatar, userId: user.userId, size: 100)
-                        .conditionalEffect(.smoke(layer: .local), condition: index < 3)
-                    Text(user.nickname)
-                        .font(.XMFont.f1b)
-                        .lineLimit(1)
-                    Text(user.distanceStr)
-                        .font(.XMFont.f3)
-                        .fcolor(.XMDesgin.f2)
-                }
-            }
-        }
-        .padding(.all)
     }
 }
 

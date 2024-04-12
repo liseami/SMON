@@ -10,16 +10,26 @@ import SwiftUI
 class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
     static let shared = MeiRiDaSaiViewModel()
     init() {
+        self.sex = UserManager.shared.user.sex == 1 ? 2 : 1
         super.init(target: PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: 0, themeId: 0)), pagesize: 20)
-        // 获取主题列表
-        Task {
+        Task{
             await self.getthemeList()
-            await refreshPostList()
+            await self.refreshPostList()
+        }
+    }
+
+    @Published var sex: Int = 1
+
+    // 主题列表
+    @Published var themeList: [XMTheme] = [] {
+        didSet {
+            guard oldValue.isEmpty else { return }
+            currentThemeIndex = max(0, themeList.count - 2)
         }
     }
 
     // 当前主题IndexId
-    @Published var currentThemeIndex: Int = 1 {
+    @Published var currentThemeIndex: Int = 0 {
         // 每次主题变化，请求帖子
         didSet {
             Task {
@@ -28,11 +38,10 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
         }
     }
 
-    // 主题列表
-    @Published var themeList: [XMTheme] = [] {
-        didSet {
-            currentThemeIndex = max(0, themeList.count - 2)
-        }
+    // 当前选择的主题
+    var currentTheme: XMTheme? {
+        guard !themeList.isEmpty else { return nil }
+        return themeList[currentThemeIndex]
     }
 
     // 最热最新
@@ -49,14 +58,9 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
      */
     @MainActor
     func refreshPostList() async {
-        target = PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: themeType, themeId: currentTheme?.id ?? 0))
+        guard !themeList.isEmpty, let currentTheme else { return }
+        target = PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: themeType, themeId: currentTheme.id))
         await getListData()
-    }
-
-    // 当前选择的主题
-    var currentTheme: XMTheme? {
-        guard !themeList.isEmpty else { return nil }
-        return themeList[currentThemeIndex]
     }
 
     /*
@@ -65,11 +69,23 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
     @MainActor
     func getthemeList() async {
         themeList = []
-        let t = PostsOperationAPI.themeList(p: .init())
+        let t = PostsOperationAPI.themeList(page: 1, sex: sex)
         let r = await Networking.request_async(t)
         if r.is2000Ok, let list = r.mapArray(XMTheme.self) {
             themeList = list
         }
+    }
+
+    /*
+     更换大赛性别
+     */
+
+    @MainActor
+    func changeThemeSex() async {
+        sex = sex == 1 ? 2 : 1
+        themeList.removeAll()
+        await waitme(sec: 0.5)
+        await getthemeList()
     }
 }
 
@@ -107,9 +123,9 @@ struct MeiRiDaSaiView: View {
             .padding(.all, 16)
         }
         .refreshable {
-            await vm.getthemeList()
+            await vm.refreshPostList()
         }
-        // 在详情内被点赞，列表中响应。
+        // 帖子发布成功，刷新列表
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.POST_PUBLISHED_SUCCESS, object: nil)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 Task {
@@ -145,7 +161,7 @@ struct MeiRiDaSaiView: View {
 
     @ViewBuilder
     var header: some View {
-        if let theme = vm.currentTheme {
+        if let theme = vm.currentTheme,!vm.themeList.isEmpty {
             VStack(alignment: .center, spacing: 12, content: {
                 VStack(alignment: .center, spacing: 16, content: {
                     Text(theme.title)
@@ -153,15 +169,17 @@ struct MeiRiDaSaiView: View {
                         .fcolor(.XMDesgin.f1)
 
                     Text(theme.description)
+                        .lineSpacing(4)
                         .font(.XMFont.f2)
                         .fcolor(.XMDesgin.f1)
-
-//                    XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "去男生主题发帖") {}
-//                        .overlay(alignment: .center) {
-//                            Capsule()
-//                                .stroke(lineWidth: 1)
-//                                .fcolor(.XMDesgin.f2)
-//                        }
+                    XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: self.vm.sex == 2 ? "去男生主题发帖" : "去女生主题发帖") {
+                        await vm.changeThemeSex()
+                    }
+                    .overlay(alignment: .center) {
+                        Capsule()
+                            .stroke(lineWidth: 1)
+                            .fcolor(.XMDesgin.f2)
+                    }
                     HStack(spacing: 0) {
                         Text("\(theme.postsNums)个帖子 · ")
                         // xx天后截止
@@ -172,6 +190,7 @@ struct MeiRiDaSaiView: View {
                 })
                 .padding(.top, 68)
                 .padding(.all, 16)
+                .frame(maxWidth: .infinity)
                 .background(Color.XMDesgin.b1.gradient)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(alignment: .top) {
@@ -184,9 +203,7 @@ struct MeiRiDaSaiView: View {
             })
             .padding(.top, 40)
             .transition(.movingParts.anvil.animation(.bouncy))
-        }
-
-        else {
+        } else {
             fakeheader
         }
     }

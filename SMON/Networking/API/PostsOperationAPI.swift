@@ -8,7 +8,7 @@
 import Foundation
 
 enum PostsOperationAPI: XMTargetType {
-    case themeList(p: PageInfo)
+    case themeList(page: Int, sex: Int)
     case tapLike(postId: String)
     case comment(p: CommentReqMod)
     case commentDelete(commentId: String)
@@ -22,7 +22,7 @@ enum PostsOperationAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
-        case .themeList(let p): return p.kj.JSONObject()
+        case .themeList(let page, let sex): return ["page": page, "sex": sex, "pageSize": "50"]
         case .tapLike(let postId): return ["postId": postId]
         case .comment(let p): return p.kj.JSONObject()
         case .commentDelete(let commentId): return ["commentId": commentId]

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ImSDK_Plus
 import JDStatusBarNotification
 import Kingfisher
 import Lantern
@@ -331,6 +332,44 @@ class Apphelper {
             }
         }
         return nil
+    }
+
+    /*
+     1，举报用户
+     2，举报帖子
+     */
+    enum ReportType: Int {
+        case user = 1
+        case post = 2
+    }
+
+    @MainActor
+    func report(type: ReportType, reportValue: String) async {
+        let t = ReportAPI.report(type: type.rawValue, reportValue: reportValue)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            pushNotification(type: .success(message: "⚠️ 举报成功！感谢你对社区的维护！"))
+        }
+    }
+
+    /*
+     拉黑用户
+     */
+
+    func blackUser(userid: String) {
+        Task {
+            let t = UserRelationAPI.tapBlack(blackUserId: userid)
+            let r = await Networking.request_async(t)
+            if r.is2000Ok {
+                DispatchQueue.main.async {
+                    // 页面返回
+                    MainViewModel.shared.removeAllPage()
+                    // 删除会话
+                    V2TIMManager.sharedInstance().deleteConversation("c2c_m\(userid)") {} fail: { _, _ in
+                    }
+                }
+            }
+        }
     }
 }
 

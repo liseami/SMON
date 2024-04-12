@@ -51,8 +51,16 @@ struct PostFeedView: View {
 
     var tabView: some View {
         TabView(selection: $vm.currentTopTab) {
-            tabContent(for: .near, target: PostAPI.nearbyList(page: 1))
-                .tag(FeedViewModel.FeedTopBarItem.near)
+            ZStack(alignment: .top) {
+                if vm.currentTopTab == .near {
+                    NearPostView()
+                } else {
+                    Color.clear.frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+            .tag(FeedViewModel.FeedTopBarItem.near)
+            .environmentObject(vm)
+
             tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
                 .tag(FeedViewModel.FeedTopBarItem.localCity)
             // 每日大赛，单独处理

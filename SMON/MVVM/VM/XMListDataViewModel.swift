@@ -37,7 +37,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
     var target: XMTargetType
     var pagesize: Int = 20
     var atKetPath: String = ""
-    
+
     init(target: XMTargetType, pagesize: Int = 20, atKeyPath: String = .datalist) {
         self.target = target
         self.pagesize = pagesize
@@ -59,14 +59,31 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
         list = []
         let result = await Networking.request_async(target)
         if result.is2000Ok, let items = result.mapArray(ListRowMod.self, atKeyPath: atKetPath) {
-            if items.isEmpty {
+            // 过滤黑名单的用户和内容
+            let filtereditems = items.filter { item in
+                let itemdict = item.kj.JSONObject()
+                let blacklist = ConfigStore.shared.blackUserList.userIds
+                guard let id = itemdict["id"] as? String, !blacklist.contains(id) else {
+                    return false
+                }
+                guard let id = itemdict["userId"] as? String, !blacklist.contains(id) else {
+                    return false
+                }
+                return true
+            }
+            // ————————————————
+            if filtereditems.isEmpty {
                 reqStatus = .isOKButEmpty
             } else {
-                list = items
+                list = filtereditems
                 reqStatus = .isOK
             }
         } else {
-            reqStatus = .isNeedReTry
+            if result.is2000Ok {
+                reqStatus = .isOKButEmpty
+            } else {
+                reqStatus = .isNeedReTry
+            }
         }
         loadingMoreStatus = .isOK
     }

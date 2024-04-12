@@ -18,6 +18,7 @@ enum PostAPI: XMTargetType {
 
     case delete(postId: String, userId: String)
     case detail(postId: String, userId: String)
+    case user(page: Int, userId: String)
 
     var group: String {
         return "/v1/posts"
@@ -25,11 +26,12 @@ enum PostAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .user(let page, let userId): return ["page": page, "pageSize": "20", "userId": userId]
         case .sameCityList(let page): return ["page": page, "pageSize": "20"]
         case .recommendList(let page): return ["page": page, "pageSize": "20"]
         case .followList(let page): return ["page": page, "pageSize": "20"]
-        case .nearbyList(let page): return ["page": page, "pageSize": "20"]
-
+        case .nearbyList(let page): return ["page": page, "pageSize": "20",
+                                            "latitude": UserManager.shared.userlocation.lat, "longitude": UserManager.shared.userlocation.long]
         case .publish(let p): return p.kj.JSONObject()
         case .themeList(let p): return p.kj.JSONObject()
         case .delete(let postId, let userId): return ["userId": userId, "postId": postId]
@@ -45,6 +47,7 @@ enum PostAPI: XMTargetType {
 
     func updatingParameters(_ newPage: Int) -> XMTargetType {
         switch self {
+        case .user(let page, let userId): return PostAPI.user(page: newPage, userId: userId)
         case .themeList(let p):
             return PostAPI.themeList(p: .init(page: newPage, pageSize: p.pageSize, type: p.type, themeId: p.themeId))
         case .sameCityList(let p): return PostAPI.sameCityList(page: newPage)

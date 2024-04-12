@@ -78,30 +78,30 @@ struct MessageView: View {
         }
     }
 
-    var converstaionList: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .leading, spacing: 12, pinnedViews: [], content: {
-                XMStateView(vm.conversations, reqStatus: vm.status, loadmoreStatus: .isOK) { conversation in
-                    let xmuserId = String(conversation.userID.suffix(from: conversation.userID.firstIndex(of: "m")!))
-
-                    XMDesgin.XMButton(action: {
-                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: xmuserId))
-                    }, label: {
-                        XMConversationLine(avatar: "", nickname: conversation.showName ?? "", date: conversation.lastMessage.timestamp ?? .now, lastmessage: "conversation.lastMessage.textElem ?? ", userid: conversation.userID)
-                    })
-                } loadingView: {
-                    UserListLoadingView()
-                } emptyView: {
-                    XMEmptyView(image: "nomessage_pagepic", text: "暂无消息，去找人聊天吧。")
-                } loadMore: {}
-            })
-            .padding(.horizontal, 16)
-        }
-        .refreshable {
-            vm.getConversationList()
-        }
-        .ignoresSafeArea(.container, edges: .bottom)
-    }
+//    var converstaionList: some View {
+//        ScrollView(showsIndicators: false) {
+//            LazyVStack(alignment: .leading, spacing: 12, pinnedViews: [], content: {
+//                XMStateView(vm.conversations, reqStatus: vm.status, loadmoreStatus: .isOK) { conversation in
+//                    let xmuserId = String(conversation.userID.suffix(from: conversation.userID.firstIndex(of: "m")!))
+//
+//                    XMDesgin.XMButton(action: {
+//                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: xmuserId))
+//                    }, label: {
+//                        XMConversationLine(avatar: "", nickname: conversation.showName ?? "", date: conversation.lastMessage.timestamp ?? .now, lastmessage: "conversation.lastMessage.textElem ?? ", userid: conversation.userID)
+//                    })
+//                } loadingView: {
+//                    UserListLoadingView()
+//                } emptyView: {
+//                    XMEmptyView(image: "nomessage_pagepic", text: "暂无消息，去找人聊天吧。")
+//                } loadMore: {}
+//            })
+//            .padding(.horizontal, 16)
+//        }
+//        .refreshable {
+//            vm.getConversationList()
+//        }
+//        .ignoresSafeArea(.container, edges: .bottom)
+//    }
 }
 
 #Preview {

@@ -33,7 +33,7 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
             mod.toUserId = targetComment.id
         } else {
             // 给帖子回复
-            mod.toUserId = self.mod.userId ?? ""
+            mod.toUserId = self.mod.userId
         }
         mod.postId = self.postId
         mod.content = self.inputStr
@@ -51,10 +51,10 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
 
     @MainActor
     func deletePost() async {
-        let t = PostAPI.delete(postId: self.postId, userId: self.mod.userId ?? "")
+        let t = PostAPI.delete(postId: self.postId, userId: self.mod.userId)
         let r = await Networking.request_async(t)
         if r.is2000Ok {
-            MainViewModel.shared.pathPages.removeLast()
+            MainViewModel.shared.pageBack()
         }
     }
 }
@@ -99,7 +99,17 @@ struct PostDetailView: View {
                                     await vm.deletePost()
                                 }
                             }),
-                        ] : []
+                        ] : [UIAlertAction(title: "举报内容", style: .default, handler: { _ in
+                            Task {
+                                await Apphelper.shared.report(type: .post, reportValue: vm.mod.id)
+                            }
+                        }),
+                        UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
+                            /*
+                             拉黑用户
+                             */
+                            Apphelper.shared.blackUser(userid: self.vm.mod.userId)
+                        })]
                     Apphelper.shared.pushActionSheet(title: "操作", message: "", actions: actions)
                 } label: {
                     XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
@@ -157,25 +167,28 @@ struct PostDetailView: View {
 
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            if vm.mod != nil {
-                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId), isLiked: vm.mod.isLiked.bool ?? false, likeNumbers: vm.mod.likeNums ?? 0,contentId: vm.mod.id ?? "") 
+            if vm.reqStatus == .isOK {
+                XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.postId),
+                          isLiked: vm.mod.isLiked.bool,
+                          likeNumbers: vm.mod.likeNums,
+                          contentId: vm.mod.id)
 
                 HStack {
-                    Text("\(vm.mod.commentNums ?? 0)")
+                    Text("\(vm.mod.commentNums)")
                         .font(.XMFont.f3)
                         .bold()
                     XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
                 }
+                Spacer()
+            } else {
+                ProgressView()
             }
-
-            Spacer()
-
         })
     }
 
     @ViewBuilder
     var text: some View {
-        Text(vm.mod.postContent ?? "")
+        Text(vm.mod.postContent)
             .lineSpacing(3)
             .fcolor(.XMDesgin.f1)
             .font(.XMFont.f1)
@@ -184,13 +197,13 @@ struct PostDetailView: View {
 
     var userinfo: some View {
         HStack {
-            XMUserAvatar(str: vm.mod.avatar ?? "", userId: vm.mod.userId ?? "", size: 56)
-            Text(vm.mod.nickname ?? "")
+            XMUserAvatar(str: vm.mod.avatar, userId: vm.mod.userId, size: 56)
+            Text(vm.mod.nickname)
                 .font(.XMFont.f1b)
                 .lineLimit(1)
                 .fcolor(.XMDesgin.f1)
             Spacer()
-            Text(vm.mod.createdAtStr ?? "")
+            Text(vm.mod.createdAtStr)
                 .font(.XMFont.f3)
                 .fcolor(.XMDesgin.f2)
         }

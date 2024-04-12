@@ -27,7 +27,7 @@ struct BannerRow<Content: View, T: Identifiable>: View {
         self.list = list
         self._index = index
         self.content = content
-        self._currentIndex = State(initialValue: index.wrappedValue)
+        self._currentIndex = State(wrappedValue: index.wrappedValue)
     }
 
     var body: some View {
@@ -52,6 +52,9 @@ struct BannerRow<Content: View, T: Identifiable>: View {
                     .animation(.spring, value: currentIndex)
             }
         }
+        .onChange(of: index, perform: { index in
+            self.currentIndex = index
+        })
         .offset(x: HStackOffset + offsetFixToCenter - offsetStep + offset)
         .animation(.spring, value: offset)
         .padding(.vertical, 12)

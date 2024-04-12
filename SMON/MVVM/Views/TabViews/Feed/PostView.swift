@@ -67,8 +67,8 @@ struct PostView: View {
 //
     var commentNum: some View {
         Text("\(vm.post.commentNums == 0 ? "" : vm.post.commentNums.string)评论")
-            .font(.XMFont.f2)
-            .bold()
+            .font(.XMFont.f3)
+            .fcolor(.XMDesgin.f2)
             .padding(.top, 6)
             .background(content: {
                 Color.black
@@ -109,18 +109,20 @@ struct PostView: View {
             return result
         } else {
             result = [UIAlertAction(title: "举报内容", style: .default, handler: { _ in
-
+                Task {
+                    await Apphelper.shared.report(type: .post, reportValue: vm.post.id)
+                    DispatchQueue.main.async {
+                        self.vm.hidden = true
+                    }
+                }
             }),
             UIAlertAction(title: "拉黑用户 / 不再看他", style: .destructive, handler: { _ in
                 /*
                  拉黑用户
                  */
-                Task {
-                    let t = UserRelationAPI.tapBlack(blackUserId: vm.post.userId)
-                    let r = await Networking.request_async(t)
-                    if r.is2000Ok {
-                        self.vm.hidden = true
-                    }
+                Apphelper.shared.blackUser(userid: self.vm.post.userId)
+                DispatchQueue.main.async {
+                    self.vm.hidden = true
                 }
             })]
             return result
@@ -159,14 +161,14 @@ struct PostView: View {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: vm.post.userId))
             } label: {
                 Text(vm.post.nickname)
-                    .font(.XMFont.f1b)
-                    .lineLimit(1)
+                    .font(.XMFont.f2b)
                     .fcolor(.XMDesgin.f1)
+                    .lineLimit(1)
             }
 
             Spacer()
             Text(vm.post.createdAtStr)
-                .font(.XMFont.f3)
+                .font(.XMFont.f2)
                 .fcolor(.XMDesgin.f2)
         }
     }
@@ -182,15 +184,7 @@ struct PostView: View {
 //
     var avatarAndLine: some View {
         VStack {
-            XMDesgin.XMButton {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: vm.post.userId))
-            } label: {
-                WebImage(str: vm.post.avatar)
-                    .scaledToFit()
-                    .frame(width: 38, height: 38) // Adjust the size as needed
-                    .clipShape(Circle())
-            }
-
+            XMUserAvatar(str: vm.post.avatar, userId: vm.post.userId, size: 38)
             RoundedRectangle(cornerRadius: 99)
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
@@ -228,7 +222,7 @@ struct LoadingPostView: View {
     var commentNum: some View {
         Text("评论")
             .font(.XMFont.f3)
-            .bold()
+            .fcolor(.XMDesgin.f2)
             .padding(.top, 6)
             .background(content: {
                 Color.black

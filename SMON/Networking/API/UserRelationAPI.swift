@@ -17,6 +17,7 @@ enum UserRelationAPI: XMTargetType {
     case friendList(page: Int)
     case blackList(page: Int)
     case tapBlack(blackUserId: String)
+    case blackAllList
 
     var group: String {
         return "/v1/userRelation"
@@ -40,6 +41,7 @@ enum UserRelationAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .blackAllList: return nil
         case .tapBlack(let id): return ["blackUserId": id]
         case .followersList(let page): return ["page": page, "pageSize": 20]
         case .fansList(let page): return ["page": page, "pageSize": 20]

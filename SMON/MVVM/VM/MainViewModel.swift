@@ -53,7 +53,16 @@ class MainViewModel: ObservableObject {
             }
         }
     }
+    
+    
+    func pageBack() {
+        self.pathPages.removeLast()
+    }
 
+    func removeAllPage() {
+        self.pathPages = .init()
+    }
+    
     enum PagePath: Hashable,Decodable {
         case setting
         case notification
