@@ -9,14 +9,15 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<dict>
+		<key>NSPrivacyAccessedAPICategoryUserDefaults</key>
+		<string>使用本地缓存来存储用户信息，帮助您实现持久化登录。</string>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>GenSekiGothic-M.ttc</string>
 		<string>GenSekiGothic-B.ttc</string>
-	</array>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>location</string>
 	</array>
 </dict>
 </plist>

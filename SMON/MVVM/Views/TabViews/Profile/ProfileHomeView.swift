@@ -33,6 +33,7 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             await self.getSingleData()
+            Apphelper.shared.pushNotification(type: .success(message: "🔥 火苗已到账！"))
         }
     }
 }

@@ -37,27 +37,29 @@ struct ProfileView: View {
             // 标签栏视图
             tabBarView
             // 照片
-            switch vm.currentTab {
-            case .media:
-                mediaGridView
-                XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
-                    PostView(post)
-                } loadingView: {
-                    PostListLoadingView()
-                } emptyView: {
-                    VStack(spacing: 24) {
-                        Text("他很忙，什么也没留下～")
-                            .font(.XMFont.f1)
-                            .fcolor(.XMDesgin.f2)
-                        LoadingPostView()
+            LazyVStack(alignment: .leading, spacing: 12) {
+                switch vm.currentTab {
+                case .media:
+                    mediaGridView
+                    XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
+                        PostView(post)
+                    } loadingView: {
+                        PostListLoadingView()
+                    } emptyView: {
+                        VStack(spacing: 24) {
+                            Text("他很忙，什么也没留下～")
+                                .font(.XMFont.f1)
+                                .fcolor(.XMDesgin.f2)
+                            LoadingPostView()
+                        }
+                        .padding(.top, 12)
+                    } loadMore: {
+                        await vm.loadMore()
+                    } getListData: {
+                        await vm.getData()
                     }
-                    .padding(.top, 12)
-                } loadMore: {
-                    await vm.loadMore()
-                } getListData: {
-                    await vm.getData()
+                    .padding(.all, 16)
                 }
-                .padding(.all, 16)
             }
         }
         .refreshable {

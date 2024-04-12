@@ -19,10 +19,10 @@ struct HotExchangeView: View {
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "兑换成功！"))
             Apphelper.shared.closeSheet()
-        }else{
+            await vm.getSingleData()
+        } else {
             Apphelper.shared.closeSheet()
         }
-       
     }
 
     var body: some View {
