@@ -23,8 +23,8 @@ public enum AppConfig {
     // baseURL
     static var baseUrl: String {
         switch env {
-        case .dev: return "https://mrdstest.ismonlove.com"
-        case .prod: return "https://mrds.ismonlove.com"
+        case .dev: return "https://mrdstest.aishisan.cn"
+        case .prod: return "https://mrdstest.aishisan.cn"
         }
     }
 

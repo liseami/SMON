@@ -32,7 +32,7 @@ class PostEditViewModel: ObservableObject {
         {
             postAttachs = urls
         }
-        let t = PostAPI.publish(p: .init(postContent: textInput, postAttachs: postAttachs, themeId: targetTheme?.id.string ?? ""))
+        let t = PostAPI.publish(p: .init(postContent: textInput, postAttachs: postAttachs, themeId: targetTheme?.id.string ?? "0"))
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "发布成功。"))

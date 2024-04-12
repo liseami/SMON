@@ -40,7 +40,6 @@ struct ProfileView: View {
             switch vm.currentTab {
             case .media:
                 mediaGridView
-                
                 XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
                     PostView(post)
                 } loadingView: {
@@ -58,8 +57,7 @@ struct ProfileView: View {
                 } getListData: {
                     await vm.getData()
                 }
-                .padding(.horizontal, 16)
-
+                .padding(.all, 16)
             }
         }
         .refreshable {

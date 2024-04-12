@@ -62,7 +62,7 @@ struct PostCommentListView: View {
                 .fcolor(.XMDesgin.f2)
                 .padding(.vertical, 32)
         }
-        .onChange(of: detailVM.mod == nil) { _ in
+        .onChange(of: detailVM.mod.id) { _ in
             Task { await vm.getListData() }
         }
     }
