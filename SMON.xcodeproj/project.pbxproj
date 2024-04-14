@@ -931,11 +931,10 @@
 			};
 			buildConfigurationList = A272A4622B8706FB008EA955 /* Build configuration list for PBXProject "SMON" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				"zh-Hans",
 			);
 			mainGroup = A272A45E2B8706FB008EA955;
 			packageReferences = (
