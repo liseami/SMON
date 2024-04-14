@@ -46,7 +46,7 @@ struct ChatView: View {
         ]
         result = [
             UIAlertAction(title: "查看用户主页", style: .default, handler: { _ in
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: XMUserId))
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: XMUserId))
             }),
             UIAlertAction(title: "举报用户", style: .default, handler: { _ in
                 Task {

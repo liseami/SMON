@@ -64,7 +64,7 @@ struct ProfileHomeView: View {
         .toolbar {
 //            ToolbarItem(placement: .topBarLeading) {
 //                XMDesgin.XMButton {
-//                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+//                    MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
 //                } label: {
 //                    XMDesgin.XMIcon(iconName: "home_bell")
 //                }
@@ -72,7 +72,7 @@ struct ProfileHomeView: View {
 
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMButton {
-                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.setting)
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.setting)
                 } label: {
                     XMDesgin.XMIcon(iconName: "profile_setting")
                 }
@@ -85,7 +85,7 @@ struct ProfileHomeView: View {
             Text(userManager.user.nickname)
                 .font(.title2.bold())
             XMDesgin.XMButton(action: {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: userManager.user.userId))
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: userManager.user.userId))
             }, label: {
                 XMUserAvatar(str: userManager.user.avatar, userId: userManager.user.userId, size: 120)
             })
@@ -123,7 +123,7 @@ struct ProfileHomeView: View {
 
             let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
             XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: text) {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profileEditView)
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
             }
         })
     }
@@ -166,11 +166,11 @@ struct ProfileHomeView: View {
     var list: some View {
         VStack(alignment: .leading, spacing: 24, content: {
             XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)")) {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends)
             }
 
             XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)")) {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo)
             }
 
 //            XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums)) {
@@ -190,9 +190,9 @@ struct ProfileHomeView: View {
                 ], id: \.icon) { item in
                     XMDesgin.XMButton.init {
                         if item.label == "火苗" {
-                            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.flamedetail)
+                            MainViewModel.shared.pushTo(MainViewModel.PagePath.flamedetail)
                         } else {
-                            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myhotinfo)
+                            MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo)
                         }
                     } label: {
                         VStack(alignment: .center, spacing: 12) {

@@ -47,19 +47,14 @@ class UserManager: ObservableObject {
         }
     }
 
-    // APP版本信息
-    @Published var APPVersionInfo: XMVersionInfo {
-        didSet {
-            savaModel(model: APPVersionInfo)
-        }
-    }
+    
 
     private init() {
         user = .init()
         OSSInfo = .init()
         IMInfo = .init()
         userlocation = .init()
-        APPVersionInfo = .init()
+     
         NearbyFliterMod = .init()
         userLoginInfo = .init()
         NearbyFliterMod = loadModel(type: FliterMod.self)
@@ -68,13 +63,12 @@ class UserManager: ObservableObject {
         userLoginInfo = loadModel(type: XMUserLoginInfo.self)
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
         IMInfo = loadModel(type: IMUserSing.self)
-        APPVersionInfo = loadModel(type: XMVersionInfo.self)
+       
         #if DEBUG
 //        user = .init(userId: 0, token: "", needInfo: true)
         #endif
         Task {
             await getUploadToken()
-            await getVersionInfo()
             // 仅针对已登陆用户
             guard userLoginInfo.isLogin && !userLoginInfo.isNeedInfo else { return }
             LocationManager.shared.uploadUserLocation()
@@ -173,21 +167,7 @@ class UserManager: ObservableObject {
         }
     }
 
-    /*
-     获取版本信息
-     */
-    @MainActor
-    func getVersionInfo() async {
-        let t = CommonAPI.versionInfo(lat: userlocation.lat, lon: userlocation.long)
-        let r = await Networking.request_async(t)
-        if r.is2000Ok, let versionInfo = r.mapObject(XMVersionInfo.self) {
-            APPVersionInfo = versionInfo
-            // 强制更新
-            if versionInfo.status == 3 {
-                Apphelper.shared.presentPanSheet(Color.red.ignoresSafeArea(), style: .setting)
-            }
-        }
-    }
+   
 }
 
 extension UserManager {

@@ -41,6 +41,7 @@ struct ProfileView: View {
                 switch vm.currentTab {
                 case .media:
                     mediaGridView
+                      
                     XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
                         PostView(post)
                     } loadingView: {
@@ -59,8 +60,34 @@ struct ProfileView: View {
                         await vm.getData()
                     }
                     .padding(.all, 16)
+                case .gift:
+                    EmptyView()
+                case .rank:
+                    VStack(alignment: .leading, spacing: 32) {
+                        // 全国排名部分
+                        Text("全国排名")
+                            .font(.XMFont.f1b)
+                            .fcolor(.XMDesgin.f1)
+                        RankingView(ranking: "No.\(1231)")
+                            
+                        Text("同城排名")
+                            .font(.XMFont.f1b)
+                            .fcolor(.XMDesgin.f1)
+                            .listRowSeparator(.hidden, edges: .all)
+                        RankingView(ranking: "No.\(14115)")
+                            .listRowSeparator(.hidden, edges: .top)
+                        // 同城排名部分
+                        XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "帮Ta冲榜", enable: true) {
+                        }
+                        Text("与送礼物一样，会增加解锁Ta的微信的进度。")
+                            .font(.XMFont.f1)
+                        
+                    }
+                    .padding(.all)
                 }
             }
+            .transition(.move(edge: .bottom).combined(with: .opacity).animation(.spring))
+            .ifshow(show: vm.user.avatar != "")
         }
         .refreshable {
             await vm.getData()
@@ -81,7 +108,7 @@ struct ProfileView: View {
         ]
         if userId == UserManager.shared.user.userId {
             result.insert(UIAlertAction(title: "编辑个人资料", style: .default, handler: { _ in
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profileEditView)
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
             }), at: 0)
             return result
         } else {
@@ -143,11 +170,11 @@ struct ProfileView: View {
                     .ifshow(show: userInfo.emotionalNeeds != 0)
                 Text("\(userInfo.fansNum)粉丝 · ")
                     .onTapGesture {
-                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
+                        MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends)
                     }
                 Text("\(userInfo.followsNum)关注")
                     .onTapGesture {
-                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.myfriends)
+                        MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends)
                     }
             }
             .font(.XMFont.f2)
@@ -164,7 +191,7 @@ struct ProfileView: View {
         HStack {
             if vm.isLocalUser {
                 XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_edit", text: "编辑社交资料") {
-                    MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profileEditView)
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
                 }
             } else {
                 // 关注按钮
@@ -184,10 +211,10 @@ struct ProfileView: View {
                     await vm.tapChat()
                 }
 //                // 微信
-//                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
-//                    Apphelper.shared.presentPanSheet(WechatGiftView()
-//                        .environmentObject(vm), style: .shop)
-//                }
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
+                    Apphelper.shared.presentPanSheet(WechatGiftView()
+                        .environmentObject(vm), style: .shop)
+                }
             }
         }
     }
@@ -213,10 +240,14 @@ struct ProfileView: View {
         HStack {
             ForEach(ProfileViewModel.ProfileBarItem.allCases, id: \.self) { tabitem in
                 let selected = tabitem == vm.currentTab
-                Text(tabitem.info.name)
-                    .font(.XMFont.f1)
-                    .bold()
-                    .opacity(selected ? 1 : 0.6)
+                XMDesgin.XMButton.init {
+                    vm.currentTab = tabitem
+                } label: {
+                    Text(tabitem.info.name)
+                        .font(.XMFont.f1)
+                        .bold()
+                        .opacity(selected ? 1 : 0.6)
+                }
             }
             Spacer()
         }
@@ -233,6 +264,7 @@ struct ProfileView: View {
             HStack(alignment: .center, spacing: 8) {
                 Spacer().frame(width: 8)
                 ForEach(vm.photos, id: \.self.id) { photo in
+                    let index = vm.photos.firstIndex(where: {$0.id == photo.id})
                     XMDesgin.XMButton {
                         Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
                     } label: {
@@ -241,6 +273,7 @@ struct ProfileView: View {
                             .frame(width: w, height: h)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
+                    .transition(.asymmetric(insertion: .movingParts.snapshot.combined(with: .opacity).animation(.bouncy.delay(Double(index ?? 0) * 0.24)), removal: .movingParts.poof.animation(.easeInOut(duration: 0.5))))
                 }
             }
             .padding(.vertical, 12)

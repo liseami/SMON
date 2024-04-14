@@ -36,19 +36,18 @@ class ProfileViewModel: XMListViewModel<XMPost> {
 
     enum ProfileBarItem: CaseIterable {
         case media
-//        case post
-//        case rank
-//        case gift
+        case rank
+        case gift
         var info: LabelInfo {
             switch self {
             case .media:
                 return .init(name: "照片与动态", icon: "", subline: "")
 //            case .post:
 //                return .init(name: "动态", icon: "", subline: "")
-//            case .rank:
-//                return .init(name: "历史排名", icon: "", subline: "")
-//            case .gift:
-//                return .init(name: "礼物", icon: "", subline: "")
+            case .rank:
+                return .init(name: "大赛排名", icon: "", subline: "")
+            case .gift:
+                return .init(name: "礼物", icon: "", subline: "")
             }
         }
     }
@@ -79,7 +78,7 @@ class ProfileViewModel: XMListViewModel<XMPost> {
         let t = UserOperationAPI.sayHello(toUserId: userId)
         let r = await Networking.request_async(t)
         if r.is2000Ok {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: "m" + userId))
+            MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: "m" + userId))
         }
     }
 

@@ -13,13 +13,22 @@ struct BlackList: Convertible {
 
 class ConfigStore: ObservableObject {
     static let shared = ConfigStore()
-
+ 
     init() {
         blackUserList = .init()
+        APPVersionInfo = .init()
         blackUserList = loadModel(type: BlackList.self)
-
+        APPVersionInfo = loadModel(type: XMVersionInfo.self)
         Task {
             await self.getAllBlack()
+            await getVersionInfo()
+        }
+    }
+    
+    // APP版本信息
+    @Published var APPVersionInfo: XMVersionInfo {
+        didSet {
+            savaModel(model: APPVersionInfo)
         }
     }
 
@@ -37,6 +46,22 @@ class ConfigStore: ObservableObject {
         let t = UserRelationAPI.blackAllList
         let r = await Networking.request_async(t)
         if r.is2000Ok, let list = r.mapObject(BlackList.self) {}
+    }
+    
+    /*
+     获取版本信息
+     */
+    @MainActor
+    func getVersionInfo() async {
+        let t = CommonAPI.versionInfo(lat: UserManager.shared.userlocation.lat, lon: UserManager.shared.userlocation.long)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let versionInfo = r.mapObject(XMVersionInfo.self) {
+            APPVersionInfo = versionInfo
+            // 强制更新
+            if versionInfo.status == 3 {
+                Apphelper.shared.presentPanSheet(Color.red.ignoresSafeArea(), style: .setting)
+            }
+        }
     }
 }
 

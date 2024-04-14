@@ -33,7 +33,7 @@ struct ConversationListContainer: UIViewControllerRepresentable {
         }
 
         func conversationListController(_ conversationController: UIViewController, didSelectConversation conversation: TUIConversationCellData) {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: conversation.userID))
+            MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: conversation.userID))
         }
     }
 }

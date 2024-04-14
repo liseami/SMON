@@ -17,12 +17,14 @@ struct XMGift {
 struct WechatGiftView: View {
     @EnvironmentObject var vm: ProfileViewModel
     let gifts: [XMGift] = [
-        .init(image: "saicoin_lvl1", price: 1, count: 5, discountRate: 0),
-        .init(image: "saicoin_lvl2", price: 12, count: 60, discountRate: 25),
-        .init(image: "saicoin_lvl3", price: 30, count: 170, discountRate: 22),
-        .init(image: "saicoin_lvl4", price: 98, count: 590, discountRate: 33),
-        .init(image: "saicoin_lvl5", price: 368, count: 2450, discountRate: 34),
-        .init(image: "saicoin_lvl6", price: 798, count: 5400, discountRate: 35),
+        .init(image: "xm_gift_1", price: 1, count: 5, discountRate: 0),
+        .init(image: "xm_gift_2", price: 12, count: 60, discountRate: 25),
+        .init(image: "xm_gift_3", price: 30, count: 170, discountRate: 22),
+        .init(image: "xm_gift_4", price: 98, count: 520, discountRate: 33),
+        .init(image: "xm_gift_5", price: 368, count: 2450, discountRate: 34),
+        .init(image: "xm_gift_6", price: 798, count: 5200, discountRate: 35),
+        .init(image: "xm_gift_7", price: 798, count: 6666, discountRate: 36),
+        .init(image: "xm_gift_8", price: 798, count: 9999, discountRate: 37),
     ]
 
     var body: some View {
@@ -42,8 +44,11 @@ struct WechatGiftView: View {
                 Spacer()
             }
             // 微信号掩码
-            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: vm.user.wechat) {}
             progressLine
+            HStack {
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: vm.user.wechat) {}
+                XMDesgin.XMTag(text: "好评率 100%")
+            }
             ScrollView(.vertical, showsIndicators: false, content: {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 4), spacing: 8) {
                     ForEach(self.gifts, id: \.self.count) { gift in
@@ -51,19 +56,19 @@ struct WechatGiftView: View {
                             VStack(alignment: .center, spacing: 12, content: {
                                 Image(gift.image)
                                     .resizable()
-                                    .frame(width: 32, height: 32, alignment: .center)
+                                    .frame(width: 56, height: 56, alignment: .center)
                                 Text("热情玫瑰")
-                                    .font(.XMFont.f2b)
+                                    .font(.XMFont.f3)
                             })
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
-                            Text("¥\(gift.price) 赛币")
+                            Text("\(gift.price) 赛币")
                                 .font(.XMFont.f3)
-                                .fcolor(Color.green)
+                                .fcolor(Color.pink)
                                 .padding(.vertical, 6)
                         })
                         .background(RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.XMDesgin.b1.gradient.shadow(.drop(color: Color.green, radius: 0))))
+                            .fill(Color.XMDesgin.b1.gradient.shadow(.drop(color: Color.pink, radius: 0))))
                         XMDesgin.XMButton {
                             LoadingTask(loadingMessage: "连接苹果商店...") {}
                         } label: {

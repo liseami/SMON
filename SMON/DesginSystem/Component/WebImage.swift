@@ -35,7 +35,7 @@ struct XMUserAvatar: View {
 
     var body: some View {
         XMDesgin.XMButton {
-            MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: self.userId))
+            MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: self.userId))
         } label: {
             WebImage(str: str)
                 .scaledToFill()

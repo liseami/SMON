@@ -42,7 +42,7 @@ struct PostView: View {
             }
             .contentShape(RoundedRectangle(cornerRadius: 12))
             .onTapGesture {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.postdetail(postId: vm.post.id))
             }
         }
     }
@@ -82,7 +82,7 @@ struct PostView: View {
             XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums, contentId: vm.post.id)
 
             XMDesgin.XMButton {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.postdetail(postId: vm.post.id))
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.postdetail(postId: vm.post.id))
             } label: {
                 XMDesgin.XMIcon(iconName: "feed_comment", size: 16, withBackCricle: true)
             }
@@ -158,7 +158,7 @@ struct PostView: View {
     var username: some View {
         HStack {
             XMDesgin.XMButton {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.profile(userId: vm.post.userId))
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: vm.post.userId))
             } label: {
                 Text(vm.post.nickname)
                     .font(.XMFont.f2b)

@@ -196,7 +196,9 @@ struct MeiRiDaSaiView: View {
                 .overlay(alignment: .top) {
                     // 主题大赛列表
                     BannerRow(imageW: 156, spacing: 12, index: $vm.currentThemeIndex, list: vm.themeList) { theme in
+                        let index = vm.themeList.firstIndex(where: {$0.id == theme.id})
                         headerImage(theme.coverUrl)
+                          
                     }
                     .offset(x: 0, y: -44)
                 }

@@ -25,7 +25,10 @@ public class NetworkPopPlugin: PluginType {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
 
-            
+            if result.message.contains("拉黑") {
+                MainViewModel.shared.pathPages = .init()
+                
+            }
 
             if result.messageCode > 4000 || result.message == "TOKEN 错误" {
                 UserManager.shared.userLoginInfo = .init()

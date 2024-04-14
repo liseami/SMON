@@ -53,8 +53,11 @@ class MainViewModel: ObservableObject {
             }
         }
     }
-    
-    
+
+    func pushTo(_ type: any Hashable) {
+        self.pathPages.append(type)
+    }
+
     func pageBack() {
         self.pathPages.removeLast()
     }
@@ -62,8 +65,8 @@ class MainViewModel: ObservableObject {
     func removeAllPage() {
         self.pathPages = .init()
     }
-    
-    enum PagePath: Hashable,Decodable {
+
+    enum PagePath: Hashable, Decodable {
         case setting
         case notification
         case myhotinfo
@@ -71,7 +74,7 @@ class MainViewModel: ObservableObject {
         case profileEditView
         case postdetail(postId: String)
         case profile(userId: String)
-        case chat(userId:String)
+        case chat(userId: String)
         case flamedetail
     }
 }

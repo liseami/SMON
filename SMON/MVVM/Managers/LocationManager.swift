@@ -42,7 +42,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             print("获取到最新的定位")
             Task {
                 UserManager.shared.userlocation = .init(lat: location.latitude.string, long: location.longitude.string)
-                await UserManager.shared.getVersionInfo()
+                await ConfigStore.shared.getVersionInfo()
                 await gotLocation()
                 self.locationManager.stopUpdatingLocation() // 停止位置更新
             }

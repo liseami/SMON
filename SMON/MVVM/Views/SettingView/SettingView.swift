@@ -28,18 +28,18 @@ struct SettingView: View {
                             XMDesgin.XMListRow(.init(name: child.name, icon: child.iconName ?? "", subline: "")) {
                                 switch child.name {
                                 case "黑名单":
-                                    MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.blackList)
+                                    MainViewModel.shared.pushTo(SettingViewModel.PagePath.blackList)
                                 case "通知":
-                                    MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.notificationSetting)
+                                    MainViewModel.shared.pushTo(SettingViewModel.PagePath.notificationSetting)
                                 case "邀请好友":
                                     shareApp()
-//                                    MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.inviteFriends)
+//                                    MainViewModel.shared.pushTo(SettingViewModel.PagePath.inviteFriends)
                                 case "App信息":
-                                    MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.appInfo)
+                                    MainViewModel.shared.pushTo(SettingViewModel.PagePath.appInfo)
                                 case "分享App": shareApp()
                                 case "去AppStore评分": rateApp()
                                 case "第三方SDK信息共享清单":
-                                    MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.thirdPartySDKInfo)
+                                    MainViewModel.shared.pushTo(SettingViewModel.PagePath.thirdPartySDKInfo)
                                 case "账户注销":
                                     UserManager.shared.goodBye()
                                 case "退出登录":

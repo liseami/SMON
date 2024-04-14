@@ -85,7 +85,7 @@ struct MessageView: View {
 //                    let xmuserId = String(conversation.userID.suffix(from: conversation.userID.firstIndex(of: "m")!))
 //
 //                    XMDesgin.XMButton(action: {
-//                        MainViewModel.shared.pathPages.append(MainViewModel.PagePath.chat(userId: xmuserId))
+//                        MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: xmuserId))
 //                    }, label: {
 //                        XMConversationLine(avatar: "", nickname: conversation.showName ?? "", date: conversation.lastMessage.timestamp ?? .now, lastmessage: "conversation.lastMessage.textElem ?? ", userid: conversation.userID)
 //                    })

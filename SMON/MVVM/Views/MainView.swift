@@ -34,7 +34,7 @@ struct MainView: View {
                     case .profileEditView: ProfileEditView()
                     case .profile(let userId): ProfileView(userId: userId)
                     case .chat(let userId): ChatView(userId: userId)
-                    case .flamedetail : FlameDetailView()
+                    case .flamedetail: FlameDetailView()
                     }
                 }
                 .navigationBarTransparent(false)
@@ -59,6 +59,16 @@ struct MainView: View {
             case .profile:
                 // 个人主页
                 ProfileHomeView()
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                // 通知按钮
+                XMDesgin.XMButton {
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
+                } label: {
+                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+                }
             }
         }
     }
