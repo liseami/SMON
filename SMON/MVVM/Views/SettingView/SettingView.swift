@@ -37,7 +37,7 @@ struct SettingView: View {
                                 case "App信息":
                                     MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.appInfo)
                                 case "分享App": shareApp()
-                                case "去AppleStore评分": rateApp()
+                                case "去AppStore评分": rateApp()
                                 case "第三方SDK信息共享清单":
                                     MainViewModel.shared.pathPages.append(SettingViewModel.PagePath.thirdPartySDKInfo)
                                 case "账户注销":
