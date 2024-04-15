@@ -350,6 +350,8 @@
 		A2BA895F2B9BDF8F002FEEFA /* XMEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMEmptyView.swift; sourceTree = "<group>"; };
 		A2BA89612B9BEFF0002FEEFA /* XMUserLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMUserLine.swift; sourceTree = "<group>"; };
 		A2BA89632B9BF005002FEEFA /* XMConversationLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMConversationLine.swift; sourceTree = "<group>"; };
+		A2BAD4DA2BCD089100FC91D4 /* SMON.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMON.entitlements; sourceTree = "<group>"; };
+		A2BAD4E32BCD0F3300FC91D4 /* jpush-ios-5.3.0.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = "jpush-ios-5.3.0.xcframework"; path = "Pods/JPush/jpush-ios-5.3.0.xcframework"; sourceTree = "<group>"; };
 		A2BF15EB2B8C423D0011A130 /* XMUIDesginSystemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMUIDesginSystemView.swift; sourceTree = "<group>"; };
 		A2BF15EF2B8C55480011A130 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A2BF15F42B8C67060011A130 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 		A272A4692B8706FB008EA955 /* SMON */ = {
 			isa = PBXGroup;
 			children = (
+				A2BAD4DA2BCD089100FC91D4 /* SMON.entitlements */,
 				A272A46A2B8706FB008EA955 /* SMONApp.swift */,
 				A26A030B2B89AF2A00F6AC9B /* AppDelegate.swift */,
 				A256DB9A2B901C9F008C7063 /* AppConfig.swift */,
@@ -837,6 +840,7 @@
 		D3E9067713C5560C79BBF173 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A2BAD4E32BCD0F3300FC91D4 /* jpush-ios-5.3.0.xcframework */,
 				A2218D6A2B89C3BE00ECE075 /* Photos.framework */,
 				A2218D682B89BC3100ECE075 /* CoreMedia.framework */,
 				A2218D642B89BB5400ECE075 /* CoreAudioTypes.framework */,
@@ -1230,7 +1234,8 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1287,6 +1292,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
@@ -1301,6 +1307,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SMON/SMON.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
@@ -1308,7 +1315,6 @@
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SMON/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
@@ -1333,8 +1339,7 @@
 				MARKETING_VERSION = 1.0.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wuhanjiyunshang.meiridasai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1357,6 +1362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SMON/SMON.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SMON/Preview Content\"";
@@ -1364,7 +1370,6 @@
 				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SMON/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
@@ -1389,8 +1394,7 @@
 				MARKETING_VERSION = 1.0.1;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wuhanjiyunshang.meiridasai;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

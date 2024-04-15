@@ -32,7 +32,10 @@ public enum AppConfig {
     static var TIMAppID: String {
         self.readPlist(key: "TIMAppID")
     }
-
+    
+    static var JPUSHAPPKE : String {
+        self.readPlist(key: "JPUSHAPPKE")
+    }
 
     static func readPlist(key: String) -> String {
         guard let path = Bundle.main.path(forResource: "AppConfig", ofType: "plist"),

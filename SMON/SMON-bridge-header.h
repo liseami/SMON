@@ -7,6 +7,9 @@
 
 
 
+// 引入 JPush 功能所需头文件
+# import "JPUSHService.h"
+// iOS10 注册 APNs 所需头文件
+# import <UserNotifications/UserNotifications.h>
 
-#import <AliyunOSSiOS/OSSService.h>
 

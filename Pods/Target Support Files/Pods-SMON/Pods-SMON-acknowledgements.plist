@@ -82,6 +82,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright jpush.cn</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>JCore</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright © 2013 Markus Emrich
 
 Permission is hereby granted, free of charge, to any person
@@ -111,6 +121,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 			<string>MIT</string>
 			<key>Title</key>
 			<string>JDStatusBarNotification</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright jiguang.cn</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>JPush</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

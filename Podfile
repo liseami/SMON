@@ -3,7 +3,7 @@ target 'SMON' do
 # 强制使用动态库
 use_frameworks!
 # 开启 modular headers。开启后 Pod 模块才能使用 @import 导入。
-use_modular_headers!
+#use_modular_headers!
 pod 'Moya'# 网络底层
 pod 'Moya/Combine', '~> 15.0'# 网络底层结合SwiftUICombine
 pod 'KakaJSON'# JSON处理
@@ -36,5 +36,17 @@ pod 'TUIConversation/UI_Classic'
 # 集成快速会议
 #pod 'TUIRoomKit'
 # 腾讯IM -——————————————————
+pod 'JCore', '3.2.3-noidfa'    
+pod 'JPush', '4.8.0'
 
+end
+
+post_install do |installer|
+  installer.generated_projects.each do |project|
+    project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '16.0'
+      end
+    end
+  end
 end

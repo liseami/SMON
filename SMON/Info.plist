@@ -19,5 +19,9 @@
 		<string>GenSekiGothic-M.ttc</string>
 		<string>GenSekiGothic-B.ttc</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

@@ -2,7 +2,10 @@ PODS:
   - Alamofire (5.8.1)
   - AliyunOSSiOS (2.10.18)
   - Introspect (0.12.0)
+  - JCore (3.2.3-noidfa)
   - JDStatusBarNotification (2.2.1)
+  - JPush (4.8.0):
+    - JCore (>= 2.0.0)
   - KakaJSON (1.1.2)
   - Kingfisher (7.11.0)
   - Lantern (1.1.5)
@@ -189,7 +192,9 @@ PODS:
 DEPENDENCIES:
   - AliyunOSSiOS
   - Introspect
+  - JCore (= 3.2.3-noidfa)
   - JDStatusBarNotification
+  - JPush (= 4.8.0)
   - KakaJSON
   - Kingfisher
   - Lantern
@@ -210,7 +215,9 @@ SPEC REPOS:
     - Alamofire
     - AliyunOSSiOS
     - Introspect
+    - JCore
     - JDStatusBarNotification
+    - JPush
     - KakaJSON
     - Kingfisher
     - Lantern
@@ -234,7 +241,9 @@ SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   AliyunOSSiOS: e683c1b1faa0657b5cd02de733628cf996f4cd93
   Introspect: b66b675de8a85d9ef832f3a710d8e3c7db186884
+  JCore: cec6c836350ac9e30f7241e6cd0d5fdcfb927da6
   JDStatusBarNotification: d43e8481174a2c5f195d16ce65c611f4a12bf507
+  JPush: b4b212aa773928303f25dafb5eb048b34232fd3a
   KakaJSON: cc5ff50a8c1cfbb09413db8496cb709a209e6137
   Kingfisher: b9c985d864d43515f404f1ef4a8ce7d802ace3ac
   Lantern: b192e7146c6d04e15e627f37281254a6a8593703
@@ -254,6 +263,6 @@ SPEC CHECKSUMS:
   TUICore: 8e855f83a1b7a04a57dec07c1b71fae83c871d19
   TXIMSDK_Plus_iOS: 9559f6aebc6d69314521d17235bdb3ab58599be3
 
-PODFILE CHECKSUM: 65ad36cf8ae2d40027c75e9358804b0affa94541
+PODFILE CHECKSUM: 5e75997d4c79ae78d0f29de4d3f47a13cf5c28d1
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2

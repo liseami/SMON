@@ -15,7 +15,7 @@ struct HomePageInfo: Convertible {
     var currentRank: String = "" // ": 4,
     var flamesNums: String = "" // ": 0,
     var coinNums: String = "" // ": 0
-    var currentHot : String = ""
+    var currentHot: String = ""
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
@@ -164,20 +164,19 @@ struct ProfileHomeView: View {
     }
 
     var list: some View {
-        VStack(alignment: .leading, spacing: 24, content: {
-            XMDesgin.XMListRow(.init(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)")) {
-                MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends)
+        let listItems = [
+            (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
+            (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
+            (name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums, action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) })
+        ]
+
+        return VStack(alignment: .leading, spacing: 24) {
+            ForEach(listItems, id: \.name) { item in
+                XMDesgin.XMListRow(.init(name: item.name, icon: item.icon, subline: item.subline)) {
+                    item.action()
+                }
             }
-
-            XMDesgin.XMListRow(.init(name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)")) {
-                MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo)
-            }
-
-//            XMDesgin.XMListRow(.init(name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums)) {
-//                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
-//            }
-
-        })
+        }
         .padding(.vertical, 16)
     }
 
@@ -220,8 +219,8 @@ struct ProfileHomeView: View {
 
             XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "立即兑换为热度") {
                 Apphelper.shared.presentPanSheet(HotExchangeView()
-                    .environmentObject(vm)
-                                                 , style: .sheet)
+                    .environmentObject(vm),
+                    style: .sheet)
             }
         }
     }
