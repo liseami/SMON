@@ -25,18 +25,19 @@ public class NetworkPopPlugin: PluginType {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
 
-            if result.message.contains("拉黑") {
-                MainViewModel.shared.pathPages = .init()
-                
-            }
+//            if result.message.contains("拉黑") {
+//                MainViewModel.shared.pathPages.removeLast()
+//            }
 
             if result.messageCode > 4000 || result.message == "TOKEN 错误" {
+                guard UserManager.shared.logged else { return }
                 UserManager.shared.userLoginInfo = .init()
                 Apphelper.shared.closeKeyBoard()
                 Apphelper.shared.pushNotification(type: .info(message: "登录过期，请重新登录。"))
             }
 
         case .failure:
+            guard UserManager.shared.logged else { return }
             Apphelper.shared.pushNotification(type: .error(message: result.message.or("网络错误。")))
         }
     }

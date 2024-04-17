@@ -77,17 +77,14 @@ struct ProfileView: View {
                         RankingView(ranking: "No.\(14115)")
                             .listRowSeparator(.hidden, edges: .top)
                         // 同城排名部分
-                        XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "帮Ta冲榜", enable: true) {
-                        }
+                        XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "帮Ta冲榜", enable: true) {}
                         Text("与送礼物一样，会增加解锁Ta的微信的进度。")
                             .font(.XMFont.f1)
-                        
                     }
                     .padding(.all)
                 }
             }
             .transition(.move(edge: .bottom).combined(with: .opacity).animation(.spring))
-            .ifshow(show: vm.user.avatar != "")
         }
         .refreshable {
             await vm.getData()
@@ -211,10 +208,10 @@ struct ProfileView: View {
                     await vm.tapChat()
                 }
 //                // 微信
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
-                    Apphelper.shared.presentPanSheet(WechatGiftView()
-                        .environmentObject(vm), style: .shop)
-                }
+//                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
+//                    Apphelper.shared.presentPanSheet(WechatGiftView()
+//                        .environmentObject(vm), style: .shop)
+//                }
             }
         }
     }
@@ -264,7 +261,7 @@ struct ProfileView: View {
             HStack(alignment: .center, spacing: 8) {
                 Spacer().frame(width: 8)
                 ForEach(vm.photos, id: \.self.id) { photo in
-                    let index = vm.photos.firstIndex(where: {$0.id == photo.id})
+                    let index = vm.photos.firstIndex(where: { $0.id == photo.id })
                     XMDesgin.XMButton {
                         Apphelper.shared.tapToShowImage(tapUrl: photo.picUrl, rect: nil, urls: vm.photos.map { $0.picUrl })
                     } label: {

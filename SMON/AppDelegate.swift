@@ -15,22 +15,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         DAppInit()
 
         DispatchQueue.main.async {
-            let entity =  JPUSHRegisterEntity()
-            entity.types = 3
-            JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
             JPUSHService.setup(withOption: launchOptions, appKey: AppConfig.JPUSHAPPKE, channel: "ios", apsForProduction: true)
-            JPUSHService.registrationIDCompletionHandler { id, str in
-                print(id)
-                print(str)
-                print("")
-            }
+            JPUSHService.registrationIDCompletionHandler { _, _ in }
         }
         let _ = ConfigStore.shared
+        let _ = UserManager.shared
         return true
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         JPUSHService.registerDeviceToken(deviceToken)
+        JPUSHService.setAlias(UserManager.shared.user.id, completion: { _, _, _ in
+        }, seq: 1)
     }
 }
 
@@ -50,15 +46,20 @@ extension AppDelegate: JPUSHRegisterDelegate {
     func jpushNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> Int {
         // Required
         if let userInfo = notification.request.content.userInfo as? [AnyHashable: Any], let _ = notification.request.trigger as? UNPushNotificationTrigger {
+            print(userInfo.description)
+            // 在这里处理打开通知后的跳转
+            print(userInfo.description)
             JPUSHService.handleRemoteNotification(userInfo)
         }
 //           completionHandler([.alert]) // 需要执行这个方法，选择是否提醒用户，有 Badge、Sound、Alert 三种类型可以选择设置
-        return 1
+        return 3
     }
 
     func jpushNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         // Required
         if let userInfo = response.notification.request.content.userInfo as? [AnyHashable: Any], let _ = response.notification.request.trigger as? UNPushNotificationTrigger {
+            print(userInfo.description)
+            print(userInfo.description)
             JPUSHService.handleRemoteNotification(userInfo)
         }
     }
@@ -72,5 +73,4 @@ extension AppDelegate: JPUSHRegisterDelegate {
     }
 
     func jpushNotificationAuthorization(_ status: JPAuthorizationStatus, withInfo info: [AnyHashable: Any]?) {}
-
 }

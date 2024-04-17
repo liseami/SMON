@@ -31,27 +31,18 @@ class LoginViewModel: ObservableObject {
         }
     }
 
+    // 手机号是否合法输入
     var isPhoneNumberValid: Bool {
         // 移除非数字字符
         let cleanedPhoneInput = phoneInput
-
         // 检查长度是否为11位
         guard cleanedPhoneInput.count == 11 else {
             return false
         }
-
         // 检查第一位是否为1
         guard let firstCharacter = cleanedPhoneInput.first, String(firstCharacter) == "1" else {
             return false
         }
-
-        // 检查前三位是否属于合法的运营商前缀
-        let prefix = String(cleanedPhoneInput.prefix(3))
-        let validPrefixes = ["134", "135", "136", "137", "138", "139", "147", "150", "151", "152", "157", "158", "159", "172", "178", "182", "183", "184", "187", "188", "198"]
-        guard validPrefixes.contains(prefix) else {
-            return false
-        }
-
         return true
     }
 }

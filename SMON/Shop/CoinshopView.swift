@@ -74,8 +74,6 @@ struct CoinshopView: View {
     var products: some View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             XMStateView(vm.list, reqStatus: vm.reqStatus) { product in
-                
-
                 XMDesgin.XMButton {
                     LoadingTask(loadingMessage: "连接苹果商店...") {
                         if let p = iapmanager.products.first(where: { $0.productIdentifier == product.id }) {

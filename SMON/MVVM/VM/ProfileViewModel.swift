@@ -28,6 +28,7 @@ class ProfileViewModel: XMListViewModel<XMPost> {
         await getUserInfo()
         await getPhotos()
         await getListData()
+
     }
 
     var isLocalUser: Bool {

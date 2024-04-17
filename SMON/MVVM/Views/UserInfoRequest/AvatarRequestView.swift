@@ -39,6 +39,7 @@ struct AvatarRequestView: View {
         }
     }
 
+    @MainActor
     func updateAvatar() async {
         guard let avatar = vm.avatar,
               let urls = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar]),

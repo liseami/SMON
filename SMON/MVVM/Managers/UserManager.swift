@@ -47,14 +47,11 @@ class UserManager: ObservableObject {
         }
     }
 
-    
-
     private init() {
         user = .init()
         OSSInfo = .init()
         IMInfo = .init()
         userlocation = .init()
-     
         NearbyFliterMod = .init()
         userLoginInfo = .init()
         NearbyFliterMod = loadModel(type: FliterMod.self)
@@ -63,18 +60,23 @@ class UserManager: ObservableObject {
         userLoginInfo = loadModel(type: XMUserLoginInfo.self)
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
         IMInfo = loadModel(type: IMUserSing.self)
-       
+
         #if DEBUG
 //        user = .init(userId: 0, token: "", needInfo: true)
         #endif
         Task {
+            // 每次启动
             await getUploadToken()
-            // 仅针对已登陆用户
-            guard userLoginInfo.isLogin && !userLoginInfo.isNeedInfo else { return }
+            // ⬇️ 仅针对已登陆,且已进入主页的用户 ⬇️
+            guard logged, !userLoginInfo.isNeedInfo else { return }
             LocationManager.shared.uploadUserLocation()
             await getUserInfo()
             await getImUserSign()
         }
+    }
+
+    var logged: Bool {
+        userLoginInfo.token.isEmpty == false
     }
 
     @MainActor
@@ -87,7 +89,7 @@ class UserManager: ObservableObject {
             MainViewModel.shared.currentTabbar = .home
         }), .init(title: "取消", style: .default)])
     }
-    
+
     @MainActor
     func goodBye() {
         Apphelper.shared.pushAlert(title: "注销账户？", message: "确认注销账户？系统会清空当前用户在服务器上留存的全部数据。", actions: [UIAlertAction(title: "确定", style: .destructive, handler: { _ in
@@ -98,7 +100,6 @@ class UserManager: ObservableObject {
             MainViewModel.shared.currentTabbar = .home
         }), .init(title: "取消", style: .default)])
     }
-
 
     // 持久化数据
     func savaModel<M: Convertible>(model: M) {
@@ -142,7 +143,7 @@ class UserManager: ObservableObject {
         if result.is2000Ok, let Iminfo = result.mapObject(IMUserSing.self) {
             // 拿到IM登陆密钥
             IMInfo = Iminfo
-            TUIInit()
+            TIMInit()
         }
     }
 
@@ -164,14 +165,22 @@ class UserManager: ObservableObject {
         let result = await Networking.request_async(target)
         if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
             user = userinfo
+            await getUploadToken()
+            await getImUserSign()
         }
     }
 
-   
+    /*
+     通知别名设置
+     */
+    func notificationSet() {
+        JPUSHService.setAlias(user.userId, completion: { _, _, _ in
+        }, seq: 1)
+    }
 }
 
 extension UserManager {
-    func TUIInit() {
+    func TIMInit() {
         let config = V2TIMSDKConfig()
         config.logLevel = .LOG_NONE
         V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)

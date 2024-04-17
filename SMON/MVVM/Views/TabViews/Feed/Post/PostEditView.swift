@@ -20,13 +20,13 @@ class PostEditViewModel: ObservableObject {
     @Published var targetTheme: XMTheme?
     
     init() {
-        self.targetTheme = MeiRiDaSaiViewModel.shared.currentTheme
+        self.targetTheme = PostThemeStore.shared.targetTheme
     }
 
     /// 发布帖子
     @MainActor
     func publishPost() async {
-        if imageSelected.isEmpty == false,
+        if !imageSelected.isEmpty,
            let urls = await
            AliyunOSSManager.shared.upLoadImages_async(images: imageSelected)
         {
@@ -77,7 +77,8 @@ struct PostEditView: View {
                             }, label: {
                                 Text("不参与")
                             })
-                            ForEach(MeiRiDaSaiViewModel.shared.themeList, id: \.id) { theme in
+                            
+                            ForEach(PostThemeStore.shared.themeList, id: \.id) { theme in
                                 Button(action: {
                                     DispatchQueue.main.async {
                                         vm.targetTheme = theme
@@ -120,7 +121,8 @@ struct PostEditView: View {
     var textInput: some View {
         // 头像和文本输入框
         HStack(alignment: .top, spacing: 12) {
-            XMUserAvatar(str: UserManager.shared.user.avatar, userId: "0", size: 44)
+            XMUserAvatar(str: UserManager.shared.user.avatar, userId: "", size: 44)
+                .disabled(true)
 
             VStack(alignment: .leading) {
                 HStack {

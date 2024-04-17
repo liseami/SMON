@@ -159,6 +159,8 @@
 		A2BF26D02BA1D8DA00B5A616 /* RankAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF26C62BA1D8DA00B5A616 /* RankAPI.swift */; };
 		A2BF26D12BA1D8DA00B5A616 /* CommonAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BF26C72BA1D8DA00B5A616 /* CommonAPI.swift */; };
 		A2BF26D52BA1D91700B5A616 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BF26D42BA1D91700B5A616 /* Bridge.m */; };
+		A2DCAC1E2BCFB6E500260FE3 /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */; };
+		A2DCAC202BCFC50E00260FE3 /* PostThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */; };
 		A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */; };
 		A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9A92B8D817B00E86474 /* Podfile */; };
 		A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */; };
@@ -374,6 +376,8 @@
 		A2BF26C72BA1D8DA00B5A616 /* CommonAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonAPI.swift; sourceTree = "<group>"; };
 		A2BF26D42BA1D91700B5A616 /* Bridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
 		A2BF26D62BA1D93800B5A616 /* SMON-bridge-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SMON-bridge-header.h"; sourceTree = "<group>"; };
+		A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
+		A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostThemeStore.swift; sourceTree = "<group>"; };
 		A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFliterView.swift; sourceTree = "<group>"; };
 		A2E7F9A92B8D817B00E86474 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUIChatXMTheme.bundle; path = SMON/TUIChatXMTheme.bundle; sourceTree = SOURCE_ROOT; };
@@ -430,6 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				A2BF15EF2B8C55480011A130 /* UserManager.swift */,
+				A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */,
 				A2BF15F42B8C67060011A130 /* PermissionManager.swift */,
 				A25AAD2D2B8EFE9900B7CE40 /* AliOSSManager.swift */,
 				A20AF75B2B9300260098E561 /* LocationManager.swift */,
@@ -555,7 +560,6 @@
 				A2784F182B9184F400A1B06F /* Profile */,
 				A2E7F9A62B8CDF1300E86474 /* HomeView */,
 				A2BF15F12B8C64E70011A130 /* Message */,
-				A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */,
 			);
 			path = TabViews;
 			sourceTree = "<group>";
@@ -601,6 +605,7 @@
 		A27EFFB02B921ACC00B47BD6 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				A2BA894A2B9AC69A002FEEFA /* MeiRiDaSaiView.swift */,
 				A272A4922B871D1A008EA955 /* PostFeedView.swift */,
 				A2A8D7A52BC9155700262C49 /* NearPostView.swift */,
 				A27EFFB92B92B7B000B47BD6 /* PostView.swift */,
@@ -752,6 +757,7 @@
 				A2BF269A2BA1D83B00B5A616 /* ChatView.swift */,
 				A2BF269B2BA1D83B00B5A616 /* MessageView.swift */,
 				A2BF26972BA1D83B00B5A616 /* TIM */,
+				A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -1032,6 +1038,7 @@
 				A2BA895E2B9B3C2D002FEEFA /* XMListDataViewModel.swift in Sources */,
 				A28C55E22B96D85500707EDA /* Date+.swift in Sources */,
 				A209C83A2BBA883300531EF1 /* LottieView.swift in Sources */,
+				A2DCAC1E2BCFB6E500260FE3 /* NotificationRequestView.swift in Sources */,
 				A25AAD382B8F238E00B7CE40 /* SmokeRequestView.swift in Sources */,
 				A2BF26CF2BA1D8DA00B5A616 /* UserAPI.swift in Sources */,
 				A20AF7582B92C42F0098E561 /* XMTyperText.swift in Sources */,
@@ -1063,6 +1070,7 @@
 				A20189DA2BAA717700AFFF06 /* UserRelationAPI.swift in Sources */,
 				A25BC4032BB17B6C00CADE49 /* PostReplyView.swift in Sources */,
 				A2B45CA32B8B008B00D71EF8 /* PublicFuncs.swift in Sources */,
+				A2DCAC202BCFC50E00260FE3 /* PostThemeStore.swift in Sources */,
 				A2A8D7A42BC8DF4200262C49 /* ConfigStore.swift in Sources */,
 				A25AAD412B90073B00B7CE40 /* WechatRequestView.swift in Sources */,
 				A2B45CAC2B8B1E3C00D71EF8 /* ViewFuncs.swift in Sources */,

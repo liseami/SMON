@@ -20,7 +20,7 @@ struct SMONApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if userManager.userLoginInfo.isLogin {
+                if userManager.logged{
                     // 需要进入资料流程
                     if userManager.userLoginInfo.isNeedInfo {
                         UserInfoRequestMainView()

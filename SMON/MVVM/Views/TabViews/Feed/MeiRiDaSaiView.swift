@@ -5,17 +5,22 @@
 //  Created by 赵翔宇 on 2024/3/8.
 //
 
+import StoreKit
 import SwiftUI
+import UserNotifications
 
 class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
-    static let shared = MeiRiDaSaiViewModel()
     init() {
         self.sex = UserManager.shared.user.sex == 1 ? 2 : 1
         super.init(target: PostAPI.themeList(p: .init(page: 1, pageSize: 20, type: 0, themeId: 0)), pagesize: 20)
-        Task{
+        Task {
             await self.getthemeList()
             await self.refreshPostList()
         }
+    }
+
+    deinit {
+        PostThemeStore.shared.reset()
     }
 
     @Published var sex: Int = 1
@@ -41,6 +46,7 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
     // 当前选择的主题
     var currentTheme: XMTheme? {
         guard !themeList.isEmpty else { return nil }
+        PostThemeStore.shared.targetTheme = themeList[currentThemeIndex]
         return themeList[currentThemeIndex]
     }
 
@@ -73,6 +79,7 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
         let r = await Networking.request_async(t)
         if r.is2000Ok, let list = r.mapArray(XMTheme.self) {
             themeList = list
+            PostThemeStore.shared.themeList = themeList
         }
     }
 
@@ -91,7 +98,8 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
 
 struct MeiRiDaSaiView: View {
     @State var currentIndex: Int = 0
-    @StateObject var vm: MeiRiDaSaiViewModel = .shared
+    @StateObject var vm: MeiRiDaSaiViewModel = .init()
+    @Environment(\.requestReview) var requestReview
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -121,6 +129,18 @@ struct MeiRiDaSaiView: View {
                 }
             })
             .padding(.all, 16)
+            // 请求通知权限 | 3秒后 | 没有请求过的话 authorizationStatus == .notDetermined
+            .onAppear(perform: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    UNUserNotificationCenter.current().getNotificationSettings { settings in
+                        if settings.authorizationStatus == .notDetermined {
+                            DispatchQueue.main.async {
+                                Apphelper.shared.presentPanSheet(NotificationRequestView(), style: .setting)
+                            }
+                        }
+                    }
+                }
+            })
         }
         .refreshable {
             await vm.refreshPostList()
@@ -132,6 +152,8 @@ struct MeiRiDaSaiView: View {
                     await self.vm.getListData()
                 }
             }
+            // 发布帖子成功，请求用户评价我们的app，每个用户只请求一次
+            requestReview()
         }
     }
 
@@ -196,9 +218,7 @@ struct MeiRiDaSaiView: View {
                 .overlay(alignment: .top) {
                     // 主题大赛列表
                     BannerRow(imageW: 156, spacing: 12, index: $vm.currentThemeIndex, list: vm.themeList) { theme in
-                        let index = vm.themeList.firstIndex(where: {$0.id == theme.id})
                         headerImage(theme.coverUrl)
-                          
                     }
                     .offset(x: 0, y: -44)
                 }

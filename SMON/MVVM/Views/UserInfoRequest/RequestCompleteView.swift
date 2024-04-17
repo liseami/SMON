@@ -21,7 +21,7 @@ struct RequestCompleteView: View {
                 XMTyperText(text: "每日大赛的游戏规则！")
                     .multilineTextAlignment(.leading)
                     .bold()
-                XMTyperText(text: "每天都举行主题「排位赛」，用户按照「❤️‍🔥热度值」进行排名。\r\r在这里，你可以轻松找到「全国❤️‍🔥最火热的用户」，「同城❤️‍🔥最火热的用户」……\r\r最重要的是，目前获取「❤️‍🔥」非常简单！\r\r祝你玩的愉快！")
+                XMTyperText(text: "每天都举行主题「排位赛」，例如「健身照大赛」、「泳装大赛」、「西装大赛」、「连衣裙大赛」等等😈\r\r用户按照po图参赛，收获点赞，可以提高热度值。全体用户按照「❤️‍🔥热度值」进行排名！\r\r在这里，你可以轻松找到「全国❤️‍🔥最火热的用户」，「同城❤️‍🔥最火热的用户」……\r\r最重要的是，目前获取「❤️‍🔥」非常简单!\r\r祝你玩的愉快！\r\r别忘了领每天免费的火苗！")
 
                     .font(.XMFont.f1).fcolor(.XMDesgin.f1)
                     .padding(.trailing, 30)
@@ -29,9 +29,7 @@ struct RequestCompleteView: View {
                     .ifshow(show: showText)
 
             })
-            .onAppear(perform: {
-                showText = true
-            })
+
             Spacer()
             XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "好的") {
                 Task {
@@ -39,6 +37,8 @@ struct RequestCompleteView: View {
                     await UserManager.shared.getUserInfo()
                 }
             }
+            .transition(.movingParts.anvil)
+            .ifshow(show: showText)
             .padding(.horizontal, 48)
         }
         .frame(maxWidth: .infinity)
@@ -47,6 +47,15 @@ struct RequestCompleteView: View {
         .font(.title)
         .padding(.top, 40)
         .frame(maxHeight: .infinity, alignment: .top)
+        .background(XMLoginVideo()
+            .ignoresSafeArea()
+            .opacity(0.6)
+            .transition(.movingParts.blur.animation(.easeIn(duration: 1.5))).ignoresSafeArea()
+            .ifshow(show: showText)
+        )
+        .onAppear(perform: {
+            showText = true
+        })
     }
 }
 

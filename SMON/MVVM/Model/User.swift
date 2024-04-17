@@ -155,9 +155,7 @@ extension XMUserProfile {
 }
 
 struct XMUserLoginInfo: Decodable, Encodable, Convertible {
-    var isLogin: Bool {
-        !token.isEmpty
-    }
+    
 
     // 用户 ID，默认为空字符串
     var userId: String = ""
