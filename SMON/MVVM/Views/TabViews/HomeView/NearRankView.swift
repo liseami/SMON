@@ -115,12 +115,14 @@ struct NearRankView: View {
                 VStack {
                     XMUserAvatar(str: user.avatar, userId: user.userId, size: 100)
                         .conditionalEffect(.smoke(layer: .local), condition: index < 3)
-                    Text(user.nickname)
-                        .font(.XMFont.f1b)
-                        .lineLimit(1)
-                    Text(user.distanceStr)
-                        .font(.XMFont.f3)
-                        .fcolor(.XMDesgin.f2)
+                    VStack(alignment: .center, spacing: 4) {
+                        Text(user.nickname)
+                            .font(.XMFont.f1b)
+                            .lineLimit(1)
+                        Text(user.distanceStr)
+                            .font(.XMFont.f3)
+                            .fcolor(.XMDesgin.f2)
+                    }
                 }
             }
         }

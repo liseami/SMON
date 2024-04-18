@@ -76,11 +76,7 @@ struct CoinshopView: View {
             XMStateView(vm.list, reqStatus: vm.reqStatus) { product in
                 XMDesgin.XMButton {
                     LoadingTask(loadingMessage: "连接苹果商店...") {
-                        if let p = iapmanager.products.first(where: { $0.productIdentifier == product.id }) {
-                            iapmanager.purchase(product: p)
-                        } else {
-                            Apphelper.shared.pushNotification(type: .error(message: "没有相关产品。"))
-                        }
+                        iapmanager.buy(productId: product.goodsCode)
                     }
                 } label: {
                     self.productCell(product)

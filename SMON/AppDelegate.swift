@@ -18,6 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             JPUSHService.setup(withOption: launchOptions, appKey: AppConfig.JPUSHAPPKE, channel: "ios", apsForProduction: true)
             JPUSHService.registrationIDCompletionHandler { _, _ in }
         }
+        let _ = IAPManager.shared
         let _ = ConfigStore.shared
         let _ = UserManager.shared
         return true

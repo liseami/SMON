@@ -27,11 +27,10 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    var gotLocation: () async -> () = {}
+    var gotLocationComplete: () async -> () = {}
     func startUpdatingLocation(whenGot: @escaping () async -> ()) {
-        gotLocation = whenGot
+        gotLocationComplete = whenGot
         print("开始获取用户定位")
-        locationManager.stopUpdatingLocation()
         locationManager.requestLocation()
     }
     
@@ -43,7 +42,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
             Task {
                 UserManager.shared.userlocation = .init(lat: location.latitude.string, long: location.longitude.string)
                 await ConfigStore.shared.getVersionInfo()
-                await gotLocation()
+                await gotLocationComplete()
                 self.locationManager.stopUpdatingLocation() // 停止位置更新
             }
         }

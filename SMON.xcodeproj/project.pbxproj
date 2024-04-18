@@ -161,6 +161,7 @@
 		A2BF26D52BA1D91700B5A616 /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = A2BF26D42BA1D91700B5A616 /* Bridge.m */; };
 		A2DCAC1E2BCFB6E500260FE3 /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */; };
 		A2DCAC202BCFC50E00260FE3 /* PostThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */; };
+		A2DCAC222BCFD4FE00260FE3 /* OrderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */; };
 		A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */; };
 		A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9A92B8D817B00E86474 /* Podfile */; };
 		A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */; };
@@ -378,6 +379,7 @@
 		A2BF26D62BA1D93800B5A616 /* SMON-bridge-header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SMON-bridge-header.h"; sourceTree = "<group>"; };
 		A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
 		A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostThemeStore.swift; sourceTree = "<group>"; };
+		A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAPI.swift; sourceTree = "<group>"; };
 		A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFliterView.swift; sourceTree = "<group>"; };
 		A2E7F9A92B8D817B00E86474 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUIChatXMTheme.bundle; path = SMON/TUIChatXMTheme.bundle; sourceTree = SOURCE_ROOT; };
@@ -817,6 +819,7 @@
 				A2498ACC2BA7E23D0045B7AD /* PostsOperationAPI.swift */,
 				A283C5522BC7E8770002939B /* NoticeAPI.swift */,
 				A2A8D7A12BC7F4C500262C49 /* ReportAPI.swift */,
+				A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1084,6 +1087,7 @@
 				A2EF075E2B9D4D88004CF692 /* InviteFriendsView.swift in Sources */,
 				A28F54412B8739EF00AF9CD3 /* AppWarningView.swift in Sources */,
 				A23DD4962BBBE0BD00249972 /* UserAssetAPI.swift in Sources */,
+				A2DCAC222BCFD4FE00260FE3 /* OrderAPI.swift in Sources */,
 				A256DB9B2B901C9F008C7063 /* AppConfig.swift in Sources */,
 				A2BF269D2BA1D83B00B5A616 /* ConversationListContainer.swift in Sources */,
 				A28FEF1C2B8DD74D002E8FB2 /* Color.swift in Sources */,
@@ -1344,7 +1348,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -1399,7 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				OTHER_LDFLAGS = "$(inherited)";

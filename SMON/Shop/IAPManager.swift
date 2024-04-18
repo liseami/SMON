@@ -7,7 +7,9 @@
 
 import Foundation
 
+import JDStatusBarNotification
 import StoreKit
+import SwiftUIX
 
 class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
     private let productIdentifiers = Set<String>([
@@ -29,23 +31,105 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
         request.start()
     }
     
+    /*
+     购买产品
+     */
+    
+    @MainActor
+    func buy(productId: String) {
+        guard let p = products.first(where: { $0.productIdentifier == productId }) else {
+            Apphelper.shared.pushNotification(type: .error(message: "没有相关产品。"))
+            return
+        }
+        startBuy()
+        purchase(product: p)
+    }
+    
     func purchase(product: SKProduct) {
         let payment = SKPayment(product: product)
         SKPaymentQueue.default().add(payment)
     }
     
+    var layerView = VisualEffectBlurView(blurStyle: .light)
+        .edgesIgnoringSafeArea(.all).host().view!
+    @MainActor func startBuy() {
+        guard let window = Apphelper.shared.getWindow() else { return }
+        
+        // 创建模糊效果的视图
+        
+        layerView.size = CGSize(width: Screen.main.bounds.width, height: Screen.main.bounds.height)
+        layerView.backgroundColor = UIColor.clear
+        layerView.alpha = 0.0 // 初始时设置为透明
+        layerView.tag = 1
+        layerView.center = CGPoint(x: Screen.main.bounds.width * 0.5, y: Screen.main.bounds.height * 0.5)
+            
+        // 将模糊效果的视图添加到窗口上
+        window.addSubview(layerView)
+            
+        // 显示loading消息
+        Apphelper.shared.pushNotification(type: .loading(message: " 🍎 连接Apple"))
+            
+        // 使用UIView.animate实现渐显动画
+        UIView.animate(withDuration: 1) {
+            self.layerView.alpha = 1.0 // 设置为完全不透明
+        }
+    }
+    
+    func endBuy() {
+        // 异步执行任务
+        // 使用UIView.animate实现淡出动画
+        UIView.animate(withDuration: 0.3) {
+            self.layerView.alpha = 0.0 // 设置为透明
+        } completion: { _ in
+            self.layerView.removeFromSuperview() // 移除模糊效果的视图
+            NotificationPresenter.shared.dismiss() // 关闭loading消息
+        }
+    }
+    
     // MARK: - SKPaymentTransactionObserver
     
+    struct OrderInfo :Convertible{
+        var orderId: String = ""
+    }
+
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch transaction.transactionState {
             case .purchased:
+                // 交易已完成
                 completeTransaction(transaction)
-                printReceipt(transaction)
+                // 打印购买凭证信息
+                endBuy()
+                Task { @MainActor in
+                    LoadingTask(loadingMessage: "与BellyBook服务器沟通") {
+                        let t = OrderAPI.placeOrder(payType: 21, goodsId: transaction.payment.productIdentifier)
+                        let r = await Networking.request_async(t)
+                        if r.is2000Ok, let mod = r.mapObject(OrderInfo.self) {
+                            await waitme(sec: 1)
+                            if let receiptStr = self.printReceipt() {
+                                let t = OrderAPI.iosPayVerify(transactionId: transaction.transactionIdentifier ?? "", receipt: receiptStr, orderId: mod.orderId)
+                                let r = await Networking.request_async(t)
+                                if r.is2000Ok {
+                                    await UserManager.shared.getUserInfo()
+                                    Apphelper.shared.pushNotification(type: .success(message: "订阅成功。很高兴认识你。"))
+                                } else {
+                                    Apphelper.shared.pushNotification(type: .error(message: "订单创建失败。"))
+                                }
+                            }
+                        } else {
+                            Apphelper.shared.pushNotification(type: .error(message: "票据验证失败。"))
+                        }
+                    }
+                }
+               
+//                printReceipt()
+                
             case .failed:
                 failedTransaction(transaction)
+                endBuy()
             case .restored:
                 restoreTransaction(transaction)
+                endBuy()
             case .deferred, .purchasing:
                 break
             @unknown default:
@@ -71,14 +155,22 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
         SKPaymentQueue.default().finishTransaction(transaction)
     }
     
-    private func printReceipt(_ transaction: SKPaymentTransaction) {
+    func printReceipt() -> String? {
         if let appStoreReceiptURL = Bundle.main.appStoreReceiptURL {
             do {
                 let receiptData = try Data(contentsOf: appStoreReceiptURL)
                 let receiptString = receiptData.base64EncodedString(options: [])
-                
-            } catch { print("Couldn't read receipt data with error: " + error.localizedDescription) }
-        } else {}
+                /*
+                 收据打印
+                 */
+                print(receiptString)
+                return receiptString
+            } catch {
+                return nil
+                print("Couldn't read receipt data with error: " + error.localizedDescription)
+            }
+        }
+        return nil
     }
 }
 
@@ -86,6 +178,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
 
 extension IAPManager: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+        print(response.products)
         DispatchQueue.main.async {
             self.products = response.products
         }

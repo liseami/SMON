@@ -166,8 +166,8 @@ struct ProfileHomeView: View {
     var list: some View {
         let listItems = [
             (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
-            (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) })
-//            (name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums, action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) })
+            (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
+            (name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums, action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) })
         ]
 
         return VStack(alignment: .leading, spacing: 24) {
