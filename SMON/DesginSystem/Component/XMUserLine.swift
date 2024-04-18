@@ -63,7 +63,7 @@ struct XMUserLine: View {
                             XMDesgin.SmallBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "关注") {
                                 await tapFollow()
                             }
-                       
+
                         // 互相关注
                         case 10:
                             XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "互相关注") {
@@ -72,15 +72,15 @@ struct XMUserLine: View {
                         default:
                             EmptyView()
                         }
-                    }     .changeEffect(.spray(origin: .top) {
+                    }
+                    // 变到榜单时，jump
+                    .changeEffect(.spray(origin: .center) {
                         Group {
-                            Image(systemName: "heart.fill")
-                            Image(systemName: "sparkles")
+                            Text("❤️‍🔥")
+                            Text("🔥")
                         }
                         .font(.title)
-                        .foregroundStyle(Color.XMDesgin.main.gradient)
                     }, value: user.followStatus)
-                    
                 }
                 Text(user.signature)
                     .font(.XMFont.f2)

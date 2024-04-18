@@ -44,7 +44,7 @@ class StoreManager: XMListViewModel<XMProduct> {
 
 struct CoinshopView: View {
     @StateObject var vm: StoreManager = .init()
-    @StateObject var iapmanager: IAPManager = .init()
+
     var body: some View {
         VStack(alignment: .center, spacing: 24, content: {
             Spacer().frame(height: 1)
@@ -55,6 +55,13 @@ struct CoinshopView: View {
                     Text("\(vm.wallet.coinNum) 赛币(余额)")
                         .font(.XMFont.f1b)
                 })
+                .changeEffect(.spray(origin: .center) {
+                    Group {
+                        Text("❤️‍🔥")
+                        Text("🔥")
+                    }
+                    .font(.title)
+                }, value: vm.wallet.coinNum, isEnabled: vm.wallet.coinNum.isEmpty == false)
             })
             products
             Text(LocalizedStringKey("点击支付，即代表您已阅读并同意「每日大赛」的[《赛币充值协议》](https://www.baidu.com)。"))
@@ -66,6 +73,13 @@ struct CoinshopView: View {
                     .handled
                 })
         })
+        // 购买成功
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
+            Task {
+                await vm.getUserWallet()
+                await vm.getListData()
+            }
+        }
         .padding(.all)
         .frame(maxWidth: .infinity, alignment: .top)
         .frame(height: UIScreen.main.bounds.height * 0.7, alignment: .top)
@@ -75,9 +89,7 @@ struct CoinshopView: View {
         LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
             XMStateView(vm.list, reqStatus: vm.reqStatus) { product in
                 XMDesgin.XMButton {
-                    LoadingTask(loadingMessage: "连接苹果商店...") {
-                        iapmanager.buy(productId: product.goodsCode)
-                    }
+                    IAPManager.shared.buy(productId: product.goodsCode)
                 } label: {
                     self.productCell(product)
                 }
@@ -88,9 +100,8 @@ struct CoinshopView: View {
             }
         }
     }
-    
-    func productCell(_ product : XMProduct) -> some View {
-        
+
+    func productCell(_ product: XMProduct) -> some View {
         VStack(alignment: .center, spacing: 0, content: {
             VStack(alignment: .center, spacing: 12, content: {
                 WebImage(str: product.coverUrl)

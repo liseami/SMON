@@ -48,7 +48,7 @@ struct NearPostView: View {
                 }
 
             })
-            .padding(.all,16)
+            .padding(.all, 16)
         }
         .overlay {
             AutoLottieView(lottieFliesName: "radar", loopMode: .loop, speed: 1)

@@ -13,14 +13,15 @@ struct BrithdayDayRequestView: View {
         InfoRequestView(title: "您的生日是？", subline: "一旦选择，无法更改，请提供有效信息。", btnEnable: true) {
             VStack(alignment: .leading, spacing: 12, content: {
                 XMDesgin.XMTag(text: "\(vm.brithday.zodiacEmojiString) \(vm.brithday.zodiacString)")
-                    .changeEffect(.spray(origin: .top) {
+
+                    .changeEffect(.spray(origin: .center) {
                         Group {
-                            Image(systemName: "heart.fill")
-                            Image(systemName: "sparkles")
+                            Text("❤️‍🔥")
+                            Text("🔥")
                         }
                         .font(.title)
-                        .foregroundStyle(Color.XMDesgin.main.gradient)
                     }, value: vm.brithday)
+
                 DatePicker("", selection: $vm.brithday, displayedComponents: .date)
                     .datePickerStyle(.wheel)
                     .labelsHidden()

@@ -20,6 +20,10 @@ struct HotExchangeView: View {
             Apphelper.shared.pushNotification(type: .success(message: "兑换成功！"))
             Apphelper.shared.closeSheet()
             await vm.getSingleData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                Apphelper.shared.pushNotification(type: .success(message: "恭喜你！排名上升了！"))
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo)
+            })
         } else {
             Apphelper.shared.closeSheet()
         }

@@ -28,11 +28,13 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
     /*
      每日签到
      */
+    @Published var flameJump: Int = 0
     @MainActor func dailySignIn() async {
         let t = AppOperationAPI.dailySignIn
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             await self.getSingleData()
+            self.flameJump += 1
             Apphelper.shared.pushNotification(type: .success(message: "🔥 火苗已到账！"))
         }
     }
@@ -56,6 +58,12 @@ struct ProfileHomeView: View {
                 Spacer().frame(height: 120)
             })
             .padding(.horizontal, 16)
+        }
+        // 购买成功
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
+            Task {
+                await vm.getSingleData()
+            }
         }
         .refreshable(action: {
             await vm.getSingleData()
@@ -167,7 +175,7 @@ struct ProfileHomeView: View {
         let listItems = [
             (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
-            (name: "赛币商店", icon: "home_shop", subline: vm.mod.coinNums, action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) })
+            (name: "赛币商店", icon: "home_shop", subline: "余额：\(vm.mod.coinNums)", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) })
         ]
 
         return VStack(alignment: .leading, spacing: 24) {
@@ -206,6 +214,9 @@ struct ProfileHomeView: View {
                         .background(Color.XMDesgin.b1)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
+                    .changeEffect(.glow, value: vm.flameJump, isEnabled: item.label == "火苗")
+                    .changeEffect(.jump(height: 32), value: vm.flameJump, isEnabled: item.label == "火苗")
+                    .conditionalEffect(.repeat(.glow, every: 3), condition: vm.flameJump > 0)
                 }
             })
             .overlay(alignment: .center) {

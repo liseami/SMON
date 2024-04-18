@@ -14,10 +14,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         DAppInit()
 
-        DispatchQueue.main.async {
-            JPUSHService.setup(withOption: launchOptions, appKey: AppConfig.JPUSHAPPKE, channel: "ios", apsForProduction: true)
-            JPUSHService.registrationIDCompletionHandler { _, _ in }
-        }
+//        JPUSHService.setup(withOption: launchOptions, appKey: AppConfig.JPUSHAPPKE, channel: "ios", apsForProduction: true)
+//        JPUSHService.registrationIDCompletionHandler { _, _ in }
         let _ = IAPManager.shared
         let _ = ConfigStore.shared
         let _ = UserManager.shared

@@ -21,6 +21,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
     
     override init() {
         super.init()
+        
         SKPaymentQueue.default().add(self)
         fetchProducts()
     }
@@ -41,7 +42,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
             Apphelper.shared.pushNotification(type: .error(message: "没有相关产品。"))
             return
         }
-        startBuy()
+        appleStartBuy()
         purchase(product: p)
     }
     
@@ -52,7 +53,8 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
     
     var layerView = VisualEffectBlurView(blurStyle: .light)
         .edgesIgnoringSafeArea(.all).host().view!
-    @MainActor func startBuy() {
+    
+    @MainActor func appleStartBuy() {
         guard let window = Apphelper.shared.getWindow() else { return }
         
         // 创建模糊效果的视图
@@ -75,20 +77,20 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
         }
     }
     
-    func endBuy() {
+    func appleEndBuy() {
         // 异步执行任务
         // 使用UIView.animate实现淡出动画
         UIView.animate(withDuration: 0.3) {
             self.layerView.alpha = 0.0 // 设置为透明
         } completion: { _ in
             self.layerView.removeFromSuperview() // 移除模糊效果的视图
-            NotificationPresenter.shared.dismiss() // 关闭loading消息
+//            NotificationPresenter.shared.dismiss() // 关闭loading消息
         }
     }
     
     // MARK: - SKPaymentTransactionObserver
     
-    struct OrderInfo :Convertible{
+    struct OrderInfo: Convertible {
         var orderId: String = ""
     }
 
@@ -99,37 +101,13 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
                 // 交易已完成
                 completeTransaction(transaction)
                 // 打印购买凭证信息
-                endBuy()
-                Task { @MainActor in
-                    LoadingTask(loadingMessage: "与BellyBook服务器沟通") {
-                        let t = OrderAPI.placeOrder(payType: 21, goodsId: transaction.payment.productIdentifier)
-                        let r = await Networking.request_async(t)
-                        if r.is2000Ok, let mod = r.mapObject(OrderInfo.self) {
-                            await waitme(sec: 1)
-                            if let receiptStr = self.printReceipt() {
-                                let t = OrderAPI.iosPayVerify(transactionId: transaction.transactionIdentifier ?? "", receipt: receiptStr, orderId: mod.orderId)
-                                let r = await Networking.request_async(t)
-                                if r.is2000Ok {
-                                    await UserManager.shared.getUserInfo()
-                                    Apphelper.shared.pushNotification(type: .success(message: "订阅成功。很高兴认识你。"))
-                                } else {
-                                    Apphelper.shared.pushNotification(type: .error(message: "订单创建失败。"))
-                                }
-                            }
-                        } else {
-                            Apphelper.shared.pushNotification(type: .error(message: "票据验证失败。"))
-                        }
-                    }
-                }
-               
-//                printReceipt()
-                
+                appleEndBuy()
             case .failed:
                 failedTransaction(transaction)
-                endBuy()
+                appleEndBuy()
             case .restored:
                 restoreTransaction(transaction)
-                endBuy()
+                appleEndBuy()
             case .deferred, .purchasing:
                 break
             @unknown default:
@@ -140,6 +118,24 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
     
     private func completeTransaction(_ transaction: SKPaymentTransaction) {
         SKPaymentQueue.default().finishTransaction(transaction)
+        DispatchQueue.main.async {
+            LoadingTask(loadingMessage: "与大赛支付中心进行确认") {
+                let t = OrderAPI.placeOrder(payType: 21, goodsId: transaction.payment.productIdentifier)
+                let r = await Networking.request_async(t)
+                if r.is2000Ok, let mod = r.mapObject(OrderInfo.self) {
+                    await waitme(sec: 1)
+                    if let receiptStr = self.printReceipt() {
+                        let t2 = OrderAPI.iosPayVerify(transactionId: transaction.transactionIdentifier ?? "", receipt: receiptStr, orderId: mod.orderId)
+                        let r2 = await Networking.request_async(t2)
+                        if r2.is2000Ok {
+                            await UserManager.shared.getUserInfo()
+                            Apphelper.shared.pushNotification(type: .success(message: "充值成功！大吉大利！祝你吃鸡！"))
+                            NotificationCenter.default.post(name: Notification.Name.IAP_BUY_SUCCESS, object: nil, userInfo: nil)
+                        }
+                    }
+                }
+            }
+        }
     }
     
     private func failedTransaction(_ transaction: SKPaymentTransaction) {

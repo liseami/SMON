@@ -69,9 +69,10 @@ class UserManager: ObservableObject {
             await getUploadToken()
             // ⬇️ 仅针对已登陆,且已进入主页的用户 ⬇️
             guard logged, !userLoginInfo.isNeedInfo else { return }
-            LocationManager.shared.uploadUserLocation()
+//            DispatchQueue.global().async {
+//                LocationManager.shared.uploadUserLocation()
+//            }
             await getUserInfo()
-            await getImUserSign()
         }
     }
 

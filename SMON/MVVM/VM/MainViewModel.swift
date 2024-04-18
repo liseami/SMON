@@ -16,6 +16,7 @@ class MainViewModel: ObservableObject {
     }
 
     @Published var currentTabbar: TabbarItem = .home
+    @Published var homeBtnJump : Int = 0
     @Published var pathPages: NavigationPath = .init()
 
     @MainActor
@@ -46,8 +47,8 @@ class MainViewModel: ObservableObject {
         var circleBtnInfo: LabelInfo {
             switch self {
             case .home:
-                return .init(name: "", icon: "tabbar_circle_post", subline: "")
-//                return .init(name: "冲榜", icon: "tabbar_circle_rank", subline: "")
+//                return .init(name: "", icon: "tabbar_circle_post", subline: "")
+                return .init(name: "冲榜", icon: "tabbar_circle_rank", subline: "")
             case .feed, .message, .profile:
                 return .init(name: "", icon: "tabbar_circle_post", subline: "")
             }

@@ -7,12 +7,13 @@
 
 import Foundation
 
-extension Notification.Name {
-    
-    public static let PostTapLike =
+public extension Notification.Name {
+    static let PostTapLike =
         Notification.Name("com.wuhanjiyunshang.meiridasai.POST_TAP_LIKE")
-    public static let APP_GO_TO_ACTIVE =
+    static let APP_GO_TO_ACTIVE =
         Notification.Name("com.wuhanjiyunshang.meiridasai.APP_GO_TO_ACTIVE")
-    public static let POST_PUBLISHED_SUCCESS =
+    static let POST_PUBLISHED_SUCCESS =
         Notification.Name("com.wuhanjiyunshang.meiridasai.POST_PUBLISHED_SUCCESS")
+    static let IAP_BUY_SUCCESS =
+        Notification.Name("com.wuhanjiyunshang.meiridasai.IAP_BUY_SUCCESS")
 }

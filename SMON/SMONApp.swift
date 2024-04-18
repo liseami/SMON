@@ -21,13 +21,17 @@ struct SMONApp: App {
         WindowGroup {
             Group {
                 if userManager.logged{
+                   // 已登录用户
                     // 需要进入资料流程
                     if userManager.userLoginInfo.isNeedInfo {
+                        // 需要进入资料流程
                         UserInfoRequestMainView()
                     } else {
+                        // APP正式页面
                         MainView()
                     }
                 } else {
+                    // 登录页面
                     LoginMainView()
                 }
             }

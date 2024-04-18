@@ -48,14 +48,17 @@ struct MainTabbar: View {
         let iconName = vm.currentTabbar.circleBtnInfo.icon
         let btnName = vm.currentTabbar.circleBtnInfo.name
         return XMDesgin.XMButton {
-//            if vm.currentTabbar == .home {
-////                vm.showHotBuyView = true
-//                Apphelper.shared.presentPanSheet(HotBuyView(), style: .cloud)
-//            } else {
-//                Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
-//            }
-            
-            Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
+            if vm.currentTabbar == .home {
+//                vm.showHotBuyView = true
+                DispatchQueue.main.async {
+                    Apphelper.shared.presentPanSheet(HotBuyView(), style: .cloud)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    Apphelper.shared.present(PostEditView(), presentationStyle: .fullScreen)
+                }
+            }
+
         } label: {
             LinearGradient(gradient: Gradient(colors: [Color(hex: "AA7E1F"), Color(hex: "7A5309"), Color(hex: "AA7E1F")]), startPoint: .bottomLeading, endPoint: .topTrailing)
                 .frame(width: 58, height: 58, alignment: .center)
@@ -64,9 +67,8 @@ struct MainTabbar: View {
                         .fcolor(.init(hex: "D9C15B"))
                 })
                 .clipShape(Circle())
-                .changeEffect(.shine, value: vm.currentTabbar, isEnabled: true)
-                .shadow(color: .gray, radius: 2, x: 0, y: 1)
-                .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 1)
+                // 冒烟
+                .conditionalEffect(.smoke, condition: vm.currentTabbar == .home)
                 .overlay {
                     VStack(spacing: 0) {
                         XMDesgin.XMIcon(iconName: iconName, color: .white)
@@ -76,6 +78,19 @@ struct MainTabbar: View {
                             .ifshow(show: !btnName.isEmpty)
                     }
                 }
+                // 变到榜单时，jump
+                .changeEffect(.spray(origin: .center) {
+                    Group {
+                        Text("❤️‍🔥")
+                        Text("🔥")
+                    }
+                    .font(.title)
+                }, value: vm.homeBtnJump)
+                .changeEffect(.jump(height: 32), value: vm.homeBtnJump, isEnabled: true)
+                .changeEffect(.shine, value: vm.currentTabbar, isEnabled: true)
+
+                .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 1)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .ifshow(show: !iconName.isEmpty)
         }
@@ -86,6 +101,14 @@ struct MainTabbar: View {
             ForEach(MainViewModel.TabbarItem.allCases, id: \.self) { tabitem in
                 let selected = vm.currentTabbar == tabitem
                 Button(action: {
+                    // 从别的地方切换到home
+                    if tabitem == .home {
+                        vm.homeBtnJump += 1
+                    }
+//                    // 现在是hot，切换到别的地方
+//                    if vm.currentTabbar == .home, tabitem != .home {
+//                        vm.homeBtnJump += 1
+//                    }
                     vm.currentTabbar = tabitem
                     Apphelper.shared.mada(style: .rigid)
                 }, label: {

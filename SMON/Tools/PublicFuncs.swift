@@ -25,31 +25,33 @@ func waitme(sec: Double = 3) async {
 /*
  强制等待任务
  */
-@MainActor public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void) {
+@MainActor
+public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void) {
     guard let window = Apphelper.shared.getWindow() else { return }
+    SwiftUI.Task {
+        // 创建模糊效果的视图
+        if let blurView = VisualEffectBlurView(blurStyle: .dark)
+            .edgesIgnoringSafeArea(.all).host().view
+        {
+            blurView.size = CGSize(width: Screen.main.bounds.width, height: Screen.main.bounds.height)
+            blurView.backgroundColor = UIColor.clear
+            blurView.alpha = 0.0 // 初始时设置为透明
+            blurView.tag = 1
+            blurView.center = CGPoint(x: Screen.main.bounds.width * 0.5, y: Screen.main.bounds.height * 0.5)
 
-    // 创建模糊效果的视图
-    if let blurView = VisualEffectBlurView(blurStyle: .dark)
-        .edgesIgnoringSafeArea(.all).host().view
-    {
-        blurView.size = CGSize(width: Screen.main.bounds.width, height: Screen.main.bounds.height)
-        blurView.backgroundColor = UIColor.clear
-        blurView.alpha = 0.0 // 初始时设置为透明
-        blurView.tag = 1
-        blurView.center = CGPoint(x: Screen.main.bounds.width * 0.5, y: Screen.main.bounds.height * 0.5)
+            // 将模糊效果的视图添加到窗口上
+            window.addSubview(blurView)
 
-        // 将模糊效果的视图添加到窗口上
-        window.addSubview(blurView)
+            // 使用UIView.animate实现渐显动画
+            UIView.animate(withDuration: 1) {
+                blurView.alpha = 1.0 // 设置为完全不透明
+            }
 
-        // 显示loading消息
-        Apphelper.shared.pushNotification(type: .loading(message: loadingMessage))
+            // 显示loading消息
+            Apphelper.shared.pushNotification(type: .loading(message: loadingMessage))
 
-        // 使用UIView.animate实现渐显动画
-        UIView.animate(withDuration: 1) {
-            blurView.alpha = 1.0 // 设置为完全不透明
-        }
-        // 异步执行任务
-        SwiftUI.Task { @MainActor in
+            // 异步执行任务
+
             await waitme()
             await task()
             // 使用UIView.animate实现淡出动画
@@ -57,7 +59,7 @@ func waitme(sec: Double = 3) async {
                 blurView.alpha = 0.0 // 设置为透明
             } completion: { _ in
                 blurView.removeFromSuperview() // 移除模糊效果的视图
-                NotificationPresenter.shared.dismiss() // 关闭loading消息
+//                NotificationPresenter.shared.dismiss() // 关闭loading消息
             }
         }
     }
