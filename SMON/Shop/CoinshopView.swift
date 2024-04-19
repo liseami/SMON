@@ -55,6 +55,7 @@ struct CoinshopView: View {
                     Text("\(vm.wallet.coinNum) 赛币(余额)")
                         .font(.XMFont.f1b)
                 })
+                .changeEffect(.jump(height: 24), value: vm.wallet.coinNum)
                 .changeEffect(.spray(origin: .center) {
                     Group {
                         Text("❤️‍🔥")

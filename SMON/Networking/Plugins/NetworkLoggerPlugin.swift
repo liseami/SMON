@@ -42,10 +42,7 @@ private func logRequest(_ target: TargetType, startDate: Date, result: Result<Re
     print("请求方式：\(target.method.rawValue)")
     print("请求时间 : \(String(format: "%.3f", requestDate))s")
     
-    if let token = target.headers?["token"] {
-        print("请求头 : \(token)")
-    }
-    
+    print("请求头 : \(target.headers)")
     if let request = result.rawReponse?.request {
         switch target.task {
         case .requestPlain, .uploadMultipart: break

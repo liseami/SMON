@@ -61,16 +61,16 @@ struct MainView: View {
                 ProfileHomeView()
             }
         }
-//        .toolbar {
-//            ToolbarItem(placement: .topBarLeading) {
-//                // 通知按钮
-//                XMDesgin.XMButton {
-//                    MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
-//                } label: {
-//                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
-//                }
-//            }
-//        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                // 通知按钮
+                XMDesgin.XMButton {
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
+                } label: {
+                    XMDesgin.XMIcon(iconName: "home_bell", size: 22)
+                }
+            }
+        }
     }
 }
 

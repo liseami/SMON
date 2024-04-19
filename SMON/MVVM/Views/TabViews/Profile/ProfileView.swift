@@ -208,10 +208,12 @@ struct ProfileView: View {
                     await vm.tapChat()
                 }
 //                // 微信
-//                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
-//                    Apphelper.shared.presentPanSheet(WechatGiftView()
-//                        .environmentObject(vm), style: .shop)
-//                }
+                #if DEBUG
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
+                    Apphelper.shared.presentPanSheet(WechatGiftView()
+                        .environmentObject(vm), style: .shop)
+                }
+                #endif
             }
         }
     }
