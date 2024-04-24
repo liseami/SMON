@@ -68,6 +68,8 @@ class MainViewModel: ObservableObject {
     }
 
     enum PagePath: Hashable, Decodable {
+        case mygift
+        case mybill
         case setting
         case notification
         case myhotinfo
@@ -77,5 +79,6 @@ class MainViewModel: ObservableObject {
         case profile(userId: String)
         case chat(userId: String)
         case flamedetail
+        case myCoinView
     }
 }

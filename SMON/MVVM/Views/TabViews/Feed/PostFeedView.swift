@@ -10,7 +10,7 @@ import SwiftUIX
 
 struct PostFeedView: View {
     @StateObject var vm: FeedViewModel = .init()
-
+    @ObservedObject var userManager: UserManager = .shared
     var body: some View {
         ZStack(alignment: .top, content: {
             // 动态流
@@ -18,12 +18,16 @@ struct PostFeedView: View {
             // 顶部模糊
             XMTopBlurView()
         })
+        .task {
+            await userManager.getUserInfo()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 // 顶部导航栏
                 toptabbar
             }
+
 //            ToolbarItem(placement: .topBarLeading) {
 //                //  通知按钮
 //                XMDesgin.XMIcon(iconName: "home_bell", size: 22)
@@ -39,10 +43,16 @@ struct PostFeedView: View {
                 XMDesgin.XMButton {
                     vm.currentTopTab = tabitem
                 } label: {
-                    Text(tabitem.info.name)
-                        .font(.XMFont.f1)
-                        .bold()
-                        .opacity(selected ? 1 : 0.6)
+                    Group {
+                        if tabitem == .localCity {
+                            Text(userManager.user.cityName)
+                        } else {
+                            Text(tabitem.info.name)
+                        }
+                    }
+                    .font(.XMFont.f1)
+                    .bold()
+                    .opacity(selected ? 1 : 0.6)
                 }
             }
             Spacer()
@@ -63,6 +73,7 @@ struct PostFeedView: View {
 
             tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
                 .tag(FeedViewModel.FeedTopBarItem.localCity)
+                .ifshow(show: userManager.user.cityName.isEmpty == false )
             // 每日大赛，单独处理
             tabContent(for: .competition, target: nil)
                 .tag(FeedViewModel.FeedTopBarItem.competition)

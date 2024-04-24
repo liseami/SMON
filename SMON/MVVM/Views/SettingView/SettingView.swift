@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @StateObject var vm: SettingViewModel = .init()
+    
     var body: some View {
         List {
             #if DEBUG

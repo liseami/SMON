@@ -162,6 +162,11 @@
 		A2DCAC1E2BCFB6E500260FE3 /* NotificationRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */; };
 		A2DCAC202BCFC50E00260FE3 /* PostThemeStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */; };
 		A2DCAC222BCFD4FE00260FE3 /* OrderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */; };
+		A2E1A7FF2BD89DD6006C9CA3 /* MyCoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A7FE2BD89DD6006C9CA3 /* MyCoinView.swift */; };
+		A2E1A8012BD89F63006C9CA3 /* MyBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A8002BD89F63006C9CA3 /* MyBill.swift */; };
+		A2E1A8032BD8A391006C9CA3 /* MyGiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A8022BD8A391006C9CA3 /* MyGiftView.swift */; };
+		A2E1A8052BD8A4BF006C9CA3 /* GiftAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A8042BD8A4BF006C9CA3 /* GiftAPI.swift */; };
+		A2E1A8072BD8B311006C9CA3 /* SocialAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A8062BD8B311006C9CA3 /* SocialAccountView.swift */; };
 		A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */; };
 		A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9A92B8D817B00E86474 /* Podfile */; };
 		A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */; };
@@ -380,6 +385,11 @@
 		A2DCAC1D2BCFB6E500260FE3 /* NotificationRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequestView.swift; sourceTree = "<group>"; };
 		A2DCAC1F2BCFC50E00260FE3 /* PostThemeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostThemeStore.swift; sourceTree = "<group>"; };
 		A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderAPI.swift; sourceTree = "<group>"; };
+		A2E1A7FE2BD89DD6006C9CA3 /* MyCoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinView.swift; sourceTree = "<group>"; };
+		A2E1A8002BD89F63006C9CA3 /* MyBill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBill.swift; sourceTree = "<group>"; };
+		A2E1A8022BD8A391006C9CA3 /* MyGiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGiftView.swift; sourceTree = "<group>"; };
+		A2E1A8042BD8A4BF006C9CA3 /* GiftAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftAPI.swift; sourceTree = "<group>"; };
+		A2E1A8062BD8B311006C9CA3 /* SocialAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAccountView.swift; sourceTree = "<group>"; };
 		A2E7F9A72B8CDF2000E86474 /* HomeFliterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFliterView.swift; sourceTree = "<group>"; };
 		A2E7F9A92B8D817B00E86474 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUIChatXMTheme.bundle; path = SMON/TUIChatXMTheme.bundle; sourceTree = SOURCE_ROOT; };
@@ -584,10 +594,12 @@
 				A272A48C2B871CF9008EA955 /* ProfileView.swift */,
 				A281EFE92B9AB99500E9DE05 /* WechatGiftView.swift */,
 				A2784F162B9166CB00A1B06F /* ProfileHomeView.swift */,
+				A2E1A8062BD8B311006C9CA3 /* SocialAccountView.swift */,
 				A2784F1C2B91851800A1B06F /* MyHotInfoView.swift */,
 				A281EFE72B9AB6E700E9DE05 /* HotHistoryView.swift */,
 				A2784F1E2B91852100A1B06F /* RelationListView.swift */,
 				A23DD4932BBBE07300249972 /* FlameDetailView.swift */,
+				A2E1A8022BD8A391006C9CA3 /* MyGiftView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -596,10 +608,12 @@
 			isa = PBXGroup;
 			children = (
 				A23DD49F2BBD231400249972 /* IAPManager.swift */,
+				A2E1A8002BD89F63006C9CA3 /* MyBill.swift */,
 				A2784F1A2B91851200A1B06F /* CoinshopView.swift */,
 				A209C83D2BBA8E3300531EF1 /* HotExchangeView.swift */,
 				A209C8322BBA830800531EF1 /* SotreTest.storekit */,
 				A209C8342BBA847F00531EF1 /* StoreKitTestCertificate.cer */,
+				A2E1A7FE2BD89DD6006C9CA3 /* MyCoinView.swift */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -809,6 +823,7 @@
 			children = (
 				A2BF26C52BA1D8DA00B5A616 /* UserAPI.swift */,
 				A23DD4952BBBE0BD00249972 /* UserAssetAPI.swift */,
+				A2E1A8042BD8A4BF006C9CA3 /* GiftAPI.swift */,
 				A209C8242BB6AA9900531EF1 /* AppOperationAPI.swift */,
 				A23DD4972BBBE44400249972 /* UserOperationAPI.swift */,
 				A209C8222BB6A32400531EF1 /* GoodAPI.swift */,
@@ -1050,6 +1065,7 @@
 				A25AAD302B8F19A900B7CE40 /* RelationHopeRequestView.swift in Sources */,
 				A272A4742B8706FC008EA955 /* Persistence.swift in Sources */,
 				A209C8252BB6AA9900531EF1 /* AppOperationAPI.swift in Sources */,
+				A2E1A8012BD89F63006C9CA3 /* MyBill.swift in Sources */,
 				A281EFE82B9AB6E700E9DE05 /* HotHistoryView.swift in Sources */,
 				A2B45CAE2B8B222400D71EF8 /* ProfileViewModel.swift in Sources */,
 				A2784F172B9166CB00A1B06F /* ProfileHomeView.swift in Sources */,
@@ -1063,6 +1079,7 @@
 				A2784F1B2B91851200A1B06F /* CoinshopView.swift in Sources */,
 				A25AAD2C2B8EF7FD00B7CE40 /* SexRequestView.swift in Sources */,
 				A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */,
+				A2E1A8032BD8A391006C9CA3 /* MyGiftView.swift in Sources */,
 				A27EFFB22B92B67700B47BD6 /* RankListView.swift in Sources */,
 				A26A03072B88C92000F6AC9B /* Public.swift in Sources */,
 				A28F543E2B8738B300AF9CD3 /* LoginViewModel.swift in Sources */,
@@ -1167,9 +1184,12 @@
 				A2EF07582B9D3C03004CF692 /* XMLoginVideo.swift in Sources */,
 				A2784F232B9186FF00A1B06F /* PanViewBox.swift in Sources */,
 				A25AAD362B8F238600B7CE40 /* DrinkRequestView.swift in Sources */,
+				A2E1A7FF2BD89DD6006C9CA3 /* MyCoinView.swift in Sources */,
 				A25BC4012BB15B3E00CADE49 /* PostCommentView.swift in Sources */,
 				A2BF26D02BA1D8DA00B5A616 /* RankAPI.swift in Sources */,
+				A2E1A8052BD8A4BF006C9CA3 /* GiftAPI.swift in Sources */,
 				A27EFFB62B92B6E700B47BD6 /* Post.swift in Sources */,
+				A2E1A8072BD8B311006C9CA3 /* SocialAccountView.swift in Sources */,
 				A272A46B2B8706FB008EA955 /* SMONApp.swift in Sources */,
 				A2BF15F52B8C67060011A130 /* PermissionManager.swift in Sources */,
 				A27F716E2BA83F0F0028885D /* Bool++.swift in Sources */,

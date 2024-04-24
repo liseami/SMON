@@ -71,7 +71,6 @@ struct ProfileEditView: View {
                 avatar
                 nickname
                 bio
-                wechat
                 bdsmAtt
                 photosWall
                 emotionNeed
@@ -145,21 +144,7 @@ struct ProfileEditView: View {
         })
     }
 
-    var wechat: some View {
-        VStack(alignment: .leading, spacing: 12, content: {
-            Text("微信号")
-            NavigationLink {
-                WechatSettingView()
-                    .navigationTitle("微信号设置")
-                    .toolbarRole(.editor)
-                    .environmentObject(vm)
-                    .navigationBarTitleDisplayMode(.inline)
-            } label: {
-                XMDesgin.XMListRow(.init(name: vm.updateModel.wechat.maskWeChatId().or("未设置"), icon: "inforequest_wechat", subline: "")) {}
-                    .disabled(true)
-            }
-        })
-    }
+    
 
     var height: some View {
         VStack(alignment: .leading, spacing: 12, content: {

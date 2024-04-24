@@ -11,7 +11,7 @@ import SwiftUIX
 struct RankView: View {
     @StateObject var vm: RankViewModel = .init()
     @State var showFliterView: Bool = false
-
+    @ObservedObject var userManager: UserManager = .shared
     var body: some View {
         ZStack(alignment: .top) {
             // 横向翻页
@@ -20,13 +20,15 @@ struct RankView: View {
             // 顶部模糊
             XMTopBlurView()
         }
+        .task {
+            await userManager.getUserInfo()
+        }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 // 顶部导航栏
                 topTabbar
             }
-
         }
     }
 
@@ -45,8 +47,13 @@ struct RankView: View {
                     .environmentObject(vm)
                     .tag(RankViewModel.HomeTopBarItem.near)
 
+                    // 没有CityId，不显示同城
+                    let items = userManager.user.cityId.isEmpty ?
+                        [RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.fans, RankViewModel.HomeTopBarItem.flow, RankViewModel.HomeTopBarItem.vistor] :
+                        [RankViewModel.HomeTopBarItem.localCity, RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.fans, RankViewModel.HomeTopBarItem.flow, RankViewModel.HomeTopBarItem.vistor]
+
                     // 其他四个页面，接口请求固定，无筛选
-                    ForEach([RankViewModel.HomeTopBarItem.localCity, RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.fans, RankViewModel.HomeTopBarItem.flow, RankViewModel.HomeTopBarItem.vistor], id: \.self) { tab in
+                    ForEach(items, id: \.self) { tab in
                         // 排行榜页面
                         ZStack(alignment: .top) {
                             if vm.currentTopTab == tab {
@@ -71,10 +78,16 @@ struct RankView: View {
                 XMDesgin.XMButton {
                     vm.currentTopTab = tabitem
                 } label: {
-                    Text(tabitem.info.name)
-                        .font(.XMFont.f1)
-                        .bold()
-                        .opacity(selected ? 1 : 0.6)
+                    Group {
+                        if tabitem == .localCity {
+                            Text(userManager.user.cityName)
+                        } else {
+                            Text(tabitem.info.name)
+                        }
+                    }
+                    .font(.XMFont.f1)
+                    .bold()
+                    .opacity(selected ? 1 : 0.6)
                 }
             }
             Spacer()

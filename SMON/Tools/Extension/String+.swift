@@ -1,7 +1,12 @@
 import Foundation
 
 extension String {
-    
+    var inBillListText: some View {
+        let number = Int(self) ?? 0
+        let text = number > 0 ? "+" + String(number) : String(number)
+        return Text(text).fcolor(number > 0 ? .green : .red)
+    }
+
     static let data = "data"
     static let datalist = "data.list"
     static func randomString(length: Int) -> String {

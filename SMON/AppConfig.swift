@@ -52,6 +52,8 @@ public enum AppConfig {
     static let UserAgreement: String = domain + "work/YHXY.html"
     /// 隐私政策
     static let UserPrivacyPolicy: String = domain + "work/YSZC.html"
+    /// 赛币充值协议
+    static let SAIBICOIN: String = domain + "work/SBXY.html"
     /// 当前版本
     static var AppVersion: String { (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0" }
     /// AppID

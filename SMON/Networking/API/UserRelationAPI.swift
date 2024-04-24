@@ -18,6 +18,8 @@ enum UserRelationAPI: XMTargetType {
     case blackList(page: Int)
     case tapBlack(blackUserId: String)
     case blackAllList
+    case contactSettingView(contactType: String)
+    case updateUserContact(contactType: String, contactValue: String, threshold: String)
 
     var group: String {
         return "/v1/userRelation"
@@ -41,6 +43,8 @@ enum UserRelationAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .contactSettingView(let contactType): return ["contactType": contactType]
+        case .updateUserContact(let contactType, let contactValue, let threshold): return ["contactType": contactType, "contactValue": contactValue, "threshold": threshold]
         case .blackAllList: return nil
         case .tapBlack(let id): return ["blackUserId": id]
         case .followersList(let page): return ["page": page, "pageSize": 20]

@@ -187,8 +187,12 @@ struct ProfileView: View {
     var buttonView: some View {
         HStack {
             if vm.isLocalUser {
-                XMDesgin.SmallBtn(fColor: .black, backColor: .white, iconName: "profile_edit", text: "编辑社交资料") {
+                XMDesgin.SmallBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "profile_edit", text: "编辑社交资料") {
                     MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
+                }
+                
+                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_gift", text: "我的礼物") {
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.mygift)
                 }
             } else {
                 // 关注按钮
@@ -283,7 +287,7 @@ struct ProfileView: View {
 #Preview {
     NavigationView(content: {
         NavigationLink(_isActive: .constant(true), destination: {
-            ProfileView(userId: "0")
+            ProfileView(userId: "1764504995815882752")
         }, label: {
             Text("hello")
         })

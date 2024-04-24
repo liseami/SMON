@@ -35,9 +35,15 @@ class HotBuyViewModel: XMModRequestViewModel<RankInfo> {
 
     @MainActor
     func buyHot() async {
-        guard let _ = input.int else {
+        guard let input = input.int else {
             Apphelper.shared.pushNotification(type: .error(message: "只能输入纯数字！"))
             return
+        }
+        let t = UserAssetAPI.coinToHot(coin: input)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            Apphelper.shared.pushNotification(type: .success(message: "兑换成功！排名上升了！！"))
+            self.input.removeAll()
         }
     }
 
@@ -129,7 +135,7 @@ struct HotBuyView: View {
                 Image("saicoin")
                     .resizable()
                     .frame(width: 20, height: 20)
-                TextField(text: $vm.input, prompt: Text("输入你要消耗的赛币")) {}
+                TextField(text: $vm.input, prompt: Text("投入赛币！")) {}
                     .tint(Color.XMDesgin.main)
                     .keyboardType(.numberPad)
                     .font(.XMFont.big3.bold())
@@ -145,7 +151,7 @@ struct HotBuyView: View {
                     .fcolor(.XMDesgin.f1)
             }
             XMDesgin.XMButton {
-                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
+                await vm.buyHot()
             } label: {
                 Text("立刻冲榜")
                     .width(120)
@@ -268,7 +274,7 @@ struct HotBuyView: View {
                                     Text(user.nickname)
                                         .lineLimit(1)
                                         .font(.XMFont.f1)
-                                        .fcolor( .XMDesgin.f1)
+                                        .fcolor(.XMDesgin.f1)
                                     Spacer()
                                     Text(String(format: "%.2f", Double(user.popularity) ?? 0.00) + "❤️‍🔥")
                                         .lineLimit(1)
@@ -279,7 +285,7 @@ struct HotBuyView: View {
                                 Divider()
                             }
                             .transition(.movingParts.move(edge: .bottom).animation(.bouncy.delay(Double(user_index) * 0.24)))
-                        }else{
+                        } else {
                             EmptyView()
                         }
                     }

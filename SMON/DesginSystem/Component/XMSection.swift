@@ -36,12 +36,13 @@ struct XMSection<Content: View>: View {
                 content
             } header: {
                 Text(title)
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
+                    .font(.XMFont.f1)
+                    .fcolor(.XMDesgin.f2)
             } footer: {
                 Text(footer)
                     .font(.XMFont.f2)
                     .fcolor(.XMDesgin.f2)
+                    .listRowInsets(.init(top: 12, leading: 12, bottom: 12, trailing: 12))
                     .listRowSeparator(.hidden, edges: .bottom)
             }
         } else {
@@ -49,8 +50,8 @@ struct XMSection<Content: View>: View {
                 content
             } header: {
                 Text(title)
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
+                    .font(.XMFont.f1)
+                    .fcolor(.XMDesgin.f2)
             }
         }
     }

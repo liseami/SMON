@@ -1,9 +1,6 @@
-//
 //  SMONApp.swift
 //  SMON
-//
 //  Created by 赵翔宇 on 2024/2/22.
-//
 
 @_exported import Combine
 @_exported import KakaJSON

@@ -70,13 +70,25 @@ struct ProfileHomeView: View {
             await UserManager.shared.getUserInfo()
         })
         .toolbar {
-//            ToolbarItem(placement: .topBarLeading) {
-//                XMDesgin.XMButton {
-//                    MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
-//                } label: {
-//                    XMDesgin.XMIcon(iconName: "home_bell")
-//                }
-//            }
+            ToolbarItem(placement: .topBarTrailing) {
+                XMDesgin.XMButton {
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.myCoinView)
+                } label: {
+                    HStack {
+                        Image("saicoin")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text(vm.mod.coinNums)
+                            .font(.XMFont.f3b)
+                            .fcolor(.XMDesgin.f1)
+//                        XMDesgin.XMIcon(iconName: "system_add")
+                    }
+                    .padding(.horizontal, 4)
+                    .padding(.all, 5)
+                    .background(Color.XMDesgin.b1)
+                    .clipShape(Capsule())
+                }
+            }
 
             ToolbarItem(placement: .topBarTrailing) {
                 XMDesgin.XMButton {
@@ -175,7 +187,8 @@ struct ProfileHomeView: View {
         let listItems = [
             (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
-            (name: "赛币商店", icon: "home_shop", subline: "余额：\(vm.mod.coinNums)", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) })
+            (name: "赛币商店", icon: "home_shop", subline: "余额：\(vm.mod.coinNums)", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
+            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "", action: { Apphelper.shared.presentPanSheet(SocialAccountView(), style: .shop) })
         ]
 
         return VStack(alignment: .leading, spacing: 24) {

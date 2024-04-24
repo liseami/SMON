@@ -71,7 +71,8 @@ struct CoinshopView: View {
                 .fcolor(.XMDesgin.f2)
                 .tint(Color.XMDesgin.main)
                 .environment(\.openURL, OpenURLAction { _ in
-                    .handled
+                    Apphelper.shared.presentPanSheet(InAppBrowser(url: URL(string: AppConfig.SAIBICOIN)!), style: .cloud)
+                     return  .handled
                 })
         })
         // 购买成功

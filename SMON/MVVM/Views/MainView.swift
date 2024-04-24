@@ -26,6 +26,9 @@ struct MainView: View {
             .navigationDestination(for: MainViewModel.PagePath.self) { path in
                 Group {
                     switch path {
+                    case .mygift : MyGiftView()
+                    case .mybill : MyBill()
+                    case .myCoinView : MyCoinView()
                     case .notification: NotificationView()
                     case .setting: SettingView()
                     case .myhotinfo: MyHotInfoView()
