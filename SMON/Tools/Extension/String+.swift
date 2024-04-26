@@ -4,7 +4,7 @@ extension String {
     var inBillListText: some View {
         let number = Int(self) ?? 0
         let text = number > 0 ? "+" + String(number) : String(number)
-        return Text(text).fcolor(number > 0 ? .green : .red)
+        return Text(text).fcolor(number > 0 ? .green : .XMDesgin.f1)
     }
 
     static let data = "data"

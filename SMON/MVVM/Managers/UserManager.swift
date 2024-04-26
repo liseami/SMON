@@ -73,6 +73,7 @@ class UserManager: ObservableObject {
 //                LocationManager.shared.uploadUserLocation()
 //            }
             await getUserInfo()
+            
         }
     }
 
@@ -156,6 +157,15 @@ class UserManager: ObservableObject {
         if result.is2000Ok {}
         return result
     }
+    
+    // 更新用户微信资料
+    @MainActor
+    func updateUserWechatSetting(contactValue:String,threshold:String = "2000") async -> MoyaResult {
+        let target = UserRelationAPI.updateUserContact(contactType: "wechat", contactValue: contactValue, threshold: threshold)
+        let result = await Networking.request_async(target)
+        if result.is2000Ok {}
+        return result
+    }
 
     /*
      获取用户资料
@@ -167,6 +177,7 @@ class UserManager: ObservableObject {
         if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
             user = userinfo
             await getImUserSign()
+            notificationSet()
         }
     }
 

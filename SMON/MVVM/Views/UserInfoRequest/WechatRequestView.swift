@@ -34,7 +34,7 @@ struct WechatRequestView: View {
                     .fcolor(.XMDesgin.f3)
             })
         } btnAction: {
-            let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(wechat: vm.wechat))
+            let result = await UserManager.shared.updateUserWechatSetting(contactValue: vm.wechat)
             if result.is2000Ok {
                 vm.presentedSteps.append(.bio)
             }

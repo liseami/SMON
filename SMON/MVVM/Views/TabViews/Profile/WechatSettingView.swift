@@ -18,7 +18,7 @@ class WechatSettingViewModel: ObservableObject {
     }
 
     var settingPrice: [Int] {
-        (6 ... 4000).filter { number in
+        (6 ... 40000).filter { number in
             if number < 300 {
                 return number % 10 == 0
             } else if number < 500 {
@@ -52,11 +52,10 @@ struct WechatSettingView: View {
 
     var body: some View {
         List {
-            XMSection(title: "微信号") {
+            XMSection(title: "微信号", footer: "要修改请先全部删除，客户端明文加密，保护你的隐私安全") {
                 TextField("微信号", text: $vm.wechat)
-                    .autoOpenKeyboard()
             }
-            XMSection(title: "他人如何解锁你的微信？", footer: "* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。") {
+            XMSection(title: "设置他人如何解锁你的微信(当前为\(vm.threshold)赛币)", footer: "* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。") {
                 Picker(selection: $vm.pikcerIndex) {
                     ForEach(vm.settingPrice, id: \.self) { index in
                         Text("送出礼物价值 >= \(index)赛币")
@@ -74,7 +73,7 @@ struct WechatSettingView: View {
                     await vm.set()
                 } label: {
                     Text("完成")
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMDesgin.main)
                         .font(.XMFont.f1b)
                 }
             }

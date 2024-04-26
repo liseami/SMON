@@ -40,6 +40,7 @@ struct XMUserAvatar: View {
             if result.is2000Ok {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: self.userId))
             }
+            
         } label: {
             WebImage(str: str)
                 .scaledToFill()

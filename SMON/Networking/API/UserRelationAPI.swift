@@ -20,6 +20,11 @@ enum UserRelationAPI: XMTargetType {
     case blackAllList
     case contactSettingView(contactType: String)
     case updateUserContact(contactType: String, contactValue: String, threshold: String)
+    case unlock(page: Int)
+    case unlocked(page: Int)
+    case unlockContactInfo(toUserId: String)
+    case wechatCopy(id: String)
+    
 
     var group: String {
         return "/v1/userRelation"
@@ -33,6 +38,8 @@ enum UserRelationAPI: XMTargetType {
 
     func updatingParameters(_ newPage: Int) -> any XMTargetType {
         switch self {
+        case .unlocked: return UserRelationAPI.unlocked(page: newPage)
+        case .unlock: return UserRelationAPI.unlock(page: newPage)
         case .followersList: return UserRelationAPI.followersList(page: newPage)
         case .friendList: return UserRelationAPI.friendList(page: newPage)
         case .fansList: return UserRelationAPI.fansList(page: newPage)
@@ -43,6 +50,10 @@ enum UserRelationAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .wechatCopy(let id): return ["id": id]
+        case .unlockContactInfo(let toUserId): return ["toUserId": toUserId]
+        case .unlock(let page): return ["page": page, "pageSize": 20]
+        case .unlocked(let page): return ["page": page, "pageSize": 20]
         case .contactSettingView(let contactType): return ["contactType": contactType]
         case .updateUserContact(let contactType, let contactValue, let threshold): return ["contactType": contactType, "contactValue": contactValue, "threshold": threshold]
         case .blackAllList: return nil
@@ -52,6 +63,7 @@ enum UserRelationAPI: XMTargetType {
         case .tapFollow(let id): return ["followUserId": id]
         case .friendList(let page): return ["page": page, "pageSize": 20]
         case .blackList(let page): return ["page": page, "pageSize": 20]
+        
         }
     }
 }

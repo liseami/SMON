@@ -39,8 +39,27 @@ struct SocialAccountView: View {
                 }
 
                 XMSection(title: "解锁信息") {
-                    XMDesgin.XMListRow(.init(name: "解锁了我的用户", icon: "", subline: "")) {}
-                    XMDesgin.XMListRow(.init(name: "我解锁的", icon: "", subline: "")) {}
+                    
+                    NavigationLink {
+                        UnlockedMeView()
+                            .navigationTitle("解锁了我的")
+                            .toolbarRole(.editor)
+                            .navigationBarTitleDisplayMode(.inline)
+                    } label: {
+                        XMDesgin.XMListRow(.init(name: "解锁了我的", icon: "", subline: ""),showRightArrow: false) {}.disabled(true)
+                    }
+                    
+                    NavigationLink {
+                        MyUnlockView()
+                            .navigationTitle("我解锁的")
+                            .toolbarRole(.editor)
+                            .navigationBarTitleDisplayMode(.inline)
+                 
+                    } label: {
+                        XMDesgin.XMListRow(.init(name: "我解锁的", icon: "", subline: ""),showRightArrow: false) {}.disabled(true)
+                    }
+
+                   
                 }
             }
             .listStyle(.grouped)
@@ -48,6 +67,7 @@ struct SocialAccountView: View {
             .navigationBarTitleDisplayMode(.inline)
 
         })
+        .navigationViewStyle(.stack)
         .tint(Color.XMDesgin.f1)
     }
 }

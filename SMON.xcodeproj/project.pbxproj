@@ -63,6 +63,8 @@
 		A25BC4012BB15B3E00CADE49 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BC4002BB15B3E00CADE49 /* PostCommentView.swift */; };
 		A25BC4032BB17B6C00CADE49 /* PostReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BC4022BB17B6C00CADE49 /* PostReplyView.swift */; };
 		A25BC4052BB17DDE00CADE49 /* Notification+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BC4042BB17DDE00CADE49 /* Notification+.swift */; };
+		A25C7A732BDBA521009E47CA /* UnlockedMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25C7A722BDBA521009E47CA /* UnlockedMeView.swift */; };
+		A25C7A752BDBA527009E47CA /* MyUnlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25C7A742BDBA527009E47CA /* MyUnlockView.swift */; };
 		A26A02FE2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */; };
 		A26A03012B88C77000F6AC9B /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03002B88C77000F6AC9B /* MainViewModel.swift */; };
 		A26A03042B88C88800F6AC9B /* MainTabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26A03032B88C88800F6AC9B /* MainTabbar.swift */; };
@@ -284,6 +286,8 @@
 		A25BC4002BB15B3E00CADE49 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
 		A25BC4022BB17B6C00CADE49 /* PostReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReplyView.swift; sourceTree = "<group>"; };
 		A25BC4042BB17DDE00CADE49 /* Notification+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+.swift"; sourceTree = "<group>"; };
+		A25C7A722BDBA521009E47CA /* UnlockedMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockedMeView.swift; sourceTree = "<group>"; };
+		A25C7A742BDBA527009E47CA /* MyUnlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyUnlockView.swift; sourceTree = "<group>"; };
 		A26A02FD2B876ED900F6AC9B /* LoginBackgroundVideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoginBackgroundVideo.mp4; sourceTree = "<group>"; };
 		A26A03002B88C77000F6AC9B /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A26A03032B88C88800F6AC9B /* MainTabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabbar.swift; sourceTree = "<group>"; };
@@ -595,6 +599,8 @@
 				A281EFE92B9AB99500E9DE05 /* WechatGiftView.swift */,
 				A2784F162B9166CB00A1B06F /* ProfileHomeView.swift */,
 				A2E1A8062BD8B311006C9CA3 /* SocialAccountView.swift */,
+				A25C7A742BDBA527009E47CA /* MyUnlockView.swift */,
+				A25C7A722BDBA521009E47CA /* UnlockedMeView.swift */,
 				A2784F1C2B91851800A1B06F /* MyHotInfoView.swift */,
 				A281EFE72B9AB6E700E9DE05 /* HotHistoryView.swift */,
 				A2784F1E2B91852100A1B06F /* RelationListView.swift */,
@@ -1174,11 +1180,13 @@
 				A2784F1D2B91851800A1B06F /* MyHotInfoView.swift in Sources */,
 				A2BF26CC2BA1D8DA00B5A616 /* NetworkPopPlugin.swift in Sources */,
 				A2498ACB2BA7DD630045B7AD /* PostAPI.swift in Sources */,
+				A25C7A732BDBA521009E47CA /* UnlockedMeView.swift in Sources */,
 				A2BA89622B9BEFF0002FEEFA /* XMUserLine.swift in Sources */,
 				A20AF75C2B9300260098E561 /* LocationManager.swift in Sources */,
 				A272A4972B871D8D008EA955 /* LoginMainView.swift in Sources */,
 				A28F54432B8739F900AF9CD3 /* LoginView_PhoneNumberInput.swift in Sources */,
 				A272A48D2B871CF9008EA955 /* ProfileView.swift in Sources */,
+				A25C7A752BDBA527009E47CA /* MyUnlockView.swift in Sources */,
 				A2BA89582B9B12C0002FEEFA /* SnapCarousel.swift in Sources */,
 				A28C55AD2B95BFF600707EDA /* User.swift in Sources */,
 				A2EF07582B9D3C03004CF692 /* XMLoginVideo.swift in Sources */,

@@ -42,8 +42,6 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
     // 教育程度，默认为 0，可选
     var education: Int?
 
-    // 微信，默认为空字符串，可选
-    var wechat: String?
 }
 
 extension XMUserUpdateReqMod {
@@ -59,7 +57,7 @@ extension XMUserUpdateReqMod {
         self.height = profile.height
         self.signature = profile.signature
         self.education = profile.education
-        self.wechat = profile.wechat
+        
     }
 }
 

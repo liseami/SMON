@@ -40,52 +40,37 @@ struct ProfileView: View {
             LazyVStack(alignment: .leading, spacing: 12) {
                 switch vm.currentTab {
                 case .media:
+                    // 照片墙
                     mediaGridView
-                      
-                    XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
-                        PostView(post)
-                    } loadingView: {
-                        PostListLoadingView()
-                    } emptyView: {
-                        VStack(spacing: 24) {
-                            Text("他很忙，什么也没留下～")
-                                .font(.XMFont.f1)
-                                .fcolor(.XMDesgin.f2)
-                            LoadingPostView()
-                        }
-                        .padding(.top, 12)
-                    } loadMore: {
-                        await vm.loadMore()
-                    } getListData: {
-                        await vm.getData()
-                    }
-                    .padding(.all, 16)
+                    // 帖子
+                    postList
                 case .gift:
                     EmptyView()
-                case .rank:
-                    VStack(alignment: .leading, spacing: 32) {
-                        // 全国排名部分
-                        Text("全国排名")
-                            .font(.XMFont.f1b)
-                            .fcolor(.XMDesgin.f1)
-                        RankingView(ranking: "No.\(1231)")
-                            
-                        Text("同城排名")
-                            .font(.XMFont.f1b)
-                            .fcolor(.XMDesgin.f1)
-                            .listRowSeparator(.hidden, edges: .all)
-                        RankingView(ranking: "No.\(14115)")
-                            .listRowSeparator(.hidden, edges: .top)
-                        // 同城排名部分
-                        XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "帮Ta冲榜", enable: true) {}
-                        Text("与送礼物一样，会增加解锁Ta的微信的进度。")
-                            .font(.XMFont.f1)
-                    }
-                    .padding(.all)
+//                case .rank:
+//                    VStack(alignment: .leading, spacing: 32) {
+//                        // 全国排名部分
+//                        Text("全国排名")
+//                            .font(.XMFont.f1b)
+//                            .fcolor(.XMDesgin.f1)
+//                        RankingView(ranking: "No.\(1231)")
+//
+//                        Text("同城排名")
+//                            .font(.XMFont.f1b)
+//                            .fcolor(.XMDesgin.f1)
+//                            .listRowSeparator(.hidden, edges: .all)
+//                        RankingView(ranking: "No.\(14115)")
+//                            .listRowSeparator(.hidden, edges: .top)
+//                        // 同城排名部分
+//                        XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "帮Ta冲榜", enable: true) {}
+//                        Text("与送礼物一样，会增加解锁Ta的微信的进度。")
+//                            .font(.XMFont.f1)
+//                    }
+//                    .padding(.all)
                 }
             }
             .transition(.move(edge: .bottom).combined(with: .opacity).animation(.spring))
         }
+
         .refreshable {
             await vm.getData()
         }
@@ -98,6 +83,27 @@ struct ProfileView: View {
             }
         })
         .ignoresSafeArea()
+    }
+    
+    var postList: some View {
+        XMStateView(vm.list, reqStatus: vm.reqStatus, loadmoreStatus: vm.loadingMoreStatus, pagesize: 20) { post in
+            PostView(post)
+        } loadingView: {
+            PostListLoadingView()
+        } emptyView: {
+            VStack(spacing: 24) {
+                Text("他很忙，什么也没留下～")
+                    .font(.XMFont.f1)
+                    .fcolor(.XMDesgin.f2)
+                LoadingPostView()
+            }
+            .padding(.top, 12)
+        } loadMore: {
+            await vm.loadMore()
+        } getListData: {
+            await vm.getData()
+        }
+        .padding(.all, 16)
     }
     
     var actions: [UIAlertAction] {
@@ -126,16 +132,28 @@ struct ProfileView: View {
     
     // 顶部图像视图
     var topImageView: some View {
-        ZStack(alignment: .center, content: {
-            WebImage(str: vm.user.avatar)
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-                .clipped()
-                .ignoresSafeArea()
-            Image("profileblur")
-                .resizable()
-                .scaledToFit()
-        })
+        GeometryReader { geometry in
+            let offset = geometry.frame(in: .global).minY
+            let targetHeight = UIScreen.main.bounds.width + offset
+            let scale = targetHeight / UIScreen.main.bounds.width
+            let blurRadius = offset < 0 ? abs(offset) / UIScreen.main.bounds.width * 66 : 0
+
+            ZStack(alignment: .center) {
+                WebImage(str: vm.user.avatar)
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                    .clipped()
+                    .ignoresSafeArea()
+                Image("profileblur")
+                    .resizable()
+                    .scaledToFit()
+            }
+            .scaleEffect(scale, anchor: .top)
+            .offset(y: -offset)
+            .rotation3DEffect(.init(degrees: 0.5 * blurRadius), axis: Axis3D(.horizontal))
+            .blur(radius: blurRadius)
+        }
+        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
     }
     
     // 个人信息视图

@@ -270,15 +270,14 @@ enum XMDesgin {
                 .padding(.vertical, 16)
                 .background(Color.XMDesgin.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
-                .changeEffect(.spray(origin: .center) {
-                    Group {
-                        Text("❤️‍🔥")
-                        Text("🔥")
-                    }
-                    .font(.title)
-                },  value: self.selected,isEnabled: self.selected != true)
+//                .changeEffect(.spray(origin: .center) {
+//                    Group {
+//                        Text("❤️‍🔥")
+//                        Text("🔥")
+//                    }
+//                    .font(.title)
+//                },  value: self.selected,isEnabled: self.selected != true)
             }
-
         }
     }
 

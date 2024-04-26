@@ -71,6 +71,7 @@ struct ProfileEditView: View {
                 avatar
                 nickname
                 bio
+                
                 bdsmAtt
                 photosWall
                 emotionNeed

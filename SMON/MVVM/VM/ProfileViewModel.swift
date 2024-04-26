@@ -28,7 +28,6 @@ class ProfileViewModel: XMListViewModel<XMPost> {
         await getUserInfo()
         await getPhotos()
         await getListData()
-
     }
 
     var isLocalUser: Bool {
@@ -37,7 +36,7 @@ class ProfileViewModel: XMListViewModel<XMPost> {
 
     enum ProfileBarItem: CaseIterable {
         case media
-        case rank
+//        case rank
         case gift
         var info: LabelInfo {
             switch self {
@@ -45,8 +44,8 @@ class ProfileViewModel: XMListViewModel<XMPost> {
                 return .init(name: "照片与动态", icon: "", subline: "")
 //            case .post:
 //                return .init(name: "动态", icon: "", subline: "")
-            case .rank:
-                return .init(name: "大赛排名", icon: "", subline: "")
+//            case .rank:
+//                return .init(name: "大赛排名", icon: "", subline: "")
             case .gift:
                 return .init(name: "礼物", icon: "", subline: "")
             }

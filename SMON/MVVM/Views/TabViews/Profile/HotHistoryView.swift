@@ -59,7 +59,7 @@ struct HotHistoryView: View {
             Spacer()
             Text(Int(item.addPopularity) ?? 0 > 0 ? "+\(item.addPopularity)" : item.addPopularity)
                 .font(.XMFont.big3.bold())
-                .fcolor(Int(item.addPopularity) ?? 0 > 0 ? .green : .red)
+                .fcolor(Int(item.addPopularity) ?? 0 > 0 ? .green : .XMDesgin.f1)
         }
     }
 }

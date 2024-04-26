@@ -102,12 +102,17 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
                 completeTransaction(transaction)
                 // 打印购买凭证信息
                 appleEndBuy()
+            // 支付失败
             case .failed:
                 failedTransaction(transaction)
                 appleEndBuy()
+                DispatchQueue.main.async {
+                    Apphelper.shared.pushNotification(type: .info(message: "交易取消，请重试。"))
+                }
             case .restored:
                 restoreTransaction(transaction)
                 appleEndBuy()
+            // 正在支付
             case .deferred, .purchasing:
                 break
             @unknown default:

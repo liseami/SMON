@@ -59,6 +59,11 @@ struct ProfileHomeView: View {
             })
             .padding(.horizontal, 16)
         }
+        .overlay(alignment: .top, content: {
+            // 顶部模糊
+            XMTopBlurView()
+        })
+        .navigationBarTitleDisplayMode(.inline)
         // 购买成功
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
             Task {
@@ -187,8 +192,8 @@ struct ProfileHomeView: View {
         let listItems = [
             (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
-            (name: "赛币商店", icon: "home_shop", subline: "余额：\(vm.mod.coinNums)", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
-            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "", action: { Apphelper.shared.presentPanSheet(SocialAccountView(), style: .shop) })
+            (name: "赛币商店", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
+            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码隐私保护", action: { Apphelper.shared.presentPanSheet(SocialAccountView(), style: .shop) })
         ]
 
         return VStack(alignment: .leading, spacing: 24) {
