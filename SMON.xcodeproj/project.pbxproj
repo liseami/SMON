@@ -165,6 +165,9 @@
 		A2DCAC222BCFD4FE00260FE3 /* OrderAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */; };
 		A2DEC4A72BE0B71B00571961 /* RSAUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC4A62BE0B71B00571961 /* RSAUtils.swift */; };
 		A2DEC4AA2BE0C82100571961 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC4A92BE0C82100571961 /* RSA.m */; };
+		A2DEC4AC2BE124E700571961 /* DGEFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC4AB2BE124E700571961 /* DGEFT.swift */; };
+		A2DEC4AF2BE1253D00571961 /* GradientWave.metal in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC4AE2BE1253D00571961 /* GradientWave.metal */; };
+		A2DEC4B12BE12E4000571961 /* Lightspeed.metal in Sources */ = {isa = PBXBuildFile; fileRef = A2DEC4B02BE12E4000571961 /* Lightspeed.metal */; };
 		A2E1A7FF2BD89DD6006C9CA3 /* MyCoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A7FE2BD89DD6006C9CA3 /* MyCoinView.swift */; };
 		A2E1A8012BD89F63006C9CA3 /* MyBill.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A8002BD89F63006C9CA3 /* MyBill.swift */; };
 		A2E1A8032BD8A391006C9CA3 /* MyGiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E1A8022BD8A391006C9CA3 /* MyGiftView.swift */; };
@@ -393,6 +396,9 @@
 		A2DEC4A62BE0B71B00571961 /* RSAUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSAUtils.swift; sourceTree = "<group>"; };
 		A2DEC4A82BE0C82100571961 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
 		A2DEC4A92BE0C82100571961 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		A2DEC4AB2BE124E700571961 /* DGEFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DGEFT.swift; sourceTree = "<group>"; };
+		A2DEC4AE2BE1253D00571961 /* GradientWave.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = GradientWave.metal; sourceTree = "<group>"; };
+		A2DEC4B02BE12E4000571961 /* Lightspeed.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Lightspeed.metal; sourceTree = "<group>"; };
 		A2E1A7FE2BD89DD6006C9CA3 /* MyCoinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoinView.swift; sourceTree = "<group>"; };
 		A2E1A8002BD89F63006C9CA3 /* MyBill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBill.swift; sourceTree = "<group>"; };
 		A2E1A8022BD8A391006C9CA3 /* MyGiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGiftView.swift; sourceTree = "<group>"; };
@@ -683,6 +689,7 @@
 		A2B45C9D2B8AFCA000D71EF8 /* DesginSystem */ = {
 			isa = PBXGroup;
 			children = (
+				A2DEC4AD2BE1252A00571961 /* Sharder */,
 				A209C8362BBA880B00531EF1 /* Lottie */,
 				A2BA894E2B9ADFA0002FEEFA /* Font */,
 				A28FEF1A2B8DD740002E8FB2 /* Color */,
@@ -853,10 +860,20 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		A2DEC4AD2BE1252A00571961 /* Sharder */ = {
+			isa = PBXGroup;
+			children = (
+				A2DEC4B02BE12E4000571961 /* Lightspeed.metal */,
+				A2DEC4AE2BE1253D00571961 /* GradientWave.metal */,
+			);
+			path = Sharder;
+			sourceTree = "<group>";
+		};
 		A2E7F9A62B8CDF1300E86474 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
 				A272A48E2B871CFD008EA955 /* RankView.swift */,
+				A2DEC4AB2BE124E700571961 /* DGEFT.swift */,
 				A27EFFB12B92B67700B47BD6 /* RankListView.swift */,
 				A2380F4F2BB412D8005B5975 /* NearRankView.swift */,
 				A23DD4992BBBE8DD00249972 /* RequestUserLocationAuthorizationView.swift */,
@@ -1091,6 +1108,7 @@
 				A256DBA72B906737008C7063 /* HotBuyView.swift in Sources */,
 				A23DD4942BBBE07300249972 /* FlameDetailView.swift in Sources */,
 				A281EFE62B99B23700E9DE05 /* XMPhoto.swift in Sources */,
+				A2DEC4AF2BE1253D00571961 /* GradientWave.metal in Sources */,
 				A2784F1B2B91851200A1B06F /* CoinshopView.swift in Sources */,
 				A25AAD2C2B8EF7FD00B7CE40 /* SexRequestView.swift in Sources */,
 				A25AAD202B8ECEB200B7CE40 /* UserInfoRequestViewModel.swift in Sources */,
@@ -1164,6 +1182,7 @@
 				A283C5532BC7E8770002939B /* NoticeAPI.swift in Sources */,
 				A23DD49A2BBBE8DD00249972 /* RequestUserLocationAuthorizationView.swift in Sources */,
 				A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */,
+				A2DEC4B12BE12E4000571961 /* Lightspeed.metal in Sources */,
 				A2BF269C2BA1D83B00B5A616 /* ChatViewContainer.swift in Sources */,
 				A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */,
 				A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */,
@@ -1175,6 +1194,7 @@
 				A2B45CB12B8B27C900D71EF8 /* SettingView.swift in Sources */,
 				A2BF26CE2BA1D8DA00B5A616 /* XMTargetType.swift in Sources */,
 				A25AAD3E2B8F4E7400B7CE40 /* BdsmRequestView.swift in Sources */,
+				A2DEC4AC2BE124E700571961 /* DGEFT.swift in Sources */,
 				A2BA89642B9BF005002FEEFA /* XMConversationLine.swift in Sources */,
 				A2A8D7A62BC9155700262C49 /* NearPostView.swift in Sources */,
 				A2BF269F2BA1D83B00B5A616 /* MessageView.swift in Sources */,

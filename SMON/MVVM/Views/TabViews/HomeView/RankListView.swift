@@ -7,7 +7,7 @@
 
 import SwiftUI
 class RanklistViewModel: XMListViewModel<XMUserInRank> {
-    override init(target: XMTargetType, pagesize: Int,atKeyPath:String = .datalist) {
+    override init(target: XMTargetType, pagesize: Int, atKeyPath: String = .datalist) {
         super.init(target: target, pagesize: 50)
         Task { await self.getListData() }
     }
@@ -16,6 +16,7 @@ class RanklistViewModel: XMListViewModel<XMUserInRank> {
 struct RankListView: View {
     @StateObject var vm: RanklistViewModel
     @EnvironmentObject var superVm: RankViewModel
+    private let date = Date()
     init(target: XMTargetType) {
         self._vm = StateObject(wrappedValue: .init(target: target, pagesize: 50))
     }
@@ -35,9 +36,45 @@ struct RankListView: View {
                     await vm.getListData()
                 }
             })
+            .background(alignment: .top) {
+                fire
+            }
         }
+
         .scrollIndicators(.hidden)
         .refreshable { await vm.getListData() }
+    }
+
+    @ViewBuilder
+    var fire: some View {
+        if #available(iOS 17.0, *) {
+            GeometryReader { geometry in
+                let offset = geometry.frame(in: .global).minY
+                let targetHeight = UIScreen.main.bounds.width + offset
+                let scale = targetHeight / UIScreen.main.bounds.width
+                let blurRadius = offset < 0 ? abs(offset) / UIScreen.main.bounds.width * 66 : 0
+                TimelineView(.animation) {
+                    let time = date.timeIntervalSince1970 - $0.date.timeIntervalSince1970
+                    Rectangle()
+                        .aspectRatio(1, contentMode: .fit)
+                        .colorEffect(ShaderLibrary.gradientWave(
+                            .boundingRect,
+                            .float(time),
+                            .color(.black),
+                            .float(5),
+                            .float(0),
+                            .float(0.4)
+                        ))
+                        .ignoresSafeArea()
+                }
+                .offset(x: 0, y: -80)
+                .scaleEffect(scale, anchor: .top)
+                .offset(y: -offset)
+                .blur(radius: blurRadius)
+            }
+            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+            .ifshow(show: superVm.currentTopTab == .all)
+        }
     }
 
     var rankList: some View {
@@ -60,9 +97,9 @@ struct RankListView: View {
 }
 
 #Preview {
-    PostListLoadingView()
-//    MainView(vm: .init(currentTabbar: .home))
-//        .environmentObject(RankViewModel())
+//    PostListLoadingView()
+    MainView(vm: .init(currentTabbar: .home))
+        .environmentObject(RankViewModel())
 }
 
 struct RankListLoadingView: View {
@@ -89,15 +126,13 @@ struct RankListLoadingView: View {
     }
 }
 
-
 struct PostListLoadingView: View {
     var body: some View {
         LazyVStack(alignment: .leading, spacing: 12) {
             ForEach(0 ... 33, id: \.self) { _ in
-              LoadingPostView()
-                .conditionalEffect(.repeat(.shine, every: 1), condition: true)
+                LoadingPostView()
+                    .conditionalEffect(.repeat(.shine, every: 1), condition: true)
             }
         }
     }
 }
-
