@@ -234,26 +234,8 @@ struct MeiRiDaSaiView: View {
                         }
                         .overlay(LinearGradient(colors: [Color.XMDesgin.b1,Color.XMDesgin.b1,Color.clear], startPoint: .bottom, endPoint: .top))
                     }
-//                    Group{
-//                        if #available(iOS 17.0, *) {
-//                            TimelineView(.animation) {
-//                                let time = date.timeIntervalSince1970 - $0.date.timeIntervalSince1970
-//                                Rectangle()
-//                                    .aspectRatio(1, contentMode: .fill)
-//                                    .colorEffect(ShaderLibrary.lightspeed(
-//                                        .boundingRect,
-//                                        .float(time),
-//                                        .float(150),
-//                                        .float(80),
-//                                        .float(45)
-//                                    ))
-//                            }
-//                            .frame(maxWidth: .infinity, alignment: .center)
-//                        } else {
-//                            Color.XMDesgin.b1.gradient
-//                        }
-//                    }
                 }
+                .background( Color.XMDesgin.b1.gradient)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(alignment: .top) {
                     // 主题大赛列表
