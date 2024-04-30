@@ -17,6 +17,7 @@ struct RankListView: View {
     @StateObject var vm: RanklistViewModel
     @EnvironmentObject var superVm: RankViewModel
     private let date = Date()
+    @State private var show: Bool = false
     init(target: XMTargetType) {
         self._vm = StateObject(wrappedValue: .init(target: target, pagesize: 50))
     }
@@ -38,7 +39,16 @@ struct RankListView: View {
             })
             .background(alignment: .top) {
                 fire
+                    .transition(.movingParts.move(edge: .top).animation(.bouncy))
+                    .ifshow(show: show)
             }
+            .onAppear(perform: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    withAnimation {
+                        show = true
+                    }
+                }
+            })
         }
 
         .scrollIndicators(.hidden)
@@ -82,7 +92,7 @@ struct RankListView: View {
             ForEach(Array(vm.list.enumerated()), id: \.offset) { index, user in
                 VStack {
                     XMUserAvatar(str: user.avatar, userId: user.userId, size: 100)
-                        .conditionalEffect(.smoke(layer: .local), condition: index < 3)
+                        .conditionalEffect(.smoke(layer: .local), condition: index < 3 && self.show)
                     Text(user.nickname)
                         .font(.XMFont.f1b)
                         .lineLimit(1)
