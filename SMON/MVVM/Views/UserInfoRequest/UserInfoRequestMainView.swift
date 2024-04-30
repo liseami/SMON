@@ -30,11 +30,7 @@ struct UserInfoRequestMainView: View {
                     .environmentObject(vm)
                 }
         })
-        .fullScreenCover(isPresented: $vm.showCompleteView, content: {
-            RequestCompleteView()
-                .environmentObject(vm)
-                .preferredColorScheme(.dark)
-        })
+        
         .overlay {
             progressLine
         }

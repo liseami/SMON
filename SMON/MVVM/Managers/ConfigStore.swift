@@ -13,7 +13,7 @@ struct BlackList: Convertible {
 
 class ConfigStore: ObservableObject {
     static let shared = ConfigStore()
- 
+
     init() {
         blackUserList = .init()
         APPVersionInfo = .init()
@@ -24,7 +24,7 @@ class ConfigStore: ObservableObject {
             await getVersionInfo()
         }
     }
-    
+
     // APP版本信息
     @Published var APPVersionInfo: XMVersionInfo {
         didSet {
@@ -47,7 +47,7 @@ class ConfigStore: ObservableObject {
         let r = await Networking.request_async(t)
         if r.is2000Ok, let list = r.mapObject(BlackList.self) {}
     }
-    
+
     /*
      获取版本信息
      */
@@ -59,7 +59,31 @@ class ConfigStore: ObservableObject {
             APPVersionInfo = versionInfo
             // 强制更新
             if versionInfo.status == 3 {
-                Apphelper.shared.presentPanSheet(Color.red.ignoresSafeArea(), style: .setting)
+                Apphelper.shared.presentPanSheet(VStack(spacing: 12) {
+                    Text("每日大赛新版本！")
+                        .font(.XMFont.big3.bold())
+                    XMLoginVideo()
+                        .ignoresSafeArea()
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(height: 120)
+                    Text(versionInfo.versionDesc)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.all, 12)
+                        .addBack()
+                    Spacer()
+                    XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "去AppStore更新到最新版本", enable: true) {
+                        guard let writeReviewURL = URL(string: AppConfig.AppStoreURL.absoluteString) else {
+                            return
+                        }
+                        if UIApplication.shared.canOpenURL(writeReviewURL) {
+                            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+                        } else {
+                            // 在这里处理无法打开App Store的情况
+                        }
+                    }
+                }.padding(.all, 24)
+                    .padding(.top, 24),
+                style: .hardSheet)
             }
         }
     }

@@ -21,7 +21,9 @@ struct MainView: View {
                 // 启动动画
                 LaunchScreenAnimation()
             }
+            
             .task {
+              
                 // 进入主页面，登录腾讯IM
                 await UserManager.shared.getImUserSign()
             }

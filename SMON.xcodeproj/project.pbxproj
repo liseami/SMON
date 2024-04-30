@@ -57,7 +57,6 @@
 		A25AAD362B8F238600B7CE40 /* DrinkRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD352B8F238600B7CE40 /* DrinkRequestView.swift */; };
 		A25AAD382B8F238E00B7CE40 /* SmokeRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD372B8F238E00B7CE40 /* SmokeRequestView.swift */; };
 		A25AAD3A2B8F246C00B7CE40 /* BioRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */; };
-		A25AAD3C2B8F26B700B7CE40 /* RequestCompleteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD3B2B8F26B700B7CE40 /* RequestCompleteView.swift */; };
 		A25AAD3E2B8F4E7400B7CE40 /* BdsmRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */; };
 		A25AAD412B90073B00B7CE40 /* WechatRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */; };
 		A25BC4012BB15B3E00CADE49 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A25BC4002BB15B3E00CADE49 /* PostCommentView.swift */; };
@@ -283,7 +282,6 @@
 		A25AAD352B8F238600B7CE40 /* DrinkRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkRequestView.swift; sourceTree = "<group>"; };
 		A25AAD372B8F238E00B7CE40 /* SmokeRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeRequestView.swift; sourceTree = "<group>"; };
 		A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioRequestView.swift; sourceTree = "<group>"; };
-		A25AAD3B2B8F26B700B7CE40 /* RequestCompleteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCompleteView.swift; sourceTree = "<group>"; };
 		A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BdsmRequestView.swift; sourceTree = "<group>"; };
 		A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WechatRequestView.swift; sourceTree = "<group>"; };
 		A25BC4002BB15B3E00CADE49 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
@@ -676,7 +674,6 @@
 				A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */,
 				A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */,
 				A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */,
-				A25AAD3B2B8F26B700B7CE40 /* RequestCompleteView.swift */,
 				A25AAD352B8F238600B7CE40 /* DrinkRequestView.swift */,
 				A25AAD372B8F238E00B7CE40 /* SmokeRequestView.swift */,
 			);
@@ -1131,7 +1128,6 @@
 				A2B45CA72B8B089900D71EF8 /* String+.swift in Sources */,
 				A2B45CA92B8B0C6B00D71EF8 /* RankViewModel.swift in Sources */,
 				A2498ADA2BA831320045B7AD /* XMLikeBtn.swift in Sources */,
-				A25AAD3C2B8F26B700B7CE40 /* RequestCompleteView.swift in Sources */,
 				A25AAD322B8F1D3700B7CE40 /* HobbyRequestView.swift in Sources */,
 				A2BF26C82BA1D8DA00B5A616 /* MoyaResult+Extension.swift in Sources */,
 				A2BF26D52BA1D91700B5A616 /* Bridge.m in Sources */,

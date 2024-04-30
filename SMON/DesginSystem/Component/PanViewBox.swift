@@ -16,6 +16,7 @@ public enum PanPresentStyle {
     case setting
     case shop
     case sheet
+    case hardSheet
 }
 
 class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable where Content: View {
@@ -39,7 +40,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     // 允许下拉关闭
     var allowsDragToDismiss: Bool {
         switch self.style {
-        case .setting: return false
+        case .setting,.hardSheet: return false
         default: return true
         }
     }
@@ -51,7 +52,7 @@ class PanViewBox<Content>: UIHostingController<AnyView>, PanModalPresentable whe
     // 最大高度
     var longFormHeight: PanModalHeight {
         switch self.style {
-        case .shop: return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.7)
+        case .shop,.hardSheet: return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.7)
         case .sheet : return .contentHeightIgnoringSafeArea(UIScreen.main.bounds.height * 0.5)
         default: return .maxHeight
         }
