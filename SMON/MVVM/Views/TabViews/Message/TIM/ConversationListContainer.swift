@@ -33,7 +33,11 @@ struct ConversationListContainer: UIViewControllerRepresentable {
         }
 
         func conversationListController(_ conversationController: UIViewController, didSelectConversation conversation: TUIConversationCellData) {
-            MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: conversation.userID))
+            if conversation.userID == "m1001" {
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
+            }else{
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: conversation.userID))
+            }
         }
     }
 }

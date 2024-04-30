@@ -17,7 +17,7 @@ struct HotHistroy: Convertible, Identifiable {
 
 class HotHistoryViewModel: XMListViewModel<HotHistroy> {
     init() {
-        super.init(target: UserAssetAPI.getHotRecord(page: 1),pagesize: 20)
+        super.init(target: UserAssetAPI.getHotRecord(page: 1), pagesize: 20)
         Task { await self.getListData() }
     }
 }
@@ -57,9 +57,9 @@ struct HotHistoryView: View {
                     .fcolor(.XMDesgin.f2)
             })
             Spacer()
-            Text(Int(item.addPopularity) ?? 0 > 0 ? "+\(item.addPopularity)" : item.addPopularity)
+            Text(item.addPopularity.double() ?? 0 > 0 ? "+\(item.addPopularity)" : "\(item.addPopularity)")
                 .font(.XMFont.big3.bold())
-                .fcolor(Int(item.addPopularity) ?? 0 > 0 ? .green : .XMDesgin.f1)
+                .fcolor(item.addPopularity.double() ?? 0 > 0 ? .green : .red)
         }
     }
 }

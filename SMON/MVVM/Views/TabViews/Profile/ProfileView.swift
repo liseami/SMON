@@ -150,7 +150,6 @@ struct ProfileView: View {
             }
             .scaleEffect(scale, anchor: .top)
             .offset(y: -offset)
-            .rotation3DEffect(.init(degrees: 0.5 * blurRadius), axis: Axis3D(.horizontal))
             .blur(radius: blurRadius)
         }
         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
@@ -229,13 +228,18 @@ struct ProfileView: View {
                 XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {
                     await vm.tapChat()
                 }
-//                // 微信
-                #if DEBUG
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "inforequest_wechat", text: userInfo.wechat) {
-                    Apphelper.shared.presentPanSheet(WechatGiftView()
-                        .environmentObject(vm), style: .shop)
+                
+                if userInfo.wechat.isEmpty {
+                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_gift", text: userInfo.wechat) {
+                        Apphelper.shared.presentPanSheet(PrueGiftView()
+                            .environmentObject(vm), style: .shop)
+                    }
+                } else {
+                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: userInfo.wechat) {
+                        Apphelper.shared.presentPanSheet(WechatGiftView()
+                            .environmentObject(vm), style: .shop)
+                    }
                 }
-                #endif
             }
         }
     }

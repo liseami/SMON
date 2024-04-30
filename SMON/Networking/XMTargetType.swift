@@ -27,7 +27,6 @@ extension XMTargetType {
         return self
     }
 
-
     var parameterEncoding: ParameterEncoding {
         switch method {
         case .get: return URLEncoding.default
@@ -75,9 +74,9 @@ extension XMTargetType {
     var headers: [String: String]? {
         var headers: [String: String] = [:]
         // 时间戳 10 位
-        let timestamp = String(Int(Date.now.timeIntervalSince1970))
+        let timestamp = (Date.now.timeIntervalSince1970 * 1000 ).int.string
         // Noce 16位随机字符串，数字字母
-        let nonce = String.randomString(length: 16)
+        let nonce = String.randomString(length: 32)
         // 盐
         let SIGN_SALT = AppConfig.readPlist(key: "SMONMeiridasai")
         // 前面三个加起来 md5()

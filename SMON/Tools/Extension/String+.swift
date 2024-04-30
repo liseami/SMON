@@ -10,7 +10,7 @@ extension String {
     static let data = "data"
     static let datalist = "data.list"
     static func randomString(length: Int) -> String {
-        let letters = "abcdefghijklmnopqrstuvwxyz0123456789"
+        let letters = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGd"
         var randomString = ""
         
         for _ in 0..<length {

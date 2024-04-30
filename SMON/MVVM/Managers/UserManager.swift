@@ -73,7 +73,6 @@ class UserManager: ObservableObject {
 //                LocationManager.shared.uploadUserLocation()
 //            }
             await getUserInfo()
-            
         }
     }
 
@@ -157,10 +156,10 @@ class UserManager: ObservableObject {
         if result.is2000Ok {}
         return result
     }
-    
+
     // 更新用户微信资料
     @MainActor
-    func updateUserWechatSetting(contactValue:String,threshold:String = "2000") async -> MoyaResult {
+    func updateUserWechatSetting(contactValue: String, threshold: String = "2000") async -> MoyaResult {
         let target = UserRelationAPI.updateUserContact(contactType: "wechat", contactValue: contactValue, threshold: threshold)
         let result = await Networking.request_async(target)
         if result.is2000Ok {}
@@ -176,7 +175,6 @@ class UserManager: ObservableObject {
         let result = await Networking.request_async(target)
         if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
             user = userinfo
-            await getImUserSign()
             notificationSet()
         }
     }
@@ -195,8 +193,13 @@ extension UserManager {
         let config = V2TIMSDKConfig()
         config.logLevel = .LOG_NONE
         V2TIMManager.sharedInstance().initSDK(Int32(Int(AppConfig.TIMAppID)!), config: config)
-        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "m" + userLoginInfo.userId, userSig: IMInfo.imUserSign) {}
-
+        TUILogin.login(Int32(Int(AppConfig.TIMAppID)!), userID: "m" + userLoginInfo.userId, userSig: IMInfo.imUserSign) {
+            let info = V2TIMUserFullInfo()
+            info.nickName = self.user.nickname
+            info.faceURL = self.user.avatar
+            V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
+            }
+        }
         // 注册主题
         if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),
            let customConversationThemePath = Bundle.main.path(forResource: "TUIConversationXMTheme.bundle", ofType: nil),

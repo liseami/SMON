@@ -76,8 +76,9 @@ struct ProfileHomeView: View {
         })
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMButton {
-                    MainViewModel.shared.pushTo(MainViewModel.PagePath.myCoinView)
+                NavigationLink {
+                    MyCoinView()
+                        .environmentObject(vm)
                 } label: {
                     HStack {
                         Image("saicoin")
@@ -86,7 +87,6 @@ struct ProfileHomeView: View {
                         Text(vm.mod.coinNums)
                             .font(.XMFont.f3b)
                             .fcolor(.XMDesgin.f1)
-//                        XMDesgin.XMIcon(iconName: "system_add")
                     }
                     .padding(.horizontal, 4)
                     .padding(.all, 5)

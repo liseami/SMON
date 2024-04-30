@@ -8,7 +8,7 @@
 import SwiftUI
 class RanklistViewModel: XMListViewModel<XMUserInRank> {
     override init(target: XMTargetType, pagesize: Int,atKeyPath:String = .datalist) {
-        super.init(target: target, pagesize: 50,atKeyPath: .datalist)
+        super.init(target: target, pagesize: 50)
         Task { await self.getListData() }
     }
 }

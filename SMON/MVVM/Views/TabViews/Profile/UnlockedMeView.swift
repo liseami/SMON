@@ -52,6 +52,7 @@ struct UnlockedMeView: View {
 
                         XMDesgin.XMButton {
                             UIPasteboard.general.setValue(user.randomCode, forPasteboardType: UTType.plainText.identifier)
+                            
                             Apphelper.shared.pushNotification(type: .success(message: "已复制"))
                         } label: {
                             XMDesgin.XMTag(text: "口令码：" + user.randomCode)

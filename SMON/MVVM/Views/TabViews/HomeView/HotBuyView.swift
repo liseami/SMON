@@ -23,10 +23,23 @@ struct RankUserInfo: Convertible {
 class HotBuyViewModel: XMModRequestViewModel<RankInfo> {
     init() {
         super.init(pageName: "") {
-            RankAPI.currentRankInfo
+            RankAPI.currentRankInfo(cityId: nil)
         }
-        Task { await self.getSingleData() }
+        Task { await self.getSingleData()
+            await self.getMyHotInfo()
+        }
     }
+
+    @Published var city: Bool = false {
+        didSet {
+            Task {
+                target = city ? RankAPI.currentRankInfo(cityId: UserManager.shared.user.cityId) : RankAPI.currentRankInfo(cityId: nil)
+                await self.getSingleData()
+            }
+        }
+    }
+
+    @Published var userHotInfo: HomePageInfo = .init()
 
     var tips: [LabelInfo] =
         [.init(name: "动态被点赞、收到礼物、每日登陆都可以获得❤️‍🔥！当然，冲榜是最🚀的选择。", icon: "firebuy_search", subline: ""),
@@ -44,6 +57,18 @@ class HotBuyViewModel: XMModRequestViewModel<RankInfo> {
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "兑换成功！排名上升了！！"))
             self.input.removeAll()
+            await getMyHotInfo()
+        } else if r.messageCode == 2002 {
+            Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
+        }
+    }
+
+    @MainActor
+    func getMyHotInfo() async {
+        let t = UserAPI.getHomePage
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let info = r.mapObject(HomePageInfo.self) {
+            userHotInfo = info
         }
     }
 
@@ -52,14 +77,20 @@ class HotBuyViewModel: XMModRequestViewModel<RankInfo> {
     @Published var timer: Timer?
 
     func startCountdown(with value: Int) {
+        countdown = 0
+        timer?.invalidate()
+        timer = nil
         countdown = value
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            if self.countdown > 0 {
-                self.countdown -= 1
-            } else {
-                self.timer?.invalidate()
-                // 请求接口
-                Task { await self.getSingleData() }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    self.timer?.invalidate()
+
+                    // 请求接口
+                    Task { await self.getSingleData() }
+                }
             }
         }
     }
@@ -89,11 +120,15 @@ struct HotBuyView: View {
             .padding(.all)
             .padding(.top, 12)
         }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
+            Task {
+                await vm.getMyHotInfo()
+            }
+        }
         .onChange(of: vm.mod.countDownBySeconds, perform: { sec in
             if let sec = sec.int {
                 vm.startCountdown(with: sec)
             }
-
         })
         .scrollDismissesKeyboard(.interactively)
         .background(
@@ -169,31 +204,45 @@ struct HotBuyView: View {
         Double(vm.input.int ?? 1) * Double(vm.mod.coinToHotRatio ?? 1)
     }
 
+    @ViewBuilder
     var tag: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .center, spacing: 4) {
-                Image("saicoin")
-                    .resizable()
-                    .frame(width: 20, height: 20)
-                Text("\(vm.input.int ?? 1)赛币  =  " + "❤️‍🔥" + String(format: "%.2f", rd) + "热度")
-            }
-            .font(.XMFont.f2b)
-            .fcolor(.XMDesgin.f1)
-            .padding(.horizontal, 20)
-            .padding(.vertical, 8)
-            .background(Color.XMDesgin.b1)
-            .clipShape(Capsule())
+            infoView(title: "当前比例", image: "saicoin", value: "\(vm.input.int ?? 1)赛币  =  ❤️‍🔥\(String(format: "%.2f", rd))热度")
+            infoView(title: "可用赛币", image: "saicoin", value: "\(vm.userHotInfo.coinNums)赛币")
+            infoView(title: "我的热度", value:
+                String(format: "❤️‍🔥%.2f热度", vm.userHotInfo.currentHot.double() ?? 0.0))
 
-            HStack(alignment: .center, spacing: 4) {
-                XMDesgin.XMIcon(iconName: "system_chart")
-                Text("当前比例 1 : \(vm.mod.coinToHotRatio?.string ?? "")")
+//
+        }
+    }
+
+    func infoView(title: String, image: String? = nil, value: String) -> some View {
+        HStack(alignment: .center, spacing: 12) {
+            Text(title)
+                .font(.XMFont.f2b)
+
+            Group {
+                if let imageName = image {
+                    HStack(alignment: .center, spacing: 4) {
+                        Image(imageName)
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                        Text(value)
+                    }
+                } else {
+                    Text(value)
+                }
             }
+
             .font(.XMFont.f2b)
             .fcolor(.XMDesgin.f1)
             .padding(.horizontal, 20)
             .padding(.vertical, 8)
             .background(Color.XMDesgin.b1)
             .clipShape(Capsule())
+            .onTapGesture {
+                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
+            }
         }
     }
 
@@ -242,8 +291,21 @@ struct HotBuyView: View {
     var currentRankInfo: some View {
         LazyVStack(alignment: .leading, spacing: 24, content: {
             HStack(alignment: .center, spacing: 12) {
-                Text("当前比赛情况")
+                Text("当前大赛排位 " + (vm.city ? UserManager.shared.user.cityName : "全国"))
                     .font(.XMFont.big3.bold())
+                Menu {
+                    Button("全国") {
+                        vm.city = false
+                    }
+                    Button("同城") {
+                        vm.city = true
+                    }
+                    .ifshow(show: !UserManager.shared.user.cityId.isEmpty)
+                } label: {
+                    XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, withBackCricle: true)
+                        .rotationEffect(.init(degrees: 90))
+                }
+
                 Spacer()
                 Text("\(vm.countdown)秒 后刷新")
                     .font(.XMFont.f2)

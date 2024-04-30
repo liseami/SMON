@@ -54,7 +54,6 @@ struct SocialAccountView: View {
                             .navigationTitle("我解锁的")
                             .toolbarRole(.editor)
                             .navigationBarTitleDisplayMode(.inline)
-                 
                     } label: {
                         XMDesgin.XMListRow(.init(name: "我解锁的", icon: "", subline: ""),showRightArrow: false) {}.disabled(true)
                     }

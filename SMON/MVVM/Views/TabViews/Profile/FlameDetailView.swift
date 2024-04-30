@@ -21,7 +21,7 @@ struct FlameDetail: Convertible, Identifiable {
 
 class FlameDetailViewModel: XMListViewModel<FlameDetail> {
     init() {
-        super.init(target: UserAssetAPI.getUserFlamesRecord(page: 1), pagesize: 20, atKeyPath: .datalist)
+        super.init(target: UserAssetAPI.getUserFlamesRecord(page: 1), pagesize: 20)
         Task {
             await self.getListData()
         }

@@ -11,11 +11,11 @@ enum RankAPI: XMTargetType {
     case fans(page: Int)
     case follow(page: Int)
     case visitor(page: Int)
-    case currentRankInfo
+    case currentRankInfo(cityId: String?)
 
     var parameters: [String: Any]? {
         switch self {
-        case .currentRankInfo: return nil
+        case .currentRankInfo(let cityId): return cityId != nil ? ["cityId": cityId!] : nil
         case .sameCity(let cityId, let page): return ["page": page, "pageSize": 50, "cityId": cityId]
         case .country(let page): return ["page": page, "pageSize": 50]
         case .fans(let page): return ["page": page, "pageSize": 50]

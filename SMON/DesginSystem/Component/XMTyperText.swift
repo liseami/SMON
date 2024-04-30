@@ -11,7 +11,7 @@ import SwiftUI
 struct XMTyperText: View {
     let text: String
     var guangbiao: String {
-        return currentIndex == text.count ? "" : " ▉"
+        return currentIndex == text.count ? "" : " 🧡"
     }
 
     init(text: String) {

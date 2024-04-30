@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MyCoinView: View {
+    @EnvironmentObject var vm : ProfileHomeViewModel
     var body: some View {
         List {
             XMSection(title: "总资产(赛币）") {
@@ -15,7 +16,7 @@ struct MyCoinView: View {
                     Image("saicoin")
                         .resizable()
                         .frame(width: 44, height: 44)
-                    Text("32")
+                    Text("\(vm.mod.coinNums)")
                         .font(.XMFont.big1.bold())
                         .fcolor(.XMDesgin.f1)
                     Spacer()
@@ -35,4 +36,5 @@ struct MyCoinView: View {
 
 #Preview {
     MyCoinView()
+        .environmentObject(ProfileHomeViewModel.init())
 }

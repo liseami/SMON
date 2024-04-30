@@ -49,6 +49,8 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
         V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
         }
     }
+    
+    
 }
 
 extension V2TIMConversation: Identifiable {}

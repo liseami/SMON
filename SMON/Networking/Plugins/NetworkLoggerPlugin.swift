@@ -55,6 +55,7 @@ private func logRequest(_ target: TargetType, startDate: Date, result: Result<Re
             }
         }
     }
+
     
     switch result {
     case let .success(response):
@@ -65,6 +66,7 @@ private func logRequest(_ target: TargetType, startDate: Date, result: Result<Re
                 message_Code :\(result.messageCode)
                 message : \(result.message)
                 data：\r \(data))
+                
                 """)
         } else {
             let message = (try? response.map(String.self, atKeyPath: "error_description")) ?? ""

@@ -69,7 +69,7 @@ public extension Result where Success == Moya.Response {
 
     // 那朵后端状态码
     var is2000Ok: Bool {
-        self.messageCode == 2000
+        messageCode == 2000
     }
 }
 
@@ -86,28 +86,49 @@ public extension Result where Failure == MoyaError {
 
 // MARK: - 数据解析
 
+struct RSAResult: Convertible {
+    var result: String = ""
+}
+
 public extension Result where Success == Moya.Response {
     func mapObject<T: Convertible>(_: T.Type, atKeyPath keyPath: String? = "data") -> T? {
         if let keyPath = keyPath {
             guard let originDic = (json?.dictionaryObject as NSDictionary?)?.value(forKeyPath: keyPath) else {
                 return nil
             }
-
-            return JSON(originDic).dictionaryObject?.kj.model(T.self)
+            if let result = JSON(originDic).dictionaryObject?.kj.model(RSAResult.self).result, result.isEmpty == false {
+                let dict = RSA.decryptString(result, privateKey: "")
+                return JSON(dict).dictionaryObject?.kj.model(T.self)
+            } else {
+                return JSON(originDic).dictionaryObject?.kj.model(T.self)
+            }
+        } else {
+            return json?.dictionaryObject?.kj.model(T.self)
         }
-
-        return json?.dictionaryObject?.kj.model(T.self)
     }
 
     func mapArray<T: Convertible>(_: T.Type, atKeyPath keyPath: String? = "data.list") -> [T]? {
         if let keyPath = keyPath {
-            guard let originDic = (json?.dictionaryObject as NSDictionary?)?.value(forKeyPath: keyPath) else {
+            
+            guard let dataDict = (json?.dictionaryObject as NSDictionary?)?.value(forKeyPath: "data") else {
                 return nil
             }
+            // 加密的
+            if let result = JSON(dataDict).dictionaryObject?.kj.model(RSAResult.self).result, result.isEmpty == false {
+                let dict = RSA.decryptString(result, privateKey: "")
+                guard let originDic = (dict as NSDictionary?)?.value(forKeyPath: "list") else {
+                    return nil
+                }
+                return JSON(originDic).arrayObject?.kj.modelArray(T.self)
 
-            return JSON(originDic).arrayObject?.kj.modelArray(T.self)
+            } else {
+                // 没加密的 走 keyPath
+                guard let originDic = (json?.dictionaryObject as NSDictionary?)?.value(forKeyPath: keyPath) else {
+                    return nil
+                }
+                return JSON(originDic).arrayObject?.kj.modelArray(T.self)
+            }
         }
-
         return json?.arrayObject?.kj.modelArray(T.self)
     }
 }

@@ -24,11 +24,22 @@ struct ChatView: View {
         return realId
     }
 
+    @State private var info: V2TIMUserFullInfo = .init()
+
+    @MainActor
+    func uploadUserInfo() {
+        // 设置个人资料
+        V2TIMManager.sharedInstance().getUsersInfo([self.conversation.userID]) { infos in
+            self.info = infos?.first ?? .init()
+        } fail: { _, _ in
+        }
+    }
+
     var body: some View {
         ChatViewContainer(conversation: conversation)
             .edgesIgnoringSafeArea(.bottom)
             .ignoresSafeArea(.keyboard)
-            .navigationTitle("用户名")
+            .navigationTitle(self.info.nickName ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -38,6 +49,9 @@ struct ChatView: View {
                         XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
                     }
                 }
+            }
+            .task {
+                uploadUserInfo()
             }
     }
 
