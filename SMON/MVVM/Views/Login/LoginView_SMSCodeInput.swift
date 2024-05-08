@@ -11,7 +11,7 @@ struct LoginView_SMSCodeInput: View {
     @EnvironmentObject var vm: LoginViewModel
 
     var body: some View {
-        InfoRequestView(title: "请输入发送至您短信的\r每日大赛验证码", subline: "我们将向您的手机号发送验证码，以帮助你验证并完成登录。", btnEnable: true) {
+        InfoRequestView(title: "请输入发送至您手机号的\r每日大赛验证码", subline: "我们将向您的手机号发送验证码，以帮助你验证并完成登录。", btnEnable: vm.vcodeInput.count == 6 && vm.autoLogin == false) {
             HStack(spacing: 12) {
                 ForEach(0 ..< 6, id: \.self) { index in
                     if vm.vcodeInput.count >= index + 1 {
@@ -23,6 +23,14 @@ struct LoginView_SMSCodeInput: View {
                     }
                 }
                 Spacer()
+            }
+            .onChange(of: vm.vcodeInput) { input in
+                if input.count == 6 {
+                    Task {
+                        vm.autoLogin = true
+                        await vm.loginBySms()
+                    }
+                }
             }
             .font(.XMFont.big2.bold())
             .padding(.trailing, 16)
@@ -59,8 +67,6 @@ struct LoginView_SMSCodeInput: View {
 }
 
 #Preview {
-    
-        LoginView_SMSCodeInput()
-            .environmentObject(LoginViewModel())
-    
+    LoginView_SMSCodeInput()
+        .environmentObject(LoginViewModel())
 }

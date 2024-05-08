@@ -60,7 +60,7 @@ class AliyunOSSManager {
             // 环境，测试环境统一上传至type文件夹
             let url = AppConfig.env == .dev ? "test/" : "\(type)/"
             // 图片名称
-            let imageName = "XM_iOS_UserPic_\(Date.now.string(withFormat: "yyyyMMddHHmm"))_\(String.random(ofLength: 12))" + ".jpg"
+            let imageName = "XM_iOS_UserPic_\(Date.now.string(withFormat: "yyyyMMddHHmm"))_\(String.random(ofLength: 12))" + ".JPG"
             // 最终路径：app/业务类型文件夹名（测试环境为：test）/图片名称.jpg
             let objectKey = "app/\(url)\(imageName)"
             put.bucketName = bucketName

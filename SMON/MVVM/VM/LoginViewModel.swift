@@ -18,7 +18,7 @@ class LoginViewModel: ObservableObject {
     }
 
     @Published var pageProgress: PageProgress = .AppFeatures
-
+    @Published var autoLogin : Bool = false
     @Published var phoneInput: String = "" {
         didSet {
             Apphelper.shared.mada(style: .soft)
@@ -63,7 +63,7 @@ extension LoginViewModel {
         let target = UserAPI.loginBySms(p: .init(cellphone: phoneInput, code: vcodeInput, zone: "86"))
         let result = await Networking.request_async(target)
         if result.is2000Ok, let userLoginInfo = result.mapObject(XMUserLoginInfo.self) {
-            await UserManager.shared.getUploadToken()
+            await UserManager.shared.getOSSToken()
             Apphelper.shared.pushNotification(type: .success(message: "登录成功。"))
             Apphelper.shared.closeKeyBoard()
             UserManager.shared.userLoginInfo = userLoginInfo
@@ -72,6 +72,8 @@ extension LoginViewModel {
             if userLoginInfo.isNeedInfo == false {
                 await UserManager.shared.getUserInfo()
             }
+        }else{
+            self.autoLogin = false
         }
     }
 }

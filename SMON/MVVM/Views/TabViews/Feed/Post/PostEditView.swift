@@ -16,7 +16,6 @@ class PostEditViewModel: ObservableObject {
     @Published var textInput: String = ""
     @Published var postAttachs: [String] = []
     @Published var themeId: String?
-    
     @Published var targetTheme: XMTheme?
     
     init() {
@@ -59,46 +58,7 @@ struct PostEditView: View {
                 .scrollDismissesKeyboard(.immediately)
             }
             .overlay(alignment: .bottom) {
-                // 底部工具栏
-                HStack(alignment: .center, spacing: 12, content: {
-                    XMDesgin.XMButton(enable: !vm.textInput.isEmpty || !vm.imageSelected.isEmpty) {
-                        openPhotoSelecter()
-                    } label: {
-                        XMDesgin.XMIcon(iconName: "post_image", size: 16, withBackCricle: true)
-                    }
-                    Spacer()
-                    
-                    if let title = vm.targetTheme?.title {
-                        Menu.init {
-                            Button(action: {
-                                DispatchQueue.main.async {
-                                    vm.targetTheme = nil
-                                }
-                            }, label: {
-                                Text("不参与")
-                            })
-                            
-                            ForEach(PostThemeStore.shared.themeList, id: \.id) { theme in
-                                Button(action: {
-                                    DispatchQueue.main.async {
-                                        vm.targetTheme = theme
-                                    }
-                                }, label: {
-                                    Text("参与 : #" + theme.title)
-                                })
-                            }
-                        } label: {
-                            HStack {
-                                Text("参与")
-                                    .font(.XMFont.f2b)
-                                    .fcolor(.XMDesgin.f1)
-                                XMDesgin.XMTag(text: title, bgcolor: .XMDesgin.main)
-                            }
-                        }
-                    }
-                    
-                })
-                .padding()
+                bottomBar
             }
             .toolbar {
                 // 导航栏按钮
@@ -118,12 +78,55 @@ struct PostEditView: View {
         })
     }
     
+    var bottomBar: some View {
+        // 底部工具栏
+        HStack(alignment: .center, spacing: 12, content: {
+            XMDesgin.XMButton(enable: vm.imageSelected.count < 4) {
+                openPhotoSelecter()
+            } label: {
+                XMDesgin.XMIcon(iconName: "post_image", size: 16, withBackCricle: true)
+            }
+            Spacer()
+            
+            if let title = vm.targetTheme?.title {
+                Menu.init {
+                    Button(action: {
+                        DispatchQueue.main.async {
+                            vm.targetTheme = nil
+                        }
+                    }, label: {
+                        Text("不参与")
+                    })
+                    
+                    ForEach(PostThemeStore.shared.themeList, id: \.id) { theme in
+                        Button(action: {
+                            DispatchQueue.main.async {
+                                vm.targetTheme = theme
+                            }
+                        }, label: {
+                            Text("参与 : #" + theme.title)
+                        })
+                    }
+                } label: {
+                    HStack {
+                        Text("参与")
+                            .font(.XMFont.f2b)
+                            .fcolor(.XMDesgin.f1)
+                        XMDesgin.XMTag(text: title, bgcolor: .XMDesgin.main)
+                    }
+                }
+            }
+            
+        })
+        .padding()
+        .background(BlurEffectView(style: .dark))
+    }
+
     var textInput: some View {
         // 头像和文本输入框
         HStack(alignment: .top, spacing: 12) {
             XMUserAvatar(str: UserManager.shared.user.avatar, userId: "", size: 44)
                 .disabled(true)
-
             VStack(alignment: .leading) {
                 HStack {
                     Text(UserManager.shared.user.nickname)
@@ -132,7 +135,6 @@ struct PostEditView: View {
                         .fcolor(.XMDesgin.f1)
                     Spacer()
                 }
-                
                 TextField(text: $vm.textInput, axis: .vertical) {}
                     .autoOpenKeyboard()
                     .frame(minHeight: 120, alignment: .topLeading)

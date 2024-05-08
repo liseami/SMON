@@ -39,7 +39,7 @@ struct ChatView: View {
         ChatViewContainer(conversation: conversation)
             .edgesIgnoringSafeArea(.bottom)
             .ignoresSafeArea(.keyboard)
-            .navigationTitle(self.info.nickName ?? "")
+//            .navigationTitle(self.info.nickName ?? "")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -47,6 +47,19 @@ struct ChatView: View {
                         Apphelper.shared.pushActionSheet(title: "操作", message: nil, actions: actions)
                     } label: {
                         XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+                    }
+                }
+                ToolbarItem(placement: .principal) {
+                    XMDesgin.XMButton {
+                        MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: XMUserId))
+                    } label: {
+                        if let avatar = self.info.faceURL{
+                            HStack {
+                                XMUserAvatar(str: avatar, userId: XMUserId,size: 32)
+                                Text(self.info.nickName).font(.XMFont.f2b)
+                            }
+                        }
+                       
                     }
                 }
             }

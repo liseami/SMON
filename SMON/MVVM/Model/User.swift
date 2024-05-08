@@ -41,7 +41,6 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
 
     // 教育程度，默认为 0，可选
     var education: Int?
-
 }
 
 extension XMUserUpdateReqMod {
@@ -57,16 +56,16 @@ extension XMUserUpdateReqMod {
         self.height = profile.height
         self.signature = profile.signature
         self.education = profile.education
-        
     }
 }
 
 struct XMUserLocationInfo: Convertible {
-    var lat : String = ""
-    var long : String =  ""
+    var lat: String = ""
+    var long: String = ""
 }
-struct XMUserProfile: Convertible ,Identifiable{
-    var id : String = UUID().uuidString
+
+struct XMUserProfile: Convertible, Identifiable {
+    var id: String = UUID().uuidString
     var userId: String = "" // 一定有，不参与资料完成度评分
     var cityId: String = "" // 一定有，不参与资料完成度评分
     var cityName: String = "" // 一定有，不参与资料完成度评分
@@ -90,8 +89,8 @@ struct XMUserProfile: Convertible ,Identifiable{
     var followsNum: Int = 0 // 一定有，不参与资料完成度评分
     // 1关注对方，0没有关注
     var isFollow: Int = 0
-    var isEachOther : Int = 0
-    var followStatus : Int = 0
+    var isEachOther: Int = 0
+    var followStatus: Int = 0
 }
 
 // 用户资料扩展
@@ -153,8 +152,6 @@ extension XMUserProfile {
 }
 
 struct XMUserLoginInfo: Decodable, Encodable, Convertible {
-    
-
     // 用户 ID，默认为空字符串
     var userId: String = ""
 
@@ -223,11 +220,11 @@ extension Int {
         case 1:
             return "Dom"
         case 2:
-            return "Sado"
+            return "S"
         case 3:
             return "Sub"
         case 4:
-            return "Maso"
+            return "M"
         default:
             return "不确定"
         }
@@ -270,5 +267,5 @@ struct XMUserInRank: Identifiable, Convertible {
     var nickname: String = "" // ": "开手机",
     var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
     var cityName: String = "" // ": ""
-    var distanceStr : String = ""
+    var distanceStr: String = ""
 }

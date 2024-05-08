@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ImSDK_Plus
 
 class MainViewModel: ObservableObject {
     static let shared: MainViewModel = .init()
@@ -13,11 +14,25 @@ class MainViewModel: ObservableObject {
     init(currentTabbar: TabbarItem = .home) {
         self.currentTabbar = currentTabbar
         self.pathPages = .init()
+        self.getUnreadCount()
     }
 
     @Published var currentTabbar: TabbarItem = .home
-    @Published var homeBtnJump : Int = 0
+    @Published var homeBtnJump: Int = 0
     @Published var pathPages: NavigationPath = .init()
+    @Published var unreadCount: Int = 0
+    /*
+     获取会话总未读数
+     */
+    func getUnreadCount() {
+        V2TIMManager.sharedInstance().getUnreadMessageCount(by: .init(), succ: { count in
+            DispatchQueue.main.async {
+                self.unreadCount = Int(count)
+            }
+        }, fail: { _, _ in
+
+        })
+    }
 
     @MainActor
     func reset() {

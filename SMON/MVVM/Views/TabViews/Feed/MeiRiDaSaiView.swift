@@ -131,7 +131,7 @@ struct MeiRiDaSaiView: View {
             .padding(.all, 16)
             // 请求通知权限 | 3秒后 | 没有请求过的话 authorizationStatus == .notDetermined
             .onAppear(perform: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     UNUserNotificationCenter.current().getNotificationSettings { settings in
                         if settings.authorizationStatus == .notDetermined {
                             DispatchQueue.main.async {
@@ -215,8 +215,7 @@ struct MeiRiDaSaiView: View {
                 .frame(maxWidth: .infinity)
                 .background {
                     if #available(iOS 17.0, *) {
-                        ZStack{
-                           
+                        ZStack {
                             TimelineView(.animation) {
                                 let time = date.timeIntervalSince1970 - $0.date.timeIntervalSince1970
                                 Rectangle()
@@ -232,10 +231,10 @@ struct MeiRiDaSaiView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .opacity(1)
                         }
-                        .overlay(LinearGradient(colors: [Color.XMDesgin.b1,Color.XMDesgin.b1,Color.clear], startPoint: .bottom, endPoint: .top))
+                        .overlay(LinearGradient(colors: [Color.XMDesgin.b1, Color.XMDesgin.b1, Color.clear], startPoint: .bottom, endPoint: .top))
                     }
                 }
-                .background( Color.XMDesgin.b1.gradient)
+                .background(Color.XMDesgin.b1.gradient)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(alignment: .top) {
                     // 主题大赛列表

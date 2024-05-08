@@ -177,6 +177,8 @@
 		A2E7F9AA2B8D817B00E86474 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9A92B8D817B00E86474 /* Podfile */; };
 		A2E7F9B62B8DADBF00E86474 /* TUIChatXMTheme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */; };
 		A2E89F9B2BDE2DBE00931132 /* PrueGiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E89F9A2BDE2DBE00931132 /* PrueGiftView.swift */; };
+		A2E9FDC12BEB289C003A3589 /* okk.json in Resources */ = {isa = PBXBuildFile; fileRef = A2E9FDC02BEB289C003A3589 /* okk.json */; };
+		A2E9FDC32BEB2900003A3589 /* LastWellComeSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E9FDC22BEB2900003A3589 /* LastWellComeSheet.swift */; };
 		A2EF07582B9D3C03004CF692 /* XMLoginVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF07572B9D3C03004CF692 /* XMLoginVideo.swift */; };
 		A2EF075A2B9D4C74004CF692 /* BlackListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF07592B9D4C74004CF692 /* BlackListView.swift */; };
 		A2EF075C2B9D4CDD004CF692 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF075B2B9D4CDD004CF692 /* NotificationSettingView.swift */; };
@@ -408,6 +410,8 @@
 		A2E7F9A92B8D817B00E86474 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A2E7F9B52B8DADBF00E86474 /* TUIChatXMTheme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TUIChatXMTheme.bundle; path = SMON/TUIChatXMTheme.bundle; sourceTree = SOURCE_ROOT; };
 		A2E89F9A2BDE2DBE00931132 /* PrueGiftView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrueGiftView.swift; sourceTree = "<group>"; };
+		A2E9FDC02BEB289C003A3589 /* okk.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = okk.json; sourceTree = "<group>"; };
+		A2E9FDC22BEB2900003A3589 /* LastWellComeSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastWellComeSheet.swift; sourceTree = "<group>"; };
 		A2EF07572B9D3C03004CF692 /* XMLoginVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMLoginVideo.swift; sourceTree = "<group>"; };
 		A2EF07592B9D4C74004CF692 /* BlackListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListView.swift; sourceTree = "<group>"; };
 		A2EF075B2B9D4CDD004CF692 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
@@ -441,6 +445,7 @@
 		A209C8362BBA880B00531EF1 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				A2E9FDC02BEB289C003A3589 /* okk.json */,
 				A2B579F12BC51B9F008B5E15 /* radar.json */,
 				A209C83B2BBA892700531EF1 /* buyhot_arrow.json */,
 				A23DD49B2BBBEAB200249972 /* location_background.json */,
@@ -680,6 +685,7 @@
 				A25AAD3D2B8F4E7400B7CE40 /* BdsmRequestView.swift */,
 				A25AAD402B90073B00B7CE40 /* WechatRequestView.swift */,
 				A25AAD392B8F246C00B7CE40 /* BioRequestView.swift */,
+				A2E9FDC22BEB2900003A3589 /* LastWellComeSheet.swift */,
 				A25AAD352B8F238600B7CE40 /* DrinkRequestView.swift */,
 				A25AAD372B8F238E00B7CE40 /* SmokeRequestView.swift */,
 			);
@@ -1025,6 +1031,7 @@
 				A256DBA52B904622008C7063 /* TUICoreXMTheme.bundle in Resources */,
 				A272A46F2B8706FC008EA955 /* Assets.xcassets in Resources */,
 				A256DBA32B9045DB008C7063 /* TUIConversationXMTheme.bundle in Resources */,
+				A2E9FDC12BEB289C003A3589 /* okk.json in Resources */,
 				A256DB992B901C88008C7063 /* AppConfig.plist in Resources */,
 				A2B579F22BC51B9F008B5E15 /* radar.json in Resources */,
 				A2498ADD2BA833610045B7AD /* GenSekiGothic-B.ttc in Resources */,
@@ -1128,6 +1135,7 @@
 				A25AAD412B90073B00B7CE40 /* WechatRequestView.swift in Sources */,
 				A2B45CAC2B8B1E3C00D71EF8 /* ViewFuncs.swift in Sources */,
 				A25AAD242B8EDE5000B7CE40 /* AvatarRequestView.swift in Sources */,
+				A2E9FDC32BEB2900003A3589 /* LastWellComeSheet.swift in Sources */,
 				A2FC43642BAD514200268892 /* XMPleaceHolderView.swift in Sources */,
 				A256DB972B900BF6008C7063 /* WebView.swift in Sources */,
 				A2BA89502B9ADFA7002FEEFA /* Font.swift in Sources */,
@@ -1406,7 +1414,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				OTHER_LDFLAGS = "$(inherited)";
@@ -1461,7 +1469,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
 				OTHER_LDFLAGS = "$(inherited)";

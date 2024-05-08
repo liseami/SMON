@@ -35,12 +35,13 @@ struct XMUserAvatar: View {
 
     var body: some View {
         XMDesgin.XMButton {
+            guard self.userId.isEmpty == false else { return }
             let target = UserAPI.getUserInfo(id: userId)
             let result = await Networking.request_async(target)
             if result.is2000Ok {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: self.userId))
             }
-            
+
         } label: {
             WebImage(str: str)
                 .scaledToFill()

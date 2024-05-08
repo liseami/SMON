@@ -62,9 +62,6 @@ struct NotificationView: View {
             HStack {
                 XMUserAvatar(str: notice.avatar, userId: notice.userId, size: 32)
                 Text(notice.nickname)
-                    .font(.XMFont.f1b)
-
-                Text(notice.subTitle)
                     .font(.XMFont.f1)
 
                 Spacer()
@@ -72,6 +69,8 @@ struct NotificationView: View {
                     .font(.XMFont.f3)
                     .fcolor(.XMDesgin.f2)
             }
+            Text(notice.subTitle)
+                .font(.XMFont.f1b)
 
             if !notice.extraJson.postContent.isEmpty {
                 Text(notice.extraJson.postContent)

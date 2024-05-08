@@ -15,7 +15,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         DAppInit()
         let entity = JPUSHRegisterEntity()
         entity.types = 3
-        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
+      
         JPUSHService.setup(withOption: launchOptions, appKey: AppConfig.JPUSHAPPKE, channel: "ios", apsForProduction: true)
         JPUSHService.registrationIDCompletionHandler { _, _ in }
         let _ = IAPManager.shared

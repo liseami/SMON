@@ -113,6 +113,12 @@ struct MainTabbar: View {
                     Apphelper.shared.mada(style: .rigid)
                 }, label: {
                     XMDesgin.XMIcon(iconName: tabitem.labelInfo.icon, size: 28)
+                        .overlay(alignment: .topTrailing) {
+                            Circle().fill(Color.XMDesgin.main.gradient)
+                                .frame(width: 12, height: 12)
+                                .font(.XMFont.f3b)
+                                .ifshow(show: tabitem == .message && vm.unreadCount != 0)
+                        }
                         .frame(maxWidth: .infinity, alignment: .center)
                         .background(Color.black.opacity(0.01))
                         .changeEffect(.jump(height: 3), value: vm.currentTabbar, isEnabled: tabitem == vm.currentTabbar)

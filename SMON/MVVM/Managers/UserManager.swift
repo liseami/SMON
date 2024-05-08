@@ -66,7 +66,7 @@ class UserManager: ObservableObject {
         #endif
         Task {
             // 每次启动
-            await getUploadToken()
+            await getOSSToken()
             // ⬇️ 仅针对已登陆,且已进入主页的用户 ⬇️
             guard logged, !userLoginInfo.isNeedInfo else { return }
 //            DispatchQueue.global().async {
@@ -128,7 +128,7 @@ class UserManager: ObservableObject {
 
     // 获取最新的阿里云OSS上传Token
     @MainActor
-    func getUploadToken() async {
+    func getOSSToken() async {
         let target = CommonAPI.getUploadToken
         let result = await Networking.request_async(target)
         if result.is2000Ok, let ossinfo = result.mapObject(XMUserOSSTokenInfo.self) {

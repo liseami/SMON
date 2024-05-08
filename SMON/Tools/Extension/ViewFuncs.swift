@@ -44,8 +44,9 @@ extension View {
             XMDesgin.XMButton {
                 action()
             } label: {
-                Text("跳过").font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f2)
+                Text("跳过")
+                    .font(.XMFont.f1)
+                    .fcolor(.XMDesgin.f1)
             }
             .padding(.all)
             .padding(.bottom, 22)
@@ -79,7 +80,9 @@ struct KeyBoardFocusModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.focused($input)
             .onAppear {
-                input = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    input = true
+                }
             }
     }
 }

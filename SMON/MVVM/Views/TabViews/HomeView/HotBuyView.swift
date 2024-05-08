@@ -101,6 +101,7 @@ class HotBuyViewModel: XMModRequestViewModel<RankInfo> {
 struct HotBuyView: View {
     @StateObject var vm: HotBuyViewModel = .init()
     @State private var showTip: Bool = false
+    @State private var show: Bool = false
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 24, content: {
@@ -120,6 +121,11 @@ struct HotBuyView: View {
             .padding(.all)
             .padding(.top, 12)
         }
+        .onAppear(perform: {
+            withAnimation {
+                show = true
+            }
+        })
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
             Task {
                 await vm.getMyHotInfo()
@@ -157,7 +163,9 @@ struct HotBuyView: View {
                     }
                     .font(.title)
                 }, value: vm.input)
-            Text("为自己添加❤️‍🔥，立刻迎来人气大爆发")
+                .transition(.movingParts.move(edge: .bottom).animation(.bouncy(duration: 2, extraBounce: 0.5)))
+                .ifshow(show: show)
+            Text("为自己添加热度，立刻迎来人气大爆发")
                 .font(.XMFont.big2.bold())
                 .animation(.spring)
 

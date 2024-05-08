@@ -38,6 +38,7 @@ pod 'TUIConversation/UI_Classic'
 # 腾讯IM -——————————————————
 pod 'JCore', '3.2.3-noidfa'    
 pod 'JPush', '4.8.0'
+pod 'SPAlert'
 
 end
 

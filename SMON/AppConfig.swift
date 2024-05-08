@@ -51,11 +51,11 @@ public enum AppConfig {
     /// 主页
     static let domain: String = "https://ismonlove.com/"
     /// 用户协议
-    static let UserAgreement: String = domain + "work/YHXY.html"
+    static let UserAgreement: String = domain + "work/YHXY"
     /// 隐私政策
-    static let UserPrivacyPolicy: String = domain + "work/YSZC.html"
+    static let UserPrivacyPolicy: String = domain + "work/YSZC"
     /// 赛币充值协议
-    static let SAIBICOIN: String = domain + "work/SBXY.html"
+    static let SAIBICOIN: String = domain + "work/SBXY"
     /// 当前版本
     static var AppVersion: String { (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "0.0.0" }
     /// AppID

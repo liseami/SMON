@@ -74,7 +74,7 @@ extension XMTargetType {
     var headers: [String: String]? {
         var headers: [String: String] = [:]
         // 时间戳 10 位
-        let timestamp = (Date.now.timeIntervalSince1970 * 1000 ).int.string
+        let timestamp = (Date.now.timeIntervalSince1970 * 1000).int.string
         // Noce 16位随机字符串，数字字母
         let nonce = String.randomString(length: 32)
         // 盐

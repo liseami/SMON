@@ -22,6 +22,7 @@ PODS:
   - SDWebImage (5.19.0):
     - SDWebImage/Core (= 5.19.0)
   - SDWebImage/Core (5.19.0)
+  - SPAlert (5.1.8)
   - SwifterSwift (6.0.0):
     - SwifterSwift/AppKit (= 6.0.0)
     - SwifterSwift/Combine (= 6.0.0)
@@ -202,6 +203,7 @@ DEPENDENCIES:
   - Moya
   - Moya/Combine (~> 15.0)
   - PanModal
+  - SPAlert
   - SwifterSwift
   - SwiftyJSON
   - SwiftyStoreKit
@@ -227,6 +229,7 @@ SPEC REPOS:
     - PanModal
     - ReactiveObjC
     - SDWebImage
+    - SPAlert
     - SwifterSwift
     - SwiftyJSON
     - SwiftyStoreKit
@@ -253,6 +256,7 @@ SPEC CHECKSUMS:
   PanModal: 3e16ead1a907fb06f4df3f13492fd00149fa4974
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDWebImage: 981fd7e860af070920f249fd092420006014c3eb
+  SPAlert: 7027ed9df9a2ba8202cab39fd05b53e110f48a99
   SwifterSwift: 66843dc594f8fb890f5543c22545921d44acc004
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
@@ -263,6 +267,6 @@ SPEC CHECKSUMS:
   TUICore: 8e855f83a1b7a04a57dec07c1b71fae83c871d19
   TXIMSDK_Plus_iOS: 9559f6aebc6d69314521d17235bdb3ab58599be3
 
-PODFILE CHECKSUM: 5e75997d4c79ae78d0f29de4d3f47a13cf5c28d1
+PODFILE CHECKSUM: a67e849b5026c8ab5f5b27992ed2bbdd1a4b5c02
 
 COCOAPODS: 1.15.2

@@ -83,7 +83,7 @@ enum XMDesgin {
                 .fcolor(.XMDesgin.f1)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
-                .background(bgcolor)
+                .background(bgcolor.gradient)
                 .clipShape(Capsule())
         }
     }

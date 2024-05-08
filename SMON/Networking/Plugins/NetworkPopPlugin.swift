@@ -22,6 +22,7 @@ public class NetworkPopPlugin: PluginType {
         switch result {
         case .success:
             if !result.is2000Ok {
+                guard UserManager.shared.logged else { return }
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
 
@@ -29,7 +30,7 @@ public class NetworkPopPlugin: PluginType {
 //                MainViewModel.shared.pathPages.removeLast()
 //            }
 
-            if result.messageCode > 4000 || result.message == "TOKEN 错误" {
+            if result.messageCode > 4000 || result.message == "-" {
                 guard UserManager.shared.logged else { return }
                 UserManager.shared.userLoginInfo = .init()
                 Apphelper.shared.closeKeyBoard()

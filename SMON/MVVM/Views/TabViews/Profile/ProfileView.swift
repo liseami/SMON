@@ -230,7 +230,7 @@ struct ProfileView: View {
                 }
                 
                 if userInfo.wechat.isEmpty {
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_gift", text: userInfo.wechat) {
+                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_gift", text: "送TA上榜") {
                         Apphelper.shared.presentPanSheet(PrueGiftView()
                             .environmentObject(vm), style: .shop)
                     }

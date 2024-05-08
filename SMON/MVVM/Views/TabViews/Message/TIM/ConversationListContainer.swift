@@ -18,7 +18,6 @@ struct ConversationListContainer: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: TUIConversationListController, context: Context) {
         // Update the view controller if needed
-        
     }
 
     func makeCoordinator() -> Coordinator {
@@ -34,8 +33,10 @@ struct ConversationListContainer: UIViewControllerRepresentable {
 
         func conversationListController(_ conversationController: UIViewController, didSelectConversation conversation: TUIConversationCellData) {
             if conversation.userID == "m1001" {
+                V2TIMManager.sharedInstance().cleanConversationUnreadMessageCount(conversation.conversationID, cleanTimestamp: UInt64(Date.now.timeIntervalSince1970), cleanSequence: UInt64(0)) {} fail: { _, _ in
+                }
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
-            }else{
+            } else {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: conversation.userID))
             }
         }

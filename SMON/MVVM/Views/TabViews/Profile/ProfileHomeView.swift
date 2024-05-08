@@ -43,6 +43,7 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
 struct ProfileHomeView: View {
     @StateObject var vm: ProfileHomeViewModel = .init()
     @ObservedObject var userManager: UserManager = .shared
+    @State private var show: Bool = false
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .center, spacing: 24, content: {
@@ -159,7 +160,7 @@ struct ProfileHomeView: View {
             XMDesgin.XMButton {
                 await vm.dailySignIn()
             } label: {
-                HStack(spacing: 32) {
+                let btn = HStack(spacing: 32) {
                     VStack(alignment: .leading, spacing: 4, content: {
                         Text("每日签到")
                             .font(.XMFont.f1b)
@@ -182,7 +183,16 @@ struct ProfileHomeView: View {
                         .scaleEffect(2.2)
                         .padding(.leading, 24)
                 }
+                if vm.mod.isDailySignin {
+                    btn
+                } else {
+                    btn
+                        .conditionalEffect(.repeat(.shine, every: 1), condition: show)
+                }
             }
+            .onAppear(perform: {
+                show = true
+            })
         })
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.vertical, 12)
@@ -192,8 +202,8 @@ struct ProfileHomeView: View {
         let listItems = [
             (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
-            (name: "赛币商店", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
-            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码隐私保护", action: { Apphelper.shared.presentPanSheet(SocialAccountView(), style: .shop) })
+            (name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
+            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.presentPanSheet(SocialAccountView(), style: .shop) })
         ]
 
         return VStack(alignment: .leading, spacing: 24) {

@@ -11,10 +11,10 @@ import JDStatusBarNotification
 import Kingfisher
 import Lantern
 import PanModal
+import SPAlert
 import StoreKit
 import SwiftUIX
 import UIKit
-
 /*
  模拟延时
  */
@@ -226,7 +226,14 @@ class Apphelper {
         }
 
         switch type {
-        case .info, .error, .success, .warning:
+        case let .success(message):
+            AlertKitAPI.present(
+                title: message,
+                icon: .heart,
+                style: .iOS17AppleMusic,
+                haptic: .success
+            )
+        case .info, .error, .warning:
             NotificationPresenter.shared.present(message, subtitle: nil, styleName: nil, duration: 2, completion: { _ in
                 // completion block
             })
