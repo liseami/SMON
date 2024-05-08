@@ -52,7 +52,7 @@ struct WechatSettingView: View {
 
     var body: some View {
         List {
-            XMSection(title: "微信号", footer: "要修改请先全部删除，客户端明文加密，保护你的隐私安全") {
+            XMSection(title: "微信号", footer: "要修改请先全部删除！！！！客户端明文加密，保护你的隐私安全") {
                 TextField("微信号", text: $vm.wechat)
             }
             XMSection(title: "设置他人如何解锁你的微信(当前为\(vm.threshold)赛币)", footer: "* 当其他用户向你赠送的礼物总价值超过上述设置价格时，对方可以解锁你的微信号。") {

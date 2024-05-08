@@ -23,9 +23,17 @@ class SocialAccountViewModel: XMModRequestViewModel<WechatSettingInfo> {
 
 struct SocialAccountView: View {
     @StateObject var vm: SocialAccountViewModel = .init()
+    @State var show: Bool = false
     var body: some View {
         NavigationView(content: {
             List {
+                AutoLottieView(lottieFliesName: "okk", loopMode: .loop)
+                    .frame(height: 120)
+                    .scaleEffect(3)
+                    .transition(.movingParts.move(edge: .bottom).combined(with: .scale(scale: 2)).animation(.bouncy(duration: 3, extraBounce: 0.5)))
+                    .listRowSeparator(.hidden, edges: .all)
+                    .listRowBackground(Color.clear)
+                    .ifshow(show: show)
                 XMSection(title: "礼物门槛设置", footer: "* 每日大赛系统会生成一个口令码，防止乱加。每个解锁你微信的用户都会得到唯一的口令码。") {
                     NavigationLink {
                         WechatSettingView(wechat: vm.mod.maskValue, threshold: vm.mod.threshold)
@@ -37,28 +45,32 @@ struct SocialAccountView: View {
                             .disabled(true)
                     }
                 }
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        withAnimation {
+                            self.show = true
+                        }
+                    })
+                }
 
                 XMSection(title: "解锁信息") {
-                    
                     NavigationLink {
                         UnlockedMeView()
                             .navigationTitle("解锁了我的")
                             .toolbarRole(.editor)
                             .navigationBarTitleDisplayMode(.inline)
                     } label: {
-                        XMDesgin.XMListRow(.init(name: "解锁了我的", icon: "", subline: ""),showRightArrow: false) {}.disabled(true)
+                        XMDesgin.XMListRow(.init(name: "解锁了我的", icon: "", subline: ""), showRightArrow: false) {}.disabled(true)
                     }
-                    
+
                     NavigationLink {
                         MyUnlockView()
                             .navigationTitle("我解锁的")
                             .toolbarRole(.editor)
                             .navigationBarTitleDisplayMode(.inline)
                     } label: {
-                        XMDesgin.XMListRow(.init(name: "我解锁的", icon: "", subline: ""),showRightArrow: false) {}.disabled(true)
+                        XMDesgin.XMListRow(.init(name: "我解锁的", icon: "", subline: ""), showRightArrow: false) {}.disabled(true)
                     }
-
-                   
                 }
             }
             .listStyle(.grouped)

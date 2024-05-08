@@ -203,7 +203,7 @@ struct ProfileHomeView: View {
             (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
             (name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
-            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.presentPanSheet(SocialAccountView(), style: .shop) })
+            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.present(SocialAccountView(), presentationStyle: .form) })
         ]
 
         return VStack(alignment: .leading, spacing: 24) {

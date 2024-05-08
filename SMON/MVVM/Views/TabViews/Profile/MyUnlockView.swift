@@ -52,7 +52,7 @@ struct MyUnlockView: View {
                                     .font(.XMFont.f1b.bold())
                                 Spacer()
 
-                                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: "复制") {
+                                XMDesgin.XMButton.init {
                                     let t = UserRelationAPI.wechatCopy(id: user.id)
                                     let r = await Networking.request_async(t)
                                     if let wechat = r.mapObject(RespWechat.self), r.is2000Ok {
@@ -62,6 +62,8 @@ struct MyUnlockView: View {
                                             Apphelper.shared.pushNotification(type: .success(message: "已复制"))
                                         }
                                     }
+                                } label: {
+                                    XMDesgin.XMTag(text: "复制微信号", bgcolor: Color.green)
                                 }
                             }
                             .padding(.all, 12)
@@ -73,11 +75,13 @@ struct MyUnlockView: View {
                                     .font(.XMFont.f1b.bold())
                                 Spacer()
 
-                                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "复制") {
+                                XMDesgin.XMButton.init {
                                     DispatchQueue.main.async {
                                         UIPasteboard.general.setValue(user.randomCode, forPasteboardType: UTType.plainText.identifier)
                                     }
                                     Apphelper.shared.pushNotification(type: .success(message: "已复制"))
+                                } label: {
+                                    XMDesgin.XMTag(text: "复制口令码", bgcolor: Color.XMDesgin.main)
                                 }
                             }
                             .padding(.all, 12)
