@@ -2,16 +2,7 @@
   "images" : [
     {
       "filename" : "截屏2024-04-09_下午5.11.40-removebg-preview (1).png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom" : "universal"
     }
   ],
   "info" : {
