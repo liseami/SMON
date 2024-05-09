@@ -19,13 +19,14 @@ public enum AppConfig {
         case dev
         case prod
     }
+
     static var key =
-    "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"
+        "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"
     // baseURL
     static var baseUrl: String {
         switch env {
-//        case .dev: return "https://mrdstest.aishisan.cn"
-        case .dev : return "https://meiridasai.aishisan.cn"
+//      case .dev: return "https://mrdstest.aishisan.cn"
+        case .dev:  return "https://meiridasai.aishisan.cn"
         case .prod: return "https://meiridasai.aishisan.cn"
         }
     }
@@ -34,8 +35,8 @@ public enum AppConfig {
     static var TIMAppID: String {
         self.readPlist(key: "TIMAppID")
     }
-    
-    static var JPUSHAPPKE : String {
+
+    static var JPUSHAPPKE: String {
         self.readPlist(key: "JPUSHAPPKE")
     }
 
@@ -46,7 +47,6 @@ public enum AppConfig {
         else { return "" }
         return value
     }
-    
 
     /// 主页
     static let domain: String = "https://ismonlove.com/"

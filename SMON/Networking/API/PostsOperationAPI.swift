@@ -28,7 +28,7 @@ enum PostsOperationAPI: XMTargetType {
         case .commentDelete(let commentId): return ["commentId": commentId]
         case .tapCommentLike(let commentId): return ["commentId": commentId]
         case .commentList(let page, let postId): return ["page": page, "postId": postId]
-        case .commentReplyList(let page, let postId): return ["page": page, "commentId": postId]
+        case .commentReplyList(let page, let postId): return ["page": page, "commentId": postId, "pageSize": "50"]
         }
     }
 

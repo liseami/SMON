@@ -30,7 +30,14 @@ struct BioRequestView: View {
             }
         }
         .canSkip {
-            vm.showCompleteView = true
+            Task {
+                let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(signature: vm.bio))
+                if result.is2000Ok {
+                    Apphelper.shared.presentPanSheet(
+                        LastWellComeSheet(),
+                        style: .hardSheet)
+                }
+            }
         }
     }
 }

@@ -24,7 +24,6 @@ class PostCommentListViewModel: XMListViewModel<XMPostComment> {
 struct PostCommentListView: View {
     @StateObject var vm: PostCommentListViewModel
     @EnvironmentObject var detailVM: PostDetailViewModel
-
     @FocusState.Binding var focused: Bool
 
     init(postId: String, focused: FocusState<Bool>.Binding) {
@@ -36,20 +35,20 @@ struct PostCommentListView: View {
         XMStateView(vm.list,
                     reqStatus: vm.reqStatus,
                     loadmoreStatus: vm.loadingMoreStatus) { comment in
-            let commentView = PostCommentView(comment: comment)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                    focused = true
-                    detailVM.targetComment = comment
-                }
+
+            let commentView =
+                PostCommentView(comment: comment, focused: $focused)
+                    .contentShape(Rectangle())
+                    .environmentObject(detailVM)
 
             // 自己的评论可以删除
             if comment.userId == UserManager.shared.user.userId {
-                commentView.onLongPressGesture(minimumDuration: 0.5, maximumDistance: 1) {
-                    Apphelper.shared.pushActionSheet(title: "操作", message: "", actions: [UIAlertAction(title: "删除", style: .destructive, handler: { _ in
-                        Task { await vm.delete(commentId: comment.id) }
-                    })])
-                }
+                commentView
+                    .onLongPressGesture(minimumDuration: 0.5, maximumDistance: 1) {
+                        Apphelper.shared.pushActionSheet(title: "操作", message: "", actions: [UIAlertAction(title: "删除", style: .destructive, handler: { _ in
+                            Task { await vm.delete(commentId: comment.id) }
+                        })])
+                    }
             } else {
                 commentView
             }
@@ -62,14 +61,17 @@ struct PostCommentListView: View {
                 .fcolor(.XMDesgin.f2)
                 .padding(.vertical, 32)
         }
-        .onChange(of: detailVM.mod.id) { _ in
+        .onChange(of: detailVM.mod.id, perform: { _ in
             Task { await vm.getListData() }
+        })
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.ADD_NEW_COMMENT_SUCCESS)) { obj in
+            if let newComment = obj.object as? XMPostComment {
+                vm.list.insert(newComment, at: 0)
+            }
         }
     }
 }
 
 #Preview {
-//    PostCommentListView(postId: "", input: <#FocusState<Bool>.Binding#>, input: )
-//        .environmentObject(PostDetailViewModel(postId: ""))
     EmptyView()
 }

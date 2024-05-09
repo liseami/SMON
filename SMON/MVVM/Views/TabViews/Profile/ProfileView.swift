@@ -298,7 +298,16 @@ struct ProfileView: View {
                             .frame(width: w, height: h)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
-                    .transition(.asymmetric(insertion: .movingParts.snapshot.combined(with: .opacity).animation(.bouncy.delay(Double(index ?? 0) * 0.24)), removal: .movingParts.poof.animation(.easeInOut(duration: 0.5))))
+                    .transition(
+                        .asymmetric(
+                            insertion:
+                            .movingParts.move(edge: .leading)
+                                .combined(with: .opacity)
+                                .animation(
+                                    .bouncy(duration: 0.5, extraBounce: 0.2)
+                                        .delay(Double(index ?? 0) * 0.1)),
+                            removal:
+                            .movingParts.poof.animation(.easeInOut(duration: 0.5))))
                 }
             }
             .padding(.vertical, 12)

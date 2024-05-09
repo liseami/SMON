@@ -17,7 +17,7 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
     }
 
     @Published var inputStr: String = ""
-    @Published var targetComment: XMPostComment?
+    @Published var commentTargetInfo: XMPostComment?
 
     /*
      发表评论和回复
@@ -27,10 +27,10 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
         guard self.inputStr.isEmpty == false else { return }
 
         var mod = PostsOperationAPI.CommentReqMod()
-        if let targetComment {
+        if let commentTargetInfo {
             // 给评论回复
-            mod.commentId = targetComment.id
-            mod.toUserId = targetComment.id
+            mod.commentId = commentTargetInfo.id
+            mod.toUserId = commentTargetInfo.userId
         } else {
             // 给帖子回复
             mod.toUserId = self.mod.userId
@@ -41,11 +41,20 @@ class PostDetailViewModel: XMModRequestViewModel<XMPostDetail> {
         let t = PostsOperationAPI.comment(p: mod)
         let r = await Networking.request_async(t)
         if r.is2000Ok {
+            DispatchQueue.main.async {
+                // 新增评论
+                if let obj = r.mapObject(XMPostComment.self){
+                    if obj.commentNum == nil ,let newReply = r.mapObject(XMPostReply.self){
+                        NotificationCenter.default.post(name:
+                            Notification.Name.ADD_NEW_REPLEY_SUCCESS, object: newReply)
+                    }else{
+                        NotificationCenter.default.post(name: Notification.Name.ADD_NEW_COMMENT_SUCCESS, object: obj)
+                    }
+                }
+            }
             self.inputStr.removeAll()
             Apphelper.shared.closeKeyBoard()
             // 请求详情
-            self.mod = .init()
-            await self.getSingleData()
         }
     }
 
@@ -66,7 +75,13 @@ struct PostDetailView: View {
     }
 
     @State var passwordText: String = ""
-    @FocusState var focused
+    @FocusState var focused {
+        didSet {
+            if self.focused == false {
+                self.vm.inputStr.removeAll()
+            }
+        }
+    }
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -86,6 +101,7 @@ struct PostDetailView: View {
             .padding(.horizontal, 16)
         }
         .refreshable {
+            self.vm.mod = .init()
             await vm.getSingleData()
         }
         .scrollDismissesKeyboard(.immediately)
@@ -127,7 +143,7 @@ struct PostDetailView: View {
             HStack(alignment: .top) {
                 XMUserAvatar(str: UserManager.shared.user.avatar, userId: UserManager.shared.user.userId, size: 32)
                     .padding(.top, 6)
-                TextField(text: $vm.inputStr, prompt: Text(vm.targetComment == nil ? "说点什么？" : "回复：@" + vm.targetComment!.nickname), label: {})
+                TextField(text: $vm.inputStr, prompt: Text(vm.commentTargetInfo == nil ? "说点什么？" : "回复：@" + vm.commentTargetInfo!.nickname), label: {})
                     .lineLimit(...(focused ? 4 : 1))
                     .tint(.XMDesgin.main)
                     .font(.XMFont.f2)

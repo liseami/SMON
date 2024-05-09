@@ -14,7 +14,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
     var getListData: () async -> ()
     var loadMore: () async -> ()
     let loading: Loading
-    let pagesize : Int
+    let pagesize: Int
     let empty: Empty
     let content: Content
     let list: ListData
@@ -23,7 +23,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
         _ ListData: ListData,
         reqStatus: XMRequestStatus = .isLoading,
         loadmoreStatus: XMRequestStatus = .isLoading,
-        pagesize : Int = 20  ,
+        pagesize: Int = 20,
         @ViewBuilder rowContent: @escaping (ListData.Element) -> RowContent,
         @ViewBuilder loadingView: @escaping () -> Loading,
         @ViewBuilder emptyView: @escaping () -> Empty,
@@ -45,7 +45,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
         _ ListData: ListData,
         reqStatus: XMRequestStatus = .isLoading,
         loadmoreStatus: XMRequestStatus = .isLoading,
-        pagesize : Int = 20 ,
+        pagesize: Int = 20,
         @ViewBuilder customContent: @escaping () -> Content,
         @ViewBuilder loadingView: @escaping () -> Loading,
         @ViewBuilder emptyView: @escaping () -> Empty,
@@ -64,52 +64,57 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
     }
 
     var body: some View {
-        switch reqStatus {
-        case .isLoading:
-            loading
-                .transition(.opacity.animation(.easeOut(duration: 0.2)))
-                .frame(maxWidth: .infinity)
-        case .isNeedReTry:
-            XMPleaceHolderView(imageName: "networkerror_pagepic", text: "网络错误，请刷新重试。", btnText: "重试") {
-                await getListData()
-            }
-
-        case .isOK:
-            content
-            Group {
-                switch loadmoreStatus {
-                case .isLoading:
-                    ProgressView()
-                        .frame(height: 60, alignment: .center)
-                case .isOK:
-                    Color.clear
-                        .frame(width: 1, height: 59, alignment: .center)
-                    Color.clear
-                        .frame(width: 1, height: 1, alignment: .center)
-                        .task {
-                            await self.loadMore()
-                        }
-                        .offset(y: 40)
-                case .isNeedReTry:
-                    XMDesgin.XMMainBtn(text: "加载失败，请重试") {
-                        await waitme(sec: 1)
-                        await loadMore()
-                    }
-                    .frame(width: 240)
-                case .isOKButEmpty:
-                    Text("--- 没有更多了 ---")
-                        .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+        Group {
+            switch reqStatus {
+            case .isLoading:
+                loading
+                    .transition(.opacity.animation(.easeOut(duration: 0.2)))
+                    .frame(maxWidth: .infinity)
+            case .isNeedReTry:
+                XMPleaceHolderView(imageName: "networkerror_pagepic", text: "网络错误，请刷新重试。", btnText: "重试") {
+                    await getListData()
                 }
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .transition(.opacity.animation(.bouncy))
-            .ifshow(show: self.list.count >= pagesize)
 
-        case .isOKButEmpty:
-            empty
-                .frame(maxWidth: .infinity)
+            case .isOK:
+                content
+                Group {
+                    switch loadmoreStatus {
+                    case .isLoading:
+                        ProgressView()
+                            .frame(height: 60, alignment: .center)
+                    case .isOK:
+                        Color.clear
+                            .frame(width: 1, height: 59, alignment: .center)
+                        Color.clear
+                            .frame(width: 1, height: 1, alignment: .center)
+                            .task {
+                                await self.loadMore()
+                            }
+                            .offset(y: 40)
+                    case .isNeedReTry:
+                        XMDesgin.XMMainBtn(text: "加载失败，请重试") {
+                            await waitme(sec: 1)
+                            await loadMore()
+                        }
+                        .frame(width: 240)
+                    case .isOKButEmpty:
+                        Text("--- 没有更多了 ---")
+                            .font(.XMFont.f2)
+                            .fcolor(.XMDesgin.f2)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .center)
+                .ifshow(show: self.list.count >= pagesize)
+
+            case .isOKButEmpty:
+                empty
+                    .frame(maxWidth: .infinity)
+            }
         }
+        .transition(.opacity
+            .combined(with: .offset(y: 20))
+            .combined(with: .scale(scale: 0.98))
+            .animation(.easeOut))
     }
 }
 

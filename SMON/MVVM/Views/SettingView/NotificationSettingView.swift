@@ -63,9 +63,9 @@ struct NotificationSettingView: View {
             XMSection(title: "通知开关") {
                 if let _ = vm.setting {
                     Group {
-                        Toggle(isOn: $vm.allOpen, label: {
-                            Text("全局开关")
-                        })
+//                        Toggle(isOn: $vm.allOpen, label: {
+//                            Text("全局开关")
+//                        })
                         Toggle(isOn: $vm.settingBool.sayHello, label: {
                             Text("私信")
                         })

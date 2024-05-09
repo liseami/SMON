@@ -86,10 +86,11 @@ class HotBuyViewModel: XMModRequestViewModel<RankInfo> {
                 if self.countdown > 0 {
                     self.countdown -= 1
                 } else {
-                    self.timer?.invalidate()
-
                     // 请求接口
-                    Task { await self.getSingleData() }
+                    Task {
+                        self.timer?.invalidate()
+                        await self.getSingleData()
+                    }
                 }
             }
         }
@@ -214,14 +215,24 @@ struct HotBuyView: View {
 
     @ViewBuilder
     var tag: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            infoView(title: "当前比例", image: "saicoin", value: "\(vm.input.int ?? 1)赛币  =  ❤️‍🔥\(String(format: "%.2f", rd))热度")
-            infoView(title: "可用赛币", image: "saicoin", value: "\(vm.userHotInfo.coinNums)赛币")
-            infoView(title: "我的热度", value:
-                String(format: "❤️‍🔥%.2f热度", vm.userHotInfo.currentHot.double() ?? 0.0))
-
-//
-        }
+        XMDesgin.XMButton(action: {
+            Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
+        }, label: {
+            VStack(alignment: .leading, spacing: 12) {
+                infoView(title: "当前比例", image: "saicoin", value: "\(vm.input.int ?? 1)赛币  =  ❤️‍🔥\(String(format: "%.2f", rd))热度")
+                HStack {
+                    infoView(title: "可用赛币", image: "saicoin", value: "\(vm.userHotInfo.coinNums)赛币")
+                    Text("特惠充值")
+                        .font(.XMFont.f2b)
+                        .fcolor(.XMDesgin.main)
+                        .padding(.all, 4)
+                        .background(Color.XMDesgin.main.gradient.opacity(0.3))
+                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                }
+                infoView(title: "我的热度", value:
+                    String(format: "❤️‍🔥%.2f热度", vm.userHotInfo.currentHot.double() ?? 0.0))
+            }
+        })
     }
 
     func infoView(title: String, image: String? = nil, value: String) -> some View {
@@ -248,9 +259,6 @@ struct HotBuyView: View {
             .padding(.vertical, 8)
             .background(Color.XMDesgin.b1)
             .clipShape(Capsule())
-            .onTapGesture {
-                Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
-            }
         }
     }
 

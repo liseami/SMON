@@ -41,6 +41,8 @@ class WechatGiftViewModel: XMListViewModel<XMGift> {
         let r = await Networking.request_async(t)
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "赠送成功！💗"))
+        } else {
+            Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
         }
     }
 
@@ -128,7 +130,8 @@ struct WechatGiftView: View {
                     .tint(Color.green)
                     .animation(.bouncy, value: vm.info?.progressBar)
                     .padding(.vertical, 6)
-                if info.progressBar.float() ?? 0 >= 1 {
+
+                if Int(info.progressBar) ?? 0 >= 100 {
                     Text("* 您已解锁对方的联系方式。请前往个人中心查看。")
                         .font(.XMFont.f2)
                         .fcolor(.XMDesgin.f2)

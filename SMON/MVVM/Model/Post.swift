@@ -31,12 +31,13 @@ struct XMPostComment: Convertible, Equatable, Identifiable {
     var isLiked: Int = 0 //
     var isPostsAuthor: Int = 0 //
     var likeNum: Int = 0 //
-    var commentNum: Int = 0 //
+    var commentNum: Int?//
     var content: String = "" // "这是一级评论",
     var imagePath: String = "" // "",
     var createdAt: Int = 0 // 1710813905,
     var createdAtStr: String = "" // "周二 10:05"
 }
+
 
 struct XMPostReply: Convertible, Equatable, Identifiable {
     var id: String = "" // : 2,

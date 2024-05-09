@@ -22,7 +22,7 @@ public class NetworkPopPlugin: PluginType {
         switch result {
         case .success:
             if !result.is2000Ok {
-                guard UserManager.shared.logged else { return }
+                guard result.message.contains("TOKEN") == false else { return }
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
 

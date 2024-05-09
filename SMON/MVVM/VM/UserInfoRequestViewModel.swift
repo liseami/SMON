@@ -20,7 +20,7 @@ class UserInfoRequestViewModel: ObservableObject {
     @Published var wechat: String = ""
     @Published var interestsTag: [String] = []
     @Published var bio: String = ""
-    @Published var showCompleteView: Bool = false
+    
     @Published var presentedSteps: [PageStep] = [.name]
     enum PageStep: CaseIterable {
         case name

@@ -16,4 +16,8 @@ public extension Notification.Name {
         Notification.Name("com.wuhanjiyunshang.meiridasai.POST_PUBLISHED_SUCCESS")
     static let IAP_BUY_SUCCESS =
         Notification.Name("com.wuhanjiyunshang.meiridasai.IAP_BUY_SUCCESS")
+    static let ADD_NEW_COMMENT_SUCCESS =
+        Notification.Name("com.wuhanjiyunshang.meiridasai.ADD_NEW_COMMENT_SUCCESS")
+    static let ADD_NEW_REPLEY_SUCCESS =
+        Notification.Name("com.wuhanjiyunshang.meiridasai.ADD_NEW_REPLEY_SUCCESS")
 }
