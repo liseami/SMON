@@ -152,7 +152,7 @@ struct HotBuyView: View {
 
     var header: some View {
         HStack(alignment: .center, spacing: 12, content: {
-            Image("saicoin_lvl1")
+            Image("3d-blocks-blocks-composition-69")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 99)
@@ -164,7 +164,7 @@ struct HotBuyView: View {
                     }
                     .font(.title)
                 }, value: vm.input)
-                .transition(.movingParts.move(edge: .bottom).animation(.bouncy(duration: 2, extraBounce: 0.5)))
+                .transition(.movingParts.pop(Color.XMDesgin.main).animation(.bouncy(duration: 1, extraBounce: 0.5)))
                 .ifshow(show: show)
             Text("为自己添加热度，立刻迎来人气大爆发")
                 .font(.XMFont.big2.bold())
