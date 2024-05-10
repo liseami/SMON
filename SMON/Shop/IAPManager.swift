@@ -134,7 +134,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
                         let r2 = await Networking.request_async(t2)
                         if r2.is2000Ok {
                             await UserManager.shared.getUserInfo()
-                            Apphelper.shared.pushNotification(type: .success(message: "充值成功！大吉大利！祝你吃鸡！"))
+                            Apphelper.shared.pushNotification(type: .info(message: "充值成功！大吉大利！祝你吃鸡！"))
                             NotificationCenter.default.post(name: Notification.Name.IAP_BUY_SUCCESS, object: nil, userInfo: nil)
                         }
                     }

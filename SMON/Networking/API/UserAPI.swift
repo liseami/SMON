@@ -26,8 +26,8 @@ enum UserAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
-        case .wallet : return nil
-        case .getHomePage : return nil
+        case .wallet: return nil
+        case .getHomePage: return nil
         case .updateAlbum(let paths): return ["picPathList": paths]
         case .albumList(let id): return id == nil ? nil : ["userId": id!]
         case .getUserInfo(let id): return id == nil ? nil : ["userId": id!]

@@ -43,7 +43,7 @@ struct MyGiftView: View {
                                 .font(.XMFont.f3)
                         })
                         Spacer()
-                        Text("x" + gift.totalPrice)
+                        Text("价值" + gift.totalPrice + "赛币")
                             .font(.XMFont.big3.bold())
                     }
                     .padding(.all, 12)

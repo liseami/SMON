@@ -5,12 +5,9 @@
 //  Created by 梁泽 on 2023/9/27.
 //
 
-
-
-import Moya
 import KakaJSON
+import Moya
 import SwiftyJSON
-
 
 struct Networking {
     static var configuration: URLSessionConfiguration {
@@ -28,6 +25,7 @@ struct Networking {
 }
 
 // MARK: - 普通请求
+
 extension Networking {
     @discardableResult
     static func request(_ target: TargetType, completion: @escaping Completion) -> Moya.Cancellable {
@@ -46,6 +44,7 @@ extension Networking {
 }
 
 // MARK: - async 函数
+
 extension Networking {
     /// 直接 result.mapObject  .mapArray
     static func request_async(_ target: TargetType) async -> MoyaResult {

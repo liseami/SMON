@@ -59,7 +59,7 @@ public func LoadingTask(loadingMessage: String, task: @escaping () async -> Void
                 blurView.alpha = 0.0 // 设置为透明
             } completion: { _ in
                 blurView.removeFromSuperview() // 移除模糊效果的视图
-//                NotificationPresenter.shared.dismiss() // 关闭loading消息
+                NotificationPresenter.shared.dismiss() // 关闭loading消息
             }
         }
     }
@@ -221,7 +221,7 @@ class Apphelper {
             style.textStyle.font = .monospacedSystemFont(ofSize: 15, weight: .bold)
             style.canSwipeToDismiss = false
             style.animationType = .move
-
+            
             return style
         }
 

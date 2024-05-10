@@ -46,6 +46,7 @@ struct MorePhotoRequestView: View {
                     let result = await Networking.request_async(target)
                     if result.is2000Ok {
                         vm.presentedSteps.append(.brithday)
+//                        Apphelper.shared.pushNotification(type: .info(message: "上传成功。"))
                     } else {
                         Apphelper.shared.pushNotification(type: .error(message: "上传失败，请稍后再试。"))
                     }
