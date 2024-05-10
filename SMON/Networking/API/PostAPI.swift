@@ -64,6 +64,8 @@ extension PostAPI {
         var postContent: String = "2"
         var postAttachs: [String] = []
         var themeId: String?
+        var lat: String = UserManager.shared.userlocation.lat
+        var long: String = UserManager.shared.userlocation.long
     }
 
     struct ThemePostListReqMod: Convertible {
