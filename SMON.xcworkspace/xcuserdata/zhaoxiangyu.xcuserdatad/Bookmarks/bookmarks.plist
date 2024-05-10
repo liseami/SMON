@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>76</string>
+					<key>StartingLineNumber</key>
+					<string>76</string>
+					<key>Timestamp</key>
+					<string>737023189</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>payload</key>
+					<string>file:///Users/jiguang/.jenkins/workspace/ios-jcommon/JCommon/JCommon/Controller/JCommonLocationController.m</string>
+				</dict>
+			</dict>
+			<key>title</key>
+			<string>Warning: This method can cause UI unresponsiveness if invoked on the main thread. Instead, consider waiting for the `-locationManagerDidChangeAuthorization:` callback and checking `authorizationStatus` first.</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>

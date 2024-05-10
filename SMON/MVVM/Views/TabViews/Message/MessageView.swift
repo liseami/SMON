@@ -64,9 +64,15 @@ struct MessageView: View {
             ConversationListContainer()
                 .ignoresSafeArea()
             XMTopBlurView()
+            
         })
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("消息")
+                    .font(.XMFont.f1)
+                    .bold()
+            }
 //            ToolbarItem(placement: .topBarLeading) {
 //                // 通知按钮
 //                XMDesgin.XMButton {} label: {

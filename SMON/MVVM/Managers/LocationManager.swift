@@ -39,7 +39,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last?.coordinate {
             print("获取到最新的定位")
-            Task {
+            Task { @MainActor in 
                 UserManager.shared.userlocation = .init(lat: location.latitude.string, long: location.longitude.string)
                 await ConfigStore.shared.getVersionInfo()
                 await gotLocationComplete()

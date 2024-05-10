@@ -10,7 +10,7 @@ import SwiftUI
 struct WechatRequestView: View {
     @EnvironmentObject var vm: UserInfoRequestViewModel
     var body: some View {
-        InfoRequestView(title: "填写微信号", subline: "⚠️ 应用内可设置解锁您的微信所需要的礼物价格。凭口令码加你。保护你的安全。", icon: "inforequest_wechat", btnEnable: !vm.wechat.isEmpty) {
+        InfoRequestView(title: "填写微信号", subline: "💰 应用内可设置解锁您的微信所需要的礼物价格。凭口令码加你。保护你的安全。", icon: "inforequest_wechat", btnEnable: !vm.wechat.isEmpty) {
             VStack(alignment: .leading, spacing: 12, content: {
                 Text("微信号")
                     .font(.XMFont.f3)

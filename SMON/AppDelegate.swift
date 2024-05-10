@@ -15,7 +15,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         DAppInit()
         let entity = JPUSHRegisterEntity()
         entity.types = 3
-      
         JPUSHService.setup(withOption: launchOptions, appKey: AppConfig.JPUSHAPPKE, channel: "ios", apsForProduction: true)
         JPUSHService.registrationIDCompletionHandler { _, _ in }
         let _ = IAPManager.shared
@@ -26,8 +25,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         JPUSHService.registerDeviceToken(deviceToken)
-//        JPUSHService.setAlias(UserManager.shared.user.id, completion: { _, _, _ in
-//        }, seq: 1)
     }
 }
 
