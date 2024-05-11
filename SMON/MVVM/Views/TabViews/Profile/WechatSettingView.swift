@@ -73,7 +73,7 @@ struct WechatSettingView: View {
                     await vm.set()
                 } label: {
                     Text("完成")
-                        .fcolor(.XMDesgin.main)
+                        .fcolor(.XMColor.main)
                         .font(.XMFont.f1b)
                 }
             }

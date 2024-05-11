@@ -31,7 +31,7 @@ enum XMDesgin {
             if withBackCricle {
                 icon
                     .padding(.all, 8)
-                    .background(Color.XMDesgin.b1)
+                    .background(Color.XMColor.b1)
                     .clipShape(Circle())
                     .contentShape(Circle())
             } else {
@@ -62,17 +62,17 @@ enum XMDesgin {
         var body: some View {
             Text("作者")
                 .font(.XMFont.f3b)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
                 .padding(.all, 4)
                 .padding(.horizontal, 2)
-                .background(Capsule().fill(Color.XMDesgin.main.gradient))
+                .background(Capsule().fill(Color.XMColor.main.gradient))
         }
     }
 
     struct XMTag: View {
         let text: String
         let bgcolor: Color
-        init(text: String, bgcolor: Color = Color.XMDesgin.b1) {
+        init(text: String, bgcolor: Color = Color.XMColor.b1) {
             self.text = text
             self.bgcolor = bgcolor
         }
@@ -80,7 +80,7 @@ enum XMDesgin {
         var body: some View {
             Text(text)
                 .font(.XMFont.f2b)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 8)
                 .background(bgcolor.gradient)
@@ -207,7 +207,7 @@ enum XMDesgin {
         var enable: Bool
         var action: () async -> ()
         @State var onTap: Bool = false
-        init(fColor: Color = .XMDesgin.b1, backColor: Color = .XMDesgin.f1, iconName: String = "", text: String = "text", enable: Bool = true, action: @escaping () async -> ()) {
+        init(fColor: Color = .XMColor.b1, backColor: Color = .XMColor.f1, iconName: String = "", text: String = "text", enable: Bool = true, action: @escaping () async -> ()) {
             self.fColor = fColor
             self.backColor = backColor
             self.iconName = iconName
@@ -255,20 +255,20 @@ enum XMDesgin {
                     Text(LocalizedStringKey(text))
                         .font(.XMFont.f1)
                         .multilineTextAlignment(.leading)
-                        .fcolor(.XMDesgin.f1)
-                        .tint(Color.XMDesgin.main)
+                        .fcolor(.XMColor.f1)
+                        .tint(Color.XMColor.main)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    XMDesgin.XMIcon(systemName: "circle", size: 18, color: Color.XMDesgin.f1)
+                    XMDesgin.XMIcon(systemName: "circle", size: 18, color: Color.XMColor.f1)
                         .overlay(alignment: .center) {
                             Circle()
-                                .fill(Color.XMDesgin.f1)
+                                .fill(Color.XMColor.f1)
                                 .frame(width: 10, height: 10)
                                 .ifshow(show: selected)
                         }
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 16)
-                .background(Color.XMDesgin.b1)
+                .background(Color.XMColor.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 //                .changeEffect(.spray(origin: .center) {
 //                    Group {
@@ -300,13 +300,13 @@ enum XMDesgin {
                         .ifshow(show: !info.icon.isEmpty)
                     Text(info.name)
                         .font(.XMFont.f1b)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                         .lineLimit(1)
                     Spacer()
                     Text(info.subline)
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
-                    XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
+                    XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMColor.f2)
                         .ifshow(show: showRightArrow)
                 }
                 .contentShape(Rectangle())
@@ -331,34 +331,23 @@ enum XMDesgin {
                         .ifshow(show: !info.icon.isEmpty)
                     Text(info.name)
                         .font(.XMFont.f1b)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                     Spacer()
                     Text(info.subline)
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
-                    XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
+                    XMDesgin.XMIcon(iconName: "system_arrow_right", size: 16, color: Color.XMColor.f2)
                 }
                 .contentShape(Rectangle())
             }
-            .listRowBackground(Color.XMDesgin.b1)
+            .listRowBackground(Color.XMColor.b1)
         }
     }
 }
 
 #Preview {
     VStack(spacing: 24) {
-        XMDesgin.XMIcon(iconName: "tabbar_home")
-        XMDesgin.XMIcon(systemName: "flag.badge.ellipsis")
-        XMDesgin.SmallBtn {}
-        XMDesgin.CircleBtn(backColor: .white, fColor: .black, iconName: "home_bell", enable: true) {}
-        XMDesgin.SelectionTable(text: "男", selected: false) {}
-        XMDesgin.XMMainBtn {}
-        XMDesgin.XMListRow(.init(name: "home_bell", icon: "home_bell", subline: "2323")) {}
-        XMDesgin.XMListRowInlist(.init(name: "home_bell", icon: "home_bell", subline: "")) {}
-        XMDesgin.CircleBtn {
-            await waitme()
-        }
-        XMDesgin.XMTag(text: "标签")
+     
     }
     .padding(.all)
 }

@@ -94,7 +94,7 @@ struct ProfileView: View {
             VStack(spacing: 24) {
                 Text("他很忙，什么也没留下～")
                     .font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
                 LoadingPostView()
             }
             .padding(.top, 12)
@@ -192,7 +192,7 @@ struct ProfileView: View {
                     }
             }
             .font(.XMFont.f2)
-            .fcolor(.XMDesgin.f2)
+            .fcolor(.XMColor.f2)
             
             Text(vm.user.signature)
                 .lineLimit(4)
@@ -204,18 +204,18 @@ struct ProfileView: View {
     var buttonView: some View {
         HStack {
             if vm.isLocalUser {
-                XMDesgin.SmallBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "profile_edit", text: "编辑社交资料") {
+                XMDesgin.SmallBtn(fColor: .XMColor.b1, backColor: .XMColor.f1, iconName: "profile_edit", text: "编辑社交资料") {
                     MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
                 }
                 
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_gift", text: "我的礼物") {
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_gift", text: "我的礼物") {
                     MainViewModel.shared.pushTo(MainViewModel.PagePath.mygift)
                 }
             } else {
                 // 关注按钮
                 switch userInfo.isFollow {
                 case 1:
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "已关注") {
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "已关注") {
                         await vm.tapFollow()
                     }
                 case 0:
@@ -225,17 +225,17 @@ struct ProfileView: View {
                 default: EmptyView()
                 }
                 // 私信
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_message", text: "私信") {
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_message", text: "私信") {
                     await vm.tapChat()
                 }
                 
                 if userInfo.wechat.isEmpty {
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_gift", text: "送TA上榜") {
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_gift", text: "送TA上榜") {
                         Apphelper.shared.presentPanSheet(PrueGiftView()
                             .environmentObject(vm), style: .shop)
                     }
                 } else {
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: userInfo.wechat) {
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .green, iconName: "inforequest_wechat", text: userInfo.wechat) {
                         Apphelper.shared.presentPanSheet(WechatGiftView()
                             .environmentObject(vm), style: .shop)
                     }
@@ -254,7 +254,7 @@ struct ProfileView: View {
                 Text(tag.text)
                     .padding(.horizontal, 20)
                     .padding(.vertical, 8)
-                    .background(Rectangle().fcolor(.XMDesgin.b1))
+                    .background(Rectangle().fcolor(.XMColor.b1))
                     .clipShape(Capsule())
             }
         }

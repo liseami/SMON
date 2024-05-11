@@ -70,7 +70,7 @@ struct PostEditView: View {
                     }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    XMDesgin.SmallBtn(fColor: Color.XMDesgin.b1, backColor: Color.XMDesgin.f1, iconName: "", text: "发布") {
+                    XMDesgin.SmallBtn(fColor: Color.XMColor.b1, backColor: Color.XMColor.f1, iconName: "", text: "发布") {
                         await vm.publishPost()
                     }
                 }
@@ -111,8 +111,8 @@ struct PostEditView: View {
                     HStack {
                         Text("参与")
                             .font(.XMFont.f2b)
-                            .fcolor(.XMDesgin.f1)
-                        XMDesgin.XMTag(text: title, bgcolor: .XMDesgin.main)
+                            .fcolor(.XMColor.f1)
+                        XMDesgin.XMTag(text: title, bgcolor: .XMColor.main)
                     }
                 }
             }
@@ -132,15 +132,15 @@ struct PostEditView: View {
                     Text(UserManager.shared.user.nickname)
                         .font(.XMFont.f1b)
                         .lineLimit(1)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                     Spacer()
                 }
                 TextField(text: $vm.textInput, axis: .vertical) {}
                     .autoOpenKeyboard()
                     .frame(minHeight: 120, alignment: .topLeading)
                     .font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f1)
-                    .tint(.XMDesgin.main)
+                    .fcolor(.XMColor.f1)
+                    .tint(.XMColor.main)
             }
         }
     }
@@ -155,7 +155,7 @@ struct PostEditView: View {
                 XMDesgin.XMButton {
                     openPhotoSelecter()
                 } label: {
-                    Color.XMDesgin.b1
+                    Color.XMColor.b1
                         .overlay(content: {
                             XMDesgin.XMIcon(iconName: "system_add")
                         })

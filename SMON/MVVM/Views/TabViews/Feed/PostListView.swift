@@ -36,7 +36,7 @@ struct PostListView: View {
                     VStack(spacing: 24) {
                         Text("暂无帖子，快快发布吧！")
                             .font(.XMFont.f1)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                         LoadingPostView()
                     }
                     .padding(.top, 12)

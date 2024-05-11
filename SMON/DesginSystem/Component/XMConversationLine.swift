@@ -23,12 +23,12 @@ struct XMConversationLine: View {
                     Spacer()
                     Text(date.string(withFormat: "HH:mm"))
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 }
                 Text(lastmessage)
                     .lineLimit(2)
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
             })
         }
     }

@@ -26,7 +26,7 @@ struct BlackListView: View {
                             Text(user.nickname)
                                 .font(.XMFont.f1b)
                             Spacer()
-                            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "解除黑名单") {
+                            XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "解除黑名单") {
                                 Task {
                                     let t = UserRelationAPI.tapBlack(blackUserId: user.userId)
                                     let r = await Networking.request_async(t)

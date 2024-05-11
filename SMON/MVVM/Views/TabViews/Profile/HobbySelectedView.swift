@@ -44,7 +44,7 @@ struct HobbySelectedView: View {
 
             XMTyperText(text: "最多选择5样您喜欢的标签。")
                 .font(.XMFont.f1)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 
@@ -89,7 +89,7 @@ struct HobbySelectedView: View {
                 Capsule()
                     .stroke(lineWidth: 3)
                 
-                    .fcolor(.XMDesgin.main)
+                    .fcolor(.XMColor.main)
                     .ifshow(show: isSelected)
             }
     }

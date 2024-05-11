@@ -42,9 +42,9 @@ struct AppWarningView: View {
                 .font(.XMFont.f2)
                 .lineSpacing(6)
                 .multilineTextAlignment(.leading)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
                 .frame(width: 240)
-                .tint(Color.XMDesgin.main)
+                .tint(Color.XMColor.main)
                 .environment(\.openURL, OpenURLAction { url in
                     print(url)
                     Apphelper.shared.mada(style: .rigid)
@@ -53,7 +53,7 @@ struct AppWarningView: View {
                     return .handled
                 })
             Spacer()
-            XMDesgin.CircleBtn(backColor: Color.white, fColor: Color.XMDesgin.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
+            XMDesgin.CircleBtn(backColor: Color.white, fColor: Color.XMColor.b1, iconName: "system_down", enable: agreeList.count == warnings.count) {
                 vm.pageProgress = .Login_PhoneNumberInput
             }
             .rotationEffect(.degrees(-90))
@@ -80,7 +80,7 @@ struct AppWarningView: View {
                 .ifshow(show: showBtns)
             }
         })
-        .shadow(.drop(color: Color.XMDesgin.b1.opacity(0.6), radius: 12, x: 0, y: 0))
+        .shadow(.drop(color: Color.XMColor.b1.opacity(0.6), radius: 12, x: 0, y: 0))
         .padding(.bottom, 60)
     }
 }

@@ -103,7 +103,7 @@ struct BannerRow<Content: View, T: Identifiable>: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .center) {
                 RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)
-                    .fcolor(.XMDesgin.b1)
+                    .fcolor(.XMColor.b1)
             }
     }
 //    Rota3dTest()
@@ -156,7 +156,7 @@ struct Rota3dTest: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .center) {
                 RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)
-                    .fcolor(.XMDesgin.b1)
+                    .fcolor(.XMColor.b1)
             }
     }
 }

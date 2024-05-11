@@ -12,13 +12,13 @@ struct BioRequestView: View {
     var body: some View {
         InfoRequestView(title: "最后，关于我，我还想说...", subline: "认真地编辑自我介绍，更容易变得万众瞩目哦。", btnEnable: !vm.bio.isEmpty) {
             TextEditor(text: $vm.bio)
-                .tint(Color.XMDesgin.main)
+                .tint(Color.XMColor.main)
                 .scrollContentBackground(.hidden)
-                .background(Color.XMDesgin.b1)
-                .font(.XMFont.f1).fcolor(.XMDesgin.f1)
+                .background(Color.XMColor.b1)
+                .font(.XMFont.f1).fcolor(.XMColor.f1)
                 .padding(.all, 12)
                 .frame(height: 160)
-                .background(Color.XMDesgin.b1)
+                .background(Color.XMColor.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .autoOpenKeyboard()
         } btnAction: {

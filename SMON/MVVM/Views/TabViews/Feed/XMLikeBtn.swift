@@ -53,7 +53,7 @@ struct XMLikeBtn: View {
                 XMDesgin.XMIcon(
                     iconName: self.isLiked ? "feed_heart_fill" : "feed_heart",
                     size: 16,
-                    color: self.isLiked ? .red : .XMDesgin.f1,
+                    color: self.isLiked ? .red : .XMColor.f1,
                     withBackCricle: true)
             }
             // 在详情内被点赞，列表中响应。

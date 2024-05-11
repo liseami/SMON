@@ -29,7 +29,7 @@ struct XMSection<Content: View>: View {
             content()
             .listRowInsets(.init(top: 24, leading: 20, bottom: 24, trailing: 20))
             .listRowSeparator(.hidden, edges: .top)
-            .tint(.XMDesgin.main)
+            .tint(.XMColor.main)
 
         if let footer {
             Section {
@@ -37,11 +37,11 @@ struct XMSection<Content: View>: View {
             } header: {
                 Text(title)
                     .font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
             } footer: {
                 Text(footer)
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
                     .listRowInsets(.init(top: 12, leading: 12, bottom: 12, trailing: 12))
                     .listRowSeparator(.hidden, edges: .bottom)
             }
@@ -51,7 +51,7 @@ struct XMSection<Content: View>: View {
             } header: {
                 Text(title)
                     .font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
             }
         }
     }

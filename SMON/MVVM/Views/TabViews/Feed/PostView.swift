@@ -68,7 +68,7 @@ struct PostView: View {
     var commentNum: some View {
         Text("\(vm.post.commentNums == 0 ? "" : vm.post.commentNums.string)评论")
             .font(.XMFont.f3)
-            .fcolor(.XMDesgin.f2)
+            .fcolor(.XMColor.f2)
             .padding(.top, 6)
             .background(content: {
                 Color.black
@@ -162,14 +162,14 @@ struct PostView: View {
             } label: {
                 Text(vm.post.nickname)
                     .font(.XMFont.f2b)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                     .lineLimit(1)
             }
 
             Spacer()
             Text(vm.post.createdAtStr)
                 .font(.XMFont.f2)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 
@@ -177,7 +177,7 @@ struct PostView: View {
     var text: some View {
         Text(vm.post.postContent)
             .lineSpacing(3)
-            .fcolor(.XMDesgin.f1)
+            .fcolor(.XMColor.f1)
             .font(.XMFont.f2)
     }
 
@@ -188,7 +188,7 @@ struct PostView: View {
             RoundedRectangle(cornerRadius: 99)
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 }
@@ -222,7 +222,7 @@ struct LoadingPostView: View {
     var commentNum: some View {
         Text("评论")
             .font(.XMFont.f3)
-            .fcolor(.XMDesgin.f2)
+            .fcolor(.XMColor.f2)
             .padding(.top, 6)
             .background(content: {
                 Color.black
@@ -271,13 +271,13 @@ struct LoadingPostView: View {
                 .redacted(reason: .placeholder)
                 .font(.XMFont.f1b)
                 .lineLimit(1)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
 
             Spacer()
             Text(String.random(ofLength: Int.random(in: 4...12)))
                 .redacted(reason: .placeholder)
                 .font(.XMFont.f3)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 
@@ -286,7 +286,7 @@ struct LoadingPostView: View {
         Text(String.random(ofLength: Int.random(in: 32...120)))
             .redacted(reason: .placeholder)
             .lineSpacing(3)
-            .fcolor(.XMDesgin.f1)
+            .fcolor(.XMColor.f1)
             .font(.XMFont.f2)
     }
 
@@ -301,7 +301,7 @@ struct LoadingPostView: View {
             RoundedRectangle(cornerRadius: 99)
                 .frame(width: 2)
                 .frame(maxHeight: .infinity)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 }

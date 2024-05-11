@@ -41,7 +41,7 @@ struct MyUnlockView: View {
                                     .font(.XMFont.f1b)
                                 Text(user.updatedAtStr)
                                     .font(.XMFont.f3)
-                                    .fcolor(.XMDesgin.f2)
+                                    .fcolor(.XMColor.f2)
                             })
                             Spacer()
                         }
@@ -67,7 +67,7 @@ struct MyUnlockView: View {
                                 }
                             }
                             .padding(.all, 12)
-                            .background(Color.XMDesgin.b1)
+                            .background(Color.XMColor.b1)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
 
                             HStack {
@@ -81,11 +81,11 @@ struct MyUnlockView: View {
                                     }
                                     Apphelper.shared.pushNotification(type: .success(message: "已复制"))
                                 } label: {
-                                    XMDesgin.XMTag(text: "复制口令码", bgcolor: Color.XMDesgin.main)
+                                    XMDesgin.XMTag(text: "复制口令码", bgcolor: Color.XMColor.main)
                                 }
                             }
                             .padding(.all, 12)
-                            .background(Color.XMDesgin.b1)
+                            .background(Color.XMColor.b1)
                             .clipShape(Capsule())
                         })
                     }

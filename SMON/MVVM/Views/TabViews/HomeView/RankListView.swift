@@ -98,7 +98,7 @@ struct RankListView: View {
                         .lineLimit(1)
                     Text(user.cityName.or("未知"))
                         .font(.XMFont.f3)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 }
             }
         }
@@ -118,7 +118,7 @@ struct RankListLoadingView: View {
             ForEach(0 ... 33, id: \.self) { _ in
                 VStack {
                     Circle()
-                        .fill(Color.XMDesgin.b1.gradient)
+                        .fill(Color.XMColor.b1.gradient)
                         .frame(width: 100, height: 100) // Adjust the size as needed
                         .clipShape(Circle())
                     Text("user.nickname")
@@ -126,7 +126,7 @@ struct RankListLoadingView: View {
                         .lineLimit(1)
                     Text("user.cityName")
                         .font(.XMFont.f3)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 }
                 .redacted(reason: .placeholder)
                 .conditionalEffect(.repeat(.shine, every: 1), condition: true)

@@ -23,7 +23,7 @@ struct XMEmptyView: View {
                 .frame(width: 220, height: 220)
             Text(text)
                 .font(.XMFont.f1)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
         .padding(.top, UIScreen.main
             .bounds.height * 0.3)

@@ -79,7 +79,7 @@ struct SocialAccountView: View {
 
         })
         .navigationViewStyle(.stack)
-        .tint(Color.XMDesgin.f1)
+        .tint(Color.XMColor.f1)
     }
 }
 

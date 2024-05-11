@@ -121,7 +121,7 @@ struct NearRankView: View {
                             .lineLimit(1)
                         Text(user.distanceStr)
                             .font(.XMFont.f3)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     }
                 }
             }

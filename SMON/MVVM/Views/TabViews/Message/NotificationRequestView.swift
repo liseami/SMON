@@ -15,10 +15,10 @@ struct NotificationRequestView: View {
         VStack(alignment: .center, spacing: 24) {
             Text("不错过大赛的爆红选手")
                 .font(.XMFont.big2.bold())
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
             Text("不想错过大赛热点信息，可以体验我们为您专属定制的大赛通报。")
                 .font(.XMFont.f2)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
             Spacer()
             Image("nitification_pagepic")
                 .resizable()
@@ -43,7 +43,7 @@ struct NotificationRequestView: View {
         .padding(.vertical, 32)
         .padding(.all, 32)
         .overlay(alignment: .topLeading) {
-            XMDesgin.XMIcon(iconName: "system_xmark", size: 22, color: .XMDesgin.f1, withBackCricle: true)
+            XMDesgin.XMIcon(iconName: "system_xmark", size: 22, color: .XMColor.f1, withBackCricle: true)
                 .onTapGesture {
                     Apphelper.shared.closeSheet()
                 }

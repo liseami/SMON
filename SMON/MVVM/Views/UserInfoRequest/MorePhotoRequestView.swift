@@ -33,7 +33,7 @@ struct MorePhotoRequestView: View {
                             }
                         }
                         .frame(width: w, height: w, alignment: .center)
-                        .background(Color.XMDesgin.b1)
+                        .background(Color.XMColor.b1)
                         .clipShape(RoundedRectangle(cornerRadius: 18))
                     })
                 }

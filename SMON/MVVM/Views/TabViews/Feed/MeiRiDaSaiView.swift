@@ -118,7 +118,7 @@ struct MeiRiDaSaiView: View {
                     VStack(spacing: 24) {
                         Text("暂无帖子，快快发布吧！")
                             .font(.XMFont.f1)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                         LoadingPostView()
                     }
                     .padding(.top, 12)
@@ -167,17 +167,17 @@ struct MeiRiDaSaiView: View {
                 } label: {
                     Text(text)
                         .font(selected ? .XMFont.f1b : .XMFont.f1)
-                        .fcolor(Color.XMDesgin.f1)
+                        .fcolor(Color.XMColor.f1)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
-                        .background(selected ? Color.XMDesgin.b1 : Color.XMDesgin.b1.opacity(0.01))
+                        .background(selected ? Color.XMColor.b1 : Color.XMColor.b1.opacity(0.01))
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
         }
         .frame(maxWidth: .infinity)
         .padding(.all, 4)
-        .background(Color.XMDesgin.b1.opacity(0))
+        .background(Color.XMColor.b1.opacity(0))
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
@@ -188,19 +188,19 @@ struct MeiRiDaSaiView: View {
                 VStack(alignment: .center, spacing: 16, content: {
                     Text(theme.title)
                         .font(.XMFont.big3.bold())
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
 
                     Text(theme.description)
                         .lineSpacing(4)
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f1)
-                    XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: self.vm.sex == 2 ? "去男生主题发帖" : "去女生主题发帖") {
+                        .fcolor(.XMColor.f1)
+                    XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: self.vm.sex == 2 ? "去男生主题发帖" : "去女生主题发帖") {
                         await vm.changeThemeSex()
                     }
                     .overlay(alignment: .center) {
                         Capsule()
                             .stroke(lineWidth: 1)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     }
                     HStack(spacing: 0) {
                         Text("\(theme.postsNums)个帖子 · ")
@@ -208,7 +208,7 @@ struct MeiRiDaSaiView: View {
                         Text(theme.deadlineInfoStr)
                     }
                     .font(.XMFont.f2).monospaced()
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
                 })
                 .padding(.top, 68)
                 .padding(.all, 16)
@@ -231,10 +231,10 @@ struct MeiRiDaSaiView: View {
                             .frame(maxWidth: .infinity, alignment: .center)
                             .opacity(1)
                         }
-                        .overlay(LinearGradient(colors: [Color.XMDesgin.b1, Color.XMDesgin.b1, Color.clear], startPoint: .bottom, endPoint: .top))
+                        .overlay(LinearGradient(colors: [Color.XMColor.b1, Color.XMColor.b1, Color.clear], startPoint: .bottom, endPoint: .top))
                     }
                 }
-                .background(Color.XMDesgin.b1.gradient)
+                .background(Color.XMColor.b1.gradient)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(alignment: .top) {
                     // 主题大赛列表
@@ -257,17 +257,17 @@ struct MeiRiDaSaiView: View {
                 Text("theme.title")
                     .redacted(reason: .placeholder)
                     .font(.XMFont.big3.bold())
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                 Text("theme.description")
                     .redacted(reason: .placeholder)
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
 
-                XMDesgin.XMMainBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在寻找大赛主题") {}
+                XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "正在寻找大赛主题") {}
                     .overlay(alignment: .center) {
                         Capsule()
                             .stroke(lineWidth: 1)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     }
                 HStack(spacing: 0) {
                     Text("232345个帖子 · ")
@@ -277,23 +277,23 @@ struct MeiRiDaSaiView: View {
                         .redacted(reason: .placeholder)
                 }
                 .font(.XMFont.f2).monospaced()
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
             })
             .padding(.top, 68)
             .padding(.all, 16)
-            .background(Color.XMDesgin.b1.gradient)
+            .background(Color.XMColor.b1.gradient)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .top) {
                 // 主题大赛列表
                 BannerRow(imageW: 156, spacing: 12, index: .constant(2), list: [XMTheme(id: 1), XMTheme(id: 2), XMTheme(id: 3), XMTheme(id: 4), XMTheme(id: 5), XMTheme(id: 6)]) { _ in
                     RoundedRectangle(cornerRadius: 20)
-                        .fill(Color.XMDesgin.b1)
+                        .fill(Color.XMColor.b1)
                         .scaledToFill()
                         .frame(width: 156, height: 156 / 16 * 9)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                         .overlay(alignment: .center) {
                             RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)
-                                .fcolor(.XMDesgin.f1)
+                                .fcolor(.XMColor.f1)
                         }
                         .conditionalEffect(.repeat(.shine, every: 1), condition: true)
                 }
@@ -310,7 +310,7 @@ struct MeiRiDaSaiView: View {
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .center) {
                 RoundedRectangle(cornerRadius: 12).stroke(lineWidth: 3)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
             }
     }
 }

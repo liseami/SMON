@@ -25,7 +25,7 @@ struct NewVersionSheet: View {
                 .padding(.all, 12)
                 .addBack()
             Spacer()
-            XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "去AppStore更新到最新版本", enable: true) {
+            XMDesgin.XMMainBtn(fColor: .XMColor.b1, backColor: .XMColor.f1, iconName: "", text: "去AppStore更新到最新版本", enable: true) {
                 guard let writeReviewURL = URL(string: AppConfig.AppStoreURL.absoluteString) else {
                     return
                 }

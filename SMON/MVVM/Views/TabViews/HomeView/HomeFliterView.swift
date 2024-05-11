@@ -23,7 +23,7 @@ struct HomeFliterView: View {
                 XMSection(title: "距离偏好") {
                     Slider(value: $mod.range, in: 2...200, step: 1, onEditingChanged: { _ in
 
-                    }).tint(Color.XMDesgin.main)
+                    }).tint(Color.XMColor.main)
                     Text("\(mod.range.int)公里")
                 }
 
@@ -32,7 +32,7 @@ struct HomeFliterView: View {
                         lowValue: $mod.minAgeProgress,
                         highValue: $mod.maxAgeProgress,
                         in: 0...100,
-                        showDifferenceOnEditing: true, color: Color.XMDesgin.main)
+                        showDifferenceOnEditing: true, color: Color.XMColor.main)
                     {
                         self.onEditing = $0
                     }

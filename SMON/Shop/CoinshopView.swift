@@ -68,8 +68,8 @@ struct CoinshopView: View {
             Text(LocalizedStringKey("点击支付，即代表您已阅读并同意「每日大赛」的[《赛币充值协议》](https://www.baidu.com)。"))
                 .font(.XMFont.f2)
                 .multilineTextAlignment(.leading)
-                .fcolor(.XMDesgin.f2)
-                .tint(Color.XMDesgin.main)
+                .fcolor(.XMColor.f2)
+                .tint(Color.XMColor.main)
                 .environment(\.openURL, OpenURLAction { _ in
                     Apphelper.shared.presentPanSheet(InAppBrowser(url: URL(string: AppConfig.SAIBICOIN)!), style: .cloud)
                      return  .handled
@@ -124,7 +124,7 @@ struct CoinshopView: View {
         .overlay(alignment: .center) {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(lineWidth: 1.5)
-                .fcolor(.XMDesgin.f3)
+                .fcolor(.XMColor.f3)
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding(.all, 1)

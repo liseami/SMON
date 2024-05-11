@@ -164,7 +164,7 @@ struct HotBuyView: View {
                     }
                     .font(.title)
                 }, value: vm.input)
-                .transition(.movingParts.pop(Color.XMDesgin.main).animation(.bouncy(duration: 1, extraBounce: 0.5)))
+                .transition(.movingParts.pop(Color.XMColor.main).animation(.bouncy(duration: 1, extraBounce: 0.5)))
                 .ifshow(show: show)
             Text("为自己添加热度，立刻迎来人气大爆发")
                 .font(.XMFont.big2.bold())
@@ -180,19 +180,19 @@ struct HotBuyView: View {
                     .resizable()
                     .frame(width: 20, height: 20)
                 TextField(text: $vm.input, prompt: Text("投入赛币！")) {}
-                    .tint(Color.XMDesgin.main)
+                    .tint(Color.XMColor.main)
                     .keyboardType(.numberPad)
                     .font(.XMFont.big3.bold())
             }
             .height(44)
             .multilineTextAlignment(.leading)
             .padding(.horizontal, 12)
-            .background(Color.XMDesgin.b1)
+            .background(Color.XMColor.b1)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .overlay(alignment: .center) {
                 RoundedRectangle(cornerRadius: 12)
                     .stroke(lineWidth: 1.5)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
             }
             XMDesgin.XMButton {
                 await vm.buyHot()
@@ -201,8 +201,8 @@ struct HotBuyView: View {
                     .width(120)
                     .height(44)
                     .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.b1)
-                    .background(Color.XMDesgin.f1)
+                    .fcolor(.XMColor.b1)
+                    .background(Color.XMColor.f1)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
@@ -224,9 +224,9 @@ struct HotBuyView: View {
                     infoView(title: "可用赛币", image: "saicoin", value: "\(vm.userHotInfo.coinNums)赛币")
                     Text("特惠充值")
                         .font(.XMFont.f2b)
-                        .fcolor(.XMDesgin.main)
+                        .fcolor(.XMColor.main)
                         .padding(.all, 4)
-                        .background(Color.XMDesgin.main.gradient.opacity(0.3))
+                        .background(Color.XMColor.main.gradient.opacity(0.3))
                         .clipShape(RoundedRectangle(cornerRadius: 6))
                 }
                 infoView(title: "我的热度", value:
@@ -254,10 +254,10 @@ struct HotBuyView: View {
             }
 
             .font(.XMFont.f2b)
-            .fcolor(.XMDesgin.f1)
+            .fcolor(.XMColor.f1)
             .padding(.horizontal, 20)
             .padding(.vertical, 8)
-            .background(Color.XMDesgin.b1)
+            .background(Color.XMColor.b1)
             .clipShape(Capsule())
         }
     }
@@ -278,12 +278,12 @@ struct HotBuyView: View {
                         Text(tips.name)
                             .lineSpacing(4)
                             .font(.XMFont.f2)
-                            .fcolor(.XMDesgin.f1)
+                            .fcolor(.XMColor.f1)
                     }
                     .padding(.vertical, 12)
                     .padding(.horizontal, 16)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.XMDesgin.b1)
+                    .background(Color.XMColor.b1)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
                 }
             }
@@ -325,7 +325,7 @@ struct HotBuyView: View {
                 Spacer()
                 Text("\(vm.countdown)秒 后刷新")
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                     .changeEffect(.glow, value: vm.countdown)
             }
 
@@ -341,7 +341,7 @@ struct HotBuyView: View {
                                         ForEach(0 ... 11, id: \.self) { index in
                                             Circle()
                                                 .frame(width: 6, height: 6, alignment: .center)
-                                                .foregroundStyle(user_index == index ? Color.XMDesgin.main : Color.XMDesgin.f1)
+                                                .foregroundStyle(user_index == index ? Color.XMColor.main : Color.XMColor.f1)
                                         }
                                     })
                                     .frame(width: 32)
@@ -352,12 +352,12 @@ struct HotBuyView: View {
                                     Text(user.nickname)
                                         .lineLimit(1)
                                         .font(.XMFont.f1)
-                                        .fcolor(.XMDesgin.f1)
+                                        .fcolor(.XMColor.f1)
                                     Spacer()
                                     Text(String(format: "%.2f", Double(user.popularity) ?? 0.00) + "❤️‍🔥")
                                         .lineLimit(1)
                                         .font(.XMFont.f1)
-                                        .fcolor(.XMDesgin.f1)
+                                        .fcolor(.XMColor.f1)
                                 }
                                 .height(44)
                                 Divider()

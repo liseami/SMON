@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    enum XMDesgin {
+    enum XMColor {
         static let f1: Color = .init(hex: "FEFEFE")
         static let f2: Color = .init(hex: "999999")
         static let f3: Color = .init(hex: "7F7F7F")

@@ -14,14 +14,14 @@ struct LoginView_PhoneNumberInput: View {
         InfoRequestView(title: "请输入您的手机号码", subline: "我们将向您的手机号发送验证码，以帮助你验证并完成登录。", btnEnable: vm.isPhoneNumberValid) {
             HStack(spacing: 20) {
                 Text("+86")
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
                 TextField("", text: $vm.phoneInput)
-                    .tint(Color.XMDesgin.main)
+                    .tint(Color.XMColor.main)
                     .keyboardType(.numberPad)
                     .autoOpenKeyboard()
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                    
-                XMDesgin.XMIcon(iconName: "system_xmark", size: 15, color: Color.XMDesgin.f3, withBackCricle: true)
+                XMDesgin.XMIcon(iconName: "system_xmark", size: 15, color: Color.XMColor.f3, withBackCricle: true)
                     .onTapGesture {
                         vm.phoneInput.removeAll()
                     }

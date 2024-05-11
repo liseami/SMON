@@ -129,9 +129,9 @@ class UserManager: ObservableObject {
     // 获取最新的阿里云OSS上传Token
     @MainActor
     func getOSSToken() async {
-        let target = CommonAPI.getUploadToken
-        let result = await Networking.request_async(target)
-        if result.is2000Ok, let ossinfo = result.mapObject(XMUserOSSTokenInfo.self) {
+        let t = CommonAPI.getUploadToken
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let ossinfo = r.mapObject(XMUserOSSTokenInfo.self) {
             OSSInfo = ossinfo
         }
     }
@@ -218,13 +218,13 @@ extension UserManager {
         TUIChatConfig.default().enableWelcomeCustomMessage = false
 
         TUITextMessageCell.outgoingTextFont = .boldSystemFont(ofSize: 16)
-        TUITextMessageCell.outgoingTextColor = UIColor(Color.XMDesgin.f1)
+        TUITextMessageCell.outgoingTextColor = UIColor(Color.XMColor.f1)
         TUITextMessageCell.incommingTextFont = .boldSystemFont(ofSize: 16)
-        TUITextMessageCell.incommingTextColor = UIColor(Color.XMDesgin.f1)
+        TUITextMessageCell.incommingTextColor = UIColor(Color.XMColor.f1)
         TUIMessageCell.outgoingNameFont = .boldSystemFont(ofSize: 16)
-        TUIMessageCell.outgoingNameColor = UIColor(Color.XMDesgin.f1)
+        TUIMessageCell.outgoingNameColor = UIColor(Color.XMColor.f1)
         TUIMessageCell.incommingNameFont = .boldSystemFont(ofSize: 16)
-        TUIMessageCell.incommingNameColor = UIColor(Color.XMDesgin.f1)
+        TUIMessageCell.incommingNameColor = UIColor(Color.XMColor.f1)
 
         TUIMessageCellLayout.outgoingMessage().avatarSize = .init(width: 44, height: 44)
         TUIMessageCellLayout.outgoingMessage().avatarInsets = .init(horizontal: 16, vertical: 16)

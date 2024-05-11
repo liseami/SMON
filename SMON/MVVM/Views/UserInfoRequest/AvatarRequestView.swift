@@ -29,7 +29,7 @@ struct AvatarRequestView: View {
                     }
                 }
                 .frame(width: 120, height: 120, alignment: .center)
-                .background(Color.XMDesgin.b1)
+                .background(Color.XMColor.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
             })
             .moveTo(alignment: .center)
@@ -42,7 +42,7 @@ struct AvatarRequestView: View {
     @MainActor
     func updateAvatar() async {
         guard let avatar = vm.avatar,
-              let urls = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar]),
+              let urls = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar], type: .avatar),
               let url = urls.first else { vm.avatar = nil; return }
         let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(avatar: url))
         if result.is2000Ok {

@@ -17,7 +17,7 @@ struct PhotoSelector : View {
 
     var body: some View {
         PhotoSelectorRepresentable(maxSelection: maxSelection, completionHandler: completionHandler)
-            .tint(Color.XMDesgin.main)
+            .tint(Color.XMColor.main)
             .ignoresSafeArea()
             .environment(\.colorScheme, .dark)
     }
@@ -118,7 +118,7 @@ struct SinglePhotoSelector : View {
     }
     var body: some View {
         SinglePhotoSelectorRepresentable(completionHandler: completionHandler)
-            .tint(Color.XMDesgin.main)
+            .tint(Color.XMColor.main)
             .ignoresSafeArea()
             .environment(\.colorScheme, .dark)
     }

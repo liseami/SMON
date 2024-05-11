@@ -188,12 +188,12 @@ class Apphelper {
     @MainActor
     func pushNotification(type: NotificationType) {
         let message: String
-        var textColor = UIColor(Color.XMDesgin.f1)
+        var textColor = UIColor(Color.XMColor.f1)
 
         switch type {
         case let .info(msg):
             message = msg
-            textColor = UIColor(Color.XMDesgin.f1)
+            textColor = UIColor(Color.XMColor.f1)
 
         case let .success(msg):
             message = msg
@@ -216,7 +216,7 @@ class Apphelper {
         // update default style
         NotificationPresenter.shared.updateDefaultStyle { style in
             let style: StatusBarNotificationStyle = style
-            style.backgroundStyle.backgroundColor = UIColor(Color.XMDesgin.b1)
+            style.backgroundStyle.backgroundColor = UIColor(Color.XMColor.b1)
             style.textStyle.textColor = textColor
             style.textStyle.font = .monospacedSystemFont(ofSize: 15, weight: .bold)
             style.canSwipeToDismiss = false
@@ -248,7 +248,7 @@ class Apphelper {
         // update default style
         NotificationPresenter.shared.updateDefaultStyle { style in
             let style: StatusBarNotificationStyle = style
-            style.backgroundStyle.backgroundColor = UIColor(Color.XMDesgin.b1)
+            style.backgroundStyle.backgroundColor = UIColor(Color.XMColor.b1)
             style.textStyle.textColor = UIColor(Color.green)
             style.textStyle.font = UIFont.boldSystemFont(ofSize: 16)
             style.canSwipeToDismiss = false
@@ -319,7 +319,7 @@ class Apphelper {
         }))
 
         // 设置模式为黑暗模式
-        alertController.view.tintColor = UIColor(Color.XMDesgin.f1)
+        alertController.view.tintColor = UIColor(Color.XMColor.f1)
 
         if let viewController = topMostViewController() {
             alertController.popoverPresentationController?.sourceView = viewController.view

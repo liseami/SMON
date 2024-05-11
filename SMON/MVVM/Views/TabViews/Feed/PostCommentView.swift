@@ -49,7 +49,7 @@ struct PostCommentView: View {
                         Text(comment.nickname)
                             .font(.XMFont.f2b)
                             .lineLimit(1)
-                            .fcolor(.XMDesgin.f1)
+                            .fcolor(.XMColor.f1)
                         XMDesgin.XMAuthorTag()
                             .ifshow(show: comment.isPostsAuthor.bool)
                         Spacer()
@@ -57,10 +57,10 @@ struct PostCommentView: View {
                     })
                     Text(comment.content)
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                     Text(comment.createdAtStr)
                         .font(.XMFont.f3)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 })
                 .contentShape(Rectangle())
 
@@ -87,7 +87,7 @@ struct PostCommentView: View {
                 } label: {
                     Text("展开\((comment.commentNum ?? 0) - vm.list.count)条回复")
                         .font(.XMFont.f2).bold()
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                         .ifshow(show: (comment.commentNum ?? 0) - vm.list.count > 0)
                 }
 

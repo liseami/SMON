@@ -59,19 +59,19 @@ struct FlameDetailView: View {
             VStack(alignment: .leading, spacing: 4, content: {
                 Text(data.nickname)
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                 Text(data.eventTitle)
                     .font(.XMFont.f2b)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                 Text(data.createdAtStr)
                     .font(.XMFont.f3)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
 
             })
             Spacer()
             Text(Int(data.addFlames) ?? 0 > 0 ? "+" + data.addFlames : data.addFlames)
                 .font(.XMFont.big3.bold())
-                .fcolor(Int(data.addFlames) ?? 0 > 0 ? .green : .XMDesgin.f1)
+                .fcolor(Int(data.addFlames) ?? 0 > 0 ? .green : .XMColor.f1)
         }
     }
 }

@@ -100,7 +100,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
                     case .isOKButEmpty:
                         Text("--- 没有更多了 ---")
                             .font(.XMFont.f2)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .center)

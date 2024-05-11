@@ -32,7 +32,7 @@ struct SMONApp: App {
                     LoginMainView()
                 }
             }
-            .tint(Color.XMDesgin.f1)
+            .tint(Color.XMColor.f1)
             .preferredColorScheme(.dark)
         }
         // 场景状态改变

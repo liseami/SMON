@@ -45,7 +45,7 @@ struct MyHotInfoView: View {
                 } header: {
                     Text("全国排名")
                         .font(.XMFont.f1b)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                         .listRowSeparator(.hidden, edges: .all)
                 }
 
@@ -56,12 +56,12 @@ struct MyHotInfoView: View {
                 } header: {
                     Text("同城排名")
                         .font(.XMFont.f1b)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                         .listRowSeparator(.hidden, edges: .all)
                 } footer: {
                     XMTyperText(text: "*\(vm.mod.cityRankDesc)")
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                         .listRowSeparator(.hidden, edges: .bottom)
                 }
             }
@@ -73,11 +73,11 @@ struct MyHotInfoView: View {
             } header: {
                 Text("当前状态")
                     .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
             } footer: {
                 Text("* \(vm.mod.hotStatusDesc)")
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
                     .listRowSeparator(.hidden, edges: .bottom)
             }
 
@@ -88,7 +88,7 @@ struct MyHotInfoView: View {
             } header: {
                 Text("当前规则")
                     .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
             }
         }
         .listStyle(.plain)
@@ -100,7 +100,7 @@ struct MyHotInfoView: View {
                     HStack {
                         XMDesgin.XMIcon(iconName: "profile_hot_history", withBackCricle: false)
                         Text("明细")
-                            .fcolor(.XMDesgin.f1)
+                            .fcolor(.XMColor.f1)
                     }
                 }
             }
@@ -116,11 +116,11 @@ struct RankingView: View {
 
     var body: some View {
         RoundedRectangle(cornerRadius: 12)
-            .fill(Color.XMDesgin.main.gradient.shadow(.drop(color: .XMDesgin.main, radius: 10)))
+            .fill(Color.XMColor.main.gradient.shadow(.drop(color: .XMColor.main, radius: 10)))
             .mask(alignment: .leading) {
                 XMTyperText(text: ranking)
                     .font(.custom("GenSekiGothicTW-B", fixedSize: 44))
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                     .listRowSeparator(.hidden, edges: .top)
             }
     }
@@ -136,7 +136,7 @@ struct RewardsView: View {
                 RewardRow(title: rule.title, points: rule.hotDesc)
             }
         }
-        .fcolor(.XMDesgin.f2)
+        .fcolor(.XMColor.f2)
     }
 }
 
@@ -154,7 +154,7 @@ struct RewardRow: View {
             DashedLine()
                 .stroke(style: StrokeStyle(lineWidth: 3, dash: [3]))
                 .frame(maxWidth: .infinity, maxHeight: 2)
-                .fcolor(.XMDesgin.f3)
+                .fcolor(.XMColor.f3)
 
             Text(points)
                 .font(.XMFont.f2)

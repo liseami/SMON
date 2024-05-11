@@ -22,7 +22,7 @@ class ProfileEditViewModel: ObservableObject {
 
     @MainActor
     func updateUserInfo() async {
-        if let avatar, let newAvatarUrl = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar])?.first {
+        if let avatar, let newAvatarUrl = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar],type: .avatar)?.first {
             updateModel.avatar = newAvatarUrl
         }
         // 阿里云图片上传，之后请求接口，刷新页面
@@ -79,14 +79,14 @@ struct ProfileEditView: View {
                 height
                 moreInfo
             })
-            .tint(Color.XMDesgin.main)
+            .tint(Color.XMColor.main)
             .font(.XMFont.f1b)
             .scrollIndicators(.hidden)
-            .fcolor(.XMDesgin.f1)
+            .fcolor(.XMColor.f1)
             .padding(.all, 16)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "完成") {
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "完成") {
                         await vm.updateUserInfo()
                         await vm.updatePhotos(urls: [])
                     }
@@ -219,7 +219,7 @@ struct ProfileEditView: View {
                                 vm.photos.removeAll(where: { $0.id == photo.id })
                             }
                         }, label: {
-                            XMDesgin.XMIcon(iconName: "system_xmark", size: 16, color: .XMDesgin.f1, withBackCricle: true)
+                            XMDesgin.XMIcon(iconName: "system_xmark", size: 16, color: .XMColor.f1, withBackCricle: true)
                         })
                         .padding(.all, 6)
                     }
@@ -239,7 +239,7 @@ struct ProfileEditView: View {
                             LoadingTask(loadingMessage: "正在处理..") {
                                 // 阿里云图片上传，之后请求接口，刷新页面
                                 // 期间不允许用户操作
-                                if let urls = await AliyunOSSManager.shared.upLoadImages_async(images: uiimages) {
+                                if let urls = await AliyunOSSManager.shared.upLoadImages_async(images: uiimages,type: .userAlbum) {
                                     await vm.updatePhotos(urls: urls)
                                 }
                             }
@@ -247,7 +247,7 @@ struct ProfileEditView: View {
                         presentationStyle: .fullScreen
                     )
                 } label: {
-                    Color.XMDesgin.b1
+                    Color.XMColor.b1
                         .overlay(content: {
                             XMDesgin.XMIcon(iconName: "system_add")
                         })
@@ -280,13 +280,13 @@ struct ProfileEditView: View {
 
             TextEditor(text: $vm.updateModel.signature)
                 .font(.XMFont.f1)
-                .fcolor(.XMDesgin.f1)
-                .tint(Color.XMDesgin.main)
+                .fcolor(.XMColor.f1)
+                .tint(Color.XMColor.main)
                 .frame(height: 100)
                 .scrollContentBackground(.hidden)
                 .padding(.all, 12)
                 .background {
-                    Color.XMDesgin.b1
+                    Color.XMColor.b1
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         })
@@ -297,11 +297,11 @@ struct ProfileEditView: View {
             Text("昵称")
             TextField(text: $vm.updateModel.nickname)
                 .font(.XMFont.f1)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
                 .scrollContentBackground(.hidden)
                 .padding(.all, 12)
                 .background {
-                    Color.XMDesgin.b1
+                    Color.XMColor.b1
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         })

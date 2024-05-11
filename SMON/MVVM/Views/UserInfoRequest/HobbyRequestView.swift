@@ -45,7 +45,7 @@ struct HobbyRequestView: View {
 
             XMTyperText(text: "最多选择5样您喜欢的标签。")
                 .font(.XMFont.f1)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 
@@ -79,8 +79,8 @@ struct HobbyRequestView: View {
 
     private var nextButtonOverlay: some View {
         XMDesgin.CircleBtn(
-            backColor: Color.XMDesgin.f1,
-            fColor: Color.XMDesgin.b1,
+            backColor: Color.XMColor.f1,
+            fColor: Color.XMColor.b1,
             iconName: "system_right",
             enable: !viewModel.interestsTag.isEmpty
         ) {
@@ -103,7 +103,7 @@ struct HobbyRequestView: View {
             .overlay(alignment: .topTrailing) {
                 Capsule()
                     .stroke(lineWidth: 3)
-                    .fcolor(.XMDesgin.main)
+                    .fcolor(.XMColor.main)
                     .ifshow(show: isSelected)
             }
     }

@@ -46,7 +46,7 @@ extension View {
             } label: {
                 Text("跳过")
                     .font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
             }
             .padding(.all)
             .padding(.bottom, 22)

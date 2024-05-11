@@ -36,7 +36,7 @@ struct PostReplayView: View {
                 }
                 Group {
                     Text("回复")
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                     HStack(alignment: .center, spacing: 4) {
                         XMUserAvatar(str: reply.toUserAvatar, userId: reply.toUserId, size: 20)
                         Text(reply.toUserNickname)
@@ -50,13 +50,13 @@ struct PostReplayView: View {
             })
             .font(.XMFont.f2)
             .lineLimit(1)
-            .fcolor(.XMDesgin.f1)
+            .fcolor(.XMColor.f1)
             Text(reply.content)
                 .font(.XMFont.f2)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
             Text(reply.createdAtStr)
                 .font(.XMFont.f3)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         })
     }
 }

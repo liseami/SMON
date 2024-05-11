@@ -21,7 +21,6 @@ struct MainView: View {
                 // 启动动画
                 LaunchScreenAnimation()
             }
-            
             .task {
                 Apphelper.shared.closeKeyBoard()
                 // 进入主页面，登录腾讯IM

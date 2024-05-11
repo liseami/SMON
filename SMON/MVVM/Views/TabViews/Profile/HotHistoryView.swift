@@ -51,10 +51,10 @@ struct HotHistoryView: View {
             VStack(alignment: .leading, spacing: 4, content: {
                 Text(item.eventTitle)
                     .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                 Text(item.createdAtStr)
                     .font(.XMFont.f3)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
             })
             Spacer()
             Text(item.addPopularity.double() ?? 0 > 0 ? "+\(item.addPopularity)" : "\(item.addPopularity)")

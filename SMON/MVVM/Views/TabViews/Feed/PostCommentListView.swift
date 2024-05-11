@@ -58,7 +58,7 @@ struct PostCommentListView: View {
         } emptyView: {
             Text("--- 暂无评论 ---")
                 .font(.XMFont.f2)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
                 .padding(.vertical, 32)
         }
         .onChange(of: detailVM.mod.id, perform: { _ in

@@ -39,9 +39,9 @@ struct UserInfoRequestMainView: View {
     var progressLine: some View {
         ZStack(alignment: .leading) {
             Capsule()
-                .fill(Color.XMDesgin.b3.opacity(0.3).gradient)
+                .fill(Color.XMColor.b3.opacity(0.3).gradient)
             Capsule()
-                .fill(Color.XMDesgin.main.gradient)
+                .fill(Color.XMColor.main.gradient)
                 .frame(width: 40 + CGFloat(240 * vm.presentedSteps.count / UserInfoRequestViewModel.PageStep.allCases.count))
         }
         .frame(width: 280, height: 5)
@@ -51,7 +51,7 @@ struct UserInfoRequestMainView: View {
                 .opacity(0)
                 .changeEffect(.rise(origin: .bottom) {
                     Text("🔥")
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                 }, value: vm.presentedSteps)
         })
         .changeEffect(.glow(color: .white), value: vm.presentedSteps)

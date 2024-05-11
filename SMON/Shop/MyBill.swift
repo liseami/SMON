@@ -40,7 +40,7 @@ struct MyBill: View {
                             .font(.XMFont.big3.bold())
                     }
                     .padding(.all, 12)
-                    .background(Color.XMDesgin.b1)
+                    .background(Color.XMColor.b1)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                 } loadingView: {
                     ProgressView()

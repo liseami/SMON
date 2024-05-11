@@ -75,7 +75,7 @@ struct WechatGiftView: View {
                     // 星座等信息
                     Text("\(superVm.user.zodiac) · \(superVm.user.bdsmAttr.bdsmAttrString) · \(superVm.user.emotionalNeeds.emotionalNeedsString)")
                         .fixedSize(horizontal: true, vertical: false)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                         .font(.XMFont.f2b)
                 }
                 Spacer()
@@ -107,7 +107,7 @@ struct WechatGiftView: View {
                                     .padding(.vertical, 6)
                             })
                             .background(RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.XMDesgin.b1.gradient.shadow(.drop(color: Color.pink, radius: 0))))
+                                .fill(Color.XMColor.b1.gradient.shadow(.drop(color: Color.pink, radius: 0))))
                         }
                     }
                 }
@@ -134,19 +134,19 @@ struct WechatGiftView: View {
                 if Int(info.progressBar) ?? 0 >= 100 {
                     Text("* 您已解锁对方的联系方式。请前往个人中心查看。")
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 } else {
                     Text("* 因对方设置，距离解锁微信还需\(info.needCoin)赛币。")
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                     Text("* 系统已助力\(info.giftsCoin)赛币。")
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 }
             })
 
             HStack {
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .green, iconName: "inforequest_wechat", text: info.maskContactValue) {}
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .green, iconName: "inforequest_wechat", text: info.maskContactValue) {}
 //                XMDesgin.XMTag(text: "好评率 100%")
             }
         }

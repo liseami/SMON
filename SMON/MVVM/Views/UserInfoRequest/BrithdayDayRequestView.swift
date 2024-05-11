@@ -27,7 +27,7 @@ struct BrithdayDayRequestView: View {
                     .labelsHidden()
                     .environment(\.locale, Locale(identifier: "zh-hans"))
                     .padding(.all)
-                    .background(Color.XMDesgin.b1)
+                    .background(Color.XMColor.b1)
                     .clipShape(RoundedRectangle(cornerRadius: 22))
             })
 

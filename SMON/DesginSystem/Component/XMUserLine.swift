@@ -47,7 +47,7 @@ struct XMUserLine: View {
                             .font(.XMFont.f1b)
                         Text("\(user.zodiac) · \(user.emotionalNeeds.emotionalNeedsString)")
                             .font(.XMFont.f2)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     })
                     Spacer()
 
@@ -55,18 +55,18 @@ struct XMUserLine: View {
                         switch user.followStatus {
                         // 我关注他
                         case 1:
-                            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "正在关注") {
+                            XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "正在关注") {
                                 await tapFollow()
                             }
                         // 他关注我,没有关系
                         case 2, 0:
-                            XMDesgin.SmallBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "关注") {
+                            XMDesgin.SmallBtn(fColor: .XMColor.b1, backColor: .XMColor.f1, iconName: "", text: "关注") {
                                 await tapFollow()
                             }
 
                         // 互相关注
                         case 10:
-                            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "", text: "互相关注") {
+                            XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "互相关注") {
                                 await tapFollow()
                             }
                         default:

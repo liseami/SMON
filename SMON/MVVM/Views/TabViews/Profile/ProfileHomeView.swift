@@ -87,11 +87,11 @@ struct ProfileHomeView: View {
                             .frame(width: 20, height: 20)
                         Text(vm.mod.coinNums)
                             .font(.XMFont.f3b)
-                            .fcolor(.XMDesgin.f1)
+                            .fcolor(.XMColor.f1)
                     }
                     .padding(.horizontal, 4)
                     .padding(.all, 5)
-                    .background(Color.XMDesgin.b1)
+                    .background(Color.XMColor.b1)
                     .clipShape(Capsule())
                 }
             }
@@ -120,13 +120,13 @@ struct ProfileHomeView: View {
                     Circle()
                         .trim(from: 0.0, to: CGFloat(1))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        .fcolor(.XMDesgin.b1)
+                        .fcolor(.XMColor.b1)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                     Circle()
                         .trim(from: 0.0, to: CGFloat(userManager.user.profileCompletionScore))
                         .stroke(style: StrokeStyle(lineWidth: 8, lineCap: .round, lineJoin: .round))
-                        .fcolor(.XMDesgin.main)
+                        .fcolor(.XMColor.main)
                         .frame(width: 140, height: 140)
                         .rotationEffect(Angle(degrees: -90))
                         .animation(.spring(), value: userManager.user.profileCompletionScore)
@@ -134,10 +134,10 @@ struct ProfileHomeView: View {
                 .overlay(alignment: .bottom) {
                     Text("\(Int(userManager.user.profileCompletionScore * 100))%")
                         .bold()
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                         .padding(.all, 4)
                         .padding(.horizontal, 4)
-                        .background(Capsule().fcolor(.XMDesgin.main))
+                        .background(Capsule().fcolor(.XMColor.main))
                         .overlay(
                             Capsule()
                                 .stroke(Color.black, lineWidth: 4) // 红色描边
@@ -148,7 +148,7 @@ struct ProfileHomeView: View {
             }
 
             let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
-            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "profile_edit", text: text) {
+            XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_edit", text: text) {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
             }
         })
@@ -166,14 +166,14 @@ struct ProfileHomeView: View {
                             .font(.XMFont.f1b)
                         Text(vm.mod.isDailySignin ? "今日已签，100火苗已到账" : "1次 / 24小时")
                             .font(.XMFont.f2)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     })
                     .padding(.leading, 120)
                     Spacer()
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 80)
-                .background(.XMDesgin.b1)
+                .background(.XMColor.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
                 .overlay(alignment: .leading) {
                     Image("profile_calendar")
@@ -239,7 +239,7 @@ struct ProfileHomeView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 24)
-                        .background(Color.XMDesgin.b1)
+                        .background(Color.XMColor.b1)
                         .clipShape(RoundedRectangle(cornerRadius: 16))
                     }
                     .changeEffect(.glow, value: vm.flameJump, isEnabled: item.label == "火苗")
@@ -256,7 +256,7 @@ struct ProfileHomeView: View {
                     .disabled(true)
             }
 
-            XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.b1, iconName: "system_toggle", text: "立即兑换为热度") {
+            XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "system_toggle", text: "立即兑换为热度") {
                 Apphelper.shared.presentPanSheet(HotExchangeView()
                     .environmentObject(vm),
                     style: .sheet)

@@ -18,7 +18,7 @@ struct LoginView_SMSCodeInput: View {
                         Text(String(vm.vcodeInput[index]))
                             .transition(.asymmetric(insertion: .movingParts.boing.animation(.spring).combined(with: .opacity), removal: .movingParts.boing).combined(with: .opacity).animation(.linear))
                     } else {
-                        Circle().fill(Color.XMDesgin.f2)
+                        Circle().fill(Color.XMColor.f2)
                             .frame(width: 10, height: 10)
                     }
                 }
@@ -54,7 +54,7 @@ struct LoginView_SMSCodeInput: View {
             TextField("", text: $vm.vcodeInput)
                 .keyboardType(.numberPad)
                 .autoOpenKeyboard()
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
                 .opacity(0)
         }
         .onChange(of: vm.vcodeInput) { input in

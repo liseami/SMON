@@ -17,10 +17,10 @@ struct RequestUserLocationAuthorizationView: View {
         VStack(alignment: .center, spacing: 24) {
             Text("查看您附近的人？")
                 .font(.XMFont.big2.bold())
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
             Text("打开你的手机，看看谁在你所在的区域。否则无法推送与你最佳匹配的用户")
                 .font(.XMFont.f2)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
             Spacer()
             Image("location_pagepic")
                 .resizable()
@@ -61,7 +61,7 @@ struct RequestUserLocationAuthorizationView: View {
         .padding(.vertical, 24)
         .padding(.all, 32)
         .overlay(alignment: .topLeading) {
-            XMDesgin.XMIcon(iconName: "system_xmark", size: 22, color: .XMDesgin.f1, withBackCricle: true)
+            XMDesgin.XMIcon(iconName: "system_xmark", size: 22, color: .XMColor.f1, withBackCricle: true)
                 .onTapGesture {
                     Apphelper.shared.closeSheet()
                 }

@@ -9,16 +9,40 @@ import SwiftUI
 
 struct SettingView: View {
     @StateObject var vm: SettingViewModel = .init()
-    
+
     var body: some View {
         List {
             #if DEBUG
+            // XMListViewModel
+            Button {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+            } label: {
+                Text("通知页面")
+            }
 
-                //            NavigationLink {
-                //                XMUIDesginSystemView()
-                //            } label: {
-                //                Text("XMUI组件")
-                //            }
+            // XMModRequestViewModel
+            Button {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+            } label: {
+                Text("帖子详情")
+            }
+
+            // XMDesgin
+            // 要求把所有的XMDesgin的控件的各种状态，用一遍
+            Button {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+            } label: {
+                Text("设计系统")
+            }
+
+            // 文字和颜色
+            Button {
+                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+            } label: {
+                Text("文字颜色大小")
+                    .font(.XMFont.f3)
+                    .fcolor(Color.XMColor.b2)
+            }
 
             #endif
 
@@ -56,7 +80,7 @@ struct SettingView: View {
                 } header: {
                     Text(group.name)
                         .font(.XMFont.f1b)
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                         .padding(.vertical, 6)
                 }
             }
@@ -64,10 +88,10 @@ struct SettingView: View {
             VStack(alignment: .center, spacing: 12) {
                 Text("Made with peace & love in Suzhou ♥️")
                     .font(.XMFont.f2b)
-                    .fcolor(.XMDesgin.f1)
+                    .fcolor(.XMColor.f1)
                 Text("SMON Version" + AppConfig.AppVersion)
                     .font(.XMFont.f1b)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
             }
             .padding(.top, 32)
             .frame(maxWidth: .infinity, alignment: .center)

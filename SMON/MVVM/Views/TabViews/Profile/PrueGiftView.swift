@@ -37,7 +37,7 @@ struct PrueGiftView: View {
                     // 星座等信息
                     Text("\(superVm.user.zodiac) · \(superVm.user.bdsmAttr.bdsmAttrString) · \(superVm.user.emotionalNeeds.emotionalNeedsString)")
                         .fixedSize(horizontal: true, vertical: false)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                         .font(.XMFont.f2b)
                 }
                 Spacer()
@@ -45,7 +45,7 @@ struct PrueGiftView: View {
 
             XMTyperText(text: "赠送礼物将为对方带来礼物价值 X 10倍的热度！")
                 .font(.XMFont.f1)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
 
             ScrollView(.vertical, showsIndicators: false, content: {
                 LazyVGrid(columns: Array(repeating: GridItem(), count: 4), spacing: 8) {
@@ -70,7 +70,7 @@ struct PrueGiftView: View {
                                     .padding(.vertical, 6)
                             })
                             .background(RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.XMDesgin.b1.gradient.shadow(.drop(color: Color.pink, radius: 0))))
+                                .fill(Color.XMColor.b1.gradient.shadow(.drop(color: Color.pink, radius: 0))))
                         }
                     }
                 }

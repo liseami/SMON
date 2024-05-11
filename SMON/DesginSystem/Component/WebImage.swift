@@ -15,7 +15,7 @@ struct WebImage: View {
         KFImage(URL(string: str))
             .resizable()
             .placeholder { _ in
-                Color.XMDesgin.b1
+                Color.XMColor.b1
             }
             .fade(duration: 0.3)
             .loadDiskFileSynchronously()

@@ -122,7 +122,7 @@ struct UserListLoadingView: View {
             Spacer().frame(height: 12)
             ForEach(0 ... 99, id: \.self) { _ in
                 HStack(alignment: .top, spacing: 12) {
-                    Circle().fill(Color.XMDesgin.b1.gradient)
+                    Circle().fill(Color.XMColor.b1.gradient)
                         .frame(width: 56, height: 56, alignment: .center)
                     HStack {
                         VStack(alignment: .leading, spacing: 6, content: {
@@ -131,12 +131,12 @@ struct UserListLoadingView: View {
                             Text(String.random(ofLength: Int.random(in: 12 ... 40)))
                                 .font(.XMFont.f2)
                                 .lineLimit(2)
-                                .fcolor(.XMDesgin.f2)
+                                .fcolor(.XMColor.f2)
                         })
                         Spacer()
                         Text(String.random(ofLength: 4))
                             .font(.XMFont.f2)
-                            .fcolor(.XMDesgin.f2)
+                            .fcolor(.XMColor.f2)
                     }
                 }
                 .redacted(reason: .placeholder)

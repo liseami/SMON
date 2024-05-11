@@ -91,7 +91,7 @@ struct PostDetailView: View {
                 // 细线
                 Capsule()
                     .frame(height: 2)
-                    .fcolor(.XMDesgin.b1)
+                    .fcolor(.XMColor.b1)
                     .padding(.horizontal)
                 // 评论列表
                 PostCommentListView(postId: vm.postId, focused: $focused)
@@ -145,17 +145,17 @@ struct PostDetailView: View {
                     .padding(.top, 6)
                 TextField(text: $vm.inputStr, prompt: Text(vm.commentTargetInfo == nil ? "说点什么？" : "回复：@" + vm.commentTargetInfo!.nickname), label: {})
                     .lineLimit(...(focused ? 4 : 1))
-                    .tint(.XMDesgin.main)
+                    .tint(.XMColor.main)
                     .font(.XMFont.f2)
                     .focused($focused)
                     .padding(.all, 12)
-                    .background(.XMDesgin.b1)
+                    .background(.XMColor.b1)
                     .clipShape(RoundedRectangle(cornerRadius: 12))
-                XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "发送") {
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "发送") {
                     await vm.addCommentToPost()
                 }
                 .padding(.top, 6)
-                .transition(.movingParts.pop(Color.XMDesgin.main))
+                .transition(.movingParts.pop(Color.XMColor.main))
                 .ifshow(show: focused)
             }
             .padding(.all, 12)
@@ -206,7 +206,7 @@ struct PostDetailView: View {
     var text: some View {
         Text(vm.mod.postContent)
             .lineSpacing(3)
-            .fcolor(.XMDesgin.f1)
+            .fcolor(.XMColor.f1)
             .font(.XMFont.f1)
             .ifshow(show: vm.mod.postContent.isEmpty == false)
     }
@@ -217,11 +217,11 @@ struct PostDetailView: View {
             Text(vm.mod.nickname)
                 .font(.XMFont.f1b)
                 .lineLimit(1)
-                .fcolor(.XMDesgin.f1)
+                .fcolor(.XMColor.f1)
             Spacer()
             Text(vm.mod.createdAtStr)
                 .font(.XMFont.f3)
-                .fcolor(.XMDesgin.f2)
+                .fcolor(.XMColor.f2)
         }
     }
 

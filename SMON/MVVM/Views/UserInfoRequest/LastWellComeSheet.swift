@@ -23,7 +23,7 @@ struct LastWellComeSheet: View {
                 .padding(.all, 12)
                 .addBack()
             Spacer()
-            XMDesgin.XMMainBtn(fColor: .XMDesgin.b1, backColor: .XMDesgin.f1, iconName: "", text: "我知道了！", enable: true) {
+            XMDesgin.XMMainBtn(fColor: .XMColor.b1, backColor: .XMColor.f1, iconName: "", text: "我知道了！", enable: true) {
                 Task {
                     UserManager.shared.userLoginInfo.isNeedInfo = false
                     await UserManager.shared.getUserInfo()

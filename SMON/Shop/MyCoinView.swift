@@ -18,9 +18,9 @@ struct MyCoinView: View {
                         .frame(width: 44, height: 44)
                     Text("\(vm.mod.coinNums)")
                         .font(.XMFont.big1.bold())
-                        .fcolor(.XMDesgin.f1)
+                        .fcolor(.XMColor.f1)
                     Spacer()
-                    XMDesgin.SmallBtn(fColor: .XMDesgin.f1, backColor: .XMDesgin.main, iconName: "", text: "充值") {
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "充值") {
                         Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop)
                     }
                 })

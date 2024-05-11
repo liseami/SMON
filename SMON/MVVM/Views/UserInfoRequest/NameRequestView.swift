@@ -35,11 +35,11 @@ struct InfoRequestView<Content>: View where Content: View {
                     .font(.XMFont.big2.bold())
                 Text(subline)
                     .font(.XMFont.f1)
-                    .fcolor(.XMDesgin.f2)
+                    .fcolor(.XMColor.f2)
             })
             content()
 
-            XMDesgin.CircleBtn(backColor: Color.XMDesgin.f1, fColor: Color.XMDesgin.b1, iconName: "system_right", enable: self.btnEnable) {
+            XMDesgin.CircleBtn(backColor: Color.XMColor.f1, fColor: Color.XMColor.b1, iconName: "system_right", enable: self.btnEnable) {
                 await self.btnAction()
             }
             .moveTo(alignment: .bottomTrailing)
@@ -59,15 +59,15 @@ struct NameRequestView: View {
             VStack(alignment: .leading, spacing: 12, content: {
                 Text("昵称")
                     .font(.XMFont.f2)
-                    .fcolor(.XMDesgin.f3)
+                    .fcolor(.XMColor.f3)
                 TextField("请输入昵称", text: $vm.name)
                     .font(.XMFont.big2.bold())
                     .autoOpenKeyboard()
-                    .fcolor(.XMDesgin.f1)
-                    .tint(Color.XMDesgin.main)
+                    .fcolor(.XMColor.f1)
+                    .tint(Color.XMColor.main)
                 Capsule()
                     .frame(height: 1)
-                    .fcolor(.XMDesgin.f3)
+                    .fcolor(.XMColor.f3)
             })
         } btnAction: {
             await updateName()

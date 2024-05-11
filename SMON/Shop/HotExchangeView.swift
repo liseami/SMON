@@ -38,7 +38,7 @@ struct HotExchangeView: View {
                     Text("热度可提升你在每日大赛中的排名，迎来人气大爆发。")
                         .fixedSize(horizontal: true, vertical: true)
                         .font(.XMFont.f2)
-                        .fcolor(.XMDesgin.f2)
+                        .fcolor(.XMColor.f2)
                 }
                 Spacer()
             })
@@ -53,7 +53,7 @@ struct HotExchangeView: View {
                 })
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 24)
-                .background(Color.XMDesgin.b1)
+                .background(Color.XMColor.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 VStack(alignment: .center, spacing: 12, content: {
                     Text("🔥")
@@ -64,7 +64,7 @@ struct HotExchangeView: View {
                 })
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 24)
-                .background(Color.XMDesgin.b1)
+                .background(Color.XMColor.b1)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
             }
             .overlay(alignment: .center) {

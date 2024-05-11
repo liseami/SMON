@@ -25,7 +25,7 @@ struct MainTabbar: View {
                 // 细线
                 Capsule()
                     .frame(height: 2)
-                    .fcolor(.XMDesgin.f2.opacity(0.4))
+                    .fcolor(.XMColor.f2.opacity(0.4))
                     .padding(.horizontal)
                 // tabbarIcons
                 tabIcons
@@ -74,7 +74,7 @@ struct MainTabbar: View {
                         XMDesgin.XMIcon(iconName: iconName, color: .white)
                         Text(btnName)
                             .font(.XMFont.f3b)
-                            .fcolor(.XMDesgin.f1)
+                            .fcolor(.XMColor.f1)
                             .ifshow(show: !btnName.isEmpty)
                     }
                 }
@@ -114,7 +114,7 @@ struct MainTabbar: View {
                 }, label: {
                     XMDesgin.XMIcon(iconName: tabitem.labelInfo.icon, size: 28)
                         .overlay(alignment: .topTrailing) {
-                            Circle().fill(Color.XMDesgin.main.gradient)
+                            Circle().fill(Color.XMColor.main.gradient)
                                 .frame(width: 12, height: 12)
                                 .font(.XMFont.f3b)
                                 .ifshow(show: tabitem == .message && vm.unreadCount != 0)

@@ -19,7 +19,7 @@ struct HeightRequestView: View {
             .pickerStyle(WheelPickerStyle())
             .labelsHidden()
             .padding(.all)
-            .background(Color.XMDesgin.b1)
+            .background(Color.XMColor.b1)
             .clipShape(RoundedRectangle(cornerRadius: 22))
         } btnAction: {
             let result = await UserManager.shared.updateUserInfo(updateReqMod: .init(height: vm.height))
