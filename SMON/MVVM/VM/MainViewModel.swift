@@ -14,7 +14,6 @@ class MainViewModel: ObservableObject {
     init(currentTabbar: TabbarItem = .home) {
         self.currentTabbar = currentTabbar
         self.pathPages = .init()
-        self.getUnreadCount()
     }
 
     @Published var currentTabbar: TabbarItem = .home
@@ -25,13 +24,14 @@ class MainViewModel: ObservableObject {
      获取会话总未读数
      */
     func getUnreadCount() {
-        V2TIMManager.sharedInstance().getUnreadMessageCount(by: .init(), succ: { count in
+        V2TIMManager.sharedInstance().getTotalUnreadMessageCount { count in
             DispatchQueue.main.async {
+                print(count)
+                print(count)
                 self.unreadCount = Int(count)
             }
-        }, fail: { _, _ in
-
-        })
+        } fail: { _, _ in
+        }
     }
 
     @MainActor

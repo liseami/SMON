@@ -199,6 +199,7 @@ extension UserManager {
             info.faceURL = self.user.avatar
             V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
             }
+            MainViewModel.shared.getUnreadCount()
         }
         // 注册主题
         if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),

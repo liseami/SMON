@@ -184,10 +184,14 @@ struct ProfileView: View {
                     .ifshow(show: userInfo.emotionalNeeds != 0)
                 Text("\(userInfo.fansNum)粉丝 · ")
                     .onTapGesture {
+                        guard userId == UserManager.shared.user.id else { return }
+                        Apphelper.shared.pushNotification(type: .info(message: "暂不可查看。"))
                         MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends)
                     }
                 Text("\(userInfo.followsNum)关注")
                     .onTapGesture {
+                        guard userId == UserManager.shared.user.id else { return }
+                        Apphelper.shared.pushNotification(type: .info(message: "暂不可查看。"))
                         MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends)
                     }
             }

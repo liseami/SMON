@@ -32,9 +32,12 @@ struct ConversationListContainer: UIViewControllerRepresentable {
         }
 
         func conversationListController(_ conversationController: UIViewController, didSelectConversation conversation: TUIConversationCellData) {
+            /*
+             清理未读数
+             */
+            V2TIMManager.sharedInstance().cleanConversationUnreadMessageCount(conversation.conversationID, cleanTimestamp: UInt64(Date.now.timeIntervalSince1970), cleanSequence: UInt64(0)) {} fail: { _, _ in
+            }
             if conversation.userID == "m1001" {
-                V2TIMManager.sharedInstance().cleanConversationUnreadMessageCount(conversation.conversationID, cleanTimestamp: UInt64(Date.now.timeIntervalSince1970), cleanSequence: UInt64(0)) {} fail: { _, _ in
-                }
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.notification)
             } else {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: conversation.userID))
