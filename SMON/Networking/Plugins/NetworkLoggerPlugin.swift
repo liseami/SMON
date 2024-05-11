@@ -18,10 +18,8 @@ public class NetworkingLogger: PluginType {
 
     /// 即将发送请求
     public func willSend(_: RequestType, target: TargetType) {
-
-            // 设置当前时间
-            NetworkingLogger.startDates[String(describing: target)] = Date()
-
+        // 设置当前时间
+        NetworkingLogger.startDates[String(describing: target)] = Date()
     }
 
     /// 收到请求时
@@ -32,55 +30,56 @@ public class NetworkingLogger: PluginType {
         #endif
     }
     
-
-#if DEBUG
-private func logRequest(_ target: TargetType, startDate: Date, result: Result<Response, MoyaError>) {
-    let requestDate = Date().timeIntervalSince1970 - startDate.timeIntervalSince1970
-    print(target.path.logMessage)
+    #if DEBUG
+    private func logRequest(_ target: TargetType, startDate: Date, result: Result<Response, MoyaError>) {
+        let requestDate = Date().timeIntervalSince1970 - startDate.timeIntervalSince1970
+        print(target.path.logMessage)
     
-    print("URL : \(target.baseURL)\(target.path)")
-    print("请求方式：\(target.method.rawValue)")
-    print("请求时间 : \(String(format: "%.3f", requestDate))s")
+        print("URL : \(target.baseURL)\(target.path)")
+        print("请求方式：\(target.method.rawValue)")
+        print("请求时间 : \(String(format: "%.3f", requestDate))s")
     
-    print("请求头 : \(target.headers)")
-    if let request = result.rawReponse?.request {
-        switch target.task {
-        case .requestPlain, .uploadMultipart: break
-        case let .requestParameters(parameters, _), let .uploadCompositeMultipart(_, parameters):
-            print("请求参数 : ", parameters)
-        default:
-            if let requestBody = request.httpBody {
-                let decrypt = requestBody.toJsonString()
-                print("请求参数 : \(decrypt)")
+        print("请求头 : \(target.headers)")
+        if let request = result.rawReponse?.request {
+            switch target.task {
+            case .requestPlain, .uploadMultipart: break
+            case let .requestParameters(parameters, _), let .uploadCompositeMultipart(_, parameters):
+                print("请求参数 : ", parameters)
+            default:
+                if let requestBody = request.httpBody {
+                    let decrypt = requestBody.toJsonString()
+                    print("请求参数 : \(decrypt)")
+                }
             }
         }
-    }
 
-    
-    switch result {
-    case let .success(response):
-        if let data = String(data: response.data, encoding: .utf8) {
-            print("""
-                code : \(result.code)
-                http_Code : \(result.HttpCode)
-                message_Code :\(result.messageCode)
-                message : \(result.message)
-                data：\r \(data))
-                
+        switch result {
+        case let .success(response):
+        
+            if let result = result.dataJson?["result"].rawValue as? String, result.isEmpty == false {
+                let dict = RSA.decryptString(result, privateKey: "")
+                guard let originDic = (dict as NSDictionary?)?.value(forKeyPath: "list") else { return }
+                print("""
+                                data：\r \(originDic))
                 """)
-        } else {
-            let message = (try? response.map(String.self, atKeyPath: "error_description")) ?? ""
-            print("message: \(message)")
+            
+            } else {}
+        
+            print("""
+            code : \(result.code)
+            http_Code : \(result.HttpCode)
+            message_Code :\(result.messageCode)
+            message : \(result.message)
+            
+            """)
+        case let .failure(error):
+            print("请求错误：\(error)")
         }
-    case let .failure(error):
-        print("请求错误：\(error)")
-    }
     
-    print("🔺🔺🔺🔺🔺🔺🔺🔺\(target.path)🔺🔺🔺🔺🔺🔺🔺🔺")
+        print("🔺🔺🔺🔺🔺🔺🔺🔺\(target.path)🔺🔺🔺🔺🔺🔺🔺🔺")
+    }
+    #endif
 }
-#endif
-}
-
 
 #if DEBUG
 private extension String {
@@ -90,8 +89,6 @@ private extension String {
 }
 #endif
 extension Data {
-    
-
     func parameterString() -> String {
         guard let json = try? JSONSerialization.jsonObject(with: self),
               let value = json as? [String: Any]
@@ -101,7 +98,7 @@ extension Data {
         return "\(value)"
     }
     
-    func toJsonString() -> String{
+    func toJsonString() -> String {
         do {
             // 创建 JSONEncoder 实例
             let encoder = JSONEncoder()
@@ -114,7 +111,7 @@ extension Data {
             return jsonString ?? ""
             
         } catch {
-           return ""
+            return ""
         }
     }
 }

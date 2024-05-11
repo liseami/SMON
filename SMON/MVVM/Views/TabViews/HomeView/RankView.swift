@@ -12,10 +12,9 @@ struct RankView: View {
     @StateObject var vm: RankViewModel = .init()
     @State var showFliterView: Bool = false
     @ObservedObject var userManager: UserManager = .shared
-  
+
     var body: some View {
         ZStack(alignment: .top) {
-            
             // 横向翻页
             tabView
                 .ignoresSafeArea(.container, edges: .top)
@@ -33,8 +32,6 @@ struct RankView: View {
             }
         }
     }
-
-
 
     var tabView: some View {
         TabView(selection: $vm.currentTopTab,

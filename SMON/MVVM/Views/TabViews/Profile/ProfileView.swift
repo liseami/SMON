@@ -70,7 +70,7 @@ struct ProfileView: View {
             }
             .transition(.move(edge: .bottom).combined(with: .opacity).animation(.spring))
         }
-
+        .scrollIndicators(.hidden)
         .refreshable {
             await vm.getData()
         }

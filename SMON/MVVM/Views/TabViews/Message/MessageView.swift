@@ -49,23 +49,41 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
         V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
         }
     }
-    
-    
 }
 
 extension V2TIMConversation: Identifiable {}
 
 struct MessageView: View {
     @StateObject var vm: MessageViewModel = .shared
-
+    private let date = Date()
     var body: some View {
         ZStack(alignment: .top, content: {
 //            converstaionList
             ConversationListContainer()
                 .ignoresSafeArea()
-            XMTopBlurView()
-            
+
+            if #available(iOS 17.0, *) {
+                TimelineView(.animation) {
+                    let time = date.timeIntervalSince1970 - $0.date.timeIntervalSince1970
+                    Rectangle()
+                        .frame(width: UIScreen.main.bounds.width)
+                        .frame(height: 90)
+                        .aspectRatio(12, contentMode: .fill)
+                        .colorEffect(ShaderLibrary.psychodelics(
+                            .boundingRect,
+                            .float(time * 2)
+                        ))
+                }
+                .offset(x: 0, y: -100)
+                .blur(radius: 6)
+                .ifshow(show: MainViewModel.shared.unreadCount != 0)
+                XMTopBlurView()
+            } else {
+                XMTopBlurView()
+            }
+
         })
+
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -143,6 +161,5 @@ struct UserListLoadingView: View {
                 .conditionalEffect(.repeat(.shine, every: 1), condition: true)
             }
         })
-        
     }
 }

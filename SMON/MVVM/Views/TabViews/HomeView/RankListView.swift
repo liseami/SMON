@@ -93,6 +93,36 @@ struct RankListView: View {
                 VStack {
                     XMUserAvatar(str: user.avatar, userId: user.userId, size: 100)
                         .conditionalEffect(.smoke(layer: .local), condition: index < 3 && self.show)
+
+                        .overlay {
+                            Group {
+                                if #available(iOS 17.0, *) {
+                                    TimelineView(.animation) {
+                                        let time = date.timeIntervalSince1970 - $0.date.timeIntervalSince1970
+                                        Rectangle()
+                                            .aspectRatio(1, contentMode: .fit)
+                                            .colorEffect(ShaderLibrary.lightspeed(
+                                                .boundingRect,
+                                                .float(time),
+                                                .float(12),
+                                                .float(12),
+                                                .float(24)
+                                            ))
+                                            .frame(width: 120, height: 120, alignment: .center)
+                                    }
+                                } else {
+                                    EmptyView()
+                                }
+                            }
+                            .mask(Circle().stroke(lineWidth: 5)
+                                .frame(width: 100, height: 100, alignment: .center))
+                            .opacity(0.8)
+                            .blur(radius: 3)
+                            .ifshow(show:
+                                user.userId == "1764504995815882752" ||
+                                    user.userId == "1779306584749506560")
+                        }
+
                     Text(user.nickname)
                         .font(.XMFont.f1b)
                         .lineLimit(1)

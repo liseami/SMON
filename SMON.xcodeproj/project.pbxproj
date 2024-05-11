@@ -191,6 +191,7 @@
 		A2EF07682B9D4DA8004CF692 /* AccountCancellationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF07672B9D4DA8004CF692 /* AccountCancellationView.swift */; };
 		A2EF076A2B9D5320004CF692 /* XMSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF07692B9D5320004CF692 /* XMSection.swift */; };
 		A2EF076C2B9D5824004CF692 /* XMAppLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2EF076B2B9D5824004CF692 /* XMAppLogo.swift */; };
+		A2FB650D2BEFBCB800BEBDE8 /* Psychodelics.metal in Sources */ = {isa = PBXBuildFile; fileRef = A2FB650C2BEFBCB800BEBDE8 /* Psychodelics.metal */; };
 		A2FC43642BAD514200268892 /* XMPleaceHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FC43632BAD514200268892 /* XMPleaceHolderView.swift */; };
 		D68557A91A1CBD10A536DDDD /* Pods_SMON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E00318C8FBEEF76CFD20CC /* Pods_SMON.framework */; };
 /* End PBXBuildFile section */
@@ -427,6 +428,7 @@
 		A2EF07672B9D4DA8004CF692 /* AccountCancellationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCancellationView.swift; sourceTree = "<group>"; };
 		A2EF07692B9D5320004CF692 /* XMSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMSection.swift; sourceTree = "<group>"; };
 		A2EF076B2B9D5824004CF692 /* XMAppLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XMAppLogo.swift; sourceTree = "<group>"; };
+		A2FB650C2BEFBCB800BEBDE8 /* Psychodelics.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Psychodelics.metal; sourceTree = "<group>"; };
 		A2FC43632BAD514200268892 /* XMPleaceHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPleaceHolderView.swift; sourceTree = "<group>"; };
 		B89ABD50A53BACC20844D7AB /* Pods-SMON.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.release.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.release.xcconfig"; sourceTree = "<group>"; };
 		ED9F8B9165A3149581433400 /* Pods-SMON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SMON.debug.xcconfig"; path = "Target Support Files/Pods-SMON/Pods-SMON.debug.xcconfig"; sourceTree = "<group>"; };
@@ -878,6 +880,7 @@
 		A2DEC4AD2BE1252A00571961 /* Sharder */ = {
 			isa = PBXGroup;
 			children = (
+				A2FB650C2BEFBCB800BEBDE8 /* Psychodelics.metal */,
 				A2DEC4B02BE12E4000571961 /* Lightspeed.metal */,
 				A2DEC4AE2BE1253D00571961 /* GradientWave.metal */,
 			);
@@ -1208,6 +1211,7 @@
 				A2DEC4A72BE0B71B00571961 /* RSAUtils.swift in Sources */,
 				A28F54492B873CD600AF9CD3 /* LoginView_SMSCodeInput.swift in Sources */,
 				A2BA895C2B9B3994002FEEFA /* Array+.swift in Sources */,
+				A2FB650D2BEFBCB800BEBDE8 /* Psychodelics.metal in Sources */,
 				A2BA894D2B9ACBCE002FEEFA /* XMTopBlurView.swift in Sources */,
 				A25BC4052BB17DDE00CADE49 /* Notification+.swift in Sources */,
 				A2498AD42BA812C40045B7AD /* XMModRequestViewModel.swift in Sources */,
