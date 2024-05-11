@@ -116,11 +116,13 @@ struct RankListView: View {
                             }
                             .mask(Circle().stroke(lineWidth: 5)
                                 .frame(width: 100, height: 100, alignment: .center))
-                            .opacity(0.8)
                             .blur(radius: 3)
+                            .allowsHitTesting(false)
                             .ifshow(show:
                                 user.userId == "1764504995815882752" ||
-                                    user.userId == "1779306584749506560")
+                                    user.userId == "1779306584749506560" ||
+                                    index < 3 && self.show)
+                            
                         }
 
                     Text(user.nickname)
