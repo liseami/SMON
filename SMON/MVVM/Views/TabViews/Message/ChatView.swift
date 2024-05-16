@@ -16,6 +16,14 @@ struct ChatView: View {
         self.userId = userId
         self.conversation = TUIChatConversationModel()
         self.conversation.userID = userId
+        V2TIMManager.sharedInstance().checkFriend([userId], check: .FRIEND_TYPE_BOTH) { results in
+            print(results?.first)
+            print(results?.first)
+        } fail: { _, _ in
+                
+        }
+
+
     }
 
     var XMUserId: String {

@@ -22,7 +22,7 @@ class ProfileEditViewModel: ObservableObject {
 
     @MainActor
     func updateUserInfo() async {
-        if let avatar, let newAvatarUrl = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar],type: .avatar)?.first {
+        if let avatar, let newAvatarUrl = await AliyunOSSManager.shared.upLoadImages_async(images: [avatar], type: .avatar)?.first {
             updateModel.avatar = newAvatarUrl
         }
         // 阿里云图片上传，之后请求接口，刷新页面
@@ -71,8 +71,8 @@ struct ProfileEditView: View {
                 avatar
                 nickname
                 bio
-                
                 bdsmAtt
+                photosWallSetting
                 photosWall
                 emotionNeed
                 interestsTag
@@ -91,7 +91,7 @@ struct ProfileEditView: View {
                         await vm.updatePhotos(urls: [])
                     }
                 }
-                
+
                 ToolbarItem(placement: .keyboard) {
                     XMDesgin.XMIcon(iconName: "system_arrow_down_circle", withBackCricle: true)
                         .onTapGesture {
@@ -144,8 +144,6 @@ struct ProfileEditView: View {
             .pickerStyle(.navigationLink)
         })
     }
-
-    
 
     var height: some View {
         VStack(alignment: .leading, spacing: 12, content: {
@@ -200,6 +198,19 @@ struct ProfileEditView: View {
         })
     }
 
+    var photosWallSetting: some View {
+        VStack(alignment: .leading, spacing: 12, content: {
+            Text("照片墙可见度")
+            Picker(selection: $vm.updateModel.emotionalNeeds) {
+                Text("公开")
+                    .tag(1)
+                Text("私密（推荐）")
+                    .tag(0)
+            }
+            .pickerStyle(.segmented)
+        })
+    }
+
     var photosWall: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("照片墙")
@@ -239,7 +250,7 @@ struct ProfileEditView: View {
                             LoadingTask(loadingMessage: "正在处理..") {
                                 // 阿里云图片上传，之后请求接口，刷新页面
                                 // 期间不允许用户操作
-                                if let urls = await AliyunOSSManager.shared.upLoadImages_async(images: uiimages,type: .userAlbum) {
+                                if let urls = await AliyunOSSManager.shared.upLoadImages_async(images: uiimages, type: .userAlbum) {
                                     await vm.updatePhotos(urls: urls)
                                 }
                             }

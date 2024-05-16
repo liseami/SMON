@@ -173,8 +173,12 @@ struct ProfileView: View {
     // 昵称、标签等信息视图
     var userInfoView: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(vm.user.nickname)
-                .font(.XMFont.big1.bold())
+            HStack {
+                Text(vm.user.nickname)
+                    .font(.XMFont.big1.bold())
+                Spacer()
+                XMDesgin.XMIcon(iconName: "feed_heart", size: 32, color: .XMColor.f1, withBackCricle: true)
+            }
             
             HStack(spacing: 0) {
                 Text("\(userInfo.zodiac) · ")
@@ -314,7 +318,22 @@ struct ProfileView: View {
                             .movingParts.poof.animation(.easeInOut(duration: 0.5))))
                 }
             }
+            
             .padding(.vertical, 12)
+        }
+        .overlay {
+            BlurEffectView(style: .systemChromeMaterialDark)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .blur(radius: 14)
+                .padding(.leading, 16)
+                .overlay {
+                    VStack(alignment: .center,
+                           spacing: 6) {
+                        XMDesgin.XMIcon(iconName: "profile_fire")
+                        Text("查看私密照片")
+                            .font(.XMFont.f2)
+                    }
+                }
         }
     }
 }

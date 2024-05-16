@@ -47,10 +47,8 @@ class RankViewModel: ObservableObject {
             return RankAPI.sameCity(cityId: UserManager.shared.user.cityId.int ?? 0, page: 1)
         case .all:
             return RankAPI.country(page: 1)
-        case .fans:
+        case .likeme:
             return RankAPI.fans(page: 1)
-        case .flow:
-            return RankAPI.follow(page: 1)
         case .vistor:
             return RankAPI.visitor(page: 1)
         }
@@ -60,8 +58,9 @@ class RankViewModel: ObservableObject {
         case near
         case localCity
         case all
-        case fans
-        case flow
+//        case fans
+//        case flow
+        case likeme
         case vistor
         var info: LabelInfo {
             switch self {
@@ -71,10 +70,12 @@ class RankViewModel: ObservableObject {
                 return .init(name: "苏州", icon: "", subline: "")
             case .near:
                 return .init(name: "附近", icon: "", subline: "")
-            case .fans:
-                return .init(name: "粉丝", icon: "", subline: "")
-            case .flow:
-                return .init(name: "关注", icon: "", subline: "")
+            case .likeme:
+                return .init(name: "喜欢我的", icon: "", subline: "")
+//            case .fans:
+//                return .init(name: "粉丝", icon: "", subline: "")
+//            case .flow:
+//                return .init(name: "关注", icon: "", subline: "")
             case .vistor:
                 return .init(name: "访客", icon: "", subline: "")
             }

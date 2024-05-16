@@ -31,6 +31,7 @@ struct MainView: View {
             .navigationDestination(for: MainViewModel.PagePath.self) { path in
                 Group {
                     switch path {
+                    
                     case .mygift : MyGiftView()
                     case .mybill : MyBill()
                     case .myCoinView : MyCoinView()

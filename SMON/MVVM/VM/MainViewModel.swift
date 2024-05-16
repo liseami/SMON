@@ -95,5 +95,6 @@ class MainViewModel: ObservableObject {
         case chat(userId: String)
         case flamedetail
         case myCoinView
+        
     }
 }

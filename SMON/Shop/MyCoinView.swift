@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MyCoinView: View {
-    @EnvironmentObject var vm : ProfileHomeViewModel
+    @EnvironmentObject var vm: ProfileHomeViewModel
     var body: some View {
         List {
             XMSection(title: "总资产(赛币）") {
@@ -26,6 +26,21 @@ struct MyCoinView: View {
                 })
             }
 
+            XMSection(title: "我的收入") {
+                HStack(alignment: .center, spacing: 12, content: {
+                    Image("profile_wallet")
+                        .resizable()
+                        .renderingMode(.template)
+                        .fcolor(.XMColor.f1)
+                        .frame(width: 44, height: 44)
+                    Text("\(vm.mod.coinNums)")
+                        .font(.XMFont.big1.bold())
+                        .fcolor(.XMColor.f1)
+                    Spacer()
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "提现") {}
+                })
+            }
+
             XMDesgin.XMListRow(.init(name: "账单", icon: "", subline: "")) {
                 MainViewModel.shared.pathPages.append(MainViewModel.PagePath.mybill)
             }
@@ -36,5 +51,5 @@ struct MyCoinView: View {
 
 #Preview {
     MyCoinView()
-        .environmentObject(ProfileHomeViewModel.init())
+        .environmentObject(ProfileHomeViewModel())
 }

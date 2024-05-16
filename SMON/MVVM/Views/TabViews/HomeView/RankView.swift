@@ -50,8 +50,8 @@ struct RankView: View {
 
                     // 没有CityId，不显示同城
                     let items = userManager.user.cityId.isEmpty ?
-                        [RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.fans, RankViewModel.HomeTopBarItem.flow, RankViewModel.HomeTopBarItem.vistor] :
-                        [RankViewModel.HomeTopBarItem.localCity, RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.fans, RankViewModel.HomeTopBarItem.flow, RankViewModel.HomeTopBarItem.vistor]
+                        [RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.likeme, RankViewModel.HomeTopBarItem.vistor] :
+                        [RankViewModel.HomeTopBarItem.localCity, RankViewModel.HomeTopBarItem.all, RankViewModel.HomeTopBarItem.likeme, RankViewModel.HomeTopBarItem.vistor]
 
                     // 其他四个页面，接口请求固定，无筛选
                     ForEach(items, id: \.self) { tab in

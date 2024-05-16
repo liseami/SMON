@@ -42,7 +42,6 @@ struct SMONApp: App {
                 print("进入background")
             case .inactive:
                 print("进入inactive")
-             
             case .active:
                 NotificationCenter.default.post(name: Notification.Name.APP_GO_TO_ACTIVE, object: nil, userInfo: nil)
                 print("进入active")

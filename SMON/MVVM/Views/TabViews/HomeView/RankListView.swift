@@ -122,13 +122,12 @@ struct RankListView: View {
                                 user.userId == "1764504995815882752" ||
                                     user.userId == "1779306584749506560" ||
                                     index < 3 && self.show)
-                            
                         }
 
                     Text(user.nickname)
                         .font(.XMFont.f1b)
                         .lineLimit(1)
-                    Text(user.cityName.or("未知"))
+                    Text("\(Int.random(in: 0 ... 1000))")
                         .font(.XMFont.f3)
                         .fcolor(.XMColor.f2)
                 }

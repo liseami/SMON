@@ -51,10 +51,12 @@ struct ProfileHomeView: View {
                 avatar
                 // 营销活动海报
                 banner
-                // 导航list
-                list
                 // 用户背包
                 userbackpack
+                // 导航list
+                list
+                // 会员卡片
+                memberShipCard
                 // 可以滑动更多
                 Spacer().frame(height: 120)
             })
@@ -76,34 +78,117 @@ struct ProfileHomeView: View {
             await UserManager.shared.getUserInfo()
         })
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                NavigationLink {
-                    MyCoinView()
-                        .environmentObject(vm)
-                } label: {
-                    HStack {
-                        Image("saicoin")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                        Text(vm.mod.coinNums)
-                            .font(.XMFont.f3b)
-                            .fcolor(.XMColor.f1)
-                    }
-                    .padding(.horizontal, 4)
-                    .padding(.all, 5)
-                    .background(Color.XMColor.b1)
-                    .clipShape(Capsule())
-                }
-            }
+            toolBar
+        }
+    }
 
-            ToolbarItem(placement: .topBarTrailing) {
-                XMDesgin.XMButton {
-                    MainViewModel.shared.pushTo(MainViewModel.PagePath.setting)
-                } label: {
-                    XMDesgin.XMIcon(iconName: "profile_setting")
+    @ToolbarContentBuilder
+    var toolBar: some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            NavigationLink {
+                MyCoinView()
+                    .environmentObject(vm)
+            } label: {
+                HStack {
+                    Image("saicoin")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                    Text(vm.mod.coinNums)
+                        .font(.XMFont.f3b)
+                        .fcolor(.XMColor.f1)
+                }
+                .padding(.horizontal, 4)
+                .padding(.all, 5)
+                .background(Color.XMColor.b1)
+                .clipShape(Capsule())
+            }
+        }
+
+        ToolbarItem(placement: .topBarTrailing) {
+            XMDesgin.XMButton {
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.setting)
+            } label: {
+                XMDesgin.XMIcon(iconName: "profile_setting")
+            }
+        }
+    }
+
+    var startDate: Date = .now
+    var memberShipCard: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            HStack(alignment: .center, spacing: 4, content: {
+                Image("saicoin")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                Text("大赛至尊会员")
+                    .font(.XMFont.f1b)
+                    .fcolor(.XMColor.f1)
+                Spacer()
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级🙋") {
+                    Apphelper.shared.present(MemberShipView(), presentationStyle: .fullScreen)
+                }
+            })
+            VStack(alignment: .leading, spacing: 12, content: {
+                Text("立即联系你喜欢的人")
+                    .font(.XMFont.big1.bold())
+                Text("体验我们的核心服务")
+                    .font(.XMFont.big1.bold())
+                    .fcolor(.XMColor.main)
+            })
+            HStack(alignment: .center, spacing: 12, content: {
+                VStack(alignment: .leading, spacing: 24, content: {
+                    Text("功能权限")
+                        .font(.XMFont.f1b)
+                    Text("私信任何人")
+                    Text("隐私相册")
+                    Text("附近的人")
+                    Text("我的访客")
+                    Text("喜欢我的")
+                    Text("签到火苗")
+                })
+                .frame(maxWidth: .infinity, alignment: .leading)
+                VStack(alignment: .center, spacing: 24, content: {
+                    Text("普通会员")
+                        .font(.XMFont.f1b)
+                    Text("/")
+                    Text("/")
+                    Text("/")
+                    Text("/")
+                    Text("/")
+                    Text("100")
+                })
+                VStack(alignment: .center, spacing: 24, content: {
+                    Text("至尊会员")
+                        .font(.XMFont.f1b)
+                    Text("✅")
+                    Text("✅")
+                    Text("✅")
+                    Text("✅")
+                    Text("✅")
+                    Text("500")
+                })
+            })
+            .font(.XMFont.f2)
+            .fcolor(.XMColor.f1)
+            XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级", enable: true) { Apphelper.shared.present(MemberShipView(), presentationStyle: .fullScreen) }
+        }
+        .padding(.all, 16)
+        .background {
+            TimelineView(.animation) { context in
+                if #available(iOS 17.0, *) {
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(.white, lineWidth: 3)
+                        .colorEffect(
+                            ShaderLibrary.default.circleMesh(.boundingRect, .float(context.date.timeIntervalSince1970 - startDate.timeIntervalSince1970))
+                        )
+                } else {
+                    // Fallback on earlier versions
                 }
             }
         }
+        .background(Color.XMColor.b1.gradient)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     var avatar: some View {
@@ -147,9 +232,19 @@ struct ProfileHomeView: View {
                 }
             }
 
-            let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
-            XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_edit", text: text) {
-                MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
+            HStack {
+                let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_edit", text: text) {
+                    MainViewModel.shared.pushTo(MainViewModel.PagePath.profileEditView)
+                }
+                NavigationLink {
+                    MyCoinView()
+                        .environmentObject(vm)
+                } label: {
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_wallet", text: "") {}
+                        .disabled(true)
+                        .allowsTightening(false)
+                }
             }
         })
     }
@@ -198,15 +293,24 @@ struct ProfileHomeView: View {
         .padding(.vertical, 12)
     }
 
+    struct ListItem {
+        let name: String
+        let icon: String
+        let subline: String
+        let action: () -> Void
+    }
+
+    @ViewBuilder
     var list: some View {
-        let listItems = [
-            (name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
-            (name: "我的当前排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
-            (name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
-            (name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.present(SocialAccountView(), presentationStyle: .form) })
+        let listItems: [ListItem] = [
+            ListItem(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
+            ListItem(name: "真人认证", icon: "system_checkmark", subline: "获得人气爆发", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
+            ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
+            ListItem(name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
+            ListItem(name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.present(SocialAccountView(), presentationStyle: .form) })
         ]
 
-        return VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: 24) {
             ForEach(listItems, id: \.name) { item in
                 XMDesgin.XMListRow(.init(name: item.name, icon: item.icon, subline: item.subline)) {
                     item.action()
