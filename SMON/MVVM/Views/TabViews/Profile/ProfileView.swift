@@ -177,7 +177,12 @@ struct ProfileView: View {
                 Text(vm.user.nickname)
                     .font(.XMFont.big1.bold())
                 Spacer()
-                XMDesgin.XMIcon(iconName: "feed_heart", size: 32, color: .XMColor.f1, withBackCricle: true)
+//                XMDesgin.XMIcon(iconName: "feed_heart", size: 32, color: .XMColor.f1, withBackCricle: true)
+                XMDesgin.LikeMeBtn(iconName:vm.user.isUserLike == 0 ? "feed_heart":"feed_heart_fill", size: 32, color: .XMColor.f1, withBackCricle: true) {
+                    await vm.tapLikeMe()
+                }
+                
+                
             }
             
             HStack(spacing: 0) {

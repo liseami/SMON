@@ -87,6 +87,29 @@ enum XMDesgin {
                 .clipShape(Capsule())
         }
     }
+    
+    struct LikeMeBtn: View{
+        var iconName: String
+        var size: CGFloat
+        var color: Color
+        var withBackCricle: Bool
+        var action: () async -> ()
+        init(iconName: String, size: CGFloat, color: Color, withBackCricle: Bool, action: @escaping () async -> ()) {
+            self.iconName = iconName
+            self.size = size
+            self.color = color
+            self.withBackCricle = withBackCricle
+            self.action = action
+        }
+        
+        var body: some View{
+            XMDesgin.XMButton{
+                await action()
+            } label: {
+                XMDesgin.XMIcon(iconName: iconName, size: size, color: color, withBackCricle: withBackCricle)
+            }
+        }
+    }
 
     struct SmallBtn: View {
         var fColor: Color

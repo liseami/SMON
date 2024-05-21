@@ -21,6 +21,9 @@ public class NetworkPopPlugin: PluginType {
     public func didReceive(_ result: Result<Response, MoyaError>, target: TargetType) {
         switch result {
         case .success:
+            if result.messageCode == 2100{
+                Apphelper.shared.presentPanSheet(Color.red, style: .sheet)
+            }
             if !result.is2000Ok {
                 guard result.message.contains("TOKEN") == false else { return }
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))

@@ -8,17 +8,20 @@ enum RankAPI: XMTargetType {
     case country(page: Int)
     case sameCity(cityId: Int, page: Int)
     case nearby(page: Int, fliter: FliterMod)
-    case fans(page: Int)
+//    case fans(page: Int)
     case follow(page: Int)
     case visitor(page: Int)
     case currentRankInfo(cityId: String?)
+    //喜欢我的
+    case LikeMe(page: Int)
 
     var parameters: [String: Any]? {
         switch self {
         case .currentRankInfo(let cityId): return cityId != nil ? ["cityId": cityId!] : nil
         case .sameCity(let cityId, let page): return ["page": page, "pageSize": 50, "cityId": cityId]
         case .country(let page): return ["page": page, "pageSize": 50]
-        case .fans(let page): return ["page": page, "pageSize": 50]
+//        case .fans(let page): return ["page": page, "pageSize": 50]
+        case .LikeMe(let page): return ["page": page, "pageSize": 50]
         case .follow(let page): return ["page": page, "pageSize": 50]
         case .visitor(let page): return ["page": page, "pageSize": 50]
         case .nearby(let page, let fliter):
@@ -31,7 +34,8 @@ enum RankAPI: XMTargetType {
     func updatingParameters(_ newPage: Int) -> any XMTargetType {
         switch self {
         case .nearby(_, let fliter): return RankAPI.nearby(page: newPage, fliter: fliter)
-        case .fans: return RankAPI.fans(page: newPage)
+//        case .fans: return RankAPI.fans(page: newPage)
+        case .LikeMe: return RankAPI.LikeMe(page: newPage)
         case .follow: return RankAPI.follow(page: newPage)
         case .visitor: return RankAPI.visitor(page: newPage)
         case .sameCity(let cityId, _): return RankAPI.sameCity(cityId: cityId, page: newPage)

@@ -93,4 +93,18 @@ class ProfileViewModel: XMListViewModel<XMPost> {
             await getUserInfo()
         }
     }
+    
+    /*
+     喜欢某人
+     */
+    @MainActor
+    func tapLikeMe() async{
+        let t = UserOperationAPI.tapUserLike(likeUserId: userId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok{
+            await getUserInfo()
+        }
+    }
+    
+    
 }

@@ -48,7 +48,8 @@ class RankViewModel: ObservableObject {
         case .all:
             return RankAPI.country(page: 1)
         case .likeme:
-            return RankAPI.fans(page: 1)
+            return RankAPI.LikeMe(page: 1)
+//            return RankAPI.fans(page: 1)
         case .vistor:
             return RankAPI.visitor(page: 1)
         }
