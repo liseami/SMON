@@ -6,6 +6,7 @@ import SwiftyJSON
 
 enum GoodAPI: XMTargetType {
     case getCoinList
+    case getVipList
 
 
     var group: String {

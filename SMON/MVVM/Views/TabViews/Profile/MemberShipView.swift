@@ -7,7 +7,12 @@
 
 import SwiftUI
 import SwiftUIX
+
+
+
+
 struct MemberShipView: View {
+    
     var startDate: Date = .now
     var body: some View {
         NavigationView(content: {
@@ -156,9 +161,9 @@ struct MemberShipCardView: View {
             })
             Spacer()
             VStack(alignment: .leading, spacing: 12, content: {
-                Text("一个月")
+                Text(memberShipInfo.title)
                     .font(.XMFont.big1.bold())
-                Text("219¥")
+                Text("\(memberShipInfo.price)¥")
                     .font(.XMFont.big1.bold())
                     .fcolor(.XMColor.main)
             })
