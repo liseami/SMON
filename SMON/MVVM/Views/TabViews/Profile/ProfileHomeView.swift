@@ -39,11 +39,49 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
             Apphelper.shared.pushNotification(type: .success(message: "🔥 火苗已到账！"))
         }
     }
+
+    struct FaceInfo: Convertible {
+        var faceId: String = "" // tx01cce896498a4a61a35cd4dd661b37",
+        var agreementNo: String = "" // nwwjy4y11ji6eyb6rbzs8y79xin4dx",
+        var bizSeqNo: String = "" // 24052310001184421115432123658057",
+        var openApiAppId: String = "" // TIDApXcx",
+        var openApiAppVersion: String = "" // 1.0.0",
+        var openApiNonce: String = "" // nwwjy4y11ji6eyb6rbzs8y79xin4dx",
+        var openApiUserId: String = "" // 1764610746026688512",
+        var openApiSign: String = "" // C6DDB7B47F9A7F04F119360FAA892286017A6939",
+        var keyLicence: String = "" // c3/5fS6Kz3axq6YbiSSSozYnbY/Y1y3xXgzLxcs0lNPICbuCDDxe4/kwSn2YVG6lk11tHuMfNsNaFU+gCcV6w7a7iZ8IGZdgKq7zoRq3G496ArZBHkcxc9DztVB1Kom6L6bUDQrZb4M8qoGHfB4y0X7e1I0bcnbHSXLOr5AWXxi3xG3qtmrRcCp+Ahn+BAbbe462vzFC/aXYUbFYKqYi05CAQ8ePIRsWdkECvqz/KJqqi9uBo+nnqSP5/Wvz0qilK689OKdh+ziDaDnSRcoQ66U6Qk83x/iBMjm5NlhUnbTopxWIodnD5kpir0FZDwZwbZUoEL6HEUJFQ+OmzPE4EQ=="
+    }
+
+    @MainActor func getTXFaceInfo() async {
+        let t = CommonAPI.faceAuth(realName: "赵翔宇", idNo: "640103199411091811")
+        let r = await Networking.request_async(t)
+        if r.is2000Ok, let data = r.mapObject(FaceInfo.self) {
+            let sdkConfig = WBFaceVerifySDKConfig()
+            sdkConfig.theme = .darkness
+            print(data)
+            WBFaceVerifyCustomerService.sharedInstance().initSDK(
+                withUserId: UserManager.shared.user.id,
+                nonce: data.openApiNonce,
+                sign: data.openApiSign,
+                appid: data.openApiAppId,
+                orderNo: data.bizSeqNo,
+                apiVersion: data.openApiAppVersion,
+                licence: data.keyLicence,
+                faceId: data.faceId,
+                sdkConfig: sdkConfig
+            ) {
+                WBFaceVerifyCustomerService.sharedInstance().startWbFaceVeirifySdk()
+            } failure: { error in
+                print(error)
+                Apphelper.shared.pushNotification(type: .error(message: "暂不可用。"))
+            }
+        }
+    }
 }
 
 struct ProfileHomeView: View {
     @StateObject var vipVM: VipPrivilegeManager = .init()
-    
+
     @StateObject var vm: ProfileHomeViewModel = .init()
     @ObservedObject var userManager: UserManager = .shared
     @State private var show: Bool = false
@@ -74,10 +112,13 @@ struct ProfileHomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         // 购买成功
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
-            Task {
-                await vm.getSingleData()
-            }
+            Task { await vm.getSingleData() }
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.WBFaceVerifyCustomerServiceDidFinished), perform: { output in
+            if let faceResult = output.userInfo?["faceVerifyResult"] as? WBFaceVerifyResult {
+                print(faceResult)
+            }
+        })
         .refreshable(action: {
             await vm.getSingleData()
             await UserManager.shared.getUserInfo()
@@ -144,7 +185,7 @@ struct ProfileHomeView: View {
                 VStack(alignment: .leading, spacing: 24, content: {
                     Text("功能权限")
                         .font(.XMFont.f1b)
-                    ForEach(vipVM.mod.vipAbilityList, id: \.self) {item in
+                    ForEach(vipVM.mod.vipAbilityList, id: \.self) { item in
                         Text(item.title)
                     }
                 })
@@ -152,14 +193,14 @@ struct ProfileHomeView: View {
                 VStack(alignment: .center, spacing: 24, content: {
                     Text("普通会员")
                         .font(.XMFont.f1b)
-                    ForEach(vipVM.mod.vipAbilityList, id: \.self) {item in
+                    ForEach(vipVM.mod.vipAbilityList, id: \.self) { item in
                         Text(item.nonVipDesc)
                     }
                 })
                 VStack(alignment: .center, spacing: 24, content: {
                     Text("至尊会员")
                         .font(.XMFont.f1b)
-                    ForEach(vipVM.mod.vipAbilityList, id: \.self) {item in
+                    ForEach(vipVM.mod.vipAbilityList, id: \.self) { item in
                         Text(item.vipDesc)
                     }
                 })
@@ -189,7 +230,7 @@ struct ProfileHomeView: View {
 
     var avatar: some View {
         VStack(alignment: .center, spacing: 32, content: {
-            HStack{
+            HStack {
                 Text(userManager.user.nickname)
                     .font(.title2.bold())
                 if userManager.user.vipLevel != 0 {
@@ -197,10 +238,8 @@ struct ProfileHomeView: View {
                         .resizable()
                         .frame(width: 20, height: 20)
                 }
-                
             }
-            
-            
+
             XMDesgin.XMButton(action: {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: userManager.user.userId))
             }, label: {
@@ -237,7 +276,7 @@ struct ProfileHomeView: View {
                         .ifshow(show: userManager.user.profileCompletionScore < 1)
                 }
             }
-                
+
             HStack {
                 let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
                 XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_edit", text: text) {
@@ -311,11 +350,7 @@ struct ProfileHomeView: View {
         let listItems: [ListItem] = [
             ListItem(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             ListItem(name: "实名认证", icon: "system_checkmark", subline: "获得人气爆发", action: {
-                WBFaceVerifyCustomerService.sharedInstance().initSDK(withUserId: userManager.user.id, nonce: "", sign: "", appid: "", orderNo: "", apiVersion: "", licence: "", faceId: "", sdkConfig: .init()) {
-                    WBFaceVerifyCustomerService.sharedInstance().startWbFaceVeirifySdk()
-                } failure: { error in
-                    print(error)
-                }
+                Task { await vm.getTXFaceInfo() }
             }),
             ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
             ListItem(name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
@@ -329,11 +364,6 @@ struct ProfileHomeView: View {
                 }
             }
         }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.WBFaceVerifyCustomerServiceDidFinished), perform: { output in
-            if let faceResult = output.userInfo?["faceVerifyResult"] as? WBFaceVerifyResult {
-                print(faceResult)
-            }
-        })
         .padding(.vertical, 16)
     }
 
