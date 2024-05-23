@@ -327,19 +327,23 @@ struct ProfileView: View {
             .padding(.vertical, 12)
         }
         .overlay {
-            BlurEffectView(style: .systemChromeMaterialDark)
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-                .blur(radius: 14)
-                .padding(.leading, 16)
-                .overlay {
-                    VStack(alignment: .center,
-                           spacing: 6) {
-                        XMDesgin.XMIcon(iconName: "profile_fire")
-                        Text("查看私密照片")
-                            .font(.XMFont.f2)
+            if UserManager.shared.user.vipLevel == 0 && vm.user.isOpenAlbum == 0 {
+                BlurEffectView(style: .systemChromeMaterialDark)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .blur(radius: 14)
+                    .padding(.leading, 16)
+                    .overlay {
+                        VStack(alignment: .center,
+                               spacing: 6) {
+                            XMDesgin.XMIcon(iconName: "profile_fire")
+                            Text("查看私密照片")
+                                .font(.XMFont.f2)
+                        }
                     }
-                }
-                .ifshow(show: !vm.photos.isEmpty)
+                    .ifshow(show: !vm.photos.isEmpty)
+                
+            }
+            
         }
     }
 }

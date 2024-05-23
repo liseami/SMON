@@ -41,6 +41,9 @@ struct XMUserUpdateReqMod: Decodable, Encodable, Convertible {
 
     // 教育程度，默认为 0，可选
     var education: Int?
+    
+    //照片墙可见度
+    var isOpenAlbum: Int?
 }
 
 extension XMUserUpdateReqMod {
@@ -56,6 +59,7 @@ extension XMUserUpdateReqMod {
         self.height = profile.height
         self.signature = profile.signature
         self.education = profile.education
+        self.isOpenAlbum = profile.isOpenAlbum
     }
 }
 
@@ -95,6 +99,8 @@ struct XMUserProfile: Convertible, Identifiable {
     
     var vipLevel: Int = 0 // vip等级
     var visiterVipLevel: Int = 0 // 访问者vip等级
+    
+    var isOpenAlbum: Int = 0 // 是否是私密相册
 }
 
 // 用户资料扩展

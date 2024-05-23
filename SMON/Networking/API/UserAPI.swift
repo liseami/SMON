@@ -13,6 +13,7 @@ enum UserAPI: XMTargetType {
     case updateAlbum(p: [String])
     case getHomePage
     case wallet
+    case cashOut
 
     var group: String {
         return "/v1/user"
@@ -34,6 +35,7 @@ enum UserAPI: XMTargetType {
         case .smsCode(let p): return p.kj.JSONObject()
         case .loginBySms(let p): return p.kj.JSONObject()
         case .updateUserInfo(let p): return p.kj.JSONObject()
+        case .cashOut: return nil
         }
     }
 }

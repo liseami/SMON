@@ -127,9 +127,9 @@ struct NearRankView: View {
                             }
                         }
                         
-//                        Text(user.distanceStr)
-//                            .font(.XMFont.f3)
-//                            .fcolor(.XMColor.f2)
+                        Text(user.distanceStr)
+                            .font(.XMFont.f3)
+                            .fcolor(.XMColor.f2)
                     }
                 }
             }

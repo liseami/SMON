@@ -201,7 +201,7 @@ struct ProfileEditView: View {
     var photosWallSetting: some View {
         VStack(alignment: .leading, spacing: 12, content: {
             Text("照片墙可见度")
-            Picker(selection: $vm.updateModel.emotionalNeeds) {
+            Picker(selection: $vm.updateModel.isOpenAlbum) {
                 Text("公开")
                     .tag(1)
                 Text("私密（推荐）")

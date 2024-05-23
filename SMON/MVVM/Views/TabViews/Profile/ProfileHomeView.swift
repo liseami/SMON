@@ -60,7 +60,9 @@ struct ProfileHomeView: View {
                 list
                 // 会员卡片
                 memberShipCard
-                // 可以滑动更多
+                    .ifshow(show: userManager.user.vipLevel == 0)
+                    // 可以滑动更多
+                
                 Spacer().frame(height: 120)
             })
             .padding(.horizontal, 16)

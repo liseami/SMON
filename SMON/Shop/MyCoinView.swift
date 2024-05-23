@@ -8,6 +8,19 @@
 import SwiftUI
 
 struct MyCoinView: View {
+    
+    // 体现按钮
+    @MainActor
+    func cashOutMyCoin() async {
+        let target = UserAPI.cashOut
+        let result = await Networking.request_async(target)
+        if result.is2000Ok {
+            
+        }
+    }
+    
+    
+    
     @EnvironmentObject var vm: ProfileHomeViewModel
     var body: some View {
         List {
@@ -37,7 +50,12 @@ struct MyCoinView: View {
                         .font(.XMFont.big1.bold())
                         .fcolor(.XMColor.f1)
                     Spacer()
-                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "提现") {}
+                    XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "", text: "提现") {
+                        Task{
+                            await cashOutMyCoin()
+                        }
+                        
+                    }
                 })
             }
 
