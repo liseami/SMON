@@ -339,6 +339,7 @@ struct ProfileView: View {
                             .font(.XMFont.f2)
                     }
                 }
+                .ifshow(show: !vm.photos.isEmpty)
         }
     }
 }
