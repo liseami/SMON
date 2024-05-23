@@ -91,7 +91,10 @@ struct XMUserProfile: Convertible, Identifiable {
     var isFollow: Int = 0
     var isEachOther: Int = 0
     var followStatus: Int = 0
-    var isUserLike: Int = 0
+    var isUserLike: Int = 0 // 是否喜欢他人
+    
+    var vipLevel: Int = 0 // vip等级
+    var visiterVipLevel: Int = 0 // 访问者vip等级
 }
 
 // 用户资料扩展
@@ -269,4 +272,7 @@ struct XMUserInRank: Identifiable, Convertible {
     var avatar: String = "" // ": "https://dailycontest.oss-cn-shanghai.aliyuncs.com/app/test/XM_iOS_UserPic_202403071914_7AggIv5rZ9XL.jpg",
     var cityName: String = "" // ": ""
     var distanceStr: String = ""
+    
+    var vipLevel = 0  // 是否是会员
+    
 }

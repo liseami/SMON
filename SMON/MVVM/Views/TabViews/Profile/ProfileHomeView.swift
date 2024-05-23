@@ -42,6 +42,8 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
 }
 
 struct ProfileHomeView: View {
+    @StateObject var vipVM: VipPrivilegeManager = .init()
+    
     @StateObject var vm: ProfileHomeViewModel = .init()
     @ObservedObject var userManager: UserManager = .shared
     @State private var show: Bool = false
@@ -140,33 +142,24 @@ struct ProfileHomeView: View {
                 VStack(alignment: .leading, spacing: 24, content: {
                     Text("功能权限")
                         .font(.XMFont.f1b)
-                    Text("私信任何人")
-                    Text("隐私相册")
-                    Text("附近的人")
-                    Text("我的访客")
-                    Text("喜欢我的")
-                    Text("签到火苗")
+                    ForEach(vipVM.mod.vipAbilityList, id: \.self) {item in
+                        Text(item.title)
+                    }
                 })
                 .frame(maxWidth: .infinity, alignment: .leading)
                 VStack(alignment: .center, spacing: 24, content: {
                     Text("普通会员")
                         .font(.XMFont.f1b)
-                    Text("/")
-                    Text("/")
-                    Text("/")
-                    Text("/")
-                    Text("/")
-                    Text("100")
+                    ForEach(vipVM.mod.vipAbilityList, id: \.self) {item in
+                        Text(item.nonVipDesc)
+                    }
                 })
                 VStack(alignment: .center, spacing: 24, content: {
                     Text("至尊会员")
                         .font(.XMFont.f1b)
-                    Text("✅")
-                    Text("✅")
-                    Text("✅")
-                    Text("✅")
-                    Text("✅")
-                    Text("500")
+                    ForEach(vipVM.mod.vipAbilityList, id: \.self) {item in
+                        Text(item.vipDesc)
+                    }
                 })
             })
             .font(.XMFont.f2)
@@ -194,8 +187,18 @@ struct ProfileHomeView: View {
 
     var avatar: some View {
         VStack(alignment: .center, spacing: 32, content: {
-            Text(userManager.user.nickname)
-                .font(.title2.bold())
+            HStack{
+                Text(userManager.user.nickname)
+                    .font(.title2.bold())
+                if userManager.user.vipLevel != 0 {
+                    Image("home_vipIcon")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                }
+                
+            }
+            
+            
             XMDesgin.XMButton(action: {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.profile(userId: userManager.user.userId))
             }, label: {
@@ -232,7 +235,7 @@ struct ProfileHomeView: View {
                         .ifshow(show: userManager.user.profileCompletionScore < 1)
                 }
             }
-
+                
             HStack {
                 let text = userManager.user.profileCompletionScore == 1 ? "修改主页资料" : "完成你的主页资料"
                 XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.b1, iconName: "profile_edit", text: text) {

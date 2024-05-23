@@ -59,6 +59,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
         list = []
         let result = await Networking.request_async(target)
         if result.is2000Ok, let items = result.mapArray(ListRowMod.self, atKeyPath: atKetPath) {
+            print("取值键: \(result)")
             // 过滤黑名单的用户和内容
 //            let filtereditems = items.filter { item in
 //                let itemdict = item.kj.JSONObject()

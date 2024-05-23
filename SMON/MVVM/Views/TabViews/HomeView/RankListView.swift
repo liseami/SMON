@@ -123,12 +123,18 @@ struct RankListView: View {
                                     index < 3 && self.show)
                         }
 
-                    Text(user.nickname)
-                        .font(.XMFont.f1b)
-                        .lineLimit(1)
-                    Text("No.\(index)")
-                        .font(.XMFont.f3)
-                        .fcolor(.XMColor.f2)
+                    HStack{
+                        Text(user.nickname)
+                            .font(.XMFont.f1b)
+                            .lineLimit(1)
+                        
+                        if user.vipLevel != 0{
+                            Image("home_vipIcon")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        }
+                    }
+                    
                 }
             }
         }

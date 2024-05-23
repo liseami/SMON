@@ -56,11 +56,13 @@ public class NetworkingLogger: PluginType {
         switch result {
         case .success(_):
         
+        
+            
             if let result = result.dataJson?["result"].rawValue as? String, result.isEmpty == false {
                 let dict = RSA.decryptString(result, privateKey: "")
                 guard let originDic = (dict as NSDictionary?)?.value(forKeyPath: "list") else { return }
                 print("""
-                                data：\r \(originDic))
+                                data：\r \(originDic) --- \n \(dict) --- 
                 """)
             
             } else {}

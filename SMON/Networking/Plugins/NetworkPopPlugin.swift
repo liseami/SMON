@@ -31,8 +31,9 @@ public class NetworkPopPlugin: PluginType {
                 Apphelper.shared.pushNotification(type: .info(message: "登录过期，请重新登录。"))
             }
 
-            if result.messageCode == 2100 {
-                Apphelper.shared.presentPanSheet(Color.red, style: .sheet)
+            
+            if result.messageCode == 2100{
+                Apphelper.shared.present(MemberShipView(), presentationStyle: .overFullScreen)
             }
 
             if !result.is2000Ok && result.code < 4000 {

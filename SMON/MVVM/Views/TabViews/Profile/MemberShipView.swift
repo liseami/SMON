@@ -8,10 +8,30 @@
 import SwiftUI
 import SwiftUIX
 
+struct VipPrivilege: Convertible, Identifiable {
+    var id = UUID()
+    var vipAbilityList : [vipPrivilegeModel] = []
+}
+struct vipPrivilegeModel : Convertible, Identifiable, Hashable {
+    var id = UUID()
+    var title: String = "" //打招呼",
+    var nonVipDesc: String = "" //3",
+    var vipDesc: String = "" //✅"
+}
+class VipPrivilegeManager: XMModRequestViewModel<VipPrivilege>{
+    init() {
+        super.init(autoGetData: true, pageName: ""){
+            GoodAPI.getVipList
+        }
+        
+    }
+}
+
 
 
 
 struct MemberShipView: View {
+    @StateObject var vm: VipPrivilegeManager = .init()
     
     var startDate: Date = .now
     var body: some View {
@@ -21,6 +41,8 @@ struct MemberShipView: View {
                     title
                     cards
                     funcs
+                    Spacer()
+                        .frame(height: 120)
                 }
                 .padding(.all, 16)
             })
@@ -76,33 +98,24 @@ struct MemberShipView: View {
             VStack(alignment: .leading, spacing: 24, content: {
                 Text("功能权限")
                     .font(.XMFont.f1b)
-                Text("私信任何人")
-                Text("隐私相册")
-                Text("附近的人")
-                Text("我的访客")
-                Text("喜欢我的")
-                Text("签到火苗")
+                ForEach(vm.mod.vipAbilityList, id: \.self) {item in
+                    Text(item.title)
+                }
             })
             .frame(maxWidth: .infinity, alignment: .leading)
             VStack(alignment: .center, spacing: 24, content: {
                 Text("普通会员")
                     .font(.XMFont.f1b)
-                Text("/")
-                Text("/")
-                Text("/")
-                Text("/")
-                Text("/")
-                Text("100")
+                ForEach(vm.mod.vipAbilityList, id: \.self) {item in
+                    Text(item.nonVipDesc)
+                }
             })
             VStack(alignment: .center, spacing: 24, content: {
                 Text("至尊会员")
                     .font(.XMFont.f1b)
-                Text("✅")
-                Text("✅")
-                Text("✅")
-                Text("✅")
-                Text("✅")
-                Text("500")
+                ForEach(vm.mod.vipAbilityList, id: \.self) {item in
+                    Text(item.vipDesc)
+                }
             })
         })
         .font(.XMFont.f2)
@@ -157,8 +170,17 @@ struct MemberShipCardView: View {
                     .font(.XMFont.f1b)
                     .fcolor(.XMColor.f1)
                 Spacer()
-                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级🙋") {}
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级🙋") {
+                    IAPManager.shared.buy(productId: memberShipInfo.goodsCode)
+                }
             })
+            // 购买成功
+            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
+                Task {
+                    await UserManager.shared.getUserInfo()
+                }
+                Apphelper.shared.closeSheet()
+            }
             Spacer()
             VStack(alignment: .leading, spacing: 12, content: {
                 Text(memberShipInfo.title)
