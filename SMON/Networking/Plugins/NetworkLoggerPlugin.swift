@@ -54,7 +54,7 @@ public class NetworkingLogger: PluginType {
         }
 
         switch result {
-        case let .success(response):
+        case .success(_):
         
             if let result = result.dataJson?["result"].rawValue as? String, result.isEmpty == false {
                 let dict = RSA.decryptString(result, privateKey: "")

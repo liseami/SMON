@@ -41,5 +41,9 @@ struct NewVersionSheet: View {
 }
 
 #Preview {
-    NewVersionSheet.init(versionInfo: XMVersionInfo.init())
+    NewVersionSheet.init(versionInfo:
+            .init()
+    
+    
+    )
 }

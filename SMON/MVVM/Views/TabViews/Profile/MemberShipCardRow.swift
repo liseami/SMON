@@ -26,6 +26,10 @@ class MemberShipManager: XMListViewModel<MemberShipInfo>{
             await self.getListData()
         }
     }
+    
+    
+    
+    
 }
 
 
