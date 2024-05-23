@@ -1,0 +1,11 @@
+face-detector-v535fp16/acn_535_net1.opt.tnnmodel:2bf7a1f73f633e84d71639ab1793772d
+face-detector-v535fp16/acn_535_net1.opt_bin.tnnproto:d5b713b156537c3807ada51fbd11b3f0
+face-detector-v535fp16/config.ini:f1e57307dd4b4e9637097cc90940d2d2
+face-detector-v535fp16/acn_535_net2.opt.tnnmodel:543c5e29ac5c0b2c9075b467173ba29b
+face-detector-v535fp16/acn_535_net2.opt_bin.tnnproto:af883577614feb132f8567d31a4263c2
+config.ini:220e5bdc27f4235edc0491256ae6d6c9
+face-alignment-v331/config_sparse.ini:3d9ba8f4b53858b8c16d0f01d40bbeec
+face-alignment-v331/1105_mbv2_eye_ch3.opt.tnnmodel:d9e03661ddd0889617d5e6015e145351
+face-alignment-v331/1102_mbv2_p1_eye.opt_bin.tnnproto:e350b4217d09167e8022021926e40556
+face-alignment-v331/1105_mbv2_eye_ch3.opt_bin.tnnproto:ea8b900f469b9181c585aee46b7407cc
+face-alignment-v331/1102_mbv2_p1_eye.opt.tnnmodel:63a62b5b505a5ab97ca63351304ff41a

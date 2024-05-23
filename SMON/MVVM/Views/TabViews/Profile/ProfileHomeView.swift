@@ -7,6 +7,7 @@
 
 import StoreKit
 import SwiftUI
+import TencentCloudHuiyanSDKFace
 
 struct HomePageInfo: Convertible {
     var userId: String = "" // : 1764610746026688512,
@@ -304,7 +305,13 @@ struct ProfileHomeView: View {
     var list: some View {
         let listItems: [ListItem] = [
             ListItem(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
-            ListItem(name: "真人认证", icon: "system_checkmark", subline: "获得人气爆发", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
+            ListItem(name: "实名认证", icon: "system_checkmark", subline: "获得人气爆发", action: {
+                WBFaceVerifyCustomerService.sharedInstance().initSDK(withUserId: userManager.user.id, nonce: "", sign: "", appid: "", orderNo: "", apiVersion: "", licence: "", faceId: "", sdkConfig: .init()) {
+                    WBFaceVerifyCustomerService.sharedInstance().startWbFaceVeirifySdk()
+                } failure: { error in
+                    print(error)
+                }
+            }),
             ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
             ListItem(name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
             ListItem(name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.present(SocialAccountView(), presentationStyle: .form) })
@@ -317,6 +324,11 @@ struct ProfileHomeView: View {
                 }
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.WBFaceVerifyCustomerServiceDidFinished), perform: { output in
+            if let faceResult = output.userInfo?["faceVerifyResult"] as? WBFaceVerifyResult {
+                print(faceResult)
+            }
+        })
         .padding(.vertical, 16)
     }
 

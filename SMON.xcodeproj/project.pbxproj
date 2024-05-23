@@ -1000,6 +1000,7 @@
 				A272A4642B8706FB008EA955 /* Frameworks */,
 				A272A4652B8706FB008EA955 /* Resources */,
 				5E27710FAB9A05E2BBA2556B /* [CP] Embed Pods Frameworks */,
+				EB7ABB58F7BF5E8F6252EB8A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1097,6 +1098,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB7ABB58F7BF5E8F6252EB8A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SMON/Pods-SMON-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F8967B72DC0EF44FB6A9E15A /* [CP] Check Pods Manifest.lock */ = {
@@ -1441,7 +1459,7 @@
 				INFOPLIST_FILE = SMON/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSCameraUsageDescription = "您需要提供相机权限，以上传动态图片。";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要您提供相机权限，以便完成认证，拍摄图片。";
 				INFOPLIST_KEY_NSContactsUsageDescription = "您需要提供通讯录权限，以快速添加聊天联系人。";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "您需要提供位置信息，以发现附近的会员。";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "您需要提供位置信息，以发现附近的会员。";
@@ -1496,7 +1514,7 @@
 				INFOPLIST_FILE = SMON/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "每日大赛";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
-				INFOPLIST_KEY_NSCameraUsageDescription = "您需要提供相机权限，以上传动态图片。";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要您提供相机权限，以便完成认证，拍摄图片。";
 				INFOPLIST_KEY_NSContactsUsageDescription = "您需要提供通讯录权限，以快速添加聊天联系人。";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "您需要提供位置信息，以发现附近的会员。";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "您需要提供位置信息，以发现附近的会员。";

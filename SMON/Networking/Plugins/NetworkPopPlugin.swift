@@ -22,9 +22,7 @@ public class NetworkPopPlugin: PluginType {
         switch result {
         case .success:
 
-            
             let tokenError = result.messageCode > 4000
-            
 
             if tokenError {
                 guard UserManager.shared.logged else { return }
@@ -32,15 +30,14 @@ public class NetworkPopPlugin: PluginType {
                 Apphelper.shared.closeKeyBoard()
                 Apphelper.shared.pushNotification(type: .info(message: "登录过期，请重新登录。"))
             }
-            
+
             if result.messageCode == 2100 {
                 Apphelper.shared.presentPanSheet(Color.red, style: .sheet)
             }
-            
+
             if !result.is2000Ok && result.code < 4000 {
                 Apphelper.shared.pushNotification(type: .error(message: result.message.or("未知错误。")))
             }
-
 
         case .failure:
             guard UserManager.shared.logged else { return }

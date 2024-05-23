@@ -18,6 +18,7 @@ pod 'Lantern'# 照片详情
 pod 'AliyunOSSiOS' #阿里云OSS
 pod 'JDStatusBarNotification' # 通知小弹窗
 pod 'SwiftyStoreKit'# 内购
+pod 'TencentCloudHuiyanSDKFace_framework', :path=> './TencentCloudHuiyanSDKFace_framework'
 # 腾讯IM -——————————————————
 pod 'TXIMSDK_Plus_iOS'
 # 集成聊天功能

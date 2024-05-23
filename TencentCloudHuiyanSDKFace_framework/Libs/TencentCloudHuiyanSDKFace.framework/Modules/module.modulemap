@@ -1,0 +1,6 @@
+framework module TencentCloudHuiyanSDKFace {
+  umbrella header "TencentCloudHuiyanSDKFace.h"
+
+  export *
+  module * { export * }
+}

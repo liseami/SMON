@@ -59,6 +59,7 @@ PODS:
   - SwiftyJSON (5.0.1)
   - SwiftyStoreKit (0.16.1)
   - Tagly (0.1.1)
+  - TencentCloudHuiyanSDKFace_framework (8.3.0)
   - TIMCommon (7.8.5483):
     - TIMCommon/BaseCell (= 7.8.5483)
     - TIMCommon/BaseCellData (= 7.8.5483)
@@ -208,6 +209,7 @@ DEPENDENCIES:
   - SwiftyJSON
   - SwiftyStoreKit
   - Tagly
+  - TencentCloudHuiyanSDKFace_framework (from `./TencentCloudHuiyanSDKFace_framework`)
   - TUIChat/UI_Classic
   - TUIConversation/UI_Classic
   - TXIMSDK_Plus_iOS
@@ -240,6 +242,10 @@ SPEC REPOS:
     - TUICore
     - TXIMSDK_Plus_iOS
 
+EXTERNAL SOURCES:
+  TencentCloudHuiyanSDKFace_framework:
+    :path: "./TencentCloudHuiyanSDKFace_framework"
+
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   AliyunOSSiOS: e683c1b1faa0657b5cd02de733628cf996f4cd93
@@ -261,12 +267,13 @@ SPEC CHECKSUMS:
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
   Tagly: deb459c698853a3fffce027fedb92dcb7cf5c68e
+  TencentCloudHuiyanSDKFace_framework: 6c0ea650106aee00f32d7ec59fa21e4b818736a3
   TIMCommon: f87e96822cc1df0ec9fea9049301922ae3f742a5
   TUIChat: 45f37caa632381bd1a05deb20f66a58ef25dc4d5
   TUIConversation: 4e38373e51a1188aaa2072116329587d8554883c
   TUICore: 8e855f83a1b7a04a57dec07c1b71fae83c871d19
   TXIMSDK_Plus_iOS: 9559f6aebc6d69314521d17235bdb3ab58599be3
 
-PODFILE CHECKSUM: a67e849b5026c8ab5f5b27992ed2bbdd1a4b5c02
+PODFILE CHECKSUM: 52caa78679b87283b3ad1ea3debc46bd1e3f1e15
 
 COCOAPODS: 1.15.2
