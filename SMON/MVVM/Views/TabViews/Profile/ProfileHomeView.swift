@@ -17,7 +17,7 @@ struct HomePageInfo: Convertible {
     var flamesNums: String = "" // ": 0,
     var coinNums: String = "" // ": 0
     var currentHot: String = ""
-    
+    var kefuUserId: String = ""
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
@@ -315,7 +315,10 @@ struct ProfileHomeView: View {
             }),
             ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
             ListItem(name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
-            ListItem(name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.present(SocialAccountView(), presentationStyle: .form) })
+            ListItem(name: "微信号解锁管理", icon: "inforequest_wechat", subline: "口令码+门槛设置", action: { Apphelper.shared.present(SocialAccountView(), presentationStyle: .form) }),
+            ListItem(name: "在线客服", icon: "inforequest_kefu", subline: "", action: {
+                MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: "m\(vm.mod.kefuUserId)"))
+            })
         ]
 
         VStack(alignment: .leading, spacing: 24) {

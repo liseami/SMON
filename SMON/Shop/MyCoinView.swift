@@ -20,8 +20,8 @@ struct MyCoinView: View {
     }
     
     
-    
-    @EnvironmentObject var vm: ProfileHomeViewModel
+    @StateObject var vm: StoreManager = .init()
+//    @EnvironmentObject var vm: ProfileHomeViewModel
     var body: some View {
         List {
             XMSection(title: "总资产(赛币）") {
@@ -29,7 +29,7 @@ struct MyCoinView: View {
                     Image("saicoin")
                         .resizable()
                         .frame(width: 44, height: 44)
-                    Text("\(vm.mod.coinNums)")
+                    Text("\(vm.wallet.coinNum)")
                         .font(.XMFont.big1.bold())
                         .fcolor(.XMColor.f1)
                     Spacer()
@@ -46,7 +46,7 @@ struct MyCoinView: View {
                         .renderingMode(.template)
                         .fcolor(.XMColor.f1)
                         .frame(width: 44, height: 44)
-                    Text("\(vm.mod.coinNums)")
+                    Text("\(vm.wallet.coinGiftMoney)")
                         .font(.XMFont.big1.bold())
                         .fcolor(.XMColor.f1)
                     Spacer()

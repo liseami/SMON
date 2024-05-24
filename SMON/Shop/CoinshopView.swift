@@ -30,6 +30,7 @@ class StoreManager: XMListViewModel<XMProduct> {
 
     struct UserWallet: Convertible {
         var coinNum: String = "0"
+        var coinGiftMoney: String = "0"
     }
 
     @Published var wallet: UserWallet = .init()
