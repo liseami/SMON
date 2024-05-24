@@ -11,6 +11,7 @@ enum CommonAPI: XMTargetType {
     case getImUserSign
     case versionInfo(lat: String, lon: String)
     case faceAuth(realName: String, idNo: String)
+    case faceAuthVerify(orderNo: String)
     var group: String {
         return "/v1/common"
     }
@@ -24,6 +25,7 @@ enum CommonAPI: XMTargetType {
 
     var parameters: [String: Any]? {
         switch self {
+        case .faceAuthVerify(let orderNo): return ["orderNo": orderNo]
         case .faceAuth(let realName, let idNo): return ["realName": realName, "idNo": idNo]
         case .versionInfo(let lat, let lon): return lat.isEmpty ? nil : ["lat": lat, "lon": lon]
         default: return nil

@@ -71,7 +71,7 @@ struct XMStateView<ListData: RandomAccessCollection, Item: Identifiable, Content
                     .transition(.opacity.animation(.easeOut(duration: 0.2)))
                     .frame(maxWidth: .infinity)
             case .isNeedReTry:
-                XMPleaceHolderView(imageName: "networkerror_pagepic", text: "网络错误，请刷新重试。", btnText: "重试") {
+                XMPleaceHolderView(imageName: "networkerror_pagepic", text: "APP高级功能。您的权限不足。请刷新重试。", btnText: "重试") {
                     await getListData()
                 }
 

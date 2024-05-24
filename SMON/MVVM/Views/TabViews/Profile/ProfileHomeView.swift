@@ -7,7 +7,7 @@
 
 import StoreKit
 import SwiftUI
-import TencentCloudHuiyanSDKFace
+
 
 struct HomePageInfo: Convertible {
     var userId: String = "" // : 1764610746026688512,
@@ -17,6 +17,7 @@ struct HomePageInfo: Convertible {
     var flamesNums: String = "" // ": 0,
     var coinNums: String = "" // ": 0
     var currentHot: String = ""
+    
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
@@ -40,43 +41,7 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
         }
     }
 
-    struct FaceInfo: Convertible {
-        var faceId: String = "" // tx01cce896498a4a61a35cd4dd661b37",
-        var agreementNo: String = "" // nwwjy4y11ji6eyb6rbzs8y79xin4dx",
-        var bizSeqNo: String = "" // 24052310001184421115432123658057",
-        var openApiAppId: String = "" // TIDApXcx",
-        var openApiAppVersion: String = "" // 1.0.0",
-        var openApiNonce: String = "" // nwwjy4y11ji6eyb6rbzs8y79xin4dx",
-        var openApiUserId: String = "" // 1764610746026688512",
-        var openApiSign: String = "" // C6DDB7B47F9A7F04F119360FAA892286017A6939",
-        var keyLicence: String = "" // c3/5fS6Kz3axq6YbiSSSozYnbY/Y1y3xXgzLxcs0lNPICbuCDDxe4/kwSn2YVG6lk11tHuMfNsNaFU+gCcV6w7a7iZ8IGZdgKq7zoRq3G496ArZBHkcxc9DztVB1Kom6L6bUDQrZb4M8qoGHfB4y0X7e1I0bcnbHSXLOr5AWXxi3xG3qtmrRcCp+Ahn+BAbbe462vzFC/aXYUbFYKqYi05CAQ8ePIRsWdkECvqz/KJqqi9uBo+nnqSP5/Wvz0qilK689OKdh+ziDaDnSRcoQ66U6Qk83x/iBMjm5NlhUnbTopxWIodnD5kpir0FZDwZwbZUoEL6HEUJFQ+OmzPE4EQ=="
-    }
 
-    @MainActor func getTXFaceInfo() async {
-        let t = CommonAPI.faceAuth(realName: "赵翔宇", idNo: "640103199411091811")
-        let r = await Networking.request_async(t)
-        if r.is2000Ok, let data = r.mapObject(FaceInfo.self) {
-            let sdkConfig = WBFaceVerifySDKConfig()
-            sdkConfig.theme = .darkness
-            print(data)
-            WBFaceVerifyCustomerService.sharedInstance().initSDK(
-                withUserId: UserManager.shared.user.id,
-                nonce: data.openApiNonce,
-                sign: data.openApiSign,
-                appid: data.openApiAppId,
-                orderNo: data.bizSeqNo,
-                apiVersion: data.openApiAppVersion,
-                licence: data.keyLicence,
-                faceId: data.faceId,
-                sdkConfig: sdkConfig
-            ) {
-                WBFaceVerifyCustomerService.sharedInstance().startWbFaceVeirifySdk()
-            } failure: { error in
-                print(error)
-                Apphelper.shared.pushNotification(type: .error(message: "暂不可用。"))
-            }
-        }
-    }
 }
 
 struct ProfileHomeView: View {
@@ -99,8 +64,8 @@ struct ProfileHomeView: View {
                 // 会员卡片
                 memberShipCard
                     .ifshow(show: userManager.user.vipLevel == 0)
-                    // 可以滑动更多
-                
+                // 可以滑动更多
+
                 Spacer().frame(height: 120)
             })
             .padding(.horizontal, 16)
@@ -114,11 +79,7 @@ struct ProfileHomeView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
             Task { await vm.getSingleData() }
         }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.WBFaceVerifyCustomerServiceDidFinished), perform: { output in
-            if let faceResult = output.userInfo?["faceVerifyResult"] as? WBFaceVerifyResult {
-                print(faceResult)
-            }
-        })
+    
         .refreshable(action: {
             await vm.getSingleData()
             await UserManager.shared.getUserInfo()
@@ -350,7 +311,7 @@ struct ProfileHomeView: View {
         let listItems: [ListItem] = [
             ListItem(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             ListItem(name: "实名认证", icon: "system_checkmark", subline: "获得人气爆发", action: {
-                Task { await vm.getTXFaceInfo() }
+                Task { MainViewModel.shared.pathPages.append(MainViewModel.PagePath.faceAuth) }
             }),
             ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),
             ListItem(name: "赛币充值", icon: "home_shop", subline: "限时特惠", action: { Apphelper.shared.presentPanSheet(CoinshopView(), style: .shop) }),
