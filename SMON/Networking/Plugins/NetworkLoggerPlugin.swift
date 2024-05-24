@@ -38,7 +38,6 @@ public class NetworkingLogger: PluginType {
         print("URL : \(target.baseURL)\(target.path)")
         print("请求方式：\(target.method.rawValue)")
         print("请求时间 : \(String(format: "%.3f", requestDate))s")
-    
         print("请求头 : \(target.headers)")
         if let request = result.rawReponse?.request {
             switch target.task {
@@ -54,10 +53,8 @@ public class NetworkingLogger: PluginType {
         }
 
         switch result {
-        case .success(_):
+        case .success:
         
-        
-            
             if let result = result.dataJson?["result"].rawValue as? String, result.isEmpty == false {
                 let dict = RSA.decryptString(result, privateKey: "")
                 guard let originDic = (dict as NSDictionary?)?.value(forKeyPath: "list") else { return }

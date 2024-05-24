@@ -8,7 +8,6 @@
 import StoreKit
 import SwiftUI
 
-
 struct HomePageInfo: Convertible {
     var userId: String = "" // : 1764610746026688512,
     var isDailySignin: Bool = false // ": 0,
@@ -18,6 +17,7 @@ struct HomePageInfo: Convertible {
     var coinNums: String = "" // ": 0
     var currentHot: String = ""
     var kefuUserId: String = ""
+    var authLevel: String = ""
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
@@ -40,8 +40,6 @@ class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
             Apphelper.shared.pushNotification(type: .success(message: "🔥 火苗已到账！"))
         }
     }
-
-
 }
 
 struct ProfileHomeView: View {
@@ -79,7 +77,7 @@ struct ProfileHomeView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
             Task { await vm.getSingleData() }
         }
-    
+
         .refreshable(action: {
             await vm.getSingleData()
             await UserManager.shared.getUserInfo()
@@ -310,7 +308,8 @@ struct ProfileHomeView: View {
     var list: some View {
         let listItems: [ListItem] = [
             ListItem(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
-            ListItem(name: "实名认证", icon: "system_checkmark", subline: "获得人气爆发", action: {
+            ListItem(name: "实名认证", icon: "system_checkmark", subline: vm.mod.authLevel == "0" ? "获得人气爆发" : "已认证", action: {
+                guard vm.mod.authLevel == "0" else { return }
                 Task { MainViewModel.shared.pathPages.append(MainViewModel.PagePath.faceAuth) }
             }),
             ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),

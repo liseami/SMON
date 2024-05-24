@@ -29,7 +29,7 @@ class FaceAuthViewModel: ObservableObject {
         var openApiNonce: String = "" // nwwjy4y11ji6eyb6rbzs8y79xin4dx",
         var openApiUserId: String = "" // 1764610746026688512",
         var openApiSign: String = "" // C6DDB7B47F9A7F04F119360FAA892286017A6939",
-        var keyLicence: String = "" // c3/5fS6Kz3axq6YbiSSSozYnbY/Y1y3xXgzLxcs0lNPICbuCDDxe4/kwSn2YVG6lk11tHuMfNsNaFU+gCcV6w7a7iZ8IGZdgKq7zoRq3G496ArZBHkcxc9DztVB1Kom6L6bUDQrZb4M8qoGHfB4y0X7e1I0bcnbHSXLOr5AWXxi3xG3qtmrRcCp+Ahn+BAbbe462vzFC/aXYUbFYKqYi05CAQ8ePIRsWdkECvqz/KJqqi9uBo+nnqSP5/Wvz0qilK689OKdh+ziDaDnSRcoQ66U6Qk83x/iBMjm5NlhUnbTopxWIodnD5kpir0FZDwZwbZUoEL6HEUJFQ+OmzPE4EQ=="
+        var keyLicence: String = ""
     }
 
     @MainActor func getTXFaceInfo() async {
@@ -63,40 +63,43 @@ class FaceAuthViewModel: ObservableObject {
 struct FaceAuth: View {
     @StateObject var vm: FaceAuthViewModel = .init()
     var body: some View {
-        VStack(alignment: .center, spacing: 24) {
-            VStack(alignment: .leading, spacing: 12, content: {
-                Text("姓名")
-                TextField(text: $vm.name)
-                    .font(.XMFont.f1)
-                    .fcolor(.XMColor.f1)
-                    .scrollContentBackground(.hidden)
-                    .keyboardType(.default)
-                    .padding(.all, 12)
-                    .background {
-                        Color.XMColor.b1
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            })
+        ScrollView(content: {
+            VStack(alignment: .center, spacing: 24) {
+                VStack(alignment: .leading, spacing: 12, content: {
+                    Text("姓名")
+                    TextField(text: $vm.name)
+                        .font(.XMFont.f1)
+                        .fcolor(.XMColor.f1)
+                        .scrollContentBackground(.hidden)
+                        .keyboardType(.default)
+                        .padding(.all, 12)
+                        .background {
+                            Color.XMColor.b1
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                })
 
-            VStack(alignment: .leading, spacing: 12, content: {
-                Text("身份证")
-                TextField(text: $vm.idnumber)
-                    .font(.XMFont.f1)
-                    .fcolor(.XMColor.f1)
-                    .keyboardType(.numberPad)
-                    .scrollContentBackground(.hidden)
-                    .padding(.all, 12)
-                    .background {
-                        Color.XMColor.b1
-                    }
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            })
-
-            Spacer().frame(width: 24, height: 120)
+                VStack(alignment: .leading, spacing: 12, content: {
+                    Text("身份证")
+                    TextField(text: $vm.idnumber)
+                        .font(.XMFont.f1)
+                        .fcolor(.XMColor.f1)
+                        .keyboardType(.numberPad)
+                        .scrollContentBackground(.hidden)
+                        .padding(.all, 12)
+                        .background {
+                            Color.XMColor.b1
+                        }
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                })
+            }
+        })
+        .overlay(alignment: .bottom) {
             XMDesgin.XMMainBtn(text: "立即认证") {
                 Apphelper.shared.closeKeyBoard()
                 await vm.getTXFaceInfo()
             }
+            .padding(.bottom, 24)
         }
         .padding(.all, 24)
         .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.WBFaceVerifyCustomerServiceDidFinished), perform: { output in

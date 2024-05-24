@@ -40,6 +40,7 @@ extension XMModRequestViewModel {
             if let mod = r.mapObject(ListRowMod.self) {
                 self.reqStatus = .isOK
                 self.mod = mod
+                print("单模型结果:" + "\(mod)")
             } else {
                 self.reqStatus = .isOKButEmpty
             }
