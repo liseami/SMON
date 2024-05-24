@@ -135,9 +135,9 @@ struct RankListView: View {
                         }
                     }
                     
-                    Text("No.\(index)")
-                        .font(.XMFont.f3)
-                        .lineLimit(1)
+//                    Text("No.\(index)")
+//                        .font(.XMFont.f3)
+//                        .lineLimit(1)
                     
                 }
             }
