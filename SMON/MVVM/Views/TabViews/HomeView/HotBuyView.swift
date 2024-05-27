@@ -348,6 +348,10 @@ struct HotBuyView: View {
                                     // 前三名特殊对待
                                     let isSupserUser = group_index == 0 && user_index < 3
                                     XMUserAvatar(str: user.avatar, userId: user.userId, size: 32)
+                                        .disabled(true)
+                                        .onTapGesture(perform: {
+                                            Apphelper.shared.presentPanSheet(ProfileView(userId: user.userId), style: .cloud)
+                                        })
                                         .ifshow(show: isSupserUser)
                                     Text(user.nickname)
                                         .lineLimit(1)

@@ -325,23 +325,33 @@ struct ProfileView: View {
             .padding(.vertical, 12)
         }
         .overlay {
-            if UserManager.shared.user.vipLevel == 0 && vm.user.isOpenAlbum == 0 {
-                BlurEffectView(style: .systemChromeMaterialDark)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                    .blur(radius: 14)
-                    .padding(.leading, 16)
-                    .overlay {
-                        VStack(alignment: .center,
-                               spacing: 6) {
-                            XMDesgin.XMIcon(iconName: "profile_fire")
-                            Text("查看私密照片")
-                                .font(.XMFont.f2)
+            if UserManager.shared.user.vipLevel == 0
+                && vm.user.isOpenAlbum == 0
+                && vm.user.id != UserManager.shared.user.id
+                && !vm.photos.isEmpty
+            {
+                XMDesgin.XMButton {
+                    Apphelper.shared.present(MemberShipView(), presentationStyle: .overFullScreen)
+                } label: {
+                    BlurEffectView(style: .systemChromeMaterialDark)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .blur(radius: 14)
+                        .padding(.leading, 16)
+                        .overlay {
+                            VStack(alignment: .center,
+                                   spacing: 6) {
+                                XMDesgin.XMIcon(iconName: "profile_fire")
+                                Text("查看私密照片")
+                                    .font(.XMFont.f2)
+                            }
+                            .onTapGesture {
+                                Apphelper.shared.pushNotification(type: .success(message: "请订阅会员服务。"))
+                            }
                         }
-                        .onTapGesture {
-                            Apphelper.shared.pushNotification(type: .success(message: "请订阅会员服务。"))
-                        }
-                    }
-                    .ifshow(show: !vm.photos.isEmpty)
+
+                }
+
+                    
             }
         }
     }
