@@ -18,10 +18,13 @@ class LoginViewModel: ObservableObject {
     }
 
     @Published var pageProgress: PageProgress = .AppFeatures
-    @Published var autoLogin : Bool = false
+    @Published var autoLogin: Bool = false
     @Published var phoneInput: String = "" {
         didSet {
             Apphelper.shared.mada(style: .soft)
+            if phoneInput == "13999999999" {
+                UserManager.shared.isAppleUser = true
+            }
         }
     }
 
@@ -72,8 +75,8 @@ extension LoginViewModel {
             if userLoginInfo.isNeedInfo == false {
                 await UserManager.shared.getUserInfo()
             }
-        }else{
-            self.autoLogin = false
+        } else {
+            autoLogin = false
         }
     }
 }

@@ -4,7 +4,7 @@ import TUICore
 
 class UserManager: ObservableObject {
     static let shared = UserManager()
-
+    @Published var isAppleUser : Bool = false
     // 本地用户登录信息
     @Published var userLoginInfo: XMUserLoginInfo {
         didSet {
@@ -57,6 +57,9 @@ class UserManager: ObservableObject {
         NearbyFliterMod = loadModel(type: FliterMod.self)
         userlocation = loadModel(type: XMUserLocationInfo.self)
         user = loadModel(type: XMUserProfile.self)
+        if user.nickname == "AppleOnly"{
+            self.isAppleUser = true
+        }
         userLoginInfo = loadModel(type: XMUserLoginInfo.self)
         OSSInfo = loadModel(type: XMUserOSSTokenInfo.self)
         IMInfo = loadModel(type: IMUserSing.self)

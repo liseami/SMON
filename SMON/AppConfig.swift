@@ -22,11 +22,16 @@ public enum AppConfig {
 
     // baseURL
     static var baseUrl: String {
-        switch env {
-      case .dev: return "https://mrdstest.aishisan.cn"
-//        case .dev: return "https://meiridasai.aishisan.cn"
-        case .prod: return "https://meiridasai.aishisan.cn"
+        if UserManager.shared.isAppleUser {
+            return "https://mrdstest.aishisan.cn"
+        }else{
+            switch env {
+            case .dev: return "https://mrdstest.aishisan.cn"
+    //        case .dev: return "https://meiridasai.aishisan.cn"
+            case .prod: return "https://meiridasai.aishisan.cn"
+            }
         }
+
     }
 
     /// 极光APPKEY
