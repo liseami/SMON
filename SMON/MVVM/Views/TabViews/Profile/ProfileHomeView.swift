@@ -18,6 +18,8 @@ struct HomePageInfo: Convertible {
     var currentHot: String = ""
     var kefuUserId: String = ""
     var authLevel: String = ""
+    var vipLevel: String = ""
+    var vipExpireTime: String = ""
 }
 
 class ProfileHomeViewModel: XMModRequestViewModel<HomePageInfo> {
@@ -61,8 +63,7 @@ struct ProfileHomeView: View {
                 list
                 // 会员卡片
                 memberShipCard
-                    .ifshow(show: userManager.user.vipLevel == 0)
-                // 可以滑动更多
+//                    .ifshow(show: userManager.user.vipLevel == 0)
 
                 Spacer().frame(height: 120)
             })
@@ -77,7 +78,9 @@ struct ProfileHomeView: View {
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.IAP_BUY_SUCCESS, object: nil)) { _ in
             Task { await vm.getSingleData() }
         }
-
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.FACEAUTHSUCCESS), perform: { _ in
+            Task { await vm.getSingleData() }
+        })
         .refreshable(action: {
             await vm.getSingleData()
             await UserManager.shared.getUserInfo()
@@ -125,11 +128,17 @@ struct ProfileHomeView: View {
                 Image("saicoin")
                     .resizable()
                     .frame(width: 32, height: 32)
-                Text("大赛至尊会员")
-                    .font(.XMFont.f1b)
-                    .fcolor(.XMColor.f1)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("大赛至尊会员")
+                        .font(.XMFont.f1b)
+                        .fcolor(.XMColor.f1)
+                    Text("至" + vm.mod.vipExpireTime)
+                        .font(.XMFont.f3)
+                        .fcolor(.XMColor.f2)
+                        .ifshow(show: vm.mod.vipLevel != "0")
+                }
                 Spacer()
-                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级🙋") {
+                XMDesgin.SmallBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: vm.mod.vipLevel == "0" ? "立刻升级🙋" : "续费会员") {
                     Apphelper.shared.present(MemberShipView(), presentationStyle: .fullScreen)
                 }
             })
@@ -166,7 +175,7 @@ struct ProfileHomeView: View {
             })
             .font(.XMFont.f2)
             .fcolor(.XMColor.f1)
-            XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级", enable: true) { Apphelper.shared.present(MemberShipView(), presentationStyle: .fullScreen) }
+            XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: vm.mod.vipLevel == "0" ? "立刻升级" : "续费会员", enable: true) { Apphelper.shared.present(MemberShipView(), presentationStyle: .fullScreen) }
         }
         .padding(.all, 16)
         .background {
@@ -309,7 +318,7 @@ struct ProfileHomeView: View {
         let listItems: [ListItem] = [
             ListItem(name: "互相关注", icon: "profile_friend", subline: "\(vm.mod.eachFollowNums)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myfriends) }),
             ListItem(name: "实名认证", icon: "system_checkmark", subline: vm.mod.authLevel == "0" ? "获得人气爆发" : "已认证", action: {
-                guard vm.mod.authLevel == "0" else { return }
+                guard vm.mod.authLevel == "0" else { Apphelper.shared.pushNotification(type: .info(message: "您已经认证过了。")); return }
                 Task { MainViewModel.shared.pathPages.append(MainViewModel.PagePath.faceAuth) }
             }),
             ListItem(name: "我的排名", icon: "profile_fire", subline: "No.\(vm.mod.currentRank)", action: { MainViewModel.shared.pushTo(MainViewModel.PagePath.myhotinfo) }),

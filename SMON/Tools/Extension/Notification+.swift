@@ -20,4 +20,6 @@ public extension Notification.Name {
         Notification.Name("com.wuhanjiyunshang.meiridasai.ADD_NEW_COMMENT_SUCCESS")
     static let ADD_NEW_REPLEY_SUCCESS =
         Notification.Name("com.wuhanjiyunshang.meiridasai.ADD_NEW_REPLEY_SUCCESS")
+    static let FACEAUTHSUCCESS =
+        Notification.Name("com.wuhanjiyunshang.meiridasai.FACEAUTHSUCCESS")
 }

@@ -18,6 +18,7 @@ struct vipPrivilegeModel : Convertible, Identifiable, Hashable {
     var nonVipDesc: String = "" //3",
     var vipDesc: String = "" //✅"
 }
+
 class VipPrivilegeManager: XMModRequestViewModel<VipPrivilege>{
     init() {
         super.init(autoGetData: true, pageName: ""){
@@ -32,6 +33,7 @@ class VipPrivilegeManager: XMModRequestViewModel<VipPrivilege>{
 
 struct MemberShipView: View {
     @StateObject var vm: VipPrivilegeManager = .init()
+    @State var currentGoodId : String = ""
     
     var startDate: Date = .now
     var body: some View {
@@ -57,7 +59,7 @@ struct MemberShipView: View {
             Text("选择一个套餐")
                 .font(.XMFont.f1b)
                 .fcolor(.XMColor.f1)
-            MemberShipCardRow()
+            MemberShipCardRow(currentGoodId: $currentGoodId)
         })
     }
 
@@ -84,7 +86,9 @@ struct MemberShipView: View {
             Text("当您点击继续后，我们将向您收取费用。您的订阅会议相同的套餐期限和价格自动续订，直至您在AppStore设置中取消自动续订。点击即表示您已阅读并同意我们的隐私政策。")
                 .font(.XMFont.f3)
                 .fcolor(.XMColor.f3)
-            XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级", enable: true) {}
+            XMDesgin.XMMainBtn(fColor: .XMColor.f1, backColor: .XMColor.main, iconName: "", text: "立刻升级", enable: true) {
+                IAPManager.shared.buy(productId: self.currentGoodId)
+            }
         })
         .padding(.all)
         .background(BlurEffectView(style: .dark).ignoresSafeArea(.all, edges: .bottom))

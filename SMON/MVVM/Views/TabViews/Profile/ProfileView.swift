@@ -177,9 +177,10 @@ struct ProfileView: View {
                 Text(vm.user.nickname)
                     .font(.XMFont.big1.bold())
                 Spacer()
-                XMDesgin.LikeMeBtn(iconName: vm.user.isUserLike == 0 ? "feed_heart" : "feed_heart_fill", size: 32, color: .XMColor.f1, withBackCricle: true) {
+                XMDesgin.LikeMeBtn(iconName: vm.user.isUserLike == 0 ? "feed_heart" : "feed_heart_fill", size: 32, color: vm.user.isUserLike == 0 ? .XMColor.f1 : Color.red, withBackCricle: true) {
                     await vm.tapLikeMe()
                 }
+                .ifshow(show: vm.user.id != UserManager.shared.user.id)
             }
             
             HStack(spacing: 0) {
@@ -335,6 +336,9 @@ struct ProfileView: View {
                             XMDesgin.XMIcon(iconName: "profile_fire")
                             Text("查看私密照片")
                                 .font(.XMFont.f2)
+                        }
+                        .onTapGesture {
+                            Apphelper.shared.pushNotification(type: .success(message: "请订阅会员服务。"))
                         }
                     }
                     .ifshow(show: !vm.photos.isEmpty)

@@ -58,6 +58,8 @@ class ProfileViewModel: XMListViewModel<XMPost> {
         let result = await Networking.request_async(target)
         if result.is2000Ok, let userinfo = result.mapObject(XMUserProfile.self) {
             user = userinfo
+            print(user)
+            print("")
         }
     }
 

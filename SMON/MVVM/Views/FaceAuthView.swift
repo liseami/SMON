@@ -17,6 +17,8 @@ class FaceAuthViewModel: ObservableObject {
         if r.is2000Ok {
             Apphelper.shared.pushNotification(type: .success(message: "实名认证成功。"))
             MainViewModel.shared.pageBack()
+            await UserManager.shared.getUserInfo()
+            NotificationCenter.default.post(name: Notification.Name.FACEAUTHSUCCESS, object: nil)
         }
     }
 
@@ -60,7 +62,7 @@ class FaceAuthViewModel: ObservableObject {
     }
 }
 
-struct FaceAuth: View {
+struct FaceAuthView: View {
     @StateObject var vm: FaceAuthViewModel = .init()
     var body: some View {
         ScrollView(content: {
@@ -68,6 +70,7 @@ struct FaceAuth: View {
                 VStack(alignment: .leading, spacing: 12, content: {
                     Text("姓名")
                     TextField(text: $vm.name)
+                        .autoOpenKeyboard()
                         .font(.XMFont.f1)
                         .fcolor(.XMColor.f1)
                         .scrollContentBackground(.hidden)
@@ -114,5 +117,5 @@ struct FaceAuth: View {
 }
 
 #Preview {
-    FaceAuth()
+    FaceAuthView()
 }

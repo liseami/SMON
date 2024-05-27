@@ -96,10 +96,8 @@ struct XMUserProfile: Convertible, Identifiable {
     var isEachOther: Int = 0
     var followStatus: Int = 0
     var isUserLike: Int = 0 // 是否喜欢他人
-    
     var vipLevel: Int = 0 // vip等级
     var visiterVipLevel: Int = 0 // 访问者vip等级
-    
     var isOpenAlbum: Int = 0 // 是否是私密相册
 }
 

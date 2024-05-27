@@ -95,7 +95,7 @@
 		A2784F1F2B91852100A1B06F /* RelationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F1E2B91852100A1B06F /* RelationListView.swift */; };
 		A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F202B9186A500A1B06F /* NotificationView.swift */; };
 		A2784F232B9186FF00A1B06F /* PanViewBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2784F222B9186FF00A1B06F /* PanViewBox.swift */; };
-		A27B31242C0066320022244D /* FaceAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27B31232C0066320022244D /* FaceAuth.swift */; };
+		A27B31242C0066320022244D /* FaceAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27B31232C0066320022244D /* FaceAuthView.swift */; };
 		A27EFF9D2B92035700B47BD6 /* PostDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFF9C2B92035700B47BD6 /* PostDetailView.swift */; };
 		A27EFFB22B92B67700B47BD6 /* RankListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB12B92B67700B47BD6 /* RankListView.swift */; };
 		A27EFFB42B92B6DB00B47BD6 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27EFFB32B92B6DB00B47BD6 /* FeedViewModel.swift */; };
@@ -332,7 +332,7 @@
 		A2784F1E2B91852100A1B06F /* RelationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationListView.swift; sourceTree = "<group>"; };
 		A2784F202B9186A500A1B06F /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A2784F222B9186FF00A1B06F /* PanViewBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanViewBox.swift; sourceTree = "<group>"; };
-		A27B31232C0066320022244D /* FaceAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAuth.swift; sourceTree = "<group>"; };
+		A27B31232C0066320022244D /* FaceAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceAuthView.swift; sourceTree = "<group>"; };
 		A27EFF9C2B92035700B47BD6 /* PostDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailView.swift; sourceTree = "<group>"; };
 		A27EFFB12B92B67700B47BD6 /* RankListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankListView.swift; sourceTree = "<group>"; };
 		A27EFFB32B92B6DB00B47BD6 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
@@ -764,7 +764,7 @@
 			isa = PBXGroup;
 			children = (
 				A272A4842B871C77008EA955 /* MainView.swift */,
-				A27B31232C0066320022244D /* FaceAuth.swift */,
+				A27B31232C0066320022244D /* FaceAuthView.swift */,
 				A2E9FDD32BEF538B003A3589 /* YPTest */,
 				A272A4862B871CC7008EA955 /* Login */,
 				A28FEF1D2B8EC7D8002E8FB2 /* UserInfoRequest */,
@@ -1245,7 +1245,7 @@
 				A2BA894D2B9ACBCE002FEEFA /* XMTopBlurView.swift in Sources */,
 				A25BC4052BB17DDE00CADE49 /* Notification+.swift in Sources */,
 				A2498AD42BA812C40045B7AD /* XMModRequestViewModel.swift in Sources */,
-				A27B31242C0066320022244D /* FaceAuth.swift in Sources */,
+				A27B31242C0066320022244D /* FaceAuthView.swift in Sources */,
 				A272A4932B871D1A008EA955 /* PostFeedView.swift in Sources */,
 				A28C55DE2B95E8A400707EDA /* XMStateView.swift in Sources */,
 				A25AAD2A2B8EF6B600B7CE40 /* BrithdayDayRequestView.swift in Sources */,

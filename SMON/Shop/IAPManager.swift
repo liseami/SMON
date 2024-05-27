@@ -13,10 +13,26 @@ import SwiftUIX
 
 class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
     private let productIdentifiers = Set<String>([
-        "001", "002", "003", "004", "005", "006"
+        "001", "002", "003", "004", "005", "006",
+        "vip_3_m", "vip_1_m", "vip_12_m"
     ])
     @Published var products = [SKProduct]()
     
+    func get_id_from_code(str: String) -> String {
+        switch str {
+        case "vip_3_m": return "14"
+        case "vip_1_m": return "13"
+        case "vip_12_m": return "15"
+        case "001": return "1"
+        case "002": return "2"
+        case "003": return "3"
+        case "004": return "4"
+        case "005": return "5"
+        case "006": return "6"
+        default: return ""
+        }
+    }
+
     static let shared = IAPManager()
     
     override init() {
@@ -125,7 +141,7 @@ class IAPManager: NSObject, SKPaymentTransactionObserver, ObservableObject {
         SKPaymentQueue.default().finishTransaction(transaction)
         DispatchQueue.main.async {
             LoadingTask(loadingMessage: "与大赛支付中心进行确认") {
-                let t = OrderAPI.placeOrder(payType: 21, goodsId: transaction.payment.productIdentifier)
+                let t = OrderAPI.placeOrder(payType: 21, goodsId: self.get_id_from_code(str: transaction.payment.productIdentifier))
                 let r = await Networking.request_async(t)
                 if r.is2000Ok, let mod = r.mapObject(OrderInfo.self) {
                     await waitme(sec: 1)
