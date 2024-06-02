@@ -55,13 +55,13 @@ struct MainView: View {
     var tabViews: some View {
         Group {
             switch vm.currentTabbar {
-            case .home:
-                // 首页
-//                HomeView()
-                RankView()
             case .feed:
                 // 信息流
                 PostFeedView()
+            case .rank:
+                // 首页
+//                HomeView()
+                RankView()
             case .message:
                 // 消息
                 MessageView()

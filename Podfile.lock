@@ -190,6 +190,7 @@ PODS:
     - TUICore/Base
     - TXIMSDK_Plus_iOS (~> 7.8.5483)
   - TXIMSDK_Plus_iOS (7.8.5483)
+  - WaterfallGrid (1.0.1)
 
 DEPENDENCIES:
   - AliyunOSSiOS
@@ -213,6 +214,7 @@ DEPENDENCIES:
   - TUIChat/UI_Classic
   - TUIConversation/UI_Classic
   - TXIMSDK_Plus_iOS
+  - WaterfallGrid (~> 1.0.1)
 
 SPEC REPOS:
   trunk:
@@ -241,6 +243,7 @@ SPEC REPOS:
     - TUIConversation
     - TUICore
     - TXIMSDK_Plus_iOS
+    - WaterfallGrid
 
 EXTERNAL SOURCES:
   TencentCloudHuiyanSDKFace_framework:
@@ -273,7 +276,8 @@ SPEC CHECKSUMS:
   TUIConversation: 4e38373e51a1188aaa2072116329587d8554883c
   TUICore: 8e855f83a1b7a04a57dec07c1b71fae83c871d19
   TXIMSDK_Plus_iOS: 9559f6aebc6d69314521d17235bdb3ab58599be3
+  WaterfallGrid: 0554a759d9a8aa136fc1769480ddb01bc6fb94b9
 
-PODFILE CHECKSUM: 52caa78679b87283b3ad1ea3debc46bd1e3f1e15
+PODFILE CHECKSUM: 1e6fd761e5de6b679b7e1ae112795501ed14f8bd
 
 COCOAPODS: 1.15.2

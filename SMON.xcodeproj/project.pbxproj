@@ -22,6 +22,8 @@
 		A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20AF75D2B931DF60098E561 /* ProfileEditView.swift */; };
 		A2218D6B2B89C3BE00ECE075 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2218D6A2B89C3BE00ECE075 /* Photos.framework */; };
 		A2380F502BB412D8005B5975 /* NearRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2380F4F2BB412D8005B5975 /* NearRankView.swift */; };
+		A23A43482C09CDD9003C68C1 /* FlowGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A43472C09CDD9003C68C1 /* FlowGrid.swift */; };
+		A23A434A2C09CE45003C68C1 /* PostCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23A43492C09CE45003C68C1 /* PostCardView.swift */; };
 		A23DD4942BBBE07300249972 /* FlameDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23DD4932BBBE07300249972 /* FlameDetailView.swift */; };
 		A23DD4962BBBE0BD00249972 /* UserAssetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23DD4952BBBE0BD00249972 /* UserAssetAPI.swift */; };
 		A23DD4982BBBE44400249972 /* UserOperationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A23DD4972BBBE44400249972 /* UserOperationAPI.swift */; };
@@ -260,6 +262,8 @@
 		A2218D682B89BC3100ECE075 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		A2218D6A2B89C3BE00ECE075 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		A2380F4F2BB412D8005B5975 /* NearRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearRankView.swift; sourceTree = "<group>"; };
+		A23A43472C09CDD9003C68C1 /* FlowGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowGrid.swift; sourceTree = "<group>"; };
+		A23A43492C09CE45003C68C1 /* PostCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardView.swift; sourceTree = "<group>"; };
 		A23DD4932BBBE07300249972 /* FlameDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlameDetailView.swift; sourceTree = "<group>"; };
 		A23DD4952BBBE0BD00249972 /* UserAssetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAssetAPI.swift; sourceTree = "<group>"; };
 		A23DD4972BBBE44400249972 /* UserOperationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserOperationAPI.swift; sourceTree = "<group>"; };
@@ -670,6 +674,7 @@
 				A272A4922B871D1A008EA955 /* PostFeedView.swift */,
 				A2A8D7A52BC9155700262C49 /* NearPostView.swift */,
 				A27EFFB92B92B7B000B47BD6 /* PostView.swift */,
+				A23A43492C09CE45003C68C1 /* PostCardView.swift */,
 				A2498AD92BA831320045B7AD /* XMLikeBtn.swift */,
 				A27EFFB72B92B75A00B47BD6 /* PostListView.swift */,
 				A27EFF9C2B92035700B47BD6 /* PostDetailView.swift */,
@@ -903,6 +908,7 @@
 			isa = PBXGroup;
 			children = (
 				A272A48E2B871CFD008EA955 /* RankView.swift */,
+				A23A43472C09CDD9003C68C1 /* FlowGrid.swift */,
 				A2DEC4AB2BE124E700571961 /* DGEFT.swift */,
 				A27EFFB12B92B67700B47BD6 /* RankListView.swift */,
 				A2380F4F2BB412D8005B5975 /* NearRankView.swift */,
@@ -1250,8 +1256,10 @@
 				A28C55DE2B95E8A400707EDA /* XMStateView.swift in Sources */,
 				A25AAD2A2B8EF6B600B7CE40 /* BrithdayDayRequestView.swift in Sources */,
 				A283C5532BC7E8770002939B /* NoticeAPI.swift in Sources */,
+				A23A434A2C09CE45003C68C1 /* PostCardView.swift in Sources */,
 				A23DD49A2BBBE8DD00249972 /* RequestUserLocationAuthorizationView.swift in Sources */,
 				A2784F212B9186A500A1B06F /* NotificationView.swift in Sources */,
+				A23A43482C09CDD9003C68C1 /* FlowGrid.swift in Sources */,
 				A2DEC4B12BE12E4000571961 /* Lightspeed.metal in Sources */,
 				A2BF269C2BA1D83B00B5A616 /* ChatViewContainer.swift in Sources */,
 				A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */,

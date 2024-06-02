@@ -9,14 +9,14 @@ import Foundation
 
 class FeedViewModel: ObservableObject {
     // 顶部tabbar
-    @Published var currentTopTab: FeedTopBarItem = .competition
+    @Published var currentTopTab: FeedTopBarItem = .hot
 
 
     enum FeedTopBarItem: CaseIterable {
-        case near
-        case localCity
-        case competition
         case hot
+        case competition
+        case localCity
+        case near
         case flow
         var info: LabelInfo {
             switch self {

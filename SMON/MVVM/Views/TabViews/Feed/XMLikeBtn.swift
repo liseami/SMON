@@ -9,12 +9,14 @@ import SwiftUI
 
 struct XMLikeBtn: View {
     init(target: XMTargetType,
-         isLiked: Bool,
+         isInCard: Bool = false,
+         isLiked: Bool ,
          likeNumbers: Int,
          withLikeNumber: Bool = true,
          contentId: String)
     {
         self.target = target
+        self.isInCard = isInCard
         self.contentId = contentId
         self._isLiked = State(initialValue: isLiked)
         self._likeNumbers = State(initialValue: likeNumbers)
@@ -23,11 +25,11 @@ struct XMLikeBtn: View {
 
     let withLikeNumber: Bool
     let target: XMTargetType
-
+    let isInCard: Bool
     let contentId: String
     @State private var isLiked: Bool
     @State private var likeNumbers: Int
-    @State var imTapSelf : Bool  = false
+    @State var imTapSelf: Bool = false
 
     @MainActor
     func tapLike() async {
@@ -42,44 +44,54 @@ struct XMLikeBtn: View {
     }
 
     var body: some View {
-        HStack {
+        HStack(spacing: isInCard ? 0 : 12) {
+            if isInCard {
+                heart
+            }
             Text("\(self.likeNumbers)")
                 .font(.XMFont.f3)
                 .bold()
                 .ifshow(show: withLikeNumber)
-            XMDesgin.XMButton {
-                await self.tapLike()
-            } label: {
-                XMDesgin.XMIcon(
-                    iconName: self.isLiked ? "feed_heart_fill" : "feed_heart",
-                    size: 16,
-                    color: self.isLiked ? .red : .XMColor.f1,
-                    withBackCricle: true)
+            if !isInCard {
+                heart
             }
-            // 在详情内被点赞，列表中响应。
-            .onReceive(NotificationCenter.default.publisher(for: Notification.Name.PostTapLike, object: nil)) { notification in
-                if let postId = notification.userInfo?["postId"] as? String {
-                    guard postId == contentId, self.imTapSelf == false else {
-                        self.imTapSelf = false
-                        return }
-                    DispatchQueue.main.async {
-                        self.isLiked.toggle()
-                        self.likeNumbers += self.isLiked ? 1 : -1
-                    }
-                }
-            }
-            .changeEffect(.spray {
-                Group {
-                    XMDesgin.XMIcon(iconName: "feed_heart_fill", color: .red)
-                    Image(systemName: "sparkles")
-                }
-                .font(.title)
-                .foregroundStyle(.red.gradient)
-            }, value: isLiked, isEnabled: isLiked)
         }
+    }
+
+    var heart: some View {
+        XMDesgin.XMButton {
+            await self.tapLike()
+        } label: {
+            XMDesgin.XMIcon(
+                iconName: self.isLiked ? "feed_heart_fill" : "feed_heart",
+                size: 16,
+                color: self.isLiked ? .red : .XMColor.f1,
+                withBackCricle: true)
+        }
+        // 在详情内被点赞，列表中响应。
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.PostTapLike, object: nil)) { notification in
+            if let postId = notification.userInfo?["postId"] as? String {
+                guard postId == contentId, self.imTapSelf == false else {
+                    self.imTapSelf = false
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.isLiked.toggle()
+                    self.likeNumbers += self.isLiked ? 1 : -1
+                }
+            }
+        }
+        .changeEffect(.spray {
+            Group {
+                XMDesgin.XMIcon(iconName: "feed_heart_fill", color: .red)
+                Image(systemName: "sparkles")
+            }
+            .font(.title)
+            .foregroundStyle(.red.gradient)
+        }, value: isLiked, isEnabled: isLiked)
     }
 }
 
 #Preview {
-    XMLikeBtn(target: PostsOperationAPI.tapLike(postId: "32"), isLiked: false, likeNumbers: 12, contentId: "")
+    XMLikeBtn(target: PostsOperationAPI.tapLike(postId: "32"), isInCard: true, isLiked: false, likeNumbers: 12, contentId: "")
 }

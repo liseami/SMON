@@ -12,6 +12,7 @@ pod 'lottie-ios'# JSON动画
 pod 'Kingfisher'# Web图片
 pod 'Introspect' # 链接UIKIT
 pod 'SwifterSwift' # 语法糖
+pod 'WaterfallGrid', '~> 1.0.1'#瀑布流
 pod 'Tagly'# 标签云
 pod 'PanModal' # slack 开源弹窗
 pod 'Lantern'# 照片详情

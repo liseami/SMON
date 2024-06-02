@@ -24,14 +24,13 @@ public enum AppConfig {
     static var baseUrl: String {
         if UserManager.shared.isAppleUser {
             return "https://mrdstest.aishisan.cn"
-        }else{
+        } else {
             switch env {
-            case .dev: return "https://mrdstest.aishisan.cn"
-    //        case .dev: return "https://meiridasai.aishisan.cn"
+//            case .dev: return "https://mrdstest.aishisan.cn"
+                    case .dev: return "https://meiridasai.aishisan.cn"
             case .prod: return "https://meiridasai.aishisan.cn"
             }
         }
-
     }
 
     /// 极光APPKEY

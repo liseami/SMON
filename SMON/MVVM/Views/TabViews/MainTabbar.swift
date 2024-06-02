@@ -48,7 +48,7 @@ struct MainTabbar: View {
         let iconName = vm.currentTabbar.circleBtnInfo.icon
         let btnName = vm.currentTabbar.circleBtnInfo.name
         return XMDesgin.XMButton {
-            if vm.currentTabbar == .home {
+            if vm.currentTabbar == .rank {
 //                vm.showHotBuyView = true
                 DispatchQueue.main.async {
                     Apphelper.shared.presentPanSheet(HotBuyView(), style: .cloud)
@@ -68,7 +68,7 @@ struct MainTabbar: View {
                 })
                 .clipShape(Circle())
                 // 冒烟
-                .conditionalEffect(.smoke, condition: vm.currentTabbar == .home)
+                .conditionalEffect(.smoke, condition: vm.currentTabbar == .rank)
                 .overlay {
                     VStack(spacing: 0) {
                         XMDesgin.XMIcon(iconName: iconName, color: .white)
@@ -102,7 +102,7 @@ struct MainTabbar: View {
                 let selected = vm.currentTabbar == tabitem
                 Button(action: {
                     // 从别的地方切换到home
-                    if tabitem == .home {
+                    if tabitem == .rank {
                         vm.homeBtnJump += 1
                     }
 //                    // 现在是hot，切换到别的地方

@@ -147,7 +147,7 @@ struct RankListView: View {
 
 #Preview {
 //    PostListLoadingView()
-    MainView(vm: .init(currentTabbar: .home))
+    MainView(vm: .init(currentTabbar: .rank))
         .environmentObject(RankViewModel())
 }
 

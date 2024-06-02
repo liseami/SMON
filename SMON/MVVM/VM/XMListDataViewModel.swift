@@ -86,6 +86,7 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
                 reqStatus = .isNeedReTry
             }
         }
+        
         loadingMoreStatus = .isOK
     }
 
@@ -101,22 +102,22 @@ class XMListViewModel<ListRowMod: Convertible>: XMListDataViewModelProtocol {
         if r.is2000Ok, let items = r.mapArray(ListRowMod.self, atKeyPath: atKetPath) {
             // 没有更多数据
             if items.isEmpty {
-                await waitme(sec: 0.2)
+                await waitme(sec: 0.6)
                 loadingMoreStatus = .isOKButEmpty
                 // 数据小于10个
             } else if items.count < pagesize {
-                await waitme(sec: 0.2)
+                await waitme(sec: 0.6)
                 loadingMoreStatus = .isOKButEmpty
                 list += items
             } else {
                 // 下一页数据数据多于等于10
                 list += items
                 currentPage += 1
-                await waitme(sec: 0.2)
+                await waitme(sec: 0.6)
                 loadingMoreStatus = .isOK
             }
         } else {
-            await waitme(sec: 0.2)
+            await waitme(sec: 0.6)
             loadingMoreStatus = .isNeedReTry
         }
     }

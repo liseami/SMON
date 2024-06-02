@@ -90,7 +90,7 @@ class UserManager: ObservableObject {
             self.userLoginInfo = .init()
             self.OSSInfo = .init()
             self.IMInfo = .init()
-            MainViewModel.shared.currentTabbar = .home
+            MainViewModel.shared.currentTabbar = .rank
         }), .init(title: "取消", style: .default)])
     }
 
@@ -101,7 +101,7 @@ class UserManager: ObservableObject {
             self.userLoginInfo = .init()
             self.OSSInfo = .init()
             self.IMInfo = .init()
-            MainViewModel.shared.currentTabbar = .home
+            MainViewModel.shared.currentTabbar = .rank
         }), .init(title: "取消", style: .default)])
     }
 

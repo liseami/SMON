@@ -97,5 +97,5 @@ struct RankView: View {
 }
 
 #Preview {
-    MainView(vm: .init(currentTabbar: .home))
+    MainView(vm: .init(currentTabbar: .rank))
 }

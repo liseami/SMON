@@ -61,6 +61,19 @@ struct PostFeedView: View {
 
     var tabView: some View {
         TabView(selection: $vm.currentTopTab) {
+            // 推荐
+            tabContent(for: .hot, target: PostAPI.recommendList(page: 1))
+                .tag(FeedViewModel.FeedTopBarItem.hot)
+            // 每日大赛，单独处理
+            tabContent(for: .competition, target: nil)
+                .tag(FeedViewModel.FeedTopBarItem.competition)
+            // 同城
+
+            tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
+                .tag(FeedViewModel.FeedTopBarItem.localCity)
+                .ifshow(show: userManager.user.cityName.isEmpty == false)
+
+            // 附近
             ZStack(alignment: .top) {
                 if vm.currentTopTab == .near {
                     NearPostView()
@@ -71,14 +84,7 @@ struct PostFeedView: View {
             .tag(FeedViewModel.FeedTopBarItem.near)
             .environmentObject(vm)
 
-            tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
-                .tag(FeedViewModel.FeedTopBarItem.localCity)
-                .ifshow(show: userManager.user.cityName.isEmpty == false )
-            // 每日大赛，单独处理
-            tabContent(for: .competition, target: nil)
-                .tag(FeedViewModel.FeedTopBarItem.competition)
-            tabContent(for: .hot, target: PostAPI.recommendList(page: 1))
-                .tag(FeedViewModel.FeedTopBarItem.hot)
+            // 关注
             tabContent(for: .flow, target: PostAPI.followList(page: 1))
                 .tag(FeedViewModel.FeedTopBarItem.flow)
         }

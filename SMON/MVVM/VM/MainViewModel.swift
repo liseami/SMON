@@ -11,12 +11,12 @@ import ImSDK_Plus
 class MainViewModel: ObservableObject {
     static let shared: MainViewModel = .init()
 
-    init(currentTabbar: TabbarItem = .home) {
+    init(currentTabbar: TabbarItem = .feed) {
         self.currentTabbar = currentTabbar
         self.pathPages = .init()
     }
 
-    @Published var currentTabbar: TabbarItem = .home
+    @Published var currentTabbar: TabbarItem = .rank
     @Published var homeBtnJump: Int = 0
     @Published var pathPages: NavigationPath = .init()
     @Published var unreadCount: Int = 0
@@ -36,24 +36,24 @@ class MainViewModel: ObservableObject {
 
     @MainActor
     func reset() {
-        self.currentTabbar = .home
+        self.currentTabbar = .feed
         self.pathPages = .init()
     }
 
     enum TabbarItem: CaseIterable {
-        case home
         case feed
+        case rank
         case message
         case profile
 
         var labelInfo: LabelInfo {
             switch self {
-            case .home:
-                return .init(name: "大赛", icon: "tabbar_home", subline: "")
+            case .feed:
+                return .init(name: "推文", icon: "tabbar_home", subline: "")
+            case .rank:
+                return .init(name: "大赛", icon: "tabbar_circle_rank", subline: "")
             case .profile:
                 return .init(name: "排名", icon: "tabbar_profile", subline: "")
-            case .feed:
-                return .init(name: "推文", icon: "tabbar_feed", subline: "")
             case .message:
                 return .init(name: "消息", icon: "tabbar_message", subline: "")
             }
@@ -61,7 +61,7 @@ class MainViewModel: ObservableObject {
 
         var circleBtnInfo: LabelInfo {
             switch self {
-            case .home:
+            case .rank:
 //                return .init(name: "", icon: "tabbar_circle_post", subline: "")
                 return .init(name: "冲榜", icon: "tabbar_circle_rank", subline: "")
             case .feed, .message, .profile:
