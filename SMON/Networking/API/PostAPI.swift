@@ -27,9 +27,9 @@ enum PostAPI: XMTargetType {
     var parameters: [String: Any]? {
         switch self {
         case .user(let page, let userId): return ["page": page, "pageSize": "20", "userId": userId]
-        case .sameCityList(let page): return ["page": page, "pageSize": "20"]
-        case .recommendList(let page): return ["page": page, "pageSize": "20"]
-        case .followList(let page): return ["page": page, "pageSize": "20"]
+        case .sameCityList(let page): return ["page": page, "pageSize": "20", "isOnlyImage": "1"]
+        case .recommendList(let page): return ["page": page, "pageSize": "20", "isOnlyImage": "1"]
+        case .followList(let page): return ["page": page, "pageSize": "20", "isOnlyImage": "1"]
         case .nearbyList(let page): return ["page": page, "pageSize": "20",
                                             "latitude": UserManager.shared.userlocation.lat, "longitude": UserManager.shared.userlocation.long]
         case .publish(let p): return p.kj.JSONObject()

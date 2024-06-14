@@ -15,9 +15,13 @@ struct PostCardView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8, content: {
+            let width: CGFloat = UIScreen.main.bounds.width
             WebImage(str: vm.post.postAttachs.first?.picUrl ?? "")
-                .scaledToFit()
-                .frame(maxWidth: .infinity)
+//                .scaledToFit()
+//                .frame(maxWidth: .infinity)
+                .scaledToFill()
+                .frame(width: (width-20)/2, height: 224)
+                .clipped()
                 .ifshow(show: vm.post.postAttachs.first?.picUrl.isEmpty == false)
             VStack(alignment: .leading, spacing: 8) {
                 Text(vm.post.postContent)
