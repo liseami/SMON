@@ -9,7 +9,8 @@ import Foundation
 
 class FeedViewModel: ObservableObject {
     // 顶部tabbar
-    @Published var currentTopTab: FeedTopBarItem = .hot
+//    @Published var currentTopTab: FeedTopBarItem = .hot
+    @Published var currentTopTab: FeedTopBarItem = .competition
 
 
     enum FeedTopBarItem: CaseIterable {

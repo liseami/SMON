@@ -50,6 +50,7 @@ struct PostListView: View {
                         PostCardView(post)
                             .clipShape(RoundedRectangle(cornerRadius: 8))
                             .contentShape(RoundedRectangle(cornerRadius: 8))
+                            .ifshow(show: post.postAttachs.first?.picUrl.isEmpty == false)
                     }
                     .gridStyle(
                         columnsInPortrait: 2,

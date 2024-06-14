@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct XMTheme: Identifiable, Convertible {
+struct XMTheme: Identifiable, Convertible,Equatable {
     var id: Int = 0 // 1,
     var sex: Int = 0 // 2,
     var title: String = "" // "包臀裙大赛",

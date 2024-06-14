@@ -26,8 +26,8 @@ public enum AppConfig {
             return "https://mrdstest.aishisan.cn"
         } else {
             switch env {
-//            case .dev: return "https://mrdstest.aishisan.cn"
-                    case .dev: return "https://meiridasai.aishisan.cn"
+            case .dev: return "https://mrdstest.aishisan.cn"
+//                    case .dev: return "https://meiridasai.aishisan.cn"
             case .prod: return "https://meiridasai.aishisan.cn"
             }
         }

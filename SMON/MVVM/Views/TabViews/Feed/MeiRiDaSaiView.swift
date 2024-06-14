@@ -29,7 +29,8 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
     @Published var themeList: [XMTheme] = [] {
         didSet {
             guard oldValue.isEmpty else { return }
-            currentThemeIndex = max(0, themeList.count - 2)
+//            currentThemeIndex = max(0, themeList.count - 2)
+            currentThemeIndex = 0
         }
     }
 
@@ -104,7 +105,8 @@ struct MeiRiDaSaiView: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
-                header
+//                header
+                newHeader
                 // 最新最热选择
                 tab
                 // 帖子列表
@@ -116,10 +118,14 @@ struct MeiRiDaSaiView: View {
                     PostListLoadingView()
                 } emptyView: {
                     VStack(spacing: 24) {
+                        Image("xm_noPostImage")
+                            .resizable()
+                            .frame(width: 179, height: 179)
+                        
                         Text("暂无帖子，快快发布吧！")
                             .font(.XMFont.f1)
                             .fcolor(.XMColor.f2)
-                        LoadingPostView()
+//                        LoadingPostView()
                     }
                     .padding(.top, 12)
                 } loadMore: {
@@ -180,6 +186,66 @@ struct MeiRiDaSaiView: View {
         .background(Color.XMColor.b1.opacity(0))
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
+    
+    
+    @ViewBuilder
+    var newHeader: some View{
+        if let theme = vm.currentTheme,!vm.themeList.isEmpty{
+            ScrollView(.horizontal, showsIndicators: false){
+                VStack{
+                    HStack {
+                        ForEach(vm.themeList.indices, id:  \.self){indx in
+                            let item = vm.themeList[indx]
+                            if item == theme {
+                                Text(item.title)
+                                    .font(.XMFont.f1)
+                                    .fcolor(.XMColor.f1)
+//                                    .width(64)
+                            }else{
+                                Text(item.title)
+                                    .font(.XMFont.f3)
+                                    .fcolor(.XMColor.f2)
+//                                    .width(48)
+                                    .onTapGesture {
+                                        vm.currentThemeIndex = indx
+                                    }
+                            }
+                        }
+                        Spacer()
+                        
+                    }
+                    HStack{
+                        ForEach(vm.themeList.indices, id:  \.self){indx in
+                            let item = vm.themeList[indx]
+                            if item == theme {
+                                WebImage(str: item.coverUrl)
+                                    .scaledToFill()
+                                    .frame(width: 64, height: 48)
+                                    .clipShape(RoundedRectangle(cornerRadius: 3))
+                            }else{
+                                WebImage(str: item.coverUrl)
+                                    .scaledToFill()
+                                    .frame(width: 48, height: 36)
+                                    .clipShape(RoundedRectangle(cornerRadius: 3))
+                                    .onTapGesture {
+                                        vm.currentThemeIndex = indx
+                                    }
+                            }
+                            
+                        }
+                        Spacer()
+                            
+                    }
+                    
+                }
+                .frame(height: 70)
+            }
+            
+        }else{
+            
+        }
+    }
+    
 
     @ViewBuilder
     var header: some View {
@@ -242,6 +308,7 @@ struct MeiRiDaSaiView: View {
                         headerImage(theme.coverUrl)
                     }
                     .offset(x: 0, y: -44)
+                    .background(.red)
                 }
             })
             .padding(.top, 40)
