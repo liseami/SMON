@@ -12,9 +12,13 @@ class PostThemeStore: ObservableObject {
 
     @Published var themeList: [XMTheme] = []
     @Published var targetTheme: XMTheme?
+    @Published var newThemeList : [[XMTheme]] = []
+    
+    
     
     func reset() {
         self.themeList = []
         self.targetTheme = nil
+        self.newThemeList = []
     }
 }

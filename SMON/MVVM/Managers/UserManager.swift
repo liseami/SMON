@@ -2,7 +2,7 @@ import Foundation
 import TUIChat
 import TUICore
 
-class UserManager: ObservableObject {
+class UserManager: NSObject, ObservableObject, V2TIMSimpleMsgListener {
     static let shared = UserManager()
     @Published var isAppleUser : Bool = false
     // 本地用户登录信息
@@ -47,13 +47,14 @@ class UserManager: ObservableObject {
         }
     }
 
-    private init() {
+    private override init() {
         user = .init()
         OSSInfo = .init()
         IMInfo = .init()
         userlocation = .init()
         NearbyFliterMod = .init()
         userLoginInfo = .init()
+        super.init()
         NearbyFliterMod = loadModel(type: FliterMod.self)
         userlocation = loadModel(type: XMUserLocationInfo.self)
         user = loadModel(type: XMUserProfile.self)
@@ -189,6 +190,18 @@ class UserManager: ObservableObject {
         JPUSHService.setAlias(user.userId, completion: { _, _, _ in
         }, seq: 1)
     }
+    
+    func onRecvC2CCustomMessage(_ msgID: String!, sender info: V2TIMUserInfo!, customData data: Data!) {
+        let jsonDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+        print("\(String(describing: jsonDictionary))")
+        let  businessID = jsonDictionary?["businessID"]
+        if businessID as! String == "bottomRecommend" {
+            let obj1 = jsonDictionary?["businessInfo"]
+            NotificationCenter.default.post(name: Notification.Name.GETPPINFOSUCCESS, object: obj1)
+        }
+        
+        MainViewModel.shared.getUnreadCount()
+    }
 }
 
 extension UserManager {
@@ -203,6 +216,13 @@ extension UserManager {
             V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
             }
             MainViewModel.shared.getUnreadCount()
+            
+            
+            
+            
+            
+            V2TIMManager.sharedInstance().addSimpleMsgListener(listener: self)
+            
         }
         // 注册主题
         if let customChatThemePath = Bundle.main.path(forResource: "TUIChatXMTheme.bundle", ofType: nil),
@@ -238,5 +258,6 @@ extension UserManager {
         TUIMessageCellLayout.outgoingTextMessage().avatarInsets = .init(horizontal: 16, vertical: 16)
         TUIMessageCellLayout.incommingTextMessage().avatarSize = .init(width: 44, height: 44)
         TUIMessageCellLayout.incommingTextMessage().avatarInsets = .init(horizontal: 16, vertical: 16)
+        
     }
 }

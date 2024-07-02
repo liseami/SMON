@@ -97,5 +97,19 @@
     ];
 }
 
+- (void)registerCustomMessageCell {
+    [TUIChatConfig.defaultConfig registerCustomMessage:@"xmPostShare"
+                                  messageCellClassName:@"TUIPostViewCell"
+                              messageCellDataClassName:@"TUIPostCellData"
+    ];
+    
+    [TUIChatConfig.defaultConfig registerCustomMessage:@"smallGrayBar"
+                                  messageCellClassName:@"TUITipViewCell"
+                              messageCellDataClassName:@"XMTipsMessageCellData"
+    ];
+    
+}
+
+
 
 @end

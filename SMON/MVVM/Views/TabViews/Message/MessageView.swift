@@ -13,7 +13,9 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
     override init() {
         super.init()
         V2TIMManager.sharedInstance().add(self)
+        
         V2TIMManager.sharedInstance().login("m" + UserManager.shared.user.userId, userSig: UserManager.shared.IMInfo.imUserSign) {
+            
             // 登录成功
             print("IM登录成功")
             DispatchQueue.main.async {
@@ -49,6 +51,46 @@ class MessageViewModel: NSObject, ObservableObject, V2TIMSDKListener {
         V2TIMManager.sharedInstance().setSelfInfo(info) {} fail: { _, _ in
         }
     }
+    
+    @MainActor
+    func sendMessage(post: XMPost , userid: String){
+        var image: String = ""
+        if post.postAttachs.count > 0 {
+            image = post.postAttachs[0].picUrl
+        }else{
+            image = post.avatar
+        }
+        let dict: [String: String] = ["content": post.postContent, "ImageUrl": image, "postId": post.id, BussinessID : "xmPostShare", "postUserId" : post.userId]
+        let jsonData = ObjectToData(dict)
+        V2TIMManager.sharedInstance().sendC2CCustomMessage(jsonData, to: userid) {
+            print("消息发送成功")
+        } fail: { _, _ in
+            
+        }
+    }
+    
+    /// 字典/数组转Data
+    func ObjectToData(_ object: Any) -> Data? {
+        do {
+            return try JSONSerialization.data(withJSONObject: object, options: [])
+        } catch {
+            print(error)
+        }
+        return nil
+    }
+    
+    
+    @MainActor
+    func sendTxtMessage(userid: String){
+        
+        V2TIMManager.sharedInstance().sendC2CTextMessage("你好,在干嘛?", to: userid) {
+            print("消息发送成功")
+        } fail: { _, _ in
+            print("消息发送失败")
+        }
+    }
+    
+    
 }
 
 extension V2TIMConversation: Identifiable {}

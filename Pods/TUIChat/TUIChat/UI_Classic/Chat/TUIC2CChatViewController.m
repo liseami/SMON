@@ -13,10 +13,11 @@
 #import "TUILinkCellData.h"
 #import "TUIMessageController.h"
 #import "TUIMessageDataProvider.h"
+#import "TUIPostCellData.h"
 
 #define kC2CTypingTime 3000.0
 
-@interface TUIC2CChatViewController ()
+@interface TUIC2CChatViewController ()<TUIBaseMessageControllerDelegate>
 
 // 如果满足了一次sendTypingBaseCondation 则当前会话未退出前都使用 sendTypingBaseCondationInVC
 // If one sendTypingBaseCondation is satisfied, sendTypingBaseCondationInVC is used until the current session exits
@@ -42,6 +43,17 @@
                   subKey:TUICore_TUIChatNotify_ChatVC_ViewDidLoadSubKey
                   object:nil
                    param:param];
+    
+    self.messageController.delegate = self;
+}
+
+- (void)messageController:(TUIBaseMessageController *)controller onSelectMessageContent:(TUIMessageCell *)cell{    
+    if ([cell.messageData.class isEqual:[TUIPostCellData class]]) {
+        TUIPostCellData *data = (TUIPostCellData *)cell.messageData;
+        [self.delegate tapMessageCell:cell postId:data.postId];
+    }
+    
+    
 }
 
 #pragma mark - Override Methods

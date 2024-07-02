@@ -16,17 +16,17 @@ class FeedViewModel: ObservableObject {
     enum FeedTopBarItem: CaseIterable {
         case hot
         case competition
-        case localCity
-        case near
+//        case localCity
+//        case near
         case flow
         var info: LabelInfo {
             switch self {
             case .competition:
                 return .init(name: "每日大赛", icon: "", subline: "")
-            case .localCity:
-                return .init(name: "苏州", icon: "", subline: "")
-            case .near:
-                return .init(name: "附近", icon: "", subline: "")
+//            case .localCity:
+//                return .init(name: "苏州", icon: "", subline: "")
+//            case .near:
+//                return .init(name: "附近", icon: "", subline: "")
             case .hot:
                 return .init(name: "推荐", icon: "", subline: "")
             case .flow:

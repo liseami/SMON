@@ -10,7 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+@protocol TUIMessageTapDelegate <NSObject>
+-(void)tapMessageCell:(TUIMessageCell *)cell postId:(NSString *)postId;
+@end
+
 @interface TUIC2CChatViewController : TUIBaseChatViewController
+
+@property(nonatomic, weak) id<TUIMessageTapDelegate> delegate;
 
 @end
 

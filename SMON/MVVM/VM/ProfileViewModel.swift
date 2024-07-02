@@ -37,11 +37,15 @@ class ProfileViewModel: XMListViewModel<XMPost> {
     enum ProfileBarItem: CaseIterable {
         case media
 //        case rank
+        case collect
         case gift
+        
         var info: LabelInfo {
             switch self {
             case .media:
                 return .init(name: "照片与动态", icon: "", subline: "")
+            case .collect:
+                return .init(name: "收藏", icon: "", subline: "")
 //            case .post:
 //                return .init(name: "动态", icon: "", subline: "")
 //            case .rank:

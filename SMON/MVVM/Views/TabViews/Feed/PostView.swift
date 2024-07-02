@@ -8,6 +8,9 @@
 import SwiftUI
 
 class PostViewModel: ObservableObject {
+    
+    @StateObject var um: MessageViewModel = .shared
+    
     @Published var post: XMPost
     init(post: XMPost) {
         self.post = post
@@ -23,9 +26,22 @@ class PostViewModel: ObservableObject {
             self.hidden = true
         }
     }
+    
+    @MainActor
+    func DasanTap() async {
+        let t = UserOperationAPI.sayHello(toUserId: self.post.userId)
+        let r = await Networking.request_async(t)
+        if r.is2000Ok {
+            MainViewModel.shared.pushTo(MainViewModel.PagePath.chat(userId: "m" + self.post.userId))
+            um.sendTxtMessage(userid: "m" + self.post.userId)
+        }
+    }
+    
 }
 
 struct PostView: View {
+    
+    
     @StateObject var vm: PostViewModel
     init(_ post: XMPost) {
         self._vm = StateObject(wrappedValue: .init(post: post))
@@ -43,6 +59,7 @@ struct PostView: View {
             .contentShape(RoundedRectangle(cornerRadius: 12))
             .onTapGesture {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.postdetail(postId: vm.post.id))
+                
             }
         }
     }
@@ -80,6 +97,22 @@ struct PostView: View {
     var toolbtns: some View {
         HStack(alignment: .center, spacing: 12, content: {
             XMLikeBtn(target: PostsOperationAPI.tapLike(postId: vm.post.id), isLiked: vm.post.isLiked.bool, likeNumbers: vm.post.likeNums, contentId: vm.post.id)
+            
+            XMDesgin.XMButton {
+                
+                let t = CollagePostAPI.tapCollect(postId: vm.post.id)
+                let r = await Networking.request_async(t)
+                if r.is2000Ok {
+                    if vm.post.isCollect == 0 {
+                        vm.post.isCollect = 1
+                    }else{
+                        vm.post.isCollect = 0
+                    }
+                }
+                
+            } label: {
+                XMDesgin.XMIcon(iconName:vm.post.isCollect == 0 ? "xm_post_collageUnsel":"xm_post_collagesel", size: 16, color:vm.post.isCollect == 0 ? Color.white : .XMColor.main, withBackCricle: false)
+            }
 
             XMDesgin.XMButton {
                 MainViewModel.shared.pushTo(MainViewModel.PagePath.postdetail(postId: vm.post.id))
@@ -89,11 +122,20 @@ struct PostView: View {
 
             Spacer()
 
+//            //更多按钮
+//            XMDesgin.XMButton {
+//                Apphelper.shared.pushActionSheet(title: "操作", message: nil, actions: actions)
+//            } label: {
+//                XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+//            }
+            
             XMDesgin.XMButton {
-                Apphelper.shared.pushActionSheet(title: "操作", message: nil, actions: actions)
+                
+                Apphelper.shared.presentPanSheet(XMPostShareView(vm.post), style: .share)
             } label: {
-                XMDesgin.XMIcon(iconName: "system_more", size: 16, withBackCricle: true)
+                XMDesgin.XMIcon(iconName: "xm_post_share", size: 16, withBackCricle: true)
             }
+            
         })
     }
 
@@ -166,10 +208,19 @@ struct PostView: View {
                     .lineLimit(1)
             }
 
-            Spacer()
+            
             Text(vm.post.createdAtStr)
-                .font(.XMFont.f2)
+                .font(.XMFont.f3)
                 .fcolor(.XMColor.f2)
+            
+            Spacer()
+            
+            XMDesgin.XMButton {
+                await vm.DasanTap()
+            } label: {
+                Image("xm_post_ds")
+            }
+            .frame(width: 58, height: 23, alignment: .center)            
         }
     }
 

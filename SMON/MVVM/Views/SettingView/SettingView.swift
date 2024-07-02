@@ -13,36 +13,36 @@ struct SettingView: View {
     var body: some View {
         List {
             #if DEBUG
-            // XMListViewModel
-            Button {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
-            } label: {
-                Text("通知页面")
-            }
-
-            // XMModRequestViewModel
-            Button {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
-            } label: {
-                Text("帖子详情")
-            }
-
-            // XMDesgin
-            // 要求把所有的XMDesgin的控件的各种状态，用一遍
-            Button {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
-            } label: {
-                Text("设计系统")
-            }
-
-            // 文字和颜色
-            Button {
-                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
-            } label: {
-                Text("文字颜色大小")
-                    .font(.XMFont.f3)
-                    .fcolor(Color.XMColor.b2)
-            }
+//            // XMListViewModel
+//            Button {
+//                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+//            } label: {
+//                Text("通知页面")
+//            }
+//
+//            // XMModRequestViewModel
+//            Button {
+//                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+//            } label: {
+//                Text("帖子详情")
+//            }
+//
+//            // XMDesgin
+//            // 要求把所有的XMDesgin的控件的各种状态，用一遍
+//            Button {
+//                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+//            } label: {
+//                Text("设计系统")
+//            }
+//
+//            // 文字和颜色
+//            Button {
+//                MainViewModel.shared.pathPages.append(MainViewModel.PagePath.notification)
+//            } label: {
+//                Text("文字颜色大小")
+//                    .font(.XMFont.f3)
+//                    .fcolor(Color.XMColor.b2)
+//            }
 
             #endif
 

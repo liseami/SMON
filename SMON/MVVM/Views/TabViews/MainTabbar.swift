@@ -114,7 +114,8 @@ struct MainTabbar: View {
                 }, label: {
                     XMDesgin.XMIcon(iconName: tabitem.labelInfo.icon, size: 28)
                         .overlay(alignment: .topTrailing) {
-                            Circle().fill(Color.XMColor.main.gradient)
+//                            Circle().fill(Color.XMColor.main.gradient)
+                            Circle().fill(Color.red.gradient)
                                 .frame(width: 12, height: 12)
                                 .font(.XMFont.f3b)
                                 .ifshow(show: tabitem == .message && vm.unreadCount != 0)

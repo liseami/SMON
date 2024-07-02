@@ -20,6 +20,9 @@ class MainViewModel: ObservableObject {
     @Published var homeBtnJump: Int = 0
     @Published var pathPages: NavigationPath = .init()
     @Published var unreadCount: Int = 0
+    
+    @Published var receivedData: [String: Any]? = nil 
+    
     /*
      获取会话总未读数
      */
@@ -96,5 +99,6 @@ class MainViewModel: ObservableObject {
         case flamedetail
         case myCoinView
         case faceAuth
+        case dsList
     }
 }

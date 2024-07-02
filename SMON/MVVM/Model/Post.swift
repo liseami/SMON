@@ -21,6 +21,7 @@ struct XMPost: Convertible, Identifiable {
     var isLiked: Int = 0
     var createdAt: Int = 0
     var createdAtStr: String = ""
+    var isCollect: Int = 0
 }
 
 struct XMPostComment: Convertible, Equatable, Identifiable {

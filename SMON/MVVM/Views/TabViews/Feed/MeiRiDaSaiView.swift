@@ -33,6 +33,14 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
             currentThemeIndex = 0
         }
     }
+    // 主题列表切分
+    @Published var NewThemeList: [[XMTheme]] = [] {
+        didSet {
+            guard oldValue.isEmpty else { return }
+        }
+    }
+    
+    
 
     // 当前主题IndexId
     @Published var currentThemeIndex: Int = 0 {
@@ -43,6 +51,8 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
             }
         }
     }
+    
+    
 
     // 当前选择的主题
     var currentTheme: XMTheme? {
@@ -81,6 +91,8 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
         if r.is2000Ok, let list = r.mapArray(XMTheme.self) {
             themeList = list
             PostThemeStore.shared.themeList = themeList
+            NewThemeList = chunk(array: themeList, groupSize: 6)
+            PostThemeStore.shared.newThemeList = NewThemeList
         }
     }
 
@@ -95,9 +107,20 @@ class MeiRiDaSaiViewModel: XMListViewModel<XMPost> {
         await waitme(sec: 0.5)
         await getthemeList()
     }
+    
+    func chunk<T>(array: [T], groupSize: Int) -> [[T]] {
+        return stride(from: 0, to: array.count, by: groupSize).map {
+            let start = $0
+            let end = min(start + groupSize, array.count)
+            return Array(array[start..<end])
+        }
+    } 
+    
+    
 }
 
 struct MeiRiDaSaiView: View {
+    @State private var selectedTab: Int = 0 // 顶部标签
     @State var currentIndex: Int = 0
     @StateObject var vm: MeiRiDaSaiViewModel = .init()
     @Environment(\.requestReview) var requestReview
@@ -106,7 +129,8 @@ struct MeiRiDaSaiView: View {
         ScrollView(.vertical, showsIndicators: false) {
             LazyVStack(alignment: .leading, spacing: 24, pinnedViews: [], content: {
 //                header
-                newHeader
+//                newHeader
+                xmNewHeader
                 // 最新最热选择
                 tab
                 // 帖子列表
@@ -167,7 +191,7 @@ struct MeiRiDaSaiView: View {
         HStack {
             ForEach(1 ... 2, id: \.self) { themetype in
                 let selected = vm.themeType == themetype
-                let text = themetype == 1 ? "最热" : "最新"
+                let text = themetype == 1 ? "热门" : "最新"
                 XMDesgin.XMButton {
                     vm.themeType = themetype
                 } label: {
@@ -186,6 +210,120 @@ struct MeiRiDaSaiView: View {
         .background(Color.XMColor.b1.opacity(0))
         .clipShape(RoundedRectangle(cornerRadius: 8))
     }
+    
+    
+    @ViewBuilder
+    var xmNewHeader: some View{
+        
+        Text("热门大赛")
+            .font(.XMFont.f2b)
+            .fcolor(Color.XMColor.f1)
+//
+//        TopViewContainer(themeList: $vm.themeList)
+//            .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
+        
+//        TopViewContainer.init(view: XMTopView(frame: CGRect(), list: vm.themeList, title: "nihao"))
+//            .frame(width: UIScreen.main.bounds.width, height: 200, alignment: .center)
+//            .background(.green)
+        
+        let arrTotal = vm.themeList.count+1
+        let total : Int =  arrTotal%6 == 0 ? arrTotal/6:arrTotal/6+1
+        
+        if !vm.themeList.isEmpty && !vm.NewThemeList.isEmpty{
+            TabView(selection: $selectedTab) {
+                ForEach(0 ..< total, id: \.self) { index in
+                    LazyVGrid(columns: Array(repeating: GridItem(), count: 2), spacing: 1) {
+                        let list = vm.NewThemeList.count > index ? vm.NewThemeList[index]:[]
+                        ForEach(Array(list.enumerated()), id: \.offset) { indx, user in
+                            HStack{
+                                
+                                if user == vm.currentTheme {
+                                    WebImage(str: user.coverUrl)
+                                        .scaledToFill()
+                                        .frame(width: 34*1.4, height: 34*1.4)
+                                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                                        .border(Color.XMColor.main, width: 2)
+                                        .cornerRadius(6)
+                                    VStack{
+                                        Text("\(user.title)")
+                                            .frame(width: 100, height: 20, alignment: .leading)
+                                            .font(.XMFont.f1)
+                                            .foregroundColor(.XMColor.main)
+                                        Text("\(user.postsNumsStr)人参与")
+                                            .frame(width: 100, alignment: .leading)
+                                            .font(.XMFont.f2)
+                                            .foregroundColor(.XMColor.main)
+                                    }
+                                }else{
+                                    WebImage(str: user.coverUrl)
+                                        .scaledToFill()
+                                        .frame(width: 34, height: 34)
+                                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                                    VStack{
+                                        Text("\(user.title)")
+                                            .frame(width: 100, height: 20, alignment: .leading)
+                                            .font(.XMFont.f2)
+                                            .foregroundColor(.XMColor.b2)
+                                        Text("\(user.postsNumsStr)人参与")
+                                            .frame(width: 100, alignment: .leading)
+                                            .font(.XMFont.f3)
+                                            .foregroundColor(.XMColor.b2)
+                                    }
+                                }
+                            }
+                            .frame(width: UIScreen.main.bounds.width/2-50, height: 60, alignment: .center)
+                            .onTapGesture {
+                                vm.currentThemeIndex = index*6+indx
+                            }
+                        }
+//                        if index == total-1 && total > 0 {
+//                            HStack{
+//                                Image("xm_post_topMore")
+//                                    .resizable()
+//                                    .frame(width: 34, height: 34, alignment: .leading)
+//                                Text("更多大赛 >")
+//                                    .font(.XMFont.f2)
+//                            }
+//                            .frame(width: UIScreen.main.bounds.width/2-50, height: 60, alignment: .leading)
+//                            .onTapGesture {
+//                                print("更多大赛>")
+//                                MainViewModel.shared.pushTo(MainViewModel.PagePath.dsList)
+//                            }
+//                        }
+                    }
+                }
+            }
+            .frame(width: UIScreen.main.bounds.width, height: 180, alignment: .top)
+            .tabViewStyle(.page(indexDisplayMode: .never))
+            .ignoresSafeArea(.container, edges: .top)
+            .onChange(of: selectedTab) { newVaule in
+                selectedTab = newVaule
+            }
+            PageControl(numberOfPages: total, currentPage: $selectedTab)
+                .padding(.top, 0)
+        }
+            
+    }
+        
+    
+    struct PageControl: UIViewRepresentable {
+        var numberOfPages: Int
+        @Binding var currentPage: Int
+        
+        func makeUIView(context: Context) -> UIPageControl {
+            let pageControl = UIPageControl()
+            pageControl.numberOfPages = numberOfPages
+            pageControl.currentPageIndicatorTintColor = .white
+            pageControl.pageIndicatorTintColor = .gray
+            return pageControl
+        }
+        
+        func updateUIView(_ uiView: UIPageControl, context: Context) {
+            uiView.currentPage = currentPage
+        }
+    }
+    
+    
     
     
     @ViewBuilder

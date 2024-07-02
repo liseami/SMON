@@ -46,6 +46,8 @@ struct ProfileView: View {
                     postList
                 case .gift:
                     EmptyView()
+                case .collect:
+                    CollagePostView()
 //                case .rank:
 //                    VStack(alignment: .leading, spacing: 32) {
 //                        // 全国排名部分
@@ -72,7 +74,13 @@ struct ProfileView: View {
         }
         .scrollIndicators(.hidden)
         .refreshable {
-            await vm.getData()
+            if vm.currentTab == .media{
+                await vm.getData()
+            }
+            if vm.currentTab == .collect{
+                
+            }
+            
         }
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
@@ -274,7 +282,10 @@ struct ProfileView: View {
     // 标签栏视图
     var tabBarView: some View {
         HStack {
-            ForEach(ProfileViewModel.ProfileBarItem.allCases, id: \.self) { tabitem in
+            
+            let items = vm.user.userId == UserManager.shared.user.userId ? [ProfileViewModel.ProfileBarItem.media,ProfileViewModel.ProfileBarItem.collect,ProfileViewModel.ProfileBarItem.gift]:[ProfileViewModel.ProfileBarItem.media,ProfileViewModel.ProfileBarItem.gift]
+            ForEach(items, id: \.self) { tabitem in
+//            ForEach(ProfileViewModel.ProfileBarItem.allCases, id: \.self) { tabitem in
                 let selected = tabitem == vm.currentTab
                 XMDesgin.XMButton.init {
                     vm.currentTab = tabitem

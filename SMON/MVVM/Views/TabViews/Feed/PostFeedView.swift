@@ -44,11 +44,12 @@ struct PostFeedView: View {
                     vm.currentTopTab = tabitem
                 } label: {
                     Group {
-                        if tabitem == .localCity {
-                            Text(userManager.user.cityName)
-                        } else {
+//                        if tabitem == .localCity {
+//                            Text(userManager.user.cityName)
+//                        } else {
                             Text(tabitem.info.name)
-                        }
+                            .padding(.all, 20)
+//                        }
                     }
                     .font(.XMFont.f1)
                     .bold()
@@ -69,20 +70,20 @@ struct PostFeedView: View {
                 .tag(FeedViewModel.FeedTopBarItem.competition)
             // 同城
 
-            tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
-                .tag(FeedViewModel.FeedTopBarItem.localCity)
-                .ifshow(show: userManager.user.cityName.isEmpty == false)
-
-            // 附近
-            ZStack(alignment: .top) {
-                if vm.currentTopTab == .near {
-                    NearPostView()
-                } else {
-                    Color.clear.frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            }
-            .tag(FeedViewModel.FeedTopBarItem.near)
-            .environmentObject(vm)
+//            tabContent(for: .localCity, target: PostAPI.sameCityList(page: 1))
+//                .tag(FeedViewModel.FeedTopBarItem.localCity)
+//                .ifshow(show: userManager.user.cityName.isEmpty == false)
+//
+//            // 附近
+//            ZStack(alignment: .top) {
+//                if vm.currentTopTab == .near {
+//                    NearPostView()
+//                } else {
+//                    Color.clear.frame(maxWidth: .infinity, maxHeight: .infinity)
+//                }
+//            }
+//            .tag(FeedViewModel.FeedTopBarItem.near)
+//            .environmentObject(vm)
 
             // 关注
             tabContent(for: .flow, target: PostAPI.followList(page: 1))
@@ -98,6 +99,7 @@ struct PostFeedView: View {
                 if let target = target {
                     PostListView(target: target)
                 } else {
+//                    MRDSContainer()
                     MeiRiDaSaiView()
                 }
             } else {
