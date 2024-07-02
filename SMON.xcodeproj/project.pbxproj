@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8CE67CE42C33930C0019D749 /* RecommendRecordAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE67CE32C33930C0019D749 /* RecommendRecordAPI.swift */; };
+		8CE67CE72C3393780019D749 /* XMFriendListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE67CE52C3393780019D749 /* XMFriendListView.swift */; };
+		8CE67CE82C3393780019D749 /* XMPostShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE67CE62C3393780019D749 /* XMPostShareView.swift */; };
+		8CE67CEA2C3394550019D749 /* XMDSListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE67CE92C3394550019D749 /* XMDSListView.swift */; };
+		8CE67CEC2C3394960019D749 /* CollagePostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE67CEB2C3394960019D749 /* CollagePostAPI.swift */; };
+		8CE67CEE2C3394D20019D749 /* CollagePostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE67CED2C3394D10019D749 /* CollagePostView.swift */; };
 		A20189DA2BAA717700AFFF06 /* UserRelationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */; };
 		A205EBF92B97EE2800165A43 /* 兴趣标签.json in Resources */ = {isa = PBXBuildFile; fileRef = A205EBF82B97EE2800165A43 /* 兴趣标签.json */; };
 		A209C8232BB6A32400531EF1 /* GoodAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A209C8222BB6A32400531EF1 /* GoodAPI.swift */; };
@@ -204,6 +210,12 @@
 
 /* Begin PBXFileReference section */
 		61E00318C8FBEEF76CFD20CC /* Pods_SMON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SMON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CE67CE32C33930C0019D749 /* RecommendRecordAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendRecordAPI.swift; sourceTree = "<group>"; };
+		8CE67CE52C3393780019D749 /* XMFriendListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMFriendListView.swift; sourceTree = "<group>"; };
+		8CE67CE62C3393780019D749 /* XMPostShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMPostShareView.swift; sourceTree = "<group>"; };
+		8CE67CE92C3394550019D749 /* XMDSListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = XMDSListView.swift; path = SMON/MVVM/Views/TabViews/Feed/XMDSListView.swift; sourceTree = "<group>"; };
+		8CE67CEB2C3394960019D749 /* CollagePostAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollagePostAPI.swift; sourceTree = "<group>"; };
+		8CE67CED2C3394D10019D749 /* CollagePostView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollagePostView.swift; sourceTree = "<group>"; };
 		A20189D92BAA717700AFFF06 /* UserRelationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRelationAPI.swift; sourceTree = "<group>"; };
 		A205EBF82B97EE2800165A43 /* 兴趣标签.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "兴趣标签.json"; sourceTree = "<group>"; };
 		A209C8222BB6A32400531EF1 /* GoodAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodAPI.swift; sourceTree = "<group>"; };
@@ -530,6 +542,7 @@
 		A272A45E2B8706FB008EA955 = {
 			isa = PBXGroup;
 			children = (
+				8CE67CE92C3394550019D749 /* XMDSListView.swift */,
 				A272A4692B8706FB008EA955 /* SMON */,
 				A272A4682B8706FB008EA955 /* Products */,
 				B127F7EE8E3E2ABAAF466928 /* Pods */,
@@ -649,6 +662,7 @@
 				A2784F1E2B91852100A1B06F /* RelationListView.swift */,
 				A23DD4932BBBE07300249972 /* FlameDetailView.swift */,
 				A2E1A8022BD8A391006C9CA3 /* MyGiftView.swift */,
+				8CE67CED2C3394D10019D749 /* CollagePostView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -681,6 +695,8 @@
 				A2498AD52BA827FA0045B7AD /* PostCommentListView.swift */,
 				A25BC4002BB15B3E00CADE49 /* PostCommentView.swift */,
 				A25BC4022BB17B6C00CADE49 /* PostReplyView.swift */,
+				8CE67CE52C3393780019D749 /* XMFriendListView.swift */,
+				8CE67CE62C3393780019D749 /* XMPostShareView.swift */,
 				A256DBA82B907E6A008C7063 /* Post */,
 			);
 			path = Feed;
@@ -888,6 +904,8 @@
 				A283C5522BC7E8770002939B /* NoticeAPI.swift */,
 				A2A8D7A12BC7F4C500262C49 /* ReportAPI.swift */,
 				A2DCAC212BCFD4FE00260FE3 /* OrderAPI.swift */,
+				8CE67CE32C33930C0019D749 /* RecommendRecordAPI.swift */,
+				8CE67CEB2C3394960019D749 /* CollagePostAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1155,6 +1173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CE67CEA2C3394550019D749 /* XMDSListView.swift in Sources */,
 				A2BA895E2B9B3C2D002FEEFA /* XMListDataViewModel.swift in Sources */,
 				A28C55E22B96D85500707EDA /* Date+.swift in Sources */,
 				A209C83A2BBA883300531EF1 /* LottieView.swift in Sources */,
@@ -1163,6 +1182,7 @@
 				A2BF26CF2BA1D8DA00B5A616 /* UserAPI.swift in Sources */,
 				A20AF7582B92C42F0098E561 /* XMTyperText.swift in Sources */,
 				A273BC4E2BAD905400B39EC4 /* XMVersionInfo.swift in Sources */,
+				8CE67CE72C3393780019D749 /* XMFriendListView.swift in Sources */,
 				A2B45CB32B8B28A800D71EF8 /* SettingViewModel.swift in Sources */,
 				A25AAD302B8F19A900B7CE40 /* RelationHopeRequestView.swift in Sources */,
 				A2E89F9B2BDE2DBE00931132 /* PrueGiftView.swift in Sources */,
@@ -1229,6 +1249,7 @@
 				A2EF07662B9D4DA1004CF692 /* ThirdPartySDKInfoView.swift in Sources */,
 				A27EFF9D2B92035700B47BD6 /* PostDetailView.swift in Sources */,
 				A2BA89542B9B03E6002FEEFA /* XMTheme.swift in Sources */,
+				8CE67CE42C33930C0019D749 /* RecommendRecordAPI.swift in Sources */,
 				A25AAD342B8F1E9500B7CE40 /* HeightRequestView.swift in Sources */,
 				A2E9FDD52BEF54BA003A3589 /* Notification.swift in Sources */,
 				A209C8232BB6A32400531EF1 /* GoodAPI.swift in Sources */,
@@ -1264,6 +1285,7 @@
 				A2BF269C2BA1D83B00B5A616 /* ChatViewContainer.swift in Sources */,
 				A20AF75E2B931DF60098E561 /* ProfileEditView.swift in Sources */,
 				A28FEF1F2B8EC7EC002E8FB2 /* UserInfoRequestMainView.swift in Sources */,
+				8CE67CEC2C3394960019D749 /* CollagePostAPI.swift in Sources */,
 				A24D10A72BF5C06E00BCB4C0 /* CircleMesh.metal in Sources */,
 				A2E7F9A82B8CDF2000E86474 /* HomeFliterView.swift in Sources */,
 				A27EFFBA2B92B7B000B47BD6 /* PostView.swift in Sources */,
@@ -1302,6 +1324,7 @@
 				A28C55AD2B95BFF600707EDA /* User.swift in Sources */,
 				A2EF07582B9D3C03004CF692 /* XMLoginVideo.swift in Sources */,
 				A2784F232B9186FF00A1B06F /* PanViewBox.swift in Sources */,
+				8CE67CE82C3393780019D749 /* XMPostShareView.swift in Sources */,
 				A25AAD362B8F238600B7CE40 /* DrinkRequestView.swift in Sources */,
 				A2E1A7FF2BD89DD6006C9CA3 /* MyCoinView.swift in Sources */,
 				A25BC4012BB15B3E00CADE49 /* PostCommentView.swift in Sources */,
@@ -1314,6 +1337,7 @@
 				A2BF15F52B8C67060011A130 /* PermissionManager.swift in Sources */,
 				A27F716E2BA83F0F0028885D /* Bool++.swift in Sources */,
 				A2BF15EC2B8C423D0011A130 /* XMUIDesginSystemView.swift in Sources */,
+				8CE67CEE2C3394D20019D749 /* CollagePostView.swift in Sources */,
 				A2784F152B90CA4900A1B06F /* UIViewController+.swift in Sources */,
 				A2B45CA02B8AFCB300D71EF8 /* Components.swift in Sources */,
 				A2A8D7A22BC7F4C500262C49 /* ReportAPI.swift in Sources */,
